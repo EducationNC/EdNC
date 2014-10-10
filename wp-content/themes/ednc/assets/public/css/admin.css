@@ -1,0 +1,22 @@
+/* Hide meta boxes on Sales Network post type that are duped in the custom fields */
+.post-type-sales [id="typediv"],
+.post-type-sales [id="product-linediv"],
+.post-type-sales [id="regiondiv"] {
+	display: none;
+}
+
+/* Hide all the translation and sharing settings on all post types */
+.postbox[id*="inpsyde_multilingual"],
+.postbox[id="sharing_meta"] {
+	display: none;
+}
+
+/* Hide comments meta box on pages */
+.post-type-page .postbox[id="commentsdiv"] {
+	display: none;
+}
+
+/* Remove min-height for textareas in ACF */
+.acf_postbox.acf_postbox .field textarea {
+	min-height: 0;
+}

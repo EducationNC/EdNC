@@ -1,0 +1,78 @@
+@import url('http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic|Karla:400italic,400,700,700italic|Noto+Sans:400,400italic,700,700italic');
+
+body.mce-content-body {
+	font-family: "Karla", sans-serif;
+	font-size: 16px;
+	line-height: 1.6em;
+	max-width: 635px;
+}
+
+blockquote {
+	color: #704924;
+	font-style: italic;
+	font-size: 1.2em;
+	margin: 0 0 1.25rem;
+	padding: 0.5625rem 0 0;
+	border-left: medium none;
+}
+
+a {
+	color: #482c68;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+h2, h3 {
+	font-family: "Crimson Text", serif;
+	font-weight: normal;
+	margin: 1em 0 .25em;
+}
+
+h2 {
+	color: #b50937;
+	font-size: 1.875rem;
+}
+
+h2 a {
+	color: #b50937;
+	font-weight: normal;
+}
+
+h2 + h3 {
+	margin-top: 0;
+}
+
+h3 {
+	color: #482c68;
+	font-size: 1.5625rem;
+}
+
+h3 a {
+	color: #482c68;
+	font-weight: normal;
+}
+
+[class*="template-enology"] h2 {
+	font-style: italic;
+}
+
+[class*="template-enology"] h3 {
+	font-family: "Karla", sans-serif;
+	font-size: 1.4375rem
+}
+
+[class*="template-enology"] h2 + h3 {
+	margin-top: -.25em;
+}
+
+p {
+	margin: 0 0 1.25rem;
+}
+
+.alignleft {
+	margin: 0 20px 20px 0;
+}
+
+.alignright {
+	margin: 0 0 20px 20px;
+}
