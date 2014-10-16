@@ -38,6 +38,7 @@ if( $test_url !== false ) { // test if the URL exists
 }
 
 // pull jQuery UI from Google's CDN. If it's not available, grab the local copy.
+if(function_exists('get_json_url')){
 $ui_url = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js';
 $test_ui_url = @fopen($ui_url,'r');
 if ($test_ui_url !== false) {
@@ -96,7 +97,7 @@ if ($test_ngrs_url !== false) {
     }
     add_action('wp_enqueue_scripts', 'load_local_angular_resource');
 }
-
+}
 
 function ednc_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -107,8 +108,10 @@ function ednc_scripts() {
     wp_enqueue_script( 'foundation', get_template_directory_uri() . '/assets/app/bower_components/foundation/js/foundation/foundation.js', array(), '', true);
     wp_enqueue_script( 'ednc-scripts', get_template_directory_uri() . '/assets/app/js/scripts.js', array('jquery', 'jquery-ui'), '', true );
     wp_enqueue_script( 'ednc-angular', get_template_directory_uri() . '/assets/app/js/app.js', array('angular-core'), '', true );
+    if(function_exists('get_json_url')){
+        wp_localize_script( 'ednc-angular', 'WPAPI', array('api_url' => esc_url_raw(get_json_url()), 'api_nonce' => wp_create_nonce('wp_json'), 'template_url' => get_bloginfo('template_directory')) );
 
-    wp_localize_script( 'ednc-angular', 'WPAPI', array('api_url' => esc_url_raw(get_json_url()), 'api_nonce' => wp_create_nonce('wp_json'), 'template_url' => get_bloginfo('template_directory')) );
+    }
 }
 
 add_action('wp_enqueue_scripts', 'ednc_scripts');
