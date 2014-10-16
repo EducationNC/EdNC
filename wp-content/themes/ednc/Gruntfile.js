@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       },
       build: {
         options: {
-          outputStyle: 'compressed'
+          outputStyle: 'expanded'
         },
         files: {
           'assets/public/css/app.css': 'assets/app/scss/app.scss'
@@ -64,10 +64,10 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
 
-      autoprefixer: {
-        files: 'assets/public/css/app.css',
-        tasks: ['autoprefixer']
-      },
+      // autoprefixer: {
+      //   files: 'assets/public/css/app.css',
+      //   tasks: ['autoprefixer']
+      // },
 
       scripts: {
         files: [

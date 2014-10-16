@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('ednc', ['ngRoute', 'ngResource']);
+  var app = angular.module('ednc', []);
 
   // set up configuration variables
   app.run(['$rootScope', function($rootScope){

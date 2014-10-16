@@ -79,23 +79,23 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-grid-classes: $include-html-classes;
 // $include-xl-html-grid-classes: false;
 
-// $row-width: rem-calc(1000);
+$row-width: rem-calc(1260);
 // $total-columns: 12;
-// $column-gutter: rem-calc(30);
+$column-gutter: rem-calc(20);
 
 // c. Global
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to define default font stacks
-// $font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-// $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-sans-serif: Lato, sans-serif;
+$font-family-serif: Merriweather, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
 // We use these to define default font weights
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
 
-// $white       : #FFFFFF;
+$white       : #FFFFFF;
 // $ghost       : #FAFAFA;
 // $snow        : #F9F9F9;
 // $vapor       : #F6F6F6;
@@ -113,20 +113,28 @@ $include-html-global-classes: $include-html-classes;
 // $tuatara     : #444444;
 // $oil         : #333333;
 // $jet         : #222222;
-// $black       : #000000;
+$black       : #000000;
+$purple      : #731454;
+$dark-blue   : #2B3E50;
+$light-blue  : #5681B3;
+$green       : #98A942;
+
+$ice         : #ECF0F1;
+$ice-dark10  : darken($ice, 10%);
+$medium-gray : #B4B7B8;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
-// $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
+$primary-color: $green;
+$secondary-color: $dark-blue;
+$alert-color: #E74B3C;
+$success-color: $green;
+$warning-color: #f08a24;
+$info-color: $ice;
 
 // We use these to control various global styles
 // $body-bg: $white;
-// $body-font-color: $jet;
-// $body-font-family: $font-family-sans-serif;
+$body-font-color: $dark-blue;
+$body-font-family: $font-family-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
@@ -195,8 +203,8 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
-// $header-font-family: $body-font-family;
-// $header-font-weight: $font-weight-normal;
+$header-font-family: $font-family-sans-serif;
+$header-font-weight: 300;
 // $header-font-style: normal;
 // $header-font-color: $jet;
 // $header-line-height: 1.4;
@@ -802,19 +810,19 @@ $include-html-global-classes: $include-html-classes;
 
 // $include-html-off-canvas-classes: $include-html-classes;
 
-// $tabbar-bg: $oil;
+$tabbar-bg: $ice;
 // $tabbar-height: rem-calc(45);
 // $tabbar-icon-width: $tabbar-height;
 // $tabbar-line-height: $tabbar-height;
-// $tabbar-color: $white;
+$tabbar-color: $dark-blue;
 // $tabbar-middle-padding: 0 rem-calc(10);
 
 // Off Canvas Divider Styles
-// $tabbar-right-section-border: solid 1px scale-color($tabbar-bg, $lightness: 13%);
-// $tabbar-left-section-border: solid 1px scale-color($tabbar-bg, $lightness: -50%);
+$tabbar-right-section-border: solid 1px scale-color($tabbar-bg, $lightness: 13%);
+$tabbar-left-section-border: solid 1px scale-color($tabbar-bg, $lightness: -50%);
 
 // Off Canvas Tab Bar Headers
-// $tabbar-header-color: $white;
+$tabbar-header-color: $purple;
 // $tabbar-header-weight: $font-weight-bold;
 // $tabbar-header-line-height: $tabbar-height;
 // $tabbar-header-margin: 0;
@@ -867,7 +875,7 @@ $include-html-global-classes: $include-html-classes;
 // $off-canvas-overlay-background-hover: rgba($white, 0.05);
 
 // Transition Variables
-// $menu-slide: "transform 500ms ease";
+$menu-slide: "transform 350ms ease";
 
 // 19. Orbit
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1361,7 +1369,7 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
+// $topbar-bg-color: $ice;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
