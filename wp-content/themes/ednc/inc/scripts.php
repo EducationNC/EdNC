@@ -106,7 +106,7 @@ function ednc_scripts() {
 
     wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/assets/app/bower_components/modernizr/modernizr.js', array(), '', true);
     wp_enqueue_script( 'foundation', get_template_directory_uri() . '/assets/app/bower_components/foundation/js/foundation/foundation.js', array(), '', true);
-    wp_enqueue_script( 'foundation-offcanvas', get_template_directory_uri() . '/assets/app/bower_components/foundation/js/foundation/foundation.offcanvas.js', array(), '', true);
+    wp_enqueue_script( 'foundation-topbar', get_template_directory_uri() . '/assets/app/bower_components/foundation/js/foundation/foundation.topbar.js', array('foundation'), '', true);
     wp_enqueue_script( 'classie', get_template_directory_uri() . '/assets/app/js/classie.js', array(), '', true );
     wp_enqueue_script( 'mlpushmenu', get_template_directory_uri() . '/assets/app/js/mlpushmenu.js', array('classie'), '', true );
     wp_enqueue_script( 'ednc-scripts', get_template_directory_uri() . '/assets/app/js/scripts.js', array('jquery', 'jquery-ui', 'mlpushmenu'), '', true );

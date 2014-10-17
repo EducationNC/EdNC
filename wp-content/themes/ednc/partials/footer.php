@@ -12,27 +12,28 @@
           <footer class="footer">
             <div class="above-footer">
               <div class="row">
-                <div class="small-12 columns">
+                <div class="medium-3 columns">
                   Logo
                 </div>
 
-                <div class="small-12 columns">
+                <div class="medium-9 columns">
                   Sponsors logos
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="small-12 columns">
+              <div class="medium-3 columns">
                 <nav>
                   <ul>
                     <li><a href="#">Research</a></li>
                     <li><a href="#">Data</a></li>
                     <li><a href="#">Districts</a></li>
                     <li><a href="#">Voices</a></li>
+                  </ul>
                 </nav>
               </div>
 
-              <div class="small-12 columns">
+              <div class="medium-3 columns">
                 <h4>Stay Connected</h4>
                 <ul>
                   <li><a href="#">Facebook</a></li>
@@ -45,7 +46,7 @@
                 <a href="#">Email Digests &amp; Alerts</a>
               </div>
 
-              <div class="small-12 columns">
+              <div class="medium-3 columns">
                 <h4>Support</h4>
                 <ul>
                   <li><a href="#">Donations</a></li>
@@ -53,7 +54,7 @@
                 </ul>
               </div>
 
-              <div class="small-12 columns">
+              <div class="medium-3 columns">
                 <h4>EducationNC</h4>
                 <ul>
                   <li><a href="#">About Us</a></li>
@@ -65,7 +66,7 @@
             </div>
 
             <div class="below-footer row">
-              <p class="centered">
+              <p class="text-center small">
                 &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
                 <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
               </p>

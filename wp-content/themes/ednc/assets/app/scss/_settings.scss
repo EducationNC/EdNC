@@ -115,6 +115,7 @@ $white       : #FFFFFF;
 // $jet         : #222222;
 $black       : #000000;
 $purple      : #731454;
+$dark-purple : darken($purple, 20%);
 $dark-blue   : #2B3E50;
 $light-blue  : #5681B3;
 $green       : #98A942;
@@ -124,8 +125,8 @@ $ice-dark10  : darken($ice, 10%);
 $medium-gray : #B4B7B8;
 
 // We use these as default colors throughout
-$primary-color: $green;
-$secondary-color: $dark-blue;
+$primary-color: $light-blue;
+$secondary-color: $purple;
 $alert-color: #E74B3C;
 $success-color: $green;
 $warning-color: #f08a24;
@@ -206,7 +207,7 @@ $body-font-family: $font-family-serif;
 $header-font-family: $font-family-sans-serif;
 $header-font-weight: 300;
 // $header-font-style: normal;
-// $header-font-color: $jet;
+$header-font-color: $dark-blue;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -1369,7 +1370,7 @@ $menu-slide: "transform 350ms ease";
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $ice;
+$topbar-bg-color: $ice;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1381,7 +1382,7 @@ $menu-slide: "transform 350ms ease";
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
+$topbar-dropdown-bg: transparent;
 // $topbar-dropdown-link-color: $white;
 // $topbar-dropdown-link-bg: $oil;
 // $topbar-dropdown-link-weight: $font-weight-normal;
@@ -1390,19 +1391,19 @@ $menu-slide: "transform 350ms ease";
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: $white;
+$topbar-link-color: $dark-blue;
 // $topbar-link-color-hover: $white;
 // $topbar-link-color-active: $white;
 // $topbar-link-color-active-hover: $white;
 // $topbar-link-weight: $font-weight-normal;
 // $topbar-link-font-size: rem-calc(13);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg: $topbar-bg;
+$topbar-link-bg: transparent;
 // $topbar-link-bg-color-hover: $charcoal;
 // $topbar-link-bg-hover: #272727;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
-// $topbar-link-font-family: $body-font-family;
+$topbar-link-font-family: $header-font-family;
 // $topbar-link-text-transform: none;
 // $topbar-link-padding: $topbar-height / 3;
 // $topbar-back-link-size: $h5-font-size;

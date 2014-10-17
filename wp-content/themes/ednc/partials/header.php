@@ -23,7 +23,7 @@
 <body <?php body_class(); ?>>
   <div class="container">
 
-    <a id="trigger-offcanvas" class="nav-toggle" href="#"><span>Menu</span></a>
+    <a id="trigger-offcanvas" class="nav-toggle hide-for-large-up" href="#"><span>Menu</span></a>
 
     <div id="oc-pusher" class="oc-pusher">
 
@@ -73,7 +73,7 @@
       <div class="scroller">
         <div class="scroller-inner">
 
-          <div class="mobile-bar">
+          <div class="mobile-bar hide-for-large-up">
 
             <section class="middle mobile-bar-section">
               <h1 class="title">EducationNC</h1>
@@ -96,5 +96,75 @@
               </div>
             </form>
           </div>
+
+          <header class="header clearfix">
+            <div class="full-width">
+              <div class="tagline">Including you in a conversation about our public schools</div>
+
+              <div class="right text-right">
+                <ul class="inline-list minor-links small">
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Supporters</a></li>
+                  <li><a href="#">en Español</a></li>
+                </ul>
+
+                <div class="search">
+                  <form>
+                    <div class="row collapse postfix-radius">
+                      <div class="small-9 columns">
+                        <input type="text" placeholder="Search..." name="search" />
+                      </div>
+                      <div class="small-3 columns">
+                        <input type="submit" value="Go" class="button postfix" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <nav class="top-bar" data-topbar role="navigation">
+                <ul class="title-area">
+                  <li class="name">
+                    <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-white.svg" alt="EducationNC" /></a>
+                  </li>
+                </ul>
+
+                <section class="top-bar-section">
+                  <ul class="left">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="has-dropdown">
+                      <a href="#">Research</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Lorem ipsum</a></li>
+                        <li><a href="#">Dolor sit</a></li>
+                        <li><a href="#">Amet</a></li>
+                        <li><a href="#">Consectetur</a></li>
+                        <li><a href="#">Adipiscing elit</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Data</a></li>
+                    <li><a href="#">Districts</a></li>
+                    <li><a href="#">Voices</a></li>
+                  </ul>
+
+                  <ul class="right">
+                    <li class="social-media">
+                      <ul class="inline-list">
+                        <li><a class="icon-facebook" href="#"></a></li>
+                        <li><a class="icon-twitter" href="#"></a></li>
+                        <li><a class="icon-instagram" href="#"></a></li>
+                        <li><a class="icon-youtube" href="#"></a></li>
+                        <li><a class="icon-gplus" href="#"></a></li>
+                        <li><a class="icon-linkedin" href="#"></a></li>
+                      </ul>
+                    </li>
+
+                    <li class="minor-button"><a href="#">Get Involved</a></li>
+                    <li class="major-button"><a href="#">Donate Now</a></li>
+                  </ul>
+                </section>
+            </nav>
+          </header>
 
           <div id="content" class="content">
