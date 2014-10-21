@@ -13,7 +13,7 @@
             <div class="above-footer">
               <div class="row">
                 <div class="medium-3 columns">
-                  Logo
+                  <img class="logo-dark" src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-white.svg" alt="EducationNC" />
                 </div>
 
                 <div class="medium-9 columns">

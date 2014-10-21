@@ -139,6 +139,10 @@
   font-size: .8em;
 }
 
+.strong {
+  font-weight: 700;
+}
+
 .inline-list {
   margin: 0 0 1.0625em -.6875em;
   padding: 0;
@@ -211,7 +215,7 @@ a {
 
   .full-width {
     position: relative;
-    background: $medium-gray;
+    @include gray-gradient-right;
 
     .right {
       padding-right: .625rem;
@@ -324,7 +328,7 @@ a {
 }
 
 .top-bar {
-  @include gray-gradient-right;
+  // @include gray-gradient-right;
 
   .title-area {
     margin: 0 .625rem 0 0;
@@ -401,7 +405,7 @@ a {
     &.left {
       li {
         & > a {
-          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
           line-height: 43px !important;
         }
 
@@ -711,6 +715,7 @@ a {
 .photo-overlay {
   position: relative;
   margin: .625rem 0;
+  overflow: hidden;
 
   .title-overlay {
     margin: 0;
@@ -720,6 +725,43 @@ a {
     right: 10px;
     color: $white;
     z-index: 2;
+    transition: transform .3s;
+  }
+
+  .callout-title {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    color: $white;
+    z-index: 2;
+    text-shadow: 0 0 15px $black;
+  }
+
+  .meta {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border-top: 1px solid $white;
+    color: $white;
+    z-index: 2;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(2em);
+    transition: all .3s;
+    font-family: $header-font-family;
+    font-weight: 300;
+
+    a {
+      color: $white;
+      text-decoration: none;
+      font-weight: normal;
+    }
+
+    date {
+      font-weight: normal;
+    }
   }
 
   .mega-link {
@@ -732,7 +774,8 @@ a {
     z-index: 4;
   }
 
-  .overlay {
+  &:after {
+    content: '';
     position: absolute;
     z-index: 1;
     top: 0;
@@ -740,6 +783,7 @@ a {
     left: 0;
     right: 0;
     @include trans-blue-gradient-bottom;
+    transition: transform .3s;
   }
 
   img {
@@ -754,6 +798,25 @@ a {
 
       img {
         // transform?
+      }
+    }
+  }
+}
+
+.has-photo-overlay {
+  &:hover {
+    .photo-overlay {
+      .title-overlay {
+        transform: translateY(-1.5em);
+      }
+
+      p {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      &:after {
+        transform: translateY(25%);
       }
     }
   }
@@ -787,19 +850,19 @@ a {
       @include trans-white-gradient-bottom;
     }
 
-    &:hover {
-      &:after {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
     p {
       margin: 0;
     }
 
     .read-more {
       float: right;
+    }
+  }
+
+  &:hover {
+    .excerpt:after {
+      opacity: 0;
+      visibility: hidden;
     }
   }
 }
@@ -839,10 +902,74 @@ a {
   text-align: center;
 }
 
+.section.fixed-height {
+  .photo-overlay {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      bottom: 30px;
+      left: 30px;
+      border: 1px solid $white;
+      content: '';
+      z-index: 2;
+      opacity: 0;
+      transform: scale(0);
+      transition: all .3s;
+    }
+
+    &:hover {
+      &:before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  img {
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
 .wide-open {
   .columns {
     text-align: center;
     margin: 1.25rem 0;
+  }
+
+  h3 {
+    color: $purple;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+
+    li {
+      margin: 1em 0;
+    }
+  }
+}
+
+.photo-strip {
+  position: relative;
+  width: 100%;
+  margin: 0;
+
+  .square {
+    float: left;
+    width: 20%;
   }
 }
 
@@ -860,4 +987,10 @@ a {
   font-family: $header-font-family;
   font-weight: 300;
   font-size: .9rem;
+}
+
+.logo-dark {
+  .text {
+    fill: purple;
+  }
 }

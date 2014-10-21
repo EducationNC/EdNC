@@ -11,7 +11,7 @@
   // example controller
   app.controller('example', ['$scope', '$http', function($scope, $http){
     $http.get(
-      $scope.api + '/posts'
+      $scope.api + '/posts?filter[posts_per_page]=6'
     ).success(function(data, status, headers, config){
       $scope.postdata = data;
       console.log('success');

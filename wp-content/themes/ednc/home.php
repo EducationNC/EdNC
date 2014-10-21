@@ -13,12 +13,12 @@
                 <div class="large-9 columns">
                   <div class="row">
                     <div class="medium-6 columns">
-                      <div class="post">
+                      <div class="post has-photo-overlay">
                         <div class="photo-overlay small-wide">
                           <span class="label on-photo">Category</span>
                           <h3 class="post-title title-overlay">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                          <p class="meta">by <a class="author" href="#">Author Name</a> on <date>11/7/2014</date></p>
                           <a class="mega-link" href="#"></a>
-                          <div class="overlay"></div>
                           <img src="https://placeimg.com/450/450/people" />
                         </div>
 
@@ -30,12 +30,12 @@
                     </div>
 
                     <div class="medium-6 columns">
-                      <div class="post">
+                      <div class="post has-photo-overlay">
                         <div class="photo-overlay small-wide">
                           <span class="label on-photo">Category</span>
                           <h3 class="post-title title-overlay">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-                          <a class="mega-link"></a>
-                          <div class="overlay"></div>
+                          <p class="meta">by <a class="author" href="#">Author Name</a> on <date>11/7/2014</date></p>
+                          <a class="mega-link" href="#"></a>
                           <img src="https://placeimg.com/450/450/tech" />
                         </div>
 
@@ -73,7 +73,7 @@
                     <div class="small-9 large-12 columns">
                       <span class="label">Category</span>
                       <h4 class="post-title"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h4>
-                      <p class="meta">by <a href="#">Author Name</a> on <date>11/7/2014</date></p>
+                      <p class="meta">by <a class="author" href="#">Author Name</a> on <date>11/7/2014</date></p>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="small-9 large-12 columns">
                       <span class="label">Category</span>
                       <h4 class="post-title"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h4>
-                      <p class="meta">by <a href="#">Author Name</a> on <date>11/7/2014</date></p>
+                      <p class="meta">by <a class="author" href="#">Author Name</a> on <date>11/7/2014</date></p>
                     </div>
                   </div>
                 </div>
@@ -99,7 +99,7 @@
                     <div class="small-9 large-12 columns">
                       <span class="label">Category</span>
                       <h4 class="post-title"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h4>
-                      <p class="meta">by <a href="#">Author Name</a> on <date>11/7/2014</date></p>
+                      <p class="meta">by <a class="author" href="#">Author Name</a> on <date>11/7/2014</date></p>
                     </div>
                   </div>
                 </div>
@@ -112,32 +112,40 @@
                     <div class="small-9 large-12 columns">
                       <span class="label">Category</span>
                       <h4 class="post-title"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h4>
-                      <p class="meta">by <a href="#">Author Name</a> on <date>11/7/2014</date></p>
+                      <p class="meta">by <a class="author" href="#">Author Name</a> on <date>11/7/2014</date></p>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section class="section">
+            <section class="section fixed-height">
               <div class="full-width collapse">
-                <div class="large-6 columns">
-                  <img src="https://placeimg.com/650/290/nature" />
+                <div class="large-6 columns has-photo-overlay">
+                  <div class="photo-overlay">
+                    <a class="mega-link" href="#"></a>
+                    <h3 class="callout-title">Ed<span class="strong">Maps</span></h3>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/edmaps.png" alt="EdMaps" />
+                  </div>
                 </div>
 
-                <div class="large-6 columns">
-                  <img src="https://placeimg.com/650/290/arch" />
+                <div class="large-6 columns has-photo-overlay">
+                  <div class="photo-overlay">
+                    <a class="mega-link" href="#"></a>
+                    <h3 class="callout-title">Ed<span class="strong">Lawsuits</span></h3>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/1409595_99556189-2.jpg" alt="EdLawsuits" />
+                  </div>
                 </div>
               </div>
             </section>
 
-            <section class="section">
+            <section class="section wide-open">
               <div class="row">
                 <div class="large-4 columns">
                   <h3>EdNews</h3>
                   <div ng-controller="example">
                     <ul>
-                      <li ng-repeat="post in postdata">{{post.title}}</li>
+                      <li ng-repeat="post in postdata"><a href="#">{{post.title}}</a></li>
                     </ul>
                   </div>
                 </div>
@@ -146,7 +154,7 @@
                   <h3>EdEvents</h3>
                   <div ng-controller="example">
                     <ul>
-                      <li ng-repeat="post in postdata">{{post.title}}</li>
+                      <li ng-repeat="post in postdata"><a href="#">{{post.title}}</a></li>
                     </ul>
                   </div>
                 </div>
@@ -155,7 +163,7 @@
                   <h3>EdTweets</h3>
                   <div ng-controller="example">
                     <ul>
-                      <li ng-repeat="post in postdata">{{post.title}}</li>
+                      <li ng-repeat="post in postdata"><a href="#">{{post.title}}</a></li>
                     </ul>
                   </div>
                 </div>
@@ -165,20 +173,20 @@
             <section class="section">
               <div class="full-width">
                 <h2>"I'm a public school kid"</h2>
-                <div class="photo-grid">
+                <div class="photo-strip">
                   <div class="square">
                     <img src="http://placeimg.com/350/350/people?1" />
                   </div>
-                  <div class="square hide-for-small-only">
+                  <div class="square">
                     <img src="http://placeimg.com/350/350/people?2" />
                   </div>
-                  <div class="square hide-for-small-only">
+                  <div class="square">
                     <img src="http://placeimg.com/350/350/people?3" />
                   </div>
-                  <div class="square hide-for-small-only">
+                  <div class="square">
                     <img src="http://placeimg.com/350/350/people?4" />
                   </div>
-                  <div class="square hide-for-small-only">
+                  <div class="square">
                     <img src="http://placeimg.com/350/350/people?5" />
                   </div>
                 </div>
