@@ -8,7 +8,7 @@
 /************* ENQUEUE CSS *****************/
 
 function ednc_styles() {
-    wp_enqueue_style( 'google-fonts', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|Merriweather:400,700,400italic,700italic' );
+    wp_enqueue_style( 'google-fonts', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|Merriweather:300,400,700,300italic,400italic,700italic' );
     wp_enqueue_style( 'ednc-style', get_template_directory_uri() . '/assets/public/css/app.css' );
     wp_enqueue_style( 'ednc-hotfixes', get_template_directory_uri() . '/style.css' );
 }
@@ -109,6 +109,7 @@ function ednc_scripts() {
     wp_enqueue_script( 'foundation-topbar', get_template_directory_uri() . '/assets/app/bower_components/foundation/js/foundation/foundation.topbar.js', array('foundation'), '', true);
     wp_enqueue_script( 'classie', get_template_directory_uri() . '/assets/app/js/classie.js', array(), '', true );
     wp_enqueue_script( 'mlpushmenu', get_template_directory_uri() . '/assets/app/js/mlpushmenu.js', array('classie'), '', true );
+    wp_enqueue_script( 'waypoints', get_template_directory_uri() . '/assets/app/js/waypoints.min.js', array('jquery'), '', true );
     wp_enqueue_script( 'ednc-scripts', get_template_directory_uri() . '/assets/app/js/scripts.js', array('jquery', 'jquery-ui', 'mlpushmenu'), '', true );
     wp_enqueue_script( 'ednc-angular', get_template_directory_uri() . '/assets/app/js/app.js', array('angular-core'), '', true );
     if(function_exists('get_json_url')){

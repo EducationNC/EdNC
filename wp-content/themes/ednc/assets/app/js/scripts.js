@@ -18,4 +18,18 @@ jQuery(document).ready(function($) {
   $('#trigger-mobile-search').on('click', function() {
     $('#oc-pusher').toggleClass('search-pushed');
   });
+
+  // Sticky header
+  $('#header').waypoint(function(d) {
+    if (d == 'down') {
+      $(this).addClass('stuck');
+    } else {
+      $(this).removeClass('stuck');
+    }
+  }, {
+    offset: -1,
+    context: '.scroller'
+  });
+
+
 });

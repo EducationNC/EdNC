@@ -11,26 +11,24 @@
 
           <footer class="footer">
             <div class="above-footer">
-              <div class="row">
-                <div class="medium-3 columns">
-                  <img class="logo-dark" src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-white.svg" alt="EducationNC" />
-                </div>
-
-                <div class="medium-9 columns">
-                  Sponsors logos
-                </div>
-              </div>
+              <ul class="inline-list text-center">
+                <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/zsrf-gray-transparent.png" width="153" alt="Z. Smith Reynolds Foundation" />
+                <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/best-nc-gray-transparent.png" width="78" alt="Best of NC" />
+                <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/bcbsnclogo-gray-transparent.png" width="209" alt="Blue Cross Blue Shield North Carolina" />
+                <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/iac-gray-transparent.png" width="239" alt="International Affairs Council" />
+              </ul>
             </div>
+
             <div class="row">
               <div class="medium-3 columns">
-                <nav>
-                  <ul>
-                    <li><a href="#">Research</a></li>
-                    <li><a href="#">Data</a></li>
-                    <li><a href="#">Districts</a></li>
-                    <li><a href="#">Voices</a></li>
-                  </ul>
-                </nav>
+                <h4>EdNC.org</h4>
+                <ul>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Issues</a></li>
+                  <li><a href="#">Data</a></li>
+                  <li><a href="#">Districts</a></li>
+                  <li><a href="#">Voices</a></li>
+                </ul>
               </div>
 
               <div class="medium-3 columns">
@@ -42,30 +40,31 @@
                   <li><a href="#">YouTube</a></li>
                   <li><a href="#">Google+</a></li>
                   <li><a href="#">LinkedIn</a></li>
+                  <li>&nbsp;</li>
+                  <li><a href="#">Email Digests &amp; Alerts</a></li>
                 </ul>
-                <a href="#">Email Digests &amp; Alerts</a>
               </div>
 
               <div class="medium-3 columns">
-                <h4>Support</h4>
+                <h4>Support us</h4>
                 <ul>
-                  <li><a href="#">Donations</a></li>
-                  <li><a href="#">Underwriting Opportunities</a></li>
+                  <li><a href="#">Make a donation</a></li>
+                  <li><a href="#">Sponsorship opportunities</a></li>
                 </ul>
               </div>
 
               <div class="medium-3 columns">
                 <h4>EducationNC</h4>
                 <ul>
-                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">About us</a></li>
                   <li><a href="#">Board of Directors</a></li>
                   <li><a href="#">Supporters</a></li>
-                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">Contact us</a></li>
                 </ul>
               </div>
             </div>
 
-            <div class="below-footer row">
+            <div class="below-footer">
               <p class="text-center small">
                 &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
                 <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>

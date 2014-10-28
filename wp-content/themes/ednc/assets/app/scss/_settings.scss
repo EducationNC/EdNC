@@ -95,37 +95,47 @@ $font-family-serif: Merriweather, serif;
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
 
-$white       : #FFFFFF;
-// $ghost       : #FAFAFA;
-// $snow        : #F9F9F9;
-// $vapor       : #F6F6F6;
-// $white-smoke : #F5F5F5;
-// $silver      : #EFEFEF;
-// $smoke       : #EEEEEE;
-// $gainsboro   : #DDDDDD;
-// $iron        : #CCCCCC;
-// $base        : #AAAAAA;
-// $aluminum    : #999999;
-// $jumbo       : #888888;
-// $monsoon     : #777777;
-// $steel       : #666666;
-// $charcoal    : #555555;
-// $tuatara     : #444444;
-// $oil         : #333333;
-// $jet         : #222222;
-$black       : #000000;
-$purple      : #731454;
-$dark-purple : darken($purple, 20%);
-$dark-blue   : #2B3E50;
-$light-blue  : #5681B3;
-$green       : #98A942;
+$transparent : rgba(255, 255, 255, 0);
+$white70     : rgba(255, 255, 255, .6);
 
+$white       : #FFFFFF;
+$black       : #000000;
+
+$deep-purple0: rgba(38, 7, 28, 0);
+$deep-purple : #26071C;
+
+$purple-dark : #67124B;
+$purple      : #731454;
+$purple-light: #801760;
+$purple-text : #8B185E;
+$pink-dark   : #93195D;
+$pink-light  : #B62078;
+
+$midnight-dark : #263748;
+$midnight    : #2B3E50;
+$midnight-light: #32485B;
+
+$blue-dark   : #4D74A1;
+$blue        : #5681B3;
+$blue-light  : #628EBE;
+
+$green-dark  : #89983B;
+$green       : #98A942;
+$green-light : #A5B54C;
+
+$green2-dark : #A1AD42;
+$green2      : #ADBB4A;
+$green2-light: #B8C455;
+
+$ice-dark    : #D4D8D9;
 $ice         : #ECF0F1;
-$ice-dark10  : darken($ice, 10%);
-$medium-gray : #B4B7B8;
+$ice-light   : #EFF3F3;
+$gray-text   : #707273;
+
+
 
 // We use these as default colors throughout
-$primary-color: $light-blue;
+$primary-color: $blue;
 $secondary-color: $purple;
 $alert-color: #E74B3C;
 $success-color: $green;
@@ -134,7 +144,7 @@ $info-color: $ice;
 
 // We use these to control various global styles
 // $body-bg: $white;
-$body-font-color: $dark-blue;
+$body-font-color: $midnight;
 $body-font-family: $font-family-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
@@ -207,10 +217,10 @@ $body-font-family: $font-family-serif;
 $header-font-family: $font-family-sans-serif;
 $header-font-weight: 300;
 // $header-font-style: normal;
-$header-font-color: $dark-blue;
+$header-font-color: $midnight;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
-// $header-bottom-margin: .5rem;
+$header-bottom-margin: .8rem;
 // $header-text-rendering: optimizeLegibility;
 
 // We use these to control header font sizes
@@ -815,7 +825,7 @@ $tabbar-bg: $ice;
 // $tabbar-height: rem-calc(45);
 // $tabbar-icon-width: $tabbar-height;
 // $tabbar-line-height: $tabbar-height;
-$tabbar-color: $dark-blue;
+$tabbar-color: $midnight;
 // $tabbar-middle-padding: 0 rem-calc(10);
 
 // Off Canvas Divider Styles
@@ -1391,12 +1401,12 @@ $topbar-dropdown-bg: transparent;
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
-$topbar-link-color: $dark-blue;
-// $topbar-link-color-hover: $white;
-// $topbar-link-color-active: $white;
-// $topbar-link-color-active-hover: $white;
+$topbar-link-color: $midnight;
+$topbar-link-color-hover: $purple-text;
+$topbar-link-color-active: $purple;
+$topbar-link-color-active-hover: $purple;
 // $topbar-link-weight: $font-weight-normal;
-// $topbar-link-font-size: rem-calc(13);
+$topbar-link-font-size: rem-calc(16);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 $topbar-link-bg: transparent;
 // $topbar-link-bg-color-hover: $charcoal;

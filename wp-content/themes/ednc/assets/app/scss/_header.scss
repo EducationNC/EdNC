@@ -1,0 +1,565 @@
+
+/*--------------------------------------------------------------
+2.0 - Desktop Navigation
+--------------------------------------------------------------*/
+
+.header {
+  margin-bottom: 5em;
+
+  a {
+    font-family: $font-family-sans-serif;
+    color: $midnight;
+    text-decoration: none;
+  }
+
+  .logo {
+    @include purple-gradient-right;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    a {
+      display: block;
+      width: 134px;
+      height: 134px;
+      position: relative;
+
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+      }
+    }
+  }
+
+  .full-width {
+    position: relative;
+    @include gray-gradient-right;
+
+    .right {
+      padding-right: .625rem;
+    }
+
+    .minor-links {
+      float: left;
+      margin: .5rem .625rem;
+
+      a {
+        font-family: $font-family-sans-serif;
+        font-weight: 300;
+        font-size: rem-calc(14);
+      }
+    }
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    padding: .3rem .625rem;
+    left: 169px;
+    color: $gray-text;
+    font-size: rem-calc(18);
+  }
+
+  .inline-list {
+    margin: .5em 0;
+  }
+
+  .search {
+    float: right;
+    max-width: 300px;
+    font-family: $font-family-sans-serif;
+    margin-top: .3rem;
+
+    input {
+      margin-bottom: .5em;
+    }
+
+    input[type="text"] {
+      padding: .25em;
+      height: 2em;
+    }
+
+    .button {
+      line-height: 1em;
+      height: 2em;
+      font-weight: 300;
+    }
+  }
+
+  .top-bar-section {
+    .social-media {
+      .inline-list {
+        margin: 0 .625rem;
+      }
+
+      li {
+        border: none;
+        line-height: 45px;
+        padding: 4px .3rem 0;
+
+        &:hover {
+          a {
+            color: $midnight;
+          }
+        }
+
+        a {
+          position: relative;
+          display: inline-block;
+          height: 1em;
+          width: 1em;
+          line-height: 45px;
+          font-size: 1.2em;
+          padding: 0;
+
+          &:before {
+            position: absolute;
+            z-index: 5;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+          }
+
+          &:after {
+            background: $gray-text;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0;
+            content: '';
+            transform: translateX(-50%) translateY(-50%) scale(0.2);
+            transition: transform .3s, opacity .3s, color .3s;
+            z-index: 0;
+          }
+
+          &:hover {
+            color: $ice;
+
+            &:after {
+              opacity: 1;
+              transform: translateX(-50%) translateY(-50%) scale(1.5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.top-bar {
+  .title-area {
+    margin: 0 .625rem 0 0;
+    padding: 10px;
+    width: 154px;
+    position: relative;
+    z-index: 5;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .name {
+      // @include purple-gradient-right;
+      // position: relative;
+      // height: auto;
+      //
+      // a {
+      //   display: block;
+      //   width: 134px;
+      //   height: 134px;
+      //   position: relative;
+      //
+      //   img {
+      //     position: absolute;
+      //     top: 50%;
+      //     left: 50%;
+      //     transform: translateY(-50%) translateX(-50%);
+      //   }
+      // }
+      //
+      // @media #{$large-up} {
+        display: none;
+      // }
+    }
+  }
+
+  .minor-button, .major-button {
+    overflow: hidden;
+
+    a {
+      font-family: $font-family-serif;
+      font-size: 1rem;
+      color: $ice;
+      border: none;
+      line-height: 45px !important;
+      position: relative;
+      z-index: 1;
+
+      &:after {
+        content: '';
+        height: 3px;
+        position: absolute;
+        left: .5rem;
+        right: .5rem;
+        bottom: -3px;
+        background: $white;
+        transition: all .3s;
+      }
+
+      &:hover, &:active, &:focus {
+        color: $white !important;
+
+        &:after {
+          bottom: .5rem;
+        }
+      }
+    }
+  }
+
+  .minor-button {
+    @include green-gradient-right;
+
+    &:hover, &:active, &:focus {
+      @include light-green-gradient-right;
+    }
+  }
+
+  .major-button {
+    @include pink-gradient-right;
+  }
+}
+
+.top-bar-section {
+  a:hover, a:focus, a:active {
+    text-decoration: none;
+  }
+
+  ul {
+    li {
+      & > a {
+        background: none !important;
+      }
+    }
+
+    &.left {
+      & > li {
+        & > a {
+          line-height: 42px !important;
+          height: 45px;
+          overflow: hidden;
+          position: relative;
+
+          &:before {
+            content: '';
+            width: 100%;
+            height: 3px;
+            background: $purple-text;
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            transition: bottom .15s;
+          }
+        }
+
+        &:not(.active) {
+          & > a:hover {
+            &:before {
+              bottom: 0;
+            }
+          }
+        }
+
+        &.active {
+          & > a {
+            color: $midnight !important;
+
+            &:before {
+              bottom: 0;
+            }
+          }
+        }
+      }
+      .has-dropdown {
+        & > a {
+          &:after {
+            border-color: $midnight transparent transparent transparent;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+2.0 - Mobile Navigation
+--------------------------------------------------------------*/
+
+.container,
+.scroller {
+  height: 100%;
+}
+
+.scroller {
+  overflow-y: scroll;
+}
+
+.scroller,
+.scroller-inner {
+  position: relative;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.oc-pusher {
+  position: relative;
+  left: 0;
+  height: 100%;
+}
+
+.oc-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 300px;
+  height: 100%;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.oc-level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #336ca6;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.oc-pusher,
+.oc-level {
+  transition: all .5s;
+}
+
+/* overlays for pusher and level that gets covered */
+
+.oc-pusher:after,
+.oc-level:after,
+.oc-level:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  opacity: 0;
+}
+
+.oc-pusher:after,
+.oc-level:after {
+  background: rgba(0,0,0,0.3);
+  transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+}
+
+.oc-level:after {
+  z-index: -1;
+}
+
+.oc-pusher.oc-pushed:after,
+.oc-level.oc-level-overlay:after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.oc-level.oc-level-overlay {
+  cursor: pointer;
+}
+
+.oc-level.oc-level-overlay:before {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 1;
+}
+
+/* overlap */
+.oc-overlap .oc-level.oc-level-open {
+  box-shadow: 1px 0 2px rgba(0,0,0,.2);
+  transform: translate3d(-40px, 0, 0);
+}
+
+/* first level */
+.oc-menu > .oc-level,
+.oc-menu > .oc-level.oc-level-open,
+.oc-menu.oc-overlap > .oc-level,
+.oc-menu.oc-overlap > .oc-level.oc-level-open {
+  box-shadow: none;
+  transform: translate3d(0, 0, 0);
+}
+
+/* cover */
+.oc-cover .oc-level.oc-level-open {
+  transform: translate3d(0, 0, 0);
+}
+
+.oc-cover .oc-level.oc-level-open > ul > li > .mp-level:not(.mp-level-open) {
+  transform: translate3d(-100%, 0, 0);
+}
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+/* We'll show the first level only */
+.no-csstransforms3d .oc-pusher,
+.no-js .oc-pusher {
+  padding-left: 300px;
+}
+
+.no-csstransforms3d .oc-menu .oc-level,
+.no-js .oc-menu .oc-level {
+  display: none;
+}
+
+.no-csstransforms3d .oc-menu > .oc-level,
+.no-js .oc-menu > .oc-level {
+  display: block;
+}
+
+.mobile-bar {
+  color: $gray-text;
+  height: 2.8125rem;
+  line-height: 2.8125rem;
+  position: relative;
+  @include gray-gradient-right;
+
+  a {
+    color: $gray-text;
+    transition: color .3s;
+
+    &:hover, &:focus, &:active {
+      color: $gray-text;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+}
+
+  .mobile-bar-section {
+    padding: 0 .625rem;
+    position: absolute;
+    text-align: center;
+    height: 2.8125rem;
+    top: 0;
+
+    &.middle {
+      left: 2.8125rem;
+      right: 2.8125rem;
+    }
+  }
+
+  .right-small {
+    border-left: none;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 2em;
+    width: 2.8125rem;
+    height: 2.8125rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .nav-toggle {
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    cursor: pointer;
+    padding: 8px 30px 16px 0;
+    color: transparent;
+    z-index: 2000;
+
+    span, span:before, span:after {
+      cursor: pointer;
+      border-radius: 1px;
+      height: 4px;
+      width: 30px;
+      background: $gray-text;
+      position: absolute;
+      display: block;
+      content: '';
+      transition: all 500ms ease-in-out;
+      color: transparent;
+    }
+
+    span:before {
+      top: -8px;
+    }
+
+    span:after {
+      bottom: -8px;
+    }
+
+    &.active {
+      span {
+        background-color: transparent;
+      }
+
+      span:before, span:after {
+        top: 0;
+        background-color: $white;
+      }
+
+      span:before {
+        transform: rotate(45deg);
+      }
+
+      span:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+.mobile-bar-search {
+  color: $midnight;
+  position: relative;
+  background-color: $gray-text;
+  height: 57px;
+  padding: 10px;
+  position: absolute;
+  top: 2.8125rem;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  z-index: 0;
+  transition: all .3s;
+
+  input {
+    margin: 0;
+  }
+}
+
+.content {
+  position: relative;
+  background: $white;
+  transition: all .3s;
+}
+
+.search-pushed {
+  .mobile-bar-search {
+    visibility: visible;
+  }
+
+  .content {
+    transform: translate3d(0, 57px, 0);
+  }
+}

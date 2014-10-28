@@ -76,7 +76,7 @@
           <div class="mobile-bar hide-for-large-up">
 
             <section class="middle mobile-bar-section">
-              <h1 class="title">EducationNC</h1>
+              <h1 class="title">EdNC</h1>
             </section>
 
             <section class="right-small">
@@ -97,9 +97,13 @@
             </form>
           </div>
 
-          <header class="header clearfix">
+          <header id="header" class="header clearfix">
             <div class="full-width">
-              <div class="tagline">Including you in a conversation about our public schools</div>
+              <div class="logo">
+                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
+              </div>
+
+              <div class="caption">Including you in a conversation about our public schools</div>
 
               <div class="right text-right">
                 <ul class="inline-list minor-links small">
@@ -126,7 +130,7 @@
             <nav class="top-bar" data-topbar role="navigation">
                 <ul class="title-area">
                   <li class="name">
-                    <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-white.svg" alt="EducationNC" /></a>
+                    <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
                   </li>
                 </ul>
 
@@ -134,7 +138,7 @@
                   <ul class="left">
                     <li class="active"><a href="#">Home</a></li>
                     <li class="has-dropdown">
-                      <a href="#">Research</a>
+                      <a href="#">Issues</a>
                       <ul class="dropdown">
                         <li><a href="#">Lorem ipsum</a></li>
                         <li><a href="#">Dolor sit</a></li>
