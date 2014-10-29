@@ -2921,7 +2921,9 @@ th.hide-for-touch {
 2.0 - Desktop Navigation
 --------------------------------------------------------------*/
 .header {
-  margin-bottom: 5em; }
+  margin-bottom: 5em;
+  position: relative;
+  z-index: 10; }
   .header a {
     font-family: Lato, sans-serif;
     color: #2b3e50;
@@ -2938,15 +2940,18 @@ th.hide-for-touch {
     .header .logo a {
       display: block;
       width: 134px;
-      height: 134px;
-      position: relative; }
-      .header .logo a img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%) translateX(-50%); }
+      position: relative;
+      text-align: center;
+      padding: 50px 0 50px;
+      transition: padding-bottom 0.3s; }
+    .header .logo.stuck {
+      position: fixed; }
+      .header .logo.stuck a {
+        padding-top: 6px;
+        padding-bottom: 6px; }
   .header .full-width {
     position: relative;
+    height: 45px;
     background-image: -o-linear-gradient(90deg, #eff3f3 0%, #d4d8d9 100%);
     background-image: -moz-linear-gradient(90deg, #eff3f3 0%, #d4d8d9 100%);
     background-image: -ms-linear-gradient(90deg, #eff3f3 0%, #d4d8d9 100%);
@@ -2955,15 +2960,14 @@ th.hide-for-touch {
       padding-right: 0.625rem; }
     .header .full-width .minor-links {
       float: left;
-      margin: 0.5rem 0.625rem; }
+      margin: 0.75rem 0.625rem 0; }
       .header .full-width .minor-links a {
         font-family: Lato, sans-serif;
         font-weight: 300;
         font-size: 0.875rem; }
   .header .caption {
     position: absolute;
-    bottom: 0;
-    padding: 0.3rem 0.625rem;
+    padding: 0.5rem 0.625rem;
     left: 169px;
     color: #707273;
     font-size: 1.125rem; }
@@ -2973,7 +2977,7 @@ th.hide-for-touch {
     float: right;
     max-width: 300px;
     font-family: Lato, sans-serif;
-    margin-top: 0.3rem; }
+    margin-top: 0.5rem; }
     .header .search input {
       margin-bottom: 0.5em; }
     .header .search input[type="text"] {
@@ -3073,6 +3077,11 @@ th.hide-for-touch {
   background-image: -moz-linear-gradient(90deg, #b62078 0%, #93195d 100%);
   background-image: -ms-linear-gradient(90deg, #b62078 0%, #93195d 100%);
   background-image: linear-gradient(90deg, #b62078 0%, #93195d 100%); }
+.top-bar.stuck {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 0 5px 0 rgba(100, 100, 100, 0.5); }
 
 .top-bar-section a:hover, .top-bar-section a:focus, .top-bar-section a:active {
   text-decoration: none; }
@@ -3104,19 +3113,6 @@ th.hide-for-touch {
 /*--------------------------------------------------------------
 2.0 - Mobile Navigation
 --------------------------------------------------------------*/
-.container, .scroller {
-  height: 100%; }
-
-.scroller {
-  overflow-y: scroll; }
-
-.scroller, .scroller-inner {
-  position: relative; }
-
-.container {
-  position: relative;
-  overflow: hidden; }
-
 .oc-pusher {
   position: relative;
   left: 0;
@@ -3303,6 +3299,19 @@ th.hide-for-touch {
 /*--------------------------------------------------------------
 2.0 - Layout
 --------------------------------------------------------------*/
+.container, .scroller {
+  height: 100%; }
+
+.scroller {
+  overflow-y: scroll; }
+
+.scroller, .scroller-inner {
+  position: relative; }
+
+.container {
+  position: relative;
+  overflow: hidden; }
+
 .section {
   margin: 2em 0 5em; }
 
@@ -3343,7 +3352,7 @@ hr {
   margin: 1.25rem 0; }
   @media only screen and (min-width:40.063em) {
     .callout {
-      margin: 0; } }
+      margin: 0 0 1.25rem; } }
   .callout h4 {
     margin-top: 0; }
   .callout p {

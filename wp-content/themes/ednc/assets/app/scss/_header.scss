@@ -5,6 +5,8 @@
 
 .header {
   margin-bottom: 5em;
+  position: relative;
+  z-index: 10;
 
   a {
     font-family: $font-family-sans-serif;
@@ -22,20 +24,25 @@
     a {
       display: block;
       width: 134px;
-      height: 134px;
       position: relative;
+      text-align: center;
+      padding: 50px 0 50px;
+      transition: padding-bottom .3s;
+    }
 
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%) translateX(-50%);
+    &.stuck {
+      position: fixed;
+
+      a {
+        padding-top: 6px;
+        padding-bottom: 6px;
       }
     }
   }
 
   .full-width {
     position: relative;
+    height: 45px;
     @include gray-gradient-right;
 
     .right {
@@ -44,7 +51,7 @@
 
     .minor-links {
       float: left;
-      margin: .5rem .625rem;
+      margin: .75rem .625rem 0;
 
       a {
         font-family: $font-family-sans-serif;
@@ -56,8 +63,7 @@
 
   .caption {
     position: absolute;
-    bottom: 0;
-    padding: .3rem .625rem;
+    padding: .5rem .625rem;
     left: 169px;
     color: $gray-text;
     font-size: rem-calc(18);
@@ -71,7 +77,7 @@
     float: right;
     max-width: 300px;
     font-family: $font-family-sans-serif;
-    margin-top: .3rem;
+    margin-top: .5rem;
 
     input {
       margin-bottom: .5em;
@@ -232,6 +238,13 @@
   .major-button {
     @include pink-gradient-right;
   }
+
+  &.stuck {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 0 5px 0 $shadow;
+  }
 }
 
 .top-bar-section {
@@ -298,25 +311,6 @@
 /*--------------------------------------------------------------
 2.0 - Mobile Navigation
 --------------------------------------------------------------*/
-
-.container,
-.scroller {
-  height: 100%;
-}
-
-.scroller {
-  overflow-y: scroll;
-}
-
-.scroller,
-.scroller-inner {
-  position: relative;
-}
-
-.container {
-  position: relative;
-  overflow: hidden;
-}
 
 .oc-pusher {
   position: relative;

@@ -20,15 +20,20 @@ jQuery(document).ready(function($) {
   });
 
   // Sticky header
-  $('#header').waypoint(function(d) {
-    if (d == 'down') {
-      $(this).addClass('stuck');
-    } else {
-      $(this).removeClass('stuck');
-    }
-  }, {
+  // $('.top-bar').wrap('<div class="sticky-wrapper"></div>');
+  // $('.sticky-wrapper').css({
+  //   height: $('.top-bar').outerHeight(true)
+  // });
+  $('.top-bar').waypoint('sticky', {
     offset: -1,
-    context: '.scroller'
+    context: '.scroller',
+    handler: function(d) {
+      if (d == 'down') {
+        $('.header .logo').addClass('stuck');
+      } else {
+        $('.header .logo').removeClass('stuck');
+      }
+    }
   });
 
 

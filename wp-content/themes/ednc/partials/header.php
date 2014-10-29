@@ -10,7 +10,7 @@
 <html <?php language_attributes(); ?> ng-app="ednc">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title><?php wp_title( '|', true, 'right' ); ?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11">
@@ -76,7 +76,7 @@
           <div class="mobile-bar hide-for-large-up">
 
             <section class="middle mobile-bar-section">
-              <h1 class="title">EdNC</h1>
+              <div class="title"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></div>
             </section>
 
             <section class="right-small">
@@ -97,7 +97,7 @@
             </form>
           </div>
 
-          <header id="header" class="header clearfix">
+          <header id="header" class="header clearfix show-for-large-up">
             <div class="full-width">
               <div class="logo">
                 <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>

@@ -142,6 +142,25 @@
 2.0 - Layout
 --------------------------------------------------------------*/
 
+.container,
+.scroller {
+  height: 100%;
+}
+
+.scroller {
+  overflow-y: scroll;
+}
+
+.scroller,
+.scroller-inner {
+  position: relative;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
 .section {
   margin: 2em 0 5em;
 }
@@ -187,7 +206,7 @@ hr {
   margin: 1.25rem 0;
 
   @media #{$medium-up} {
-    margin: 0;
+    margin: 0 0 1.25rem;
   }
 
   h4 {

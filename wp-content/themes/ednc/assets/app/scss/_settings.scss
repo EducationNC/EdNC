@@ -97,6 +97,7 @@ $font-family-serif: Merriweather, serif;
 
 $transparent : rgba(255, 255, 255, 0);
 $white70     : rgba(255, 255, 255, .6);
+$shadow      : rgba(100, 100, 100, .5);
 
 $white       : #FFFFFF;
 $black       : #000000;
@@ -170,11 +171,11 @@ $body-font-family: $font-family-serif;
 // d. Media Query Ranges
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $small-range: (0em, 40em);
-// $medium-range: (40.063em, 64em);
-// $large-range: (64.063em, 90em);
-// $xlarge-range: (90.063em, 120em);
-// $xxlarge-range: (120.063em, 99999999em);
+// $small-range: (0em, 40em);                 // 0 -640
+// $medium-range: (40.063em, 64em);           // 641 - 1024
+// $large-range: (64.063em, 90em);            // 1025 - 1440
+// $xlarge-range: (90.063em, 120em);          // 1441 - 1920
+// $xxlarge-range: (120.063em, 99999999em);   // 1921 - up
 
 // $screen: "only screen";
 

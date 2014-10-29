@@ -110,6 +110,7 @@ function ednc_scripts() {
     wp_enqueue_script( 'classie', get_template_directory_uri() . '/assets/app/js/classie.js', array(), '', true );
     wp_enqueue_script( 'mlpushmenu', get_template_directory_uri() . '/assets/app/js/mlpushmenu.js', array('classie'), '', true );
     wp_enqueue_script( 'waypoints', get_template_directory_uri() . '/assets/app/js/waypoints.min.js', array('jquery'), '', true );
+    wp_enqueue_script( 'waypoints-sticky', get_template_directory_uri() . '/assets/app/js/waypoints-sticky.min.js', array('jquery', 'waypoints'), '', true );
     wp_enqueue_script( 'ednc-scripts', get_template_directory_uri() . '/assets/app/js/scripts.js', array('jquery', 'jquery-ui', 'mlpushmenu'), '', true );
     wp_enqueue_script( 'ednc-angular', get_template_directory_uri() . '/assets/app/js/app.js', array('angular-core'), '', true );
     if(function_exists('get_json_url')){
