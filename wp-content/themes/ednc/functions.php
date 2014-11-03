@@ -11,11 +11,11 @@
 $nomacorc_includes = array(
     'inc/setup.php',                // Theme setup stuff
     'inc/scripts.php',              // Scripts and styles
-    // 'inc/custom-post-types.php',    // Custom post types
+    'inc/custom-post-types.php',    // Custom post types
     // 'inc/widgets.php',              // Custom widgets and areas
     'inc/tinymce.php',              // Customizations to Advanced TinyMCE Editor Plugin
     // 'inc/shortcodes.php',           // Custom shortcodes
-    // 'inc/extras.php',               // Custom functions specific for this theme
+    'inc/extras.php',               // Custom functions specific for this theme
     'inc/resize.php'                // Resizes images on the fly (TimThumb replacement)
 );
 

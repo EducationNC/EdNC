@@ -40,7 +40,7 @@
   background-image: linear-gradient(90deg, $green-light 0%, $green-dark 100%);
 }
 
-@mixin light-green-gradient-right() {
+@mixin dark-green-gradient-right() {
   background-image: -o-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
   background-image: -moz-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
   background-image: -ms-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
@@ -59,6 +59,13 @@
   background-image: -moz-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
   background-image: -ms-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
   background-image: linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
+}
+
+@mixin dark-pink-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+  background-image: linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
 }
 
 @mixin blue-gradient-right() {
@@ -102,7 +109,7 @@
 @import
 //   "foundation/components/accordion",
 //   "foundation/components/alert-boxes",
-//   "foundation/components/block-grid",
+  "foundation/components/block-grid",
 //   "foundation/components/breadcrumbs",
 //   "foundation/components/button-groups",
 //   "foundation/components/buttons",
@@ -142,27 +149,38 @@
 2.0 - Layout
 --------------------------------------------------------------*/
 
-.container,
-.scroller {
-  height: 100%;
-}
+// .container,
+// .scroller {
+//   height: 100%;
+// }
+//
+// .scroller {
+//   overflow-y: scroll;
+// }
+//
+// .scroller,
+// .scroller-inner {
+//   position: relative;
+// }
+//
+// .container {
+//   position: relative;
+//   overflow: hidden;
+// }
 
-.scroller {
-  overflow-y: scroll;
-}
-
-.scroller,
-.scroller-inner {
+.content {
   position: relative;
-}
+  background: $white;
+  transition: all .3s;
+  padding-top: 2em;
 
-.container {
-  position: relative;
-  overflow: hidden;
+  @media #{$large-up} {
+    padding-top: 0;
+  }
 }
 
 .section {
-  margin: 2em 0 5em;
+  margin: 0 0 5em;
 }
 
 .collapse {
@@ -174,8 +192,14 @@
 }
 
 .extra-padding {
-  padding-left: .625rem;
-  padding-right: .625rem;
+  padding-left: .625rem !important;
+  padding-right: .625rem !important;
+}
+
+.ignore-nested-rows {
+  .row {
+    margin: 0;
+  }
 }
 
 .full-width {
@@ -203,23 +227,15 @@ hr {
 .callout {
   @include gray-gradient-right;
   padding: 30px;
-  margin: 1.25rem 0;
-
-  @media #{$medium-up} {
-    margin: 0 0 1.25rem;
-  }
+  margin: 0 0 1.25rem;
 
   h4 {
     margin-top: 0;
   }
 
   p {
-    font-size: $h4-font-size;
+    font-size: 1rem;
     font-style: italic;
-
-    @media #{$medium-up} {
-      font-size: 1rem;
-    }
   }
 
   .button {
@@ -227,6 +243,19 @@ hr {
   }
 }
 
+.flex-medium {
+  @media #{$medium-only} {
+    display: flex;
+
+    > div > div {
+      height: 100%;
+    }
+  }
+}
+
+.twitter-timeline {
+  width: 100% !important;
+}
 
 /*--------------------------------------------------------------
 2.0 - Typography
@@ -282,6 +311,7 @@ h4, .h4, .article-section-subtitle {
   font-weight: normal;
   color: $midnight;
   font-size: rem-calc(20);
+  line-height: 1.2em;
 
   li & {
     font-size: rem-calc(18);
@@ -405,7 +435,7 @@ a {
   }
 
   &:hover, &:active, &:focus {
-    @include light-green-gradient-right;
+    @include dark-green-gradient-right;
     color: $white;
     text-decoration: none;
 
@@ -416,6 +446,10 @@ a {
 
   &.secondary {
     @include pink-gradient-right;
+
+    &:hover, &:active, &:focus {
+      @include dark-pink-gradient-right;
+    }
   }
 
   &.wide {
@@ -441,6 +475,19 @@ a {
   &.big {
     font-size: rem-calc(20);
     padding: 1rem 1.5rem 1.0625rem;
+  }
+}
+
+.has-new {
+  &:after {
+    content: 'New!';
+    font-family: $font-family-serif;
+    color: $ice;
+    @include green-gradient-right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 3px 8px;
   }
 }
 
@@ -480,7 +527,7 @@ form {
   .post-title {
     margin: 0;
     position: absolute;
-    bottom: 10px;
+    bottom: 1.5em;
     left: 10px;
     right: 10px;
     font-family: $font-family-sans-serif;
@@ -503,8 +550,7 @@ form {
     z-index: 2;
     margin: 0;
     padding-top: .3em;
-    opacity: 0;
-    transform: translateY(2em);
+    opacity: 1;
     transition: all .3s;
   }
 
@@ -540,6 +586,17 @@ form {
     width: 100%;
   }
 
+  @media #{$large-up} {
+    .post-title {
+      transform: translateY(1.25em);
+    }
+
+    .meta, .line {
+      opacity: 0;
+      transform: translateY(2em);
+    }
+  }
+
   @media #{$small-only} {
     &.small-wide {
       height: 250px;
@@ -563,20 +620,21 @@ form {
   position: relative;
   z-index: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
   max-height: 9.1875rem;
 
-  &:after {
-    content: '';
-    position: absolute;
-    z-index: 5;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    transition: all .5s;
-    @include trans-white-gradient-bottom;
+  @media #{$large-up} {
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 1;
+      transition: all .5s;
+      @include trans-white-gradient-bottom;
+    }
   }
 
   p {
@@ -589,7 +647,7 @@ form {
     position: absolute;
     right: 0;
     bottom: 0;
-    box-shadow: 0 0 20px 24px $white;
+    box-shadow: 0 0 20px 15px $white;
     background: $white;
     line-height: 2em;
     font-size: rem-calc(14);
@@ -598,26 +656,28 @@ form {
   }
 }
 
-.has-photo-overlay {
-  &:hover {
-    .photo-overlay:not(.light) {
-      .post-title {
-        transform: translateY(-1.25em);
+@media #{$large-up} {
+  .has-photo-overlay {
+    &:hover {
+      .photo-overlay:not(.light) {
+        .post-title {
+          transform: translateY(0);
+        }
+
+        .meta, .line {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        &:after {
+          transform: translateY(15%);
+        }
       }
 
-      .meta, .line {
-        transform: translateY(0);
-        opacity: 1;
+      .excerpt:after {
+        opacity: 0;
+        visibility: hidden;
       }
-
-      &:after {
-        transform: translateY(15%);
-      }
-    }
-
-    .excerpt:after {
-      opacity: 0;
-      visibility: hidden;
     }
   }
 }
@@ -628,10 +688,6 @@ form {
 
   @media #{$medium-up} {
     margin: 0 0 3em;
-  }
-
-  .row &.row {
-    margin: 1.25rem -0.625rem;
   }
 }
 
@@ -693,9 +749,12 @@ form {
   width: 100%;
   margin: 0;
 
-  .square {
-    float: left;
-    width: 20%;
+  ul {
+    margin: 0;
+  }
+
+  li {
+    padding: 0;
   }
 }
 
@@ -709,7 +768,7 @@ form {
   .inline-list {
     li {
       border: none;
-      padding: 0 2rem;
+      padding: 1rem 2rem;
     }
   }
 }
@@ -719,6 +778,10 @@ form {
   font-family: $font-family-sans-serif;
   font-weight: 300;
   font-size: .9rem;
+
+  .columns {
+    margin-bottom: 2em;
+  }
 
   p, li {
     font-family: $font-family-sans-serif;
@@ -752,7 +815,6 @@ form {
 
 .below-footer {
   background: $ice;
-  margin-top: 2em;
 
   p {
     margin: 0;

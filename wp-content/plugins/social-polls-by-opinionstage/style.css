@@ -1,0 +1,33 @@
+#opinionstage-head {
+  background: url("images/logo.png") no-repeat 0px 0px;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.opinionstage-wrap {
+  margin: 10px auto;
+  background-color: #FAFBFC;
+  border: 1px solid #D2E0F0;
+}
+.section {
+  padding: 15px;
+}
+h2 {
+  color: #25264c;
+  font-weight: bold;
+  font-size: 23px;
+}
+.os_links_list {
+  list-style-type: none;
+  margin: 0 0 35px 0;
+  padding: 0;
+}
+.os_links_list li {
+  margin-bottom: 21px;
+}
+.os_links_list li a {
+  color: #5db5d4;
+  font-size: 17px;
+  text-decoration: none;
+}

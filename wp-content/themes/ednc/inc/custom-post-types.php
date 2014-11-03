@@ -8,93 +8,28 @@
 */
 
 function add_custom_post_types() {
-	register_post_type( 'sales', /* (http://codex.wordpress.org/Function_Reference/register_post_type) */
+	register_post_type( 'underwriter',
 		array('labels' => array(
-				'name' => 'Sales Network',
-				'singular_name' => 'Network',
+				'name' => 'Underwriters',
+				'singular_name' => 'Underwriter',
 				'add_new' => 'Add New',
-				'add_new_item' => 'Add New Network',
+				'add_new_item' => 'Add New Underwriter',
 				'edit' => 'Edit',
-				'edit_item' => 'Edit Network',
-				'new_item' => 'New Network',
-				'view_item' => 'View Network',
-				'search_items' => 'Search Sales Network',
+				'edit_item' => 'Edit Underwriter',
+				'new_item' => 'New Underwriter',
+				'view_item' => 'View Underwriter',
+				'search_items' => 'Search Sales Underwriter',
 				'not_found' =>  'Nothing found in the Database.',
 				'not_found_in_trash' => 'Nothing found in Trash',
 				'parent_item_colon' => ''
 			), /* end of arrays */
-			'description' => 'These are Nomacorc Sales',
 			'public' => false,
 			'exclude_from_search' => true,
 			'publicly_queryable' => true,
 			'show_ui' => true,
 			'show_in_nav_menus' => false,
 			'menu_position' => 8,
-			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png', /* the icon for the custom post type menu */
-			'capability_type' => 'post',
-			'hierarchical' => false,
-			'supports' => array( 'title', 'revisions'),
-			'has_archive' => false,
-			'rewrite' => false,
-			'query_var' => true
-	 	)
-	);
-
-	register_post_type( 'videos', /* (http://codex.wordpress.org/Function_Reference/register_post_type) */
-		array('labels' => array(
-				'name' => 'Videos',
-				'singular_name' => 'Video',
-				'add_new' => 'Add New',
-				'add_new_item' => 'Add New Video',
-				'edit' => 'Edit',
-				'edit_item' => 'Edit Video',
-				'new_item' => 'New Video',
-				'view_item' => 'View Video',
-				'search_items' => 'Search Videos',
-				'not_found' =>  'Nothing found in the Database.',
-				'not_found_in_trash' => 'Nothing found in Trash',
-				'parent_item_colon' => ''
-			), /* end of arrays */
-			'description' => 'These are Nomacorc videos',
-			'public' => false,
-			'exclude_from_search' => true,
-			'publicly_queryable' => true,
-			'show_ui' => true,
-			'show_in_nav_menus' => false,
-			'menu_position' => 8,
-			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png', /* the icon for the custom post type menu */
-			'capability_type' => 'post',
-			'hierarchical' => false,
-			'supports' => array( 'title', 'revisions'),
-			'has_archive' => false,
-			'rewrite' => false,
-			'query_var' => true
-	 	)
-	);
-
-	register_post_type( 'enology-videos', /* (http://codex.wordpress.org/Function_Reference/register_post_type) */
-		array('labels' => array(
-				'name' => 'Enology Videos',
-				'singular_name' => 'Enology Video',
-				'add_new' => 'Add New',
-				'add_new_item' => 'Add New Enology Video',
-				'edit' => 'Edit',
-				'edit_item' => 'Edit Enology Video',
-				'new_item' => 'New Enology Video',
-				'view_item' => 'View Enology Video',
-				'search_items' => 'Search Enology Videos',
-				'not_found' =>  'Nothing found in the Database.',
-				'not_found_in_trash' => 'Nothing found in Trash',
-				'parent_item_colon' => ''
-			), /* end of arrays */
-			'description' => 'These are Enology videos',
-			'public' => false,
-			'exclude_from_search' => true,
-			'publicly_queryable' => true,
-			'show_ui' => true,
-			'show_in_nav_menus' => false,
-			'menu_position' => 8,
-			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png', /* the icon for the custom post type menu */
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			'supports' => array( 'title', 'revisions'),
@@ -106,12 +41,6 @@ function add_custom_post_types() {
 }
 add_action( 'init', 'add_custom_post_types');
 
-/*
-for more information on taxonomies, go here:
-http://codex.wordpress.org/Function_Reference/register_taxonomy
-*/
-
-// now let's add custom categories (these act like categories)
 
 register_taxonomy( 'type',
 	array('sales'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */

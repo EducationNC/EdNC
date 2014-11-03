@@ -8,7 +8,29 @@ jQuery(document).ready(function($) {
 
   // Toggle menu button to x close state on click
   $('#trigger-offcanvas').on('click', function() {
-    $(this).toggleClass('active');
+    if ($(this).hasClass('active')) {
+      console.log('close');
+      $this = $(this);
+      setTimeout(function() {
+        $this.prependTo('.mobile-bar');
+      }, 500);
+      setTimeout(function() {
+        $this.removeClass('active');
+      }, 1);
+    } else {
+      console.log('open');
+      $this = $(this);
+      $(this).insertBefore('#oc-pusher');
+      setTimeout(function() {
+        $this.addClass('active');
+      }, 1);
+    }
+  });
+
+  $('#oc-pusher').on('click', function() {
+    if ($(this).hasClass('oc-pushed')) {
+      $('#trigger-offcanvas').removeClass('active');
+    }
   });
 
   // Initiate the off-canvas push menu
@@ -20,18 +42,20 @@ jQuery(document).ready(function($) {
   });
 
   // Sticky header
-  // $('.top-bar').wrap('<div class="sticky-wrapper"></div>');
-  // $('.sticky-wrapper').css({
-  //   height: $('.top-bar').outerHeight(true)
-  // });
   $('.top-bar').waypoint('sticky', {
     offset: -1,
-    context: '.scroller',
+    // context: '.scroller',
     handler: function(d) {
       if (d == 'down') {
         $('.header .logo').addClass('stuck');
+        setTimeout(function() {
+          $('.header .logo').addClass('fix-height');
+        }, 1);
       } else {
         $('.header .logo').removeClass('stuck');
+        setTimeout(function() {
+          $('.header .logo').removeClass('fix-height');
+        }, 1);
       }
     }
   });
