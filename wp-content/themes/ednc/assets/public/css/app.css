@@ -30,7 +30,7 @@
 /*--------------------------------------------------------------
 1.1 - Reset
 --------------------------------------------------------------*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, #poll-container .pds-links.pds-links a, #poll-container .pds-links-back.pds-links-back a, abbr, acronym, address, big, cite, code, tt, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
   border: 0;
   font-family: inherit;
   font-size: 100%;
@@ -158,12 +158,12 @@ th {
 .alignleft {
   display: inline;
   float: left;
-  margin-right: 1.5em; }
+  margin: 0 1.5em 1.5em -5em; }
 
 .alignright {
   display: inline;
   float: right;
-  margin-left: 1.5em; }
+  margin: 0 -5em 1.5em 1.5em; }
 
 .aligncenter {
   clear: both;
@@ -774,7 +774,7 @@ select {
     padding-left: 0;
     padding-top: 0; } }
 
-button, .button {
+button, .button, #poll-container .pds-vote-button.pds-vote-button {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -797,9 +797,9 @@ button, .button {
   border-color: #426792;
   color: white;
   transition: background-color 300ms ease-out; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  button:hover, button:focus, .button:hover, #poll-container .pds-vote-button.pds-vote-button:hover, #poll-container .pds-vote-button.pds-vote-button:active, #poll-container .pds-vote-button.pds-vote-button:focus, .button:focus {
     background-color: #426792; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  button:hover, button:focus, .button:hover, #poll-container .pds-vote-button.pds-vote-button:hover, #poll-container .pds-vote-button.pds-vote-button:active, #poll-container .pds-vote-button.pds-vote-button:focus, .button:focus {
     color: white; }
   button.secondary, .button.secondary {
     background-color: #731454;
@@ -957,7 +957,7 @@ button::-moz-focus-inner {
   padding: 0; }
 
 @media only screen and (min-width:40.063em) {
-  button, .button {
+  button, .button, #poll-container .pds-vote-button.pds-vote-button {
     display: inline-block; } }
 
 /* Standard Forms */
@@ -983,11 +983,11 @@ form .row input.column, form .row input.columns, form .row textarea.column, form
 
 /* Label Styles */
 label {
-  font-size: 0.875rem;
+  font-size: 1em;
   color: #4d4d4d;
   cursor: pointer;
   display: block;
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1.5;
   margin-bottom: 0;
   /* Styles for required inputs */ }
@@ -1016,7 +1016,7 @@ select::-ms-expand {
   border-style: solid;
   border-width: 1px;
   overflow: hidden;
-  font-size: 0.875rem;
+  font-size: 1em;
   height: 2.3125rem;
   line-height: 2.3125rem; }
 
@@ -2051,6 +2051,41 @@ label.error {
     right: 91.66667%;
     left: auto; } }
 
+table {
+  background: white;
+  margin-bottom: 1.25rem;
+  border: solid 1px #d4d8d9;
+  table-layout: auto; }
+  table caption {
+    background: transparent;
+    color: #2b3e50;
+    font-size: 1rem;
+    font-weight: bold; }
+  table thead {
+    background: #ecf0f1; }
+    table thead tr th, table thead tr td {
+      padding: 0.5rem 0.625rem 0.625rem;
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: #2b3e50; }
+  table tfoot {
+    background: #ecf0f1; }
+    table tfoot tr th, table tfoot tr td {
+      padding: 0.5rem 0.625rem 0.625rem;
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: #2b3e50; }
+  table tr th, table tr td {
+    padding: 0.5625rem 0.625rem;
+    font-size: 0.875rem;
+    color: #222222;
+    text-align: left; }
+  table tr.even, table tr.alt, table tr:nth-of-type(even) {
+    background: #eff3f3; }
+  table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
+    display: table-cell;
+    line-height: 1.125rem; }
+
 meta.foundation-mq-topbar {
   font-family: "/only screen and (min-width:40.063em)/";
   width: 40.063em; }
@@ -2100,7 +2135,7 @@ meta.foundation-mq-topbar {
     padding-top: 0.35rem;
     padding-bottom: 0.35rem;
     font-size: 0.75rem; }
-  .top-bar .button, .top-bar button {
+  .top-bar .button, .top-bar #poll-container .pds-vote-button.pds-vote-button, #poll-container .top-bar .pds-vote-button.pds-vote-button, .top-bar button {
     padding-top: 0.4125rem;
     padding-bottom: 0.4125rem;
     margin-bottom: 0;
@@ -2120,7 +2155,7 @@ meta.foundation-mq-topbar {
       line-height: 45px;
       font-size: 1.0625rem;
       margin: 0; }
-      .top-bar .name h1 a {
+      .top-bar .name h1 a, .top-bar .name h1 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar .name h1 a, .top-bar .name h1 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar .name h1 a {
         font-weight: normal;
         color: #2b3e50;
         width: 75%;
@@ -2130,7 +2165,7 @@ meta.foundation-mq-topbar {
     position: absolute;
     right: 0;
     top: 0; }
-    .top-bar .toggle-topbar a {
+    .top-bar .toggle-topbar a, .top-bar .toggle-topbar #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar .toggle-topbar a, .top-bar .toggle-topbar #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar .toggle-topbar a {
       color: #2b3e50;
       text-transform: uppercase;
       font-size: 0.8125rem;
@@ -2143,7 +2178,7 @@ meta.foundation-mq-topbar {
     .top-bar .toggle-topbar.menu-icon {
       top: 50%;
       margin-top: -16px; }
-      .top-bar .toggle-topbar.menu-icon a {
+      .top-bar .toggle-topbar.menu-icon a, .top-bar .toggle-topbar.menu-icon #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar .toggle-topbar.menu-icon a, .top-bar .toggle-topbar.menu-icon #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar .toggle-topbar.menu-icon a {
         height: 34px;
         line-height: 33px;
         padding: 0 40px 0 15px;
@@ -2166,7 +2201,7 @@ meta.foundation-mq-topbar {
     background: transparent; }
     .top-bar.expanded .title-area {
       background: #ecf0f1; }
-    .top-bar.expanded .toggle-topbar a {
+    .top-bar.expanded .toggle-topbar a, .top-bar.expanded .toggle-topbar #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar.expanded .toggle-topbar a, .top-bar.expanded .toggle-topbar #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar.expanded .toggle-topbar a {
       color: #888888; }
       .top-bar.expanded .toggle-topbar a span::after {
         box-shadow: 0 0px 0 1px #888888, 0 7px 0 1px #888888, 0 14px 0 1px #888888; }
@@ -2190,7 +2225,7 @@ meta.foundation-mq-topbar {
     width: 100%; }
   .top-bar-section ul li {
     background: transparent; }
-    .top-bar-section ul li > a {
+    .top-bar-section ul li > a, .top-bar-section ul li > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section ul li > a, .top-bar-section ul li > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section ul li > a {
       display: block;
       width: 100%;
       color: #2b3e50;
@@ -2286,11 +2321,11 @@ meta.foundation-mq-topbar {
           background-color: #cf6e0e; }
         .top-bar-section ul li > button.warning:hover, .top-bar-section ul li > button.warning:focus {
           color: white; }
-    .top-bar-section ul li:hover:not(.has-form) > a {
+    .top-bar-section ul li:hover:not(.has-form) > a, .top-bar-section ul li:hover:not(.has-form) > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section ul li:hover:not(.has-form) > a, .top-bar-section ul li:hover:not(.has-form) > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section ul li:hover:not(.has-form) > a {
       background-color: #555555;
       background: #272727;
       color: #8b185e; }
-    .top-bar-section ul li.active > a {
+    .top-bar-section ul li.active > a, .top-bar-section ul li.active > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section ul li.active > a, .top-bar-section ul li.active > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section ul li.active > a {
       background: #5681b3;
       color: #731454; }
       .top-bar-section ul li.active > a:hover {
@@ -2341,7 +2376,7 @@ meta.foundation-mq-topbar {
     .top-bar-section .dropdown li {
       width: 100%;
       height: auto; }
-      .top-bar-section .dropdown li a {
+      .top-bar-section .dropdown li a, .top-bar-section .dropdown li #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section .dropdown li a, .top-bar-section .dropdown li #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section .dropdown li a {
         font-weight: normal;
         padding: 8px 15px; }
         .top-bar-section .dropdown li a.parent-link {
@@ -2350,14 +2385,14 @@ meta.foundation-mq-topbar {
         margin-bottom: 0;
         margin-top: 0;
         font-size: 1.125rem; }
-        .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.parent-link a {
+        .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.title h5 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.title h5 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.parent-link a, .top-bar-section .dropdown li.parent-link #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section .dropdown li.parent-link a, .top-bar-section .dropdown li.parent-link #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section .dropdown li.parent-link a {
           color: #2b3e50;
           display: block; }
           .top-bar-section .dropdown li.title h5 a:hover, .top-bar-section .dropdown li.parent-link a:hover {
             background: none; }
       .top-bar-section .dropdown li.has-form {
         padding: 8px 15px; }
-      .top-bar-section .dropdown li .button, .top-bar-section .dropdown li button {
+      .top-bar-section .dropdown li .button, .top-bar-section .dropdown li #poll-container .pds-vote-button.pds-vote-button, #poll-container .top-bar-section .dropdown li .pds-vote-button.pds-vote-button, .top-bar-section .dropdown li button {
         top: auto; }
     .top-bar-section .dropdown label {
       padding: 8px 15px 2px;
@@ -2383,9 +2418,9 @@ meta.foundation-mq-topbar {
       display: none; }
     .top-bar .title-area {
       float: left; }
-    .top-bar .name h1 a {
+    .top-bar .name h1 a, .top-bar .name h1 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar .name h1 a, .top-bar .name h1 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar .name h1 a {
       width: auto; }
-    .top-bar input, .top-bar .button, .top-bar button {
+    .top-bar input, .top-bar .button, .top-bar #poll-container .pds-vote-button.pds-vote-button, #poll-container .top-bar .pds-vote-button.pds-vote-button, .top-bar button {
       font-size: 0.875rem;
       position: relative;
       top: 7px; }
@@ -2425,7 +2460,7 @@ meta.foundation-mq-topbar {
       .top-bar-section li.active:not(.has-form) a:not(.button):hover {
         background: #476f9d;
         color: #731454; }
-    .top-bar-section .has-dropdown > a {
+    .top-bar-section .has-dropdown > a, .top-bar-section .has-dropdown > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section .has-dropdown > a, .top-bar-section .has-dropdown > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section .has-dropdown > a {
       padding-right: 35px !important; }
       .top-bar-section .has-dropdown > a:after {
         content: "";
@@ -2474,7 +2509,7 @@ meta.foundation-mq-topbar {
       top: auto;
       background: transparent;
       min-width: 100%; }
-      .top-bar-section .dropdown li a {
+      .top-bar-section .dropdown li a, .top-bar-section .dropdown li #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section .dropdown li a, .top-bar-section .dropdown li #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section .dropdown li a {
         color: white;
         line-height: 45px;
         white-space: nowrap;
@@ -2514,11 +2549,11 @@ meta.foundation-mq-topbar {
       left: 0; }
       .top-bar-section .left li .dropdown li .dropdown {
         left: 100%; }
-  .no-js .top-bar-section ul li:hover > a {
+  .no-js .top-bar-section ul li:hover > a, .no-js .top-bar-section ul li:hover > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .no-js .top-bar-section ul li:hover > a, .no-js .top-bar-section ul li:hover > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .no-js .top-bar-section ul li:hover > a {
     background-color: #555555;
     background: #272727;
     color: #8b185e; }
-  .no-js .top-bar-section ul li:active > a {
+  .no-js .top-bar-section ul li:active > a, .no-js .top-bar-section ul li:active > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .no-js .top-bar-section ul li:active > a, .no-js .top-bar-section ul li:active > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .no-js .top-bar-section ul li:active > a {
     background: #5681b3;
     color: #731454; }
   .no-js .top-bar-section .has-dropdown:hover > .dropdown {
@@ -2656,7 +2691,7 @@ div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, t
   padding: 0; }
 
 /* Default Link Styles */
-a {
+a, #poll-container .pds-links.pds-links a, #poll-container .pds-links-back.pds-links-back a {
   color: #5681b3;
   text-decoration: none;
   line-height: inherit; }
@@ -2741,14 +2776,14 @@ small {
   font-size: 60%;
   line-height: inherit; }
 
-code {
+code, tt {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-weight: normal;
-  color: #333333;
-  background-color: #ee9fd5;
+  color: #707273;
+  background-color: #eff3f3;
   border-width: 1px;
   border-style: solid;
-  border-color: #e87dc8;
+  border-color: #ecf0f1;
   padding: 0.125rem 0.3125rem 0.0625rem; }
 
 /* Lists */
@@ -2810,25 +2845,25 @@ abbr, acronym {
 abbr {
   text-transform: none; }
   abbr[title] {
-    border-bottom: 1px dotted #dddddd; }
+    border-bottom: 1px dotted #ecf0f1; }
 
 /* Blockquotes */
 blockquote {
   margin: 0 0 1.25rem;
   padding: 0.5625rem 1.25rem 0 1.1875rem;
-  border-left: 1px solid #dddddd; }
+  border-left: 1px solid #ecf0f1; }
   blockquote cite {
     display: block;
     font-size: 0.8125rem;
-    color: #4a6b8a; }
+    color: #707273; }
     blockquote cite:before {
       content: "\2014 \0020"; }
-    blockquote cite a, blockquote cite a:visited {
-      color: #4a6b8a; }
+    blockquote cite a, blockquote cite #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links blockquote cite a, blockquote cite #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back blockquote cite a, blockquote cite a:visited {
+      color: #707273; }
 
 blockquote, blockquote p {
   line-height: 1.6;
-  color: #5b82a7; }
+  color: #2b3e50; }
 
 /* Microformats */
 .vcard {
@@ -2844,7 +2879,7 @@ blockquote, blockquote p {
     font-size: 0.9375rem; }
 
 .vevent .summary {
-  font-weight: bold; }
+  font-weight: 300; }
 .vevent abbr {
   cursor: default;
   text-decoration: none;
@@ -2887,7 +2922,7 @@ blockquote, blockquote p {
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important; }
-  a, a:visited {
+  a, #poll-container .pds-links.pds-links a, #poll-container .pds-links-back.pds-links-back a, a:visited {
     text-decoration: underline; }
   a[href]:after {
     content: " (" attr(href) ")"; }
@@ -3197,7 +3232,7 @@ th.hide-for-touch {
   margin-bottom: 5em;
   position: relative;
   z-index: 10; }
-  .header a {
+  .header a, .header #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .header a, .header #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .header a {
     font-family: Lato, sans-serif;
     color: #2b3e50;
     text-decoration: none; }
@@ -3210,7 +3245,7 @@ th.hide-for-touch {
     top: 0;
     left: 0;
     z-index: 2; }
-    .header .logo a {
+    .header .logo a, .header .logo #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .header .logo a, .header .logo #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .header .logo a {
       display: block;
       width: 134px;
       position: relative;
@@ -3220,7 +3255,7 @@ th.hide-for-touch {
     .header .logo.stuck {
       position: fixed;
       backface-visibility: hidden; }
-    .header .logo.fix-height a {
+    .header .logo.fix-height a, .header .logo.fix-height #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .header .logo.fix-height a, .header .logo.fix-height #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .header .logo.fix-height a {
       padding-top: 5px;
       padding-bottom: 7px; }
   .header .full-width {
@@ -3235,7 +3270,7 @@ th.hide-for-touch {
     .header .full-width .minor-links {
       float: left;
       margin: 0.75rem 0.625rem 0; }
-      .header .full-width .minor-links a {
+      .header .full-width .minor-links a, .header .full-width .minor-links #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .header .full-width .minor-links a, .header .full-width .minor-links #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .header .full-width .minor-links a {
         font-family: Lato, sans-serif;
         font-weight: 300;
         font-size: 0.875rem; }
@@ -3257,7 +3292,8 @@ th.hide-for-touch {
     .header .search input[type="text"] {
       padding: 0.25em;
       height: 2em; }
-    .header .search .button {
+    .header .search .button, .header .search #poll-container .pds-vote-button.pds-vote-button, #poll-container .header .search .pds-vote-button.pds-vote-button {
+      font-size: 0.875rem;
       line-height: 1em;
       height: 2em;
       font-weight: 300; }
@@ -3265,11 +3301,12 @@ th.hide-for-touch {
     margin: 0 0.625rem; }
   .header .top-bar-section .social-media li {
     border: none;
+    height: 45px;
     line-height: 45px;
     padding: 4px 0.3rem 0; }
-    .header .top-bar-section .social-media li:hover a {
+    .header .top-bar-section .social-media li:hover a, .header .top-bar-section .social-media li:hover #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .header .top-bar-section .social-media li:hover a, .header .top-bar-section .social-media li:hover #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .header .top-bar-section .social-media li:hover a {
       color: #2b3e50; }
-    .header .top-bar-section .social-media li a {
+    .header .top-bar-section .social-media li a, .header .top-bar-section .social-media li #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .header .top-bar-section .social-media li a, .header .top-bar-section .social-media li #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .header .top-bar-section .social-media li a {
       position: relative;
       display: inline-block;
       height: 1em;
@@ -3302,6 +3339,8 @@ th.hide-for-touch {
         .header .top-bar-section .social-media li a:hover:after {
           opacity: 1;
           transform: translateX(-50%) translateY(-50%) scale(1.5); }
+  .single-post .header {
+    margin-bottom: 0; }
 
 .top-bar .title-area {
   margin: 0 0.625rem 0 0;
@@ -3315,7 +3354,7 @@ th.hide-for-touch {
     display: none; }
 .top-bar .minor-button, .top-bar .major-button {
   overflow: hidden; }
-  .top-bar .minor-button a, .top-bar .major-button a {
+  .top-bar .minor-button a, .top-bar .minor-button #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar .minor-button a, .top-bar .minor-button #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar .minor-button a, .top-bar .major-button a, .top-bar .major-button #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar .major-button a, .top-bar .major-button #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar .major-button a {
     font-family: Merriweather, serif;
     font-size: 1rem;
     color: #ecf0f1;
@@ -3365,9 +3404,9 @@ th.hide-for-touch {
 
 .top-bar-section a:hover, .top-bar-section a:focus, .top-bar-section a:active {
   text-decoration: none; }
-.top-bar-section ul li > a {
+.top-bar-section ul li > a, .top-bar-section ul li > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section ul li > a, .top-bar-section ul li > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section ul li > a {
   background: none !important; }
-.top-bar-section ul.left > li > a {
+.top-bar-section ul.left > li > a, .top-bar-section ul.left > li > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section ul.left > li > a, .top-bar-section ul.left > li > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section ul.left > li > a {
   line-height: 42px !important;
   height: 45px;
   overflow: hidden;
@@ -3380,13 +3419,14 @@ th.hide-for-touch {
     position: absolute;
     left: 0;
     bottom: -3px;
-    transition: bottom 0.15s; }
-.top-bar-section ul.left > li:not(.active) > a:hover:before {
-  bottom: 0; }
-.top-bar-section ul.left > li.active > a {
+    transform: translateY(0);
+    transition: transform 0.3s; }
+.top-bar-section ul.left > li:not(.current-menu-item) > a:hover:before {
+  transform: translateY(-3px); }
+.top-bar-section ul.left > li.current-menu-item > a, .top-bar-section ul.left > li.current-menu-item > #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .top-bar-section ul.left > li.current-menu-item > a, .top-bar-section ul.left > li.current-menu-item > #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .top-bar-section ul.left > li.current-menu-item > a {
   color: #2b3e50 !important; }
-  .top-bar-section ul.left > li.active > a:before {
-    bottom: 0; }
+  .top-bar-section ul.left > li.current-menu-item > a:before {
+    transform: translateY(-3px); }
 .top-bar-section ul.left .has-dropdown > a:after {
   border-color: #2b3e50 transparent transparent transparent; }
 
@@ -3403,7 +3443,7 @@ th.hide-for-touch {
   background-image: -moz-linear-gradient(90deg, #eff3f3 0%, #d4d8d9 100%);
   background-image: -ms-linear-gradient(90deg, #eff3f3 0%, #d4d8d9 100%);
   background-image: linear-gradient(90deg, #eff3f3 0%, #d4d8d9 100%); }
-  .mobile-bar a {
+  .mobile-bar a, .mobile-bar #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .mobile-bar a, .mobile-bar #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .mobile-bar a {
     color: #707273;
     text-decoration: none !important;
     transition: color 0.3s; }
@@ -3466,13 +3506,13 @@ th.hide-for-touch {
     top: -8px; }
   .nav-toggle span:after {
     bottom: -8px; }
-  .nav-toggle.active span {
+  .nav-toggle.current-menu-item span {
     background-color: transparent; }
-  .nav-toggle.active span:before, .nav-toggle.active span:after {
+  .nav-toggle.current-menu-item span:before, .nav-toggle.current-menu-item span:after {
     top: 0; }
-  .nav-toggle.active span:before {
+  .nav-toggle.current-menu-item span:before {
     transform: rotate(45deg); }
-  .nav-toggle.active span:after {
+  .nav-toggle.current-menu-item span:after {
     transform: rotate(-45deg); }
 
 .mobile-bar-search {
@@ -3558,7 +3598,7 @@ th.hide-for-touch {
   .oc-level .social-media {
     padding: 0 10px;
     margin-bottom: 1.25rem; }
-    .oc-level .social-media a {
+    .oc-level .social-media a, .oc-level .social-media #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .oc-level .social-media a, .oc-level .social-media #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .oc-level .social-media a {
       display: inline-block;
       font-size: 1.25rem;
       line-height: 1.5em;
@@ -3635,7 +3675,8 @@ th.hide-for-touch {
   position: relative;
   background: white;
   transition: all 0.3s;
-  padding-top: 2em; }
+  padding-top: 2em;
+  z-index: 1; }
   @media only screen and (min-width:64.063em) {
     .content {
       padding-top: 0; } }
@@ -3650,6 +3691,9 @@ th.hide-for-touch {
 .extra-padding {
   padding-left: 0.625rem !important;
   padding-right: 0.625rem !important; }
+
+.no-margin, #poll-container .pds-vote-button.pds-vote-button {
+  margin: 0; }
 
 .ignore-nested-rows .row {
   margin: 0; }
@@ -3686,7 +3730,7 @@ hr {
   .callout p {
     font-size: 1rem;
     font-style: italic; }
-  .callout .button {
+  .callout .button, .callout #poll-container .pds-vote-button.pds-vote-button, #poll-container .callout .pds-vote-button.pds-vote-button {
     margin: 0; }
 
 @media only screen and (min-width:40.063em) and (max-width:64em) {
@@ -3726,7 +3770,13 @@ hr {
 h1, .h1, .article-title {
   font-family: Lato, sans-serif;
   color: #2b3e50;
-  font-size: 2.25rem; }
+  font-size: 2.25rem;
+  font-weight: normal; }
+  .article-title-overlay h1, .article-title-overlay .h1, .article-title-overlay .article-title {
+    color: white;
+    font-size: 3.5rem;
+    line-height: 1.2em;
+    font-weight: 300; }
 
 h2, .h2, .article-subtitle {
   font-family: Lato, sans-serif;
@@ -3736,29 +3786,31 @@ h2, .h2, .article-subtitle {
 
 h3, .h3, .article-section-title {
   font-family: Lato, sans-serif;
-  font-weight: 300;
+  font-weight: normal;
   color: #2b3e50;
   font-size: 1.5rem; }
+  .article-content h3, .article-content .h3, .article-content .article-section-title {
+    margin-top: 2em; }
 
-h4, .h4, .article-section-subtitle {
+h4, .h4, .article-section-subtitle, table tr th, #poll-container .pds-question-top.pds-question-top {
   font-family: Lato, sans-serif;
   font-weight: normal;
   color: #2b3e50;
   font-size: 1.25rem;
   line-height: 1.2em; }
-  li h4, li .h4, li .article-section-subtitle {
+  li h4, li .h4, li .article-section-subtitle, li table tr th, table tr li th, li #poll-container .pds-question-top.pds-question-top, #poll-container li .pds-question-top.pds-question-top {
     font-size: 1.125rem;
     font-weight: 300;
     margin: 0; }
-    li h4 a, li .h4 a, li .article-section-subtitle a {
+    li h4 a, li h4 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li h4 a, li h4 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li h4 a, li .h4 a, li .h4 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .h4 a, li .h4 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .h4 a, li .article-section-subtitle a, li .article-section-subtitle #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .article-section-subtitle a, li .article-section-subtitle #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .article-section-subtitle a {
       color: #2b3e50;
       text-decoration: none; }
 
-.meta, .attr {
+.meta, .attr, .duration {
   font-family: Merriweather, serif;
   font-weight: normal;
   font-size: 0.875rem; }
-  li .meta a, li .attr a {
+  li .meta a, li .meta #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .meta a, li .meta #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .meta a, li .attr a, li .attr #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .attr a, li .attr #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .attr a, li .duration a, li .duration #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .duration a, li .duration #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .duration a {
     text-decoration: none; }
 
 .caption {
@@ -3785,6 +3837,14 @@ blockquote, .blockquote {
   font-style: italic;
   font-size: 1em;
   line-height: 1.5em; }
+  blockquote p, .blockquote p {
+    font-weight: inherit; }
+  blockquote cite, .blockquote cite {
+    line-height: 2em; }
+
+cite {
+  font-weight: 300;
+  font-style: italic; }
 
 .pullquote {
   font-family: Merriweather, serif;
@@ -3793,11 +3853,49 @@ blockquote, .blockquote {
   font-size: 1.5rem;
   line-height: 1.4em; }
 
-.small {
+q:before {
+  content: "\201C"; }
+q:after {
+  content: "\201D"; }
+
+.small, #poll-container .pds-links.pds-links a, #poll-container .pds-links-back.pds-links-back a, small {
   font-size: 0.8em; }
 
 .normal {
   font-weight: normal; }
+
+.big, big {
+  font-size: 1.25rem; }
+
+sub, sup {
+  position: relative;
+  vertical-align: baseline;
+  line-height: 0;
+  font-size: 0.8em; }
+
+sub {
+  bottom: -0.25em; }
+
+sup {
+  top: -0.5em; }
+
+ul {
+  list-style: disc; }
+  ul li ul {
+    list-style: circle;
+    margin-left: 3rem; }
+    ul li ul ul {
+      list-style: square;
+      margin-left: 3rem; }
+
+ol {
+  list-style: decimal; }
+  ol li ol {
+    list-style: lower-roman;
+    margin-left: 3rem; }
+    ol li ol ol {
+      list-style: lower-alpha;
+      margin-left: 3rem; }
 
 .inline-list {
   margin: 0 0 1.0625em -0.6875em;
@@ -3814,7 +3912,7 @@ blockquote, .blockquote {
       padding-right: 0;
       border-right: none; }
 
-a {
+a, #poll-container .pds-links.pds-links a, #poll-container .pds-links-back.pds-links-back a {
   transition: all 0.3s;
   color: #5681b3;
   text-decoration: underline;
@@ -3823,7 +3921,7 @@ a {
     color: #4d74a1;
     text-decoration: underline; }
 
-.button {
+.button, #poll-container .pds-vote-button.pds-vote-button {
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -3834,7 +3932,7 @@ a {
   color: #ecf0f1;
   font-family: Merriweather, serif;
   padding: 1rem 1.5rem 1.0625rem; }
-  .button:after {
+  .button:after, #poll-container .pds-vote-button.pds-vote-button:after {
     content: '';
     height: 3px;
     position: absolute;
@@ -3843,14 +3941,14 @@ a {
     bottom: -3px;
     background: white;
     transition: all 0.3s; }
-  .button:hover, .button:active, .button:focus {
+  .button:hover, #poll-container .pds-vote-button.pds-vote-button:hover, #poll-container .pds-vote-button.pds-vote-button:active, #poll-container .pds-vote-button.pds-vote-button:focus, .button:active, .button:focus {
     background-image: -o-linear-gradient(90deg, #a5b54c 0%, #89983b 100%);
     background-image: -moz-linear-gradient(90deg, #a5b54c 0%, #89983b 100%);
     background-image: -ms-linear-gradient(90deg, #a5b54c 0%, #89983b 100%);
     background-image: linear-gradient(90deg, #a5b54c 0%, #89983b 100%);
     color: white;
     text-decoration: none; }
-    .button:hover:after, .button:active:after, .button:focus:after {
+    .button:hover:after, #poll-container .pds-vote-button.pds-vote-button:hover:after, #poll-container .pds-vote-button.pds-vote-button:active:after, #poll-container .pds-vote-button.pds-vote-button:focus:after, .button:active:after, .button:focus:after {
       bottom: 0.5rem; }
   .button.secondary {
     background-image: -o-linear-gradient(90deg, #b62078 0%, #93195d 100%);
@@ -3897,16 +3995,21 @@ a {
   right: 0;
   padding: 3px 8px; }
 
-form label {
-  font-size: 1rem;
-  color: #2b3e50;
-  font-weight: 300;
-  clear: both;
-  line-height: 1.2em;
-  padding-bottom: 0.8em; }
-  form label input[type="radio"], form label input[type="checkbox"] {
-    margin-right: 10px;
-    float: left; }
+
+address {
+  margin-bottom: 1.25rem; }
+
+ins {
+  border-bottom: 1px dotted;
+  text-decoration: none; }
+  ins:after {
+    content: ' (Updated)';
+    font-style: italic;
+    font-weight: 300; }
+
+
+var {
+  font-style: italic; }
 
 /*--------------------------------------------------------------
 1.0 - Content
@@ -3986,6 +4089,26 @@ form label {
     background-image: -moz-linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.6) 35%, rgba(255, 255, 255, 0.6) 65%, rgba(255, 255, 255, 0) 90%);
     background-image: -ms-linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.6) 35%, rgba(255, 255, 255, 0.6) 65%, rgba(255, 255, 255, 0) 90%);
     background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.6) 35%, rgba(255, 255, 255, 0.6) 65%, rgba(255, 255, 255, 0) 90%); }
+  .photo-overlay .article-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2; }
+    .photo-overlay .article-title-overlay .columns {
+      padding-top: 3em;
+      padding-bottom: 3em; }
+    .photo-overlay .article-title-overlay .meta {
+      position: relative;
+      color: white;
+      bottom: auto;
+      left: auto;
+      opacity: 1;
+      transform: none; }
+  .photo-overlay.header {
+    margin-bottom: 3em;
+    max-height: 600px;
+    overflow: hidden; }
 
 .excerpt {
   padding: 0 10px;
@@ -4064,15 +4187,15 @@ form label {
   left: 50%;
   transform: translateY(-50%) translateX(-50%); }
 
-.content-listing ul {
+.content-listing ul, .content-listing ol {
   list-style: none;
   margin: 0; }
-  .content-listing ul li {
+  .content-listing ul li, .content-listing ol li {
     padding: 0.75em 0;
     text-align: left; }
-    .content-listing ul li * {
+    .content-listing ul li *, .content-listing ol li * {
       margin: 0; }
-    .content-listing ul li + li {
+    .content-listing ul li + li, .content-listing ol li + li {
       border-top: 2px solid #f1f1f1; }
 
 .photo-strip {
@@ -4082,7 +4205,100 @@ form label {
   .photo-strip ul {
     margin: 0; }
   .photo-strip li {
-    padding: 0; }
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    float: left;
+    display: block; }
+    .photo-strip li:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: -o-linear-gradient(180deg, rgba(38, 7, 28, 0) 50%, #26071c 100%);
+      background-image: -moz-linear-gradient(180deg, rgba(38, 7, 28, 0) 50%, #26071c 100%);
+      background-image: -ms-linear-gradient(180deg, rgba(38, 7, 28, 0) 50%, #26071c 100%);
+      background-image: linear-gradient(180deg, rgba(38, 7, 28, 0) 50%, #26071c 100%);
+      transition: transform 0.3s; }
+  .photo-strip a, .photo-strip #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .photo-strip a, .photo-strip #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .photo-strip a {
+    position: absolute;
+    display: block;
+    outline: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover; }
+  .photo-strip .meta {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    z-index: 2;
+    margin: 0;
+    padding-top: 0.3em;
+    opacity: 1;
+    transition: all 0.3s; }
+
+.tribe-events-list-widget .tribe-events-widget-link {
+  display: none; }
+
+#poll-container .pds-box.pds-box {
+  font-family: inherit;
+  background: none;
+  border: 0px none;
+  width: auto;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 0; }
+#poll-container .pds-question-top.pds-question-top {
+  padding: 0;
+  margin-bottom: 0.8rem; }
+#poll-container .pds-answer.pds-answer {
+  padding: 0;
+  border: 0; }
+  #poll-container .pds-answer.pds-answer label {
+    line-height: 1;
+    width: auto;
+    color: inherit;
+    font-size: inherit;
+    font-weight: 300; }
+#poll-container .pds-answer-input.pds-answer-input {
+  line-height: 1; }
+  #poll-container .pds-answer-input.pds-answer-input input {
+    margin: 0;
+    vertical-align: top; }
+#poll-container .pds-answer-other.pds-answer-other input {
+  width: auto;
+  margin-left: 25px;
+  margin-bottom: 0; }
+#poll-container .pds-vote-button.pds-vote-button:hover, #poll-container .pds-vote-button.pds-vote-button:active, #poll-container .pds-vote-button.pds-vote-button:focus {
+  border: none; }
+#poll-container .pds-links.pds-links {
+  padding: 0;
+  text-align: left; }
+  #poll-container .pds-links.pds-links a:after {
+    content: ' \00BB';
+    padding-right: 10px; }
+#poll-container .pds-links-back.pds-links-back {
+  padding: 0;
+  text-align: left; }
+  #poll-container .pds-links-back.pds-links-back a:before {
+    content: '\00AB '; }
+#poll-container a.pds-pd-link.pds-pd-link {
+  float: right;
+  color: #d4d8d9; }
+  #poll-container a.pds-pd-link.pds-pd-link:before, #poll-container a.pds-pd-link.pds-pd-link:after {
+    display: none; }
+
+.mc-field-group ul {
+  list-style: none;
+  margin: 0; }
 
 /*--------------------------------------------------------------
 1.0 - Footer
@@ -4112,7 +4328,7 @@ form label {
   .footer ul {
     list-style: none;
     margin: 0; }
-    .footer ul a {
+    .footer ul a, .footer ul #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .footer ul a, .footer ul #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .footer ul a {
       color: #2b3e50;
       text-decoration: none; }
       .footer ul a:hover, .footer ul a:active, .footer ul a:focus {

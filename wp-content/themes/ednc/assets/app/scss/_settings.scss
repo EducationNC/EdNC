@@ -266,13 +266,13 @@ $header-bottom-margin: .8rem;
 // $paragraph-text-rendering: optimizeLegibility;
 
 // We use these to style <code> tags
-// $code-color: $oil;
+$code-color: $gray-text;
 // $code-font-family: $font-family-monospace;
 // $code-font-weight: $font-weight-normal;
-// $code-background-color: scale-color($secondary-color, $lightness: 70%);
+$code-background-color: $ice-light;
 // $code-border-size: 1px;
 // $code-border-style: solid;
-// $code-border-color: scale-color($code-background-color, $lightness: -10%);
+$code-border-color: $ice;
 // $code-padding: rem-calc(2) rem-calc(5) rem-calc(1);
 
 // We use these to style anchors
@@ -302,15 +302,15 @@ $header-bottom-margin: .8rem;
 // $definition-list-margin-bottom: rem-calc(12);
 
 // We use these to style blockquotes
-// $blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
+$blockquote-font-color: $midnight;
 // $blockquote-padding: rem-calc(9 20 0 19);
-// $blockquote-border: 1px solid $gainsboro;
+$blockquote-border: 1px solid $ice;
 // $blockquote-cite-font-size: rem-calc(13);
-// $blockquote-cite-font-color: scale-color($header-font-color, $lightness: 23%);
+$blockquote-cite-font-color: $gray-text;
 // $blockquote-cite-link-color: $blockquote-cite-font-color;
 
 // Acronym styles
-// $acronym-underline: 1px dotted $gainsboro;
+$acronym-underline: 1px dotted $ice;
 
 // We use these to control padding and margin
 // $microformat-padding: rem-calc(10 12);
@@ -326,7 +326,7 @@ $header-bottom-margin: .8rem;
 // $microformat-fullname-font-size: rem-calc(15);
 
 // We use this to control the summary font styles
-// $microformat-summary-font-weight: $font-weight-bold;
+$microformat-summary-font-weight: 300;
 
 // We use this to control abbr padding
 // $microformat-abbr-padding: rem-calc(0 1);
@@ -639,8 +639,8 @@ $header-bottom-margin: .8rem;
 
 // We use these to style the labels in different ways
 // $form-label-pointer: pointer;
-// $form-label-font-size: rem-calc(14);
-// $form-label-font-weight: $font-weight-normal;
+$form-label-font-size: 1em;
+$form-label-font-weight: 300;
 // $form-label-line-height: 1.5;
 // $form-label-font-color: scale-color($black, $lightness: 30%);
 // $form-label-small-transform: capitalize;
@@ -1290,18 +1290,18 @@ $menu-slide: "transform 350ms ease";
 // $include-html-table-classes: $include-html-classes;
 
 // These control the background color for the table and even rows
-// $table-bg: $white;
-// $table-even-row-bg: $snow  ;
+$table-bg: $white;
+$table-even-row-bg: $ice-light  ;
 
 // These control the table cell border style
 // $table-border-style: solid;
 // $table-border-size: 1px;
-// $table-border-color: $gainsboro;
+$table-border-color: $ice-dark;
 
 // These control the table head styles
-// $table-head-bg: $white-smoke  ;
+$table-head-bg: $ice  ;
 // $table-head-font-size: rem-calc(14);
-// $table-head-font-color: $jet;
+$table-head-font-color: $midnight;
 // $table-head-font-weight: $font-weight-bold;
 // $table-head-padding: rem-calc(8 10 10);
 

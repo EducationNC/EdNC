@@ -60,5 +60,28 @@ jQuery(document).ready(function($) {
     }
   });
 
-
+  // Photo strip grid rotation on home page
+  $('#photo-strip').gridrotator({
+    rows: 1,
+    columns: 5,
+    w1024: {
+      rows: 1,
+      columns: 3
+    },
+    w768: {
+      rows: 2,
+      columns: 2
+    },
+    w480: {
+      rows: 1,
+      columns: 1
+    },
+    step: 1,
+    maxStep: 1,
+    animType: 'slideTop',
+    animSpeed: 300,
+    animEasingOut: 'ease',
+    animEasingIn: 'ease',
+    interval: 6000
+  });
 });

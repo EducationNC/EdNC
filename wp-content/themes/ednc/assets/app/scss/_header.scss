@@ -92,6 +92,7 @@
     }
 
     .button {
+      font-size: .875rem;
       line-height: 1em;
       height: 2em;
       font-weight: 300;
@@ -106,6 +107,7 @@
 
       li {
         border: none;
+        height: 45px;
         line-height: 45px;
         padding: 4px .3rem 0;
 
@@ -159,6 +161,10 @@
         }
       }
     }
+  }
+
+  .single-post & {
+    margin-bottom: 0;
   }
 }
 
@@ -283,24 +289,25 @@
             position: absolute;
             left: 0;
             bottom: -3px;
-            transition: bottom .15s;
+            transform: translateY(0);
+            transition: transform .3s;
           }
         }
 
-        &:not(.active) {
+        &:not(.current-menu-item) {
           & > a:hover {
             &:before {
-              bottom: 0;
+              transform: translateY(-3px);
             }
           }
         }
 
-        &.active {
+        &.current-menu-item {
           & > a {
             color: $midnight !important;
 
             &:before {
-              bottom: 0;
+              transform: translateY(-3px);
             }
           }
         }
@@ -407,7 +414,7 @@
     bottom: -8px;
   }
 
-  &.active {
+  &.current-menu-item {
     span {
       background-color: transparent;
     }

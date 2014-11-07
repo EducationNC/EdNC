@@ -25,7 +25,7 @@
                   if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
 
                     $category = get_the_category();
-                    $image_id = get_the_post_thumbnail();
+                    $image_id = get_post_thumbnail_id();
                     $image_src = wp_get_attachment_image_src($image_id, 'full');
                     if ($image_src) {
                       $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
@@ -176,33 +176,38 @@
                 <p class="content-section-subtitle">Today's top education news stories</p>
                 <div class="content-listing extra-padding" ng-controller="example">
                   <hr />
-                  <!--<ul>
-                    <li ng-repeat="post in postdata"><a href="#">{{post.title}}</a></li>
-                  </ul>-->
-                  <ul>
-                    <li>
-                      <h4><a href="#"><span class="normal">State:</span> Mauris non tempor quam, et lacinia sapien. Mauris accumsan eros eget libero posuere vulputate.</a></h4>
-                      <p class="meta"><a href="#">News &amp; Observer, 11/7/2014 <span class="icon-external-link"></span></a></p>
-                    </li>
-                    <li>
-                      <h4><a href="#"><span class="normal">Local:</span> Sed nec felis pellentesque, lacinia dui sed, ultricies sapien. Pellentesque orci lectus, consectetur vel posuere posuere, rutrum eu ipsum.</a></h4>
-                      <p class="meta"><a href="#">News &amp; Record, 11/7/2014 <span class="icon-external-link"></span></a></p>
-                    </li>
-                    <li>
-                      <h4><a href="#"><span class="normal">Local:</span> Donec sit amet ligula eget nisi sodales eges.</a></h4>
-                      <p class="meta"><a href="#">Charlotte Observer, 11/7/2014 <span class="icon-external-link"></span></a></p>
-                    </li>
-                    <li>
-                      <h4><a href="#"><span class="normal">National:</span> Aliquam eget odio sed ligula iaculis consequat at eget orci. Mauris molestie sit amet metus mattis varius.</a></h4>
-                      <p class="meta"><a href="#">WUNC, 11/7/2014 <span class="icon-external-link"></span></a></p>
-                    </li>
-                    <li>
-                      <h4><a href="#"><span class="normal">State:</span> Mauris non tempor quam, et lacinia sapien. Mauris accumsan eros eget libero posuere vulputate.</a></h4>
-                      <p class="meta"><a href="#">News &amp; Observer, 11/7/2014 <span class="icon-external-link"></span></a></p>
-                    </li>
-                  </ul>
+                  <?php
+                  $args = array(
+                    'post_type' => 'ednews',
+                    'posts_per_page' => 1
+                  );
 
-                  <p class="text-center"><a href="#" class="button">See all EdNews stories</a></p>
+                  $ednews = new WP_Query($args);
+
+                  if ($ednews->have_posts()) : while ($ednews->have_posts()) : $ednews->the_post(); ?>
+
+                  <ul>
+                    <?php
+                    $date = get_the_time('n/j/Y');
+                    $items = get_field('news_item');
+
+                    foreach ($items as $item) { ?>
+
+                      <li>
+                        <h4>
+                          <a href="<?php echo $item['link']; ?>" target="_blank">
+                            <span class="normal"><?php echo $item['scope']; ?>:</span>
+                            <?php echo $item['title']; ?>
+                          </a>
+                        </h4>
+                        <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $date; ?> <span class="icon-external-link"></span></a></p>
+                      </li>
+
+                    <?php } ?>
+                  </ul>
+                  <p class="text-center"><a href="<?php the_permalink(); ?>" class="button">See all EdNews stories</a></p>
+
+                  <?php endwhile; endif; wp_reset_query(); ?>
                 </div>
               </div>
 
@@ -211,10 +216,8 @@
                 <p class="content-section-subtitle">Upcoming education events</p>
                 <div class="content-listing extra-padding" ng-controller="example">
                   <hr />
-                  <!--<ul>
-                    <li ng-repeat="post in postdata"><a href="#">{{post.title}}</a></li>
-                  </ul>-->
-                  <ul>
+                  <?php the_widget('TribeEventsListWidget'); ?>
+                  <!-- <ul>
                     <li>
                       <h4><a href="#">Mauris non tempor quam, et lacinia sapien.</a></h4>
                       <p class="meta"><a href="#">November 10 @11:30 am<br />NCGA, Raleigh</a></p>
@@ -235,9 +238,12 @@
                       <h4><a href="#">Etiam elit elit, elementum sed varius at, adipiscing vitae est.</a></h4>
                       <p class="meta"><a href="#">November 13 @3:00 pm<br />City Hall, Charlotte</a></p>
                     </li>
-                  </ul>
+                  </ul> -->
 
-                  <p class="text-center"><a href="#" class="button">See all upcoming EdEvents</a></p>
+                  <p class="text-center">
+                    <a href="/events/" class="button no-margin">See all upcoming EdEvents</a><br />
+                    <a href="#" class="small">Submit your event &raquo;</a>
+                  </p>
                 </div>
               </div>
 
@@ -255,24 +261,24 @@
 
           <section class="section">
             <div class="full-width">
-              <h2><span class="label big">I am a public school kid</span></h2>
-              <div class="photo-strip">
-                <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-5">
-                  <li class="square">
-                    <img src="http://placeimg.com/350/350/people?1" />
-                  </li>
-                  <li class="square">
-                    <img src="http://placeimg.com/350/350/people?2" />
-                  </li>
-                  <li class="square show-for-medium-up">
-                    <img src="http://placeimg.com/350/350/people?3" />
-                  </li>
-                  <li class="square show-for-large-up">
-                    <img src="http://placeimg.com/350/350/people?4" />
-                  </li>
-                  <li class="square show-for-large-up">
-                    <img src="http://placeimg.com/350/350/people?5" />
-                  </li>
+              <?php
+              $gallery_id = 1404;
+              $gallery = get_post($gallery_id);
+              $photos = get_field('gallery', $gallery_id);
+              shuffle($photos);
+              ?>
+              <h2><span class="label big"><?php echo $gallery->post_title; ?></span></h2>
+              <div id="photo-strip" class="photo-strip">
+                <ul>
+                  <?php
+                  foreach ($photos as $photo) {
+                    $resized = mr_image_resize($photo['url'], 300, 300, true, false);
+                    echo '<li><a href="#">';
+                      echo '<img src="' . $resized['url'] . '" alt="" />';
+                      echo '<p class="meta"><strong>' . $photo['title'] . '</strong><br />' . nl2br($photo['caption']) . '</p>';
+                    echo '</a></li>';
+                  }
+                  ?>
                 </ul>
               </div>
               <p class="right"><a href="#">Submit your photos &raquo;</a></p>
@@ -282,8 +288,9 @@
           <section class="section">
             <div class="row">
               <div class="large-4 columns">
-                <div class="extra-padding">
-                <?php gravity_form(1, false, false, false, false, true, 1); ?>
+                <div class="extra-padding" id="poll-container">
+                <?php //gravity_form(1, false, false, false, false, true, 1); ?>
+                <?php echo do_shortcode('[polldaddy poll=8423767]'); ?>
                   <!-- <h4>Poll: What issue is most important to you in the 2015-16 session of the NCGA?</h3>
                   <form>
                     <label for="radio1"><input id="radio1" value="1" name="radio" type="radio" />Education spending</label>
@@ -307,14 +314,44 @@
                 <div class="callout">
                   <h4>Register for free email subscription</h4>
                   <p>Sign up now to receive EdNC straight to your inbox. Unsubscribe at any time.</p>
-                  <form>
+                  <!-- Begin MailChimp Signup Form -->
+                  <div id="mc_embed_signup">
+                  <form action="//ednc.us9.list-manage.com/subscribe/post?u=8ba11e9b3c5e00a64382db633&amp;id=2696365d99" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div id="mc_embed_signup_scroll">
+
+                      <div class="mc-field-group">
+                  	    <input type="email" value="" name="EMAIL" placeholder="Email address" class="required email" id="mce-EMAIL">
+                      </div>
+
+                      <div class="mc-field-group input-group">
+                        <ul>
+                          <li><input type="checkbox" value="1" name="group[13145][1]" id="mce-group[13145]-13145-0"><label for="mce-group[13145]-13145-0">Daily digest</label></li>
+                          <li><input type="checkbox" value="2" name="group[13145][2]" id="mce-group[13145]-13145-1"><label for="mce-group[13145]-13145-1">Weekly wrapup</label></li>
+                          <li><input type="checkbox" value="4" name="group[13145][4]" id="mce-group[13145]-13145-2"><label for="mce-group[13145]-13145-2">Monthly newsletter</label></li>
+                          <li><input type="checkbox" value="8" name="group[13145][8]" id="mce-group[13145]-13145-3"><label for="mce-group[13145]-13145-3">Breaking news alerts</label></li>
+                        </ul>
+                      </div>
+
+                      <div id="mce-responses" class="clear">
+                  		  <div class="response" id="mce-error-response" style="display:none"></div>
+                		    <div class="response" id="mce-success-response" style="display:none"></div>
+                	    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+
+                      <div style="position: absolute; left: -5000px;"><input type="text" name="b_8ba11e9b3c5e00a64382db633_2696365d99" tabindex="-1" value=""></div>
+                      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                    </div>
+                  </form>
+                  </div>
+
+                  <!--End mc_embed_signup-->
+                  <!-- <form>
                     <input type="email" placeholder="Email address" />
                     <label for="checkbox1"><input id="checkbox1" value="1" name="checkbox" type="checkbox" />Daily digest <span class="caption">(includes EdNews stories)</span></label>
                     <label for="checkbox2"><input id="checkbox2" value="2" name="checkbox" type="checkbox" />Weekly wrapup</label>
                     <label for="checkbox3"><input id="checkbox3" value="3" name="checkbox" type="checkbox" />Monthly newsletter</label>
                     <label for="checkbox4"><input id="checkbox4" value="4" name="checkbox" type="checkbox" />Breaking news alerts</label>
                     <input type="submit" class="button" value="Sign up" />
-                  </form>
+                  </form> -->
                 </div>
               </div>
             </div>

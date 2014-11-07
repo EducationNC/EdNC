@@ -37,9 +37,9 @@ add_action('wp_enqueue_scripts', 'fdfootnote_enqueue_scripts');
 
 function fdfootnote_enqueue_scripts() {
 	if (is_admin()) return;
-	
+
 	wp_enqueue_script('jquery');
-	
+
 	wp_register_script('fdfootnote_script', get_bloginfo('wpurl').'/'.PLUGINDIR.'/'.dirname(plugin_basename(__FILE__)).'/fdfootnotes.js', array(), '1.3');
 	wp_enqueue_script('fdfootnote_script');
 }
@@ -57,11 +57,11 @@ function fdfootnote_conf() {
 	$options = get_option('fdfootnote');
 
 	if (!isset($options['fdfootnote_collapse'])) $options['fdfootnote_collapse'] = 0;
-	
+
 	$updated = false;
 	if ( isset($_POST['submit']) ) {
 		check_admin_referer('fdfootnote', 'fdfootnote-admin');
-		
+
 		if (isset($_POST['fdfootnote_collapse'])) {
 			$options['fdfootnote_collapse'] = 1;
 		} else {
@@ -89,7 +89,7 @@ function fdfootnote_conf() {
 	?>
 	<h2><?php _e('Footnotes Configuration', FDFOOTNOTE_TEXTDOMAIN); ?></h2>
 	<form action="" method="post" id="fdfootnote-conf">
-	
+
 	<p>
 		<input id="fdfootnote_single" name="fdfootnote_single" type="checkbox" value="1"<?php if ($options['fdfootnote_single']==1) echo ' checked'; ?> />
 		<label for="fdfootnote_single"><?php _e('Only show footnotes on single post/page', FDFOOTNOTE_TEXTDOMAIN); ?></label>
@@ -115,7 +115,7 @@ function fdfootnote_convert($content) {
 	if (isset($options['fdfootnote_collapse'])) $collapse = $options['fdfootnote_collapse'];
 	if (isset($options['fdfootnote_single'])) $single = $options['fdfootnote_single'];
 	if (!is_page() && !is_single() && $single) $linksingle = true;
-	
+
 	$post_id = get_the_ID();
 
 	$n = 1;
@@ -125,8 +125,9 @@ function fdfootnote_convert($content) {
 			$note = preg_replace('/\[\d+\. (.*?)\]/s', '\1', $fn);
 			$notes[$n] = $note;
 
+			$singleurl = '';
 			if ($linksingle) $singleurl = get_permalink();
-			
+
 			$content = str_replace($fn, "<sup class='footnote'><a href='$singleurl#fn-$post_id-$n' id='fnref-$post_id-$n' onclick='return fdfootnote_show($post_id)'>$n</a></sup>", $content);
 			$n++;
 		}
@@ -140,12 +141,12 @@ function fdfootnote_convert($content) {
 		if (!$linksingle) {
 			$content .= "<div class='footnotes' id='footnotes-$post_id'>";
 			$content .= "<div class='footnotedivider'></div>";
-			
+
 			if ($collapse) {
 				$content .= "<a href='#' onclick='return fdfootnote_togglevisible($post_id)' class='footnotetoggle'>";
 				$content .= "<span class='footnoteshow'>".sprintf(_n('Show %d footnote', 'Show %d footnotes', $n-1, FDFOOTNOTE_TEXTDOMAIN), $n-1)."</span>";
 				$content .= "</a>";
-				
+
 				$content .= "<ol style='display: none'>";
 			} else {
 				$content .= "<ol>";

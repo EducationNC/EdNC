@@ -18,7 +18,7 @@ function add_custom_post_types() {
 				'edit_item' => 'Edit Underwriter',
 				'new_item' => 'New Underwriter',
 				'view_item' => 'View Underwriter',
-				'search_items' => 'Search Sales Underwriter',
+				'search_items' => 'Search Underwriter',
 				'not_found' =>  'Nothing found in the Database.',
 				'not_found_in_trash' => 'Nothing found in Trash',
 				'parent_item_colon' => ''
@@ -38,24 +38,117 @@ function add_custom_post_types() {
 			'query_var' => true
 	 	)
 	);
+
+	register_post_type( 'gallery',
+		array('labels' => array(
+				'name' => 'Galleries',
+				'singular_name' => 'Gallery',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New Gallery',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit Gallery',
+				'new_item' => 'New Gallery',
+				'view_item' => 'View Gallery',
+				'search_items' => 'Search Gallery',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'public' => true,
+			'exclude_from_search' => true,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array( 'title', 'revisions'),
+			'has_archive' => false,
+			'rewrite' => true,
+			'query_var' => true
+		)
+	);
+
+	register_post_type( 'ednews',
+		array('labels' => array(
+				'name' => 'EdNews',
+				'singular_name' => 'EdNews',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New EdNews',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit EdNews',
+				'new_item' => 'New EdNews',
+				'view_item' => 'View EdNews',
+				'search_items' => 'Search EdNews',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'public' => true,
+			'exclude_from_search' => true,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array( 'title', 'revisions'),
+			'has_archive' => false,
+			'rewrite' => true,
+			'query_var' => true
+		)
+	);
+
+	register_post_type( 'district',
+		array('labels' => array(
+				'name' => 'Districts',
+				'singular_name' => 'District',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New District',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit District',
+				'new_item' => 'New District',
+				'view_item' => 'View District',
+				'search_items' => 'Search District',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'public' => true,
+			'exclude_from_search' => true,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array( 'title', 'revisions', 'thumbnail'),
+			'has_archive' => false,
+			'rewrite' => true,
+			'query_var' => true
+		)
+	);
 }
 add_action( 'init', 'add_custom_post_types');
 
 
-register_taxonomy( 'type',
-	array('sales'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+register_taxonomy( 'district-type',
+	array('district'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
-			'name' => 'Type', /* name of the custom taxonomy */
-			'singular_name' => 'Type', /* single taxonomy name */
-			'search_items' =>  'Search Types', /* search title for taxomony */
-			'all_items' => 'All Types', /* all title for taxonomies */
-			'parent_item' => 'Parent Type', /* parent title for taxonomy */
-			'parent_item_colon' => 'Parent Type:', /* parent taxonomy title */
-			'edit_item' => 'Edit Type', /* edit custom taxonomy title */
-			'update_item' => 'Update Type', /* update title for taxonomy */
-			'add_new_item' => 'Add New Type', /* add new title for taxonomy */
-			'new_item_name' => 'New Type Name' /* name title for taxonomy */
+			'name' => 'District Types', /* name of the custom taxonomy */
+			'singular_name' => 'District Type', /* single taxonomy name */
+			'search_items' =>  'Search District Types', /* search title for taxomony */
+			'all_items' => 'All District Types', /* all title for taxonomies */
+			'parent_item' => 'Parent Disrict Type', /* parent title for taxonomy */
+			'parent_item_colon' => 'Parent District Type:', /* parent taxonomy title */
+			'edit_item' => 'Edit District Type', /* edit custom taxonomy title */
+			'update_item' => 'Update District Type', /* update title for taxonomy */
+			'add_new_item' => 'Add New District Type', /* add new title for taxonomy */
+			'new_item_name' => 'New District Type Name' /* name title for taxonomy */
 		),
 		'show_ui' => true,
 		'query_var' => true,

@@ -25,9 +25,9 @@ function add_tiny_mce_before_init( $init_array ) {
     $init_array['style_formats'] = json_encode($style_formats);
 
     // Add custom class to the iframe based on page template usage
-    $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
-    $template = get_page_template_slug($post_id);
-    $init_array['body_class'] .= ' ' . $template;
+    // $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+    // $template = get_page_template_slug($post_id);
+    // $init_array['body_class'] .= ' ' . $template;
 
     return $init_array;
 }

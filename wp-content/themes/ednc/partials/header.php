@@ -27,28 +27,13 @@
 
       <nav id="oc-menu" class="oc-menu">
         <div class="oc-level">
-          <ul class="no-border">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Issues</a>
-            <!-- <li class="has-submenu"><a href="#">Issues</a> -->
-              <!--<div class="oc-level">
-                <h4>Issues</h4>
-                <a class="oc-back">back</a>
-                <ul>
-                  <li><a href="#">Lorem ipsum</a></li>
-                  <li><a href="#">Dolor sit</a></li>
-                  <li><a href="#">Amet</a></li>
-                  <li><a href="#">Consectetur</a></li>
-                  <li><a href="#">Adipiscing elit</a></li>
-                </ul>
-              </div>-->
-            </li>
-            <li><a href="#">Data</a></li>
-            <li><a href="#">Districts</a></li>
-            <li><a href="#">Voices</a></li>
-            <li class="has-button"><a href="#" class="button">Get Involved</a></li>
-            <li class="has-button"><a href="#" class="button secondary">Donate Now</a></li>
-          </ul>
+          <?php
+          wp_nav_menu(array(
+            'theme_location' => 'primary',
+            'container' => false,
+            'menu_class' => 'no-border'
+          ));
+          ?>
 
           <div class="social-media">
             <a class="icon-facebook" href="#"></a>
@@ -60,9 +45,14 @@
           </div>
 
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Supporters</a></li>
-            <li><a href="#">en Español</a></li>
+            <?php
+            wp_nav_menu(array(
+              'theme_location' => 'minor',
+              'container' => false,
+              'items_wrap' => '%3$s'
+            ));
+            ?>
+            <li><a onclick="doGoogleLanguageTranslator('en|es'); return false;" title="en Español">en Español</a></li>
           </ul>
         </div>
       </nav>
@@ -97,16 +87,21 @@
         <header id="header" class="header clearfix show-for-large-up">
           <div class="full-width">
             <div class="logo">
-              <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
+              <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
             </div>
 
             <div class="caption">Including you in a conversation about our public schools</div>
 
             <div class="right text-right">
               <ul class="inline-list minor-links small">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Supporters</a></li>
-                <li><a href="#">en Español</a></li>
+                <?php
+                wp_nav_menu(array(
+                  'theme_location' => 'minor',
+                  'container' => false,
+                  'items_wrap' => '%3$s'
+                ));
+                ?>
+                <li><a onclick="doGoogleLanguageTranslator('en|es'); return false;" title="en Español">en Español</a></li>
               </ul>
 
               <div class="search">
@@ -127,28 +122,18 @@
           <nav class="top-bar" data-topbar role="navigation">
               <ul class="title-area">
                 <li class="name">
-                  <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
+                  <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
                 </li>
               </ul>
 
               <section class="top-bar-section">
-                <ul class="left">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li>
-                  <!-- <li class="has-dropdown"> -->
-                    <a href="#">Issues</a>
-                    <!--<ul class="dropdown">
-                      <li><a href="#">Lorem ipsum</a></li>
-                      <li><a href="#">Dolor sit</a></li>
-                      <li><a href="#">Amet</a></li>
-                      <li><a href="#">Consectetur</a></li>
-                      <li><a href="#">Adipiscing elit</a></li>
-                    </ul>-->
-                  </li>
-                  <li><a href="#">Data</a></li>
-                  <li><a href="#">Districts</a></li>
-                  <li><a href="#">Voices</a></li>
-                </ul>
+                <?php
+                wp_nav_menu(array(
+                  'theme_location' => 'primary',
+                  'container' => false,
+                  'menu_class' => 'left'
+                ));
+                ?>
 
                 <ul class="right">
                   <li class="social-media">
