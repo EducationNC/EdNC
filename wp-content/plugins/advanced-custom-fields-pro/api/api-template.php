@@ -477,6 +477,7 @@ function have_rows( $selector, $post_id = false ) {
 	$new_parent_loop = false;
 	$new_child_loop = false;
 	$sub_field = false;
+	$sub_exists = false;
 	
 	
 	// reference
@@ -502,14 +503,37 @@ function have_rows( $selector, $post_id = false ) {
 		// vars
 		$row = end( $GLOBALS['acf_field'] );
 		$prev = prev( $GLOBALS['acf_field'] );
+		$change = false;
+		
+		
+		// detect change
+		if( $post_id != $row['post_id'] ) {
+			
+			$change = 'post_id';
+				
+		} elseif( $selector != $row['selector'] ) {
+			
+			$change = 'selector';
+				
+		}
 		
 		
 		// attempt to find sub field
-		$sub_field = acf_get_sub_field($selector, $row['field']);
+		if( $change ) {
+			
+			$sub_field = acf_get_sub_field($selector, $row['field']);
+			
+			if( $sub_field ) {
+				
+				$sub_exists = isset($row['value'][ $row['i'] ][ $sub_field['key'] ]);
+				
+			}
+			
+		}
 		
 		
 		// If post_id has changed, this is most likely an archive loop
-		if( $post_id != $row['post_id'] ) {
+		if( $change == 'post_id' ) {
 			
 			if( $prev && $prev['post_id'] == $post_id ) {
 				
@@ -517,7 +541,7 @@ function have_rows( $selector, $post_id = false ) {
 				// action: move up one level through the loops
 				reset_rows();
 			
-			} elseif( empty($_post_id) && $sub_field ) {
+			} elseif( empty($_post_id) && $sub_exists ) {
 				
 				// case: Change in $post_id was due to this being a nested loop and not specifying the $post_id
 				// action: move down one level into a new loop
@@ -531,7 +555,7 @@ function have_rows( $selector, $post_id = false ) {
 				
 			}
 			
-		} elseif( $selector != $row['selector'] ) {
+		} elseif( $change == 'selector' ) {
 			
 			if( $prev && $prev['selector'] == $selector && $prev['post_id'] == $post_id ) {
 				
@@ -539,7 +563,7 @@ function have_rows( $selector, $post_id = false ) {
 				// action: move up one level through the loops
 				reset_rows();
 				
-			} elseif( $sub_field ) {
+			} elseif( $sub_exists ) {
 				
 				// case: Change in $field_name was due to this being a nested loop
 				// action: move down one level into a new loop
@@ -594,8 +618,9 @@ function have_rows( $selector, $post_id = false ) {
 	$row = end( $GLOBALS['acf_field'] );
 	
 	
+	
 	// return true if next row exists
-	if( isset($row['value'][$row['i']+1]) ) {
+	if( is_array($row['value']) && array_key_exists($row['i']+1, $row['value']) ) {
 		
 		return true;
 		
@@ -628,20 +653,50 @@ function have_rows( $selector, $post_id = false ) {
 function the_row() {
 	
 	// vars
-	$depth = count( $GLOBALS['acf_field'] ) - 1;
+	$depth = count($GLOBALS['acf_field']) - 1;
 
 	
-	// increase row
+	// increase i of current row
 	$GLOBALS['acf_field'][ $depth ]['i']++;
 	
 	
-	// get row
-	$value = $GLOBALS['acf_field'][ $depth ]['value'];
-	$i = $GLOBALS['acf_field'][ $depth ]['i'];
+	// return
+	return get_row();
+	
+}
 
+function get_row() {
+	
+	// vars
+	$row = acf_get_row();
+	
+	
+	// bail early if no row
+	if( $row ) {
+		
+		return $row['value'][ $row['i'] ];
+		
+	}
+	
 	
 	// return
-	return $value[ $i ];
+	return false;
+	
+}
+
+function acf_get_row() {
+	
+	// no field?
+	if( !empty($GLOBALS['acf_field']) ) {
+		
+		return end( $GLOBALS['acf_field'] );
+		
+	}
+	
+	
+	// return
+	return false;
+	
 }
 
 
@@ -745,16 +800,16 @@ function has_sub_fields( $field_name, $post_id = false ) {
 
 function get_sub_field( $selector, $format_value = true ) {
 	
-	// no field?
-	if( empty($GLOBALS['acf_field']) ) {
+	// vars
+	$row = acf_get_row();
+	
+	
+	// bail early if no row
+	if( !$row ) {
 		
 		return false;
 		
 	}
-	
-	
-	// vars
-	$row = end( $GLOBALS['acf_field'] );
 	
 	
 	// attempt to find sub field
@@ -841,8 +896,12 @@ function the_sub_field( $field_name, $format_value = true ) {
 
 function get_sub_field_object( $selector, $format_value = true, $load_value = true ) {
 	
-	// no field?
-	if( empty($GLOBALS['acf_field']) ) {
+	// vars
+	$row = acf_get_row();
+	
+	
+	// bail early if no row
+	if( !$row ) {
 		
 		return false;
 		
@@ -850,7 +909,6 @@ function get_sub_field_object( $selector, $format_value = true, $load_value = tr
 
 	
 	// vars
-	$row = end( $GLOBALS['acf_field'] );
 	$parent = $row['field'];
 
 	
@@ -892,7 +950,20 @@ function get_sub_field_object( $selector, $format_value = true, $load_value = tr
 
 function get_row_layout() {
 	
-	return get_sub_field('acf_fc_layout');
+	// vars
+	$row = get_row();
+	
+	
+	// return
+	if( isset($row['acf_fc_layout']) ) {
+		
+		return $row['acf_fc_layout'];
+		
+	}
+	
+	
+	// return
+	return false;
 	
 }
 
@@ -1323,19 +1394,11 @@ function acf_form( $args = array() ) {
 		'nonce'		=> 'acf_form' 
 	));
 	
-	
 	?>
 	<div class="acf-hidden">
-		
-		<?php 
-		
-		acf_hidden_input(array( 'name' => '_acf_form', 'value' => base64_encode(json_encode($args)) ));
-		
-		?>
-			
+		<?php acf_hidden_input(array( 'name' => '_acf_form', 'value' => base64_encode(json_encode($args)) )); ?>
 	</div>
-	
-	<div class="acf-form-fields">
+	<div class="acf-fields acf-form-fields">
 	
 		<?php
 		
@@ -1344,8 +1407,8 @@ function acf_form( $args = array() ) {
 		
 		
 		// start table
-		if( $args['label_placement'] == 'left' )
-		{
+		if( $args['label_placement'] == 'left' ) {
+			
 			$args['field_el'] = 'tr';
 			
 			?><table class="acf-table"><tbody><?php
@@ -1356,9 +1419,10 @@ function acf_form( $args = array() ) {
 		
 		
 		// end table
-		if( $args['label_placement'] == 'left' )
-		{
+		if( $args['label_placement'] == 'left' ) {
+			
 			?></tbody></table><?php
+				
 		}
 		
 		
@@ -1368,7 +1432,6 @@ function acf_form( $args = array() ) {
 		?>
 	
 	</div><!-- acf-form-fields -->
-	
 	<?php if( $args['form'] ): ?>
 	
 	<!-- Submit -->
@@ -1380,7 +1443,6 @@ function acf_form( $args = array() ) {
 	<!-- / Submit -->
 	
 	</form>
-	
 	<?php endif;
 }
 

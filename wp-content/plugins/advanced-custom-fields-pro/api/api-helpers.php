@@ -1,66 +1,6 @@
 <?php 
 
 /*
-*  acf_e
-*
-*  This function wraps the `_e` in extra logic
-*
-*  @type	function
-*  @date	11/03/2014
-*  @since	5.0.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_e() {
-	
-	// vars
-	$args = func_get_args();
-	
-	
-	// acf__
-	echo call_user_func_array('acf__', $args);
-	
-}
-
-
-function acf__() {
-	
-	// vars
-	$args = func_get_args();
-	$domain = 'acf';
-	
-	
-	// __()
-	foreach( $args as $k => $v )
-	{
-		$args[ $k ] = __( $v, $domain );
-	}
-	
-	
-	// string
-	$string = $args[0];
-	
-	
-	// sprintf
-	if( count($args) > 1 )
-	{
-		$string = call_user_func_array('sprintf', $args);
-	}
-	
-	
-	// replace backticks
-	$string = preg_replace("/`(.*?)`/s", '<pre>$1</pre>', $string);
-	
-	
-	// return
-	return $string;
-	
-}
-
-
-/*
 *  acf_get_setting
 *
 *  This function will return a value from the settings array found in the acf object
@@ -80,16 +20,18 @@ function acf_get_setting( $name, $allow_filter = true ) {
 	
 	
 	// load from ACF if available
-	if( isset( acf()->settings[ $name ] ) )
-	{
+	if( isset( acf()->settings[ $name ] ) ) {
+		
 		$r = acf()->settings[ $name ];
+		
 	}
 	
 	
 	// filter for 3rd party customization
-	if( $allow_filter )
-	{
+	if( $allow_filter ) {
+		
 		$r = apply_filters( "acf/settings/{$name}", $r );
+		
 	}
 	
 	
@@ -112,9 +54,10 @@ function acf_get_setting( $name, $allow_filter = true ) {
 *  @return	n/a
 */
 
-function acf_update_setting( $name, $value )
-{
+function acf_update_setting( $name, $value ) {
+	
 	acf()->settings[ $name ] = $value;
+	
 }
 
 
@@ -135,10 +78,12 @@ function acf_update_setting( $name, $value )
 function acf_append_setting( $name, $value ) {
 	
 	// createa array if needed
-	if( ! isset(acf()->settings[ $name ]) )
-	{
+	if( ! isset(acf()->settings[ $name ]) ) {
+		
 		acf()->settings[ $name ] = array();
+		
 	}
+	
 	
 	// append to array
 	acf()->settings[ $name ][] = $value;
@@ -158,9 +103,10 @@ function acf_append_setting( $name, $value ) {
 *  @return	(string)
 */
 
-function acf_get_path( $path )
-{
+function acf_get_path( $path ) {
+	
 	return acf_get_setting('path') . $path;
+	
 }
 
 
@@ -177,9 +123,10 @@ function acf_get_path( $path )
 *  @return	(string)
 */
 
-function acf_get_dir( $path )
-{
+function acf_get_dir( $path ) {
+	
 	return acf_get_setting('dir') . $path;
+	
 }
 
 
@@ -226,9 +173,10 @@ function acf_include( $file ) {
 function acf_parse_args( $args, $defaults = array() ) {
 	
 	// $args may not be na array!
-	if( !is_array($args) )
-	{
+	if( !is_array($args) ) {
+		
 		$args = array();
+		
 	}
 	
 	
@@ -247,35 +195,6 @@ function acf_parse_args( $args, $defaults = array() ) {
 
 
 /*
-*  acf_require_arg
-*
-*  description
-*
-*  @type	function
-*  @date	19/05/2014
-*  @since	5.0.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_require_arg( $array, $arg, $value = false ) {
-	
-	// isset
-	if( !isset($array[ $arg ]) ) {
-		
-		$array[ $arg ] = $value;
-		
-	}
-	
-	
-	// return
-	return $array;
-	
-} 
-
-
-/*
 *  acf_parse_types
 *
 *  This function will convert any numeric values to int and trim strings
@@ -288,61 +207,80 @@ function acf_require_arg( $array, $arg, $value = false ) {
 *  @return	$var (mixed)
 */
 
-function acf_parse_types( $var )
-{
-	// is value another array?
-	if( is_array($var) )
-	{
-		// some keys are restricted
-		$restricted = array(
-			'label',
-			'name',
-			'value',
-			'instructions',
-			'nonce'
-		);
+function acf_parse_types( $array ) {
+	
+	// some keys are restricted
+	$restricted = array(
+		'label',
+		'name',
+		'value',
+		'instructions',
+		'nonce'
+	);
+	
+	
+	// loop
+	foreach( array_keys($array) as $k ) {
 		
-		
-		// loop through $var carful not to parse any restricted keys
-		foreach( array_keys($var) as $k )
-		{
-			// bail early for restricted pieces
-			if( in_array($k, $restricted, true) )
-			{
-				continue;
-			}
+		// parse type if not restricted
+		if( !in_array($k, $restricted, true) ) {
 			
-			$var[ $k ] = acf_parse_types( $var[ $k ] );
-		}	
+			$array[ $k ] = acf_parse_type( $array[ $k ] );
+			
+		}
+
 	}
-	else
-	{
-		// string
-		if( is_string($var) )
-		{
-			$var = trim( $var );
-		}
+	
+	// return
+	return $array;
+}
+
+
+/*
+*  acf_parse_type
+*
+*  description
+*
+*  @type	function
+*  @date	11/11/2014
+*  @since	5.0.9
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function acf_parse_type( $v ) {
+	
+	// test for array
+	if( is_array($v) ) {
 		
+		return acf_parse_types($v);
+	}
+	
+	
+	// bail early if not string
+	if( !is_string($v) ) {
 		
-		// numbers
-		if( is_numeric($var) )
-		{
-			// check for non numeric characters
-			if( preg_match('/[^0-9]/', $var) )
-			{
-				// leave value if it contains such characters: . + - e
-				//$value = floatval( $value );
-			}
-			else
-			{
-				$var = intval( $var );
-			}
-		}
+		return $v;
+				
+	}
+	
+	
+	// trim
+	$v = trim($v);
+	
+	
+	// numbers
+	if( is_numeric($v) && strval((int)$v) === $v ) {
+		
+		$v = intval( $v );
+		
 	}
 	
 	
 	// return
-	return $var;
+	return $v;
+	
 }
 
 
@@ -365,10 +303,61 @@ function acf_get_view( $view_name = '', $args = array() ) {
 	// vars
 	$path = acf_get_path("admin/views/{$view_name}.php");
 	
-	if( file_exists($path) )
-	{
+	if( file_exists($path) ) {
+		
 		include( $path );
+		
 	}
+	
+}
+
+
+/*
+*  acf_merge_atts
+*
+*  description
+*
+*  @type	function
+*  @date	2/11/2014
+*  @since	5.0.9
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function acf_merge_atts( $atts, $extra = array() ) {
+	
+	// bail ealry if no $extra
+	if( empty($extra) ) {
+		
+		return $atts;
+		
+	}
+	
+	
+	// merge in new atts
+	foreach( $extra as $k => $v ) {
+			
+		if( $k == 'class' || $k == 'style' ) {
+			
+			if( $v === '' ) {
+				
+				continue;
+				
+			}
+			
+			$v = $atts[ $k ] . ' ' . $v;
+			
+		}
+		
+		$atts[ $k ] = $v;
+		
+	}
+	
+	
+	// return
+	return $atts;
+	
 }
 
 
@@ -388,7 +377,7 @@ function acf_get_view( $view_name = '', $args = array() ) {
 *  @return	N/A
 */
 
-function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label', $atts = array() ) {
+function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 	
 	// get valid field
 	$field = acf_get_valid_field( $field );
@@ -410,83 +399,113 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label', $at
 	
 	
 	// validate $el
-	if( !array_key_exists($el, $elements) )
-	{
+	if( !array_key_exists($el, $elements) ) {
+		
 		$el = 'div';
+	
 	}
 	
 	
-	// atts
-	$atts = acf_parse_args($atts, array(
-		'class'		=> '',
+	// wrapper
+	$wrapper = array(
+		'id'		=> '',
+		'class'		=> 'acf-field',
+		'width'		=> '',
+		'style'		=> '',
 		'data-name'	=> $field['name'],
 		'data-type'	=> $field['type'],
-	));
+		'data-key'	=> '',
+	);
 	
 	
-	// add to atts
-	$atts['class'] .= " acf-field field_type-{$field['type']}";
+	// merge in atts
+	$wrapper = acf_merge_atts( $wrapper, $field['wrapper'] );
+	
+	
+	// add type
+	$wrapper['class'] .= " field_type-{$field['type']}";
 	
 	
 	// add key
-	if( $field['key'] )
-	{
-		$atts['class'] .= " field_key-{$field['key']}";
-		$atts['data-key'] = $field['key'];
+	if( $field['key'] ) {
+		
+		$wrapper['class'] .= " field_key-{$field['key']}";
+		$wrapper['data-key'] = $field['key'];
+		
 	}
 	
 	
 	// add required
-	if( $field['required'] )
-	{
-		$atts['data-required'] = 1;
+	if( $field['required'] ) {
+		
+		$wrapper['data-required'] = 1;
+		
+	}
+	
+	
+	// add width
+	$width = (int) acf_extract_var( $wrapper, 'width' );
+	
+	if( $el == 'tr' || $el == 'td' ) {
+		
+		$width = 0;
+		
+	}
+	
+	if( $width > 0 && $width < 100 ) {
+		
+		$wrapper['data-width'] .= $width;
+		$wrapper['style'] .= " width:{$width}%;";
+		
+	}
+	
+	
+	// remove empty attributes
+	foreach( $wrapper as $k => $v ) {
+		
+		if( $v == '' ) {
+			
+			unset($wrapper[$k]);
+			
+		}
+		
 	}
 	
 	
 	// vars
 	$show_label = true;
 	
-	if( $el == 'td' )
-	{
+	if( $el == 'td' ) {
+		
 		$show_label = false;
+		
 	}
 	
 	
-	?><<?php echo $el; ?> <?php echo acf_esc_attr($atts); ?>>
-		<?php if( $show_label ): ?>
-		<<?php echo $elements[ $el ]; ?> class="acf-label">
-			
-			<label for="<?php echo $field['id']; ?>"><?php echo acf_get_field_label($field); ?></label>
-			
-			<?php if( $instruction == 'label' && $field['instructions'] ): ?>
-				<p class="description"><?php echo $field['instructions']; ?></p>
-			<?php endif; ?>
-			
-		</<?php echo $elements[ $el ]; ?>>
-		<?php endif; ?>
-		<<?php echo $elements[ $el ]; ?> class="acf-input">
+?><<?php echo $el; ?> <?php echo acf_esc_attr($wrapper); ?>>
+<?php if( $show_label ): ?>
+	<<?php echo $elements[ $el ]; ?> class="acf-label">
+		<label for="<?php echo $field['id']; ?>"><?php echo acf_get_field_label($field); ?></label>
+<?php if( $instruction == 'label' && $field['instructions'] ): ?>
+		<p class="description"><?php echo $field['instructions']; ?></p>
+<?php endif; ?>
+	</<?php echo $elements[ $el ]; ?>>
+<?php endif; ?>
+	<<?php echo $elements[ $el ]; ?> class="acf-input">
+		<?php acf_render_field( $field ); ?>
 		
-			<?php acf_render_field( $field ); ?>
-			
-			<?php if( $instruction == 'field' && $field['instructions'] ): ?>
-				<p class="description"><?php echo $field['instructions']; ?></p>
-			<?php endif; ?>
-			
-			<?php if( !empty($field['conditional_logic'])): ?>
-			<script type="text/javascript">
-			(function($) {
-				
-			if( typeof acf !== 'undefined' )
-			{
-				acf.conditional_logic.add( '<?php echo $field['key']; ?>', <?php echo json_encode($field['conditional_logic']); ?>);
-			}
-				
-			})(jQuery);	
-			</script>
-			<?php endif; ?>
-			
-		</<?php echo $elements[ $el ]; ?>>
-	</<?php echo $el; ?>><?php
+<?php if( $instruction == 'field' && $field['instructions'] ): ?>
+		<p class="description"><?php echo $field['instructions']; ?></p>
+<?php endif; ?>
+	</<?php echo $elements[ $el ]; ?>>
+<?php if( !empty($field['conditional_logic'])): ?>
+	<script type="text/javascript">
+		if(typeof acf !== 'undefined'){ acf.conditional_logic.add( '<?php echo $field['key']; ?>', <?php echo json_encode($field['conditional_logic']); ?>); }
+	</script>
+<?php endif; ?>
+</<?php echo $el; ?>>
+<?php
+	
 }
 
 
@@ -553,9 +572,10 @@ function acf_get_field_label( $field ) {
 	$label = $field['label'];
 	
 	
-	if( $field['required'] )
-	{
-		$label .= ' <span class="acf-required">*</span>'; 
+	if( $field['required'] ) {
+		
+		$label .= ' <span class="acf-required">*</span>';
+		
 	}
 	
 	
@@ -568,33 +588,6 @@ function acf_the_field_label( $field ) {
 
 	echo acf_get_field_label( $field );
 	
-}
-
-
-/*
-*  acf_render_field_option
-*
-*  This function will render a tr element containing a label and field cell, but also setting the tr_class for use with AJAX 
-*
-*  @type	function
-*  @date	28/09/13
-*  @since	5.0.0
-*
-*  @param	$type (string) the origional field_type (not $field['type'])
-*  @param	$field (array)
-*  @return	N/A
-*/
-
-function acf_render_field_option( $type, $field )
-{
-	// vars
-	$atts = array( 
-		'data-setting' => $type
-	);
-	
-	
-	// render
-	acf_render_field_wrap( $field, 'tr', 'label', $atts );
 }
 
 
@@ -618,10 +611,14 @@ function acf_render_field_setting( $field, $setting, $global = false ) {
 	$atts = array();
 	
 	
+	// validate
+	$setting = acf_get_valid_field( $setting );
+	
+	
 	// if this setting is not global, add a data attribute
 	if( ! $global ) {
 		
-		$atts['data-setting'] = $field['type'];
+		$setting['wrapper']['data-setting'] = $field['type'];
 		
 	}
 	
@@ -631,8 +628,7 @@ function acf_render_field_setting( $field, $setting, $global = false ) {
 		
 		
 	// copy across the $setting value
-	// Note: tab field contains no name for it's $setting (its just a message)
-	if( isset($setting['name'], $field[ $setting['name'] ]) ) {
+	if( isset($field[ $setting['name'] ]) ) {
 		
 		$setting['value'] = $field[ $setting['name'] ];
 		
@@ -640,7 +636,7 @@ function acf_render_field_setting( $field, $setting, $global = false ) {
 	
 	
 	// render
-	acf_render_field_wrap( $setting, 'tr', 'label', $atts );
+	acf_render_field_wrap( $setting, 'tr', 'label' );
 	
 }
 
@@ -747,20 +743,22 @@ function acf_field_type_exists( $field_type ) {
 *  @return	n/a
 */
 
-function acf_esc_attr( $atts )
-{
+function acf_esc_attr( $atts ) {
+	
 	// is string?
-	if( is_string($atts) )
-	{
+	if( is_string($atts) ) {
+		
 		$atts = trim( $atts );
 		return esc_attr( $atts );
+		
 	}
 	
 	
 	// validate
-	if( empty($atts) )
-	{
+	if( empty($atts) ) {
+		
 		return '';
+		
 	}
 	
 	
@@ -769,16 +767,18 @@ function acf_esc_attr( $atts )
 	
 	
 	// loop through and render
-	foreach( $atts as $k => $v )
-	{
-		if( is_array($v) || is_object($v) || is_bool($v) )
-		{
+	foreach( $atts as $k => $v ) {
+		
+		if( is_array($v) || is_object($v) || is_bool($v) ) {
+			
 			$v = '';
+			
 		}
 		
-		if( is_string($v) )
-		{
+		if( is_string($v) ) {
+			
 			$v = trim( $v );
+			
 		}
 		
 		$e[] = $k . '="' . esc_attr( $v ) . '"';
@@ -790,7 +790,9 @@ function acf_esc_attr( $atts )
 }
 
 function acf_esc_attr_e( $atts ) {
+	
 	echo acf_esc_attr( $atts );
+	
 }
 
 
@@ -838,21 +840,25 @@ function acf_hidden_input( $atts ) {
 
 function acf_extract_var( &$array, $key ) {
 	
-	// vars
-	$r = null;
-	
-	
 	// check if exists
-	if( array_key_exists($key, $array) ) {
-	
-		$r = $array[ $key ];
+	if( is_array($array) && array_key_exists($key, $array) ) {
+		
+		// store value
+		$v = $array[ $key ];
+		
+		
+		// unset
 		unset( $array[ $key ] );
-	
+		
+		
+		// return
+		return $v;
+		
 	}
 	
 	
 	// return
-	return $r;
+	return null;
 }
 
 
@@ -869,13 +875,14 @@ function acf_extract_var( &$array, $key ) {
 *  @return	$post_id (int)
 */
 
-function acf_extract_vars( &$array, $keys )
-{
+function acf_extract_vars( &$array, $keys ) {
+	
 	$r = array();
 	
-	foreach( $keys as $key )
-	{
+	foreach( $keys as $key ) {
+		
 		$r[ $key ] = acf_extract_var( $array, $key );
+		
 	}
 	
 	return $r;
@@ -1027,12 +1034,11 @@ function acf_verify_nonce( $nonce, $post_id = 0 ) {
 	
 	
 	// check
-	if( isset($_POST['_acfnonce']) )
-	{
+	if( isset($_POST['_acfnonce']) ) {
 
 		// verify nonce 'post|user|comment|term'
-		if( wp_verify_nonce($_POST['_acfnonce'], $nonce) )
-		{
+		if( is_string($_POST['_acfnonce']) && wp_verify_nonce($_POST['_acfnonce'], $nonce) ) {
+			
 			$r = true;
 			
 			
@@ -1041,27 +1047,24 @@ function acf_verify_nonce( $nonce, $post_id = 0 ) {
 			
 		
 			// if we are currently saving a revision, allow its parent to bypass this validation
-			if( $post_id )
-			{
-				if( $parent = wp_is_post_revision($post_id) )
-				{
-					// revision: set parent post_id
-					$_POST['_acfnonce'] = $parent;
-				}
+			if( $post_id && $parent = wp_is_post_revision($post_id) ) {
+				
+				// revision: set parent post_id
+				$_POST['_acfnonce'] = $parent;
+				
 			}
-		}
-		
-		
-		if( $_POST['_acfnonce'] === $post_id )
-		{
+			
+		} elseif( $_POST['_acfnonce'] === $post_id ) {
+			
 			$r = true;
 			
 			// remove potential for inifinite loops
 			$_POST['_acfnonce'] = false;
+			
 		}
 		
 	}
-	
+		
 	
 	// return
 	return $r;

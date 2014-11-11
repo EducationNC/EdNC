@@ -61,16 +61,18 @@ function acf_is_field_key( $field_key = '' ) {
 function acf_get_valid_field( $field = false ) {
 	
 	// $field must be an array
-	if( !is_array($field) )
-	{
+	if( !is_array($field) ) {
+		
 		$field = array();
+		
 	}
 	
 	
-	// bail ealry if field_name exists (only run this function once)
-	if( !empty($field['_valid']) )
-	{
+	// bail ealry if already valid
+	if( !empty($field['_valid']) ) {
+		
 		return $field;
+		
 	}
 	
 	
@@ -90,8 +92,11 @@ function acf_get_valid_field( $field = false ) {
 		'class'				=> '',
 		'conditional_logic'	=> 0,
 		'parent'			=> 0,
-		//'ancestors'			=> array(),
-		//'field_group'		=> 0,
+		'wrapper'			=> array(
+			'width'				=> '',
+			'class'				=> '',
+			'id'				=> ''
+		),
 		'_name'				=> '',
 		'_input'			=> '',
 		'_valid'			=> 0,
@@ -103,9 +108,10 @@ function acf_get_valid_field( $field = false ) {
 	
 	
 	// translate
-	foreach( array('label', 'instructions') as $s )
-	{
+	foreach( array('label', 'instructions') as $s ) {
+		
 		$field[ $s ] = __($field[ $s ]);
+		
 	}
 	
 	
@@ -367,7 +373,7 @@ function acf_get_fields_by_id( $id = 0 ) {
 		'post_type'					=> 'acf-field',
 		'orderby'					=> 'menu_order',
 		'order'						=> 'ASC',
-		'suppress_filters'			=> true, // allows WPML to work
+		'suppress_filters'			=> true, // DO NOT allow WPML to modify the query
 		'post_parent'				=> $id,
 		'post_status'				=> 'publish, trash', // 'any' won't get trashed fields
 		'update_post_meta_cache'	=> false
@@ -648,7 +654,7 @@ function _acf_get_field_by_key( $key = '' ) {
 /*
 *  _acf_get_field_by_name
 *
-*  This function will get a field via its key
+*  This function will get a field via its name
 *
 *  @type	function
 *  @date	27/02/2014
@@ -659,10 +665,6 @@ function _acf_get_field_by_key( $key = '' ) {
 */
 
 function _acf_get_field_by_name( $name = '' ) {
-	
-	// vars
-	$field = false;	
-	
 	
 	// vars
 	$args = array(
@@ -680,18 +682,15 @@ function _acf_get_field_by_name( $name = '' ) {
 	
 	
 	// validate
-	if( empty($posts) )
-	{
-		return $field;	
+	if( empty($posts) ) {
+		
+		return false;	
+		
 	}
 	
 	
-	// load from ID
-	$field = _acf_get_field_by_id( $posts[0]->ID );
-	
-		
 	// return
-	return $field;
+	return _acf_get_field_by_id( $posts[0]->ID );
 	
 }
 
@@ -1390,11 +1389,22 @@ function acf_get_sub_field( $selector, $field ) {
 		
 	} elseif( $field['type'] == 'flexible_content' ) {
 		
+		// vars
 		$layouts = acf_extract_var( $field, 'layouts');
+		$current = get_row_layout();
+		
 		
 		if( !empty($layouts) ) {
 			
 			foreach( $layouts as $layout ) {
+				
+				// skip layout if the current layout key does not match
+				if( $current && $current !== $layout['name'] ) {
+					
+					continue;
+					
+				} 
+				
 				
 				// extract sub fields
 				$sub_fields = acf_extract_var( $layout, 'sub_fields');

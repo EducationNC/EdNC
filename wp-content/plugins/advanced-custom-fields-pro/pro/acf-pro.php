@@ -55,17 +55,49 @@ class acf_pro {
 		add_action('acf/input/admin_enqueue_scripts',			array($this, 'input_admin_enqueue_scripts'));
 		add_action('acf/field_group/admin_enqueue_scripts',		array($this, 'field_group_admin_enqueue_scripts'));
 		add_action('acf/field_group/admin_l10n',				array($this, 'field_group_admin_l10n'));
-		add_action('acf/render_field_settings', 				array($this, 'render_field_settings'));
 		
 		
 		// filters
+		add_filter('acf/get_valid_field',						array($this, 'get_valid_field'), 11, 1);
 		add_filter('acf/update_field',							array($this, 'update_field'), 1, 1);
 		add_filter('acf/prepare_field_for_export', 				array($this, 'prepare_field_for_export'));
 		add_filter('acf/prepare_field_for_import', 				array($this, 'prepare_field_for_import'));
 		
 		
 		// add-ons
-		add_filter('acf/is_add_on_active/slug=acf-pro',			'__return_true');
+		//add_filter('acf/is_add_on_active/slug=acf-pro',			'__return_true');
+	}
+	
+	
+	/*
+	*  get_valid_field
+	*
+	*  This function will provide compatibility with ACF4 fields
+	*
+	*  @type	function
+	*  @date	23/04/2014
+	*  @since	5.0.0
+	*
+	*  @param	$field (array)
+	*  @return	$field
+	*/
+	
+	function get_valid_field( $field ) {
+		
+		// extract old width
+		$width = acf_extract_var( $field, 'column_width' );
+		
+		
+		// if old width, update the new width
+		if( $width ) {
+			
+			$field['wrapper']['width'] = $width;
+		}
+		
+		
+		// return
+		return $field;
+		
 	}
 	
 	
@@ -384,47 +416,6 @@ class acf_pro {
 		
 		// return
 		return $field;
-		
-	}
-	
-	
-	/*
-	*  render_field_settings
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	15/04/2014
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-	
-	function render_field_settings( $field ) {
-		
-		// bail early if doing ajax
-		/*
-if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			
-			return;
-			
-		}
-		
-		
-*/
-		// vars
-		$setting = array(
-			'label'		=> __('Column Width','acf'),
-			'type'		=> 'number',
-			'name'		=> 'column_width',
-			'append'	=> '%',
-			'disabled'	=> 1
-		);
-		
-		
-		// add setting
-		acf_render_field_setting( $field, $setting );
 		
 	}
 	 

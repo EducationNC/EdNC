@@ -30,7 +30,7 @@
 		initialize: function(){
 			
 			// bail early if no tinymce
-			if( typeof tinyMCEPreInit === 'undefined' ) {
+			if( typeof tinyMCEPreInit === 'undefined' || typeof tinymce === 'undefined' ) {
 				
 				return false;
 				

@@ -10,35 +10,35 @@
 			'color' => 'blue',
 			'nice' => 'false',
 			'url'  => '',
-			'text' => '', 
+			'text' => '',
 		), $atts ) );
-		
+
 		$output = '<a href="' . $url . '" class="button '. $type . ' ' . $size . ' ' . $color;
 		if( $nice == 'true' ){ $output .= ' nice';}
 		$output .= '">';
 		$output .= $text;
 		$output .= '</a>';
-		
+
 		return $output;
 	}
 
-	add_shortcode('button', 'buttons'); 
+	add_shortcode('button', 'buttons');
 
 // Alerts
 	function alerts( $atts, $content = null ) {
 		extract( shortcode_atts( array(
 			'type' => '	', /* warning, success, error */
 			'close' => 'false', /* display close link */
-			'text' => '', 
+			'text' => '',
 		), $atts ) );
-		
+
 		$output = '<div class="fade in alert-box '. $type . '">';
-		
+
 		$output .= $text;
 		if($close == 'true') {
 			$output .= '<a class="close" href="#">×</a></div>';
 		}
-		
+
 		return $output;
 	}
 
@@ -49,13 +49,13 @@
 		extract( shortcode_atts( array(
 			'type' => '	', /* warning, success, error */
 			'close' => 'false', /* display close link */
-			'text' => '', 
+			'text' => '',
 		), $atts ) );
-		
+
 		$output = '<div class="panel">';
 		$output .= $text;
 		$output .= '</div>';
-		
+
 		return $output;
 	}
 
@@ -139,4 +139,17 @@
 	}
 	add_shortcode('contact', 'contact_shortcode');
 
+// Aside shortcode
+	function aside_shortcode($atts, $content = null) {
+		extract( shortcode_atts( array(
+			'align' => 'left'
+		), $atts ) );
+
+		$output = '<div class="aside align-'. $align . '">';
+		$output .= $content;
+		$output .= '</div>';
+
+		return $output;
+	}
+	add_shortcode('aside', 'aside_shortcode');
 ?>

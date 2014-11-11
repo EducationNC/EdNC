@@ -125,6 +125,43 @@ img.acf-fw {
 
 /*---------------------------------------------------------------------------------------------
 *
+*  tooltip
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf-tooltip {
+	display: inline;
+    position: relative;
+}
+
+.acf-tooltip:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+
+.acf-tooltip:hover:before{
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
 *  callout
 *
 *---------------------------------------------------------------------------------------------*/
@@ -527,6 +564,39 @@ img.acf-fw {
 }
 
 
+/* width */
+.acf-field[data-width] {
+	float: left;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.acf-field[data-width] + .acf-field {
+	clear: left;
+}
+
+.acf-field[data-width] + .acf-field[data-width] {
+	clear: none;
+	border-left: 1px solid #eeeeee;	
+}
+
+td.acf-field[data-width] {
+	float: none;
+}
+
+
+/* field width helpers */
+.acf-r0 {
+	border-top: none !important;
+}
+
+.acf-c0 {
+	clear: left !important;
+	border-left: none !important;
+}
+
 
 /*--------------------------------------------------------------------------------------------
 *
@@ -733,18 +803,20 @@ img.acf-fw {
 	position: relative;
 }
 
-.acf-postbox > .inside {
+.acf-postbox > .inside,
+.acf-fields {
 	margin: 0 !important;
 	padding: 0 !important;
+	position: relative;
 }
 
-.acf-postbox > .inside > .acf-field {
+.acf-fields > .acf-field {
 	margin: 0;
 	padding: 15px 12px;
 	border-top: #EEEEEE solid 1px;
 }
 
-.acf-postbox > .inside > .acf-field:first-child {
+.acf-fields > .acf-field:first-child {
 	border-top: 0 none;
 }
 
@@ -761,14 +833,14 @@ img.acf-fw {
 	display: none;
 }
 
-.acf-postbox.seamless > .inside > .acf-field {
+.acf-postbox.seamless > .acf-fields > .acf-field {
 	margin: 0;
 	padding: 15px 0;
-	border-top: 0 none;
+	border: 0 none !important;
 }
 
-.acf-postbox.seamless > .inside > .acf-table,
-.acf-postbox.seamless > .inside > .acf-table > tbody > tr > td {
+.acf-postbox.seamless > .acf-fields > .acf-table,
+.acf-postbox.seamless > .acf-fields > .acf-table > tbody > tr > td {
 	background: none;
 	border: 0 none;
 }
@@ -977,6 +1049,14 @@ img.acf-fw {
 .acf-input-table > tbody > tr > td.order + td {
 	border-left-color: #DFDFDF;
 }
+
+
+/* row block layout */
+.acf-table.row-layout > tbody > tr > td,
+.acf-table.block-layout > tbody > tr > td {
+	border-top-color: #E1E1E1;
+}
+
 
 
 /* remove */

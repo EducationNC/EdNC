@@ -120,7 +120,7 @@ function acf_get_field_groups( $args = false ) {
 		'posts_per_page'			=> -1,
 		'orderby' 					=> 'menu_order title',
 		'order' 					=> 'asc',
-		'suppress_filters'			=> false,
+		'suppress_filters'			=> false, // allow WPML to modify the query
 		'post_status'				=> 'publish',
 		'update_post_meta_cache'	=> false
 	));
@@ -367,7 +367,6 @@ function _acf_get_field_group_by_id( $post_id = 0 ) {
 *  @return	$field_group (array)
 */
 
-
 function _acf_get_field_group_by_key( $key = '', $search_trash = false ) {
 	
 	// vars
@@ -427,7 +426,6 @@ function _acf_get_field_group_by_key( $key = '', $search_trash = false ) {
 	return $field_group;
 	
 }
-
 
 
 /*
@@ -626,7 +624,7 @@ function acf_get_field_count( $field_group_id ) {
 		'post_type'			=> 'acf-field',
 		'orderby'			=> 'menu_order',
 		'order'				=> 'ASC',
-		'suppress_filters'	=> true, // allows WPML to work
+		'suppress_filters'	=> true, // DO NOT allow WPML to modify the query
 		'post_parent'		=> $field_group_id,
 		'fields'			=> 'ids',
 		'post_status'		=> 'publish, trash' // 'any' won't get trashed fields
@@ -641,6 +639,7 @@ function acf_get_field_count( $field_group_id ) {
 	return apply_filters('acf/get_field_count', count( $posts ), $field_group_id);
 	
 }
+
 
 /*
 *  acf_delete_field_group

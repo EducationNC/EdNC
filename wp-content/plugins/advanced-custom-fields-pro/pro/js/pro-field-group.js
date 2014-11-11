@@ -47,13 +47,6 @@
 		    });
 		    
 		    
-		    acf.add_action('open_field change_field_type', function( $el ){
-			    
-			    self.toggle_column_width( $el );
-				
-		    });
-		    
-		    
 		    // modules
 		    this.repeater.init();
 	    	this.flexible_content.init();
@@ -172,41 +165,6 @@
 	    	// action for 3rd party customization
 			acf.do_action('update_field_parent', $el, $parent);
 			
-    	},
-    	
-    	
-    	/*
-    	*  toggle_column_width
-    	*
-    	*  description
-    	*
-    	*  @type	function
-    	*  @date	25/06/2014
-    	*  @since	5.0.0
-    	*
-    	*  @param	$post_id (int)
-    	*  @return	$post_id (int)
-    	*/
-    	
-    	toggle_column_width : function( $el ){
-	    	
-	    	// vars
-	    	var $parent = $el.parent().closest('.field');
-	    	
-	    	
-	    	// show / hide column width setting
-	    	$column_width = $el.find('> .field-settings > table > tbody > tr[data-name="column_width"]');
-	    	
-	    	if( $parent.exists() ) {
-	    	
-	    		$column_width.find('input').removeAttr('disabled');
-	    		
-	    	} else {
-		    	
-		    	$column_width.find('input').attr('disabled', 'disabled');
-		    	
-	    	}
-	    	
     	},
     	
     	

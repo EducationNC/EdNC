@@ -77,8 +77,7 @@ class acf_field_tab extends acf_field {
 	
 	function render_field_settings( $field ) {
 		
-		?>
-		<tr class="acf-field" data-setting="tab" data-name="warning">
+		?><tr class="acf-field" data-setting="tab" data-name="warning">
 			<td class="acf-label">
 				<label><?php _e("Warning",'acf'); ?></label>
 			</td>

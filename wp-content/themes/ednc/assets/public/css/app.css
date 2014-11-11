@@ -3835,10 +3835,26 @@ blockquote, .blockquote {
   font-family: Merriweather, serif;
   font-weight: 300;
   font-style: italic;
-  font-size: 1em;
-  line-height: 1.5em; }
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1.4375rem; }
   blockquote p, .blockquote p {
     font-weight: inherit; }
+    blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
+      width: 50%;
+      position: relative;
+      padding: 1.25rem 0;
+      border-top: 3px solid #ecf0f1;
+      border-bottom: 3px solid #ecf0f1; }
+    blockquote p[style*=left], .blockquote p[style*=left] {
+      float: left;
+      margin: 0 1.25rem 1.25rem -16.66667%; }
+    blockquote p[style*=right], .blockquote p[style*=right] {
+      float: right;
+      margin: 0 -16.66667% 1.25rem 1.25rem; }
+    blockquote p[style*=center], .blockquote p[style*=center] {
+      margin: 2.5rem -16.66667%; }
   blockquote cite, .blockquote cite {
     line-height: 2em; }
 

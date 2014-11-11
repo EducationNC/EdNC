@@ -317,7 +317,6 @@ class acf_form_post {
 				
 			}
 			
-			
 		} else {
 			
 			// update classes
@@ -330,18 +329,19 @@ class acf_form_post {
 		
 		
 		// inline script
-		echo '<div class="acf-hidden">';
-			?>
+		?>
+		<div class="acf-hidden">
 			<script type="text/javascript">
 			(function($) {
 				
 				$('#<?php echo $id; ?>').addClass('<?php echo $class; ?>').removeClass('hide-if-js');
+				$('#<?php echo $id; ?> > .inside').addClass('acf-fields acf-cf');
 				$('#adv-settings label[for="<?php echo $id; ?>-hide"]').addClass('<?php echo $toggle_class; ?>');
 				
 			})(jQuery);	
 			</script>
-			<?php
-		echo '</div>';
+		</div>
+		<?php
 		
 	}
 	

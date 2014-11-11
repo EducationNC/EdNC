@@ -4,8 +4,7 @@
 	acf.pro = acf.model.extend({
 		
 		actions: {
-			'conditional_logic_show_field': 'show_field_cl',
-			'conditional_logic_hide_field': 'hide_field_cl'
+			'refresh': 	'refresh',
 		},
 		
 		filters: {
@@ -22,93 +21,79 @@
 		
 		},
 		
-		show_field_cl : function( $field ){
-			
-			// bail early if not a sub field
-			if( ! acf.is_sub_field($field) ) {
-				
-				return;
-				
-			}
-			
-			
-			// bail early if not a td
-			if( ! $field.is('td') ) {
-				
-				return;
-				
-			}
-			
-			
-			// vars
-			var key = acf.get_field_key( $field ),
-				$table = $field.closest('.acf-table'),
-				$th = $table.find('> thead > tr > th[data-key="' + key + '"]'),
-				$td = $table.find('> tbody > tr:not(.acf-clone) > td[data-key="' + key + '"]');
-			
-			
-			// remove class
-			$field.removeClass('appear-empty');
-			
-			
-			// show entire column
-			$td.filter('.hidden-by-conditional-logic').addClass('appear-empty');
-			$th.removeClass('hidden-by-conditional-logic');
-			
-			
-			// render table
-			this.render_table( $table );
-			
-		},
 		
-		hide_field_cl : function( $field ){
+		/*
+		*  refresh
+		*
+		*  This function will run when acf detects a refresh is needed on the UI
+		*  Most commonly after ready / conditional logic change
+		*
+		*  @type	function
+		*  @date	10/11/2014
+		*  @since	5.0.9
+		*
+		*  @param	n/a
+		*  @return	n/a
+		*/
+		
+		refresh: function(){
 			
-			// debug
-			//console.log('conditional_logic_hide_field %o', $field);
+			// reference
+			var self = this;
 			
-			// bail early if not a sub field
-			if( ! acf.is_sub_field($field) ) {
+			
+			// loop over all table layouts
+			$('.acf-input-table.table-layout').each(function(){
 				
-				return;
+				// vars
+				var $table = $(this);
 				
-			}
-			
-			
-			// bail early if not a td
-			if( ! $field.is('td') ) {
 				
-				return;
+				// loop over th
+				$table.find('> thead th.acf-th').each(function(){
+					
+					// vars
+					var $th = $(this),
+						$td = $table.find('> tbody > tr > td[data-key="' + $th.attr('data-key') + '"]');
+					
+					
+					// clear class
+					$td.removeClass('appear-empty');
+					$th.removeClass('hidden-by-conditional-logic');
+					
+					
+					// remove clone if needed
+					if( $td.length > 1 ) {
+						
+						$td = $td.not(':last');
+						
+					}
+					
+					
+					// add classes
+					if( $td.not('.hidden-by-conditional-logic').length == 0 ) {
+						
+						$th.addClass('hidden-by-conditional-logic');
+						
+					} else {
+						
+						$td.addClass('appear-empty');
+						
+					}
+					
+				});
 				
-			}
-			
-			
-			// vars
-			var key = acf.get_field_key( $field ),
-				$table = $field.closest('.acf-table'),
-				$th = $table.find('> thead > tr > th[data-key="' + key + '"]'),
-				$td = $table.find('> tbody > tr:not(.acf-clone) > td[data-key="' + key + '"]');
-			
-			
-			// add class
-			$field.addClass('appear-empty');
-			
-			//console.log($td);
-			// if all cells are hidden, hide the entire column
-			if( $td.filter('.hidden-by-conditional-logic').length == $td.length ) {
 				
-				$td.removeClass('appear-empty');
-				$th.addClass('hidden-by-conditional-logic');
+				// render table widths
+				self.render_table( $table );
 				
-			}
-			
-			
-			// render table
-			this.render_table( $table );
+			});
 			
 		},
 		
 		render_table : function( $table ){
 			
+			//console.log( 'render_table %o', $table);
 			// bail early if table is row layout
 			if( $table.hasClass('row-layout') ) {
 			
@@ -285,7 +270,8 @@
 
 			
 			// set column widths
-			acf.pro.render_table( this.$el.children('table') );
+			// no longer needed due to refresh action in acf.pro model
+			//acf.pro.render_table( this.$el.children('table') );
 			
 			
 			// disable clone inputs
@@ -536,11 +522,14 @@
 			
 			
 			// set column widths
-			this.$values.find('> .layout > .acf-table').each(function(){
+			// no longer needed due to refresh action in acf.pro model
+			/*
+this.$values.find('> .layout > .acf-table').each(function(){
 			
 				acf.pro.render_table( $(this) );
 				
 			});
+*/
 			
 			
 			// disable clone inputs
@@ -947,6 +936,9 @@
 			
 				$layout.attr('data-toggle', 'open');
 				$layout.children('.acf-input-table').show();
+				
+				// refresh layout
+				acf.do_action('refresh', $layout);
 				
 			} else {
 				

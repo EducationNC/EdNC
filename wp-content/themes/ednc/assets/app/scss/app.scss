@@ -379,11 +379,35 @@ blockquote, .blockquote {
   font-family: $font-family-serif;
   font-weight: 300;
   font-style: italic;
-  font-size: 1em;
-  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: $h4-font-size;
 
   p {
     font-weight: inherit;
+
+    &[style*=left], &[style*=right] {
+      width: 50%;
+      position: relative;
+      padding: 1.25rem 0;
+      border-top: 3px solid $ice;
+      border-bottom: 3px solid $ice;
+    }
+
+    &[style*=left] {
+      float: left;
+      margin: 0 1.25rem 1.25rem -16.66667%;
+    }
+
+    &[style*=right] {
+      float: right;
+      margin: 0 -16.66667% 1.25rem 1.25rem;
+    }
+
+    &[style*=center] {
+      margin: 2.5rem -16.66667%;
+    }
   }
 
   cite {

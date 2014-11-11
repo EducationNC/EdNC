@@ -1,4 +1,8 @@
 ------------------------------------------------------------------------------------------------------------------
+Version 3.0.1
+	- Fixed issue with upgrade that caused configuration not to be copied over in certain situations
+
+------------------------------------------------------------------------------------------------------------------
 Version 3.0
     - Added integration with Add-On Framework
 	- Added support for sending selected checkboxes as a concatenated string

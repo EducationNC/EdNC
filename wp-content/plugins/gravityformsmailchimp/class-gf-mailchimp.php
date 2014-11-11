@@ -44,7 +44,6 @@ class GFMailChimp extends GFFeedAddOn {
 			)
 		);
 
-		add_filter( 'gform_addon_navigation', array( $this, 'maybe_create_menu' ) );
 	}
 
 	public function init_ajax(){
@@ -52,6 +51,15 @@ class GFMailChimp extends GFFeedAddOn {
 
 		add_action( 'wp_ajax_gf_dismiss_mailchimp_menu', array( $this, 'ajax_dismiss_menu' ) );
 
+	}
+
+	public function init_admin(){
+
+		parent::init_admin();
+
+		$this->ensure_upgrade();
+
+		add_filter( 'gform_addon_navigation', array( $this, 'maybe_create_menu' ) );
 	}
 
 	// ------- Plugin settings -------
@@ -862,12 +870,12 @@ class GFMailChimp extends GFFeedAddOn {
 	}
 
 	private function get_address( $entry, $field_id ){
-		$street_value 	= str_replace( '  ', ' ', trim( $entry[$field_id . '.1'] ) );
-		$street2_value 	= str_replace( '  ', ' ', trim( $entry[$field_id . '.2'] ) );
-		$city_value 	= str_replace( '  ', ' ', trim( $entry[$field_id . '.3'] ) );
-		$state_value 	= str_replace( '  ', ' ', trim( $entry[$field_id . '.4'] ) );
-		$zip_value 		= trim( $entry[$field_id . '.5'] );
-		$country_value 	= GFCommon::get_country_code( trim( $entry[$field_id . '.6'] ) );
+		$street_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.1' ] ) );
+		$street2_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.2' ] ) );
+		$city_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.3' ] ) );
+		$state_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.4' ] ) );
+		$zip_value 		= trim( $entry[ $field_id . '.5' ] );
+		$country_value 	= GFCommon::get_country_code( trim( $entry[ $field_id . '.6' ] ) );
 
 		$address = $street_value;
 		$address .= ! empty( $address ) && ! empty( $street2_value ) ? '  ' . $street2_value : $street2_value;
@@ -883,7 +891,7 @@ class GFMailChimp extends GFFeedAddOn {
 
 		//If field is simple (one input), simply return full content
 		$name = rgar( $entry, $field_id );
-		if( ! empty( $name ) ){
+		if ( ! empty( $name ) ) {
 			return $name;
 		}
 
@@ -971,22 +979,27 @@ class GFMailChimp extends GFFeedAddOn {
 	//Migrate existing data to new table structure
 	public function upgrade( $previous_version ) {
 
-		$previous_is_pre_addon_framework = version_compare( $previous_version, '3.0.dev1', '<' );
+		$previous_is_pre_addon_framework = empty( $previous_version ) || version_compare( $previous_version, '3.0.dev1', '<' );
 
 		if ( $previous_is_pre_addon_framework ) {
 
 			//get old plugin settings
 			$old_settings = get_option( 'gf_mailchimp_settings' );
 			//remove username and password from the old settings; these were very old legacy api settings that we do not support anymore
-			foreach ( $old_settings as $id => $setting ) {
-				if ( $id != 'username' && $id != 'password' ) {
-					if ( $id == 'apikey' ) {
-						$id = 'apiKey';
+
+			if ( is_array( $old_settings ) ){
+
+				foreach ( $old_settings as $id => $setting ) {
+					if ( $id != 'username' && $id != 'password' ) {
+						if ( $id == 'apikey' ) {
+							$id = 'apiKey';
+						}
+						$new_settings[ $id ] = $setting;
 					}
-					$new_settings[ $id ] = $setting;
 				}
+				$this->update_plugin_settings( $new_settings );
+
 			}
-			$this->update_plugin_settings( $new_settings );
 
 			//get old feeds
 			$old_feeds = $this->get_old_feeds();
@@ -1075,8 +1088,26 @@ class GFMailChimp extends GFFeedAddOn {
 				//set paypal delay setting
 				$this->update_paypal_delay_settings( 'delay_mailchimp_subscription' );
 			}
+			update_option( 'gf_mailchimp_upgrade', 1 );
 		}
 	}
+
+	public function ensure_upgrade(){
+
+		if ( get_option( 'gf_mailchimp_upgrade' ) ){
+			return false;
+		}
+
+		$feeds = $this->get_feeds();
+		if ( empty( $feeds ) ){
+
+			//Force Add-On framework upgrade
+			$this->upgrade( '2.0' );
+		}
+
+		update_option( 'gf_mailchimp_upgrade', 1 );
+	}
+
 
 	public function update_paypal_delay_settings( $old_delay_setting_name ){
 		global $wpdb;
@@ -1096,7 +1127,7 @@ class GFMailChimp extends GFFeedAddOn {
 					$meta[ $new_delay_setting_name ] = $meta[ $old_delay_setting_name ];
 					//update paypal meta to have new setting
 					$meta = maybe_serialize( $meta );
-					$wpdb->update("{$wpdb->prefix}rg_paypal", array( 'meta' => $meta ), array( 'id' => $old_feed['id'] ), array('%s'), array('%d') );
+					$wpdb->update( "{$wpdb->prefix}rg_paypal", array( 'meta' => $meta ), array( 'id' => $old_feed['id'] ), array('%s'), array('%d') );
 				}
 			}
 		}

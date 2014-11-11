@@ -350,7 +350,8 @@ table.conditional-logic-rules tbody td {
 .acf-field-list .field_type-tab tr[data-name="name"],
 .acf-field-list .field_type-tab tr[data-name="instructions"],
 .acf-field-list .field_type-tab tr[data-name="required"],
-.acf-field-list .field_type-tab tr[data-name="warning"] {
+.acf-field-list .field_type-tab tr[data-name="warning"],
+.acf-field-list .field_type-tab tr[data-name="wrapper"] {
 	display: none !important;
 }
 
@@ -368,7 +369,8 @@ table.conditional-logic-rules tbody td {
 
 .acf-field-list .field_type-message tr[data-name="name"],
 .acf-field-list .field_type-message tr[data-name="instructions"],
-.acf-field-list .field_type-message tr[data-name="required"] {
+.acf-field-list .field_type-message tr[data-name="required"],
+.acf-field-list .field_type-message tr[data-name="wrapper"] {
 	display: none !important;
 }
 

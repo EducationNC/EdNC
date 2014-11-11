@@ -119,6 +119,10 @@
 				}
 				
 			});
+			
+			
+			// action for 3rd party customization
+			acf.do_action('refresh');
 
 		},
 		
