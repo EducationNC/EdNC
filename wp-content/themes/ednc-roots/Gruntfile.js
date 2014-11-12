@@ -6,20 +6,20 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   var jsFileList = [
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
-    'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
-    'assets/js/plugins/*.js',
-    'assets/js/_*.js'
+    'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
+    'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+    'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+    'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+    'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+    'assets/app/js/plugins/*.js',
+    'assets/app/js/_*.js'
   ];
 
   grunt.initConfig({
@@ -29,8 +29,8 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        'assets/js/*.js',
-        '!assets/js/scripts.js',
+        'assets/app/js/*.js',
+        '!assets/app/js/scripts.js',
         '!assets/**/*.min.*'
       ]
     },
@@ -45,8 +45,8 @@ module.exports = function(grunt) {
           sourcemap: true
         },
         files: {
-          'assets/css/main.css': [
-            'assets/sass/main.scss'
+          'assets/public/css/main.css': [
+            'assets/app/sass/main.scss'
           ]
         }
       },
@@ -60,8 +60,8 @@ module.exports = function(grunt) {
           sourcemap: true
         },
         files: {
-          'assets/css/main.min.css': [
-            'assets/sass/main.scss'
+          'assets/public/css/main.min.css': [
+            'assets/app/sass/main.scss'
           ]
         }
       }
@@ -72,13 +72,13 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [jsFileList],
-        dest: 'assets/js/scripts.js',
+        dest: 'assets/public/js/scripts.js',
       },
     },
     uglify: {
       dist: {
         files: {
-          'assets/js/scripts.min.js': [jsFileList]
+          'assets/public/js/scripts.min.js': [jsFileList]
         }
       }
     },
@@ -89,23 +89,23 @@ module.exports = function(grunt) {
       dev: {
         options: {
           map: {
-            prev: 'assets/css/'
+            prev: 'assets/public/css/'
           }
         },
-        src: 'assets/css/main.css'
+        src: 'assets/public/css/main.css'
       },
       build: {
-        src: 'assets/css/main.min.css'
+        src: 'assets/public/css/main.min.css'
       }
     },
     modernizr: {
       build: {
-        devFile: 'assets/vendor/modernizr/modernizr.js',
-        outputFile: 'assets/js/vendor/modernizr.min.js',
+        devFile: 'assets/app/vendor/modernizr/modernizr.js',
+        outputFile: 'assets/public/js/modernizr.min.js',
         files: {
           'src': [
-            ['assets/js/scripts.min.js'],
-            ['assets/css/main.min.css']
+            ['assets/public/js/scripts.min.js'],
+            ['assets/public/css/main.min.css']
           ]
         },
         uglify: true,
@@ -124,15 +124,15 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'lib/scripts.php': 'assets/{css,js}/{main,scripts}.min.{css,js}'
+          'lib/scripts.php': 'assets/public/{css,js}/{main,scripts}.min.{css,js}'
         }
       }
     },
     watch: {
       sass: {
         files: [
-          'assets/sass/*.scss',
-          'assets/sass/**/*.scss'
+          'assets/app/sass/*.scss',
+          'assets/app/sass/**/*.scss'
         ],
         tasks: ['sass:dev', 'autoprefixer:dev']
       },
@@ -147,11 +147,11 @@ module.exports = function(grunt) {
         // Browser live reloading
         // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
         options: {
-          livereload: false
+          livereload: true
         },
         files: [
-          'assets/css/main.css',
-          'assets/js/scripts.js',
+          'assets/public/css/main.css',
+          'assets/public/js/scripts.js',
           'templates/*.php',
           '*.php'
         ]

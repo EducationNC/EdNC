@@ -21,18 +21,18 @@ function roots_scripts() {
    */
   if (WP_ENV === 'development') {
     $assets = array(
-      'css'       => '/assets/css/main.css',
-      'js'        => '/assets/js/scripts.js',
-      'modernizr' => '/assets/vendor/modernizr/modernizr.js',
+      'css'       => '/assets/public/css/main.css',
+      'js'        => '/assets/public/js/scripts.js',
+      'modernizr' => '/assets/app/vendor/modernizr/modernizr.js',
       'jquery'    => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js'
     );
   } else {
     $get_assets = file_get_contents(get_template_directory() . '/assets/manifest.json');
     $assets     = json_decode($get_assets, true);
     $assets     = array(
-      'css'       => '/assets/css/main.min.css?' . $assets['assets/css/main.min.css']['hash'],
-      'js'        => '/assets/js/scripts.min.js?' . $assets['assets/js/scripts.min.js']['hash'],
-      'modernizr' => '/assets/js/vendor/modernizr.min.js',
+      'css'       => '/assets/public/css/main.min.css?' . $assets['assets/public/css/main.min.css']['hash'],
+      'js'        => '/assets/public/js/scripts.min.js?' . $assets['assets/public/js/scripts.min.js']['hash'],
+      'modernizr' => '/assets/public/js/modernizr.min.js',
       'jquery'    => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
     );
   }
@@ -76,6 +76,17 @@ function roots_jquery_local_fallback($src, $handle = null) {
   return $src;
 }
 add_action('wp_head', 'roots_jquery_local_fallback');
+
+/**
+ * Manage google fonts of load_google_font()
+ * set GOOGLE_FONTS constant in config.php
+ */
+function load_google_fonts() {
+  if( ! defined( 'GOOGLE_FONTS' ) ) return;
+
+  echo '<link href="http://fonts.googleapis.com/css?family=' . GOOGLE_FONTS . '" rel="stylesheet" type="text/css" />'."\n";
+}
+add_action( 'wp_head', 'load_google_fonts' , 1);
 
 /**
  * Google Analytics snippet from HTML5 Boilerplate
