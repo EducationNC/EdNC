@@ -4,15 +4,198 @@
 $main-sm-columns:       $grid-columns;
 $sidebar-sm-columns:    4;
 
+$grid-gutter-width:     20px;
+
+$container-lg:          1260px;
 
 
 // Brand colors
 // -------------------------
 
-$brand-primary:         #27ae60;
+$transparent:           rgba(255, 255, 255, 0);
+$white70:               rgba(255, 255, 255, .6);
+$shadow:                rgba(100, 100, 100, .5);
+
+$white:                 #FFFFFF;
+$black:                 #000000;
+
+$deep-purple0:          rgba(38, 7, 28, 0);
+$deep-purple:           #26071C;
+
+$purple-dark:           #67124B;
+$purple:                #731454;
+$purple-light:          #801760;
+$purple-text:           #8B185E;
+
+$pink-dark:             #93195D;
+$pink-light:            #B62078;
+
+$pink2-dark:            #7B1351;
+$pink2-light:           #971D67;
+
+$midnight-dark:         #263748;
+$midnight:              #2B3E50;
+$midnight-light:        #32485B;
+
+$blue-dark:             #4D74A1;
+$blue:                  #5681B3;
+$blue-light:            #628EBE;
+
+$green-dark:            #A1AD42;
+$green:                 #ADBB4A;
+$green-light:           #B8C455;
+
+$green2-dark:           #89983B;
+$green2-light:          #A5B54C;
+
+$ice-dark:              #D4D8D9;
+$ice:                   #ECF0F1;
+$ice-light:             #EFF3F3;
+$gray-text:             #707273;
+
+$brand-primary:         $blue;
+$brand-success:         $green;
+
+$text-color:            $midnight;
+
+$link-color:            $blue;
+$link-hover-color:      $blue-dark;
+
+
+// Gradients
+// -------------------------
+
+@mixin gray-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
+  background-image: linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
+}
+
+@mixin green-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $green-light 0%, $green-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $green-light 0%, $green-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $green-light 0%, $green-dark 100%);
+  background-image: linear-gradient(90deg, $green-light 0%, $green-dark 100%);
+}
+
+@mixin dark-green-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
+  background-image: linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
+}
+
+@mixin purple-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
+  background-image: linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
+}
+
+@mixin pink-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
+  background-image: linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
+}
+
+@mixin dark-pink-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+  background-image: linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
+}
+
+@mixin blue-gradient-right() {
+  background-image: -o-linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
+  background-image: -moz-linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
+  background-image: -ms-linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
+  background-image: linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
+}
+
+@mixin trans-purple-gradient-bottom() {
+  background-image: -o-linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
+  background-image: -moz-linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
+  background-image: -ms-linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
+  background-image: linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
+}
+
+@mixin trans-white-gradient-bottom() {
+  background-image: -o-linear-gradient(180deg, $transparent 0%, $white 70%);
+  background-image: -moz-linear-gradient(180deg, $transparent 0%, $white 70%);
+  background-image: -ms-linear-gradient(180deg, $transparent 0%, $white 70%);
+  background-image: linear-gradient(180deg, $transparent 0%, $white 70%);
+}
+
+@mixin trans-white-gradient-middle() {
+  background-image: -o-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
+  background-image: -moz-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
+  background-image: -ms-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
+  background-image: linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
+}
+
+
+// Typography
+// -------------------------
+
+$font-family-sans-serif:  Lato, sans-serif;
+$font-family-serif:       Merriweather, serif;
+
+$font-family-base:      $font-family-serif;
+
+$font-size-base:        16px;
+
+$headings-font-family:  $font-family-sans-serif;
+$headings-font-weight:  400;
+
+
+// Buttons
+// -------------------------
+
+$btn-default-color:     $ice;
+$btn-default-bg:        $green;
+$btn-default-border:    transparent;
+
+$btn-primary-color:     $ice;
+$btn-primary-bg:        $pink-dark;
+$btn-primary-border:    transparent;
 
 
 // Glyphicons path
 // -------------------------
 
 $icon-font-path:        "../vendor/bootstrap-sass-official/assets/fonts/";
+
+
+// Navbar
+// -------------------------
+
+$navbar-height:         44px;
+$navbar-margin-bottom:  0;
+$navbar-border-radius:  0;
+$navbar-padding-vertical: 12px;
+
+$navbar-default-bg:     $ice;
+$navbar-default-color:  $midnight;
+$navbar-default-border: none;
+
+$navbar-default-link-color:         $midnight;
+$navbar-default-link-hover-color:   $purple-text;
+$navbar-default-link-active-color:  $midnight;
+$navbar-default-link-active-bg:     transparent;
+
+
+// Jumbotron
+// -------------------------
+
+$jumbotron-padding:              0;
+$jumbotron-bg:                   transparent;
+
+
+// Thumbnails
+// -------------------------
+
+$thumbnail-padding:       0;
+$thumbnail-border:        none;
+$thumbnail-border-radius: 0;

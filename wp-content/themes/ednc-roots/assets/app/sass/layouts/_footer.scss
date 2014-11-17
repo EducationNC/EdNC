@@ -1,1 +1,63 @@
-.content-info { }
+.above-footer {
+  background: $midnight;
+
+  li {
+    padding: 1rem 2rem;
+  }
+}
+
+.below-footer {
+  background: $ice;
+  padding: 1em 0;
+
+  p {
+    margin: 0;
+    font-weight: normal;
+  }
+}
+
+.content-info {
+  @include gray-gradient-right;
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  font-ize: .9rem;
+
+  .container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .menu-footer-nav {
+    a {
+      text-decoration: none;
+      color: $midnight;
+
+      &:hover, &:active, &:focus {
+        color: $blue;
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      list-style: none;
+    }
+
+    ul {
+      padding: 1em 0 0 0;
+    }
+
+    & > li {
+      & > a {
+        color: $purple-text;
+        @extend .h4;
+        font-weight: normal;
+        cursor: default;
+
+        &:hover, &:active, &:focus {
+          color: $purple-text;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

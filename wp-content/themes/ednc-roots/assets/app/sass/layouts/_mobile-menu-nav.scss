@@ -1,0 +1,311 @@
+
+.mobile-bar {
+  color: $gray-text;
+  height: 2.8125rem;
+  line-height: 2.8125rem;
+  position: relative;
+  z-index: 2;
+  @include gray-gradient-right;
+
+  a {
+    color: $gray-text;
+    text-decoration: none !important;
+    transition: color .3s;
+
+    &:hover, &:focus, &:active {
+      color: $gray-text;
+    }
+  }
+
+  .title {
+    width: 134px;
+    height: 55px;
+    padding: 10px 0;
+    margin: 0 auto;
+    text-align: center;
+    @include purple-gradient-right;
+
+    img {
+      vertical-align: top;
+    }
+  }
+}
+
+.mobile-bar-section {
+  padding: 0 .625rem;
+  position: absolute;
+  text-align: center;
+  height: 2.8125rem;
+  top: 0;
+
+  &.middle {
+    left: 2.8125rem;
+    right: 2.8125rem;
+  }
+}
+
+.right-small {
+  border-left: none;
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 2em;
+  width: 2.8125rem;
+  height: 2.8125rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.nav-toggle {
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  cursor: pointer;
+  padding: 8px 30px 16px 0;
+  color: transparent;
+  z-index: 2000;
+
+  span, span:before, span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 4px;
+    width: 30px;
+    background: $gray-text;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 500ms ease-in-out;
+    color: transparent;
+  }
+
+  span:before {
+    top: -8px;
+  }
+
+  span:after {
+    bottom: -8px;
+  }
+
+  &.active {
+    span {
+      background-color: transparent;
+    }
+
+    span:before, span:after {
+      top: 0;
+    }
+
+    span:before {
+      transform: rotate(45deg);
+    }
+
+    span:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.mobile-bar-search {
+  color: $midnight;
+  position: relative;
+  background-color: $ice;
+  padding: 15px 10px 10px;
+  position: absolute;
+  top: 2.8125rem;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  z-index: 1;
+  transition: all .3s;
+
+  input {
+    margin: 0;
+  }
+}
+
+.search-pushed {
+  .mobile-bar-search {
+    visibility: visible;
+  }
+
+  .content {
+    transform: translate3d(0, 62px, 0);
+  }
+}
+
+.oc-pusher {
+  position: relative;
+  left: 0;
+  height: 100%;
+}
+
+.oc-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 300px;
+  height: 100%;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.oc-level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  z-index: 2;
+  @include gray-gradient-right;
+  transform: translate3d(-100%, 0, 0);
+
+  h4 {
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: $purple-text;
+    padding: 0 10px;
+    margin: 0 0 .75em;
+  }
+
+  ul {
+    list-style: none;
+    margin-left: 0;
+    font-size: 1.25rem;
+    border-bottom: 1px solid $ice;
+
+    &.no-border {
+      border: none;
+    }
+  }
+
+  a:not(.button) {
+    font-family: $font-family-sans-serif;
+    text-decoration: none;
+    color: $midnight;
+    line-height: 2em;
+    display: block;
+    padding: 2px 10px;
+    border-top: 1px solid $ice;
+
+    &:hover, &:active, &:focus {
+      background: $ice;
+    }
+  }
+
+  a.button {
+    display: block;
+    margin-bottom: 1rem;
+    z-index: auto !important;
+  }
+
+  a.oc-back {
+    font-size: 1rem;
+    font-weight: light;
+    color: $blue;
+    background: $ice;
+    padding: 2px 10px;
+  }
+
+  .social-media {
+    padding: 0 10px;
+    margin-bottom: 1.25rem;
+
+    a {
+      display: inline-block;
+      font-size: 1.25rem;
+      line-height: 1.5em;
+      padding: 0 9px;
+    }
+  }
+}
+
+.oc-pusher,
+.oc-level {
+  transition: all .5s;
+}
+
+/* overlays for pusher and level that gets covered */
+
+.oc-pusher:after,
+.oc-level:after,
+.oc-level:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  opacity: 0;
+}
+
+.oc-pusher:after,
+.oc-level:after {
+  background: rgba(0,0,0,0.3);
+  transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+  z-index: 10;
+}
+
+.oc-level:after {
+  z-index: 0;
+}
+
+.oc-pusher.oc-pushed:after,
+.oc-level.oc-level-overlay:after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.oc-level.oc-level-overlay {
+  cursor: pointer;
+}
+
+.oc-level.oc-level-overlay:before {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 1;
+}
+
+/* overlap */
+.oc-overlap .oc-level.oc-level-open {
+  box-shadow: 1px 0 2px rgba(0,0,0,.2);
+  transform: translate3d(-40px, 0, 0);
+}
+
+/* first level */
+.oc-menu > .oc-level,
+.oc-menu > .oc-level.oc-level-open,
+.oc-menu.oc-overlap > .oc-level,
+.oc-menu.oc-overlap > .oc-level.oc-level-open {
+  box-shadow: none;
+  transform: translate3d(0, 0, 0);
+}
+
+/* cover */
+.oc-cover .oc-level.oc-level-open {
+  transform: translate3d(0, 0, 0);
+}
+
+.oc-cover .oc-level.oc-level-open > ul > li > .mp-level:not(.mp-level-open) {
+  transform: translate3d(-100%, 0, 0);
+}
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+/* We'll show the first level only */
+.no-csstransforms3d .oc-pusher,
+.no-js .oc-pusher {
+  padding-left: 300px;
+}
+
+.no-csstransforms3d .oc-menu .oc-level,
+.no-js .oc-menu .oc-level {
+  display: none;
+}
+
+.no-csstransforms3d .oc-menu > .oc-level,
+.no-js .oc-menu > .oc-level {
+  display: block;
+}

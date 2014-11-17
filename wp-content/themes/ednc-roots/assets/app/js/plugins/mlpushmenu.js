@@ -57,7 +57,7 @@
 		return e.parentNode && closest( e.parentNode, classname );
 	}
 
-	function mlPushMenu( el, trigger, options ) {
+	function MLPushMenu( el, trigger, options ) {
 		this.el = el;
 		this.trigger = trigger;
 		this.options = extend( this.defaults, options );
@@ -68,7 +68,7 @@
 		}
 	}
 
-	mlPushMenu.prototype = {
+	MLPushMenu.prototype = {
 		defaults : {
 			// overlap: there will be a gap between open levels
 			// cover: the open levels will be on top of any previous open level
@@ -238,6 +238,6 @@
 	}
 
 	// add to global namespace
-	window.mlPushMenu = mlPushMenu;
+	window.MLPushMenu = MLPushMenu;
 
 } )( window );

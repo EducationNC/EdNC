@@ -9,6 +9,12 @@
 .alignright {
   margin-bottom: ($line-height-computed / 2);
 }
+.alignleft {
+  margin-left: -16.66667%;
+}
+.alignright {
+  margin-right: -16.66667%;
+}
 figure.alignnone {
   margin-left: 0;
   margin-right: 0;

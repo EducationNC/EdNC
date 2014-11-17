@@ -10,18 +10,20 @@
  * @link https://github.com/roots/roots/pull/1042
  */
 $roots_includes = array(
-  'lib/utils.php',           // Utility functions
-  'lib/init.php',            // Initial theme setup and constants
-  'lib/wrapper.php',         // Theme wrapper class
-  'lib/sidebar.php',         // Sidebar class
-  'lib/config.php',          // Configuration
-  'lib/titles.php',          // Page titles
-  'lib/nav.php',             // Custom nav modifications
-  'lib/gallery.php',         // Custom [gallery] modifications
-  'lib/comments.php',        // Custom comments modifications
-  'lib/scripts.php',         // Scripts and stylesheets
+  'lib/utils.php',            // Utility functions
+  'lib/init.php',             // Initial theme setup and constants
+  'lib/wrapper.php',          // Theme wrapper class
+  'lib/sidebar.php',          // Sidebar class
+  'lib/config.php',           // Configuration
+  'lib/titles.php',           // Page titles
+  'lib/nav.php',              // Custom nav modifications
+  'lib/gallery.php',          // Custom [gallery] modifications
+  'lib/comments.php',         // Custom comments modifications
+  'lib/scripts.php',          // Scripts and stylesheets
   'lib/custom-post-types.php',// Custom post types
-  'lib/extras.php',          // Custom functions
+  'lib/resize.php',           // Resize images on the fly
+  'lib/shortcodes.php',       // Shortcodes
+  'lib/extras.php',           // Custom functions
 );
 
 foreach ($roots_includes as $file) {

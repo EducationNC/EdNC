@@ -1,0 +1,50 @@
+.btn {
+  border: none;
+  border-radius: 0;
+  font-family: $font-family-serif;
+  font-weight: 400;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    height: 3px;
+    position: absolute;
+    left: .5rem;
+    right: .5rem;
+    bottom: -3px;
+    background: $white;
+    transition: all .3s;
+  }
+
+  &:hover, &:active, &:focus {
+    color: $white;
+
+    &:after {
+      bottom: 5px;
+    }
+  }
+}
+
+.btn-default {
+  @include green-gradient-right;
+
+  &:hover, &:active, &:focus {
+    @include dark-green-gradient-right;
+  }
+}
+
+.btn-primary {
+  @include pink-gradient-right;
+
+  &:hover, &:active, &:focus {
+    @include dark-pink-gradient-right;
+  }
+}
+
+.btn-group {
+  .btn + .btn {
+    margin-left: 0;
+  }
+}
