@@ -1,10 +1,10 @@
 <?php
-$logged_in = !is_user_logged_in();
+$logged_in = is_user_logged_in();
 ?>
 
-<section class="container">
+<section class="container <?php if (!$logged_in) { echo 'no-bottom-margin'; } ?>">
   <div class="row">
-    <div class="col-lg-9">
+    <div class="col-md-9">
       <div class="row">
         <?php
         $sticky = get_option('sticky_posts');
@@ -19,6 +19,10 @@ $logged_in = !is_user_logged_in();
         if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
 
           $category = get_the_category();
+
+          $author_id = get_the_author_meta('ID');
+          $author_type = wp_get_post_terms($author_id, 'author-type');
+
           $image_id = get_post_thumbnail_id();
           $image_src = wp_get_attachment_image_src($image_id, 'full');
           if ($image_src) {
@@ -29,7 +33,7 @@ $logged_in = !is_user_logged_in();
           <div class="col-md-6">
             <div class="post has-photo-overlay">
               <div class="photo-overlay small-wide">
-                <span class="label"><?php echo $category[0]->cat_name; ?></span>
+                <span class="label"><?php echo $author_type[0]->name; ?></span>
                 <h2 class="post-title"><?php the_title(); ?></h2>
                 <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
@@ -38,7 +42,7 @@ $logged_in = !is_user_logged_in();
                 <?php } ?>
               </div>
 
-              <div class="excerpt">
+              <div class="excerpt extra-padding">
                 <?php the_advanced_excerpt(); ?>
                 <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
               </div>
@@ -49,9 +53,9 @@ $logged_in = !is_user_logged_in();
       </div>
     </div>
 
-    <div class="col-lg-3">
-      <div class="row flex-md">
-        <div class="col-md-6 col-lg-12">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12 col-sm-6">
           <div class="callout">
             <h4>Hi there, we're new here.</h4>
             <p>We'd like to make EdNC a part of your day. What features would you like to see here?</p>
@@ -59,7 +63,7 @@ $logged_in = !is_user_logged_in();
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-12">
+        <div class="col-md-12 col-sm-6">
           <?php
           $args = array(
             'post_type' => 'underwriter',
@@ -74,7 +78,7 @@ $logged_in = !is_user_logged_in();
             $image = mr_image_resize(get_field('image'), 350, 350, true, false);
 
             if ($link) {
-              echo '<a href="' . $link['url'] . '">';
+              echo '<a href="' . $link . '">';
             }
             echo '<img src="' . $image['url'] . '" alt="' . get_the_title() . '" />';
             if ($link) {
@@ -87,8 +91,8 @@ $logged_in = !is_user_logged_in();
       </div>
 
       <div class="row">
-        <div class="col-md-6 col-md-offset-6 col-lg-12 col-lg-offset-0">
-          <p class="text-center"><a href="#">EdNC thanks our sponsors &raquo;</a></p>
+        <div class="col-md-12 col-sm-6 col-sm-offset-6 col-md-offset-0">
+          <p class="text-center"><a href="<?php echo get_permalink('1497'); ?>">EdNC thanks our supporters &raquo;</a></p>
         </div>
       </div>
     </div>
@@ -258,57 +262,27 @@ $logged_in = !is_user_logged_in();
         ?>
       </ul>
     </div>
-    <p class="right"><a href="#">Submit your photos &raquo;</a></p>
+    <p class="text-right"><a href="#" data-toggle="modal" data-target="#photoSubmissionModal">Submit your photos &raquo;</a></p>
   </div>
 </section>
 
 <section class="container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <div class="extra-padding" id="poll-container">
         <?php echo do_shortcode('[polldaddy poll=8423767]'); ?>
       </div>
     </div>
 
-    <div class="col-md-6 col-lg-4">
-      <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/stock-photo-ready-to-work-in-a-classroom-at-school-10038223.jpg" alt="" /></a>
+    <div class="col-md-4 text-center">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/shutterstock_10038223.jpg" alt="" />
+      <?php if ($logged_in) { ?>
       <a href="#" class="btn btn-primary btn-lg btn-wide">Make a donation today &raquo;</a>
+      <?php } ?>
     </div>
 
-    <div class="col-md-6 col-lg-4">
-      <div class="callout">
-        <h4>Register for free email subscription</h4>
-        <p>Sign up now to receive EdNC straight to your inbox. Unsubscribe at any time.</p>
-        <!-- Begin MailChimp Signup Form -->
-        <div id="mc_embed_signup">
-        <form action="//ednc.us9.list-manage.com/subscribe/post?u=8ba11e9b3c5e00a64382db633&amp;id=2696365d99" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-          <div id="mc_embed_signup_scroll">
-
-            <div class="mc-field-group">
-              <input type="email" value="" name="EMAIL" placeholder="Email address" class="required email" id="mce-EMAIL">
-            </div>
-
-            <div class="mc-field-group input-group">
-              <ul>
-                <li><input type="checkbox" value="1" name="group[13145][1]" id="mce-group[13145]-13145-0"><label for="mce-group[13145]-13145-0">Daily digest</label></li>
-                <li><input type="checkbox" value="2" name="group[13145][2]" id="mce-group[13145]-13145-1"><label for="mce-group[13145]-13145-1">Weekly wrapup</label></li>
-                <!--<li><input type="checkbox" value="4" name="group[13145][4]" id="mce-group[13145]-13145-2"><label for="mce-group[13145]-13145-2">Monthly newsletter</label></li>-->
-                <li><input type="checkbox" value="8" name="group[13145][8]" id="mce-group[13145]-13145-3"><label for="mce-group[13145]-13145-3">Breaking news alerts</label></li>
-              </ul>
-            </div>
-
-            <div id="mce-responses" class="clear">
-              <div class="response" id="mce-error-response" style="display:none"></div>
-              <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-
-            <div style="position: absolute; left: -5000px;"><input type="text" name="b_8ba11e9b3c5e00a64382db633_2696365d99" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
-          </div>
-        </form>
-        </div>
-        <!--End mc_embed_signup-->
-      </div>
+    <div class="col-md-4">
+      <?php get_template_part('templates/email-signup'); ?>
     </div>
   </div>
 </section>

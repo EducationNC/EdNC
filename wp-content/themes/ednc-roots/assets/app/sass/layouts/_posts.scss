@@ -17,3 +17,21 @@
 .hentry footer {
   margin-bottom: 5em;
 }
+
+.share-btns {
+  line-height: 30px;
+  clear: both;
+
+  span:not(.label) {
+    vertical-align: bottom;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    line-height: 37px;
+
+    .label {
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+}

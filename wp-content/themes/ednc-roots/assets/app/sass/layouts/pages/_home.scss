@@ -13,7 +13,7 @@
   font-weight: 300;
 
   &.big {
-    font-size: rem-calc(20);
+    font-size: 1.25rem;
     padding: 1rem 1.5rem 1.0625rem;
   }
 }
@@ -113,7 +113,12 @@
     }
   }
 
-  @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max) {
+  &.wide {
+    height: 250px;
+    overflow: hidden;
+  }
+
+  @media (max-width: $screen-xs-max) {
     &.small-wide {
       height: 250px;
       overflow: hidden;
@@ -160,7 +165,6 @@
 }
 
 .excerpt {
-  padding: 0 10px;
   position: relative;
   z-index: 0;
   overflow: hidden;
@@ -352,9 +356,12 @@
   }
 
   .pds-question-top.pds-question-top {
-    @extend .article-section-subtitle;
     padding: 0;
     margin-bottom: 0.8rem;
+    font-family: $font-family-sans-serif;
+    font-weight: normal;
+    color: $midnight;
+    font-size: $font-size-h4;
   }
 
   .pds-answer.pds-answer {
@@ -365,7 +372,7 @@
       line-height: 1;
       width: auto;
       color: inherit;
-      font-size: inherit;
+      font-size: 14px;
       font-weight: 300;
     }
   }
@@ -388,9 +395,19 @@
   }
 
   .pds-vote-button.pds-vote-button {
-    @extend .btn;
-    @extend .btn-default;
-    @extend .no-margin;
+    border: none;
+    border-radius: 0;
+    font-family: $font-family-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    padding: 6px 12px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    color: $ice;
+    @extend .btn; // have to do this because the double classes trick isn't working
+    @include green-gradient-right;
 
     &:after {
       @extend .btn:after;
@@ -464,8 +481,15 @@
 }
 
 .mc-field-group {
+  margin-bottom: .75em;
+
   ul {
     list-style: none;
+    padding: 0;
     margin: 0;
+  }
+
+  input[type="checkbox"] {
+    width: 25px;
   }
 }

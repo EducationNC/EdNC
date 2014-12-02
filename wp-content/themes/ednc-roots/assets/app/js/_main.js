@@ -73,7 +73,7 @@ var Roots = {
         columns: 5,
         w1024: {
           rows: 1,
-          columns: 3
+          columns: 4
         },
         w768: {
           rows: 2,
@@ -91,7 +91,7 @@ var Roots = {
         animEasingIn: 'ease',
         interval: 6000
       });
-      
+
     }
   },
   // About us page, note the change from about-us to about_us.

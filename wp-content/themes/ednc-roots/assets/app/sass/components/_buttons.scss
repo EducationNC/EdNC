@@ -20,6 +20,8 @@
 
   &:hover, &:active, &:focus {
     color: $white;
+    box-shadow: none;
+    outline: none;
 
     &:after {
       bottom: 5px;
@@ -27,7 +29,7 @@
   }
 }
 
-.btn-default {
+.btn-default, .button {
   @include green-gradient-right;
 
   &:hover, &:active, &:focus {
@@ -47,4 +49,9 @@
   .btn + .btn {
     margin-left: 0;
   }
+}
+
+.button {
+  @extend .btn;
+  color: $ice;
 }

@@ -23,7 +23,7 @@
 
         <div class="wrap" role="document">
           <div class="content clearfix">
-            <main class="main" role="main">
+            <main class="main container" role="main">
               <?php include roots_template_path(); ?>
             </main><!-- /.main -->
             <?php if (roots_display_sidebar()) : ?>

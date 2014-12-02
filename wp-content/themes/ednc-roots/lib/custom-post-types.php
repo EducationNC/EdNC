@@ -131,6 +131,37 @@ function add_custom_post_types() {
 			'query_var' => true
 		)
 	);
+
+	register_post_type( 'bio',
+	array('labels' => array(
+		'name' => 'Bios',
+		'singular_name' => 'Bio',
+		'add_new' => 'Add New',
+		'add_new_item' => 'Add New Bio',
+		'edit' => 'Edit',
+		'edit_item' => 'Edit Bio',
+		'new_item' => 'New Bio',
+		'view_item' => 'View Bio',
+		'search_items' => 'Search Bio',
+		'not_found' =>  'Nothing found in the Database.',
+		'not_found_in_trash' => 'Nothing found in Trash',
+		'parent_item_colon' => ''
+	), /* end of arrays */
+	'public' => true,
+	'exclude_from_search' => true,
+	'publicly_queryable' => true,
+	'show_ui' => true,
+	'show_in_nav_menus' => false,
+	'menu_position' => 8,
+	//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+	'capability_type' => 'post',
+	'hierarchical' => false,
+	'supports' => array( 'title', 'editor', 'revisions', 'thumbnail'),
+	'has_archive' => false,
+	'rewrite' => true,
+	'query_var' => true
+)
+);
 }
 add_action( 'init', 'add_custom_post_types');
 
@@ -218,6 +249,8 @@ register_taxonomy( 'video-category',
 		'public' => false
 	)
 );
+
+
 
 /**
  *	Add metadata to region taxonomy for translation purposes

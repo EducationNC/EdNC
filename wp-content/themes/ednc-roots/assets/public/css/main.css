@@ -296,8 +296,9 @@ th {
     background-color: #fff !important;
   }
 
-  .btn > .caret, #poll-container .pds-vote-button > .caret,
+  .btn > .caret, .button > .caret, #poll-container .pds-vote-button > .caret,
   .dropup > .btn > .caret,
+  .dropup > .button > .caret,
   #poll-container .dropup > .pds-vote-button > .caret {
     border-top-color: #000 !important;
   }
@@ -1847,10 +1848,10 @@ pre code {
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    width: 100%;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .container {
     width: 1260px;
   }
@@ -2515,7 +2516,7 @@ pre code {
     margin-left: 100%;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
     float: left;
   }
@@ -3079,48 +3080,56 @@ input[type="month"] {
 input[type="date"].input-sm, .form-horizontal .form-group-sm input[type="date"].form-control, .input-group-sm > input[type="date"].form-control,
 .input-group-sm > input[type="date"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="date"].btn,
+.input-group-sm > .input-group-btn > input[type="date"].button,
 #poll-container .input-group-sm > .input-group-btn > input[type="date"].pds-vote-button,
 input[type="time"].input-sm,
 .form-horizontal .form-group-sm input[type="time"].form-control,
 .input-group-sm > input[type="time"].form-control,
 .input-group-sm > input[type="time"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="time"].btn,
+.input-group-sm > .input-group-btn > input[type="time"].button,
 #poll-container .input-group-sm > .input-group-btn > input[type="time"].pds-vote-button,
 input[type="datetime-local"].input-sm,
 .form-horizontal .form-group-sm input[type="datetime-local"].form-control,
 .input-group-sm > input[type="datetime-local"].form-control,
 .input-group-sm > input[type="datetime-local"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="datetime-local"].btn,
+.input-group-sm > .input-group-btn > input[type="datetime-local"].button,
 #poll-container .input-group-sm > .input-group-btn > input[type="datetime-local"].pds-vote-button,
 input[type="month"].input-sm,
 .form-horizontal .form-group-sm input[type="month"].form-control,
 .input-group-sm > input[type="month"].form-control,
 .input-group-sm > input[type="month"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="month"].btn,
+.input-group-sm > .input-group-btn > input[type="month"].button,
 #poll-container .input-group-sm > .input-group-btn > input[type="month"].pds-vote-button {
   line-height: 30px;
 }
 input[type="date"].input-lg, .form-horizontal .form-group-lg input[type="date"].form-control, .input-group-lg > input[type="date"].form-control,
 .input-group-lg > input[type="date"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="date"].btn,
+.input-group-lg > .input-group-btn > input[type="date"].button,
 #poll-container .input-group-lg > .input-group-btn > input[type="date"].pds-vote-button,
 input[type="time"].input-lg,
 .form-horizontal .form-group-lg input[type="time"].form-control,
 .input-group-lg > input[type="time"].form-control,
 .input-group-lg > input[type="time"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="time"].btn,
+.input-group-lg > .input-group-btn > input[type="time"].button,
 #poll-container .input-group-lg > .input-group-btn > input[type="time"].pds-vote-button,
 input[type="datetime-local"].input-lg,
 .form-horizontal .form-group-lg input[type="datetime-local"].form-control,
 .input-group-lg > input[type="datetime-local"].form-control,
 .input-group-lg > input[type="datetime-local"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="datetime-local"].btn,
+.input-group-lg > .input-group-btn > input[type="datetime-local"].button,
 #poll-container .input-group-lg > .input-group-btn > input[type="datetime-local"].pds-vote-button,
 input[type="month"].input-lg,
 .form-horizontal .form-group-lg input[type="month"].form-control,
 .input-group-lg > input[type="month"].form-control,
 .input-group-lg > input[type="month"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="month"].btn,
+.input-group-lg > .input-group-btn > input[type="month"].button,
 #poll-container .input-group-lg > .input-group-btn > input[type="month"].pds-vote-button {
   line-height: 46px;
 }
@@ -3202,9 +3211,11 @@ input[type="checkbox"] {
 .form-control-static.input-lg, .form-horizontal .form-group-lg .form-control-static.form-control, .input-group-lg > .form-control-static.form-control,
 .input-group-lg > .form-control-static.input-group-addon,
 .input-group-lg > .input-group-btn > .form-control-static.btn,
+.input-group-lg > .input-group-btn > .form-control-static.button,
 #poll-container .input-group-lg > .input-group-btn > .form-control-static.pds-vote-button, .form-control-static.input-sm, .form-horizontal .form-group-sm .form-control-static.form-control, .input-group-sm > .form-control-static.form-control,
 .input-group-sm > .form-control-static.input-group-addon,
 .input-group-sm > .input-group-btn > .form-control-static.btn,
+.input-group-sm > .input-group-btn > .form-control-static.button,
 #poll-container .input-group-sm > .input-group-btn > .form-control-static.pds-vote-button {
   padding-left: 0;
   padding-right: 0;
@@ -3213,6 +3224,7 @@ input[type="checkbox"] {
 .input-sm, .form-horizontal .form-group-sm .form-control, .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn,
+.input-group-sm > .input-group-btn > .button,
 #poll-container .input-group-sm > .input-group-btn > .pds-vote-button {
   height: 30px;
   padding: 5px 10px;
@@ -3224,6 +3236,7 @@ input[type="checkbox"] {
 select.input-sm, .form-horizontal .form-group-sm select.form-control, .input-group-sm > select.form-control,
 .input-group-sm > select.input-group-addon,
 .input-group-sm > .input-group-btn > select.btn,
+.input-group-sm > .input-group-btn > select.button,
 #poll-container .input-group-sm > .input-group-btn > select.pds-vote-button {
   height: 30px;
   line-height: 30px;
@@ -3232,12 +3245,14 @@ select.input-sm, .form-horizontal .form-group-sm select.form-control, .input-gro
 textarea.input-sm, .form-horizontal .form-group-sm textarea.form-control, .input-group-sm > textarea.form-control,
 .input-group-sm > textarea.input-group-addon,
 .input-group-sm > .input-group-btn > textarea.btn,
+.input-group-sm > .input-group-btn > textarea.button,
 #poll-container .input-group-sm > .input-group-btn > textarea.pds-vote-button,
 select[multiple].input-sm,
 .form-horizontal .form-group-sm select[multiple].form-control,
 .input-group-sm > select[multiple].form-control,
 .input-group-sm > select[multiple].input-group-addon,
 .input-group-sm > .input-group-btn > select[multiple].btn,
+.input-group-sm > .input-group-btn > select[multiple].button,
 #poll-container .input-group-sm > .input-group-btn > select[multiple].pds-vote-button {
   height: auto;
 }
@@ -3245,6 +3260,7 @@ select[multiple].input-sm,
 .input-lg, .form-horizontal .form-group-lg .form-control, .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn,
+.input-group-lg > .input-group-btn > .button,
 #poll-container .input-group-lg > .input-group-btn > .pds-vote-button {
   height: 46px;
   padding: 10px 16px;
@@ -3256,6 +3272,7 @@ select[multiple].input-sm,
 select.input-lg, .form-horizontal .form-group-lg select.form-control, .input-group-lg > select.form-control,
 .input-group-lg > select.input-group-addon,
 .input-group-lg > .input-group-btn > select.btn,
+.input-group-lg > .input-group-btn > select.button,
 #poll-container .input-group-lg > .input-group-btn > select.pds-vote-button {
   height: 46px;
   line-height: 46px;
@@ -3264,12 +3281,14 @@ select.input-lg, .form-horizontal .form-group-lg select.form-control, .input-gro
 textarea.input-lg, .form-horizontal .form-group-lg textarea.form-control, .input-group-lg > textarea.form-control,
 .input-group-lg > textarea.input-group-addon,
 .input-group-lg > .input-group-btn > textarea.btn,
+.input-group-lg > .input-group-btn > textarea.button,
 #poll-container .input-group-lg > .input-group-btn > textarea.pds-vote-button,
 select[multiple].input-lg,
 .form-horizontal .form-group-lg select[multiple].form-control,
 .input-group-lg > select[multiple].form-control,
 .input-group-lg > select[multiple].input-group-addon,
 .input-group-lg > .input-group-btn > select[multiple].btn,
+.input-group-lg > .input-group-btn > select[multiple].button,
 #poll-container .input-group-lg > .input-group-btn > select[multiple].pds-vote-button {
   height: auto;
 }
@@ -3296,6 +3315,7 @@ select[multiple].input-lg,
 .input-lg + .form-control-feedback, .form-horizontal .form-group-lg .form-control + .form-control-feedback, .input-group-lg > .form-control + .form-control-feedback,
 .input-group-lg > .input-group-addon + .form-control-feedback,
 .input-group-lg > .input-group-btn > .btn + .form-control-feedback,
+.input-group-lg > .input-group-btn > .button + .form-control-feedback,
 #poll-container .input-group-lg > .input-group-btn > .pds-vote-button + .form-control-feedback {
   width: 46px;
   height: 46px;
@@ -3305,6 +3325,7 @@ select[multiple].input-lg,
 .input-sm + .form-control-feedback, .form-horizontal .form-group-sm .form-control + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback,
 .input-group-sm > .input-group-addon + .form-control-feedback,
 .input-group-sm > .input-group-btn > .btn + .form-control-feedback,
+.input-group-sm > .input-group-btn > .button + .form-control-feedback,
 #poll-container .input-group-sm > .input-group-btn > .pds-vote-button + .form-control-feedback {
   width: 30px;
   height: 30px;
@@ -3501,7 +3522,7 @@ select[multiple].input-lg,
   }
 }
 
-.btn, #poll-container .pds-vote-button {
+.btn, .button, #poll-container .pds-vote-button {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -3520,22 +3541,22 @@ select[multiple].input-lg,
   -ms-user-select: none;
   user-select: none;
 }
-.btn:focus, #poll-container .pds-vote-button:focus, .btn:active:focus, #poll-container .pds-vote-button:active:focus, .btn.active:focus, #poll-container .active.pds-vote-button:focus {
+.btn:focus, .button:focus, #poll-container .pds-vote-button:focus, .btn:active:focus, .button:active:focus, #poll-container .pds-vote-button:active:focus, .btn.active:focus, .active.button:focus, #poll-container .active.pds-vote-button:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.btn:hover, #poll-container .pds-vote-button:hover, #poll-container .pds-vote-button:active, #poll-container .pds-vote-button:focus, .btn:focus, #poll-container .pds-vote-button:focus {
+.btn:hover, .button:hover, #poll-container .pds-vote-button:hover, #poll-container .pds-vote-button:active, #poll-container .pds-vote-button:focus, .btn:focus, .button:focus, #poll-container .pds-vote-button:focus {
   color: #ECF0F1;
   text-decoration: none;
 }
-.btn:active, #poll-container .pds-vote-button:active, .btn.active, #poll-container .active.pds-vote-button {
+.btn:active, .button:active, #poll-container .pds-vote-button:active, .btn.active, .active.button, #poll-container .active.pds-vote-button {
   outline: 0;
   background-image: none;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-.btn.disabled, #poll-container .disabled.pds-vote-button, .btn[disabled], #poll-container [disabled].pds-vote-button, fieldset[disabled] .btn, fieldset[disabled] #poll-container .pds-vote-button, #poll-container fieldset[disabled] .pds-vote-button {
+.btn.disabled, .disabled.button, #poll-container .disabled.pds-vote-button, .btn[disabled], [disabled].button, #poll-container [disabled].pds-vote-button, fieldset[disabled] .btn, fieldset[disabled] .button, fieldset[disabled] #poll-container .pds-vote-button, #poll-container fieldset[disabled] .pds-vote-button {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.65;
@@ -3544,24 +3565,24 @@ select[multiple].input-lg,
   box-shadow: none;
 }
 
-.btn-default, #poll-container .pds-vote-button {
+.btn-default {
   color: #ECF0F1;
   background-color: #ADBB4A;
   border-color: transparent;
 }
-.btn-default:hover, #poll-container .pds-vote-button:hover, .btn-default:focus, #poll-container .pds-vote-button:focus, .btn-default:active, #poll-container .pds-vote-button:active, .btn-default.active, #poll-container .active.pds-vote-button, .open > .btn-default.dropdown-toggle, #poll-container .open > .dropdown-toggle.pds-vote-button {
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
   color: #ECF0F1;
   background-color: #8d9939;
   border-color: transparent;
 }
-.btn-default:active, #poll-container .pds-vote-button:active, .btn-default.active, #poll-container .active.pds-vote-button, .open > .btn-default.dropdown-toggle, #poll-container .open > .dropdown-toggle.pds-vote-button {
+.btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
   background-image: none;
 }
-.btn-default.disabled, #poll-container .disabled.pds-vote-button, .btn-default.disabled:hover, #poll-container .disabled.pds-vote-button:hover, .btn-default.disabled:focus, #poll-container .disabled.pds-vote-button:focus, .btn-default.disabled:active, #poll-container .disabled.pds-vote-button:active, .btn-default.disabled.active, #poll-container .disabled.active.pds-vote-button, .btn-default[disabled], #poll-container [disabled].pds-vote-button, .btn-default[disabled]:hover, #poll-container [disabled].pds-vote-button:hover, .btn-default[disabled]:focus, #poll-container [disabled].pds-vote-button:focus, .btn-default[disabled]:active, #poll-container [disabled].pds-vote-button:active, .btn-default[disabled].active, #poll-container [disabled].active.pds-vote-button, fieldset[disabled] .btn-default, fieldset[disabled] #poll-container .pds-vote-button, #poll-container fieldset[disabled] .pds-vote-button, fieldset[disabled] .btn-default:hover, fieldset[disabled] #poll-container .pds-vote-button:hover, #poll-container fieldset[disabled] .pds-vote-button:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] #poll-container .pds-vote-button:focus, #poll-container fieldset[disabled] .pds-vote-button:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] #poll-container .pds-vote-button:active, #poll-container fieldset[disabled] .pds-vote-button:active, fieldset[disabled] .btn-default.active, fieldset[disabled] #poll-container .active.pds-vote-button, #poll-container fieldset[disabled] .active.pds-vote-button {
+.btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
   background-color: #ADBB4A;
   border-color: transparent;
 }
-.btn-default .badge, #poll-container .pds-vote-button .badge {
+.btn-default .badge {
   color: #ADBB4A;
   background-color: #ECF0F1;
 }
@@ -3700,21 +3721,21 @@ select[multiple].input-lg,
   text-decoration: none;
 }
 
-.btn-lg, .btn-group-lg > .btn, #poll-container .btn-group-lg > .pds-vote-button {
+.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .button, #poll-container .btn-group-lg > .pds-vote-button {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
 
-.btn-sm, .btn-group-sm > .btn, #poll-container .btn-group-sm > .pds-vote-button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .button, #poll-container .btn-group-sm > .pds-vote-button {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
 
-.btn-xs, .btn-group-xs > .btn, #poll-container .btn-group-xs > .pds-vote-button {
+.btn-xs, .btn-group-xs > .btn, .btn-group-xs > .button, #poll-container .btn-group-xs > .pds-vote-button {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
@@ -3925,36 +3946,44 @@ tbody.collapse.in {
   display: inline-block;
   vertical-align: middle;
 }
-.btn-group > .btn, #poll-container .btn-group > .pds-vote-button,
+.btn-group > .btn, .btn-group > .button, #poll-container .btn-group > .pds-vote-button,
 .btn-group-vertical > .btn,
+.btn-group-vertical > .button,
 #poll-container .btn-group-vertical > .pds-vote-button {
   position: relative;
   float: left;
 }
-.btn-group > .btn:hover, #poll-container .btn-group > .pds-vote-button:hover, #poll-container .btn-group > .pds-vote-button:active, #poll-container .btn-group > .pds-vote-button:focus, .btn-group > .btn:focus, #poll-container .btn-group > .pds-vote-button:focus, .btn-group > .btn:active, #poll-container .btn-group > .pds-vote-button:active, .btn-group > .btn.active, #poll-container .btn-group > .active.pds-vote-button,
+.btn-group > .btn:hover, .btn-group > .button:hover, #poll-container .btn-group > .pds-vote-button:hover, #poll-container .btn-group > .pds-vote-button:active, #poll-container .btn-group > .pds-vote-button:focus, .btn-group > .btn:focus, .btn-group > .button:focus, #poll-container .btn-group > .pds-vote-button:focus, .btn-group > .btn:active, .btn-group > .button:active, #poll-container .btn-group > .pds-vote-button:active, .btn-group > .btn.active, .btn-group > .active.button, #poll-container .btn-group > .active.pds-vote-button,
 .btn-group-vertical > .btn:hover,
+.btn-group-vertical > .button:hover,
 #poll-container .btn-group-vertical > .pds-vote-button:hover,
 #poll-container .btn-group-vertical > .pds-vote-button:active,
 #poll-container .btn-group-vertical > .pds-vote-button:focus,
 .btn-group-vertical > .btn:focus,
+.btn-group-vertical > .button:focus,
 #poll-container .btn-group-vertical > .pds-vote-button:focus,
 .btn-group-vertical > .btn:active,
+.btn-group-vertical > .button:active,
 #poll-container .btn-group-vertical > .pds-vote-button:active,
 .btn-group-vertical > .btn.active,
+.btn-group-vertical > .active.button,
 #poll-container .btn-group-vertical > .active.pds-vote-button {
   z-index: 2;
 }
-.btn-group > .btn:focus, #poll-container .btn-group > .pds-vote-button:focus,
+.btn-group > .btn:focus, .btn-group > .button:focus, #poll-container .btn-group > .pds-vote-button:focus,
 .btn-group-vertical > .btn:focus,
+.btn-group-vertical > .button:focus,
 #poll-container .btn-group-vertical > .pds-vote-button:focus {
   outline: 0;
 }
 
-.btn-group .btn + .btn, .btn-group #poll-container .pds-vote-button + .btn, #poll-container .btn-group .pds-vote-button + .btn, .btn-group #poll-container .btn + .pds-vote-button, #poll-container .btn-group .btn + .pds-vote-button, .btn-group #poll-container .pds-vote-button + .pds-vote-button, #poll-container .btn-group .pds-vote-button + .pds-vote-button,
+.btn-group .btn + .btn, .btn-group .button + .btn, .btn-group #poll-container .pds-vote-button + .btn, #poll-container .btn-group .pds-vote-button + .btn, .btn-group .btn + .button, .btn-group .button + .button, .btn-group #poll-container .pds-vote-button + .button, #poll-container .btn-group .pds-vote-button + .button, .btn-group #poll-container .btn + .pds-vote-button, #poll-container .btn-group .btn + .pds-vote-button, .btn-group #poll-container .button + .pds-vote-button, #poll-container .btn-group .button + .pds-vote-button, .btn-group #poll-container .pds-vote-button + .pds-vote-button, #poll-container .btn-group .pds-vote-button + .pds-vote-button,
 .btn-group .btn + .btn-group,
+.btn-group .button + .btn-group,
 .btn-group #poll-container .pds-vote-button + .btn-group,
 #poll-container .btn-group .pds-vote-button + .btn-group,
 .btn-group .btn-group + .btn,
+.btn-group .btn-group + .button,
 .btn-group #poll-container .btn-group + .pds-vote-button,
 #poll-container .btn-group .btn-group + .pds-vote-button,
 .btn-group .btn-group + .btn-group {
@@ -3975,25 +4004,25 @@ tbody.collapse.in {
 .btn-toolbar .input-group {
   float: left;
 }
-.btn-toolbar > .btn, #poll-container .btn-toolbar > .pds-vote-button,
+.btn-toolbar > .btn, .btn-toolbar > .button, #poll-container .btn-toolbar > .pds-vote-button,
 .btn-toolbar > .btn-group,
 .btn-toolbar > .input-group {
   margin-left: 5px;
 }
 
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), #poll-container .btn-group > .pds-vote-button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .button:not(:first-child):not(:last-child):not(.dropdown-toggle), #poll-container .btn-group > .pds-vote-button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
   border-radius: 0;
 }
 
-.btn-group > .btn:first-child, #poll-container .btn-group > .pds-vote-button:first-child {
+.btn-group > .btn:first-child, .btn-group > .button:first-child, #poll-container .btn-group > .pds-vote-button:first-child {
   margin-left: 0;
 }
-.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), #poll-container .btn-group > .pds-vote-button:first-child:not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .button:first-child:not(:last-child):not(.dropdown-toggle), #poll-container .btn-group > .pds-vote-button:first-child:not(:last-child):not(.dropdown-toggle) {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-.btn-group > .btn:last-child:not(:first-child), #poll-container .btn-group > .pds-vote-button:last-child:not(:first-child),
+.btn-group > .btn:last-child:not(:first-child), .btn-group > .button:last-child:not(:first-child), #poll-container .btn-group > .pds-vote-button:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -4003,17 +4032,17 @@ tbody.collapse.in {
   float: left;
 }
 
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, #poll-container .btn-group > .btn-group:not(:first-child):not(:last-child) > .pds-vote-button {
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, .btn-group > .btn-group:not(:first-child):not(:last-child) > .button, #poll-container .btn-group > .btn-group:not(:first-child):not(:last-child) > .pds-vote-button {
   border-radius: 0;
 }
 
-.btn-group > .btn-group:first-child > .btn:last-child, #poll-container .btn-group > .btn-group:first-child > .pds-vote-button:last-child,
+.btn-group > .btn-group:first-child > .btn:last-child, .btn-group > .btn-group:first-child > .button:last-child, #poll-container .btn-group > .btn-group:first-child > .pds-vote-button:last-child,
 .btn-group > .btn-group:first-child > .dropdown-toggle {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-.btn-group > .btn-group:last-child > .btn:first-child, #poll-container .btn-group > .btn-group:last-child > .pds-vote-button:first-child {
+.btn-group > .btn-group:last-child > .btn:first-child, .btn-group > .btn-group:last-child > .button:first-child, #poll-container .btn-group > .btn-group:last-child > .pds-vote-button:first-child {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
@@ -4023,12 +4052,12 @@ tbody.collapse.in {
   outline: 0;
 }
 
-.btn-group > .btn + .dropdown-toggle, #poll-container .btn-group > .pds-vote-button + .dropdown-toggle {
+.btn-group > .btn + .dropdown-toggle, .btn-group > .button + .dropdown-toggle, #poll-container .btn-group > .pds-vote-button + .dropdown-toggle {
   padding-left: 8px;
   padding-right: 8px;
 }
 
-.btn-group > .btn-lg + .dropdown-toggle, .btn-group-lg.btn-group > .btn + .dropdown-toggle, #poll-container .btn-group-lg.btn-group > .pds-vote-button + .dropdown-toggle {
+.btn-group > .btn-lg + .dropdown-toggle, .btn-group-lg.btn-group > .btn + .dropdown-toggle, .btn-group-lg.btn-group > .button + .dropdown-toggle, #poll-container .btn-group-lg.btn-group > .pds-vote-button + .dropdown-toggle {
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -4042,22 +4071,23 @@ tbody.collapse.in {
   box-shadow: none;
 }
 
-.btn .caret, #poll-container .pds-vote-button .caret {
+.btn .caret, .button .caret, #poll-container .pds-vote-button .caret {
   margin-left: 0;
 }
 
-.btn-lg .caret, .btn-group-lg > .btn .caret, #poll-container .btn-group-lg > .pds-vote-button .caret {
+.btn-lg .caret, .btn-group-lg > .btn .caret, .btn-group-lg > .button .caret, #poll-container .btn-group-lg > .pds-vote-button .caret {
   border-width: 5px 5px 0;
   border-bottom-width: 0;
 }
 
-.dropup .btn-lg .caret, .dropup .btn-group-lg > .btn .caret, .dropup #poll-container .btn-group-lg > .pds-vote-button .caret, #poll-container .dropup .btn-group-lg > .pds-vote-button .caret {
+.dropup .btn-lg .caret, .dropup .btn-group-lg > .btn .caret, .dropup .btn-group-lg > .button .caret, .dropup #poll-container .btn-group-lg > .pds-vote-button .caret, #poll-container .dropup .btn-group-lg > .pds-vote-button .caret {
   border-width: 0 5px 5px;
 }
 
-.btn-group-vertical > .btn, #poll-container .btn-group-vertical > .pds-vote-button,
+.btn-group-vertical > .btn, .btn-group-vertical > .button, #poll-container .btn-group-vertical > .pds-vote-button,
 .btn-group-vertical > .btn-group,
 .btn-group-vertical > .btn-group > .btn,
+.btn-group-vertical > .btn-group > .button,
 #poll-container .btn-group-vertical > .btn-group > .pds-vote-button {
   display: block;
   float: none;
@@ -4071,44 +4101,46 @@ tbody.collapse.in {
 .btn-group-vertical > .btn-group:after {
   clear: both;
 }
-.btn-group-vertical > .btn-group > .btn, #poll-container .btn-group-vertical > .btn-group > .pds-vote-button {
+.btn-group-vertical > .btn-group > .btn, .btn-group-vertical > .btn-group > .button, #poll-container .btn-group-vertical > .btn-group > .pds-vote-button {
   float: none;
 }
-.btn-group-vertical > .btn + .btn, #poll-container .btn-group-vertical > .pds-vote-button + .btn, #poll-container .btn-group-vertical > .btn + .pds-vote-button, #poll-container .btn-group-vertical > .pds-vote-button + .pds-vote-button,
+.btn-group-vertical > .btn + .btn, .btn-group-vertical > .button + .btn, #poll-container .btn-group-vertical > .pds-vote-button + .btn, .btn-group-vertical > .btn + .button, .btn-group-vertical > .button + .button, #poll-container .btn-group-vertical > .pds-vote-button + .button, #poll-container .btn-group-vertical > .btn + .pds-vote-button, #poll-container .btn-group-vertical > .button + .pds-vote-button, #poll-container .btn-group-vertical > .pds-vote-button + .pds-vote-button,
 .btn-group-vertical > .btn + .btn-group,
+.btn-group-vertical > .button + .btn-group,
 #poll-container .btn-group-vertical > .pds-vote-button + .btn-group,
 .btn-group-vertical > .btn-group + .btn,
+.btn-group-vertical > .btn-group + .button,
 #poll-container .btn-group-vertical > .btn-group + .pds-vote-button,
 .btn-group-vertical > .btn-group + .btn-group {
   margin-top: -1px;
   margin-left: 0;
 }
 
-.btn-group-vertical > .btn:not(:first-child):not(:last-child), #poll-container .btn-group-vertical > .pds-vote-button:not(:first-child):not(:last-child) {
+.btn-group-vertical > .btn:not(:first-child):not(:last-child), .btn-group-vertical > .button:not(:first-child):not(:last-child), #poll-container .btn-group-vertical > .pds-vote-button:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
-.btn-group-vertical > .btn:first-child:not(:last-child), #poll-container .btn-group-vertical > .pds-vote-button:first-child:not(:last-child) {
+.btn-group-vertical > .btn:first-child:not(:last-child), .btn-group-vertical > .button:first-child:not(:last-child), #poll-container .btn-group-vertical > .pds-vote-button:first-child:not(:last-child) {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.btn-group-vertical > .btn:last-child:not(:first-child), #poll-container .btn-group-vertical > .pds-vote-button:last-child:not(:first-child) {
+.btn-group-vertical > .btn:last-child:not(:first-child), .btn-group-vertical > .button:last-child:not(:first-child), #poll-container .btn-group-vertical > .pds-vote-button:last-child:not(:first-child) {
   border-bottom-left-radius: 4px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 
-.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, #poll-container .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .pds-vote-button {
+.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .button, #poll-container .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .pds-vote-button {
   border-radius: 0;
 }
 
-.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, #poll-container .btn-group-vertical > .btn-group:first-child:not(:last-child) > .pds-vote-button:last-child,
+.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .button:last-child, #poll-container .btn-group-vertical > .btn-group:first-child:not(:last-child) > .pds-vote-button:last-child,
 .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, #poll-container .btn-group-vertical > .btn-group:last-child:not(:first-child) > .pds-vote-button:first-child {
+.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .button:first-child, #poll-container .btn-group-vertical > .btn-group:last-child:not(:first-child) > .pds-vote-button:first-child {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
@@ -4119,21 +4151,22 @@ tbody.collapse.in {
   table-layout: fixed;
   border-collapse: separate;
 }
-.btn-group-justified > .btn, #poll-container .btn-group-justified > .pds-vote-button,
+.btn-group-justified > .btn, .btn-group-justified > .button, #poll-container .btn-group-justified > .pds-vote-button,
 .btn-group-justified > .btn-group {
   float: none;
   display: table-cell;
   width: 1%;
 }
-.btn-group-justified > .btn-group .btn, .btn-group-justified > .btn-group #poll-container .pds-vote-button, #poll-container .btn-group-justified > .btn-group .pds-vote-button {
+.btn-group-justified > .btn-group .btn, .btn-group-justified > .btn-group .button, .btn-group-justified > .btn-group #poll-container .pds-vote-button, #poll-container .btn-group-justified > .btn-group .pds-vote-button {
   width: 100%;
 }
 .btn-group-justified > .btn-group .dropdown-menu {
   left: auto;
 }
 
-[data-toggle="buttons"] > .btn > input[type="radio"], #poll-container [data-toggle="buttons"] > .pds-vote-button > input[type="radio"],
+[data-toggle="buttons"] > .btn > input[type="radio"], [data-toggle="buttons"] > .button > input[type="radio"], #poll-container [data-toggle="buttons"] > .pds-vote-button > input[type="radio"],
 [data-toggle="buttons"] > .btn > input[type="checkbox"],
+[data-toggle="buttons"] > .button > input[type="checkbox"],
 #poll-container [data-toggle="buttons"] > .pds-vote-button > input[type="checkbox"] {
   position: absolute;
   z-index: -1;
@@ -4191,6 +4224,7 @@ tbody.collapse.in {
 .input-group-addon.input-sm, .form-horizontal .form-group-sm .input-group-addon.form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .input-group-addon.btn,
+.input-group-sm > .input-group-btn > .input-group-addon.button,
 #poll-container .input-group-sm > .input-group-btn > .input-group-addon.pds-vote-button {
   padding: 5px 10px;
   font-size: 12px;
@@ -4199,6 +4233,7 @@ tbody.collapse.in {
 .input-group-addon.input-lg, .form-horizontal .form-group-lg .input-group-addon.form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .input-group-addon.btn,
+.input-group-lg > .input-group-btn > .input-group-addon.button,
 #poll-container .input-group-lg > .input-group-btn > .input-group-addon.pds-vote-button {
   padding: 10px 16px;
   font-size: 18px;
@@ -4212,13 +4247,17 @@ tbody.collapse.in {
 .input-group .form-control:first-child,
 .input-group-addon:first-child,
 .input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .button,
 #poll-container .input-group-btn:first-child > .pds-vote-button,
 .input-group-btn:first-child > .btn-group > .btn,
+.input-group-btn:first-child > .btn-group > .button,
 #poll-container .input-group-btn:first-child > .btn-group > .pds-vote-button,
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group-btn:last-child > .button:not(:last-child):not(.dropdown-toggle),
 #poll-container .input-group-btn:last-child > .pds-vote-button:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:last-child > .btn-group:not(:last-child) > .btn,
+.input-group-btn:last-child > .btn-group:not(:last-child) > .button,
 #poll-container .input-group-btn:last-child > .btn-group:not(:last-child) > .pds-vote-button {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
@@ -4231,13 +4270,17 @@ tbody.collapse.in {
 .input-group .form-control:last-child,
 .input-group-addon:last-child,
 .input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .button,
 #poll-container .input-group-btn:last-child > .pds-vote-button,
 .input-group-btn:last-child > .btn-group > .btn,
+.input-group-btn:last-child > .btn-group > .button,
 #poll-container .input-group-btn:last-child > .btn-group > .pds-vote-button,
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child),
+.input-group-btn:first-child > .button:not(:first-child),
 #poll-container .input-group-btn:first-child > .pds-vote-button:not(:first-child),
 .input-group-btn:first-child > .btn-group:not(:first-child) > .btn,
+.input-group-btn:first-child > .btn-group:not(:first-child) > .button,
 #poll-container .input-group-btn:first-child > .btn-group:not(:first-child) > .pds-vote-button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -4252,20 +4295,20 @@ tbody.collapse.in {
   font-size: 0;
   white-space: nowrap;
 }
-.input-group-btn > .btn, #poll-container .input-group-btn > .pds-vote-button {
+.input-group-btn > .btn, .input-group-btn > .button, #poll-container .input-group-btn > .pds-vote-button {
   position: relative;
 }
-.input-group-btn > .btn + .btn, #poll-container .input-group-btn > .pds-vote-button + .btn, #poll-container .input-group-btn > .btn + .pds-vote-button, #poll-container .input-group-btn > .pds-vote-button + .pds-vote-button {
+.input-group-btn > .btn + .btn, .input-group-btn > .button + .btn, #poll-container .input-group-btn > .pds-vote-button + .btn, .input-group-btn > .btn + .button, .input-group-btn > .button + .button, #poll-container .input-group-btn > .pds-vote-button + .button, #poll-container .input-group-btn > .btn + .pds-vote-button, #poll-container .input-group-btn > .button + .pds-vote-button, #poll-container .input-group-btn > .pds-vote-button + .pds-vote-button {
   margin-left: -1px;
 }
-.input-group-btn > .btn:hover, #poll-container .input-group-btn > .pds-vote-button:hover, #poll-container .input-group-btn > .pds-vote-button:active, #poll-container .input-group-btn > .pds-vote-button:focus, .input-group-btn > .btn:focus, #poll-container .input-group-btn > .pds-vote-button:focus, .input-group-btn > .btn:active, #poll-container .input-group-btn > .pds-vote-button:active {
+.input-group-btn > .btn:hover, .input-group-btn > .button:hover, #poll-container .input-group-btn > .pds-vote-button:hover, #poll-container .input-group-btn > .pds-vote-button:active, #poll-container .input-group-btn > .pds-vote-button:focus, .input-group-btn > .btn:focus, .input-group-btn > .button:focus, #poll-container .input-group-btn > .pds-vote-button:focus, .input-group-btn > .btn:active, .input-group-btn > .button:active, #poll-container .input-group-btn > .pds-vote-button:active {
   z-index: 2;
 }
-.input-group-btn:first-child > .btn, #poll-container .input-group-btn:first-child > .pds-vote-button,
+.input-group-btn:first-child > .btn, .input-group-btn:first-child > .button, #poll-container .input-group-btn:first-child > .pds-vote-button,
 .input-group-btn:first-child > .btn-group {
   margin-right: -1px;
 }
-.input-group-btn:last-child > .btn, #poll-container .input-group-btn:last-child > .pds-vote-button,
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .button, #poll-container .input-group-btn:last-child > .pds-vote-button,
 .input-group-btn:last-child > .btn-group {
   margin-left: -1px;
 }
@@ -4732,11 +4775,11 @@ tbody.collapse.in {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.navbar-btn.btn-sm, .btn-group-sm > .navbar-btn.btn, #poll-container .btn-group-sm > .navbar-btn.pds-vote-button {
+.navbar-btn.btn-sm, .btn-group-sm > .navbar-btn.btn, .btn-group-sm > .navbar-btn.button, #poll-container .btn-group-sm > .navbar-btn.pds-vote-button {
   margin-top: 7px;
   margin-bottom: 7px;
 }
-.navbar-btn.btn-xs, .btn-group-xs > .navbar-btn.btn, #poll-container .btn-group-xs > .navbar-btn.pds-vote-button {
+.navbar-btn.btn-xs, .btn-group-xs > .navbar-btn.btn, .btn-group-xs > .navbar-btn.button, #poll-container .btn-group-xs > .navbar-btn.pds-vote-button {
   margin-top: 11px;
   margin-bottom: 11px;
 }
@@ -5111,7 +5154,7 @@ tbody.collapse.in {
 .label:empty {
   display: none;
 }
-.btn .label, #poll-container .pds-vote-button .label {
+.btn .label, .button .label, #poll-container .pds-vote-button .label {
   position: relative;
   top: -1px;
 }
@@ -5181,11 +5224,11 @@ a.label:hover, #poll-container .pds-links.pds-links a.label:hover, #poll-contain
 .badge:empty {
   display: none;
 }
-.btn .badge, #poll-container .pds-vote-button .badge {
+.btn .badge, .button .badge, #poll-container .pds-vote-button .badge {
   position: relative;
   top: -1px;
 }
-.btn-xs .badge, .btn-group-xs > .btn .badge, #poll-container .btn-group-xs > .pds-vote-button .badge {
+.btn-xs .badge, .btn-group-xs > .btn .badge, .btn-group-xs > .button .badge, #poll-container .btn-group-xs > .pds-vote-button .badge {
   top: 0;
   padding: 1px 5px;
 }
@@ -6220,11 +6263,11 @@ button.close {
 .modal-footer:after {
   clear: both;
 }
-.modal-footer .btn + .btn, .modal-footer #poll-container .pds-vote-button + .btn, #poll-container .modal-footer .pds-vote-button + .btn, .modal-footer #poll-container .btn + .pds-vote-button, #poll-container .modal-footer .btn + .pds-vote-button, .modal-footer #poll-container .pds-vote-button + .pds-vote-button, #poll-container .modal-footer .pds-vote-button + .pds-vote-button {
+.modal-footer .btn + .btn, .modal-footer .button + .btn, .modal-footer #poll-container .pds-vote-button + .btn, #poll-container .modal-footer .pds-vote-button + .btn, .modal-footer .btn + .button, .modal-footer .button + .button, .modal-footer #poll-container .pds-vote-button + .button, #poll-container .modal-footer .pds-vote-button + .button, .modal-footer #poll-container .btn + .pds-vote-button, #poll-container .modal-footer .btn + .pds-vote-button, .modal-footer #poll-container .button + .pds-vote-button, #poll-container .modal-footer .button + .pds-vote-button, .modal-footer #poll-container .pds-vote-button + .pds-vote-button, #poll-container .modal-footer .pds-vote-button + .pds-vote-button {
   margin-left: 5px;
   margin-bottom: 0;
 }
-.modal-footer .btn-group .btn + .btn, .modal-footer .btn-group #poll-container .pds-vote-button + .btn, #poll-container .modal-footer .btn-group .pds-vote-button + .btn, .modal-footer .btn-group #poll-container .btn + .pds-vote-button, #poll-container .modal-footer .btn-group .btn + .pds-vote-button, .modal-footer .btn-group #poll-container .pds-vote-button + .pds-vote-button, #poll-container .modal-footer .btn-group .pds-vote-button + .pds-vote-button {
+.modal-footer .btn-group .btn + .btn, .modal-footer .btn-group .button + .btn, .modal-footer .btn-group #poll-container .pds-vote-button + .btn, #poll-container .modal-footer .btn-group .pds-vote-button + .btn, .modal-footer .btn-group .btn + .button, .modal-footer .btn-group .button + .button, .modal-footer .btn-group #poll-container .pds-vote-button + .button, #poll-container .modal-footer .btn-group .pds-vote-button + .button, .modal-footer .btn-group #poll-container .btn + .pds-vote-button, #poll-container .modal-footer .btn-group .btn + .pds-vote-button, .modal-footer .btn-group #poll-container .button + .pds-vote-button, #poll-container .modal-footer .btn-group .button + .pds-vote-button, .modal-footer .btn-group #poll-container .pds-vote-button + .pds-vote-button, #poll-container .modal-footer .btn-group .pds-vote-button + .pds-vote-button {
   margin-left: -1px;
 }
 .modal-footer .btn-block + .btn-block {
@@ -6657,7 +6700,7 @@ button.close {
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
-.carousel-caption .btn, .carousel-caption #poll-container .pds-vote-button, #poll-container .carousel-caption .pds-vote-button {
+.carousel-caption .btn, .carousel-caption .button, .carousel-caption #poll-container .pds-vote-button, #poll-container .carousel-caption .pds-vote-button {
   text-shadow: none;
 }
 
@@ -6837,7 +6880,7 @@ button.close {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1279px) {
   .visible-md {
     display: block !important;
   }
@@ -6855,25 +6898,25 @@ button.close {
     display: table-cell !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1279px) {
   .visible-md-block {
     display: block !important;
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1279px) {
   .visible-md-inline {
     display: inline !important;
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1279px) {
   .visible-md-inline-block {
     display: inline-block !important;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .visible-lg {
     display: block !important;
   }
@@ -6891,19 +6934,19 @@ button.close {
     display: table-cell !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .visible-lg-block {
     display: block !important;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .visible-lg-inline {
     display: inline !important;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .visible-lg-inline-block {
     display: inline-block !important;
   }
@@ -6919,12 +6962,12 @@ button.close {
     display: none !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1279px) {
   .hidden-md {
     display: none !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .hidden-lg {
     display: none !important;
   }
@@ -7006,7 +7049,7 @@ a:hover, #poll-container .pds-links.pds-links a:hover, #poll-container .pds-link
   font-family: Lato, sans-serif;
   font-weight: 300;
   color: #8B185E;
-  font-size: rem-calc(36);
+  font-size: 2.25rem;
   text-align: center;
   margin-bottom: 0;
 }
@@ -7024,52 +7067,55 @@ a:hover, #poll-container .pds-links.pds-links a:hover, #poll-container .pds-link
   font-family: Lato, sans-serif;
   font-weight: 300;
   color: #2B3E50;
-  font-size: rem-calc(18);
+  font-size: 1.125rem;
 }
 
-h1, .h1, .article-title {
+h1, .h1, .article-title, .entry-title {
   font-family: Lato, sans-serif;
   color: #2B3E50;
-  font-size: rem-calc(36);
+  font-size: 36px;
   font-weight: normal;
 }
-.article-title-overlay h1, .article-title-overlay .h1, .article-title-overlay .article-title {
+.article-title-overlay h1, .article-title-overlay .h1, .article-title-overlay .article-title, .article-title-overlay .entry-title {
   color: #FFFFFF;
   font-size: 3.5rem;
   line-height: 1.2em;
   font-weight: 300;
+}
+h1 + h2, h1 .h2, h1 .article-subtitle, .h1 + h2, .h1 .h2, .h1 .article-subtitle, .article-title + h2, .article-title .h2, .article-title .article-subtitle, .entry-title + h2, .entry-title .h2, .entry-title .article-subtitle {
+  margin-top: 0;
 }
 
 h2, .h2, .article-subtitle {
   font-family: Lato, sans-serif;
   font-weight: 300;
   color: #8B185E;
-  font-size: rem-calc(30);
+  font-size: 30px;
 }
 
 h3, .h3, .article-section-title {
   font-family: Lato, sans-serif;
   font-weight: normal;
   color: #2B3E50;
-  font-size: rem-calc(24);
+  font-size: 24px;
 }
 .entry-content h3, .entry-content .h3, .entry-content .article-section-title {
   margin-top: 2em;
 }
 
-h4, .h4, .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links.pds-links .menu-footer-nav > li > a, #poll-container .pds-links.pds-links .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links-back.pds-links-back .menu-footer-nav > li > a, #poll-container .pds-links-back.pds-links-back .content-info .menu-footer-nav > li > a, .article-section-subtitle, #poll-container .pds-question-top {
+h4, .h4, .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links.pds-links .menu-footer-nav > li > a, #poll-container .pds-links.pds-links .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links-back.pds-links-back .menu-footer-nav > li > a, #poll-container .pds-links-back.pds-links-back .content-info .menu-footer-nav > li > a, .article-section-subtitle {
   font-family: Lato, sans-serif;
   font-weight: normal;
   color: #2B3E50;
-  font-size: rem-calc(20);
+  font-size: 18px;
   line-height: 1.2em;
 }
-li h4, li .h4, .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links.pds-links .menu-footer-nav > li > a, #poll-container .pds-links.pds-links .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links-back.pds-links-back .menu-footer-nav > li > a, #poll-container .pds-links-back.pds-links-back .content-info .menu-footer-nav > li > a, li .article-section-subtitle, li #poll-container .pds-question-top, #poll-container li .pds-question-top {
-  font-size: rem-calc(18);
+li h4, li .h4, .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links.pds-links .menu-footer-nav > li > a, #poll-container .pds-links.pds-links .content-info .menu-footer-nav > li > a, .content-info #poll-container .pds-links-back.pds-links-back .menu-footer-nav > li > a, #poll-container .pds-links-back.pds-links-back .content-info .menu-footer-nav > li > a, li .article-section-subtitle {
+  font-size: 1.125rem;
   font-weight: 300;
   margin: 0;
 }
-li h4 a, li h4 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li h4 a, li h4 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li h4 a, li .h4 a, .content-info .menu-footer-nav > li > a a, li .h4 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .h4 a, .content-info .menu-footer-nav > li > a #poll-container .pds-links.pds-links a, .content-info #poll-container .pds-links.pds-links .menu-footer-nav > li > a a, #poll-container .pds-links.pds-links .content-info .menu-footer-nav > li > a a, li .h4 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .h4 a, .content-info .menu-footer-nav > li > a #poll-container .pds-links-back.pds-links-back a, .content-info #poll-container .pds-links-back.pds-links-back .menu-footer-nav > li > a a, #poll-container .pds-links-back.pds-links-back .content-info .menu-footer-nav > li > a a, li .article-section-subtitle a, li #poll-container .pds-question-top a, #poll-container li .pds-question-top a, li .article-section-subtitle #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .article-section-subtitle a, li #poll-container .pds-question-top .pds-links.pds-links a, li #poll-container .pds-links.pds-links .pds-question-top a, #poll-container li .pds-question-top .pds-links.pds-links a, #poll-container .pds-links.pds-links li .pds-question-top a, li .article-section-subtitle #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .article-section-subtitle a, li #poll-container .pds-question-top .pds-links-back.pds-links-back a, li #poll-container .pds-links-back.pds-links-back .pds-question-top a, #poll-container li .pds-question-top .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .pds-question-top a {
+li h4 a, li h4 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li h4 a, li h4 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li h4 a, li .h4 a, .content-info .menu-footer-nav > li > a a, li .h4 #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .h4 a, .content-info .menu-footer-nav > li > a #poll-container .pds-links.pds-links a, .content-info #poll-container .pds-links.pds-links .menu-footer-nav > li > a a, #poll-container .pds-links.pds-links .content-info .menu-footer-nav > li > a a, li .h4 #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .h4 a, .content-info .menu-footer-nav > li > a #poll-container .pds-links-back.pds-links-back a, .content-info #poll-container .pds-links-back.pds-links-back .menu-footer-nav > li > a a, #poll-container .pds-links-back.pds-links-back .content-info .menu-footer-nav > li > a a, li .article-section-subtitle a, li .article-section-subtitle #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .article-section-subtitle a, li .article-section-subtitle #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .article-section-subtitle a {
   color: #2B3E50;
   text-decoration: none;
 }
@@ -7077,7 +7123,7 @@ li h4 a, li h4 #poll-container .pds-links.pds-links a, #poll-container .pds-link
 .meta, .attr, .duration {
   font-family: Merriweather, serif;
   font-weight: normal;
-  font-size: rem-calc(14);
+  font-size: 12px;
 }
 li .meta a, li .meta #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .meta a, li .meta #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .meta a, li .attr a, li .attr #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .attr a, li .attr #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .attr a, li .duration a, li .duration #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links li .duration a, li .duration #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back li .duration a {
   text-decoration: none;
@@ -7097,7 +7143,7 @@ label, .label {
 .intro {
   font-family: Merriweather, serif;
   font-weight: 300;
-  font-size: rem-calc(20);
+  font-size: 18px;
   line-height: 1.5em;
 }
 
@@ -7114,23 +7160,43 @@ blockquote p, .blockquote p {
   font-weight: inherit;
 }
 blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
-  width: 50%;
   position: relative;
   padding: 1.25rem 0;
   border-top: 3px solid #ECF0F1;
   border-bottom: 3px solid #ECF0F1;
+  margin: 0 0 1.25rem;
+}
+@media (min-width: 768px) {
+  blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
+    width: 50%;
+  }
 }
 blockquote p[style*=left], .blockquote p[style*=left] {
   float: left;
-  margin: 0 1.25rem 1.25rem -16.66667%;
+  margin-right: 1.25rem;
+}
+@media (min-width: 992px) {
+  blockquote p[style*=left], .blockquote p[style*=left] {
+    margin-left: -14.7%;
+  }
 }
 blockquote p[style*=right], .blockquote p[style*=right] {
   float: right;
-  margin: 0 -16.66667% 1.25rem 1.25rem;
   text-align: left !important;
+  margin-left: 1.25rem;
+}
+@media (min-width: 992px) {
+  blockquote p[style*=right], .blockquote p[style*=right] {
+    margin-right: -14.7%;
+  }
 }
 blockquote p[style*=center], .blockquote p[style*=center] {
-  margin: 2.5rem -16.66667%;
+  margin: 2.5rem 0;
+}
+@media (min-width: 992px) {
+  blockquote p[style*=center], .blockquote p[style*=center] {
+    margin: 2.5rem -14.7%;
+  }
 }
 blockquote cite, .blockquote cite {
   line-height: 2em;
@@ -7220,7 +7286,7 @@ sup.footnote a:after, sup.footnote #poll-container .pds-links.pds-links a:after,
   content: "k";
 }
 
-.btn, #poll-container .pds-vote-button {
+.btn, .button, #poll-container .pds-vote-button {
   border: none;
   border-radius: 0;
   font-family: Merriweather, serif;
@@ -7229,7 +7295,7 @@ sup.footnote a:after, sup.footnote #poll-container .pds-links.pds-links a:after,
   position: relative;
   overflow: hidden;
 }
-.btn:after, #poll-container .pds-vote-button:after {
+.btn:after, .button:after, #poll-container .pds-vote-button:after {
   content: '';
   height: 3px;
   position: absolute;
@@ -7241,20 +7307,23 @@ sup.footnote a:after, sup.footnote #poll-container .pds-links.pds-links a:after,
        -o-transition: all .3s;
           transition: all .3s;
 }
-.btn:hover, #poll-container .pds-vote-button:hover, #poll-container .pds-vote-button:active, #poll-container .pds-vote-button:focus, .btn:active, #poll-container .pds-vote-button:active, .btn:focus, #poll-container .pds-vote-button:focus {
+.btn:hover, .button:hover, #poll-container .pds-vote-button:hover, #poll-container .pds-vote-button:active, #poll-container .pds-vote-button:focus, .btn:active, .button:active, #poll-container .pds-vote-button:active, .btn:focus, .button:focus, #poll-container .pds-vote-button:focus {
   color: #FFFFFF;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
 }
-.btn:hover:after, #poll-container .pds-vote-button:hover:after, #poll-container .pds-vote-button:active:after, #poll-container .pds-vote-button:focus:after, .btn:active:after, #poll-container .pds-vote-button:active:after, .btn:focus:after, #poll-container .pds-vote-button:focus:after {
+.btn:hover:after, .button:hover:after, #poll-container .pds-vote-button:hover:after, #poll-container .pds-vote-button:active:after, #poll-container .pds-vote-button:focus:after, .btn:active:after, .button:active:after, #poll-container .pds-vote-button:active:after, .btn:focus:after, .button:focus:after, #poll-container .pds-vote-button:focus:after {
   bottom: 5px;
 }
 
-.btn-default, #poll-container .pds-vote-button {
+.btn-default, .button {
   background-image: -o-linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
   background-image: -webkit-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
   background-image: -o-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
   background-image: linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
 }
-.btn-default:hover, #poll-container .pds-vote-button:hover, .btn-default:active, #poll-container .pds-vote-button:active, .btn-default:focus, #poll-container .pds-vote-button:focus {
+.btn-default:hover, .btn-default:active, .btn-default:focus, .button:hover, .button:active, .button:focus {
   background-image: -o-linear-gradient(90deg, #A5B54C 0%, #89983B 100%);
   background-image: -webkit-linear-gradient(0deg, #A5B54C 0%, #89983B 100%);
   background-image: -o-linear-gradient(0deg, #A5B54C 0%, #89983B 100%);
@@ -7274,8 +7343,16 @@ sup.footnote a:after, sup.footnote #poll-container .pds-links.pds-links a:after,
   background-image: linear-gradient(90deg, #971D67 0%, #7B1351 100%);
 }
 
-.btn-group .btn + .btn, .btn-group #poll-container .pds-vote-button + .btn, #poll-container .btn-group .pds-vote-button + .btn, .btn-group #poll-container .btn + .pds-vote-button, #poll-container .btn-group .btn + .pds-vote-button, .btn-group #poll-container .pds-vote-button + .pds-vote-button, #poll-container .btn-group .pds-vote-button + .pds-vote-button {
+.btn-group .btn + .btn, .btn-group .button + .btn, .btn-group #poll-container .pds-vote-button + .btn, #poll-container .btn-group .pds-vote-button + .btn, .btn-group .btn + .button, .btn-group .button + .button, .btn-group #poll-container .pds-vote-button + .button, #poll-container .btn-group .pds-vote-button + .button, .btn-group #poll-container .btn + .pds-vote-button, #poll-container .btn-group .btn + .pds-vote-button, .btn-group #poll-container .button + .pds-vote-button, #poll-container .btn-group .button + .pds-vote-button, .btn-group #poll-container .pds-vote-button + .pds-vote-button, #poll-container .btn-group .pds-vote-button + .pds-vote-button {
   margin-left: 0;
+}
+
+.button {
+  color: #ECF0F1;
+}
+
+label {
+  font-weight: normal;
 }
 
 .gallery-row {
@@ -7308,6 +7385,21 @@ object, embed {
   max-width: 100%;
 }
 
+.entry-content-asset {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  margin-bottom: 1em;
+}
+.entry-content-asset iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .aligncenter {
   display: block;
   margin: 10px auto;
@@ -7318,12 +7410,16 @@ object, embed {
   margin-bottom: 10px;
 }
 
-.alignleft {
-  margin-left: -16.66667%;
+@media (min-width: 992px) {
+  .alignleft {
+    margin-left: -14.7%;
+  }
 }
 
-.alignright {
-  margin-right: -16.66667%;
+@media (min-width: 992px) {
+  .alignright {
+    margin-right: -14.7%;
+  }
 }
 
 figure.alignnone {
@@ -7343,10 +7439,15 @@ figure.alignnone {
     margin-left: 10px;
   }
 }
+section {
+  margin-bottom: 5em;
+}
+
 .wrap {
   position: relative;
   background: #FFFFFF;
   padding-top: 2em;
+  margin-bottom: 5em;
   z-index: 0;
 }
 @media (min-width: 992px) {
@@ -7383,20 +7484,16 @@ figure.alignnone {
   padding-right: 0;
 }
 
-.no-margin, #poll-container .pds-vote-button {
+.no-margin {
   margin: 0;
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
-  .flex-md {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .flex-md > div > div {
-    height: 100%;
-  }
+.no-top-margin {
+  margin-top: 0;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
 }
 
 .vertical-center {
@@ -7431,6 +7528,29 @@ figure.alignnone {
 .callout .button {
   margin: 0;
 }
+.callout .menu {
+  list-style: none;
+  padding: 0;
+  font-family: Lato, sans-serif;
+}
+.callout .menu li {
+  padding-bottom: .25em;
+}
+.callout .menu li.active a, .callout .menu li.active #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .callout .menu li.active a, .callout .menu li.active #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .callout .menu li.active a {
+  color: #8B185E;
+}
+.callout .menu a, .callout .menu #poll-container .pds-links.pds-links a, #poll-container .pds-links.pds-links .callout .menu a, .callout .menu #poll-container .pds-links-back.pds-links-back a, #poll-container .pds-links-back.pds-links-back .callout .menu a {
+  text-decoration: none;
+  color: #2B3E50;
+}
+.callout .menu a:hover, .callout .menu #poll-container .pds-links.pds-links a:hover, #poll-container .pds-links.pds-links .callout .menu a:hover, .callout .menu #poll-container .pds-links-back.pds-links-back a:hover, #poll-container .pds-links-back.pds-links-back .callout .menu a:hover, .callout .menu a:active, .callout .menu #poll-container .pds-links.pds-links a:active, #poll-container .pds-links.pds-links .callout .menu a:active, .callout .menu #poll-container .pds-links-back.pds-links-back a:active, #poll-container .pds-links-back.pds-links-back .callout .menu a:active, .callout .menu a:focus, .callout .menu #poll-container .pds-links.pds-links a:focus, #poll-container .pds-links.pds-links .callout .menu a:focus, .callout .menu #poll-container .pds-links-back.pds-links-back a:focus, #poll-container .pds-links-back.pds-links-back .callout .menu a:focus {
+  color: #5681B3;
+}
+@media (max-width: 1279px) {
+  .callout {
+    padding: 15px;
+  }
+}
 
 .aside {
   width: 50%;
@@ -7444,6 +7564,24 @@ figure.alignnone {
 .full-width {
   margin-left: -16.66667%;
   margin-right: -16.66667%;
+}
+
+.page-header {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.sep {
+  margin: 2em 0;
+  border-bottom: 1px solid #ECF0F1;
+  width: 100%;
+  height: 0;
+}
+
+.modal-content {
+  padding: 30px;
+  border-radius: 0;
 }
 
 .mobile-bar {
@@ -7816,6 +7954,9 @@ figure.alignnone {
   font-size: 1.125rem;
   font-weight: 300;
 }
+.banner .beta-banner {
+  padding: .5rem 15px;
+}
 .banner .container-fluid {
   position: relative;
   height: 45px;
@@ -8018,7 +8159,7 @@ figure.alignnone {
   font-weight: 300;
 }
 .label.big {
-  font-size: rem-calc(20);
+  font-size: 1.25rem;
   padding: 1rem 1.5rem 1.0625rem;
 }
 
@@ -8120,7 +8261,11 @@ figure.alignnone {
             transform: translateY(2em);
   }
 }
-@media (min-width: 480px) and (max-width: 767px) {
+.photo-overlay.wide {
+  height: 250px;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
   .photo-overlay.small-wide {
     height: 250px;
     overflow: hidden;
@@ -8161,7 +8306,6 @@ figure.alignnone {
 }
 
 .excerpt {
-  padding: 0 10px;
   position: relative;
   z-index: 0;
   overflow: hidden;
@@ -8349,6 +8493,10 @@ figure.alignnone {
 #poll-container .pds-question-top.pds-question-top {
   padding: 0;
   margin-bottom: 0.8rem;
+  font-family: Lato, sans-serif;
+  font-weight: normal;
+  color: #2B3E50;
+  font-size: 18px;
 }
 #poll-container .pds-answer.pds-answer {
   padding: 0;
@@ -8358,7 +8506,7 @@ figure.alignnone {
   line-height: 1;
   width: auto;
   color: inherit;
-  font-size: inherit;
+  font-size: 14px;
   font-weight: 300;
 }
 #poll-container .pds-answer-input.pds-answer-input {
@@ -8372,6 +8520,23 @@ figure.alignnone {
   width: auto;
   margin-left: 25px;
   margin-bottom: 0;
+}
+#poll-container .pds-vote-button.pds-vote-button {
+  border: none;
+  border-radius: 0;
+  font-family: Merriweather, serif;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 6px 12px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  color: #ECF0F1;
+  background-image: -o-linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
+  background-image: -webkit-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+  background-image: -o-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+  background-image: linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
 }
 #poll-container .pds-vote-button.pds-vote-button:hover, #poll-container .pds-vote-button.pds-vote-button:active, #poll-container .pds-vote-button.pds-vote-button:focus {
   border: none;
@@ -8399,9 +8564,20 @@ figure.alignnone {
   display: none;
 }
 
+.mc-field-group {
+  margin-bottom: .75em;
+}
 .mc-field-group ul {
   list-style: none;
+  padding: 0;
   margin: 0;
+}
+.mc-field-group input[type="checkbox"] {
+  width: 25px;
+}
+
+.about .has-photo-overlay {
+  margin-bottom: 2em;
 }
 
 .hentry .entry-header {
@@ -8418,6 +8594,28 @@ figure.alignnone {
 
 .hentry footer {
   margin-bottom: 5em;
+}
+
+.share-btns {
+  line-height: 30px;
+  clear: both;
+}
+.share-btns span:not(.label) {
+  vertical-align: bottom;
+}
+@media (max-width: 767px) {
+  .share-btns {
+    line-height: 37px;
+  }
+  .share-btns .label {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.single-bio .entry-header {
+  border-bottom: 1px solid #ECF0F1;
+  margin-bottom: 1em;
 }
 
 /*# sourceMappingURL=main.css.map */

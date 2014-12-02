@@ -7,6 +7,14 @@ $sidebar-sm-columns:    4;
 $grid-gutter-width:     20px;
 
 $container-lg:          1260px;
+$container-md:          100%;
+
+
+// Media queries breakpoints
+// -------------------------
+
+$screen-lg-min:         1280px;
+$screen-md-max:         ($screen-lg-min - 1);
 
 
 // Brand colors

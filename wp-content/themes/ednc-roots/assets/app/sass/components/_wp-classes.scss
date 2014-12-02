@@ -10,10 +10,14 @@
   margin-bottom: ($line-height-computed / 2);
 }
 .alignleft {
-  margin-left: -16.66667%;
+  @media (min-width: $screen-md-min) {
+    margin-left: -14.7%;
+  }
 }
 .alignright {
-  margin-right: -16.66667%;
+  @media (min-width: $screen-md-min) {
+    margin-right: -14.7%;
+  }
 }
 figure.alignnone {
   margin-left: 0;

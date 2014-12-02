@@ -2,14 +2,13 @@
   <div class="above-footer">
     <ul class="list-inline text-center">
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/zsrf-gray-transparent.png" width="153" alt="Z. Smith Reynolds Foundation" />
-      <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/best-nc-gray-transparent.png" width="78" alt="Best of NC" />
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/bcbsnclogo-gray-transparent.png" width="209" alt="Blue Cross Blue Shield North Carolina" />
-      <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/iac-gray-transparent.png" width="239" alt="International Affairs Council" />
+      <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/best-nc-gray-transparent.png" width="78" alt="Best of NC" />
     </ul>
   </div>
 
   <?php
-  if (!is_user_logged_in()) {
+  if (is_user_logged_in()) {
   wp_nav_menu(array(
     'theme_location' => 'footer_navigation',
     'container' => false,
@@ -67,7 +66,7 @@
   <div class="below-footer">
     <p class="text-center small">
       &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
-      <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+      <a href="<?php echo get_permalink('1528'); ?>">Terms of Service</a> | <a href="<?php echo get_permalink('1530'); ?>">Privacy Policy</a>
     </p>
   </div>
 </footer>
@@ -77,6 +76,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <?php gravity_form(3, false, false, false, null, true, '-1'); ?>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade photo-submission-modal" id="photoSubmissionModal" tabindex="-2" role="dialog" aria-labelledby="photoSubmissionModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <?php gravity_form(5, false, false, false, null, true, '-2'); ?>
     </div>
   </div>
 </div>
