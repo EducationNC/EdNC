@@ -2839,7 +2839,7 @@ frame.on('all', function( e ) {
 		
 		// vars
 		type:		'',
-		settings:	{},
+		o:			{},
 		actions:	{},
 		events:		{},
 		$field:		null,
@@ -2893,10 +2893,6 @@ frame.on('all', function( e ) {
 			
 			// focus on $field
 			this.$field = $field;
-			
-			
-			// merge in field's data
-			$.extend(this.settings, acf.get_data($field));
 			
 			
 			// callback

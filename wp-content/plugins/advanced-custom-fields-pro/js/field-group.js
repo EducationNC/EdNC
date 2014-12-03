@@ -111,6 +111,12 @@
 				
 			});
 			
+			this.$fields.on('blur', 'tr[data-name="name"] input', function( e ){
+				
+				_this.change_field_name( $(this).closest('.field') );
+				
+			});
+			
 			this.$fields.on('keyup', 'tr[data-name="label"] input, tr[data-name="name"] input', function( e ){
 				
 				_this.render_field( $(this).closest('.field') );
@@ -1516,6 +1522,38 @@
 			
 			// action for 3rd party customization
 			acf.do_action('change_field_label', $el);
+			
+		},
+		
+		/*
+		*  change_field_name
+		*
+		*  This function is triggered when changing the field's name
+		*
+		*  @type	function
+		*  @date	8/04/2014
+		*  @since	5.0.0
+		*
+		*  @param	$el
+		*  @return	n/a
+		*/
+		
+		change_field_name : function( $el ) {
+			
+			// vars
+			var $name = $el.find('tr[data-name="name"]:first input');
+			
+			if( $name.val().substr(0, 6) === 'field_' ) {
+				
+				alert( acf._e('field_name_start') );
+				
+				setTimeout(function(){
+					
+					$name.focus();
+					
+				}, 1);
+				
+			}
 			
 		}
 		

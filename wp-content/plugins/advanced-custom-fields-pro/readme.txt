@@ -107,6 +107,13 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.1.4 =
+* Taxonomy field: Major improvement to save/load setting allowing for different values on multiple sub fields
+* Google Map field: Fixed render glitch on sub fields when shown by a tab field
+* Code: Fixed bug where Select2 would continuously load when no results found
+* Core: Fixed bug where translated field groups were lost during DB migration to v5
+* Core: Minor fixes and improvements
+
 = 5.1.3 =
 * Repeater field: Added new 'block' layout style
 * Flexible Content field: Added new 'block' layout style

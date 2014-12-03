@@ -216,6 +216,7 @@ class acf_admin_field_group {
 			'move_field_warning'	=> __("This field cannot be moved until its changes have been saved",'acf'),
 			'null'					=> __("Null",'acf'),
 			'unload'				=> __('The changes you made will be lost if you navigate away from this page','acf'),
+			'field_name_start'		=> __('The string "field_" may not be used at the start of a field name','acf'),
 		));
 		
 		$o = array(

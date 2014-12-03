@@ -25,12 +25,14 @@
 		
 		focus: function(){
 			
+			// get elements
 			this.$el = this.$field.find('.acf-relationship');
 			this.$input = this.$el.find('.acf-hidden input');
 			this.$choices = this.$el.find('.choices'),
 			this.$values = this.$el.find('.values');
 			
-			this.settings = acf.get_data( this.$el );
+			// get options
+			this.o = acf.get_data( this.$el );
 			
 		},
 		
@@ -144,13 +146,13 @@ var scroll_timer = null;
 			// vars
 			var data = acf.prepare_for_ajax({
 				action:		'acf/fields/relationship/query',
-				field_key:	acf.get_field_key($field),
+				field_key:	$field.data('key'),
 				post_id:	acf.get('post_id'),
 			});
 			
 			
 			// merge in wrap data
-			// don't use this.settings becuase they are outdated
+			// don't use this.o becuase they are outdated
 			$.extend(data, acf.get_data( this.$el ));
 			
 			
@@ -216,7 +218,7 @@ var scroll_timer = null;
 			
 				
 				// add message
-				if( this.settings.paged == 1 ) {
+				if( this.o.paged == 1 ) {
 				
 					this.$choices.children('.list').append('<p>' + acf._e('relationship', 'empty') + '</p>');
 			
@@ -244,9 +246,9 @@ var scroll_timer = null;
 			
 			
 			// underline search match
-			if( this.settings.s ) {
+			if( this.o.s ) {
 			
-				var s = this.settings.s;
+				var s = this.o.s;
 				
 				$new.find('.acf-rel-item').each(function(){
 					
@@ -372,11 +374,11 @@ var scroll_timer = null;
 		add_item: function( e ){
 			
 			// max posts
-			if( this.settings.max > 0 ) {
+			if( this.o.max > 0 ) {
 			
-				if( this.$values.find('.acf-rel-item').length >= this.settings.max ) {
+				if( this.$values.find('.acf-rel-item').length >= this.o.max ) {
 				
-					alert( acf._e('relationship', 'max').replace('{max}', this.settings.max) );
+					alert( acf._e('relationship', 'max').replace('{max}', this.o.max) );
 					
 					return;
 					

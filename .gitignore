@@ -9,6 +9,7 @@ Thumbs.db
 .htaccess
 sitemap.xml
 sitemap.xml.gz
+searchreplacedb2.php
 
 # wordpress specific
 wp-config.php
@@ -26,8 +27,6 @@ wp-content/themes/ednc-broke/*
 wp-content/themes/ednc-new/*
 wp-content/themes/ednc/assets/app/bower_components/*
 wp-content/themes/ednc/node_modules/*
-wp-content/themes/ednc-roots/node_modules/*
-wp-content/themes/ednc-roots/assets/app/vendor/*
 
 # wpengine specific
 .smushit-status

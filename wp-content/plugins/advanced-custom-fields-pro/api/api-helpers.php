@@ -454,7 +454,7 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 	
 	if( $width > 0 && $width < 100 ) {
 		
-		$wrapper['data-width'] .= $width;
+		$wrapper['data-width'] = $width;
 		$wrapper['style'] .= " width:{$width}%;";
 		
 	}

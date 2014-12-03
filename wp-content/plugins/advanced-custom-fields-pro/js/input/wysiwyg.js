@@ -17,14 +17,14 @@
 		
 		focus: function(){
 			
-			// update vars
+			// get elements
 			this.$el = this.$field.find('.wp-editor-wrap').last();
 			this.$textarea = this.$el.find('textarea');
 			
+			// get options
+			this.o = acf.get_data( this.$el );
+			this.o.id = this.$textarea.attr('id');
 			
-			// settings
-			this.settings = acf.get_data( this.$el );
-			this.settings.id = this.$textarea.attr('id');
 		},
 		
 		initialize: function(){
@@ -70,7 +70,6 @@
 			
 		},
 		
-		
 		get_mceInit : function(){
 			
 			// reference
@@ -78,17 +77,17 @@
 				
 				
 			// vars
-			var toolbar = this.get_toolbar( this.settings.toolbar ),
+			var toolbar = this.get_toolbar( this.o.toolbar ),
 				mceInit = $.extend({}, tinyMCEPreInit.mceInit.acf_content);
 			
 			
 			// selector
-			mceInit.selector = '#' + this.settings.id;
+			mceInit.selector = '#' + this.o.id;
 			
 			
 			// id
-			mceInit.id = this.settings.id; // tinymce v4
-			mceInit.elements = this.settings.id; // tinymce v3
+			mceInit.id = this.o.id; // tinymce v4
+			mceInit.elements = this.o.id; // tinymce v3
 			
 			
 			// toolbar
@@ -161,6 +160,12 @@
 						
 					});
 					
+					/*
+ed.on('ResizeEditor', function(e) {
+					    console.log(e);
+					});
+*/
+					
 				};
 			
 			}
@@ -182,7 +187,7 @@
 			
 			
 			// id
-			qtInit.id = this.settings.id;
+			qtInit.id = this.o.id;
 			
 			
 			// hook for 3rd party customization
@@ -214,8 +219,8 @@
 			try {
 				
 				// vars
-				var ed = tinyMCE.get( this.settings.id ),
-					txtarea_el = tinyMCE.DOM.get( this.settings.id );
+				var ed = tinyMCE.get( this.o.id ),
+					txtarea_el = tinyMCE.DOM.get( this.o.id );
 					val = txtarea_el.value;
 					
 				
@@ -247,7 +252,7 @@
 			
 			try {
 				
-				tinyMCE.init( tinyMCEPreInit.mceInit[ this.settings.id ] );
+				tinyMCE.init( tinyMCEPreInit.mceInit[ this.o.id ] );
 				
 			} catch(e) {}
 			

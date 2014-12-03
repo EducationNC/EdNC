@@ -25,7 +25,7 @@ $ofgs = get_posts(array(
 	'post_type' 		=> 'acf',
 	'orderby' 			=> 'menu_order title',
 	'order' 			=> 'asc',
-	'suppress_filters'	=> false,
+	'suppress_filters'	=> true,
 ));
 
 
@@ -181,6 +181,10 @@ function _migrate_field_group_500( $ofg ) {
 		acf_trash_field_group( $nfg['ID'] );
 		
 	}
+	
+	
+	// action for 3rd party customization
+	do_action('acf/update/migrate_field_group', $ofg->ID, $nfg['ID'] );
 	
 	
 	// return

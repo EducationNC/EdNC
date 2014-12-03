@@ -893,6 +893,9 @@ function acf_duplicate_fields( $fields, $new_parent = 0 ) {
 	// create new field keys (for conditional logic fixes)
 	foreach( $fields as $field ) {
 		
+		// ensure a delay for unique ID
+		usleep(1);
+		
 		acf_update_setting( 'duplicate_key_' . $field['key'] , uniqid('field_') );
 		
 	}

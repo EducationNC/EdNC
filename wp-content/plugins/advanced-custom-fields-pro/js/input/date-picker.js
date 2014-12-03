@@ -7,6 +7,8 @@
 		$input: null,
 		$hidden: null,
 		
+		o : {},
+		
 		actions: {
 			'ready':	'initialize',
 			'append':	'initialize'
@@ -18,11 +20,14 @@
 		
 		focus: function(){
 			
+			// get elements
 			this.$el = this.$field.find('.acf-date_picker');
 			this.$input = this.$el.find('input[type="text"]');
 			this.$hidden = this.$el.find('input[type="hidden"]');
 			
-			this.settings = acf.get_data( this.$el );
+			// get options
+			this.o = acf.get_data( this.$el );
+			
 		},
 		
 		initialize: function(){
@@ -40,7 +45,7 @@
 				yearRange		:	"-100:+100",
 				changeMonth		:	true,
 				showButtonPanel	:	true,
-				firstDay		:	this.settings.first_day
+				firstDay		:	this.o.first_day
 			});
 			
 			
@@ -53,7 +58,7 @@
 			
 			
 			// now change the format back to how it should be.
-			this.$input.datepicker( "option", "dateFormat", this.settings.display_format );
+			this.$input.datepicker( "option", "dateFormat", this.o.display_format );
 			
 			
 			// wrap the datepicker (only if it hasn't already been wrapped)

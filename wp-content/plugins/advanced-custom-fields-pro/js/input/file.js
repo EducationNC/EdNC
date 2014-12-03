@@ -19,9 +19,11 @@
 		
 		focus: function(){
 			
+			// get elements
 			this.$el = this.$field.find('.acf-file-uploader');
 			
-			this.settings = acf.get_data( this.$el );
+			// get options
+			this.o = acf.get_data( this.$el );
 			
 		},
 		
@@ -57,7 +59,7 @@
 				mode:		'select',
 				type:		'',
 				multiple:	$repeater.exists(),
-				library:	this.settings.library,
+				library:	this.o.library,
 				
 				select: function( attachment, i ) {
 					

@@ -1,34 +1,35 @@
 (function($){
 	
-	/*
-	*  Location
-	*
-	*  static model for this field
-	*
-	*  @type	event
-	*  @date	1/06/13
-	*
-	*/
-	
-	acf.fields.google_map = {
+	acf.fields.google_map = acf.field.extend({
 		
-		$el : null,
+		type: 'google_map',
+		$el: null,
 		$input : null,
 		
-		o : {},
-		
-		ready : false,
+		status : '', // '', 'loading', 'ready'
 		geocoder : false,
 		map : false,
 		maps : {},
+		pending: $(),
 		
-		set : function( o ){
+		actions: {
+			'ready':	'initialize',
+			'append':	'initialize',
+			'show':		'show'
+		},
+		
+		events: {
+			'click a[data-name="clear-location"]': 	'clear',
+			'click a[data-name="find-location"]': 	'locate',
+			'click .title h4': 						'edit',
+			'keydown .search': 						'keydown',
+			'blur .search': 						'blur',
+		},
+		
+		focus: function(){
 			
-			// merge in new option
-			$.extend( this, o );
-			
-			
-			// find input
+			// get elements
+			this.$el = this.$field.find('.acf-google-map');
 			this.$input = this.$el.find('.value');
 			
 			
@@ -37,38 +38,126 @@
 			
 			
 			// get map
-			if( this.maps[ this.o.id ] )
-			{
-				this.map = this.maps[ this.o.id ];
-			}
-			
+			if( this.maps[ this.o.id ] ) {
 				
-			// return this for chaining
-			return this;
+				this.map = this.maps[ this.o.id ];
+				
+			}
 			
 		},
-		init : function(){
+		
+		/*
+		*  is_ready
+		*
+		*  This function will ensure google API is available and return a boolean for the current status
+		*
+		*  @type	function
+		*  @date	19/11/2014
+		*  @since	5.0.9
+		*
+		*  @param	n/a
+		*  @return	(boolean)
+		*/
+		
+		is_ready: function(){ 
 			
-			// geocode
-			if( !this.geocoder )
-			{
-				this.geocoder = new google.maps.Geocoder();
+			// debug
+			//console.log('is_ready: %o', this.status);
+			
+			// check
+			if( this.status == 'ready' ) {
+				
+				return true;
+				
+			} else if( this.status == 'loading' ) {
+				
+				return false;
+				
+			} else if( typeof google === 'undefined' ) {
+				
+				// reference
+				var self = this;
+				
+				
+				// se tstatus
+				self.status = 'loading';
+				
+				
+				// load API
+				$.getScript('https://www.google.com/jsapi', function(){
+					
+					// load maps
+				    google.load('maps', '3', { other_params: 'sensor=false&libraries=places', callback: function(){
+				    	
+				    	// set status
+				    	self.status = 'ready';
+				    	
+				    	
+				    	// initialize pending
+				    	self.initialize_pending();
+				        
+				    }});
+				    
+				});
+				
+				return false;
+					
 			}
 			
 			
-			// google maps is loaded and ready
-			this.ready = true;
+			// google must exist already
+			this.status = 'ready';
 			
 			
-			// render map
-			this.render();
-					
+			// return
+			return true;
+			
 		},
-		render : function(){
+		
+		initialize_pending: function(){
+			
+			// debug
+			//console.log('initialize_pending', this.status);
 			
 			// reference
-			var _this	= this,
-				_$el	= this.$el;
+			var self = this;
+			
+			this.pending.each(function(){
+				
+				self.doFocus( $(this) ).initialize();
+				
+			});
+			
+			
+			// reset
+			this.pending = $();
+			
+		},
+		
+		initialize: function(){
+			
+			// add to pending
+			if( !this.is_ready() ) {
+				
+				this.pending = this.pending.add( this.$field );
+				
+				return false;
+				
+			}
+			
+			
+			// load geocode
+			if( !this.geocoder ) {
+				
+				this.geocoder = new google.maps.Geocoder();
+				
+			}
+			
+			
+			// reference
+			var self = this,
+				$field = this.$field,
+				$el = this.$el;
 			
 			
 			// vars
@@ -98,15 +187,17 @@
 		    
 		    // add references
 		    this.map.$el = this.$el;
+		    this.map.$field = this.$field;
 		    
 		    
 		    // value exists?
 		    var lat = this.$el.find('.input-lat').val(),
 		    	lng = this.$el.find('.input-lng').val();
 		    
-		    if( lat && lng )
-		    {
-			    this.update( lat, lng ).center();
+		    if( lat && lng ) {
+			    
+			    this.update(lat, lng).center();
+			    
 		    }
 		    
 		    
@@ -114,9 +205,10 @@
 			google.maps.event.addListener(autocomplete, 'place_changed', function( e ) {
 			    
 			    // reference
-			    var $el = this.map.$el;
-
-
+			    var $el = this.map.$el,
+			    	$field = this.map.$field;
+					
+					
 			    // manually update address
 			    var address = $el.find('.search').val();
 			    $el.find('.input-address').val( address );
@@ -127,45 +219,47 @@
 			    var place = this.getPlace();
 			    
 			    
-			    // validate
-			    if( place.geometry )
-			    {
+			    // if place exists
+			    if( place.geometry ) {
+				    
 			    	var lat = place.geometry.location.lat(),
 						lng = place.geometry.location.lng();
 						
-						
-				    _this.set({ $el : $el }).update( lat, lng ).center();
+					
+					self.doFocus( $field ).update( lat, lng ).center();
+				    
+				    // bail early
+				    return;
 			    }
-			    else
-			    {
-				    // client hit enter, manually get the place
-				    _this.geocoder.geocode({ 'address' : address }, function( results, status ){
-				    	
-				    	// validate
-						if( status != google.maps.GeocoderStatus.OK )
-						{
-							console.log('Geocoder failed due to: ' + status);
-							return;
-						}
+			    
+			    
+			    // client hit enter, manually get the place
+			    self.geocoder.geocode({ 'address' : address }, function( results, status ){
+			    	
+			    	// validate
+					if( status != google.maps.GeocoderStatus.OK ) {
 						
-						if( !results[0] )
-						{
-							console.log('No results found');
-							return;
-						}
+						console.log('Geocoder failed due to: ' + status);
+						return;
 						
+					} else if( !results[0] ) {
 						
-						// get place
-						place = results[0];
+						console.log('No results found');
+						return;
 						
-						var lat = place.geometry.location.lat(),
-							lng = place.geometry.location.lng();
-							
-							
-					    _this.set({ $el : $el }).update( lat, lng ).center();
-					    
-					});
-			    }
+					}
+					
+					
+					// get place
+					place = results[0];
+					
+					var lat = place.geometry.location.lat(),
+						lng = place.geometry.location.lng();
+						
+					
+					self.doFocus( $field ).update( lat, lng ).center();
+				    
+				});
 			    
 			});
 		    
@@ -173,7 +267,7 @@
 		    google.maps.event.addListener( this.map.marker, 'dragend', function(){
 		    	
 		    	// reference
-			    var $el = this.map.$el;
+			    var $field = this.map.$field;
 			    
 			    
 		    	// vars
@@ -181,7 +275,7 @@
 					lat = position.lat(),
 			    	lng = position.lng();
 			    	
-				_this.set({ $el : $el }).update( lat, lng ).sync();
+				self.doFocus( $field ).update( lat, lng ).sync();
 			    
 			});
 			
@@ -189,7 +283,7 @@
 			google.maps.event.addListener( this.map, 'click', function( e ) {
 				
 				// reference
-			    var $el = this.$el;
+			    var $field = this.$field;
 			    
 			    
 				// vars
@@ -197,15 +291,13 @@
 					lng = e.latLng.lng();
 				
 				
-				_this.set({ $el : $el }).update( lat, lng ).sync();
+				self.doFocus( $field ).update( lat, lng ).sync();
 			
 			});
-
 			
 			
 	        // add to maps
 	        this.maps[ this.o.id ] = this.map;
-	        
 	        
 		},
 		
@@ -233,7 +325,7 @@
 	        
 	        
 	        // validation
-			this.$el.closest('.acf-field').removeClass('error');
+			this.$field.removeClass('error');
 			
 			
 	        // return for chaining
@@ -249,10 +341,11 @@
 			
 			
 			// if marker exists, center on the marker
-			if( position )
-			{
+			if( position ) {
+				
 				lat = position.lat();
 				lng = position.lng();
+				
 			}
 			
 			
@@ -261,6 +354,7 @@
 			
 			// set center of map
 	        this.map.setCenter( latlng );
+	        
 		},
 		
 		sync : function(){
@@ -277,16 +371,16 @@
 			this.geocoder.geocode({ 'latLng' : latlng }, function( results, status ){
 				
 				// validate
-				if( status != google.maps.GeocoderStatus.OK )
-				{
+				if( status != google.maps.GeocoderStatus.OK ) {
+					
 					console.log('Geocoder failed due to: ' + status);
 					return;
-				}
-				
-				if( !results[0] )
-				{
+					
+				} else if( !results[0] ) {
+					
 					console.log('No results found');
 					return;
+					
 				}
 				
 				
@@ -306,26 +400,28 @@
 			
 			// return for chaining
 	        return this;
+	        
 		},
 		
 		locate : function(){
 			
 			// reference
-			var _this	= this,
-				_$el	= this.$el;
+			var self = this,
+				$field = this.$field;
 			
 			
 			// Try HTML5 geolocation
-			if( ! navigator.geolocation )
-			{
+			if( ! navigator.geolocation ) {
+				
 				alert( acf.l10n.google_map.browser_support );
 				return this;
+				
 			}
 			
 			
 			// show loading text
-			_$el.find('.title h4').text(acf.l10n.google_map.locating + '...');
-			_$el.addClass('active');
+			this.$el.find('.title h4').text(acf.l10n.google_map.locating + '...');
+			this.$el.addClass('active');
 			
 		    navigator.geolocation.getCurrentPosition(function(position){
 		    	
@@ -333,12 +429,13 @@
 				var lat = position.coords.latitude,
 			    	lng = position.coords.longitude;
 			    	
-				_this.set({ $el : _$el }).update( lat, lng ).sync().center();
+				self.doFocus( $field ).update( lat, lng ).sync().center();
 				
 			});
 
 				
 		},
+		
 		
 		clear : function(){
 			
@@ -382,150 +479,40 @@
 			// center map
 			this.center();
 			
-		}
-
-	
-	};
-	
-	
-	/*
-	*  acf/setup_fields
-	*
-	*  run init function on all elements for this field
-	*
-	*  @type	event
-	*  @date	20/07/13
-	*
-	*  @param	{object}	e		event object
-	*  @param	{object}	el		DOM object which may contain new ACF elements
-	*  @return	N/A
-	*/
-	
-	acf.add_action('ready append', function( $el ){
+		},
 		
-		//vars
-		var $fields = acf.get_fields({ type : 'google_map'}, $el);
-		
-		
-		// validate
-		if( !$fields.exists() )
-		{
-			return;
-		}
-		
-		
-		// validate google
-		if( typeof google === 'undefined' )
-		{
-			$.getScript('https://www.google.com/jsapi', function(){
+		keydown: function( e ){
 			
-			    google.load('maps', '3', { other_params: 'sensor=false&libraries=places', callback: function(){
+			// prevent form from submitting
+			if( e.which == 13 ) {
+				
+				e.preventDefault();
 			    
-			        $fields.each(function(){
-					
-						acf.fields.google_map.set({ $el : $(this).find('.acf-google-map') }).init();
-						
-					});
-			        
-			    }});
-			});
+			}
 			
-		}
-		else
-		{
-			$fields.each(function(){
+		},
+		
+		blur: function(){
+			
+			// has a value?
+			if( this.$el.find('.input-lat').val() ) {
 				
-				acf.fields.google_map.set({ $el : $(this).find('.acf-google-map') }).init();
+				this.$el.addClass('active');
 				
-			});
+			}
+			
+		},
+		
+		show: function(){
+			
+			if( this.is_ready() ) {
+				
+				this.refresh();
+				
+			}
 			
 		}
 		
-		
 	});
-	
-	
-	/*
-	*  Events
-	*
-	*  jQuery events for this field
-	*
-	*  @type	function
-	*  @date	1/03/2011
-	*
-	*  @param	N/A
-	*  @return	N/A
-	*/
-	
-	$(document).on('click', '.acf-google-map a[data-name="clear-location"]', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.google_map.set({ $el : $(this).closest('.acf-google-map') }).clear();
-		
-		$(this).blur();
-		
-	});
-	
-	
-	$(document).on('click', '.acf-google-map a[data-name="find-location"]', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.google_map.set({ $el : $(this).closest('.acf-google-map') }).locate();
-		
-		$(this).blur();
-		
-	});
-	
-	$(document).on('click', '.acf-google-map .title h4', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.google_map.set({ $el : $(this).closest('.acf-google-map') }).edit();
-			
-	});
-	
-	$(document).on('keydown', '.acf-google-map .search', function( e ){
-		
-		// prevent form from submitting
-		if( e.which == 13 )
-		{
-		    return false;
-		}
-			
-	});
-	
-	$(document).on('blur', '.acf-google-map .search', function( e ){
-		
-		// vars
-		var $el = $(this).closest('.acf-google-map');
-		
-		
-		// has a value?
-		if( $el.find('.input-lat').val() )
-		{
-			$el.addClass('active');
-		}
-			
-	});
-	
-	acf.add_action('show_field', function( $field ){
-		
-		// validate
-		if( ! acf.fields.google_map.ready )
-		{
-			return;
-		}
-		
-		
-		// validate
-		if( acf.is_field($field, {type : 'google_map'}) )
-		{
-			acf.fields.google_map.set({ $el : $field.find('.acf-google-map') }).refresh();
-		}
-		
-	});
-	
 
 })(jQuery);

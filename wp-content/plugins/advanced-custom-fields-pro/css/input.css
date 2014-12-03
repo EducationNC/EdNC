@@ -230,17 +230,20 @@ ul.acf-checkbox-list li label {
 .pac-container {
 	margin-left: -1px;
 	margin-top: -1px;
-	padding: 5px 0;
-	border-color: #DFDFDF;
+	border: #DFDFDF solid 1px !important;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.2) !important;
 }
 
 .pac-container:after {
 	display: none;
 }
 
+.pac-container .pac-item:first-child {
+	border-top: 0 none;
+}
 .pac-container .pac-item {
-	padding: 5px;
-	margin: 0 5px;
+	padding: 5px 10px;
+	cursor: pointer;
 }
 
 
