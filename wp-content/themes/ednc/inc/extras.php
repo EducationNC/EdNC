@@ -2,299 +2,125 @@
 /**
  * Custom functions that act independently of the theme templates
  *
- * Eventually, some of the functionality here could be replaced by core features
- *
  * @package EducationNC
  */
 
-/**
- * Sets the authordata global when viewing an author archive.
- *
- * This provides backwards compatibility with
- * http://core.trac.wordpress.org/changeset/25574
- *
- * It removes the need to call the_post() and rewind_posts() in an author
- * template to print information about the author.
- *
- * @global WP_Query $wp_query WordPress Query object.
- * @return void
- */
-function ednc_setup_author() {
-	global $wp_query;
+// Randomize order of poll options (Gravity Form ID = 1)
+function ednc_randomize_fields($choices, $field){
+  if ($field['formId'] == 1) {
+    // put all choices into an array
+    $choices_array = explode('<li ', $choices);
 
-	if ( $wp_query->is_author() && isset( $wp_query->post ) ) {
-		$GLOBALS['authordata'] = get_userdata( $wp_query->post->post_author );
-	}
+    // separate "other" choice so it's always at the end
+    $other = '<li ' . array_pop($choices_array);
+
+    // randomize choices array
+    shuffle($choices_array);
+
+    $choices = '<li ' . implode('<li ', $choices_array) . $other;
+
+    return $choices;
+  }
 }
-add_action( 'wp', 'ednc_setup_author' );
+// add_filter("gform_field_choices", "ednc_randomize_fields", 10, 2);
 
-
-// Sort terms in a custom taxonomy hierarchically
-// http://wordpress.stackexchange.com/a/99516/35628
-/**
- * Recursively sort an array of taxonomy terms hierarchically. Child categories will be
- * placed under a 'children' member of their parent term.
- * @param Array   $cats     taxonomy term objects to sort
- * @param Array   $into     result array to put them in
- * @param integer $parentId the current parent ID to put them in
- */
-function sort_terms_hierarchically(Array &$cats, Array &$into, $parentId = 0) {
-    foreach ($cats as $i => $cat) {
-        if ($cat->parent == $parentId) {
-            $into[$cat->term_id] = $cat;
-            unset($cats[$i]);
-        }
-    }
-
-    foreach ($into as $topCat) {
-        $topCat->children = array();
-        sort_terms_hierarchically($cats, $topCat->children, $topCat->term_id);
-    }
-
-    // Make sure final array is ordered in the preferred custom order
-    usort($into, function($a, $b) {
-        return $a->term_order - $b->term_order;
-    });
+// Function to calculate sig for auth
+function calculate_signature($string, $private_key) {
+    $hash = hash_hmac("sha1", $string, $private_key, true);
+    $sig = rawurlencode(base64_encode($hash));
+    return $sig;
 }
 
+// Custom confirmation message for polls
+function ednc_poll_confirmation($confirmation, $form, $lead, $ajax) {
+  if ($form['id'] == 1) {
 
-// Allow .ai files to be uploaded
-function custom_upload_mimes ($existing_mimes=array()) {
+    // Generate Auth for API request
+    $api_key = "cd50a36fe3";
+    $private_key = "a115f379bf12b83";
+    $method  = "GET";
+    $route    = "forms/1/entries";
+    $expires = strtotime("+10 mins");
+    $string_to_sign = sprintf("%s:%s:%s:%s", $api_key, $method, $route, $expires);
+    $sig = calculate_signature($string_to_sign, $private_key);
 
-    // Add file extension 'extension' with mime type 'mime/type'
-    $existing_mimes['psd'] = 'application/photoshop';
-    $existing_mimes['ai'] = 'application/postscript';
+    $url = get_bloginfo('url') . '/gravityformsapi/' . $route . '?paging[page_size]=200&api_key=' . $api_key . '&signature=' . $sig . '&expires=' . $expires;
 
-    // and return the new full result
-    return $existing_mimes;
+    $json = json_decode(file_get_contents($url), true);
 
-}
-add_filter('upload_mimes', 'custom_upload_mimes');
+    $entries = $json['response']['entries'];
 
+    $values = array();
 
-// Forward attachment pages to the media file itself
-function ednc_attachment_redirect() {
-    if ( is_attachment() ) {
-        $url = wp_get_attachment_url(get_the_id());
-        wp_redirect($url, 301);
-    }
-}
-add_action('template_redirect', 'ednc_attachment_redirect');
-
-
-// Get Vimeo video data from API
-function get_vimeo($vid){
-    // Vimeo API
-    require_once('vimeo-api/vimeo.php');
-
-    // oAuth2
-    $apiKey = '0fbac824646d2b56700587abae670783ee657f0e';
-    $apiSecret = 'e5419e6800c0c3a1246e81c71aaec8103f0c2002';
-    $accessToken = '639554c4d0083dc24d7a67c0bfee360e';
-
-    $vimeo = new Vimeo($apiKey, $apiSecret, $accessToken);
-
-    // Use WP Transients API to cache the response from Vimeo
-    $video = get_transient('vimeo_cache'.$vid);
-    if ($video == '') {
-        // Get the info about the video from Vimeo
-        $video = $vimeo->request("/videos/$vid");
-        set_transient( 'vimeo_cache'.get_the_id(), $video, HOUR_IN_SECONDS );
-    }
-
-    return $video;
-}
-
-// Tweet fetching and formatting
-// Taken from Joe Bunn website
-function ednc_tweets($twitter_id) {
-    $tweet_number = 0;
-
-    $tweets = getTweets($twitter_id, 2);
-
-    // format each tweet
-    if (is_array($tweets)) {
-
-        foreach ($tweets as $tweet) {
-
-            // process tweet text
-            if ($tweet['text']) {
-                $tweet_text = $tweet['text'];
-
-                // replace mentions with links
-                if (is_array($tweet['entities']['user_mentions'])) {
-                    foreach($tweet['entities']['user_mentions'] as $key => $user_mention) {
-                        $tweet_text = preg_replace(
-                            '/@'.$user_mention['screen_name'].'/i',
-                            '<a href="http://www.twitter.com/'.$user_mention['screen_name'].'" target="_blank">@'.$user_mention['screen_name'].'</a>',
-                            $tweet_text
-                        );
-                    }
-                }
-
-                // replace hashtags with search link
-                if (is_array($tweet['entities']['hashtags'])) {
-                    foreach($tweet['entities']['hashtags'] as $key => $hashtag) {
-                        $tweet_text = preg_replace(
-                            '/#'.$hashtag['text'].'/i',
-                            '<a href="https://twitter.com/search?q=%23'.$hashtag['text'].'&src=hash" target="_blank">#'.$hashtag['text'].'</a>',
-                            $tweet_text
-                        );
-                    }
-                }
-
-                // replace links with t.co shortlinks
-                if (is_array($tweet['entities']['urls'])) {
-                    foreach($tweet['entities']['urls'] as $key => $link) {
-                        $tweet_text = preg_replace(
-                            '`'.$link['url'].'`',
-                            '<a href="'.$link['url'].'" target="_blank">'.$link['url'].'</a>',
-                            $tweet_text
-                        );
-                    }
-                }
-
-                // replace media links with t.co shortlinks
-                if (is_array($tweet['entities']['media'])) {
-                    foreach($tweet['entities']['media'] as $key => $link) {
-                        $tweet_text = preg_replace(
-                            '`'.$link['url'].'`',
-                            '<a href="'.$link['url'].'" target="_blank">'.$link['url'].'</a>',
-                            $tweet_text
-                        );
-                    }
-                }
-
-                // twitter intents
-                $intents = '
-                    <a class="twitter-action-reply" href="https://twitter.com/intent/tweet?in_reply_to='.$tweet['id_str'].'"></a>
-                    <a class="twitter-action-retweet" href="https://twitter.com/intent/retweet?tweet_id='.$tweet['id_str'].'"></a>
-                    <a class="twitter-action-favorite" href="https://twitter.com/intent/favorite?tweet_id='.$tweet['id_str'].'"></a>';
-
-                // timestamp and permalink
-                $timestamp = '<a href="https://twitter.com/bunndjco/status/'.$tweet['id_str'].'" target="_blank">
-                    '.date('M d',strtotime($tweet['created_at'])).'
-                    </a>';
-            }
-
-            // format fragment
-            $tweet_fragment = '<div class="post"><div class="meta">
-                <a href="https://twitter.com/bunndjco/status/'.$tweet['id_str'].'" target="_blank">@'.$twitter_id.'</a>'.
-            '</div>
-            <div class="tweet">'
-                .$tweet_text.
-            '</div>
-            <div class="intents">'
-            .$intents.
-            '</div></div>';
-
-            echo $tweet_fragment;
-
-            $tweet_number++;
-        }
-    }
-
-    echo '<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>';
-}
-
-// Filter Modern Tribe's The Events Calendar date output
-function ednc_event_schedule_details($event = null, $before = '', $after = '') {
-    if ( is_null( $event ) ) {
-        global $post;
-        $event = $post;
-    }
-
-    if ( is_numeric( $event ) )
-        $event = get_post( $event );
-
-    $schedule = '<span class="date-start dtstart">';
-    $format = '';
-    $date_without_year_format = tribe_get_date_format();
-    $date_with_year_format = tribe_get_date_format( true );
-    $time_format = get_option( 'time_format' );
-    $datetime_separator = tribe_get_option('dateTimeSeparator', ' @ ');
-    $time_range_separator = tribe_get_option('timeRangeSeparator', ' - ');
-    $microformatStartFormat = tribe_get_start_date( $event, false, 'Y-m-dTh:i' );
-    $microformatEndFormat = tribe_get_end_date( $event, false, 'Y-m-dTh:i' );
-
-    $settings = array(
-        'show_end_time' => true,
-        'time' => true,
-    );
-
-    $settings = wp_parse_args( apply_filters('tribe_events_event_schedule_details_formatting', $settings), $settings );
-    if ( ! $settings['time'] ) $settings['show_end_time'] = false;
-    extract($settings);
-
-    $format = $date_with_year_format;
-
-    // if it starts and ends in the current year then there is no need to display the year
-    if ( tribe_get_start_date( $event, false, 'Y' ) === date( 'Y' ) && tribe_get_end_date( $event, false, 'Y' ) === date( 'Y' ) ) {
-        $format = $date_without_year_format;
-    }
-
-    if ( tribe_event_is_multiday( $event ) ) { // multi-date event
-
-        $format2ndday = $date_with_year_format;
-
-        //If it's all day and the end date is in the same month and year, just show the day and year.
-        if ( tribe_event_is_all_day( $event ) && tribe_get_end_date( $event, false, 'm' ) === tribe_get_start_date( $event, false, 'm' ) && tribe_get_end_date( $event, false, 'Y' ) === date( 'Y' ) ) {
-            $format2ndday = 'j, Y';
-        }
-
-        if ( tribe_event_is_all_day( $event ) ) {
-            $schedule .= tribe_get_start_date( $event, true, $format );
-            $schedule .= '<span class="value-title" title="'. $microformatStartFormat .'"></span>';
-            $schedule .= '</span>'.$time_range_separator;
-            $schedule .= '<span class="date-end dtend">';
-            $schedule .= tribe_get_end_date( $event, true, $format2ndday );
-            $schedule .= '<span class="value-title" title="'. $microformatEndFormat .'"></span>';
+    if ($entries) {
+      // loop through entries and gather the various responses
+      foreach ($entries as $e) {
+        if (array_key_exists($e['2'], $values)) {
+          $values[$e['2']]['value'] ++;
         } else {
-            $schedule .= tribe_get_start_date( $event, false, $format ) . ( $time ? $datetime_separator . tribe_get_start_date( $event, false, $time_format ) : '' );
-            $schedule .= '<span class="value-title" title="'. $microformatStartFormat .'"></span>';
-            $schedule .= '</span>'.$time_range_separator;
-            $schedule .= '<span class="date-end dtend">';
-            $schedule .= tribe_get_end_date( $event, false, $format2ndday ) . ( $time ? $datetime_separator . tribe_get_end_date( $event, false, $time_format ) : '' );
-            $schedule .= '<span class="value-title" title="'. $microformatEndFormat .'"></span>';
+          $values[$e['2']]['value'] = 1;
+          $values[$e['2']]['label'] = $e['2'];
+          $values[$e['2']]['color'] = '#123456';
         }
+      }
 
-    } elseif ( tribe_event_is_all_day( $event ) ) { // all day event
-        $schedule .=  tribe_get_start_date( $event, true, $format );
-        $schedule .= '<span class="value-title" title="'. $microformatStartFormat .'"></span>';
-    } else { // single day event
-        if ( tribe_get_start_date( $event, false, 'g:i A' ) === tribe_get_end_date( $event, false, 'g:i A' ) ) { // Same start/end time
-            $schedule .= tribe_get_start_date( $event, false, $format ) . ( $time ? $datetime_separator . tribe_get_start_date( $event, false, $time_format ) : '' );
-            $schedule .= '<span class="value-title" title="'. $microformatStartFormat .'"></span>';
-        } else { // defined start/end time
-            $schedule .= tribe_get_start_date( $event, false, $format ) . ( $time ? $datetime_separator . tribe_get_start_date( $event, false, $time_format ) : '' );
-            $schedule .= '<span class="value-title" title="'. $microformatStartFormat .'"></span>';
-            $schedule .= '</span>' . ( $show_end_time ? $time_range_separator : '' );
-            $schedule .= '<span class="end-time dtend">';
-            $schedule .= ( $show_end_time ? tribe_get_end_date( $event, false, $time_format ) : '' ) . '<span class="value-title" title="'. $microformatEndFormat .'"></span>';
-        }
+      $data = array_values($values);
+
+      //print_r($data);
+
+      $data = json_encode($data);
+
+      // echo $data;
+
+      // $confirmation = '<script type="text/javascript" src="'.get_template_directory_uri().'/assets/app/bower_components/chartist/libdist/chartist.min.js"></script>';
+
+      $confirmation = "<canvas id='chart-pie'></canvas>\n";
+
+      $confirmation .= '<script type="text/javascript">';
+        $confirmation .= "var data = $data;\n";
+        // $confirmation .= "var options = {
+        //   labelInterpolationFnc: function(value) {
+        //     return value[0]
+        //   }
+        // };\n";
+        // $confirmation .= "new Chartist.Pie('.ct-pie', data, options);\n";
+
+        $confirmation .= "var ctx = jQuery('#chart-pie').get(0).getContext('2d');\n";
+        $confirmation .= "var pollResults = new Chart(ctx).Pie(data);\n";
+      $confirmation .= "</script>\n";
+
+      // $confirmation .= "<div class='.ct-pie'></div>\n";
+      $confirmation .= "&nbsp;";
     }
+  }
 
-    $schedule .= '</span>';
-
-    $schedule = $before . $schedule . $after;
-
-    return $schedule;
+  return $confirmation;
 }
+// add_filter("gform_confirmation", "ednc_poll_confirmation", 10, 4);
 
-// Remove share buttons and related posts from bottom of blog post content so we can add them manually later
-function jptweak_remove_share() {
-    remove_filter( 'the_content', 'sharing_display',19 );
-    remove_filter( 'the_excerpt', 'sharing_display',19 );
-    if ( class_exists( 'Jetpack_Likes' ) ) {
-        remove_filter( 'the_content', array( Jetpack_Likes::init(), 'post_likes' ), 30, 1 );
-    }
+
+// Auto-generate date for EdNews titles
+function ednc_news_date_title($data, $postarr) {
+  if ($data['post_type'] == 'ednews') {
+    // If our form has not been submitted, we dont want to do anything
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    // Verify this came from the our screen and with proper authorization because save_post can be triggered at other times
+    // if (!isset($_POST['my_nonce_field'])) return;
+
+    // If nonce is set, verify it
+    // if(isset($_POST['my_nonce_field']) && !wp_verify_nonce($_POST['my_nonce_field'], plugins_url(__FILE__))) return;
+
+    // Make sure current user can save posts
+    if ( !current_user_can('edit_post', $post_id) ) return;
+
+    // Set the title to the post date
+    $title = $data['post_date'];
+    $data['post_title'] = date('l, F j, Y', strtotime($title));
+  }
+
+  return $data;
 }
+add_filter('wp_insert_post_data', 'ednc_news_date_title', 99, 2);
 
-add_action( 'loop_start', 'jptweak_remove_share' );
-
-function jetpackme_remove_rp() {
-    $jprp = Jetpack_RelatedPosts::init();
-    $callback = array( $jprp, 'filter_add_target_to_dom' );
-    remove_filter( 'the_content', $callback, 40 );
-}
-add_filter( 'wp', 'jetpackme_remove_rp', 20 );
+?>

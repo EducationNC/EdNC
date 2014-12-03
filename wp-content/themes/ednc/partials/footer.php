@@ -7,75 +7,74 @@
  * @package EducationNC
  */
 ?>
-          </div><!-- .content -->
+        </div><!-- .content -->
 
-          <footer class="footer">
-            <div class="above-footer">
-              <div class="row">
-                <div class="small-12 columns">
-                  Logo
-                </div>
+        <footer class="footer">
+          <div class="above-footer">
+            <ul class="inline-list text-center">
+              <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/zsrf-gray-transparent.png" width="153" alt="Z. Smith Reynolds Foundation" />
+              <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/best-nc-gray-transparent.png" width="78" alt="Best of NC" />
+              <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/bcbsnclogo-gray-transparent.png" width="209" alt="Blue Cross Blue Shield North Carolina" />
+              <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/iac-gray-transparent.png" width="239" alt="International Affairs Council" />
+            </ul>
+          </div>
 
-                <div class="small-12 columns">
-                  Sponsors logos
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="small-12 columns">
-                <nav>
-                  <ul>
-                    <li><a href="#">Research</a></li>
-                    <li><a href="#">Data</a></li>
-                    <li><a href="#">Districts</a></li>
-                    <li><a href="#">Voices</a></li>
-                </nav>
-              </div>
-
-              <div class="small-12 columns">
-                <h4>Stay Connected</h4>
-                <ul>
-                  <li><a href="#">Facebook</a></li>
-                  <li><a href="#">Twitter</a></li>
-                  <li><a href="#">Instagram</a></li>
-                  <li><a href="#">YouTube</a></li>
-                  <li><a href="#">Google+</a></li>
-                  <li><a href="#">LinkedIn</a></li>
-                </ul>
-                <a href="#">Email Digests &amp; Alerts</a>
-              </div>
-
-              <div class="small-12 columns">
-                <h4>Support</h4>
-                <ul>
-                  <li><a href="#">Donations</a></li>
-                  <li><a href="#">Underwriting Opportunities</a></li>
-                </ul>
-              </div>
-
-              <div class="small-12 columns">
-                <h4>EducationNC</h4>
-                <ul>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Board of Directors</a></li>
-                  <li><a href="#">Supporters</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
+          <div class="row">
+            <div class="large-3 columns show-for-large-up">
+              <h4>EdNC.org</h4>
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Issues</a></li>
+                <li><a href="#">Data</a></li>
+                <li><a href="#">Districts</a></li>
+                <li><a href="#">Voices</a></li>
+              </ul>
             </div>
 
-            <div class="below-footer row">
-              <p class="centered">
-                &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
-                <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
-              </p>
+            <div class="large-3 medium-4 columns">
+              <h4>Stay Connected</h4>
+              <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">YouTube</a></li>
+                <li><a href="#">Google+</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li>&nbsp;</li>
+                <li><a href="#">Email Digests &amp; Alerts</a></li>
+              </ul>
             </div>
-          </footer>
 
-        </div><!-- .scroller-inner -->
-      </div><!-- .scroller -->
+            <div class="large-3 medium-4 columns">
+              <h4>Support us</h4>
+              <ul>
+                <li><a href="#">Make a donation</a></li>
+                <li><a href="#">Sponsorship opportunities</a></li>
+              </ul>
+            </div>
+
+            <div class="large-3 medium-4 columns">
+              <h4>EducationNC</h4>
+              <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Board of Directors</a></li>
+                <li><a href="#">Supporters</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="below-footer">
+            <p class="text-center small">
+              &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
+              <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+            </p>
+          </div>
+        </footer>
+
+      </div><!-- .container -->
     </div><!-- .oc-pusher -->
-  </div><!-- .container -->
+  </div><!-- .wrapper -->
 <?php wp_footer(); ?>
 
 </body>

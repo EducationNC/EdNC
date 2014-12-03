@@ -95,37 +95,52 @@ $font-family-serif: Merriweather, serif;
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
 
-$white       : #FFFFFF;
-// $ghost       : #FAFAFA;
-// $snow        : #F9F9F9;
-// $vapor       : #F6F6F6;
-// $white-smoke : #F5F5F5;
-// $silver      : #EFEFEF;
-// $smoke       : #EEEEEE;
-// $gainsboro   : #DDDDDD;
-// $iron        : #CCCCCC;
-// $base        : #AAAAAA;
-// $aluminum    : #999999;
-// $jumbo       : #888888;
-// $monsoon     : #777777;
-// $steel       : #666666;
-// $charcoal    : #555555;
-// $tuatara     : #444444;
-// $oil         : #333333;
-// $jet         : #222222;
-$black       : #000000;
-$purple      : #731454;
-$dark-blue   : #2B3E50;
-$light-blue  : #5681B3;
-$green       : #98A942;
+$transparent : rgba(255, 255, 255, 0);
+$white70     : rgba(255, 255, 255, .6);
+$shadow      : rgba(100, 100, 100, .5);
 
+$white       : #FFFFFF;
+$black       : #000000;
+
+$deep-purple0: rgba(38, 7, 28, 0);
+$deep-purple : #26071C;
+
+$purple-dark : #67124B;
+$purple      : #731454;
+$purple-light: #801760;
+$purple-text : #8B185E;
+
+$pink-dark   : #93195D;
+$pink-light  : #B62078;
+
+$pink2-dark  : #7B1351;
+$pink2-light : #971D67;
+
+$midnight-dark : #263748;
+$midnight    : #2B3E50;
+$midnight-light: #32485B;
+
+$blue-dark   : #4D74A1;
+$blue        : #5681B3;
+$blue-light  : #628EBE;
+
+$green-dark  : #A2AD41;
+$green       : #ADB947;
+$green-light : #B7C351;
+
+$green2-dark : #89983B;
+$green2-light: #A5B54C;
+
+$ice-dark    : #D4D8D9;
 $ice         : #ECF0F1;
-$ice-dark10  : darken($ice, 10%);
-$medium-gray : #B4B7B8;
+$ice-light   : #EFF3F3;
+$gray-text   : #707273;
+
+
 
 // We use these as default colors throughout
-$primary-color: $green;
-$secondary-color: $dark-blue;
+$primary-color: $blue;
+$secondary-color: $purple;
 $alert-color: #E74B3C;
 $success-color: $green;
 $warning-color: #f08a24;
@@ -133,7 +148,7 @@ $info-color: $ice;
 
 // We use these to control various global styles
 // $body-bg: $white;
-$body-font-color: $dark-blue;
+$body-font-color: $midnight;
 $body-font-family: $font-family-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
@@ -159,11 +174,11 @@ $body-font-family: $font-family-serif;
 // d. Media Query Ranges
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $small-range: (0em, 40em);
-// $medium-range: (40.063em, 64em);
-// $large-range: (64.063em, 90em);
-// $xlarge-range: (90.063em, 120em);
-// $xxlarge-range: (120.063em, 99999999em);
+// $small-range: (0em, 40em);                 // 0 -640
+// $medium-range: (40.063em, 64em);           // 641 - 1024
+// $large-range: (64.063em, 90em);            // 1025 - 1440
+// $xlarge-range: (90.063em, 120em);          // 1441 - 1920
+// $xxlarge-range: (120.063em, 99999999em);   // 1921 - up
 
 // $screen: "only screen";
 
@@ -206,10 +221,10 @@ $body-font-family: $font-family-serif;
 $header-font-family: $font-family-sans-serif;
 $header-font-weight: 300;
 // $header-font-style: normal;
-// $header-font-color: $jet;
+$header-font-color: $midnight;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
-// $header-bottom-margin: .5rem;
+$header-bottom-margin: .8rem;
 // $header-text-rendering: optimizeLegibility;
 
 // We use these to control header font sizes
@@ -251,13 +266,13 @@ $header-font-weight: 300;
 // $paragraph-text-rendering: optimizeLegibility;
 
 // We use these to style <code> tags
-// $code-color: $oil;
+$code-color: $gray-text;
 // $code-font-family: $font-family-monospace;
 // $code-font-weight: $font-weight-normal;
-// $code-background-color: scale-color($secondary-color, $lightness: 70%);
+$code-background-color: $ice-light;
 // $code-border-size: 1px;
 // $code-border-style: solid;
-// $code-border-color: scale-color($code-background-color, $lightness: -10%);
+$code-border-color: $ice;
 // $code-padding: rem-calc(2) rem-calc(5) rem-calc(1);
 
 // We use these to style anchors
@@ -287,15 +302,15 @@ $header-font-weight: 300;
 // $definition-list-margin-bottom: rem-calc(12);
 
 // We use these to style blockquotes
-// $blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
+$blockquote-font-color: $midnight;
 // $blockquote-padding: rem-calc(9 20 0 19);
-// $blockquote-border: 1px solid $gainsboro;
+$blockquote-border: 1px solid $ice;
 // $blockquote-cite-font-size: rem-calc(13);
-// $blockquote-cite-font-color: scale-color($header-font-color, $lightness: 23%);
+$blockquote-cite-font-color: $gray-text;
 // $blockquote-cite-link-color: $blockquote-cite-font-color;
 
 // Acronym styles
-// $acronym-underline: 1px dotted $gainsboro;
+$acronym-underline: 1px dotted $ice;
 
 // We use these to control padding and margin
 // $microformat-padding: rem-calc(10 12);
@@ -311,7 +326,7 @@ $header-font-weight: 300;
 // $microformat-fullname-font-size: rem-calc(15);
 
 // We use this to control the summary font styles
-// $microformat-summary-font-weight: $font-weight-bold;
+$microformat-summary-font-weight: 300;
 
 // We use this to control abbr padding
 // $microformat-abbr-padding: rem-calc(0 1);
@@ -624,8 +639,8 @@ $header-font-weight: 300;
 
 // We use these to style the labels in different ways
 // $form-label-pointer: pointer;
-// $form-label-font-size: rem-calc(14);
-// $form-label-font-weight: $font-weight-normal;
+$form-label-font-size: 1em;
+$form-label-font-weight: 300;
 // $form-label-line-height: 1.5;
 // $form-label-font-color: scale-color($black, $lightness: 30%);
 // $form-label-small-transform: capitalize;
@@ -814,7 +829,7 @@ $tabbar-bg: $ice;
 // $tabbar-height: rem-calc(45);
 // $tabbar-icon-width: $tabbar-height;
 // $tabbar-line-height: $tabbar-height;
-$tabbar-color: $dark-blue;
+$tabbar-color: $midnight;
 // $tabbar-middle-padding: 0 rem-calc(10);
 
 // Off Canvas Divider Styles
@@ -1275,18 +1290,18 @@ $menu-slide: "transform 350ms ease";
 // $include-html-table-classes: $include-html-classes;
 
 // These control the background color for the table and even rows
-// $table-bg: $white;
-// $table-even-row-bg: $snow  ;
+$table-bg: $white;
+$table-even-row-bg: $ice-light  ;
 
 // These control the table cell border style
 // $table-border-style: solid;
 // $table-border-size: 1px;
-// $table-border-color: $gainsboro;
+$table-border-color: $ice-dark;
 
 // These control the table head styles
-// $table-head-bg: $white-smoke  ;
+$table-head-bg: $ice  ;
 // $table-head-font-size: rem-calc(14);
-// $table-head-font-color: $jet;
+$table-head-font-color: $midnight;
 // $table-head-font-weight: $font-weight-bold;
 // $table-head-padding: rem-calc(8 10 10);
 
@@ -1369,7 +1384,7 @@ $menu-slide: "transform 350ms ease";
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $ice;
+$topbar-bg-color: $ice;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1381,7 +1396,7 @@ $menu-slide: "transform 350ms ease";
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
+$topbar-dropdown-bg: transparent;
 // $topbar-dropdown-link-color: $white;
 // $topbar-dropdown-link-bg: $oil;
 // $topbar-dropdown-link-weight: $font-weight-normal;
@@ -1390,19 +1405,19 @@ $menu-slide: "transform 350ms ease";
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: $white;
-// $topbar-link-color-hover: $white;
-// $topbar-link-color-active: $white;
-// $topbar-link-color-active-hover: $white;
+$topbar-link-color: $midnight;
+$topbar-link-color-hover: $purple-text;
+$topbar-link-color-active: $purple;
+$topbar-link-color-active-hover: $purple;
 // $topbar-link-weight: $font-weight-normal;
-// $topbar-link-font-size: rem-calc(13);
+$topbar-link-font-size: rem-calc(16);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg: $topbar-bg;
+$topbar-link-bg: transparent;
 // $topbar-link-bg-color-hover: $charcoal;
 // $topbar-link-bg-hover: #272727;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
-// $topbar-link-font-family: $body-font-family;
+$topbar-link-font-family: $header-font-family;
 // $topbar-link-text-transform: none;
 // $topbar-link-padding: $topbar-height / 3;
 // $topbar-back-link-size: $h5-font-size;

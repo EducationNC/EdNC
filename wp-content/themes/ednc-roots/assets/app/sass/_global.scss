@@ -1,0 +1,197 @@
+// Typography
+// -------------------------
+
+html {
+  font-size: 100%;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+a {
+  transition: all .3s;
+  text-decoration: underline;
+
+  &:hover, &:active, &:focus {
+    color: $blue-dark;
+    text-decoration: underline;
+  }
+}
+
+.content-section-title {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  color: $purple-text;
+  font-size: 2.25rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.content-section-subtitle {
+  font-family: $font-family-serif;
+  font-weight: 300;
+  font-style: italic;
+  color: $midnight;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.list-item-title {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  color: $midnight;
+  font-size: 1.125rem;
+}
+
+h1, .h1, .article-title, .entry-title {
+  font-family: $font-family-sans-serif;
+  color: $midnight;
+  font-size: $font-size-h1;
+  font-weight: normal;
+
+  .article-title-overlay & {
+    color: $white;
+    font-size: 3.5rem;
+    line-height: 1.2em;
+    font-weight: 300;
+  }
+
+  + h2, .h2, .article-subtitle {
+    margin-top: 0;
+  }
+}
+
+h2, .h2, .article-subtitle {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  color: $purple-text;
+  font-size: $font-size-h2;
+}
+
+h3, .h3, .article-section-title {
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
+  color: $midnight;
+  font-size: $font-size-h3;
+
+  .entry-content & {
+    margin-top: 2em;
+  }
+}
+
+h4, .h4, .article-section-subtitle {
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
+  color: $midnight;
+  font-size: $font-size-h4;
+  line-height: 1.2em;
+
+  li & {
+    font-size: 1.125rem;
+    font-weight: 300;
+    margin: 0;
+
+    a {
+      color: $midnight;
+      text-decoration: none;
+    }
+  }
+}
+
+.meta, .attr, .duration {
+  font-family: $font-family-serif;
+  font-weight: normal;
+  font-size: $font-size-h6;
+
+  li & {
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+label, .label {
+  border-radius: 0;
+}
+
+.caption {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.intro {
+  font-family: $font-family-serif;
+  font-weight: 300;
+  font-size: $font-size-h4;
+  line-height: 1.5em;
+}
+
+blockquote, .blockquote {
+  font-family: $font-family-serif;
+  font-weight: 300;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: $font-size-h3;
+
+  p {
+    font-weight: inherit;
+
+    &[style*=left], &[style*=right] {
+      position: relative;
+      padding: 1.25rem 0;
+      border-top: 3px solid $ice;
+      border-bottom: 3px solid $ice;
+      margin: 0 0 1.25rem;
+
+      @media (min-width: $screen-sm-min) {
+        width: 50%;
+      }
+    }
+
+    &[style*=left] {
+      float: left;
+      margin-right: 1.25rem;
+
+      @media (min-width: $screen-md-min) {
+        margin-left: -14.7%;
+      }
+    }
+
+    &[style*=right] {
+      float: right;
+      text-align: left !important;
+      margin-left: 1.25rem;
+
+      @media (min-width: $screen-md-min) {
+        margin-right: -14.7%;
+      }
+    }
+
+    &[style*=center] {
+      margin: 2.5rem 0;
+
+      @media (min-width: $screen-md-min) {
+        margin: 2.5rem -14.7%;
+      }
+    }
+  }
+
+  cite {
+    line-height: 2em;
+  }
+}
+
+sup.footnote {
+  a:before {
+    content: '\005B';
+  }
+
+  a:after {
+    content: '\005D';
+  }
+}

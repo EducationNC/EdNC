@@ -24,10 +24,9 @@ function ednc_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary-left' => 'Primary Menu - Left Side',
-        'primary-right' => 'Primary Menu - Right Side',
-        'footer' => 'Footer Menu',
-        'enology-side' => 'Enology Side Menu'
+		'primary' => 'Primary Menu',
+        'minor' => 'Minor Menu',
+        'footer' => 'Footer Menu'
 	) );
 
 	// Enable support for HTML5 markup.

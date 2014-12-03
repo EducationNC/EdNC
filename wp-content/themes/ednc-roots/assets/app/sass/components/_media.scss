@@ -1,0 +1,58 @@
+// Captions
+.wp-caption {
+  @extend .thumbnail;
+}
+
+.wp-caption-text {
+  @extend .thumbnail;
+  @extend .caption;
+}
+
+// Gallery shortcode
+.gallery-row {
+  padding: ($line-height-computed / 2) 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.object-wrapper {
+  position: relative;
+  padding-bottom: 75%;
+  padding-top: 25px;
+  height: 0;
+
+  object, embed {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+object, embed {
+  max-width: 100%;
+}
+
+.entry-content-asset {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  margin-bottom: 1em;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

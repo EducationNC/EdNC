@@ -1,0 +1,495 @@
+
+.twitter-timeline {
+  width: 100% !important;
+}
+
+.label {
+  @include blue-gradient-right;
+  color: $ice;
+  padding: 5px 15px;
+  font-size: 1rem;
+  min-width: 140px;
+  font-family: $font-family-serif;
+  font-weight: 300;
+
+  &.big {
+    font-size: 1.25rem;
+    padding: 1rem 1.5rem 1.0625rem;
+  }
+}
+
+.post {
+  position: relative;
+  margin: 1.25rem 0;
+
+  @media (min-width: $screen-md-min) {
+    margin: 0 0 3em;
+  }
+}
+
+.photo-overlay {
+  position: relative;
+  margin: 0 0 1em;
+  padding: 0;
+  overflow: hidden;
+
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  .post-title {
+    margin: 0;
+    position: absolute;
+    bottom: 1.5em;
+    left: 10px;
+    right: 10px;
+    font-family: $font-family-sans-serif;
+    font-weight: 300;
+    color: $white;
+    z-index: 2;
+    transition: transform .3s;
+  }
+
+  h2.post-title {
+    // line-height: rem-calc(36);
+  }
+
+  .meta, .line {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border-top: 3px solid $white;
+    color: $white;
+    z-index: 2;
+    margin: 0;
+    padding-top: .3em;
+    opacity: 1;
+    transition: all .3s;
+  }
+
+  .line {
+    right: 30px;
+    bottom: 1em;
+  }
+
+  .mega-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 4;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include trans-purple-gradient-bottom;
+    transition: transform .3s;
+  }
+
+  img {
+    position: relative;
+    width: 100%;
+  }
+
+  @media (min-width: $screen-md-min) {
+    .post-title {
+      transform: translateY(1.25em);
+    }
+
+    .meta, .line {
+      opacity: 0;
+      transform: translateY(2em);
+    }
+  }
+
+  &.wide {
+    height: 250px;
+    overflow: hidden;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    &.small-wide {
+      height: 250px;
+      overflow: hidden;
+
+      img {
+        // transform?
+      }
+    }
+  }
+
+  &.light {
+    &:after {
+      @include trans-white-gradient-middle;
+    }
+  }
+
+  .article-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+
+    .columns{
+      padding-top: 3em;
+      padding-bottom: 3em;
+    }
+
+    .meta {
+      position: relative;
+      color: $white;
+      bottom: auto;
+      left: auto;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  &.header {
+    margin-bottom: 3em;
+    max-height: 600px;
+    overflow: hidden;
+  }
+}
+
+.excerpt {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  max-height: 9.1875rem;
+  font-size: .9em;
+  line-height: 1.75em;
+
+  @media (min-width: $screen-md-min) {
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 1;
+      transition: all .5s;
+      @include trans-white-gradient-bottom;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .read-more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 0 20px 15px $white;
+    background: $white;
+    line-height: 1.5em;
+    border-radius: 50%;
+    padding: 0 8px 0 20px;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .has-photo-overlay {
+    &:hover {
+      .photo-overlay:not(.light) {
+        .post-title {
+          transform: translateY(0);
+        }
+
+        .meta, .line {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        &:after {
+          transform: translateY(15%);
+        }
+      }
+
+      .excerpt:after {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.banners {
+  .photo-overlay {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+      .banner-line {
+        margin-left: 25%;
+        margin-right: 25%;
+      }
+    }
+  }
+
+  .banner-line {
+    background: $purple;
+    height: 3px;
+    margin: .5em 50% .75em;
+    transition: margin .3s;
+  }
+
+  img {
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+.content-listing {
+  ul, ol {
+    list-style: none;
+    margin: 0;
+
+    li {
+      padding: .75em 0;
+      text-align: left;
+
+      * {
+        margin: 0;
+      }
+
+      & + li {
+        border-top: 2px solid lighten($gray-text, 50%);
+      }
+    }
+  }
+}
+
+.photo-strip {
+  position: relative;
+  width: 100%;
+  margin: 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    float: left;
+    display: block;
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      @include trans-purple-gradient-bottom;
+      transition: transform .3s;
+    }
+  }
+
+  a {
+    position: absolute;
+    display: block;
+    outline: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .meta {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: $white;
+    z-index: 2;
+    margin: 0;
+    padding-top: .3em;
+    opacity: 1;
+    transition: all .3s;
+  }
+}
+
+.tribe-events-list-widget {
+  .tribe-events-widget-link {
+    display: none;
+  }
+}
+
+#poll-container {
+  .pds-box.pds-box {
+    font-family: inherit;
+    background: none;
+    border: 0px none;
+    width: auto;
+    font-size: inherit;
+    color: inherit;
+    border-radius: 0;
+  }
+
+  .pds-question-top.pds-question-top {
+    padding: 0;
+    margin-bottom: 0.8rem;
+    font-family: $font-family-sans-serif;
+    font-weight: normal;
+    color: $midnight;
+    font-size: $font-size-h4;
+  }
+
+  .pds-answer.pds-answer {
+    padding: 0;
+    border: 0;
+
+    label {
+      line-height: 1;
+      width: auto;
+      color: inherit;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+
+  .pds-answer-input.pds-answer-input {
+    line-height: 1;
+
+    input {
+      margin: 0;
+      vertical-align: top;
+    }
+  }
+
+  .pds-answer-other.pds-answer-other {
+    input {
+      width: auto;
+      margin-left: 25px;
+      margin-bottom: 0;
+    }
+  }
+
+  .pds-vote-button.pds-vote-button {
+    border: none;
+    border-radius: 0;
+    font-family: $font-family-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    padding: 6px 12px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    color: $ice;
+    @extend .btn; // have to do this because the double classes trick isn't working
+    @include green-gradient-right;
+
+    &:after {
+      @extend .btn:after;
+    }
+
+    &:hover, &:active, &:focus {
+      @extend .btn:hover;
+      border: none;
+
+      &:after {
+        @extend .btn:hover:after;
+      }
+    }
+  }
+
+  .pds-links.pds-links {
+    padding: 0;
+    text-align: left;
+
+    a {
+      @extend a;
+      @extend .small;
+
+      &:after {
+        content: ' \00BB';
+        padding-right: 10px;
+      }
+
+      // &.pds-pd-link {
+      //   float: right;
+      //   color: $ice-dark;
+      //
+      //   &:after {
+      //     display: none;
+      //   }
+      // }
+    }
+  }
+
+  .pds-links-back.pds-links-back {
+    padding: 0;
+    text-align: left;
+
+    a {
+      @extend a;
+      @extend .small;
+
+      &:before {
+        content: '\00AB ';
+      }
+
+      // &.pds-pd-link {
+      //   float: right;
+      //   color: $ice-dark;
+      //
+      //   &:before {
+      //     display: none;
+      //   }
+      // }
+    }
+  }
+
+  a.pds-pd-link.pds-pd-link {
+    float: right;
+    color: $ice-dark;
+
+    &:before, &:after {
+      display: none;
+    }
+  }
+}
+
+.mc-field-group {
+  margin-bottom: .75em;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  input[type="checkbox"] {
+    width: 25px;
+  }
+}
