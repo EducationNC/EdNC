@@ -6,7 +6,7 @@ $glt_css = get_option("googlelanguagetranslator_css");
   echo $glt_css;
 
 if (get_option('googlelanguagetranslator_flags') == 'show_flags') {
-	
+
 	if(get_option('googlelanguagetranslator_display')=='Vertical') { 
 	  if (get_option('googlelanguagetranslator_language_option')=='specific') {
 		echo '#flags {display:none !important; }';

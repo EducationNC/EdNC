@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 	   jQuery ('.choose_flags').css('display','none');
 		
 	} else if (language_display == 'specific') {
-	   jQuery ('.languages').css('display','inline');
+	   //jQuery ('.languages').css('display','inline');
 	   jQuery ('.choose_flags_intro').css('display','none');
 	   jQuery ('.choose_flags').css('display','none');
 	}

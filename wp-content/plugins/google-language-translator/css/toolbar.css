@@ -51,7 +51,6 @@
 }
 
 .tool-container.tool-top, .tool-container.tool-bottom {
-	height: 27px;
 	border-bottom: 1px solid #beb8b8 ; /* #B1A9A9 */
 }
 

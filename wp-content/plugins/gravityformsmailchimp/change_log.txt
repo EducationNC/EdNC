@@ -1,5 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------
-Version 3.0.1
+Version 3.1
+    - Fixed issue where grouping assignment was not working for already subscribed users
+	- Fixed issue where a fatal error is displayed in certain situations
 	- Fixed issue with upgrade that caused configuration not to be copied over in certain situations
 
 ------------------------------------------------------------------------------------------------------------------

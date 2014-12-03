@@ -773,7 +773,12 @@ class GFMailChimp extends GFFeedAddOn {
 
 		try {
 			$params = array( 'id' => $mailchimp_list );
-			$groups = $api->call( 'lists/interest-groupings', $params );
+			if ( empty($api) ) {
+				$groups = array();
+			}
+			else {
+				$groups = $api->call( 'lists/interest-groupings', $params );
+			}
 		}
 		catch ( Exception $e ) {
 			$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
@@ -841,17 +846,22 @@ class GFMailChimp extends GFFeedAddOn {
 
 		foreach ( $merge_vars['GROUPINGS'] as &$grouping ) {
 
-			// groups from the $merge_vars are in a comman-delimited string, let's convert to array
-			$new_groups = explode( ', ', $grouping['groups'] );
+			// return an array of existing groupings
+			$existing_groups = $this->get_existing_groups( $grouping["name"], $current_groupings );
+            // filter out groupings to which the user already belongs
+            $active_existing_groups = array();
+            foreach ($existing_groups as $active_existing_group)
+            {
+                if($active_existing_group["interested"] == true)
+                {
+                    $active_existing_groups[]= $active_existing_group["name"];
+                }
 
-			// return an array of existing groups to which the user belongs
-			$existing_groups = $this->get_existing_groups( $grouping['name'], $current_groupings );
-
-			// merge the new and existing groups, filter out duplicate groups
-			$groups = array_unique( array_merge( $existing_groups, $new_groups ) );
-
-			// convert groups back into comma-delimited string
-			$grouping['groups'] = implode( ', ', $groups );
+            }
+           
+           // merge the new and existing groups, filter out duplicate groups
+           $merged_groups = array_unique(array_merge_recursive($active_existing_groups, $grouping["groups"]));
+           $grouping['groups']  = $merged_groups; 
 
 		}
 
@@ -862,7 +872,7 @@ class GFMailChimp extends GFFeedAddOn {
 
 		foreach ( $current_groupings as $grouping ) {
 			if ( strtolower( $grouping['name'] ) == strtolower( $grouping_name ) ) {
-				return explode( ', ', $grouping['groups'] );
+				return $grouping['groups'];
 			}
 		}
 
@@ -1088,13 +1098,12 @@ class GFMailChimp extends GFFeedAddOn {
 				//set paypal delay setting
 				$this->update_paypal_delay_settings( 'delay_mailchimp_subscription' );
 			}
-			update_option( 'gf_mailchimp_upgrade', 1 );
 		}
 	}
 
 	public function ensure_upgrade(){
 
-		if ( get_option( 'gf_mailchimp_upgrade' ) ){
+		if ( get_option( 'gf_mailchimp_update' ) ){
 			return false;
 		}
 
@@ -1105,7 +1114,7 @@ class GFMailChimp extends GFFeedAddOn {
 			$this->upgrade( '2.0' );
 		}
 
-		update_option( 'gf_mailchimp_upgrade', 1 );
+		update_option( 'gf_mailchimp_update', 1 );
 	}
 
 
