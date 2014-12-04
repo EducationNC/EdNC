@@ -1,5 +1,9 @@
 <?php while (have_posts()) : the_post(); ?>
-  <?php get_template_part('templates/page', 'header'); ?>
+  <div class="page-header">
+    <h1>
+      <?php echo roots_title(); ?>
+    </h1>
+  </div>
   <?php get_template_part('templates/content', 'about'); ?>
 
   <div class="sep"></div>

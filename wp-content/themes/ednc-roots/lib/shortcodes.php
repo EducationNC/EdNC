@@ -27,4 +27,16 @@
     return $output;
   }
   add_shortcode('aside', 'aside_shortcode');
+
+  // Email signup form shortcode
+  function email_signup_shortcode($atts, $content = null) {
+    extract( shortcode_atts( array(
+
+    ), $atts) );
+
+    $output = get_template_part('templates/email-signup');
+
+    return $output;
+  }
+  add_shortcode('email-signup', 'email_signup_shortcode');
 ?>

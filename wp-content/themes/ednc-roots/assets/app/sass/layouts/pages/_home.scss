@@ -3,21 +3,6 @@
   width: 100% !important;
 }
 
-.label {
-  @include blue-gradient-right;
-  color: $ice;
-  padding: 5px 15px;
-  font-size: 1rem;
-  min-width: 140px;
-  font-family: $font-family-serif;
-  font-weight: 300;
-
-  &.big {
-    font-size: 1.25rem;
-    padding: 1rem 1.5rem 1.0625rem;
-  }
-}
-
 .post {
   position: relative;
   margin: 1.25rem 0;
@@ -40,6 +25,14 @@
     z-index: 3;
   }
 
+  .avatar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+    width: 140px;
+  }
+
   .post-title {
     margin: 0;
     position: absolute;
@@ -49,6 +42,7 @@
     font-family: $font-family-sans-serif;
     font-weight: 300;
     color: $white;
+    text-shadow: 0px 0px 20px $midnight;
     z-index: 2;
     transition: transform .3s;
   }
@@ -217,7 +211,7 @@
         }
 
         &:after {
-          transform: translateY(15%);
+          //transform: translateY(15%);
         }
       }
 
@@ -298,6 +292,8 @@
     overflow: hidden;
     float: left;
     display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     &:after {
       content: '';
@@ -347,137 +343,142 @@
 #poll-container {
   .pds-box.pds-box {
     font-family: inherit;
-    background: none;
-    border: 0px none;
+  //   background: none;
+  //   border: 0px none;
     width: auto;
-    font-size: inherit;
-    color: inherit;
-    border-radius: 0;
+  //   font-size: inherit;
+  //   color: inherit;
+  //   border-radius: 0;
   }
-
+  //
   .pds-question-top.pds-question-top {
-    padding: 0;
-    margin-bottom: 0.8rem;
+  //   padding: 0;
+  //   margin-bottom: 0.8rem;
     font-family: $font-family-sans-serif;
-    font-weight: normal;
-    color: $midnight;
-    font-size: $font-size-h4;
+  //   font-weight: normal;
+  //   color: $midnight;
+    // font-size: $font-size-h4;
   }
-
+  //
   .pds-answer.pds-answer {
-    padding: 0;
-    border: 0;
-
+  //   padding: 0;
+  //   border: 0;
+  //
     label {
-      line-height: 1;
+  //     line-height: 1;
       width: auto;
-      color: inherit;
-      font-size: 14px;
-      font-weight: 300;
+  //     color: inherit;
+  //     font-size: 14px;
+  //     font-weight: 300;
+      font-family: inherit;
+      line-height: 1.5em;
     }
   }
-
-  .pds-answer-input.pds-answer-input {
-    line-height: 1;
-
-    input {
-      margin: 0;
-      vertical-align: top;
-    }
-  }
-
-  .pds-answer-other.pds-answer-other {
-    input {
-      width: auto;
-      margin-left: 25px;
-      margin-bottom: 0;
-    }
-  }
-
+  //
+  // .pds-answer-input.pds-answer-input {
+  //   line-height: 1;
+  //
+  //   input {
+  //     margin: 0;
+  //     vertical-align: top;
+  //   }
+  // }
+  //
+  // .pds-answer-other.pds-answer-other {
+  //   input {
+  //     width: auto;
+  //     margin-left: 25px;
+  //     margin-bottom: 0;
+  //   }
+  // }
+  //
   .pds-vote-button.pds-vote-button {
-    border: none;
-    border-radius: 0;
+  //   border: none;
+  //   border-radius: 0;
     font-family: $font-family-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    padding: 6px 12px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    margin: 0;
-    color: $ice;
-    @extend .btn; // have to do this because the double classes trick isn't working
+  //   font-weight: 400;
+  //   font-size: 1rem;
+  //   padding: 6px 12px;
+  //   text-decoration: none;
+  //   position: relative;
+  //   overflow: hidden;
+  //   margin: 0;
+  //   color: $ice;
+  //   @extend .btn; // have to do this because the double classes trick isn't working
     @include green-gradient-right;
-
-    &:after {
-      @extend .btn:after;
-    }
-
+  //
+  //   &:after {
+  //     @extend .btn:after;
+  //   }
+  //
     &:hover, &:active, &:focus {
-      @extend .btn:hover;
-      border: none;
-
-      &:after {
-        @extend .btn:hover:after;
-      }
+      // @extend .btn:hover;
+      @include dark-green-gradient-right;
+  //     border: none;
+  //
+  //     &:after {
+  //       @extend .btn:hover:after;
+  //     }
     }
   }
-
+  //
   .pds-links.pds-links {
-    padding: 0;
-    text-align: left;
-
+  //   padding: 0;
+  //   text-align: left;
+  //
     a {
-      @extend a;
-      @extend .small;
-
-      &:after {
-        content: ' \00BB';
-        padding-right: 10px;
-      }
-
-      // &.pds-pd-link {
-      //   float: right;
-      //   color: $ice-dark;
-      //
-      //   &:after {
-      //     display: none;
-      //   }
-      // }
+      // padding-left: 10px;
+  //     @extend a;
+  //     @extend .small;
+  //
+  //     &:after {
+  //       content: ' \00BB';
+  //       padding-right: 10px;
+  //     }
+  //
+  //     // &.pds-pd-link {
+  //     //   float: right;
+  //     //   color: $ice-dark;
+  //     //
+  //     //   &:after {
+  //     //     display: none;
+  //     //   }
+  //     // }
     }
   }
-
-  .pds-links-back.pds-links-back {
-    padding: 0;
-    text-align: left;
-
-    a {
-      @extend a;
-      @extend .small;
-
-      &:before {
-        content: '\00AB ';
-      }
-
-      // &.pds-pd-link {
-      //   float: right;
-      //   color: $ice-dark;
-      //
-      //   &:before {
-      //     display: none;
-      //   }
-      // }
-    }
-  }
-
-  a.pds-pd-link.pds-pd-link {
-    float: right;
-    color: $ice-dark;
-
-    &:before, &:after {
-      display: none;
-    }
-  }
+  //
+  // .pds-links-back.pds-links-back {
+  //   padding: 0;
+  //   text-align: left;
+  //
+  //   a {
+  //     @extend a;
+  //     @extend .small;
+  //
+  //     &:before {
+  //       content: '\00AB ';
+  //     }
+  //
+  //     // &.pds-pd-link {
+  //     //   float: right;
+  //     //   color: $ice-dark;
+  //     //
+  //     //   &:before {
+  //     //     display: none;
+  //     //   }
+  //     // }
+  //   }
+  // }
+  //
+  // a.pds-pd-link.pds-pd-link {
+  //   float: right;
+  //   color: $ice-dark;
+  //   display: none !important;
+  //
+  //   &:before, &:after {
+  //     display: none;
+  //   }
+  // }
 }
 
 .mc-field-group {

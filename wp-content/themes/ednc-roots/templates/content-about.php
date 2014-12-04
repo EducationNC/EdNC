@@ -10,6 +10,6 @@
   </div>
 
   <div class="col-md-9 col-lg-8 col-md-pull-3">
-    <?php get_template_part('templates/content', 'page'); ?>
+    <?php the_content(); ?>
   </div>
 </div>

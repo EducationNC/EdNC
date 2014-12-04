@@ -34,6 +34,32 @@ module.exports = function(grunt) {
         '!assets/**/*.min.*'
       ]
     },
+    // libsass using grunt-sass
+    // sass: {
+    //   dev: {
+    //     options: {
+    //       outputStyle: 'nested',
+    //       sourceMap: true
+    //     },
+    //     files: {
+    //       'assets/public/css/main.css': [
+    //       'assets/app/sass/main.scss'
+    //       ]
+    //     }
+    //   },
+    //   build: {
+    //     options: {
+    //       outputStyle: 'compressed',
+    //       sourcemap: false
+    //     },
+    //     files: {
+    //       'assets/public/css/main.min.css': [
+    //       'assets/app/sass/main.scss'
+    //       ]
+    //     }
+    //   }
+    // },
+    // regular sass using grunt-contrib-sass
     sass: {
       dev: {
         options: {
@@ -42,7 +68,7 @@ module.exports = function(grunt) {
           // SASS source map
           // To disable, set sourcemap to false
           // https://github.com/gruntjs/grunt-contrib-sass#sourcemap
-          sourcemap: true
+          sourcemap: 'auto'
         },
         files: {
           'assets/public/css/main.css': [
@@ -57,7 +83,7 @@ module.exports = function(grunt) {
           // SASS source map
           // To disable, set sourcemap to false
           // https://github.com/gruntjs/grunt-contrib-sass#sourcemap
-          sourcemap: true
+          sourcemap: 'auto'
         },
         files: {
           'assets/public/css/main.min.css': [

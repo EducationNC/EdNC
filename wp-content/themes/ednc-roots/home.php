@@ -22,6 +22,9 @@ $logged_in = is_user_logged_in();
 
           $author_id = get_the_author_meta('ID');
           $author_type = wp_get_post_terms($author_id, 'author-type');
+          $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+          $author_avatar = get_field('avatar', $author_bio[0]->ID);
+          $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 
           $image_id = get_post_thumbnail_id();
           $image_src = wp_get_attachment_image_src($image_id, 'full');
@@ -34,6 +37,15 @@ $logged_in = is_user_logged_in();
             <div class="post has-photo-overlay">
               <div class="photo-overlay small-wide">
                 <span class="label"><?php echo $author_type[0]->name; ?></span>
+                <?php
+                if ($author_avatar) {
+                  ?>
+                  <div class="avatar">
+                    <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
+                  </div>
+                  <?php
+                }
+                ?>
                 <h2 class="post-title"><?php the_title(); ?></h2>
                 <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
@@ -43,7 +55,7 @@ $logged_in = is_user_logged_in();
               </div>
 
               <div class="excerpt extra-padding">
-                <?php the_advanced_excerpt(); ?>
+                <?php the_excerpt(); ?>
                 <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
               </div>
             </div>
@@ -78,7 +90,7 @@ $logged_in = is_user_logged_in();
             $image = mr_image_resize(get_field('image'), 350, 350, true, false);
 
             if ($link) {
-              echo '<a href="' . $link . '">';
+              echo '<a href="' . $link . '" target="_blank">';
             }
             echo '<img src="' . $image['url'] . '" alt="' . get_the_title() . '" />';
             if ($link) {
@@ -248,16 +260,16 @@ $logged_in = is_user_logged_in();
     $photos = get_field('gallery', $gallery_id);
     shuffle($photos);
     ?>
-    <h2><span class="label big"><?php echo $gallery->post_title; ?></span></h2>
+    <h2 class="no-bottom-margin"><span class="label big"><?php echo $gallery->post_title; ?></span></h2>
     <div id="photo-strip" class="photo-strip">
       <ul>
         <?php
         foreach ($photos as $photo) {
           $resized = mr_image_resize($photo['url'], 300, 300, true, false);
-          echo '<li><a href="#">';
+          echo '<li>';
             echo '<img src="' . $resized['url'] . '" alt="" />';
             echo '<p class="meta"><strong>' . $photo['title'] . '</strong><br />' . nl2br($photo['caption']) . '</p>';
-          echo '</a></li>';
+          echo '</li>';
         }
         ?>
       </ul>

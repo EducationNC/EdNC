@@ -8,6 +8,12 @@
         <h1 class="entry-title no-top-margin"><?php the_title(); ?></h1>
         <h2><?php the_field('title'); ?></h2>
         <h4><?php the_field('tagline'); ?></h4>
+        <?php
+        $twitter = get_field('twitter');
+        if ($twitter) {
+          echo '<span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a>';
+        }
+        ?>
       </header>
       <div class="entry-content">
         <?php the_content(); ?>

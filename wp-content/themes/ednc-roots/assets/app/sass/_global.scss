@@ -111,8 +111,21 @@ h4, .h4, .article-section-subtitle {
   }
 }
 
-label, .label {
+.label {
+  @include blue-gradient-right;
+  color: $ice;
+  padding: 5px 15px;
+  font-size: 1rem;
+  min-width: 140px;
+  font-family: $font-family-serif;
+  font-weight: 300;
   border-radius: 0;
+
+  &.big {
+    font-size: 1.25rem;
+    line-height: 1em;
+    padding: 1rem 1.5rem 1.0625rem;
+  }
 }
 
 .caption {
@@ -194,4 +207,11 @@ sup.footnote {
   a:after {
     content: '\005D';
   }
+}
+
+.big {
+  font-size: 1.25em;
+  line-height: 0;
+  vertical-align: top;
+  display: inline-block;
 }

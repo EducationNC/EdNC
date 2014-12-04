@@ -40,7 +40,18 @@ if ($image_src) {
           <span class="label"><?php if (is_sticky()) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
           <h1 class="entry-title"><?php the_title(); ?></h1>
           <?php get_template_part('templates/entry-meta'); ?>
-          <?php the_post_thumbnail('post-thumbnail', array('class' => 'hidden-xs')); ?>
+          <?php
+          if (has_post_thumbnail()) {
+            the_post_thumbnail('post-thumbnail', array('class' => 'hidden-xs'));
+            $thumb_id = get_post_thumbnail_id();
+            $thumb_post = get_post($thumb_id);
+            ?>
+            <div class="text-right caption">
+              <?php echo $thumb_post->post_excerpt; ?>
+            </div>
+            <?php
+          }
+          ?>
         </div>
       </div>
     </header>
@@ -94,12 +105,19 @@ if ($image_src) {
               <p class="caption"><?php the_field('tagline'); ?></p> -->
               <?php
               if (get_field('has_bio_page') == 1) { ?>
-                <h3 class="no-top-margin"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                <h3 class="no-margin"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                <?php
+                $twitter = get_field('twitter');
+                if ($twitter) {
+                  echo '<span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a>';
+                }
+                ?>
                 <div class="excerpt">
                   <?php the_advanced_excerpt(); ?>
                   <a href="<?php the_permalink(); ?>" class="read-more">Read the rest &raquo;</a>
                 </div>
               <?php } else { ?>
+                <h3 class="no-margin"><?php the_title(); ?></h3>
                 <div>
                   <?php the_content(); ?>
                 </div>
@@ -139,11 +157,6 @@ if ($image_src) {
                 <?php if ($image_src) { ?>
                   <img src="<?php echo $image_sized['url']; ?>" />
                 <?php } ?>
-              </div>
-
-              <div class="excerpt">
-                <?php the_advanced_excerpt(); ?>
-                <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
               </div>
             </div>
           <?php
