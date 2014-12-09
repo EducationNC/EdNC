@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
     'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
-    'assets/app/js/plugins/*.js',
+    // 'assets/app/js/plugins/*.js',
     'assets/app/js/_*.js'
   ];
 

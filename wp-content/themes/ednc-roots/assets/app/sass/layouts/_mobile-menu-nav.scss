@@ -294,18 +294,13 @@
 }
 
 /* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
-/* We'll show the first level only */
+/* Don't show any of this */
 .no-csstransforms3d .oc-pusher,
 .no-js .oc-pusher {
-  padding-left: 300px;
+  // padding-left: 300px;
 }
 
-.no-csstransforms3d .oc-menu .oc-level,
-.no-js .oc-menu .oc-level {
+.no-csstransforms3d .oc-menu,
+.no-js .oc-menu {
   display: none;
-}
-
-.no-csstransforms3d .oc-menu > .oc-level,
-.no-js .oc-menu > .oc-level {
-  display: block;
 }

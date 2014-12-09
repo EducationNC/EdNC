@@ -54,6 +54,7 @@ $green:                 #ADBB4A;
 $green-light:           #B8C455;
 
 $green2-dark:           #89983B;
+$green2:                #98A941;
 $green2-light:          #A5B54C;
 
 $ice-dark:              #D4D8D9;
@@ -73,7 +74,15 @@ $link-hover-color:      $blue-dark;
 // Gradients
 // -------------------------
 
+  // Utility mixin from Compass
+  @mixin filter-gradient($start-color, $end-color, $orientation: vertical) {
+    $gradient-type: if($orientation == vertical, 0, 1);
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=#{$gradient-type}, startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}');
+  }
+
 @mixin gray-gradient-right() {
+  background-color: $ice;
+  @include filter-gradient($ice-light, $ice-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
   background-image: -moz-linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
   background-image: -ms-linear-gradient(90deg, $ice-light 0%, $ice-dark 100%);
@@ -81,6 +90,8 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin green-gradient-right() {
+  background-color: $green;
+  @include filter-gradient($green-light, $green-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $green-light 0%, $green-dark 100%);
   background-image: -moz-linear-gradient(90deg, $green-light 0%, $green-dark 100%);
   background-image: -ms-linear-gradient(90deg, $green-light 0%, $green-dark 100%);
@@ -88,6 +99,8 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin dark-green-gradient-right() {
+  background-color: $green2;
+  @include filter-gradient($green2-light, $green2-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
   background-image: -moz-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
   background-image: -ms-linear-gradient(90deg, $green2-light 0%, $green2-dark 100%);
@@ -95,6 +108,8 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin purple-gradient-right() {
+  background-color: $purple;
+  @include filter-gradient($purple-light, $purple-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
   background-image: -moz-linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
   background-image: -ms-linear-gradient(90deg, $purple-light 0%, $purple-dark 100%);
@@ -102,6 +117,8 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin pink-gradient-right() {
+  background-color: $pink-dark;
+  @include filter-gradient($pink-light, $pink-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
   background-image: -moz-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
   background-image: -ms-linear-gradient(90deg, $pink-light 0%, $pink-dark 100%);
@@ -109,6 +126,8 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin dark-pink-gradient-right() {
+  background-color: $pink2-dark;
+  @include filter-gradient($pink2-light, $pink2-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
   background-image: -moz-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
   background-image: -ms-linear-gradient(90deg, $pink2-light 0%, $pink2-dark 100%);
@@ -116,6 +135,8 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin blue-gradient-right() {
+  background-color: $midnight;
+  @include filter-gradient($midnight-light, $midnight-dark, horizontal);
   background-image: -o-linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
   background-image: -moz-linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
   background-image: -ms-linear-gradient(90deg, $midnight-light 0%, $midnight-dark 100%);
@@ -123,13 +144,16 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin trans-purple-gradient-bottom() {
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMyNjA3MWMiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMjYwNzFjIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
   background-image: -o-linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
   background-image: -moz-linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
   background-image: -ms-linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
   background-image: linear-gradient(180deg, $deep-purple0 50%, $deep-purple 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0026071c', endColorstr='#26071c',GradientType=0 );
 }
 
 @mixin trans-white-gradient-bottom() {
+  @include filter-gradient($transparent, $white, vertical);
   background-image: -o-linear-gradient(180deg, $transparent 0%, $white 70%);
   background-image: -moz-linear-gradient(180deg, $transparent 0%, $white 70%);
   background-image: -ms-linear-gradient(180deg, $transparent 0%, $white 70%);
@@ -137,6 +161,7 @@ $link-hover-color:      $blue-dark;
 }
 
 @mixin trans-white-gradient-middle() {
+  @include filter-gradient($transparent, $white, vertical);
   background-image: -o-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
   background-image: -moz-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
   background-image: -ms-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
