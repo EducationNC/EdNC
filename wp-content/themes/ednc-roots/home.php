@@ -7,11 +7,9 @@ $logged_in = is_user_logged_in();
     <div class="col-md-9">
       <div class="row">
         <?php
-        $sticky = get_option('sticky_posts');
         $args = array(
           'posts_per_page' => 2,
-          'post__in' => $sticky,
-          'ignore_sticky_posts' => 1
+          'post_type' => 'feature'
         );
 
         $featured = new WP_Query($args);
@@ -113,10 +111,8 @@ $logged_in = is_user_logged_in();
   <?php if ($logged_in) : ?>
   <div class="row">
     <?php
-    $sticky = get_option('sticky_posts');
     $args = array(
-      'posts_per_page' => 4,
-      'post__not_in' => $sticky
+      'posts_per_page' => 4
     );
 
     $featured = new WP_Query($args);

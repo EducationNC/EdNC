@@ -8,6 +8,37 @@
 */
 
 function add_custom_post_types() {
+	register_post_type( 'feature',
+		array('labels' => array(
+			'name' => 'Features',
+			'singular_name' => 'Feature',
+			'add_new' => 'Add New',
+			'add_new_item' => 'Add New Feature',
+			'edit' => 'Edit',
+			'edit_item' => 'Edit Feature',
+			'new_item' => 'New Feature',
+			'view_item' => 'View Feature',
+			'search_items' => 'Search Feature',
+			'not_found' =>  'Nothing found in the Database.',
+			'not_found_in_trash' => 'Nothing found in Trash',
+			'parent_item_colon' => ''
+		), /* end of arrays */
+		'public' => true,
+		'exclude_from_search' => false,
+		'publicly_queryable' => true,
+		'show_ui' => true,
+		'show_in_nav_menus' => false,
+		'menu_position' => 8,
+		//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+		'capability_type' => 'post',
+		'hierarchical' => false,
+		'supports' => array( 'title', 'editor', 'revisions', 'comments', 'trackbacks'),
+		'has_archive' => false,
+		'rewrite' => true,
+		'query_var' => true
+	)
+	);
+
 	register_post_type( 'underwriter',
 		array('labels' => array(
 				'name' => 'Underwriters',
