@@ -287,10 +287,10 @@ $logged_in = is_user_logged_in();
     </div>
 
     <div class="col-md-4 text-center">
+    <a href="https://support.ednc.org/donate">
       <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/shutterstock_10038223.jpg" alt="" />
-      <?php if ($logged_in) { ?>
-      <a href="#" class="btn btn-primary btn-lg btn-wide">Make a donation today &raquo;</a>
-      <?php } ?>
+    </a>
+    <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg btn-wide">Make a donation today &raquo;</a>
     </div>
 
     <div class="col-md-4">

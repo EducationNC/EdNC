@@ -1,0 +1,78 @@
+#salsaDonationHeader, .orderform {
+  position: relative;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (min-width: $screen-md-min) {
+  #salsaDonationHeader {
+    float: left;
+    width: 41.66667%;
+  }
+
+  .orderform {
+    float: left;
+    width: 41.66667%;
+    left: 8.33333%;
+    padding-top: 70px;
+  }
+}
+
+.salsa.salsa {
+  legend {
+    font-family: $font-family-sans-serif;
+    font-weight: 300;
+    color: $purple-text;
+    font-size: 30px;
+    margin: 20px 0 10px;
+    display: block;
+    border: 0;
+  }
+
+  label {
+    font-family: $font-family-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.42857;
+    color: $midnight;
+  }
+
+  .helpText {
+    font-family: $font-family-sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    color: $midnight;
+    line-height: 19px;
+  }
+
+  .formRow {
+    margin-bottom: 1em;
+    padding-left: 0;
+  }
+
+  #donation_amount {
+    .formRow.formRow {
+      clear: both !important;
+      margin-bottom: 0;
+    }
+
+    .formRow.otherRow {
+      margin-bottom: 1em;
+    }
+  }
+
+  input[type=text] {
+    width: 100%;
+  }
+
+  input[name=amountOther] {
+    width: 185px;
+  }
+
+  .supporterInfo > br,
+  #preCustomText {
+    display: none;
+  }
+}
