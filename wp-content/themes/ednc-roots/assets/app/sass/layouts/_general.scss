@@ -117,8 +117,10 @@ section {
 }
 
 .full-width {
-  margin-left: -16.66667%;
-  margin-right: -16.66667%;
+  @media (min-width: $screen-md-min) {
+    margin-left: -16.66667%;
+    margin-right: -16.66667%;
+  }
 }
 
 .page-header {

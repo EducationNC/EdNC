@@ -61,6 +61,56 @@ var Roots = {
       // Wrap any object embed with responsive wrapper
       $('object').wrap('<div class="object-wrapper"></div>');
 
+      // Open Magnific for all image link types inside articles
+      $('.entry-content a[href$=".gif"], .entry-content a[href$=".jpg"], .entry-content a[href$=".png"], .entry-content a[href$=".jpeg"]').not('.gallery a').magnificPopup({
+        type: 'image',
+        midClick: true,
+        mainClass: 'mfp-with-zoom',
+        zoom: {
+          enabled: true,
+          duration: 300,
+          easing: 'ease-in-out',
+          opener: function(openerElement) {
+            return openerElement.is('img') ? openerElement : openerElement.find('img');
+          }
+        },
+        image: {
+          cursor: 'mfp-zoom-out-cur',
+          verticalFit: true,
+          titleSrc: function(item) {
+            return $(item.el).children('img').attr('alt');
+          }
+        }
+      });
+
+      // Gallery lightboxes in articles
+      $('.gallery').each(function() { // the containers for all your galleries
+        $(this).magnificPopup({
+          delegate: 'a', // the selector for gallery item
+          type: 'image',
+          gallery: {
+            enabled:true
+          },
+          midClick: true,
+          mainClass: 'mfp-with-zoom',
+          zoom: {
+            enabled: true,
+            duration: 300,
+            easing: 'ease-in-out',
+            opener: function(openerElement) {
+              return openerElement.is('img') ? openerElement : openerElement.find('img');
+            }
+          },
+          image: {
+            cursor: 'mfp-zoom-out-cur',
+            verticalFit: true,
+            titleSrc: function(item) {
+              return $(item.el).children('img').attr('alt');
+            }
+          }
+        });
+      });
+
     }
   },
   // Home page

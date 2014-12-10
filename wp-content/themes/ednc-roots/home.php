@@ -262,10 +262,10 @@ $logged_in = is_user_logged_in();
         <?php
         foreach ($photos as $photo) {
           $resized = mr_image_resize($photo['url'], 300, 300, true, false);
-          echo '<li>';
+          echo '<li><a>';
             echo '<img src="' . $resized['url'] . '" alt="" />';
             echo '<p class="meta"><strong>' . $photo['title'] . '</strong><br />' . nl2br($photo['caption']) . '</p>';
-          echo '</li>';
+          echo '</a></li>';
         }
         ?>
       </ul>

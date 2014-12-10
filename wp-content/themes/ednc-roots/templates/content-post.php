@@ -104,20 +104,16 @@ if ($image_src) {
               <!--<h4><?php the_field('title'); ?></h4>
               <p class="caption"><?php the_field('tagline'); ?></p> -->
               <?php
-              if (get_field('has_bio_page') == 1) { ?>
-                <h3 class="no-margin"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                <?php
-                $twitter = get_field('twitter');
-                if ($twitter) {
-                  echo '<span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a>';
-                }
-                ?>
+              $twitter = get_field('twitter');
+              if ($twitter) {
+                echo '<span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a>';
+              } ?>
+              <?php if (get_field('has_bio_page') == 1) { ?>
                 <div class="excerpt">
                   <?php the_advanced_excerpt(); ?>
                   <a href="<?php the_permalink(); ?>" class="read-more">Read the rest &raquo;</a>
                 </div>
               <?php } else { ?>
-                <h3 class="no-margin"><?php the_title(); ?></h3>
                 <div>
                   <?php the_content(); ?>
                 </div>

@@ -22,17 +22,10 @@ function roots_scripts() {
   if (WP_ENV === 'development') {
     $assets = array(
       'css'       => '/assets/public/css/main.css',
-      'classie'   => '/assets/app/js/plugins/classie.js',
-      'gridrotator'=>'/assets/app/js/plugins/jquery.gridrotator.js',
-      'mlpushmenu'=> '/assets/app/js/plugins/mlpushmenu.js',
       'js'        => '/assets/public/js/scripts.js',
       'modernizr' => '/assets/app/vendor/modernizr/modernizr.js',
       'jquery'    => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js'
     );
-
-    wp_enqueue_script('classie', get_template_directory_uri() . $assets['classie'], array(), null, false);
-    wp_enqueue_script('gridrotator', get_template_directory_uri() . $assets['gridrotator'], array('jquery', 'modernizr'), null, false);
-    wp_enqueue_script('mlpushmenu', get_template_directory_uri() . $assets['mlpushmenu'], array(), null, false);
 
   } else {
     $get_assets = file_get_contents(get_template_directory() . '/assets/manifest.json');

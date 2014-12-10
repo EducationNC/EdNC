@@ -5,6 +5,11 @@
   padding-right: 10px;
 }
 
+#salsaDonationFooter {
+  clear: both;
+  padding-top: 3em;
+}
+
 @media (min-width: $screen-md-min) {
   #salsaDonationHeader {
     float: left;
