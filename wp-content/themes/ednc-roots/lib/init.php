@@ -13,7 +13,6 @@ function roots_setup() {
     'primary_navigation' => __('Primary Navigation', 'roots'),
     'minor_navigation' => __('Minor Navigation', 'roots'),
     'footer_navigation' => __('Footer Navigation', 'roots'),
-    'about_navigation' => __('About Navigation', 'roots'),
     'beta_navigation' => __('Beta Navigation', 'roots')
   ));
 

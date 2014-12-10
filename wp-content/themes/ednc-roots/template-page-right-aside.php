@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: About Section
+Template Name: Right Sidebar Navigation
 */
 ?>
 
@@ -10,5 +10,5 @@ Template Name: About Section
       <?php echo roots_title(); ?>
     </h1>
   </div>
-  <?php get_template_part('templates/content', 'about'); ?>
+  <?php get_template_part('templates/content', 'page-right-aside'); ?>
 <?php endwhile; ?>

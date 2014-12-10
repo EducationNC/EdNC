@@ -7206,13 +7206,13 @@ object, embed {
 }
 
 @media (min-width: 992px) {
-  .alignleft {
+  body:not(.page-template) .alignleft {
     margin-left: -14.7%;
   }
 }
 
 @media (min-width: 992px) {
-  .alignright {
+  body:not(.page-template) .alignright {
     margin-right: -14.7%;
   }
 }

@@ -1,8 +1,16 @@
+<?php
+if (is_page('about')) {
+  $nav_menu = 68;
+} else {
+  $nav_menu = get_field('nav_menu');
+}
+?>
+
 <div class="row">
   <div class="col-md-3 col-md-push-9">
     <div class="callout">
       <?php wp_nav_menu(array(
-        'theme_location' => 'about_navigation',
+        'menu' => $nav_menu,
         'container' => false,
         'walker' => new Walker_Nav_Menu
       )); ?>

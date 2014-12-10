@@ -4,7 +4,7 @@
       <?php echo roots_title(); ?>
     </h1>
   </div>
-  <?php get_template_part('templates/content', 'about'); ?>
+  <?php get_template_part('templates/content', 'page-right-aside'); ?>
 
   <div class="sep"></div>
 
