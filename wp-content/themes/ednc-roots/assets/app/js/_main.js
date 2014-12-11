@@ -23,6 +23,34 @@ var Roots = {
   common: {
     init: function() {
 
+      // Util function to check get variables
+      function getVariable(variable)
+      {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+          if(pair[0] === variable){return pair[1];}
+        }
+        return(false);
+      }
+
+      // Open splash on page load only on first page load
+      if ( firstImpression() || getVariable('splash') ) {
+        $.magnificPopup.open({
+          items: {
+            src: '#splash',
+            type: 'inline'
+          },
+          modal: true
+        });
+      }
+
+      $(document).on('click', '.popup-modal-dismiss', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
+      });
+
       // Toggle menu button to x close state on click
       $('#trigger-offcanvas').on('click', function() {
         if ($(this).hasClass('active')) {

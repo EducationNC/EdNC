@@ -1,0 +1,21 @@
+.splash {
+  background: $white;
+  padding: 20px;
+
+  .logo {
+    position: relative;
+    width: 134px;
+  }
+
+  .row {
+    margin: 1em 0;
+  }
+
+  .md-spacer {
+    padding: 0 10px;
+
+    @media (min-width: $screen-md-min) {
+      float: left;
+    }
+  }
+}

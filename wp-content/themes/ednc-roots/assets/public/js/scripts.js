@@ -1129,6 +1129,13 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );
+;/*
+* firstImpression.js
+* Copyright (c) 2012 Rob Flaherty (@robflaherty)
+* Copyright (c) 2010 Klaus Hartl (stilbuero.de)
+* Licensed under the MIT and GPL licenses.
+*/
+window.firstImpression=function(c,f){var a,b,d,e;a=function(j,k,i){var h,g,l;if(arguments.length>1&&String(k)!=="[object Object]"){i=i||{};if(k===null||k===undefined){i.expires=-1}if(typeof i.expires==="number"){h=i.expires;l=i.expires=new Date();l.setTime(l.getTime()+h*24*60*60*1000)}i.path="/";return(document.cookie=[encodeURIComponent(j),"=",encodeURIComponent(k),i.expires?"; expires="+i.expires.toUTCString():"",i.path?"; path="+i.path:"",i.domain?"; domain="+i.domain:"",i.secure?"; secure":""].join(""))}g=new RegExp("(?:^|; )"+encodeURIComponent(j)+"=([^;]*)").exec(document.cookie);return g?decodeURIComponent(g[1]):null};if(c===undefined){c="_firstImpression"}if(f===undefined){f=730}if(c===null){a("_firstImpression",null);return}if(f===null){a(c,null);return}b=function(){return a(c)};d=function(){a(c,true,{expires:f})};e=function(){var g=b();if(!g){d()}return !g};return e()};
 ;/**
  * jquery.gridrotator.js v1.1.0
  * http://www.codrops.com
@@ -2234,6 +2241,34 @@ var Roots = {
   // All pages
   common: {
     init: function() {
+
+      // Util function to check get variables
+      function getVariable(variable)
+      {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+          if(pair[0] === variable){return pair[1];}
+        }
+        return(false);
+      }
+
+      // Open splash on page load only on first page load
+      if ( firstImpression() || getVariable('splash') ) {
+        $.magnificPopup.open({
+          items: {
+            src: '#splash',
+            type: 'inline'
+          },
+          modal: true
+        });
+      }
+
+      $(document).on('click', '.popup-modal-dismiss', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
+      });
 
       // Toggle menu button to x close state on click
       $('#trigger-offcanvas').on('click', function() {

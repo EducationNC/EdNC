@@ -1,3 +1,32 @@
+.logo {
+  @include purple-gradient-right;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  a {
+    display: block;
+    width: 134px;
+    position: relative;
+    text-align: center;
+    padding: 50px 0 50px;
+    transition: padding-bottom .3s;
+  }
+
+  &.stuck {
+    position: fixed;
+    backface-visibility: hidden;
+  }
+
+  &.fix-height {
+    a {
+      padding-top: 5px;
+      padding-bottom: 7px;
+    }
+  }
+}
+
 .banner {
   margin-bottom: 5em;
   position: relative;
@@ -10,35 +39,6 @@
 
     &:hover {
       color: $blue;
-    }
-  }
-
-  .logo {
-    @include purple-gradient-right;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    a {
-      display: block;
-      width: 134px;
-      position: relative;
-      text-align: center;
-      padding: 50px 0 50px;
-      transition: padding-bottom .3s;
-    }
-
-    &.stuck {
-      position: fixed;
-      backface-visibility: hidden;
-    }
-
-    &.fix-height {
-      a {
-        padding-top: 5px;
-        padding-bottom: 7px;
-      }
     }
   }
 
