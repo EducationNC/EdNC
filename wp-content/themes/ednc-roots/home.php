@@ -203,6 +203,8 @@ $logged_in = is_user_logged_in();
           $date = get_the_time('n/j/Y');
           $items = get_field('news_item');
 
+          // TODO: limit to first 5
+
           foreach ($items as $item) { ?>
 
             <li>
