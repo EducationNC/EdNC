@@ -1,6 +1,10 @@
 .splash {
   background: $white;
-  padding: 20px;
+  padding: 10px;
+
+  @media (min-width: $screen-md-min) {
+    padding: 20px;
+  }
 
   .logo {
     position: relative;

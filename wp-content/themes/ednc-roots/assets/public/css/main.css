@@ -7722,7 +7722,12 @@ img.mfp-img {
 
 .splash {
   background: #FFFFFF;
-  padding: 20px;
+  padding: 10px;
+}
+@media (min-width: 992px) {
+  .splash {
+    padding: 20px;
+  }
 }
 .splash .logo {
   position: relative;

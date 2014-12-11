@@ -49,6 +49,7 @@ var Roots = {
       $(document).on('click', '.popup-modal-dismiss', function (e) {
         e.preventDefault();
         $.magnificPopup.close();
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
       // Toggle menu button to x close state on click
