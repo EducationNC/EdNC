@@ -46,7 +46,7 @@ if ($image_src) {
             $thumb_id = get_post_thumbnail_id();
             $thumb_post = get_post($thumb_id);
             ?>
-            <div class="text-right caption">
+            <div class="text-right caption hidden-xs">
               <?php echo $thumb_post->post_excerpt; ?>
             </div>
             <?php
