@@ -8,22 +8,22 @@
       </div>
       <div class="col-md-8">
         <div class="h1">Welcome to EdNC</div>
-        <p>This is a very short paragraph welcoming people and explaining who we are. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in felis mi.</p>
+        <p>Please watch this video to learn abour our mission and then join us in the conversation.</p>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <div class="entry-content-asset">
-          <iframe src="//player.vimeo.com/video/112569533?title=0&amp;byline=0&amp;portrait=0" width="300" height="150" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+          <iframe width="640" height="360" src="//www.youtube.com/embed/iZ4jsiD88II?controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <?php get_template_part('templates/email', 'signup'); ?>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 text-center">
-        <a href="#" class="btn btn-primary popup-modal-dismiss">Continue to EdNC.org</a>
+        <a href="#" class="btn btn-primary btn-lg popup-modal-dismiss">Continue to EdNC.org</a>
       </div>
     </div>
   </div>

@@ -1,9 +1,9 @@
 <?php while (have_posts()) : the_post(); ?>
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <?php the_post_thumbnail('full'); ?>
     </div>
-    <article <?php post_class('col-lg-8'); ?>>
+    <article <?php post_class('col-md-8'); ?>>
       <header class="entry-header">
         <h1 class="entry-title no-top-margin"><?php the_title(); ?></h1>
         <h2><?php the_field('title'); ?></h2>

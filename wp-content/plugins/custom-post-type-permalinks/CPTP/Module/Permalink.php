@@ -35,9 +35,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 	 *
 	 */
 	public function post_type_link( $post_link, $post, $leavename ) {
-
 		global $wp_rewrite;
-
 		$draft_or_pending = isset( $post->post_status ) && in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) );
 		if( $draft_or_pending and !$leavename )
 			return $post_link;
@@ -71,7 +69,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		//%post_id%/attachment/%attachement_name%;
 		//画像の編集ページでのリンク
 		if( isset($_GET["post"]) && $_GET["post"] != $post->ID ) {
-			$parent_structure = trim(get_option( $post->post_type.'_structure' ), "/");
+			$parent_structure = trim( CPTP_Util::get_permalink_structure( $this->post_type ), "/");
 			$parent_dirs = explode( "/", $parent_structure );
 			if(is_array($parent_dirs)) {
 				$last_dir = array_pop( $parent_dirs );
@@ -93,10 +91,32 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		$replace = $replace + $replace_tag["replace"];
 
 
-		$user = get_userdata( $post->post_author );
-		if(isset($user->user_nicename)) {
-			$permalink = str_replace( "%author%", $user->user_nicename, $permalink );
+		//from get_permalink.
+		$category = '';
+		if ( strpos($permalink, '%category%') !== false ) {
+			$cats = get_the_category($post->ID);
+			if ( $cats ) {
+				usort($cats, '_usort_terms_by_ID'); // order by ID
+				$category_object = apply_filters( 'post_link_category', $cats[0], $cats, $post );
+				$category_object = get_term( $category_object, 'category' );
+				$category = $category_object->slug;
+				if ( $parent = $category_object->parent )
+					$category = get_category_parents($parent, false, '/', true) . $category;
+			}
+			// show default category in permalinks, without
+			// having to assign it explicitly
+			if ( empty($category) ) {
+				$default_category = get_term( get_option( 'default_category' ), 'category' );
+				$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
+			}
 		}
+
+		$author = '';
+		if ( strpos($permalink, '%author%') !== false ) {
+			$authordata = get_userdata($post->post_author);
+			$author = $authordata->user_nicename;
+		}
+
 
 		$post_date = strtotime( $post->post_date );
 		$permalink = str_replace(array(
@@ -105,14 +125,20 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			"%day%",
 			"%hour%",
 			"%minute%",
-			"%second%"
+			"%second%",
+			'%category%',
+			'%author%'
+
 		), array(
 			date("Y",$post_date),
 			date("m",$post_date),
 			date("d",$post_date),
 			date("H",$post_date),
 			date("i",$post_date),
-			date("s",$post_date)
+			date("s",$post_date),
+			$category,
+			$author
+
 		), $permalink );
 		$permalink = str_replace($search, $replace, $permalink);
 		$permalink = rtrim( home_url(),"/")."/".ltrim( $permalink ,"/" );
@@ -137,43 +163,44 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		//運用でケアすべきかも。
 
 		foreach ( $taxonomies as $taxonomy => $objects ) {
-			$term = null;
+
 			if ( strpos($permalink, "%$taxonomy%") !== false ) {
 				$terms = wp_get_post_terms( $post_id, $taxonomy, array('orderby' => 'term_id'));
 
-				if ( $terms and count($terms) > 1 ) {
-					if(reset($terms)->parent == 0){
+				if( $terms and !is_wp_error($terms) ) {
 
-						$keys = array_keys($terms);
-						$term = $terms[$keys[1]]->slug;
-						if ( $terms[$keys[0]]->term_id == $terms[$keys[1]]->parent ) {
-							$term = CPTP_Util::get_taxonomy_parents( $terms[$keys[1]]->parent,$taxonomy, false, '/', true ) . $term;
-						}
-					}else{
-						$keys = array_keys($terms);
-						$term = $terms[$keys[0]]->slug;
-						if ( $terms[$keys[1]]->term_id == $terms[$keys[0]]->parent ) {
-							$term = CPTP_Util::get_taxonomy_parents( $terms[$keys[0]]->parent,$taxonomy, false, '/', true ) . $term;
+					$parents = array_map( array(__CLASS__, 'get_term_parent'), $terms); //親の一覧
+					$newTerms = array();
+					foreach ($terms as $key => $term) {
+						if( !in_array($term->term_id, $parents )) {
+							$newTerms[] = $term;
 						}
 					}
-				}else if( $terms ){
 
-					$term_obj = array_shift($terms);
-					$term = $term_obj->slug;
+					//このブロックだけで良いはず。
+					$term_obj = reset($newTerms); //最初のOBjectのみを対象。
+					$term_slug = $term_obj->slug;
 
 					if(isset($term_obj->parent) and $term_obj->parent != 0) {
-						$term = CPTP_Util::get_taxonomy_parents( $term_obj->parent,$taxonomy, false, '/', true ) . $term;
+						$term_slug = CPTP_Util::get_taxonomy_parents( $term_obj->parent,$taxonomy, false, '/', true ) . $term_slug;
 					}
 				}
 
-				if( isset($term) ) {
+				if( isset($term_slug) ) {
 					$search[] = "%$taxonomy%";
-					$replace[] = $term;
+					$replace[] = $term_slug;
 				}
 
 			}
 		}
+
 		return array("search" => $search, "replace" => $replace );
+	}
+
+	private static function get_term_parent($term) {
+		if(isset($term->parent) and $term->parent > 0) {
+			return $term->parent;
+		}
 	}
 
 
@@ -193,7 +220,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			return $link;
 		}
 		$post_parent = get_post( $post->post_parent );
-		$permalink = get_option( $post_parent->post_type.'_structure' );
+		$permalink = CPTP_Util::get_permalink_structure( $post_parent->post_type );
 		$post_type = get_post_type_object( $post_parent->post_type );
 
 		if( $post_type->_builtin == false ) {

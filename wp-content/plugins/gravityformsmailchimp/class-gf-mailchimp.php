@@ -484,7 +484,12 @@ class GFMailChimp extends GFFeedAddOn {
 		// retrieve name => value pairs for all fields mapped in the 'mappedFields' field map
 		$field_map = $this->get_field_map_fields( $feed, 'mappedFields' );
 		$email     = rgar( $entry, $field_map['EMAIL'] );
-
+        
+        $override_empty_fields = apply_filters( "gform_mailchimp_override_empty_fields_{$form['id']}", apply_filters( 'gform_mailchimp_override_empty_fields', true, $form, $entry, $feed ), $form, $entry, $feed );
+        if ( !$override_empty_fields ) {
+               $this->log_debug( 'Empty fields will not be overriden.' );
+        }
+        
 		$merge_vars = array( '' );
 		foreach ( $field_map as $name => $field_id ) {
 			// $field_id can also be a string like 'date_created'
@@ -505,8 +510,11 @@ class GFMailChimp extends GFFeedAddOn {
 					$input_type  = RGFormsModel::get_input_type( $field );
 					$field_value = rgar( $entry, $field_id );
 
+                    if(empty($field_value) && !$override_empty_fields) 
+                        break;
+                    
 					// handling full address
-					if ( $is_integer && $input_type == 'address' ) {
+					if ( $is_integer && $input_type == 'address' ) {                       
 						$merge_vars[ $name ] = $this->get_address( $entry, $field_id );
 					} // handling full name
 					else if ( $is_integer && $input_type == 'name' ) {
@@ -544,8 +552,12 @@ class GFMailChimp extends GFFeedAddOn {
 		$mc_groupings = $this->get_mailchimp_groups( $feed_meta['mailchimpList'] );
 		$groupings    = array();
 
-		if ( false !== $mc_groupings ) {
+		if ( $mc_groupings !== false ) {
 			foreach ( $mc_groupings as $grouping ) {
+
+				if ( ! is_array( $grouping['groups'] ) ){
+					cotinue;
+				}
 
 				$groups = array();
 
@@ -557,7 +569,6 @@ class GFMailChimp extends GFFeedAddOn {
 					}
 
 					$groups[]   = $group['name'];
-
 				}
 
 				if ( ! empty( $groups ) ) {
@@ -596,6 +607,7 @@ class GFMailChimp extends GFFeedAddOn {
 			return;
 		}
 
+		$subscribe_or_update = false;
 		$member_not_found = absint( rgar( $member_info, 'error_count' ) ) > 0;
 		$member_status    = rgars( $member_info, 'data/0/status' );
 
@@ -643,6 +655,8 @@ class GFMailChimp extends GFFeedAddOn {
 			}
 
 			$transaction = 'Update';
+            
+            $params = apply_filters( "gform_mailchimp_args_pre_subscribe_{$form['id']}", apply_filters( 'gform_mailchimp_args_pre_subscribe', $params, $form, $entry, $feed ), $form, $entry, $feed );
 
 			try {
 				$params = array(
@@ -660,15 +674,12 @@ class GFMailChimp extends GFFeedAddOn {
 			}
 		}
 
-		if ( empty( $subscribe_or_update ) ) {
-			$this->log_error( "{$transaction} failed. Error {$e->getCode()} - {$e->getMessage()}" );
-		} else if ( rgar( $subscribe_or_update, 'email' ) ) {
+		if ( rgar( $subscribe_or_update, 'email' ) ) {
 			//email will be returned if successful
 			$this->log_debug( "{$transaction} successful" );
 		} else {
-			$this->log_error( "{$transaction} failed. Error {$e->getCode()} - {$e->getMessage()}" );
+			$this->log_error( "{$transaction} failed." );
 		}
-
 	}
 
 
@@ -837,33 +848,31 @@ class GFMailChimp extends GFFeedAddOn {
 		}
 
 	}
-
+    
 	public function append_groups( $merge_vars, $current_groupings ) {
 
 		if ( ! isset( $merge_vars['GROUPINGS'] ) ) {
 			return $merge_vars;
 		}
 
-		foreach ( $merge_vars['GROUPINGS'] as &$grouping ) {
-
-			// return an array of existing groupings
-			$existing_groups = $this->get_existing_groups( $grouping["name"], $current_groupings );
-            // filter out groupings to which the user already belongs
-            $active_existing_groups = array();
-            foreach ($existing_groups as $active_existing_group)
+        $active_current_groups = array();
+        $i=0;
+        foreach ( $current_groupings as &$current_group )
+        {
+            foreach ($current_group["groups"] as $current_grouping)
             {
-                if($active_existing_group["interested"] == true)
+            if($current_grouping["interested"] == true)
                 {
-                    $active_existing_groups[]= $active_existing_group["name"];
+                    $active_current_groups[$i]["name"]= $current_group["name"];
+                    $active_current_groups[$i]["groups"][]= $current_grouping["name"];
                 }
-
             }
-           
-           // merge the new and existing groups, filter out duplicate groups
-           $merged_groups = array_unique(array_merge_recursive($active_existing_groups, $grouping["groups"]));
-           $grouping['groups']  = $merged_groups; 
-
-		}
+            
+            $i++;
+        }
+        
+        $active_merged_groups = array_merge_recursive($merge_vars['GROUPINGS'], $active_current_groups);
+        $merge_vars['GROUPINGS'] = $active_merged_groups;
 
 		return $merge_vars;
 	}

@@ -316,7 +316,7 @@ function ure_show_rename_role_dialog() {
     });
   });
   
-  jQuery("#ure_reset_roles").button({
+  jQuery('#ure_reset_roles_button').button({
     label: ure_data.reset
   }).click(function(){
     event.preventDefault();

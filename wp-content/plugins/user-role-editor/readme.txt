@@ -2,8 +2,8 @@
 Contributors: shinephp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=vladimir%40shinephp%2ecom&lc=RU&item_name=ShinePHP%2ecom&item_number=User%20Role%20Editor%20WordPress%20plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: user, role, editor, security, access, permission, capability
-Requires at least: 3.5
-Tested up to: 4.0.1
+Requires at least: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -73,6 +73,7 @@ To read more about 'User Role Editor' visit [this page](http://www.shinephp.com/
 * French: [Transifex](https://www.transifex.com);
 * Hebrew: [atar4u](http://atar4u.com) - needs update;
 * Hungarian: Németh Balázs;
+* Italian: [Giuseppe Velardo](http://www.comprensivoleopardi.gov.it/);
 * Persian: Morteza - needs update;
 * Russian: [Vladimir Garagulya](https://www.role-editor.com)
 * Spanish: [Dario Ferrer](http://darioferrer.com/) - needs update;
@@ -85,6 +86,18 @@ Some translations may be outdated. If you have better translation for some phras
 
 
 == Changelog ==
+
+= 4.18.1 =
+* 14.12.2014
+* As activation hook does not fire during bulk plugins update, automatic plugin version check and upgrade execution were added.
+
+= 4.18 =
+* 14.12.2014
+* Own custom user capabilities, e.g. 'ure_edit_roles' are used to restrict access to User Role Editor functionality ([read more](https://www.role-editor.com/user-role-editor-4-18-new-permissions/)).
+* Multisite: You may allow to the users without superadmin privileges to add/create site users without sending them email confirmation request.
+* Bug fix: when non-admin user updated other user profile, that user lost secondary roles.
+* Italian translation was added. Thanks to [Giuseppe Velardo](http://www.comprensivoleopardi.gov.it/).
+
 = 4.17.3 =
 * 23.11.2014
 * French and Turkish translation were updated. Thanks to [Transifex](https://www.transifex.com) translation team.

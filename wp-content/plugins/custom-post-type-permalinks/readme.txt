@@ -1,9 +1,9 @@
-=== Custom Post Type Permalinks ===
+﻿=== Custom Post Type Permalinks ===
 Contributors: Toro_Unit
 Tags: permalink,permalinks,custom post type,custom taxonomy,cms
 Requires at least: 3.7
-Tested up to: 3.9
-Stable tag: 0.9.5.6
+Tested up to: 4.0
+Stable tag: 0.9.6
 
 Lets you edit the permalink of custom post type.
 
@@ -20,6 +20,7 @@ And support wp_get_archives( "post_type=foo" ).
 Donation: Please send amazon.co.jp Gift to donate[at]torounit.com.
 
 = Translators =
+* French(fr_FR) - [Geoffrey Crofte](http://geoffrey.crofte.fr/)
 * Japanese(ja) - [Toro_Unit](http://www.torounit.com/)
 * Russian(ru_RU) - [Olart](http://olart.ru)
 
@@ -40,6 +41,11 @@ That's it. You can access the permalinks setting by going to *Settings -> Permal
 
 
 == Changelog ==
+
+= 0.9.6 =
+* Category and author.
+* French Transration. Thanks Geoffrey!
+* Hierarchial Term Fix.
 
 = 0.9.5.6 =
 * Strict Standard Error Fix.
