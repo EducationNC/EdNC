@@ -24,4 +24,4 @@
 <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
 
 <!-- Buffer Scripts -->
-<script type="text/javascript" src="//d389zggrogs7qo.cloudfront.net/js/button.js"></script>
+<!-- <script type="text/javascript" src="//d389zggrogs7qo.cloudfront.net/js/button.js"></script> -->
