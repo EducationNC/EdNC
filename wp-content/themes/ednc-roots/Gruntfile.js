@@ -90,6 +90,18 @@ module.exports = function(grunt) {
             'assets/app/sass/main.scss'
           ]
         }
+      },
+      salsa: {
+        option: {
+          style: 'compressed',
+          compass: true,
+          sourcemap: 'auto'
+        },
+        files: {
+          'assets/public/css/salsa.min.css': [
+            'assets/app/sass/salsa.scss'
+          ]
+        }
       }
     },
     concat: {
@@ -122,6 +134,9 @@ module.exports = function(grunt) {
       },
       build: {
         src: 'assets/public/css/main.min.css'
+      },
+      salsa: {
+        src: 'assets/public/css/salsa.min.css'
       }
     },
     modernizr: {
@@ -203,5 +218,9 @@ module.exports = function(grunt) {
     'uglify',
     'modernizr',
     'version'
+  ]);
+  grunt.registerTask('salsa', [
+    'sass:salsa',
+    'autoprefixer:salsa'
   ]);
 };
