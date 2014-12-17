@@ -23,4 +23,6 @@
     get_template_part('templates/analytics');
   }
   ?>
+
+  <?php get_template_part('templates/social-scripts', 'header'); ?>
 </head>

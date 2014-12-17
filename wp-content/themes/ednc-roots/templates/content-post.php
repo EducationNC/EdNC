@@ -10,9 +10,9 @@ if ($image_src) {
   $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
 } ?>
 
-<script type="text/javascript">var switchTo5x=true;</script>
+<!-- <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "9370f123-7244-4151-a639-30ba1d71bf7f", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
+<script type="text/javascript">stLight.options({publisher: "9370f123-7244-4151-a639-30ba1d71bf7f", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script> -->
 
 <article <?php post_class('article'); ?>>
   <?php
@@ -40,6 +40,7 @@ if ($image_src) {
           <span class="label"><?php if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
           <h1 class="entry-title"><?php the_title(); ?></h1>
           <?php get_template_part('templates/entry-meta'); ?>
+          <?php get_template_part('templates/social', 'share'); ?>
           <?php
           if (has_post_thumbnail()) {
             the_post_thumbnail('post-thumbnail', array('class' => 'hidden-xs'));
@@ -60,17 +61,8 @@ if ($image_src) {
       <div class="row">
         <div class="col-lg-7 col-md-9 col-centered">
           <?php the_content(); ?>
-          <div class="share-btns">
-            <span class="label">Like this article? Share it!</span>
-            <span class='st_facebook_large' displayText='Facebook'></span>
-            <span class='st_twitter_large' displayText='Tweet'></span>
-            <span class='st_buffer_large' displayText='Buffer'></span>
-            <span class='st_linkedin_large' displayText='LinkedIn'></span>
-            <span class='st_digg_large' displayText='Digg'></span>
-            <span class='st_reddit_large' displayText='Reddit'></span>
-            <span class='st_email_large' displayText='Email'></span>
-            <span class='st_sharethis_large' displayText='ShareThis'></span>
-          </div>
+
+          <?php get_template_part('templates/social', 'share'); ?>
         </div>
       </div>
     </div>

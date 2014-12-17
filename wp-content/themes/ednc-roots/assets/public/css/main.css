@@ -7720,6 +7720,19 @@ img.mfp-img {
   padding-top: 0;
 }
 
+.social-buttons li {
+  vertical-align: top;
+  height: 27px;
+}
+
+.fb-share-button span {
+  vertical-align: top !important;
+}
+
+.twitter-share-button {
+  width: 85px !important;
+}
+
 .splash {
   background: #FFFFFF;
   padding: 10px;
@@ -8876,77 +8889,6 @@ section {
 .single-bio .entry-header {
   border-bottom: 1px solid #ECF0F1;
   margin-bottom: 1em;
-}
-
-#salsaDonationHeader, .orderform {
-  position: relative;
-  min-height: 1px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-#salsaDonationFooter {
-  clear: both;
-  padding-top: 3em;
-}
-
-@media (min-width: 992px) {
-  #salsaDonationHeader {
-    float: left;
-    width: 41.66667%;
-  }
-
-  .orderform {
-    float: left;
-    width: 41.66667%;
-    left: 8.33333%;
-    padding-top: 70px;
-  }
-}
-.salsa.salsa legend {
-  font-family: Lato, sans-serif;
-  font-weight: 300;
-  color: #8B185E;
-  font-size: 30px;
-  margin: 20px 0 10px;
-  display: block;
-  border: 0;
-}
-.salsa.salsa label {
-  font-family: Merriweather, serif;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.42857;
-  color: #2B3E50;
-}
-.salsa.salsa .helpText {
-  font-family: Lato, sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  font-style: italic;
-  color: #2B3E50;
-  line-height: 19px;
-}
-.salsa.salsa .formRow {
-  margin-bottom: 1em;
-  padding-left: 0;
-}
-.salsa.salsa #donation_amount .formRow.formRow {
-  clear: both !important;
-  margin-bottom: 0;
-}
-.salsa.salsa #donation_amount .formRow.otherRow {
-  margin-bottom: 1em;
-}
-.salsa.salsa input[type=text] {
-  width: 100%;
-}
-.salsa.salsa input[name=amountOther] {
-  width: 185px;
-}
-.salsa.salsa .supporterInfo > br,
-.salsa.salsa #preCustomText {
-  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */
