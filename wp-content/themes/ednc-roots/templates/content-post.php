@@ -11,7 +11,7 @@ if ($image_src) {
 } ?>
 
 <script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "9370f123-7244-4151-a639-30ba1d71bf7f", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
 
 <article <?php post_class('article'); ?>>
