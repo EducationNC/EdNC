@@ -3,7 +3,6 @@
     <ul class="list-inline text-center">
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/zsrf-logo-white-transparent.png" width="153" alt="Z. Smith Reynolds Foundation" />
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/bcbsnclogo-gray-transparent.png" width="209" alt="Blue Cross Blue Shield North Carolina" />
-      <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/best-nc-gray-transparent.png" width="78" alt="BEST NC" />
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/sas_logo-white-transparent.png" width="78" alt="SAS Institute" />
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/o2-energies-inc-white-transparent.png" width="78" alt="O2energies" />
     </ul>
