@@ -16,9 +16,6 @@ if (has_post_thumbnail()) {
     <div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?php echo get_permalink(); ?>"></div>
   </li>
   <li>
-    <script type="IN/Share" data-url="<?php echo get_permalink(); ?>" data-counter="right" data-showzero="true" data-onsuccess="LinkedInShare"></script>
+    <script type="IN/Share" data-url="<?php echo get_permalink(); ?>" data-counter="right" data-showzero="true" data-onsuccess="track_linkedin_share"></script>
   </li>
-  <!-- <li>
-    <a href="http://bufferapp.com/add" class="buffer-add-button" data-text="<?php the_title(); ?>" data-url="<?php echo get_permalink(); ?>" data-count="horizontal" data-via="EducationNC" data-picture="<?php $thumb_url[0]; ?>" ></a>
-  </li> -->
 </ul>

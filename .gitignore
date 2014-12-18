@@ -6,6 +6,9 @@
 *.swp
 Thumbs.db
 
+ednc.sublime-project
+ednc.sublime-workspace
+
 .htaccess
 sitemap.xml
 sitemap.xml.gz
