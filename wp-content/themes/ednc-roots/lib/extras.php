@@ -20,12 +20,3 @@ function roots_wp_title($title) {
   return $title;
 }
 add_filter('wp_title', 'roots_wp_title', 10);
-
-
-/**
- * Force SSL for whole site
- */
-function my_force_ssl() {
-  return true;
-}
-add_filter('force_ssl', 'my_force_ssl', 10, 3);
