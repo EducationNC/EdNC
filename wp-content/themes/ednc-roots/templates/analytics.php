@@ -5,6 +5,7 @@
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-57754133-1', {'siteSpeedSampleRate': 50});
+ga('require', 'displayfeatures');
 ga('send', 'pageview');
 
 </script>
