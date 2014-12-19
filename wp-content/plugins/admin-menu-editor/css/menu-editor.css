@@ -870,6 +870,10 @@ select.ws_dropdown optgroup option {
 	padding-top: 25px;
 }
 
+#ws_import_error_response {
+	width: 100%;
+}
+
 .ws_dont_show_again {
     display: inline-block;
     margin-top: 1em;
@@ -1053,6 +1057,16 @@ select.ws_dropdown optgroup option {
 	list-style-position: inside;
 	margin-left: 0.5em;
 }
+
+
+/************************************
+      Copy Permissions dialog
+*************************************/
+#ws-ame-copy-permissions-dialog select {
+	min-width: 280px;
+}
+
+
 
 #ws_sidebar_pro_ad {
     min-width: 225px;

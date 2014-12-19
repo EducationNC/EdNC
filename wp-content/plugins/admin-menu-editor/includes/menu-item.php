@@ -397,7 +397,7 @@ abstract class ameMenuItem {
 		}
 
 		if ( self::is_hook_or_plugin_page($menu_url, $parent_url) ) {
-			$base_file = self::is_hook_or_plugin_page($parent_url) ? 'admin.php' : $parent_url;
+			$base_file = self::is_wp_admin_file($parent_url) ? $parent_url : 'admin.php';
 			$url = add_query_arg(array('page' => $menu_url), $base_file);
 		} else {
 			$url = $menu_url;
@@ -411,15 +411,23 @@ abstract class ameMenuItem {
 		}
 		$pageFile = self::remove_query_from($page_url);
 
+		//Files in /wp-admin are part of WP core so they're not plugin pages.
+		if ( self::is_wp_admin_file($pageFile) ) {
+			return false;
+		}
+
+		$hasHook = (get_plugin_page_hook($page_url, $parent_page_url) !== null);
+		if ( $hasHook ) {
+			return true;
+		}
+
 		/*
 		 * Special case: Absolute paths.
 		 *
 		 * - add_submenu_page() applies plugin_basename() to the menu slug, so we don't need to worry about plugin
 		 * paths. However, absolute paths that *don't* point point to the plugins directory can be a problem.
 		 *
-		 * - If we blindly append $pageFile to another path, we'll get something like "C:\a\b/wp-admin/C:\c\d.php".
-		 * PHP 5.2.5 has a known bug where calling file_exists() on that kind of an invalid filename will cause
-		 * a timeout and a crash in some configurations. See: https://bugs.php.net/bug.php?id=44412
+		 * - Due to a known PHP bug, certain invalid paths can crash PHP. See self::is_safe_to_append().
 		 *
 		 * - WP 3.9.2 and 4.0+ unintentionally break menu URLs like "foo.php?page=c:\a\b.php" because esc_url()
 		 * interprets the part before the colon as an invalid protocol. As a result, such links have an empty URL
@@ -430,26 +438,8 @@ abstract class ameMenuItem {
 		 * can still be used as unique slugs for menus with hook callbacks, so we shouldn't reject them outright.
 		 * Related: https://core.trac.wordpress.org/ticket/10011
 		 */
-		$allowPathConcatenation = (substr($pageFile, 1, 1) !== ':'); //Reject "C:\whatever" and similar.
+		$allowPathConcatenation = self::is_safe_to_append($pageFile);
 
-		//Check our hard-coded list of admin pages first. It's measurably faster than
-		//hitting the disk with is_file().
-		if ( isset(self::$known_wp_admin_files[$pageFile]) ) {
-			return false;
-		}
-
-		//Now actually check the filesystem.
-		$adminFileExists = $allowPathConcatenation && is_file(ABSPATH . 'wp-admin/' . $pageFile);
-		if ( $adminFileExists ) {
-			return false;
-		}
-
-		$hasHook = (get_plugin_page_hook($page_url, $parent_page_url) !== null);
-		if ( $hasHook ) {
-			return true;
-		}
-
-		//Note: We don't need to call plugin_basename() on $pageFile because add_submenu_page() already did that.
 		$pluginFileExists = $allowPathConcatenation
 			&& ($page_url != 'index.php')
 			&& is_file(WP_PLUGIN_DIR . '/' . $pageFile);
@@ -458,6 +448,43 @@ abstract class ameMenuItem {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Check if a file exists inside the /wp-admin subdirectory.
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	private static function is_wp_admin_file($filename) {
+		//Check our hard-coded list of admin pages first. It's measurably faster than
+		//hitting the disk with is_file().
+		if ( isset(self::$known_wp_admin_files[$filename]) ) {
+			return self::$known_wp_admin_files[$filename];
+		}
+
+		//Now actually check the filesystem.
+		$adminFileExists = self::is_safe_to_append($filename)
+			&& is_file(ABSPATH . 'wp-admin/' . $filename);
+
+		//Cache the result for later. We can generally expect more than one call per top level menu URL.
+		self::$known_wp_admin_files[$filename] = $adminFileExists;
+
+		return $adminFileExists;
+	}
+
+	/**
+	 * Verify that it's safe to append a given filename to another path.
+	 *
+	 * If we blindly append an absolute path to another path, we can get something like "C:\a\b/wp-admin/C:\c\d.php".
+	 * PHP 5.2.5 has a known bug where calling file_exists() on that kind of an invalid filename will cause
+	 * a timeout and a crash in some configurations. See: https://bugs.php.net/bug.php?id=44412
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	private static function is_safe_to_append($filename) {
+		return (substr($filename, 1, 1) !== ':'); //Reject "C:\whatever" and similar.
 	}
 
 	/**

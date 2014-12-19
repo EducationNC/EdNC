@@ -1076,9 +1076,6 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$new_submenu = array();
 		$this->title_lookups = array();
 		
-		//Sort the menu by position
-		uasort($tree, 'ameMenuItem::compare_position');
-
 		//Prepare the top menu
 		$first_nonseparator_found = false;
 		foreach ($tree as $topmenu){
@@ -1107,8 +1104,6 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			$has_submenu_icons = false;
 			if( !empty($topmenu['items']) ){
 				$items = $topmenu['items'];
-				//Sort by position
-				uasort($items, 'ameMenuItem::compare_position');
 
 				foreach ($items as $item) {
 					//Skip missing and hidden items
@@ -1125,6 +1120,9 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 					//Keep track of which menus have items with icons.
 					$has_submenu_icons = $has_submenu_icons || !empty($item['has_submenu_icon']);
 				}
+
+				//Sort by position
+				uasort($new_items, 'ameMenuItem::compare_position');
 			}
 
 			//The ame-has-submenu-icons class lets us change the appearance of all submenu items at once,
@@ -1136,6 +1134,9 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			$topmenu['items'] = $new_items;
 			$new_tree[] = $topmenu;
 		}
+
+		//Sort the menu by position
+		uasort($new_tree, 'ameMenuItem::compare_position');
 
 		//Use only the highest-priority capability for each URL.
 		foreach($this->page_access_lookup as $url => $capabilities) {
@@ -2006,11 +2007,17 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 				}
 			}
 
+			//Special case: In WP 4.0+ the URL of the "Customize" menu changes often due to a "return" query parameter
+			//that contains the current page URL. To reliably recognize this item, we should ignore that parameter.
+			if ( $this->endsWith($item_url['path'], 'customize.php') ) {
+				unset($item_url['params']['return']);
+			}
+
 			//The current URL must match all query parameters of the item URL.
-			$different_params = array_diff_assoc($item_url['params'], $current_url['params']);
+			$different_params = $this->arrayDiffAssocRecursive($item_url['params'], $current_url['params']);
 
 			//The current URL must have as few extra parameters as possible.
-			$extra_params = array_diff_assoc($current_url['params'], $item_url['params']);
+			$extra_params = $this->arrayDiffAssocRecursive($current_url['params'], $item_url['params']);
 
 			if ( $is_close_match && (count($different_params) == 0) && (count($extra_params) < $best_extra_params) ) {
 				$best_item = $item;
@@ -2062,6 +2069,44 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$parsed['params'] = $params;
 
 		return $parsed;
+	}
+
+	/**
+	 * Get the difference of two arrays.
+	 *
+	 * This methods works like array_diff_assoc(), except it also supports nested arrays by comparing them recursively.
+	 *
+	 * @param array $array1 The base array.
+	 * @param array $array2 The array to compare to.
+	 * @return array An associative array of values from $array1 that are not present in $array2.
+	 */
+	private function arrayDiffAssocRecursive($array1, $array2) {
+		$difference = array();
+
+		foreach($array1 as $key => $value) {
+			if ( !array_key_exists($key, $array2) ) {
+				$difference[$key] = $value;
+				continue;
+			}
+
+			$otherValue = $array2[$key];
+			if ( is_array($value) !== is_array($otherValue) ) {
+				//If only one of the two values is an array then they can't be equal.
+				$difference[$key] = $value;
+			} elseif ( is_array($value) ) {
+				//Compare array values recursively.
+				$subDiff = $this->arrayDiffAssocRecursive($value, $otherValue);
+				if( !empty($subDiff) ) {
+					$difference[$key] = $subDiff;
+				}
+
+			//Like the original array_diff_assoc(), we compare the values as strings.
+			} elseif ( (string)$value !== (string)$array2[$key] ) {
+				$difference[$key] = $value;
+			}
+		}
+
+		return $difference;
 	}
 
 	/**

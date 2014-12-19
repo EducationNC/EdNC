@@ -182,8 +182,8 @@ jQuery(function($) {
 		                              (otherHighlightedMenus.length > 0);
 
 		if (isWrongMenuHighlighted) {
-			//Account for users who use a plugin to keep all menus expanded.
-			var shouldCloseOtherMenus = $('li.wp-has-current-submenu', '#adminmenu').length <= 1;
+			//Account for users who use the Expanded Admin Menus plugin to keep all menus expanded.
+			var shouldCloseOtherMenus = ! $('div.expand-arrow', '#adminmenu').get(0);
 			if (shouldCloseOtherMenus) {
 				otherHighlightedMenus
 					.add('> a', otherHighlightedMenus)
@@ -195,6 +195,14 @@ jQuery(function($) {
 			parentMenuAndLink.removeClass('wp-not-current-submenu');
 			if (parentMenu.hasClass('wp-has-submenu')) {
 				parentMenuAndLink.addClass('wp-has-current-submenu wp-menu-open');
+			}
+
+			//Note: WordPress switches the admin menu between `position: fixed` and `position: relative` depending on
+			//how tall it is compared to the browser window. Opening a different submenu can change the menu's height,
+			//so we must trigger the position update to avoid bugs. If we don't, we can end up with a very tall menu
+			//that's not scrollable (due to being stuck with `position: fixed`).
+			if ((typeof window['stickyMenu'] === 'object') && (typeof window['stickyMenu']['update'] === 'function')) {
+				window.stickyMenu.update();
 			}
 		}
 

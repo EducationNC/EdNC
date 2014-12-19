@@ -18,10 +18,9 @@ if ( ! $this->check_minimum_supported_version() ) {
 	<div class="wrap">
 	<div class="error">
 	<p><?php printf(
-		__( 'This plugin requires WordPress version 4.0 or newer. Please upgrade your WordPress ' .
-			'installation or download an %solder version of the plugin%s.', 'tinymce-advanced' ),
-		'<a href="//wordpress.org/extend/plugins/tinymce-advanced/download/">',
-		'</a>'
+		__( 'This plugin requires WordPress version %1$s or newer. Please upgrade your WordPress installation or download an <a href="%2$s">older version of the plugin</a>.', 'tinymce-advanced' ),
+		'4.0',
+		'//wordpress.org/extend/plugins/tinymce-advanced/download/'
 	); ?></p>
 	</div>
 	</div>
@@ -152,24 +151,20 @@ if ( isset( $_POST['tadv-save'] ) ) {
 
 	?>
 	<div class="wrap">
-	<h2><?php _e('TinyMCE Advanced Settings Export', 'tinymce-advanced'); ?></h2>
+	<h2><?php _e( 'TinyMCE Advanced Settings Export', 'tinymce-advanced' ); ?></h2>
 
 	<div class="tadv-import-export">
 	<p>
-	<?php
-
-	_e( 'The settings are exported as a JSON encoded string. Please copy the content ' .
-		'and save it in a <b>text</b> (.txt) file, using a plain text editor like Notepad. ' .
-		'It is important that the export is not changed in any way, no spaces, line breaks, etc.', 'tinymce-advanced' );
-
-	?>
+	<?php _e( 'The settings are exported as a JSON encoded string.', 'tinymce-advanced' ); ?>
+	<?php _e( 'Please copy the content and save it in a <b>text</b> (.txt) file, using a plain text editor like Notepad.', 'tinymce-advanced' ); ?>
+	<?php _e( 'It is important that the export is not changed in any way, no spaces, line breaks, etc.', 'tinymce-advanced' ); ?>
 	</p>
 
 	<form action="">
 		<p><textarea readonly="readonly" id="tadv-export"><?php echo json_encode( $output ); ?></textarea></p>
 		<p><button type="button" class="button" id="tadv-export-select"><?php _e( 'Select All', 'tinymce-advanced' ); ?></button></p>
 	</form>
-	<p><a href=""><?php _e('Back to Editor Settings', 'tinymce-advanced'); ?></a></p>
+	<p><a href=""><?php _e( 'Back to Editor Settings', 'tinymce-advanced' ); ?></a></p>
 	</div>
 	</div>
 	<?php
@@ -179,25 +174,21 @@ if ( isset( $_POST['tadv-save'] ) ) {
 	// TODO ! admin && ! SA
 	?>
 	<div class="wrap">
-	<h2><?php _e('TinyMCE Advanced Settings Import', 'tinymce-advanced'); ?></h2>
+	<h2><?php _e( 'TinyMCE Advanced Settings Import', 'tinymce-advanced' ); ?></h2>
 
 	<div class="tadv-import-export">
-	<p><?php
-		_e( 'The settings are imported from a JSON encoded string. Please paste ' .
-			'the exported string in the textarea below.', 'tinymce-advanced' );
-	?></p>
+	<p><?php _e( 'The settings are imported from a JSON encoded string. Please paste the exported string in the text area below.', 'tinymce-advanced' );	?></p>
 
 	<form action="" method="post">
 		<p><textarea id="tadv-import" name="tadv-import"></textarea></p>
 		<p>
 			<button type="button" class="button" id="tadv-import-verify"><?php _e( 'Verify', 'tinymce-advanced' ); ?></button>
-			<input type="submit" class="button button-primary alignright" name="tadv-import-submit" value="<?php
-				_e( 'Import', 'tinymce-advanced' ); ?>" />
+			<input type="submit" class="button button-primary alignright" name="tadv-import-submit" value="<?php _e( 'Import', 'tinymce-advanced' ); ?>" />
 		</p>
 		<?php wp_nonce_field('tadv-import'); ?>
 		<p id="tadv-import-error"></p>
 	</form>
-	<p><a href=""><?php _e('Back to Editor Settings', 'tinymce-advanced'); ?></a></p>
+	<p><a href=""><?php _e( 'Back to Editor Settings', 'tinymce-advanced' ); ?></a></p>
 	</div>
 	</div>
 	<?php
@@ -244,9 +235,7 @@ if ( isset( $_POST['tadv-save'] ) ) {
 $this->load_settings();
 
 if ( empty( $this->toolbar_1 ) && empty( $this->toolbar_2 ) && empty( $this->toolbar_3 ) && empty( $this->toolbar_4 ) ) {
-	$message = '<div class="error"><p>' .
-		__('ERROR: All toolbars are empty. Default settings loaded.', 'tinymce-advanced') .
-		'</p></div>';
+	$message = '<div class="error"><p>' . __( 'ERROR: All toolbars are empty. Default settings loaded.', 'tinymce-advanced' ) . '</p></div>';
 
 	$this->admin_settings = $this->default_admin_settings;
 	$this->settings = $this->default_settings;
@@ -258,11 +247,11 @@ $all_buttons = $this->get_all_buttons();
 
 ?>
 <div class="wrap" id="contain">
-<h2><?php _e('Editor Settings', 'tinymce-advanced'); ?></h2>
+<h2><?php _e( 'Editor Settings', 'tinymce-advanced' ); ?></h2>
 <?php
 
 if ( isset( $_POST['tadv-save'] ) && empty( $message ) ) {
-	?><div class="updated" id="message"><p><?php _e( 'Settings saved.', 'tinymce-advanced' ); ?></p></div><?php
+	?><div class="updated"><p><?php _e( 'Settings saved.', 'tinymce-advanced' ); ?></p></div><?php
 } else {
 	echo $message;
 }
@@ -271,17 +260,16 @@ if ( isset( $_POST['tadv-save'] ) && empty( $message ) ) {
 <form id="tadvadmin" method="post" action="">
 
 <p class="tadv-submit">
-	<input class="button-primary button-large" type="submit" name="tadv-save" value="<?php _e('Save Changes', 'tinymce-advanced'); ?>" />
+	<input class="button-primary button-large" type="submit" name="tadv-save" value="<?php _e( 'Save Changes', 'tinymce-advanced' ); ?>" />
 </p>
 
 <div id="tadvzones">
 
-<p><?php _e( 'New in TinyMCE 4.0/WordPress 3.9 is the editor menu. When it is enabled, ' .
-	'most buttons are also available as menu items.', 'tinymce-advanced' ); ?></p>
+<p><?php _e( 'New in TinyMCE 4.0/WordPress 3.9 is the editor menu. When it is enabled, most buttons are also available as menu items.', 'tinymce-advanced' ); ?></p>
 
 <p><label>
 <input type="checkbox" name="menubar" id="menubar" <?php if ( $this->check_setting( 'menubar' ) ) { echo ' checked="checked"'; } ?>>
-<?php _e('Enable the editor menu.', 'tinymce-advanced'); ?>
+<?php _e( 'Enable the editor menu.', 'tinymce-advanced' ); ?>
 </label></p>
 
 <div id="tadv-mce-menu" class="mce-container mce-menubar mce-toolbar mce-first mce-stack-layout-item
@@ -393,11 +381,10 @@ for ( $i = 1; $i < 5; $i++ ) {
 ?>
 </div>
 
-<p><?php _e('Drag buttons from the unused buttons below and drop them in the toolbars above, ' .
-	'or drag the buttons in the toolbars to rearrange them.', 'tinymce-advanced'); ?></p>
+<p><?php _e( 'Drag buttons from the unused buttons below and drop them in the toolbars above, or drag the buttons in the toolbars to rearrange them.', 'tinymce-advanced' ); ?></p>
 
 <div id="unuseddiv">
-<h3><?php _e('Unused Buttons', 'tinymce-advanced'); ?></h3>
+<h3><?php _e( 'Unused Buttons', 'tinymce-advanced' ); ?></h3>
 <ul id="unused" class="container">
 <?php
 
@@ -438,21 +425,20 @@ foreach( $all_buttons as $button => $name ) {
 </ul>
 </div>
 
-<p class="tadv-more-plugins"><?php _e( 'Also enable:' ); ?>
+<p class="tadv-more-plugins"><?php _e( 'Also enable:', 'tinymce-advanced' ); ?>
 	<label>
 	<input type="checkbox" name="advlist" id="advlist" <?php if ( $this->check_setting('advlist') ) echo ' checked="checked"'; ?> />
-	<?php _e('List Style Options', 'tinymce-advanced'); ?>
+	<?php _e( 'List Style Options', 'tinymce-advanced' ); ?>
 	</label>
 
 	<label>
-	<input type="checkbox" name="contextmenu" id="contextmenu" <?php
-		if ( $this->check_setting('contextmenu') ) echo ' checked="checked"'; ?> />
-	<?php _e('Context Menu', 'tinymce-advanced'); ?>
+	<input type="checkbox" name="contextmenu" id="contextmenu" <?php if ( $this->check_setting('contextmenu') ) echo ' checked="checked"'; ?> />
+	<?php _e( 'Context Menu', 'tinymce-advanced' ); ?>
 	</label>
 
 	<label>
 	<input type="checkbox" name="advlink" id="advlink" <?php if ( $this->check_setting('advlink') ) echo ' checked="checked"'; ?> />
-	<?php _e('Link (replaces the Insert/Edit Link dialog)', 'tinymce-advanced'); ?>
+	<?php _e( 'Link (replaces the Insert/Edit Link dialog)', 'tinymce-advanced' ); ?>
 	</label>
 </p>
 
@@ -462,94 +448,72 @@ if ( ! is_multisite() || current_user_can( 'manage_sites' ) ) {
 
 	?>
 	<div class="advanced-options">
-	<h3><?php _e('Advanced Options', 'tinymce-advanced'); ?></h3>
+	<h3><?php _e( 'Advanced Options', 'tinymce-advanced' ); ?></h3>
 	<?php
 
 	if ( ! is_multisite() && ! current_theme_supports( 'editor-style' ) ) {
 
 		?>
 		<div>
-			<label><input type="checkbox" name="editorstyle" id="editorstyle" <?php
-				if ( $this->check_admin_setting( 'editorstyle' ) ) echo ' checked="checked"'; ?> />
-			<?php _e('Import editor-style.css.', 'tinymce-advanced'); ?></label>
-			<p><?php
-				_e( 'It seems your theme does not support customised styles for the editor. ' .
-					'You can create a CSS file named <code>editor-style.css</code> and upload it to your ' .
-					'theme\'s directory. After that, enable this setting.', 'tinymce-advanced' );
-			?></p>
+			<label><input type="checkbox" name="editorstyle" id="editorstyle" <?php if ( $this->check_admin_setting( 'editorstyle' ) ) echo ' checked="checked"'; ?> />
+			<?php _e( 'Import editor-style.css.', 'tinymce-advanced' ); ?></label>
+			<p>
+				<?php _e( 'It seems your theme does not support customised styles for the editor.', 'tinymce-advanced' ); ?>
+				<?php _e( 'You can create a CSS file named <code>editor-style.css</code> and upload it to your theme\'s directory.', 'tinymce-advanced' ); ?>
+				<?php _e( 'After that, enable this setting.', 'tinymce-advanced' ); ?>
+			</p>
 		</div>
 		<?php
 	}
 
 	?>
 	<div>
-		<label><input type="checkbox" name="importcss" id="importcss" <?php
-			if ( $this->check_admin_setting( 'importcss' ) ) echo ' checked="checked"'; ?> />
-		<?php _e('Load the CSS classes used in editor-style.css and replace the Formats button ' .
-			'and sub-menu.', 'tinymce-advanced'); ?></label>
+		<label><input type="checkbox" name="importcss" id="importcss" <?php if ( $this->check_admin_setting( 'importcss' ) ) echo ' checked="checked"'; ?> />
+		<?php _e( 'Load the CSS classes used in editor-style.css and replace the Formats button and sub-menu.', 'tinymce-advanced' ); ?></label>
 	</div>
 
 	<div>
-		<label><input type="checkbox" name="textpattern" id="textpattern" <?php
-			if ( $this->check_admin_setting('textpattern') ) echo ' checked="checked"'; ?> />
-		<?php _e('Markdown typing support (text pattern plugin)', 'tinymce-advanced'); ?></label>
-		<p><?php
-			_e( 'This plugin matches special patterns while you type and applies formats ' .
-				'or executed commands on these text patterns. The default patterns are the ' .
-				'same as the markdown syntax so you can type <code># text</code> to create ' .
-				'a header, <code>1. text</code> to create a list, <code>**text**</code> ' .
-				'to make something bold, etc.', 'tinymce-advanced' );
-		?> <a href="http://www.tinymce.com/wiki.php/Configuration:textpattern_patterns" target="_blank"><?php
-			_e('More information', 'tinymce-advanced'); ?></a>
+		<label><input type="checkbox" name="textpattern" id="textpattern" <?php if ( $this->check_admin_setting('textpattern') ) echo ' checked="checked"'; ?> />
+		<?php _e( 'Markdown typing support (text pattern plugin)', 'tinymce-advanced' ); ?></label>
+		<p>
+			<?php _e( 'This plugin matches special patterns while you type and applies formats or executes commands on the matched text.', 'tinymce-advanced' ); ?>
+			<?php _e( 'The default patterns are the same as the markdown syntax so you can type <code># text</code> to create a header, <code>1. text</code> to create a list, <code>**text**</code> to make it bold, etc.', 'tinymce-advanced' ); ?>
+			<a href="http://www.tinymce.com/wiki.php/Configuration:textpattern_patterns" target="_blank"><?php _e( 'More information', 'tinymce-advanced' ); ?></a>
 		</p>
 	</div>
 
 	<div>
-		<label><input type="checkbox" name="no_autop" id="no_autop" <?php
-			if ( $this->check_admin_setting( 'no_autop' ) ) echo ' checked="checked"'; ?> />
-		<?php _e('Stop removing the &lt;p&gt; and &lt;br /&gt; tags when saving and show them ' .
-			'in the Text editor', 'tinymce-advanced'); ?></label>
-		<p><?php
-			_e( 'This will make it possible to use more advanced coding in the HTML editor ' .
-				'without the back-end filtering affecting it much. However it may behave ' .
-				'unexpectedly in rare cases, so test it thoroughly before enabling it ' .
-				'permanently. Line breaks in the HTML editor would still affect the output, ' .
-				'in particular do not use empty lines, line breaks inside HTML tags ' .
-				'or multiple &lt;br /&gt; tags.', 'tinymce-advanced' );
-		?></p>
+		<label><input type="checkbox" name="no_autop" id="no_autop" <?php if ( $this->check_admin_setting( 'no_autop' ) ) echo ' checked="checked"'; ?> />
+		<?php _e( 'Stop removing the &lt;p&gt; and &lt;br /&gt; tags when saving and show them in the Text editor', 'tinymce-advanced' ); ?></label>
+		<p>
+			<?php _e( 'This will make it possible to use more advanced coding in the HTML editor without the back-end filtering affecting it much.', 'tinymce-advanced' ); ?>
+			<?php _e( 'However it may behave unexpectedly in rare cases, so test it thoroughly before enabling it permanently.', 'tinymce-advanced' ); ?>
+			<?php _e( 'Line breaks in the HTML editor would still affect the output, in particular do not use empty lines, line breaks inside HTML tags or multiple &lt;br /&gt; tags.', 'tinymce-advanced' ); ?>
+		</p>
 	</div>
 
 	<div>
-		<label><input type="checkbox" name="fontsize_formats" id="fontsize_formats" <?php
-			if ( $this->check_admin_setting( 'fontsize_formats' ) ) echo ' checked="checked"'; ?> />
-		<?php _e('Replace font size settings', 'tinymce-advanced'); ?></label>
-		<p><?php
-			_e( 'Replaces the size setting available for fonts with: 8px 10px 12px 14px 16px 20px 24px 28px 32px 36px.', 'tinymce-advanced' );
-		?></p>
+		<label><input type="checkbox" name="fontsize_formats" id="fontsize_formats" <?php if ( $this->check_admin_setting( 'fontsize_formats' ) ) echo ' checked="checked"'; ?> />
+		<?php _e( 'Replace font size settings', 'tinymce-advanced' ); ?></label>
+		<p><?php _e( 'Replaces the size setting available for fonts with: 8px 10px 12px 14px 16px 20px 24px 28px 32px 36px.', 'tinymce-advanced' ); ?></p>
 	</div>
 
 	<div>
-		<label><input type="checkbox" name="paste_images" id="paste_images" <?php
-			if ( $this->check_admin_setting( 'paste_images' ) ) echo ' checked="checked"'; ?> />
-		<?php _e('Enable pasting of image source', 'tinymce-advanced'); ?></label>
-		<p><?php
-			_e( 'Works only in Firefox and Safari. These browsers support pasting of ' .
-				'images directly in the editor and convert them to base64 encoded text. ' .
-				'This is not acceptable for larger images like photos or graphics, ' .
-				'but may be useful in some cases for very small images like icons, ' .
-				'not larger than 2-3KB. These images will not be available in ' .
-				'the Media Library.', 'tinymce-advanced' );
-		?></p>
+		<label><input type="checkbox" name="paste_images" id="paste_images" <?php if ( $this->check_admin_setting( 'paste_images' ) ) echo ' checked="checked"'; ?> />
+		<?php _e( 'Enable pasting of image source', 'tinymce-advanced' ); ?></label>
+		<p>
+			<?php _e( 'Works only in Firefox and Safari. These browsers support pasting of images directly in the editor and convert them to base64 encoded text.', 'tinymce-advanced' ); ?>
+			<?php _e( 'This is not acceptable for larger images like photos or graphics, but may be useful in some cases for very small images like icons, not larger than 2-3KB.', 'tinymce-advanced' ); ?>
+			<?php _e( 'These images will not be available in the Media Library.', 'tinymce-advanced' ); ?>
+		</p>
 	</div>
 	</div>
 
 	<div class="advanced-options">
-	<h3><?php _e('Administration', 'tinymce-advanced'); ?></h3>
+	<h3><?php _e( 'Administration', 'tinymce-advanced' ); ?></h3>
 	<div>
-		<input type="submit" class="button" name="tadv-export-settings" value="<?php
-			_e( 'Export Settings', 'tinymce-advanced' ); ?>" /> &nbsp;
-		<input type="submit" class="button" name="tadv-import-settings" value="<?php
-			_e( 'Import Settings', 'tinymce-advanced' ); ?>" />
+		<input type="submit" class="button" name="tadv-export-settings" value="<?php _e( 'Export Settings', 'tinymce-advanced' ); ?>" /> &nbsp;
+		<input type="submit" class="button" name="tadv-import-settings" value="<?php _e( 'Import Settings', 'tinymce-advanced' ); ?>" />
 	</div>
 	</div>
 	<?php
@@ -559,15 +523,12 @@ if ( ! is_multisite() || current_user_can( 'manage_sites' ) ) {
 
 <p class="tadv-submit">
 	<?php wp_nonce_field( 'tadv-save-buttons-order' ); ?>
-	<input class="button" type="submit" name="tadv-restore-defaults" value="<?php
-		_e('Restore Default Settings', 'tinymce-advanced'); ?>" />
-	<input class="button-primary button-large" type="submit" name="tadv-save" value="<?php
-		_e('Save Changes', 'tinymce-advanced'); ?>" />
+	<input class="button" type="submit" name="tadv-restore-defaults" value="<?php _e( 'Restore Default Settings', 'tinymce-advanced' ); ?>" />
+	<input class="button-primary button-large" type="submit" name="tadv-save" value="<?php _e( 'Save Changes', 'tinymce-advanced' ); ?>" />
 </p>
 </form>
 
 <div id="wp-adv-error-message" class="tadv-error">
-<?php _e('The [Toolbar toggle] button shows or hides the second, third, and forth button rows. ' .
-	'It will only work when it is in the first row and there are buttons in the second row.', 'tinymce-advanced'); ?>
+<?php _e( 'The [Toolbar toggle] button shows or hides the second, third, and forth button rows. It will only work when it is in the first row and there are buttons in the second row.', 'tinymce-advanced' ); ?>
 </div>
 </div><!-- /wrap -->

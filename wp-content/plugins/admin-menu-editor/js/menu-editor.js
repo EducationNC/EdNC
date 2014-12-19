@@ -144,6 +144,8 @@ var AmeCapabilityManager = (function(roles, users) {
 			case 'user':
 				specificity = 10;
 				break;
+			default:
+				specificity = 0;
         }
 		return specificity;
     };
@@ -203,11 +205,7 @@ var itemTemplates = {
  */
 function setInputValue(input, value) {
 	if (input.attr('type') == 'checkbox'){
-        if (value){
-            input.attr('checked', 'checked');
-        } else {
-            input.removeAttr('checked');
-        }
+		input.prop('checked', value);
     } else {
         input.val(value);
     }
@@ -1633,7 +1631,7 @@ $(document).ready(function(){
 
 			var actorHasAccess = actorCanAccessMenu(menuItem, actor);
 			if (actorHasAccess) {
-				checkbox.attr('checked', 'checked');
+				checkbox.prop('checked', true);
 			}
 
 			alternate = (alternate == '') ? 'alternate' : '';
@@ -2429,6 +2427,82 @@ $(document).ready(function(){
 		});
 	});
 
+	//Copy all menu permissions from one role to another.
+	var copyPermissionsDialog = $('#ws-ame-copy-permissions-dialog').dialog({
+		autoOpen: false,
+		modal: true,
+		closeText: ' ',
+		draggable: false
+	});
+
+	//Populate source/destination lists.
+	var sourceActorList = $('#ame-copy-source-actor'), destinationActorList = $('#ame-copy-destination-actor');
+	$.each(wsEditorData.actors, function(actor, name) {
+		var option = $('<option>', {val: actor, text: name});
+		sourceActorList.append(option);
+		destinationActorList.append(option.clone());
+	});
+
+	//The "Copy permissions" toolbar button.
+	$('#ws_copy_role_permissions').click(function() {
+		//Pre-select the current actor as the destination.
+		if (selectedActor !== null) {
+			destinationActorList.val(selectedActor);
+		}
+		copyPermissionsDialog.dialog('open');
+	});
+
+	//Actually copy the permissions when the user click the confirmation button.
+	var copyConfirmationButton = $('#ws-ame-confirm-copy-permissions');
+	copyConfirmationButton.click(function() {
+		var sourceActor = sourceActorList.val();
+		var destinationActor = destinationActorList.val();
+
+		if (sourceActor === null || destinationActor === null) {
+			alert('Select a source and a destination first.');
+			return;
+		}
+
+		//Iterate over all menu items and copy the permissions from one actor to the other.
+		var allMenuNodes = $('.ws_menu', '#ws_menu_box').add('.ws_item', '#ws_submenu_box');
+		allMenuNodes.each(function() {
+			var node = $(this);
+			var menuItem = node.data('menu_item');
+
+			//Only change permissions when they don't match. This ensures we won't unnecessarily overwrite default
+			//permissions and bloat the configuration with extra grant_access entries.
+			var sourceAccess      = actorCanAccessMenu(menuItem, sourceActor);
+			var destinationAccess = actorCanAccessMenu(menuItem, destinationActor);
+			if (sourceAccess !== destinationAccess) {
+				setActorAccess(node, destinationActor, sourceAccess);
+				//Note: In theory, we could also look at the default permissions for destinationActor and
+				//revert to default instead of overwriting if that would make the two actors' permissions match.
+			}
+		});
+
+		//If the user is currently looking at the destination actor, force the UI to refresh
+		//so that they can see the new permissions.
+		if (selectedActor === destinationActor) {
+			//This is a bit of a hack, but right now there's no better way to refresh all items at once.
+			setSelectedActor(null);
+			setSelectedActor(destinationActor);
+		}
+
+		//All done.
+		copyPermissionsDialog.dialog('close');
+	});
+
+	//Only enable the copy button when the user selects a valid source and destination.
+	copyConfirmationButton.prop('disabled', true);
+	sourceActorList.add(destinationActorList).click(function() {
+		var sourceActor = sourceActorList.val();
+		var destinationActor = destinationActorList.val();
+
+		var validInputs = (sourceActor !== null) && (destinationActor !== null) && (sourceActor !== destinationActor);
+		copyConfirmationButton.prop('disabled', !validInputs);
+	});
+
+
 	/*************************************************************************
 	                          Item toolbar buttons
 	 *************************************************************************/
@@ -2758,7 +2832,8 @@ $(document).ready(function(){
 	});
 
 	$('#ws_import_menu').click(function(){
-		$('#import_progress_notice, #import_progress_notice2, #import_complete_notice').hide();
+		$('#import_progress_notice, #import_progress_notice2, #import_complete_notice, #ws_import_error').hide();
+		$('#ws_import_panel').show();
 		$('#import_menu_form').resetForm();
 		//The "Upload" button is disabled until the user selects a file
 		$('#ws_start_import').attr('disabled', 'disabled');
@@ -2771,6 +2846,21 @@ $(document).ready(function(){
 	$('#import_file_selector').change(function(){
 		$('#ws_start_import').prop('disabled', ! $(this).val() );
 	});
+
+	//This function displays unhandled server side errors. In theory, our upload handler always returns a well-formed
+	//response even if there's an error. In practice, stuff can go wrong in unexpected ways (e.g. plugin conflicts).
+	function handleUnexpectedImportError(xhr, errorMessage) {
+		//The server-side code didn't catch this error, so it's probably something serious
+		//and retrying won't work.
+		$('#import_menu_form').resetForm();
+		$('#ws_import_panel').hide();
+
+		//Display error information.
+		$('#ws_import_error_message').text(errorMessage);
+		$('#ws_import_error_http_code').text(xhr.status);
+		$('#ws_import_error_response').text((xhr.responseText !== '') ? xhr.responseText : '[Empty response]');
+		$('#ws_import_error').show();
+	}
 
 	//AJAXify the upload form
 	$('#import_menu_form').ajaxForm({
@@ -2793,11 +2883,18 @@ $(document).ready(function(){
 			$('#ws_start_import').attr('disabled', 'disabled');
 			return true;
 		},
-		success: function(data){
+		success: function(data, status, xhr) {
+			$('#import_progress_notice').hide();
+
 			var importDialog = $('#import_dialog');
 			if ( !importDialog.dialog('isOpen') ){
 				//Whoops, the user closed the dialog while the upload was in progress.
 				//Discard the response silently.
+				return;
+			}
+
+			if ( data === null ) {
+				handleUnexpectedImportError(xhr, 'Invalid response from server. Please check your PHP error log.');
 				return;
 			}
 
@@ -2807,7 +2904,6 @@ $(document).ready(function(){
 				$('#import_menu_form').resetForm();
 				importDialog.find('.hide-when-uploading').show();
 			}
-			$('#import_progress_notice').hide();
 
 			if ( (typeof data['tree'] != 'undefined') && data.tree ){
 				//Whee, we got back a (seemingly) valid menu. A veritable miracle!
@@ -2823,6 +2919,9 @@ $(document).ready(function(){
 				}), 500);
 			}
 
+		},
+		error: function(xhr, status, errorMessage) {
+			handleUnexpectedImportError(xhr, errorMessage);
 		}
 	});
 

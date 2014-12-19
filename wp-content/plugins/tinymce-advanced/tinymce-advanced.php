@@ -3,7 +3,7 @@
 Plugin Name: TinyMCE Advanced
 Plugin URI: http://www.laptoptips.ca/projects/tinymce-advanced/
 Description: Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
-Version: 4.1.1
+Version: 4.1.7
 Author: Andrew Ozz
 Author URI: http://www.laptoptips.ca/
 
@@ -177,9 +177,9 @@ class Tinymce_Advanced {
 		$this->get_all_buttons();
 	}
 
-	// Min version 3.9-RC1
+	// Min version 4.1-RC1
 	private function check_minimum_supported_version() {
-		return ( isset( $GLOBALS['wp_db_version'] ) && $GLOBALS['wp_db_version'] >= 29630 );
+		return ( isset( $GLOBALS['wp_db_version'] ) && $GLOBALS['wp_db_version'] >= 30133 );
 	}
 
 	private function check_plugin_version() {
@@ -448,11 +448,12 @@ class Tinymce_Advanced {
 	}
 
 	function after_wp_tiny_mce() {
-		if ( $this->check_setting('menubar') ) {
-			?>
-			<style type="text/css">.wp-fullscreen-wrap .mce-menubar { position: static !important; width: auto !important; }</style>
-			<?php
-		}
+		?>
+		<style type="text/css">
+		.wp-fullscreen-wrap .mce-menubar { position: static !important; width: auto !important; }
+		#wp-content-wrap .mce-tinymce.mce-fullscreen .mce-wp-dfw { display: none; }
+		</style>
+		<?php
 	}
 
 	function htmledit( $c ) {
@@ -475,7 +476,7 @@ class Tinymce_Advanced {
 			$this->plugins = array();
 		}
 
-		if ( $this->check_admin_setting( 'no_autop' ) || in_array( 'table', $this->plugins, true ) ) {
+		if ( $this->check_admin_setting( 'no_autop' ) ) {
 			$this->plugins[] = 'wptadv';
 		}
 

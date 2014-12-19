@@ -3,6 +3,8 @@
 /**
  * CMB field class
  * @since  1.1.0
+ * @method string _id()
+ * @method string type()
  */
 class CMB2_Field {
 
@@ -11,35 +13,42 @@ class CMB2_Field {
 	 * @var   mixed
 	 * @since 1.1.0
 	 */
-	public $object_id;
+	public $object_id = null;
 
 	/**
 	 * Metabox object type
-	 * @var   mixed
+	 * @var   string
 	 * @since 1.1.0
 	 */
-	public $object_type;
+	public $object_type = '';
 
 	/**
 	 * Field arguments
 	 * @var   mixed
 	 * @since 1.1.0
 	 */
-	public $args;
+	public $args = array();
 
 	/**
-	 * Field group object
-	 * @var   array
+	 * Field group object or false (if no group)
+	 * @var   mixed
 	 * @since 1.1.0
 	 */
-	public $group;
+	public $group = false;
 
 	/**
 	 * Field meta value
 	 * @var   mixed
 	 * @since 1.1.0
 	 */
-	public $value;
+	public $value = null;
+
+	/**
+	 * Field meta value
+	 * @var   mixed
+	 * @since 1.1.0
+	 */
+	public $escaped_value = null;
 
 	/**
 	 * Constructs our field object
@@ -54,8 +63,7 @@ class CMB2_Field {
 			$this->object_type = $this->group->object_type;
 		} else {
 			$this->object_id   = $args['object_id'];
-			$this->object_type = $args['object_type'];
-			$this->group       = false;
+			$this->object_type = isset( $args['object_type'] ) ? $args['object_type'] : 'post';
 		}
 
 		$this->args = $this->_set_field_defaults( $args['field_args'] );
@@ -491,7 +499,7 @@ class CMB2_Field {
 	 */
 	public function escaped_value( $func = 'esc_attr', $meta_value = '' ) {
 
-		if ( isset( $this->escaped_value ) ) {
+		if ( ! is_null( $this->escaped_value ) ) {
 			return $this->escaped_value;
 		}
 
@@ -556,6 +564,36 @@ class CMB2_Field {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Format the timestamp field value based on the field date/time format arg
+	 * @since  2.0.0
+	 * @param  int    $meta_value Timestamp
+	 * @param  string $format     Either date_format or time_format
+	 * @return string             Formatted date
+	 */
+	public function format_timestamp( $meta_value, $format = 'date_format' ) {
+		return date( stripslashes( $this->args( $format ) ), $meta_value );
+	}
+
+	/**
+	 * Return a formatted timestamp for a field
+	 * @since  2.0.0
+	 * @param  string $format Either date_format or time_format
+	 * @return string         Formatted date
+	 */
+	public function get_timestamp_format( $format = 'date_format', $meta_value = 0 ) {
+		$meta_value = $meta_value ? $meta_value : $this->escaped_value();
+		$meta_value = cmb2_utils()->make_valid_time_stamp( $meta_value );
+
+		if ( empty( $meta_value ) ) {
+			return '';
+		}
+
+		return is_array( $meta_value )
+			? array_map( array( $this, 'format_timestamp' ), $meta_value, $format )
+			: $this->format_timestamp( $meta_value, $format );
 	}
 
 	/**

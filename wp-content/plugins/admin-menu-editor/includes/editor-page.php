@@ -14,6 +14,7 @@ $icons = array(
 	'delete' => '/page-delete.png',
 	'new-separator' => '/separator-add.png',
 	'toggle-all' => '/check-all.png',
+	'copy-permissions' => '/copy-permissions.png',
 );
 foreach($icons as $name => $url) {
 	$icons[$name] = $images_url . $url;
@@ -43,50 +44,18 @@ if ( !apply_filters('admin_menu_editor_is_pro', false) ){
 	</h2>
 
 <?php
-	if ( !empty($_GET['message']) ){
-		if ( intval($_GET['message']) == 1 ){
-			echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
-		} elseif ( intval($_GET['message']) == 2 ) {
-			echo '<div id="message" class="error"><p><strong>Failed to decode input! The menu wasn\'t modified.</strong></p></div>';
-		}
+if ( !empty($_GET['message']) ){
+	if ( intval($_GET['message']) == 1 ){
+		echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
+	} elseif ( intval($_GET['message']) == 2 ) {
+		echo '<div id="message" class="error"><p><strong>Failed to decode input! The menu wasn\'t modified.</strong></p></div>';
 	}
-?>
+}
 
-<?php
-$hint_id = 'ws_whats_new_120';
-$show_whats_new = false && apply_filters('admin_menu_editor_is_pro', false) && !empty($editor_data['show_hints'][$hint_id]);
-if ( $show_whats_new ):
-    ?>
-    <div class="ws_hint" id="<?php echo esc_attr($hint_id); ?>">
-        <div class="ws_hint_close" title="Close">x</div>
-        <div class="ws_hint_content">
-            <strong>What's New In 1.20 and 1.30</strong>
-            <ul>
-                <li>New menu permissions interface.
-                    <a href="http://w-shadow.com/admin-menu-editor-pro/permissions/">Learn more.</a></li>
-
-                <li>You can now use "not:user:username", "capability1,capability2", "capability1+capability2" and other
-                    advanced syntax in the capability field. See the link above for details.</li>
-
-                <li>You can drag sub-menu items to the top level and the other way around. To do it,
-                    drag the item to the very end of the (sub-)menu and drop it on the yellow rectangle that will appear.</li>
-
-                <li>Added a "Target page" drop-down to simplify setting menu URLs. You can still enter an arbitrary URL
-                    by selecting "Custom".</li>
-
-                <li>Miscellaneous bug fixes.</li>
-
-            </ul>
-        </div>
-    </div>
-    <?php
-endif;
-?>
-
-<?php
 include dirname(__FILE__) . '/access-editor-dialog.php';
 if ( apply_filters('admin_menu_editor_is_pro', false) ) {
 	include dirname(__FILE__) . '/../extras/menu-color-dialog.php';
+	include dirname(__FILE__) . '/../extras/copy-permissions-dialog.php';
 }
 ?>
 
@@ -126,6 +95,9 @@ if ( apply_filters('admin_menu_editor_is_pro', false) ) {
 
 					<a id='ws_toggle_all_menus' class='ws_button' href='javascript:void(0)'
 					   title='Toggle all menus for the selected role'><img src='<?php echo $icons['toggle-all']; ?>' alt="Toggle all" /></a>
+
+					<a id='ws_copy_role_permissions' class='ws_button' href='javascript:void(0)'
+					   title='Copy all menu permissions from one role to another'><img src='<?php echo $icons['copy-permissions']; ?>' alt="Copy permissions" /></a>
 				<?php endif; ?>
 
 				<div class="clear"></div>
