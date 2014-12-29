@@ -1,11 +1,19 @@
 <?php
 /**
-* Featured Stories RSS2 Template
+* Posts from Today RSS2 Template
 */
 
+$today = getdate();
 $args = array(
-  'post_type' => 'feature',
-  'posts_per_page' => 2   // TODO: Change this to show only stories published since 12AM on this day
+  'post_type' => 'post',
+  'posts_per_page' => -1,
+  'date_query' => array(
+    array(
+      'year' => $today['year'],
+      'month' => $today['mon'],
+      'day' => $today['mday']
+    )
+  )
 );
 
 $features = new WP_Query($args);
@@ -39,18 +47,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
       <dc:creator><?php the_author(); ?></dc:creator>
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
-      <description><![CDATA[<?php
-      if (has_post_thumbnail()) {
-        echo '<figure>';
-        the_post_thumbnail('post-thumbnail');
-        $thumb_id = get_post_thumbnail_id();
-        $thumb_post = get_post($thumb_id);
-        echo '<figcaption>';
-        echo $thumb_post->post_excerpt;
-        echo '</figcaption>';
-        echo '</figure>';
-      }
-      the_excerpt(); ?>]]></description>
+      <description><![CDATA[<?php the_excerpt_rss() ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
         echo '<figure>';
@@ -62,7 +59,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '</figcaption>';
         echo '</figure>';
       }
-      the_content(); ?>]]></content:encoded>
+      the_content() ?>]]></content:encoded>
       <?php rss_enclosure(); ?>
       <?php do_action('rss2_item'); ?>
     </item>

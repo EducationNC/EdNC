@@ -3,7 +3,6 @@
 * EdNews RSS2 Template
 */
 
-$postCount = 1;
 $args = array(
   'post_type' => 'ednews',
   'posts_per_page' => 1
@@ -45,17 +44,22 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       echo '<ul>';
       $date = get_the_time('n/j/Y');
       $items = get_field('news_item');
-      foreach ($items as $item) {
+      $i = 0;
+      $limit = 5;
+      $count = count($items);
+      while ($i < $limit && $i < $count) {
+        $item = $items[$i];
         echo '<li>';
-        echo '<h4>';
-        echo '<a href="' . $item['link'] . '" target="_blank">';
-        echo '<span class="normal">' . $item['scope'] . ':</span>';
-        echo $item['title'];
-        echo '</a>';
-        echo '</h4>';
-        echo '<p class="meta">';
-        echo '<a href="' . $item['link'] . '" target="_blank">' . $item['source_name'] . ', ' . $date . '<span class="icon-external-link"></span></a></p>';
+          echo '<h3 style="margin-bottom: 0;">';
+            echo '<a href="' . $item['link'] . '" target="_blank">';
+              echo '<span class="normal">' . $item['scope'] . ':</span>';
+              echo $item['title'];
+            echo '</a>';
+          echo '</h3>';
+          echo '<p class="meta">';
+            echo '<a href="' . $item['link'] . '" target="_blank">' . $item['source_name'] . ', ' . $date . '</a></p>';
         echo '</li>';
+        $i++;
       }
       echo '</ul>';
       ?>]]></description>
@@ -65,14 +69,14 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       $items = get_field('news_item');
       foreach ($items as $item) {
         echo '<li>';
-          echo '<h4>';
+          echo '<h3 style="margin-bottom: 0;">';
             echo '<a href="' . $item['link'] . '" target="_blank">';
               echo '<span class="normal">' . $item['scope'] . ':</span>';
               echo $item['title'];
             echo '</a>';
-          echo '</h4>';
+          echo '</h3>';
           echo '<p class="meta">';
-            echo '<a href="' . $item['link'] . '" target="_blank">' . $item['source_name'] . ', ' . $date . '<span class="icon-external-link"></span></a></p>';
+            echo '<a href="' . $item['link'] . '" target="_blank">' . $item['source_name'] . ', ' . $date . '</a></p>';
         echo '</li>';
       }
       echo '</ul>';
