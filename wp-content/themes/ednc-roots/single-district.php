@@ -36,9 +36,12 @@
         </p>
 
         <h2>Basic Information</h2>
-        <p><span>Number of schools:</span> <?php the_field('number_of_schools'); ?></p>
-        <p><span>Number of students:</span> <?php the_field('number_of_students'); ?></p>
-        <p><span>Number of teachers:</span> <?php the_field('number_of_teachers'); ?></p>
+        <p>
+          <span>Number of schools:</span> <?php the_field('number_of_schools'); ?><br />
+          <span>Number of students:</span> <?php the_field('number_of_students'); ?><br />
+          <span>Number of teachers:</span> <?php the_field('number_of_teachers'); ?><br />
+          <span class="caption">Source: <a href="http://www.ncpublicschools.org/fbs/accounting/eddie/" target="_blank">http://www.ncpublicschools.org/fbs/accounting/eddie/</a></span>
+        </p>
       </div>
 
       <div class="col-md-4">
