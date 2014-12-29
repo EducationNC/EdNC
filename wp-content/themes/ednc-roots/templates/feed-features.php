@@ -47,7 +47,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
           $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
         }
         $image_post = get_post($image_id);
-        echo '<figure>';
+        echo '<figure style="margin: 1em 0;">';
         if ($image_src) {
           echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
         }
@@ -65,11 +65,11 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
           $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
         }
         $image_post = get_post($image_id);
-        echo '<figure>';
+        echo '<figure style="margin: 1em 0;">';
         if ($image_src) {
           echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
         }
-        echo '<figcaption>';
+        echo '<figcaption style="font-style: italic;">';
         echo $image_post->post_excerpt;
         echo '</figcaption>';
         echo '</figure>';
