@@ -52,12 +52,12 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<li>';
           echo '<h3 style="margin-bottom: 0;">';
             echo '<a href="' . $item['link'] . '" target="_blank">';
-              echo '<span class="normal">' . $item['scope'] . ':</span>';
+              echo '<span class="normal">' . $item['scope'] . ':</span> ';
               echo $item['title'];
             echo '</a>';
           echo '</h3>';
-          echo '<p class="meta">';
-            echo '<a href="' . $item['link'] . '" target="_blank">' . $item['source_name'] . ', ' . $date . '</a></p>';
+          echo '<p class="meta" style="margin: 0;">';
+            echo $item['source_name'] . ', ' . $date . '</p>';
         echo '</li>';
         $i++;
       }
@@ -71,12 +71,12 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<li>';
           echo '<h3 style="margin-bottom: 0;">';
             echo '<a href="' . $item['link'] . '" target="_blank">';
-              echo '<span class="normal">' . $item['scope'] . ':</span>';
+              echo '<span class="normal">' . $item['scope'] . ':</span> ';
               echo $item['title'];
             echo '</a>';
           echo '</h3>';
-          echo '<p class="meta">';
-            echo '<a href="' . $item['link'] . '" target="_blank">' . $item['source_name'] . ', ' . $date . '</a></p>';
+          echo '<p class="meta" style="margin: 0;">';
+            echo $item['source_name'] . ', ' . $date . '</p>';
         echo '</li>';
       }
       echo '</ul>';
