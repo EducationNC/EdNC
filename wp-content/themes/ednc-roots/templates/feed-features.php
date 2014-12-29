@@ -41,24 +41,36 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
       <description><![CDATA[<?php
       if (has_post_thumbnail()) {
+        $image_id = get_post_thumbnail_id();
+        $image_src = wp_get_attachment_image_src($image_id, 'full');
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+        }
+        $image_post = get_post($image_id);
         echo '<figure>';
-        the_post_thumbnail('post-thumbnail');
-        $thumb_id = get_post_thumbnail_id();
-        $thumb_post = get_post($thumb_id);
+        if ($image_src) {
+          echo '<img src="' . echo $image_sized['url'] . '" style="max-width: 100%;" />';
+        }
         echo '<figcaption>';
-        echo $thumb_post->post_excerpt;
+        echo $image_post->post_excerpt;
         echo '</figcaption>';
         echo '</figure>';
       }
       the_excerpt(); ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
+        $image_id = get_post_thumbnail_id();
+        $image_src = wp_get_attachment_image_src($image_id, 'full');
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+        }
+        $image_post = get_post($image_id);
         echo '<figure>';
-        the_post_thumbnail('post-thumbnail');
-        $thumb_id = get_post_thumbnail_id();
-        $thumb_post = get_post($thumb_id);
+        if ($image_src) {
+          echo '<img src="' . echo $image_sized['url'] . '" style="max-width: 100%;" />';
+        }
         echo '<figcaption>';
-        echo $thumb_post->post_excerpt;
+        echo $image_post->post_excerpt;
         echo '</figcaption>';
         echo '</figure>';
       }
