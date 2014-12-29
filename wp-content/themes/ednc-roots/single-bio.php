@@ -11,7 +11,13 @@
         <?php
         $twitter = get_field('twitter');
         if ($twitter) {
-          echo '<span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a>';
+          echo '<p><span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a></p>';
+        }
+        ?>
+        <?php
+        $website = get_field('website');
+        if ($website) {
+          echo '<p><a href="' . $website . '" target="_blank">' . $website . '</a></p>';
         }
         ?>
       </header>

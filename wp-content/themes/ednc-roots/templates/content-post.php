@@ -1,7 +1,8 @@
 <?php while (have_posts()) : the_post();
 
 $author_id = get_the_author_meta('ID');
-$author_type = wp_get_post_terms($author_id, 'author-type');
+$author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+$author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 
 $category = get_the_category();
 $image_id = get_post_thumbnail_id();
@@ -93,23 +94,7 @@ if ($image_src) {
               <?php the_post_thumbnail('full'); ?>
             </div>
             <div class="col-xs-7 col-sm-12 col-md-7">
-              <!--<h4><?php the_field('title'); ?></h4>
-              <p class="caption"><?php the_field('tagline'); ?></p> -->
-              <?php
-              $twitter = get_field('twitter');
-              if ($twitter) {
-                echo '<span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a>';
-              } ?>
-              <?php if (get_field('has_bio_page') == 1) { ?>
-                <div class="excerpt">
-                  <?php the_advanced_excerpt(); ?>
-                  <a href="<?php the_permalink(); ?>" class="read-more">Read the rest &raquo;</a>
-                </div>
-              <?php } else { ?>
-                <div>
-                  <?php the_content(); ?>
-                </div>
-              <?php } ?>
+              <?php get_template_part('templates/author', 'excerpt'); ?>
             </div>
           </div>
           <?php
@@ -127,7 +112,8 @@ if ($image_src) {
             setup_postdata($post);
 
             $author_id = get_the_author_meta('ID');
-            $author_type = wp_get_post_terms($author_id, 'author-type');
+            $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+            $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 
             $category = get_the_category($pid);
             $image_id = get_post_thumbnail_id($pid);
@@ -137,7 +123,7 @@ if ($image_src) {
             }
             ?>
             <div class="post has-photo-overlay">
-              <div class="photo-overlay wide">
+              <div class="photo-overlay">
                 <span class="label"><?php if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
                 <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>

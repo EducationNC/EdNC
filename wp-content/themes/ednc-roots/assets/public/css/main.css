@@ -7044,6 +7044,22 @@ sup.footnote a:after {
   content: "k";
 }
 
+.icon-email:before {
+  content: "l";
+}
+
+.icon-phone:before {
+  content: "m";
+}
+
+.icon-fax:before {
+  content: "n";
+}
+
+.icon-website:before {
+  content: "o";
+}
+
 .btn, .button {
   border: none;
   border-radius: 0;
@@ -7831,6 +7847,13 @@ section {
 }
 .vertical-center * {
   margin: 0;
+}
+
+.text-col-lg-3 {
+  -moz-column-count: 3;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 20px;
 }
 
 .callout {
@@ -8675,7 +8698,7 @@ section {
 }
 
 @media (min-width: 992px) {
-  .has-photo-overlay:hover .photo-overlay:not(.light) .post-title {
+  .has-photo-overlay:hover .photo-overlay:not(.light) .post-title:not(.no-transform) {
     -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
          -o-transform: translateY(0);

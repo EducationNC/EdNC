@@ -66,6 +66,13 @@ section {
   }
 }
 
+.text-col-lg-3 {
+  -moz-column-count: 3;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 20px;
+}
+
 .callout {
   @include gray-gradient-right;
   padding: 30px;

@@ -201,7 +201,7 @@
   .has-photo-overlay {
     &:hover {
       .photo-overlay:not(.light) {
-        .post-title {
+        .post-title:not(.no-transform) {
           transform: translateY(0);
         }
 

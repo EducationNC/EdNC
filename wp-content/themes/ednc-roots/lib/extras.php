@@ -1,5 +1,11 @@
 <?php
 /**
+ * Define image sizes
+ */
+
+
+
+/**
  * Clean up the_excerpt()
  */
 function roots_excerpt_more($more) {

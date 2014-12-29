@@ -19,8 +19,8 @@ $logged_in = is_user_logged_in();
           $category = get_the_category();
 
           $author_id = get_the_author_meta('ID');
-          $author_type = wp_get_post_terms($author_id, 'author-type');
           $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+          $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
           $author_avatar = get_field('avatar', $author_bio[0]->ID);
           $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 
