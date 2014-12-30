@@ -29,6 +29,7 @@
 
       <div class="col-md-4">
         <h2>Superintendent</h2>
+        <img src="<?php the_field('superintendent_picture'); ?>" alt="<?php the_field('superintendent'); ?>" class="super-pic" />
         <p>
           <?php the_field('superintendent'); ?><br />
           <?php if (get_field('superintendent_phone')) { ?><?php the_field('superintendent_phone'); ?><br /><?php } ?>

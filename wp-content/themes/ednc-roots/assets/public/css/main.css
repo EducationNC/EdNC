@@ -8914,4 +8914,10 @@ section {
   margin-bottom: 1em;
 }
 
+.super-pic {
+  float: left;
+  margin: 0 15px 0 0;
+  max-width: 100px;
+}
+
 /*# sourceMappingURL=main.css.map */
