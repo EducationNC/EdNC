@@ -30,10 +30,10 @@
       <div class="col-md-4">
         <h2>Superintendent</h2>
         <img src="<?php the_field('superintendent_picture'); ?>" alt="<?php the_field('superintendent'); ?>" class="super-pic" />
-        <p>
+        <p class="overflow-ellipsis">
           <?php the_field('superintendent'); ?><br />
           <?php if (get_field('superintendent_phone')) { ?><?php the_field('superintendent_phone'); ?><br /><?php } ?>
-          <?php if (get_field('superintendent_email')) { ?><a href="<?php echo antispambot(get_field('superintendent_email')); ?>" target="_blank"><?php echo antispambot(get_field('superintendent_email')); ?></a><?php } ?>
+          <?php if (get_field('superintendent_email')) { ?><a href="mailto:<?php echo antispambot(get_field('superintendent_email')); ?>" target="_blank"><?php echo antispambot(get_field('superintendent_email')); ?></a><?php } ?>
         </p>
 
         <h2>Basic Information</h2>

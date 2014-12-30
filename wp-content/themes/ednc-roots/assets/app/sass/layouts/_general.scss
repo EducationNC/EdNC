@@ -73,6 +73,11 @@ section {
   -webkit-column-gap: 20px;
 }
 
+.overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .callout {
   @include gray-gradient-right;
   padding: 30px;
