@@ -127,7 +127,7 @@ $logged_in = is_user_logged_in();
       }
       ?>
 
-      <div class="col-sm-6 col-lg-3">
+      <div class="col-sm-6 col-md-3">
         <div class="post has-photo-overlay row">
           <div class="photo-overlay col-xs-3 col-xs-push-3 col-sm-12 col-sm-push-0">
             <div class="hidden-xs">
@@ -184,7 +184,7 @@ $logged_in = is_user_logged_in();
 
 <section class="container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">News</span></h3>
       <p class="content-section-subtitle">Today's top education news stories</p>
       <div class="content-listing extra-padding" ng-controller="example">
@@ -203,9 +203,12 @@ $logged_in = is_user_logged_in();
           $date = get_the_time('n/j/Y');
           $items = get_field('news_item');
 
-          // TODO: limit to first 5
+          $i = 0;
+          $limit = 5;
+          $count = count($items);
 
-          foreach ($items as $item) { ?>
+          while ($i < $limit && $i < $count) {
+            $item = $items[$i]; ?>
 
             <li>
               <h4>
@@ -217,7 +220,8 @@ $logged_in = is_user_logged_in();
               <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $date; ?> <span class="icon-external-link"></span></a></p>
             </li>
 
-          <?php } ?>
+            <?php $i++; 
+          } ?>
         </ul>
         <p class="text-center"><a href="<?php the_permalink(); ?>" class="btn btn-default">See all EdNews stories</a></p>
 
@@ -225,7 +229,7 @@ $logged_in = is_user_logged_in();
       </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">Events</span></h3>
       <p class="content-section-subtitle">Upcoming education events</p>
       <div class="content-listing extra-padding" ng-controller="example">
@@ -237,12 +241,12 @@ $logged_in = is_user_logged_in();
       </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">Tweets</span></h3>
       <p class="content-section-subtitle">Education buzz on Twitter</p>
       <div class="extra-padding">
         <hr />
-        <a class="twitter-timeline" height="600" data-dnt="true" href="https://twitter.com/Mebane_Rash" data-widget-id="524950313388613633" data-chrome="">Tweets by @Mebane_Rash</a>
+        <a class="twitter-timeline" height="600" data-dnt="true" href="https://twitter.com/EducationNC" data-widget-id="549987364819705857" data-chrome="">Tweets by @EducationNC</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>
     </div>
