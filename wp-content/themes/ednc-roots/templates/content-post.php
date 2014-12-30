@@ -1,5 +1,7 @@
 <?php while (have_posts()) : the_post();
 
+$comments_open = comments_open();
+
 $author_id = get_the_author_meta('ID');
 $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
 $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
@@ -64,16 +66,17 @@ if ($image_src) {
           <?php the_content(); ?>
 
           <?php get_template_part('templates/social', 'share'); ?>
+
+          <div class="sep"></div>
         </div>
       </div>
     </div>
 
-    <div class="sep"></div>
-
     <footer class="container">
       <div class="row">
-        <div class="col-sm-4">
-          <h3>About the author</h3>
+        <?php if ($comments_open == 1) { ?>
+        <div class="col-lg-7 col-md-9 col-centered">
+          <h3>About <?php the_author(); ?></h3>
           <?php
           $args = array(
             'post_type' => 'bio',
@@ -90,19 +93,63 @@ if ($image_src) {
           if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
           ?>
           <div class="row has-photo-overlay">
-            <div class="col-xs-5 col-sm-12 col-md-5">
+            <div class="col-xs-5 col-sm-3">
               <?php the_post_thumbnail('full'); ?>
             </div>
-            <div class="col-xs-7 col-sm-12 col-md-7">
+
+            <div class="col-xs-7 col-sm-9">
               <?php get_template_part('templates/author', 'excerpt'); ?>
             </div>
           </div>
-          <?php
-          endwhile; endif; wp_reset_query();
-          ?>
+          <?php endwhile; endif; wp_reset_query(); ?>
+        </div>
+      </div>
+      <?php } ?>
+
+      <div class="row">
+        <?php if ($comments_open == 1) { ?>
+        <div class="col-md-8 col-lg-7">
+          <h3>Join the conversation</h3>
+          <?php comments_template('templates/comments'); ?>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-md-4 col-lg-push-1">
+        <?php } else { ?>
+        <div class="col-sm-12 col-md-4">
+          <h3>About <?php the_author(); ?></h3>
+          <?php
+          $args = array(
+            'post_type' => 'bio',
+            'meta_query' => array(
+              array(
+                'key' => 'user',
+                'value' => $author_id
+              )
+            )
+          );
+
+          $bio = new WP_Query($args);
+
+          if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
+          ?>
+          <div class="row has-photo-overlay">
+            <div class="col-xs-5 col-sm-3 col-md-5">
+              <?php the_post_thumbnail('full'); ?>
+            </div>
+
+            <div class="col-xs-7 col-sm-9 col-md-7">
+              <?php get_template_part('templates/author', 'excerpt'); ?>
+            </div>
+          </div>
+          <?php endwhile; endif; wp_reset_query(); ?>
+
+        </div>
+        <div class="col-sm-6 col-md-4">
+        <?php } ?>
+
+        <?php if ($comments_open == 1) { ?>
+        <div class="col-sm-6 col-md-12">
+        <?php } ?>
           <h3>Recommended for you</h3>
           <?php
           $recommended = get_field('recommended_articles');
@@ -122,7 +169,7 @@ if ($image_src) {
               $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
             }
             ?>
-            <div class="post has-photo-overlay">
+            <div class="has-photo-overlay">
               <div class="photo-overlay">
                 <span class="label"><?php if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
@@ -137,14 +184,20 @@ if ($image_src) {
           }
           wp_reset_postdata();
           ?>
+
         </div>
-        <div class="col-sm-4">
+        <?php if ($comments_open == 1) { ?>
+        <div class="col-sm-6 col-md-12">
+        <?php } else { ?>
+        <div class="col-sm-6 col-md-4">
+        <?php } ?>
+
           <h3>Stay connected</h3>
           <?php get_template_part('templates/email-signup'); ?>
+
         </div>
       </div>
     </footer>
-    <?php // comments_template('/templates/comments.php'); ?>
 </article>
 
 <?php endwhile; ?>

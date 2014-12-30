@@ -6967,6 +6967,10 @@ sup.footnote a:after {
   display: inline-block;
 }
 
+.normal {
+  font-weight: normal;
+}
+
 @font-face {
   font-family: "ednc";
   src: url("../fonts/ednc.eot");
@@ -8755,6 +8759,7 @@ section {
 .content-listing ul, .content-listing ol {
   list-style: none;
   margin: 0;
+  padding: 0;
 }
 .content-listing ul li, .content-listing ol li {
   padding: .75em 0;
