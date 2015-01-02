@@ -277,6 +277,54 @@
   }
 }
 
+.tribe-events-adv-list-widget {
+  .vevent {
+    padding: .75em 0;
+
+    & + .vevent {
+      border-top: 2px solid lighten($gray-text, 50%);
+    }
+
+    .list-date {
+      display: none;
+    }
+
+    .entry-title {
+      font-family: $font-family-sans-serif;
+      color: $midnight;
+      line-height: 1.2em;
+      font-size: 1.125rem;
+      font-weight: 300;
+      margin: 0;
+
+      a {
+        color: $midnight;
+        text-decoration: none;
+      }
+    }
+
+    .duration {
+      color: $blue;
+    }
+
+    .location {
+      @extend .duration;
+
+      span {
+        display: inline;
+
+        &.tribe-venue:after {
+          content: ', ';
+        }
+      }
+    }
+  }
+
+  .tribe-events-widget-link {
+    display: none;
+  }
+}
+
 .photo-strip {
   position: relative;
   width: 100%;
@@ -332,12 +380,6 @@
     padding-top: .3em;
     opacity: 1;
     transition: all .3s;
-  }
-}
-
-.tribe-events-list-widget {
-  .tribe-events-widget-link {
-    display: none;
   }
 }
 

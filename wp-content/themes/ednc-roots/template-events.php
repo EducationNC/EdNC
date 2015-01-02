@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Custom Template
+Template Name: Events Template
 */
 ?>
 

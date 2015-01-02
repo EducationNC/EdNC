@@ -220,7 +220,7 @@ $logged_in = is_user_logged_in();
               <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $date; ?> <span class="icon-external-link"></span></a></p>
             </li>
 
-            <?php $i++; 
+            <?php $i++;
           } ?>
         </ul>
         <p class="text-center"><a href="<?php the_permalink(); ?>" class="btn btn-default">See all EdNews stories</a></p>
@@ -232,8 +232,23 @@ $logged_in = is_user_logged_in();
     <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">Events</span></h3>
       <p class="content-section-subtitle">Upcoming education events</p>
-      <div class="content-listing extra-padding" ng-controller="example">
-        <?php the_widget('TribeEventsListWidget'); ?>
+      <div class="extra-padding" ng-controller="example">
+        <?php the_widget('TribeEventsAdvancedListWidget', array(
+          'title' => '',
+          'limit' => '5',
+          'no_upcoming_events' => false,
+          'venue' => true,
+          'country' => false,
+          'address' => false,
+          'city' => true,
+          'region' => false,
+          'zip' => false,
+          'phone' => false,
+          'cost' => false,
+          'organizer' => false,
+          'operand' => 'OR',
+          'filters' => ''
+        )); ?>
         <p class="text-center">
           <a href="/events/" class="btn btn-default no-margin">See all upcoming EdEvents</a><br />
           <a href="#" class="small">Submit your event &raquo;</a>
