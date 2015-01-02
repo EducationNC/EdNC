@@ -8964,4 +8964,10 @@ section {
   clear: both;
 }
 
+.page-template-template-events-php .main {
+  float: none;
+  width: auto;
+  padding: 0;
+}
+
 /*# sourceMappingURL=main.css.map */

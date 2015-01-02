@@ -51,14 +51,15 @@ function roots_display_sidebar() {
       'is_front_page',
       'is_single',
       'is_page',
-      'is_archive'
+      'is_archive',
+
     ),
     /**
      * Page template checks (via is_page_template())
      * Any of these page templates that return true won't show the sidebar
      */
     array(
-      'template-custom.php'
+      'template-events.php'
     )
   );
 
