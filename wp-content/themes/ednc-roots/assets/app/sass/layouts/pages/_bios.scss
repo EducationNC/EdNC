@@ -4,3 +4,13 @@
     margin-bottom: 1em;
   }
 }
+
+.author, .single-bio {
+  .main {
+    .btn {
+      white-space: normal;
+      text-align: left;
+      width: 100%;
+    }
+  }
+}

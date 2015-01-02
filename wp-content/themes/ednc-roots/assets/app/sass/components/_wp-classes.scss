@@ -9,12 +9,12 @@
 .alignright {
   margin-bottom: ($line-height-computed / 2);
 }
-body:not(.page-template) .alignleft {
+body:not(.page-template):not(.single-bio) .alignleft {
   @media (min-width: $screen-md-min) {
     margin-left: -14.7%;
   }
 }
-body:not(.page-template) .alignright {
+body:not(.page-template):not(.single-bio) .alignright {
   @media (min-width: $screen-md-min) {
     margin-right: -14.7%;
   }

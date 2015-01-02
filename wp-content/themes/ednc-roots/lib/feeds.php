@@ -21,3 +21,12 @@ function feed_ednews() {
 function feed_features() {
   get_template_part('templates/feed', 'features');
 }
+
+// Modify author feeds to include any custom post type
+function feedFilter($query) {
+  if ($query->is_feed && $query->is_author) {
+    $query->set('post_type', 'any');
+  }
+  return $query;
+}
+add_filter('pre_get_posts','feedFilter');

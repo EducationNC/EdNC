@@ -1,5 +1,14 @@
 <?php while (have_posts()) : the_post(); ?>
-  <?php get_template_part('templates/page', 'header'); ?>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-9 col-centered">
+        <h1>
+          <?php echo roots_title(); ?>
+        </h1>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-9 col-centered">
       <div class="h2">Staff</div>

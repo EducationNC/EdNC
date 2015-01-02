@@ -7226,13 +7226,13 @@ object, embed {
 }
 
 @media (min-width: 992px) {
-  body:not(.page-template) .alignleft {
+  body:not(.page-template):not(.single-bio) .alignleft {
     margin-left: -14.7%;
   }
 }
 
 @media (min-width: 992px) {
-  body:not(.page-template) .alignright {
+  body:not(.page-template):not(.single-bio) .alignright {
     margin-right: -14.7%;
   }
 }
@@ -8952,6 +8952,12 @@ section {
 .single-bio .entry-header {
   border-bottom: 1px solid #ECF0F1;
   margin-bottom: 1em;
+}
+
+.author .main .btn, .author .main .button, .single-bio .main .btn, .single-bio .main .button {
+  white-space: normal;
+  text-align: left;
+  width: 100%;
 }
 
 .super-pic {

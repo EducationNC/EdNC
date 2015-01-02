@@ -59,6 +59,27 @@ query_posts($query_string . '&post_type=any');
         <?php get_template_part('templates/author', 'excerpt'); ?>
       </div>
     </div>
+
+    <div>
+      <h3>Links</h3>
+      <p><a class="btn btn-default" href="<?php echo get_author_feed_link($author_id); ?>">RSS Feed</a></p>
+      <?php
+      $extras = get_field('author_extras');
+      if ($extras) {
+        foreach ($extras as $e) {
+          if ($e['acf_fc_layout'] == 'file') {
+            echo '<p><a class="btn btn-default" href="' . $e['file']['url'] . '" target="_blank">';
+              echo $e['link_text'];
+            echo '</a></p>';
+          } elseif ($e['acf_fc_layout'] == 'link') {
+            echo '<p><a class="btn btn-default" href="' . $e['url'] . '" target="_blank">';
+            echo $e['link_text'];
+            echo '</a></p>';
+          }
+        }
+      }
+      ?>
+    </div>
     <?php endwhile; endif; wp_reset_query(); ?>
   </div>
 </div>
