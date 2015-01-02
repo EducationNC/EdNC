@@ -52,7 +52,7 @@ function roots_display_sidebar() {
       'is_single',
       'is_page',
       'is_archive',
-
+      'is_search'
     ),
     /**
      * Page template checks (via is_page_template())

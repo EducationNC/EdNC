@@ -28,7 +28,7 @@ $logged_in = is_user_logged_in();
           <div class="row">
             <div class="col-sm-12">
               <div class="input-group">
-                <input class="form-control input-sm" type="text" placeholder="Search..." name="search" />
+                <input class="form-control input-sm" type="text" placeholder="Search..." name="s" />
                 <span class="input-group-btn">
                   <input type="submit" class="btn btn-sm" value="Go" class="postfix" />
                 </span>
