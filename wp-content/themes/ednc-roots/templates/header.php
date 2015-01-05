@@ -75,12 +75,12 @@ $logged_in = is_user_logged_in();
         </ul>
       </div>
 
-      <?php if ($logged_in) { ?>
       <div class="btn-group">
+        <?php if ($logged_in) { ?>
         <a href="#" class="btn btn-default btn-lg"><small>Get Involved</small></a>
-        <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
+        <?php } ?>
+        <a href="https://salsa4.salsalabs.com/o/51260/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
       </div>
-      <?php } ?>
     </div>
   </nav>
 </header>

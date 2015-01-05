@@ -39,5 +39,11 @@ $logged_in = is_user_logged_in();
       <li><a onclick="doGoogleLanguageTranslator('en|es'); return false;" title="en Español">en Español</a></li>
     </ul>
     <?php } ?>
+
+    <!-- <ul>
+      <li>
+        <a href="https://salsa4.salsalabs.com/o/51260/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
+      </li>
+    </ul> -->
   </div>
 </nav>
