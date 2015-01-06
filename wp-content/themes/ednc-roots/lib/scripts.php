@@ -35,7 +35,7 @@ function roots_scripts() {
       'css'          => '/assets/public/css/main.min.css?' . $assets['assets/public/css/main.min.css']['hash'],
       'js'           => '/assets/public/js/scripts.min.js?' . $assets['assets/public/js/scripts.min.js']['hash'],
       'grid_rotator' => '/assets/public/js/jquery.gridrotator.min.js',
-      'modernizr'    => '/assets/public/js/modernizr.min.js',
+      'modernizr'    => '/assets/public/js/modernizr.custom.min.js',
       'jquery'       => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
     );
   }
