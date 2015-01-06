@@ -21,20 +21,22 @@ function roots_scripts() {
    */
   if (WP_ENV === 'development') {
     $assets = array(
-      'css'       => '/assets/public/css/main.css',
-      'js'        => '/assets/public/js/scripts.js',
-      'modernizr' => '/assets/app/vendor/modernizr/modernizr.js',
-      'jquery'    => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js'
+      'css'          => '/assets/public/css/main.css',
+      'js'           => '/assets/public/js/scripts.js',
+      'grid_rotator' => '/assets/app/js/jquery.gridrotator.js',
+      'modernizr'    => '/assets/app/vendor/modernizr/modernizr.js',
+      'jquery'       => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js'
     );
 
   } else {
     $get_assets = file_get_contents(get_template_directory() . '/assets/manifest.json');
     $assets     = json_decode($get_assets, true);
     $assets     = array(
-      'css'       => '/assets/public/css/main.min.css?' . $assets['assets/public/css/main.min.css']['hash'],
-      'js'        => '/assets/public/js/scripts.min.js?' . $assets['assets/public/js/scripts.min.js']['hash'],
-      'modernizr' => '/assets/public/js/modernizr.min.js',
-      'jquery'    => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+      'css'          => '/assets/public/css/main.min.css?' . $assets['assets/public/css/main.min.css']['hash'],
+      'js'           => '/assets/public/js/scripts.min.js?' . $assets['assets/public/js/scripts.min.js']['hash'],
+      'grid_rotator' => '/assets/public/js/jquery.gridrotator.min.js',
+      'modernizr'    => '/assets/public/js/modernizr.min.js',
+      'jquery'       => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
     );
   }
 
@@ -58,6 +60,11 @@ function roots_scripts() {
   wp_enqueue_script('modernizr', get_template_directory_uri() . $assets['modernizr'], array(), null, false);
   wp_enqueue_script('jquery');
   wp_enqueue_script('roots_js', get_template_directory_uri() . $assets['js'], array(), null, true);
+
+  // Enqueue grid rotator plugin on the homepage only
+  if (is_home()) {
+    wp_enqueue_script('grid_rotator', get_template_directory_uri() . $assets['grid_rotator'], array('jquery'), null, true);
+  }
 }
 add_action('wp_enqueue_scripts', 'roots_scripts', 100);
 

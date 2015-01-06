@@ -18,6 +18,8 @@ module.exports = function(grunt) {
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
     'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+    // Don't minify the gridrotator plugin because we're only going to enqueue it on the homepage... minified file is in public
+    '!assets/app/js/plugins/jquery.gridrotator.js',
     'assets/app/js/plugins/*.js',
     'assets/app/js/_*.js'
   ];
