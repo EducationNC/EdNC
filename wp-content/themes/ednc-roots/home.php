@@ -223,7 +223,7 @@ $logged_in = is_user_logged_in();
             <?php $i++;
           } ?>
         </ul>
-        <p class="text-center"><a href="<?php the_permalink(); ?>" class="btn btn-default">See all EdNews stories</a></p>
+        <p class="text-center"><a href="<?php the_permalink(); ?>" class="btn btn-default">See all of today's EdNews</a></p>
 
         <?php endwhile; endif; wp_reset_query(); ?>
       </div>
