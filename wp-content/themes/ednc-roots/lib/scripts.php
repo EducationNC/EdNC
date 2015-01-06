@@ -23,7 +23,7 @@ function roots_scripts() {
     $assets = array(
       'css'          => '/assets/public/css/main.css',
       'js'           => '/assets/public/js/scripts.js',
-      'grid_rotator' => '/assets/app/js/jquery.gridrotator.js',
+      'grid_rotator' => '/assets/public/js/jquery.gridrotator.min.js',
       'modernizr'    => '/assets/app/vendor/modernizr/modernizr.js',
       'jquery'       => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js'
     );
