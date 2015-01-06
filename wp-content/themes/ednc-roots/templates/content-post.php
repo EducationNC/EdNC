@@ -6,6 +6,8 @@ $author_id = get_the_author_meta('ID');
 $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
 $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 
+$column_name = get_field('column_name', $author_bio[0]->ID);
+
 $category = get_the_category();
 $image_id = get_post_thumbnail_id();
 $image_src = wp_get_attachment_image_src($image_id, 'full');
@@ -27,7 +29,19 @@ if ($image_src) {
         <div class="container">
           <div class="row">
             <div class="col-lg-9 col-centered jumbotron">
-              <span class="label"><?php if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
+              <?php
+              if ($column_name) {
+                ?>
+                <span class="label"><?php echo $column_name; ?></span>
+                <?php
+              } else {
+                if ($category[0]->cat_name != 'Uncategorized') {
+                ?>
+                <span class="label"><?php echo $category[0]->cat_name; ?></span>
+                <?php
+                }
+              }
+              ?>
               <h1 class="entry-title"><?php the_title(); ?></h1>
               <?php get_template_part('templates/entry-meta'); ?>
             </div>
@@ -40,7 +54,19 @@ if ($image_src) {
     <header class="entry-header container">
       <div class="row">
         <div class="col-md-9 col-centered">
-          <span class="label"><?php if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
+          <?php
+          if ($column_name) {
+            ?>
+            <span class="label"><?php echo $column_name; ?></span>
+            <?php
+          } else {
+            if ($category[0]->cat_name != 'Uncategorized') {
+            ?>
+            <span class="label"><?php echo $category[0]->cat_name; ?></span>
+            <?php
+            }
+          }
+          ?>
           <h1 class="entry-title"><?php the_title(); ?></h1>
           <?php get_template_part('templates/entry-meta'); ?>
           <?php get_template_part('templates/social', 'share'); ?>

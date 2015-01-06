@@ -7,6 +7,7 @@ $today = getdate();
 $args = array(
   'post_type' => 'post',
   'posts_per_page' => -1,
+  'category__not_in' => array(90), // id of "featured" category in dev and prod
   'date_query' => array(
     array(
       'year' => $today['year'],

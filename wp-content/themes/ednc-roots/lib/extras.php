@@ -65,7 +65,7 @@ function ednc_ef_auto_subscribe_usergroup( $new_status, $old_status, $post ) {
     // You'll need to get term IDs for your user groups and place them as
     // comma-separated values
     $usergroup_ids_to_follow = array(
-      86,
+      87, // id of editors group on prod site
     );
     $edit_flow->notifications->follow_post_usergroups( $post->ID, $usergroup_ids_to_follow, true );
   }

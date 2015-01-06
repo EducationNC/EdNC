@@ -9,7 +9,8 @@ $logged_in = is_user_logged_in();
         <?php
         $args = array(
           'posts_per_page' => 2,
-          'post_type' => 'feature'
+          'post_type' => 'post',
+          'category__in' => array(90) // id of "featured" category in dev and prod
         );
 
         $featured = new WP_Query($args);
@@ -24,6 +25,8 @@ $logged_in = is_user_logged_in();
           $author_avatar = get_field('avatar', $author_bio[0]->ID);
           $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 
+          $column_name = get_field('column_name', $author_bio[0]->ID);
+
           $image_id = get_post_thumbnail_id();
           $image_src = wp_get_attachment_image_src($image_id, 'full');
           if ($image_src) {
@@ -34,7 +37,20 @@ $logged_in = is_user_logged_in();
           <div class="col-md-6">
             <div class="post has-photo-overlay">
               <div class="photo-overlay small-wide">
-                <span class="label"><?php echo $author_type[0]->name; ?></span>
+                <?php
+                if ($column_name) {
+                  ?>
+                  <span class="label"><?php echo $column_name; ?></span>
+                  <?php
+                } else {
+                  if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') {
+                  ?>
+                  <span class="label"><?php echo $category[0]->cat_name; ?></span>
+                  <?php
+                  }
+                }
+                ?>
+
                 <?php
                 if ($author_avatar) {
                   ?>
@@ -44,6 +60,7 @@ $logged_in = is_user_logged_in();
                   <?php
                 }
                 ?>
+
                 <h2 class="post-title"><?php the_title(); ?></h2>
                 <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
@@ -112,7 +129,8 @@ $logged_in = is_user_logged_in();
   <div class="row">
     <?php
     $args = array(
-      'posts_per_page' => 4
+      'posts_per_page' => 4,
+      'category__not_in' => array(90) // id of "featured" category in dev and prod
     );
 
     $featured = new WP_Query($args);
@@ -131,7 +149,9 @@ $logged_in = is_user_logged_in();
         <div class="post has-photo-overlay row">
           <div class="photo-overlay col-xs-3 col-xs-push-3 col-sm-12 col-sm-push-0">
             <div class="hidden-xs">
+              <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
               <span class="label"><?php echo $category[0]->cat_name; ?></span>
+              <?php } ?>
               <h4 class="post-title"><?php the_title(); ?></h4>
               <div class="line"></div>
             </div>

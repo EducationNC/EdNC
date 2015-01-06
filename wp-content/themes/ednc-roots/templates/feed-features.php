@@ -4,8 +4,9 @@
 */
 
 $args = array(
-  'post_type' => 'feature',
-  'posts_per_page' => 2   // TODO: Change this to show only stories published since 12AM on this day
+  'posts_per_page' => 2,   // TODO: Change this to show only stories published since 12AM on this day
+  'post_type' => 'post',
+  'category__in' => array(90) // id of "featured" category in dev and prod
 );
 
 $features = new WP_Query($args);
