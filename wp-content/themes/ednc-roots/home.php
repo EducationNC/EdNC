@@ -130,7 +130,7 @@ $logged_in = is_user_logged_in();
     <?php
     $args = array(
       'posts_per_page' => 4,
-      'category__not_in' => array(90) // id of "featured" category in dev and prod
+      'category__not_in' => array(90, 96) // id of "featured" and "hide from home" categories in dev and prod
     );
 
     $featured = new WP_Query($args);
