@@ -218,7 +218,7 @@ function add_custom_post_types() {
 			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
 			'capability_type' => 'post',
 			'hierarchical' => false,
-			'supports' => array( 'title', 'author', 'revisions', 'thumbnail', 'comments'),
+			'supports' => array( 'title', 'editor', 'author', 'revisions', 'thumbnail', 'comments'),
 			'has_archive' => false,
 			'rewrite' => true,
 			'query_var' => true

@@ -1479,8 +1479,12 @@ var Roots = {
         $('#oc-pusher').toggleClass('search-pushed');
       });
 
-      // Wrap any object embed with responsive wrapper
-      $('object').wrap('<div class="object-wrapper"></div>');
+      // Wrap any object embed with responsive wrapper (except for map embeds)
+      $.expr[':'].childof = function(obj, index, meta, stack){
+        return $(obj).parent().is(meta[3]);
+      };
+
+      $('object:not(childof(.tableauPlaceholder)').wrap('<div class="object-wrapper"></div>');
 
       // Open Magnific for all image link types inside articles
       $('.entry-content a[href$=".gif"], .entry-content a[href$=".jpg"], .entry-content a[href$=".png"], .entry-content a[href$=".jpeg"]').not('.gallery a').magnificPopup({

@@ -1,0 +1,51 @@
+.map-mobile {
+  margin: 0 auto;
+  width: 320px;
+}
+
+.map-tablet {
+  width: 764px;
+}
+
+.map-desktop {
+  margin: 0 auto;
+  width: 1024px;
+}
+
+.map-desktop,
+.map-tablet {
+  display: none;
+}
+
+@media (min-width: $container-lg) {
+  .map-desktop {
+    width: 75%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .map-desktop {
+    display: block;
+  }
+
+  .map-tablet,
+  .map-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .map-tablet {
+    display: block;
+  }
+
+  .map-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 816px) {
+  .map-tablet {
+    margin-left: -16px;
+  }
+}

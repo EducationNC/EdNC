@@ -179,7 +179,11 @@ if ($image_src) {
           <h3>Recommended for you</h3>
           <?php
           $recommended = get_field('recommended_articles');
-          foreach ($recommended as $post) {
+          if ($recommended) {
+            // set this to only display first one for now.
+            // TODO: add some way to have more than 1 recommended article
+            $post = $recommended[0];
+
             $pid = $post->ID;
 
             setup_postdata($post);
@@ -197,20 +201,51 @@ if ($image_src) {
             ?>
             <div class="has-photo-overlay">
               <div class="photo-overlay">
-                <span class="label"><?php if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; } ?></span>
+                <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; }} ?></span>
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
                 <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
                 <?php if ($image_src) { ?>
-                  <img src="<?php echo $image_sized['url']; ?>" />
+                <img src="<?php echo $image_sized['url']; ?>" />
                 <?php } ?>
               </div>
             </div>
             <?php
-          }
-          wp_reset_postdata();
-          ?>
+            wp_reset_postdata();
+          } else {
+            // previous post by same author
+            $post = get_adjacent_author_post(true);
 
+            $pid = $post->ID;
+
+            setup_postdata($post);
+
+            $author_id = get_the_author_meta('ID');
+            $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+            $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
+
+            $category = get_the_category($pid);
+            $image_id = get_post_thumbnail_id($pid);
+            $image_src = wp_get_attachment_image_src($image_id, 'full');
+            if ($image_src) {
+              $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+            }
+            ?>
+            <div class="has-photo-overlay">
+              <div class="photo-overlay">
+                <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; }} ?></span>
+                <h2 class="post-title"><?php echo $post->post_title; ?></h2>
+                <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
+                <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+                <?php if ($image_src) { ?>
+                <img src="<?php echo $image_sized['url']; ?>" />
+                <?php } ?>
+              </div>
+            </div>
+            <?php
+            wp_reset_postdata();
+          }
+          ?>
         </div>
         <?php if ($comments_open == 1) { ?>
         <div class="col-sm-6 col-md-12">
