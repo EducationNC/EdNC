@@ -29,7 +29,7 @@
                   <?php echo $item['title']; ?>
                 </a>
               </h4>
-              <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $date; ?> <span class="icon-external-link"></span></a></p>
+              <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $item['original_date']; ?> <span class="icon-external-link"></span></a></p>
             </li>
           <?php } ?>
         </ul>

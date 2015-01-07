@@ -57,7 +57,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
             echo '</a>';
           echo '</h3>';
           echo '<p class="meta" style="margin: 0;">';
-            echo $item['source_name'] . ', ' . $date . '</p>';
+            echo $item['source_name'] . ', ' . $item['original_date'] . '</p>';
         echo '</li>';
         $i++;
       }
@@ -76,7 +76,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
             echo '</a>';
           echo '</h3>';
           echo '<p class="meta" style="margin: 0;">';
-            echo $item['source_name'] . ', ' . $date . '</p>';
+            echo $item['source_name'] . ', ' . $item['original_date'] . '</p>';
         echo '</li>';
       }
       echo '</ul>';
