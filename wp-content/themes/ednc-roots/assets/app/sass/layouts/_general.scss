@@ -78,6 +78,10 @@ section {
   text-overflow: ellipsis;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .callout {
   @include gray-gradient-right;
   padding: 30px;

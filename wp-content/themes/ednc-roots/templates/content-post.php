@@ -15,20 +15,17 @@ if ($image_src) {
   $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
 } ?>
 
-<!-- <script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "9370f123-7244-4151-a639-30ba1d71bf7f", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script> -->
-
 <article <?php post_class('article'); ?>>
   <?php
   $featured_image_align = get_field('featured_image_alignment');
 
   if (has_post_thumbnail() && $featured_image_align == 'hero') { ?>
     <header class="entry-header photo-overlay">
+      <?php the_post_thumbnail(); ?>
       <div class="article-title-overlay">
         <div class="container">
           <div class="row">
-            <div class="col-lg-9 col-centered jumbotron">
+            <div class="col-md-9 col-centered">
               <?php
               if ($column_name) {
                 ?>
@@ -48,7 +45,6 @@ if ($image_src) {
           </div>
         </div>
       </div>
-      <?php the_post_thumbnail(); ?>
     </header>
   <?php } else { ?>
     <header class="entry-header container">
@@ -89,6 +85,10 @@ if ($image_src) {
     <div class="entry-content container">
       <div class="row">
         <div class="col-lg-7 col-md-9 col-centered">
+          <?php if (has_post_thumbnail() && $featured_image_align == 'hero') {
+            get_template_part('templates/social', 'share');
+          } ?>
+
           <?php the_content(); ?>
 
           <?php get_template_part('templates/social', 'share'); ?>

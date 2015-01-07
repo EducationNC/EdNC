@@ -1,12 +1,12 @@
 <?php
 $twitter = get_field('twitter');
 if ($twitter) {
-  echo '<div><span class="big icon-twitter"></span> <a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a></div>';
+  echo '<div class="nowrap overflow-ellipsis"><span class="big icon-twitter"></span> <a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a></div>';
 } ?>
 <?php
 $email = get_field('email');
 if ($email) {
-  echo '<div><span class="big icon-email"></span> <a href="mailto:' . antispambot($email) . '" target="_blank">' . antispambot($email) . '</a></div>';
+  echo '<div class="nowrap overflow-ellipsis"><span class="big icon-email"></span> <a href="mailto:' . antispambot($email) . '" target="_blank">' . antispambot($email) . '</a></div>';
 }
 ?>
 <?php if (get_field('has_bio_page') == 1) { ?>

@@ -7129,6 +7129,9 @@ sup.footnote a:after {
   background-image: linear-gradient(90deg, #971D67 0%, #7B1351 100%);
 }
 
+.btn-group .btn, .btn-group .button {
+  height: 44px;
+}
 .btn-group .btn + .btn, .btn-group .button + .btn, .btn-group .btn + .button, .btn-group .button + .button {
   margin-left: 0;
 }
@@ -7863,6 +7866,10 @@ section {
 .overflow-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .callout {
@@ -8920,12 +8927,59 @@ section {
   margin-bottom: 3em;
 }
 .hentry .entry-header.photo-overlay {
-  margin-top: -5em;
-  max-height: 600px;
+  margin-top: -52px;
   overflow: hidden;
 }
-.hentry .entry-header .jumbotron {
-  padding-bottom: 5em;
+.hentry .entry-header.photo-overlay .article-title-overlay {
+  padding-bottom: 2.5em;
+  color: #FFFFFF;
+}
+.hentry .entry-header.photo-overlay img {
+  position: relative;
+}
+.hentry .entry-header.photo-overlay h1 {
+  margin-top: 0;
+  padding-top: 28px;
+  text-shadow: 0px 0px 20px #2B3E50;
+}
+@media (min-width: 1280px) {
+  .hentry .entry-header.photo-overlay {
+    height: 600px;
+  }
+  .hentry .entry-header.photo-overlay img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+        -ms-transform: translateY(-50%) translateX(-50%);
+         -o-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
+  }
+}
+@media (min-width: 992px) {
+  .hentry .entry-header.photo-overlay {
+    margin-top: -5em;
+  }
+}
+@media (max-width: 767px) {
+  .hentry .entry-header.photo-overlay {
+    margin-bottom: 1em;
+  }
+  .hentry .entry-header.photo-overlay:after {
+    display: none;
+  }
+  .hentry .entry-header.photo-overlay .label {
+    position: relative;
+  }
+  .hentry .entry-header.photo-overlay .article-title-overlay {
+    position: relative;
+    padding-top: 15px;
+  }
+  .hentry .entry-header.photo-overlay .article-title-overlay h1 {
+    color: #2B3E50;
+    font-size: 2em;
+    text-shadow: none;
+  }
 }
 
 .hentry footer {
@@ -8995,7 +9049,7 @@ section {
   display: none;
 }
 
-@media (min-width: 1260px) {
+@media (min-width: 1280px) {
   .map-desktop {
     width: 75%;
   }

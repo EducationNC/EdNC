@@ -2,13 +2,61 @@
   margin-bottom: 3em;
 
   &.photo-overlay {
-    margin-top: -5em;
-    max-height: 600px;
+    margin-top: -52px;
     overflow: hidden;
-  }
 
-  .jumbotron {
-    padding-bottom: 5em;
+    .article-title-overlay {
+      padding-bottom: 2.5em;
+      color: $white;
+    }
+
+    img {
+      position: relative;
+    }
+
+    h1 {
+      margin-top: 0;
+      padding-top: 28px;
+      text-shadow: 0px 0px 20px $midnight;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      height: 600px;
+
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+      }
+    }
+
+    @media (min-width: $screen-md-min) {
+      margin-top: -5em;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 1em;
+
+      &:after {
+        display: none;
+      }
+
+      .label {
+        position: relative;
+      }
+
+      .article-title-overlay {
+        position: relative;
+        padding-top: 15px;
+
+        h1 {
+          color: $midnight;
+          font-size: 2em;
+          text-shadow: none;
+        }
+      }
+    }
   }
 }
 .hentry time { }

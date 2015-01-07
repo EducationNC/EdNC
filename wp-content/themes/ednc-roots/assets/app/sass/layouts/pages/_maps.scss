@@ -17,7 +17,7 @@
   display: none;
 }
 
-@media (min-width: $container-lg) {
+@media (min-width: $screen-lg-min) {
   .map-desktop {
     width: 75%;
   }

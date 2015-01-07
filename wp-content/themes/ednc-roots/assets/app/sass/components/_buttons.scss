@@ -46,6 +46,10 @@
 }
 
 .btn-group {
+  .btn {
+    height: 44px;
+  }
+  
   .btn + .btn {
     margin-left: 0;
   }
