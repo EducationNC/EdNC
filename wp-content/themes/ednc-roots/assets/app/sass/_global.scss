@@ -192,6 +192,13 @@ blockquote, .blockquote {
       @media (min-width: $screen-md-min) {
         margin: 2.5rem -14.7%;
       }
+
+      @media (max-width: $screen-xs-max) {
+        font-weight: normal;
+        font-size: 22px;
+        text-align: left !important;
+        margin: 0 0 10px 0;
+      }
     }
   }
 

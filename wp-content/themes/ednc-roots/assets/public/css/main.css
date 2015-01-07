@@ -6949,6 +6949,14 @@ blockquote p[style*=center], .blockquote p[style*=center] {
     margin: 2.5rem -14.7%;
   }
 }
+@media (max-width: 767px) {
+  blockquote p[style*=center], .blockquote p[style*=center] {
+    font-weight: normal;
+    font-size: 22px;
+    text-align: left !important;
+    margin: 0 0 10px 0;
+  }
+}
 blockquote cite, .blockquote cite {
   line-height: 2em;
 }
