@@ -128,14 +128,59 @@ $logged_in = is_user_logged_in();
   <?php if ($logged_in) : ?>
   <div class="row">
     <?php
+    // TEMPORARY: LEADERSHIP PROFILES
+
     $args = array(
-      'posts_per_page' => 4,
-      'category__not_in' => array(90, 96) // id of "featured" and "hide from home" categories in dev and prod
+      'posts_per_page' => 1,
+      'category_in' => array(97) // id of "leadership profile" category in dev and prod
     );
 
-    $featured = new WP_Query($args);
+    $stories = new WP_Query($args);
 
-    if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
+    if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
+
+    $category = get_the_category();
+    $image_id = get_post_thumbnail_id();
+    $image_src = wp_get_attachment_image_src($image_id, 'full');
+    if ($image_src) {
+      $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+    }
+    ?>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="post has-photo-overlay row">
+        <div class="photo-overlay col-xs-3 col-xs-push-3 col-sm-12 col-sm-push-0">
+          <div class="hidden-xs">
+            <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
+              <span class="label"><?php echo $category[0]->cat_name; ?></span>
+              <?php } ?>
+              <h4 class="post-title"><?php the_title(); ?></h4>
+              <div class="line"></div>
+            </div>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <?php if ($image_src) { ?>
+            <img src="<?php echo $image_sized['url']; ?>" />
+            <?php } ?>
+          </div>
+
+          <div class="col-xs-9 col-xs-pull-3 col-sm-12 col-sm-pull-0 extra-padding">
+            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+            <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
+          </div>
+        </div>
+      </div>
+
+    <?php endwhile; endif; wp_reset_query(); ?>
+
+    <?php
+    $args = array(
+      'posts_per_page' => 3,
+      'category__not_in' => array(90, 96, 97) // id of "featured", "hide from home" and "leadership profile" categories in dev and prod
+    );
+
+    $stories = new WP_Query($args);
+
+    if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
 
       $category = get_the_category();
       $image_id = get_post_thumbnail_id();

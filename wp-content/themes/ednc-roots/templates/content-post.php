@@ -32,7 +32,7 @@ if ($image_src) {
                 <span class="label"><?php echo $column_name; ?></span>
                 <?php
               } else {
-                if ($category[0]->cat_name != 'Uncategorized') {
+                if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') {
                 ?>
                 <span class="label"><?php echo $category[0]->cat_name; ?></span>
                 <?php

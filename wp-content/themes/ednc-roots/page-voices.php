@@ -77,7 +77,7 @@
         <?php endwhile; endif; wp_reset_query(); ?>
       </div>
 
-      <!-- <div class="h2">Contributors</div> -->
+      <div class="h2">Contributors</div>
       <?php
       $args = array(
         'post_type' => 'bio',
@@ -96,11 +96,17 @@
       $contributors = new WP_Query($args);
 
       if ($contributors->have_posts()) : while ($contributors->have_posts()) : $contributors->the_post();
+        $user = get_field('user'); ?>
 
-      // TODO when we get these people
+        <div class="col-md-4">
+          <div class="photo-overlay">
+            <?php the_post_thumbnail('medium'); ?>
+            <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
+            <h3 class="post-title"><?php the_title(); ?></h3>
+          </div>
+        </div>
 
-      endwhile; endif; wp_reset_query();
-      ?>
+      <?php endwhile; endif; wp_reset_query(); ?>
 
       <!-- <div class="h2">Points of view</div> -->
       <?php
