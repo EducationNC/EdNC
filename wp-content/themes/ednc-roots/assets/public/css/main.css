@@ -6917,7 +6917,7 @@ blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left
   border-bottom: 3px solid #ECF0F1;
   margin: 0 0 1.25rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 545px) {
   blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
     width: 50%;
   }
@@ -7246,13 +7246,15 @@ figure.alignnone {
   max-width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 545px) {
   .alignleft {
+    max-width: 50%;
     float: left;
     margin-right: 10px;
   }
 
   .alignright {
+    max-width: 50%;
     float: right;
     margin-left: 10px;
   }

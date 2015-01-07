@@ -653,7 +653,7 @@ blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left
   border-bottom: 3px solid #ECF0F1;
   margin: 0 0 1.25rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 545px) {
   blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
     width: 50%;
   }
