@@ -10,7 +10,7 @@ if (has_post_thumbnail()) {
     <div class="fb-share-button" data-href="<?php echo get_permalink(); ?>" data-layout="button_count"></div>
   </li>
   <li>
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo get_permalink(); ?>" data-text="<?php the_title(); ?>" data-via="EducationNC"></a>
+    <a href="https://twitter.com/share" class="twitter-share-button"></a>
   </li>
   <li>
     <div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?php echo get_permalink(); ?>"></div>
