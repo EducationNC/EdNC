@@ -95,7 +95,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         $image_post = get_post($image_id);
         echo '<figure style="float: left; margin: 0 15px 0 0;">';
         if ($image_src) {
-          echo '<img src="' . $image_sized['url'] . '" style="max-width: 50%;" />';
+          echo '<img src="' . $image_sized['url'] . '" style="width: 150px; max-width: 25%;" />';
         }
         echo '<figcaption style="font-style: italic;">';
         echo $image_post->post_excerpt;
