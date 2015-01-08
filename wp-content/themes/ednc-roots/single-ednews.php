@@ -46,6 +46,9 @@
             <?php next_post_link('%link', 'Next day &raquo;') ?>
           </div>
         </div>
+        <div class="row">
+          <p><br /><a href="/feed/ednews/" target="_blank" class="btn btn-default"><span class="icon-rss"></span> RSS feed</a></p>
+        </div>
       </div>
     </footer>
   </article>

@@ -7072,6 +7072,10 @@ sup.footnote a:after {
   content: "o";
 }
 
+.icon-rss:before {
+  content: "p";
+}
+
 .btn, .button {
   border: none;
   border-radius: 0;

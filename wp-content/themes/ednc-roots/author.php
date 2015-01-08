@@ -59,7 +59,7 @@ query_posts($query_string . '&post_type=any');
 
     <div>
       <h3>Links</h3>
-      <p><a class="btn btn-default" href="<?php echo get_author_feed_link($author_id); ?>">RSS Feed</a></p>
+      <p><a class="btn btn-default" href="<?php echo get_author_feed_link($author_id); ?>"><span class="icon-rss"></span> RSS Feed</a></p>
       <?php
       $extras = get_field('author_extras');
       if ($extras) {

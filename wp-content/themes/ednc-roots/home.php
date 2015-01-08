@@ -307,7 +307,10 @@ $logged_in = is_user_logged_in();
             <?php $i++;
           } ?>
         </ul>
-        <p class="text-center"><a href="<?php the_permalink(); ?>" class="btn btn-default">See all of today's EdNews</a></p>
+        <p class="text-center">
+          <a href="<?php the_permalink(); ?>" class="btn btn-default">See all of today's EdNews</a><br />
+          <a href="/feed/ednews/" target="_blank" class="small"><span class="icon-rss"></span> RSS feed</a>
+        </p>
 
         <?php endwhile; endif; wp_reset_query(); ?>
       </div>
