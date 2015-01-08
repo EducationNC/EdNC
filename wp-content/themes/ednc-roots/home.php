@@ -233,12 +233,6 @@ $logged_in = is_user_logged_in();
   <div class="row no-padding">
     <div class="col-md-6 has-photo-overlay">
       <div class="photo-overlay light">
-        <a class="mega-link" href="<?php echo get_author_posts_url(14); ?>"></a>
-        <div class="vertical-center">
-          <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
-          <div class="banner-line"></div>
-          <h4 class="content-section-subtitle">Visualize education data across the state</h4>
-        </div>
         <?php
         $args = array(
           'post_type' => 'map',
@@ -246,10 +240,15 @@ $logged_in = is_user_logged_in();
         );
         $map = new WP_Query($args);
 
-        if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post();
-          the_post_thumbnail();
-        endwhile; endif; wp_reset_query();
-        ?>
+        if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post(); ?>
+        <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+        <div class="vertical-center">
+          <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
+          <div class="banner-line"></div>
+          <h4 class="content-section-subtitle">Visualize education data across the state</h4>
+        </div>
+        <?php the_post_thumbnail(); ?>
+        <?php endwhile; endif; wp_reset_query(); ?>
       </div>
     </div>
 
