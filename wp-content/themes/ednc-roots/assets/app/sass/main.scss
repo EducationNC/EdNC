@@ -9,6 +9,7 @@
 @import "components/_forms";         // Form tweaks
 @import "components/_media";         // WordPress media
 @import "components/_wp-classes";    // WordPress generated classes
+@import "components/_nav";           // Page navigation
 @import "components/_tables";        // Tables
 @import "components/_magnific-popup";// Magnific popup jquery plugin
 @import "components/_social-buttons";// Social share buttons
@@ -21,6 +22,7 @@
 @import "layouts/_pages";            // Page styling
 @import "layouts/pages/_home";       // Home page styling
 @import "layouts/pages/_about";      // About page styling
+@import "layouts/_archives";         // Post archives styling
 @import "layouts/_posts";            // Post styling
 @import "layouts/pages/_bios";       // Bios styling
 @import "layouts/pages/_districts";  // Districts styling

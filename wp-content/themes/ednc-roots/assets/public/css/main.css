@@ -7272,6 +7272,15 @@ figure.alignnone {
     display: block;
   }
 }
+.wp-pagenavi span, .wp-pagenavi a {
+  display: inline-block;
+  padding: 3px 8px;
+}
+.wp-pagenavi a, .wp-pagenavi .current {
+  background: #ECF0F1;
+  margin: 0 5px;
+}
+
 td, th {
   padding: 5px;
 }
@@ -8931,6 +8940,15 @@ section {
 
 .about .has-photo-overlay {
   margin-bottom: 2em;
+}
+
+.archive .hentry h2, .search .hentry h2 {
+  margin-top: 0;
+  font-size: 30px;
+}
+.archive .hentry h2 a, .search .hentry h2 a {
+  color: #8B185E;
+  text-decoration: none;
 }
 
 .hentry .entry-header {

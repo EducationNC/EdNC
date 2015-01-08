@@ -6,9 +6,9 @@ query_posts($query_string . '&post_type=any');
 <div class="row">
   <div class="col-lg-8 col-md-9">
     <div class="page-header">
-      <h1>
+      <!-- <h1>
         <?php echo roots_title(); ?>
-      </h1>
+      </h1> -->
     </div>
 
     <?php if (!have_posts()) : ?>
@@ -24,10 +24,7 @@ query_posts($query_string . '&post_type=any');
 
     <?php if ($wp_query->max_num_pages > 1) : ?>
       <nav class="post-nav">
-        <ul class="pager">
-          <li class="previous"><?php next_posts_link(__('&larr; Older posts', 'roots')); ?></li>
-          <li class="next"><?php previous_posts_link(__('Newer posts &rarr;', 'roots')); ?></li>
-        </ul>
+        <?php wp_pagenavi(); ?>
       </nav>
     <?php endif; ?>
   </div>

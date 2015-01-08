@@ -1,0 +1,11 @@
+.wp-pagenavi {
+  span, a {
+    display: inline-block;
+    padding: 3px 8px;
+  }
+
+  a, .current {
+    background: $ice;
+    margin: 0 5px;
+  }
+}

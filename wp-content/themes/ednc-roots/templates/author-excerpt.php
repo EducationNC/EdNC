@@ -10,7 +10,7 @@ if ($email) {
 }
 ?>
 <?php if (get_field('has_bio_page') == 1) { ?>
-  <div class="excerpt">
+  <div class="">
     <?php the_advanced_excerpt(); ?>
     <a href="<?php the_permalink(); ?>" class="read-more">Read full bio &raquo;</a>
   </div>

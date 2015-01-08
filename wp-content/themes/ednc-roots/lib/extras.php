@@ -43,6 +43,18 @@ function add_mce_css( $mce_css ) {
 add_filter( 'mce_css', 'add_mce_css' );
 
 
+// Get first image inside post content
+function catch_that_image() {
+  global $post, $posts;
+  $first_img = '';
+  ob_start();
+  ob_end_clean();
+  $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+  $first_img = $matches[1][0];
+  
+  return $first_img;
+}
+
 
 /**
 * Auto-subscribe or unsubscribe an Edit Flow user group when a post changes status

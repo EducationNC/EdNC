@@ -140,10 +140,15 @@ $logged_in = is_user_logged_in();
     if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
 
     $category = get_the_category();
-    $image_id = get_post_thumbnail_id();
-    $image_src = wp_get_attachment_image_src($image_id, 'full');
-    if ($image_src) {
-      $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+    if (has_post_thumbnail()) {
+      $image_id = get_post_thumbnail_id();
+      $image_src = wp_get_attachment_image_src($image_id, 'full');
+      if ($image_src) {
+        $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+      }
+    } else {
+      $image_src = catch_that_image();
+      $image_sized = mr_image_resize($image_src, 295, 295, true, false);
     }
     ?>
 
@@ -183,10 +188,15 @@ $logged_in = is_user_logged_in();
     if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
 
       $category = get_the_category();
-      $image_id = get_post_thumbnail_id();
-      $image_src = wp_get_attachment_image_src($image_id, 'full');
-      if ($image_src) {
-        $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+      if (has_post_thumbnail()) {
+        $image_id = get_post_thumbnail_id();
+        $image_src = wp_get_attachment_image_src($image_id, 'full');
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+        }
+      } else {
+        $image_src = catch_that_image();
+        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
       }
       ?>
 

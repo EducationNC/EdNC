@@ -1,0 +1,13 @@
+.archive, .search {
+  .hentry {
+    h2 {
+      margin-top: 0;
+      font-size: 30px;
+
+      a {
+        color: $purple-text;
+        text-decoration: none;
+      }
+    }
+  }
+}
