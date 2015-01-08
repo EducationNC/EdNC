@@ -132,7 +132,7 @@ $logged_in = is_user_logged_in();
 
     $args = array(
       'posts_per_page' => 1,
-      'category_in' => array(97) // id of "leadership profile" category in dev and prod
+      'category__in' => array(97) // id of "leadership profile" category in dev and prod
     );
 
     $stories = new WP_Query($args);
@@ -180,7 +180,7 @@ $logged_in = is_user_logged_in();
     <?php
     $args = array(
       'posts_per_page' => 3,
-      'category__not_in' => array(90, 96, 97) // id of "featured", "hide from home" and "leadership profile" categories in dev and prod
+      'category__not_in' => array(90, 96, 97) // id of "featured", "hide from home," and "leadership profile" categories in dev and prod
     );
 
     $stories = new WP_Query($args);
