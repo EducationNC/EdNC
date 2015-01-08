@@ -8952,6 +8952,9 @@ section {
   padding-top: 28px;
   text-shadow: 0px 0px 20px #2B3E50;
 }
+.hentry .entry-header.photo-overlay a {
+  color: #FFFFFF;
+}
 @media (min-width: 1280px) {
   .hentry .entry-header.photo-overlay {
     height: 600px;

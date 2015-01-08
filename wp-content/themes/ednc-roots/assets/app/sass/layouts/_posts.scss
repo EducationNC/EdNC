@@ -20,6 +20,10 @@
       text-shadow: 0px 0px 20px $midnight;
     }
 
+    a {
+      color: $white;
+    }
+
     @media (min-width: $screen-lg-min) {
       height: 600px;
 
