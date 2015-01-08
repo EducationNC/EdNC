@@ -326,7 +326,7 @@ $logged_in = is_user_logged_in();
         )); ?>
         <p class="text-center">
           <a href="/events/" class="btn btn-default no-margin">See all upcoming EdEvents</a><br />
-          <a href="#" class="small">Submit your event &raquo;</a>
+          <a href="#" class="small" data-toggle="modal" data-target="#eventSubmissionModal">Submit your event &raquo;</a>
         </p>
       </div>
     </div>

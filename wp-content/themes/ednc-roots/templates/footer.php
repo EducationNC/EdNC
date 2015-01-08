@@ -90,4 +90,14 @@
 </div>
 <?php endif; ?>
 
+<?php if (is_home() || get_post_type() == 'tribe_events' || tribe_is_archive()) : ?>
+<div class="modal fade event-submission-modal" id="eventSubmissionModal" tabindex="-3" role="dialog" aria-labelledby="eventSubmissionModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <?php gravity_form(6, false, false, false, null, true, '-2'); ?>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
 <?php get_template_part('templates/splash'); ?>
