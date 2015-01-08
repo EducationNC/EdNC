@@ -21,7 +21,7 @@ $screen-md-max:         ($screen-lg-min - 1);
 // -------------------------
 
 $transparent:           rgba(255, 255, 255, 0);
-$white70:               rgba(255, 255, 255, .6);
+$white70:               rgba(255, 255, 255, .8);
 $shadow:                rgba(100, 100, 100, .5);
 
 $white:                 #FFFFFF;
@@ -162,10 +162,10 @@ $link-hover-color:      $blue-dark;
 
 @mixin trans-white-gradient-middle() {
   @include filter-gradient($transparent, $white, vertical);
-  background-image: -o-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
-  background-image: -moz-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
-  background-image: -ms-linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
-  background-image: linear-gradient(180deg, $transparent 10%, $white70 35%, $white70 65%, $transparent 90%);
+  background-image: -o-linear-gradient(180deg, $transparent 10%, $white70 30%, $white70 70%, $transparent 90%);
+  background-image: -moz-linear-gradient(180deg, $transparent 10%, $white70 30%, $white70 70%, $transparent 90%);
+  background-image: -ms-linear-gradient(180deg, $transparent 10%, $white70 30%, $white70 70%, $transparent 90%);
+  background-image: linear-gradient(180deg, $transparent 10%, $white70 30%, $white70 70%, $transparent 90%);
 }
 
 
