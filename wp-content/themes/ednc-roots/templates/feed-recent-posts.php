@@ -8,7 +8,7 @@ $yesterday = getdate(strtotime('-1 days'));
 $args = array(
   'post_type' => array('post', 'map'),
   'posts_per_page' => -1,
-  'category__not_in' => array(90), // id of "featured" category in dev and prod
+  'category__not_in' => array(90, 96), // id of "featured" and "hide from home" categories
   'date_query' => array(
     'relation' => 'OR',
     array(
