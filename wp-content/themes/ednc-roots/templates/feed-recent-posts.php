@@ -1,22 +1,54 @@
 <?php
 /**
-* Posts from Today RSS2 Template
+* Posts since last email RSS2 Template
 */
 
 $today = getdate();
+$yesterday = getdate(strtotime('-1 days'));
 $args = array(
-  'post_type' => 'post',
+  'post_type' => array('post', 'map'),
   'posts_per_page' => -1,
   'category__not_in' => array(90), // id of "featured" category in dev and prod
   'date_query' => array(
+    'relation' => 'OR',
     array(
-      'year' => $today['year'],
-      'month' => $today['mon'],
-      'day' => $today['mday']
+      'relation' => 'AND',
+      array(
+        'year' => $yesterday['year'],
+        'month' => $yesterday['mon'],
+        'day' => $yesterday['mday']
+      ),
+      array(
+        'hour' => 8,
+        'compare' => '>='
+      ),
+      array(
+        'hour' => 23,
+        'minute' => 59,
+        'second' => 59,
+        'compare' => '<='
+      )
+    ),
+    array(
+      'relation' => 'AND',
+      array(
+        'year' => $today['year'],
+        'month' => $today['mon'],
+        'day' => $today['mday']
+      ),
+      array(
+        'hour' => 0,
+        'minute' => 0,
+        'second' => 0,
+        'compare' => '>='
+      ),
+      array(
+        'hour' => 8,
+        'compare' => '<'
+      )
     )
   )
 );
-
 $features = new WP_Query($args);
 
 header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('blog_charset'), true);
@@ -48,7 +80,29 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
       <dc:creator><?php the_author(); ?></dc:creator>
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
-      <description><![CDATA[<?php the_excerpt_rss() ?>]]></description>
+      <description><![CDATA[<?php
+      if (has_post_thumbnail()) {
+        $image_id = get_post_thumbnail_id();
+        $image_src = wp_get_attachment_image_src($image_id, 'full');
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src[0], 150, 150, true, false);
+        }
+      } else {
+        $image_src = catch_that_image();
+        $image_sized = mr_image_resize($image_src, 150, 150, true, false);
+      }
+      if ($image_sized) {
+        $image_post = get_post($image_id);
+        echo '<figure style="margin: 1em 0;">';
+        if ($image_src) {
+          echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
+        }
+        echo '<figcaption style="font-style: italic;">';
+        echo $image_post->post_excerpt;
+        echo '</figcaption>';
+        echo '</figure>';
+      }
+      the_excerpt(); ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
         echo '<figure>';
