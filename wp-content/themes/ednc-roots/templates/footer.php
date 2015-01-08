@@ -90,7 +90,7 @@
 </div>
 <?php endif; ?>
 
-<?php if (is_home() || get_post_type() == 'tribe_events' || tribe_is_archive()) : ?>
+<?php if (is_home() || get_post_type() == 'tribe_events') : ?>
 <div class="modal fade event-submission-modal" id="eventSubmissionModal" tabindex="-3" role="dialog" aria-labelledby="eventSubmissionModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
