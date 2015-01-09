@@ -1,5 +1,4 @@
-<?php while (have_posts()) : the_post();
-
+<?php
 $comments_open = comments_open();
 
 $author_id = get_the_author_meta('ID');
@@ -265,5 +264,3 @@ if ($image_src) {
       </div>
     </footer>
 </article>
-
-<?php endwhile; ?>
