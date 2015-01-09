@@ -35,7 +35,14 @@
 
         <div class="col-md-4">
           <div class="photo-overlay">
-            <?php the_post_thumbnail('medium'); ?>
+            <?php
+            $image_id = get_post_thumbnail_id();
+            $image_src = wp_get_attachment_image_src($image_id, 'full');
+            if ($image_src) {
+              $image_sized = mr_image_resize($image_src[0], 295, 330, true, false);
+            }
+            ?>
+            <img src="<?php echo $image_sized['url']; ?>" />
             <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
             <h3 class="post-title"><?php the_title(); ?></h3>
           </div>
@@ -68,7 +75,14 @@
 
           <div class="col-md-4">
             <div class="photo-overlay">
-              <?php the_post_thumbnail('medium'); ?>
+              <?php
+              $image_id = get_post_thumbnail_id();
+              $image_src = wp_get_attachment_image_src($image_id, 'full');
+              if ($image_src) {
+                $image_sized = mr_image_resize($image_src[0], 295, 330, true, false);
+              }
+              ?>
+              <img src="<?php echo $image_sized['url']; ?>" />
               <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
               <h3 class="post-title"><?php the_title(); ?></h3>
             </div>
@@ -100,7 +114,14 @@
 
         <div class="col-md-4">
           <div class="photo-overlay">
-            <?php the_post_thumbnail('medium'); ?>
+            <?php
+            $image_id = get_post_thumbnail_id();
+            $image_src = wp_get_attachment_image_src($image_id, 'full');
+            if ($image_src) {
+              $image_sized = mr_image_resize($image_src[0], 295, 330, true, false);
+            }
+            ?>
+            <img src="<?php echo $image_sized['url']; ?>" />
             <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
             <h3 class="post-title"><?php the_title(); ?></h3>
           </div>

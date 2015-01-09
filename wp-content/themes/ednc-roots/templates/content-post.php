@@ -68,7 +68,7 @@ if ($image_src) {
           <?php get_template_part('templates/social', 'share'); ?>
           <?php
           if (has_post_thumbnail()) {
-            the_post_thumbnail('post-thumbnail', array('class' => 'hidden-xs'));
+            the_post_thumbnail('large');
             $thumb_id = get_post_thumbnail_id();
             $thumb_post = get_post($thumb_id);
             ?>

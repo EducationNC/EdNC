@@ -256,9 +256,9 @@ $logged_in = is_user_logged_in();
       <div class="photo-overlay light">
         <a class="mega-link" href="#"></a>
         <div class="vertical-center">
-          <h3 class="content-section-title">Ed<span class="normal">Lawsuits</span></h3>
+          <h3 class="content-section-title">Ed<span class="normal">EdLitigation</span></h3>
           <div class="banner-line"></div>
-          <h4 class="content-section-subtitle">Track education lawsuits across NC</h4>
+          <h4 class="content-section-subtitle">Track education litigation across NC</h4>
         </div>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/1409595_99556189-2.jpg" alt="EdLawsuits" />
       </div>
