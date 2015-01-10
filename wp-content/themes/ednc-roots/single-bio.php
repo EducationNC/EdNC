@@ -30,6 +30,12 @@
         <h2><?php the_field('title'); ?></h2>
         <h4><?php the_field('tagline'); ?></h4>
         <?php
+        $email = get_field('email');
+        if ($email) {
+          echo '<p><span class="big icon-email"></span> <a href="mailto:' . antispambot($email) . '" target="_blank">' . antispambot($email) . '</a></p>';
+        }
+        ?>
+        <?php
         $twitter = get_field('twitter');
         if ($twitter) {
           echo '<p><span class="big icon-twitter"></span><a href="http://twitter.com/' . $twitter . '" target="_blank">@' . $twitter . '</a></p>';
