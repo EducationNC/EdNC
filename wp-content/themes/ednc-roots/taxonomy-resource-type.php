@@ -32,24 +32,22 @@
 
   <div class="col-md-9 col-lg-8 col-md-pull-3">
     <?php while (have_posts()) : the_post(); ?>
-    <div class="clearfix">
-      <hr class="separator" />
-      <h3 class="resource-title"><?php the_title() ?></h3>
-      <p><strong><?php echo get_the_date(); ?></strong></p>
-      <p><?php the_content(); ?></p>
-      <p class="cat-detail"><span class="cat-meta">CATEGORY:</span> <?php the_terms($post->ID, 'resource-type') ?></p>
-      <?php
-      if (get_field('file')) {
-        $doc = get_field('file');
-        ?>
-        <p class="underline"><?php echo wp_get_attachment_link($doc['id']); ?></p>
-      <?php }
-      if (get_field('link')) {
-        ?>
-        <p class="underline"><?php the_field('link'); ?></p>
-      <?php } ?>
-    </div>
 
+      <div class="clearfix">
+        <hr class="separator" />
+        <?php
+        if (get_field('file')) {
+          $doc = get_field('file');
+          $link = $doc['url'];
+        } elseif (get_field('link')) {
+          $link = get_field('link');
+        }
+        ?>
+        <h3 class="resource-title"><a href="<?php echo $link; ?>" target="_blank"><?php the_title() ?></a></h3>
+        <p class="meta">Added on <?php echo get_the_date(); ?> in <?php the_terms($post->ID, 'resource-type') ?></p>
+        <p><?php the_content(); ?></p>
+      </div>
+      
     <?php endwhile;
 
     if ($resources->max_num_pages > 1) { ?>
