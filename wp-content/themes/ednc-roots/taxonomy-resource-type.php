@@ -8,7 +8,7 @@
     <div class="col-md-3 col-md-push-9">
       <div class="callout">
         <h4>Search EdLibrary</h4>
-        <form method="get" action="<?php the_permalink() ?>">
+        <form method="get" action="<?php the_permalink('2968'); ?>">
           <div class="input-group">
             <input type="text" class="form-control input-sm" name="k" placeholder="Search by keyword" />
             <span class="input-group-btn">

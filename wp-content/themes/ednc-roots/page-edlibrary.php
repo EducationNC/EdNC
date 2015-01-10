@@ -44,7 +44,9 @@
 
       if (isset($_GET['k'])) {
         $args['s'] = $_GET['k'];
-        echo '<h2>Search Results for: <em>' . sanitize_text_field($_GET['k']) . '</em></h2>';
+        echo '<h2>Search results for: <em>' . sanitize_text_field($_GET['k']) . '</em></h2>';
+      } else {
+        echo '<h2>Recently added resources</h2>';
       }
 
       $resources = new WP_Query( $args );
@@ -69,16 +71,20 @@
         <?php } ?>
       </div>
 
-      <?php endwhile; ?>
+      <?php
+      endwhile;
 
-                      <?php else : ?>
+      if ($wp_query->max_num_pages > 1) : ?>
+        <nav class="post-nav">
+          <?php wp_pagenavi( array( 'query' => $resources ) ); ?>
+        </nav>
+      <?php endif; ?>
 
-                        <h3>No resources found</h3>
+      <? else : ?>
 
-                      <?php endif; ?>
+        <h3>No resources found</h3>
 
-                      <?php wp_reset_query(); ?>
-
+      <?php endif; wp_reset_query(); ?>
     </div>
   </div>
 <?php endwhile; ?>
