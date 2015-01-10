@@ -76,7 +76,7 @@
 
       if ($resources->max_num_pages > 1) { ?>
         <nav class="post-nav">
-          <?php wp_pagenavi(); ?>
+          <?php wp_pagenavi( array( 'query' => $resources ) ); ?>
         </nav>
       <?php } ?>
 
