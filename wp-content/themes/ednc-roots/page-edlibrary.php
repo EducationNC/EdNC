@@ -1,8 +1,6 @@
 <?php while (have_posts()) : the_post(); ?>
   <div class="page-header">
-    <h1>
-      <?php echo roots_title(); ?>
-    </h1>
+    <h1><a href="<?php the_permalink(); ?>"><?php echo roots_title(); ?></a></h1>
   </div>
 
   <div class="row">
@@ -37,10 +35,12 @@
 
       the_content();
 
+      $paged = get_query_var('paged') ? get_query_var('paged') : 1;
       $args = array(
         'post_type' => 'resource',
-        'posts_per_page' => 10 )
-      ;
+        'posts_per_page' => 1,
+        'paged' => $paged
+      );
 
       if (isset($_GET['k'])) {
         $args['s'] = $_GET['k'];
@@ -74,11 +74,11 @@
       <?php
       endwhile;
 
-      // if ($resources->max_num_pages > 1) { ?>
+      if ($resources->max_num_pages > 1) { ?>
         <nav class="post-nav">
           <?php wp_pagenavi( array( 'query' => $resources ) ); ?>
         </nav>
-      <?php //} ?>
+      <?php } ?>
 
       <?php else : ?>
 
