@@ -34,7 +34,7 @@ $logged_in = is_user_logged_in();
           }
           ?>
 
-          <div class="col-md-6">
+          <div class="col-sm-6">
             <div class="post has-photo-overlay">
               <div class="photo-overlay small-wide">
                 <?php
