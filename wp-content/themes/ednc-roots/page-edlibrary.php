@@ -63,7 +63,7 @@
         if (get_field('file')) {
           $doc = get_field('file');
           ?>
-          <p class="underline"><?php echo wp_get_attachment_link($doc['id']); ?></p>
+          <p class="underline"><a href="<?php echo $doc['url']; ?>" target="_blank"><?php echo $doc['title']; ?></a></p>
         <?php }
         if (get_field('link')) {
           ?>
@@ -74,13 +74,13 @@
       <?php
       endwhile;
 
-      if ($resources->max_num_pages > 1) : ?>
+      // if ($resources->max_num_pages > 1) { ?>
         <nav class="post-nav">
           <?php wp_pagenavi( array( 'query' => $resources ) ); ?>
         </nav>
-      <?php endif; ?>
+      <?php //} ?>
 
-      <? else : ?>
+      <?php else : ?>
 
         <h3>No resources found</h3>
 
