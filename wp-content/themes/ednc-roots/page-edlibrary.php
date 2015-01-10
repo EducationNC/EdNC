@@ -74,7 +74,7 @@
       <?php
       endwhile;
 
-      if ($wp_query->max_num_pages > 1) : ?>
+      if ($resources->max_num_pages > 1) : ?>
         <nav class="post-nav">
           <?php wp_pagenavi( array( 'query' => $resources ) ); ?>
         </nav>
