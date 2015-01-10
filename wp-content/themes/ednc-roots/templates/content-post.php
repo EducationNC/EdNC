@@ -237,7 +237,7 @@ if ($image_src) {
             ?>
             <div class="has-photo-overlay">
               <div class="photo-overlay">
-                <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if (is_singular('feature')) { echo $author_type[0]->name; } else { echo $category[0]->cat_name; }} ?></span>
+                <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if (is_singular('feature')) { echo $author_type[0]->name; } elseif ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
                 <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
