@@ -105,7 +105,7 @@ $logged_in = is_user_logged_in();
             $image = mr_image_resize(get_field('image'), 350, 350, true, false);
 
             if ($link) {
-              echo '<a href="' . $link . '" target="_blank">';
+              echo '<a href="' . $link . '" target="_blank" onclick="ga(\'send\', \'event\', \'ad\', \'click\');">';
             }
             echo '<img src="' . $image['url'] . '" alt="' . get_the_title() . '" />';
             if ($link) {
@@ -292,19 +292,9 @@ $logged_in = is_user_logged_in();
           $count = count($items);
 
           while ($i < $limit && $i < $count) {
-            $item = $items[$i]; ?>
-
-            <li>
-              <h4>
-                <a href="<?php echo $item['link']; ?>" target="_blank">
-                  <span class="normal"><?php echo $item['scope']; ?>:</span>
-                  <?php echo $item['title']; ?>
-                </a>
-              </h4>
-              <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $item['original_date']; ?> <span class="icon-external-link"></span></a></p>
-            </li>
-
-            <?php $i++;
+            $item = $items[$i];
+            include(locate_template('templates/content-ednews.php'));
+            $i++;
           } ?>
         </ul>
         <p class="text-center">

@@ -21,17 +21,9 @@
           $date = get_the_time('n/j/Y');
           $items = get_field('news_item');
 
-          foreach ($items as $item) { ?>
-            <li>
-              <h4>
-                <a href="<?php echo $item['link']; ?>" target="_blank">
-                  <span class="normal"><?php echo $item['scope']; ?>:</span>
-                  <?php echo $item['title']; ?>
-                </a>
-              </h4>
-              <p class="meta"><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['source_name']; ?>, <?php echo $item['original_date']; ?> <span class="icon-external-link"></span></a></p>
-            </li>
-          <?php } ?>
+          foreach ($items as $item) {
+            include(locate_template('templates/content-ednews.php'));
+          } ?>
         </ul>
       </div>
     </div>
