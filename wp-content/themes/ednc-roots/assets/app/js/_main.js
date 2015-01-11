@@ -62,24 +62,21 @@ var Roots = {
       // Toggle menu button to x close state on click
       $('#trigger-offcanvas').on(trigger, function() {
         if ($(this).hasClass('active')) {
-          $this = $(this);
-          setTimeout(function() {
-            $this.prependTo('.mobile-bar');
-          }, 500);
-          setTimeout(function() {
-            $this.removeClass('active');
-          }, 1);
+          $(this).removeClass('active');
         } else {
-          $this = $(this);
-          $(this).insertBefore('#oc-pusher');
-          setTimeout(function() {
-            $this.addClass('active');
-          }, 1);
+          $(this).addClass('active');
         }
       });
 
-      $('#oc-pusher').on(trigger, function() {
-        if ($(this).hasClass('oc-pushed')) {
+      // Toggle menu button to normal state if clicking on page to close menu
+      $('#oc-pusher').on(trigger, function(e) {
+        // Exclude clicks on menu
+        if($(e.target).is('#oc-menu')){
+          e.preventDefault();
+          return;
+        }
+        
+        if (!$(this).hasClass('oc-pushed')) {
           $('#trigger-offcanvas').removeClass('active');
         }
       });

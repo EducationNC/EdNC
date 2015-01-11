@@ -13,9 +13,6 @@ if ($time >= $launchtime) {
 ?>
 
 <div class="mobile-bar hidden-md hidden-lg">
-
-  <a id="trigger-offcanvas" class="nav-toggle hidden-md hidden-lg" href="#"><span>Menu</span></a>
-
   <section class="middle mobile-bar-section">
     <div class="title"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></div>
   </section>
