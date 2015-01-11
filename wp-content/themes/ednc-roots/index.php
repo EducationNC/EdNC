@@ -8,8 +8,16 @@
       <?php get_search_form(); ?>
     <?php endif; ?>
 
+    <?php
+    $desc = category_description();
+    if ($desc) { ?>
+      <div class="extra-bottom-margin">
+        <?php echo $desc; ?>
+      </div>
+    <?php } ?>
+
     <?php while (have_posts()) : the_post(); ?>
-      <?php get_template_part('templates/content', get_post_format()); ?>
+      <?php get_template_part('templates/content', 'excerpt'); ?>
     <?php endwhile; ?>
 
     <?php if ($wp_query->max_num_pages > 1) : ?>

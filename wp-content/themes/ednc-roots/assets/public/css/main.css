@@ -6818,6 +6818,10 @@ h1, .h1, .article-title, .entry-title {
 h1 + h2, h1 .h2, h1 .article-subtitle, .h1 + h2, .h1 .h2, .h1 .article-subtitle, .article-title + h2, .article-title .h2, .article-title .article-subtitle, .entry-title + h2, .entry-title .h2, .entry-title .article-subtitle {
   margin-top: 0;
 }
+h1 a, .h1 a, .article-title a, .entry-title a {
+  color: #2B3E50;
+  text-decoration: none;
+}
 
 h2, .h2, .article-subtitle {
   font-family: Lato, sans-serif;
@@ -7863,6 +7867,10 @@ section {
 
 .bottom-margin {
   margin-bottom: 1em;
+}
+
+.extra-bottom-margin {
+  margin-bottom: 3em;
 }
 
 .vertical-center {

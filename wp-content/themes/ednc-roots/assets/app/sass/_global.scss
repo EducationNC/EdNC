@@ -60,6 +60,11 @@ h1, .h1, .article-title, .entry-title {
   + h2, .h2, .article-subtitle {
     margin-top: 0;
   }
+
+  a {
+    color: $midnight;
+    text-decoration: none;
+  }
 }
 
 h2, .h2, .article-subtitle {

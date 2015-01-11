@@ -33,7 +33,7 @@
         if ($staff->have_posts()) : while ($staff->have_posts()) : $staff->the_post();
           $user = get_field('user'); ?>
 
-        <div class="col-md-4">
+        <div class="col-md-4 has-photo-overlay">
           <div class="photo-overlay">
             <?php
             $image_id = get_post_thumbnail_id();
@@ -45,6 +45,7 @@
             <img src="<?php echo $image_sized['url']; ?>" />
             <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
             <h3 class="post-title"><?php the_title(); ?></h3>
+            <div class="line"></div>
           </div>
         </div>
 
@@ -73,7 +74,7 @@
         if ($columnists->have_posts()) : while ($columnists->have_posts()) : $columnists->the_post();
           $user = get_field('user'); ?>
 
-          <div class="col-md-4">
+          <div class="col-md-4 has-photo-overlay">
             <div class="photo-overlay">
               <?php
               $image_id = get_post_thumbnail_id();
@@ -85,6 +86,7 @@
               <img src="<?php echo $image_sized['url']; ?>" />
               <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
               <h3 class="post-title"><?php the_title(); ?></h3>
+              <div class="line"></div>
             </div>
           </div>
 
@@ -112,7 +114,7 @@
       if ($contributors->have_posts()) : while ($contributors->have_posts()) : $contributors->the_post();
         $user = get_field('user'); ?>
 
-        <div class="col-md-4">
+        <div class="col-md-4 has-photo-overlay">
           <div class="photo-overlay">
             <?php
             $image_id = get_post_thumbnail_id();
@@ -124,6 +126,7 @@
             <img src="<?php echo $image_sized['url']; ?>" />
             <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
             <h3 class="post-title"><?php the_title(); ?></h3>
+            <div class="line"></div>
           </div>
         </div>
 

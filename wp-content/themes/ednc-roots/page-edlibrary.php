@@ -23,7 +23,7 @@
         <ul class="resource-cats">
           <?php foreach( $terms as $term) { ?>
           <li>
-            <p><a href="<?php echo esc_url( get_term_link( $term, $term->taxonomy ) ); ?>"><?php echo $term->name; ?></a></p>
+            <em><a href="<?php echo esc_url( get_term_link( $term, $term->taxonomy ) ); ?>"><?php echo $term->name; ?></a></em>
           </li>
           <?php } ?>
         </ul>
