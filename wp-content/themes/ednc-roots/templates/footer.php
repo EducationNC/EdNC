@@ -67,7 +67,7 @@
   <div class="below-footer">
     <p class="text-center small">
       &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
-      <a href="<?php echo get_permalink('1528'); ?>">Terms of Service</a> | <a href="<?php echo get_permalink('1530'); ?>">Privacy Policy</a>
+      <a href="<?php echo get_permalink('1528'); ?>">Terms of service</a> | <a href="<?php echo get_permalink('1530'); ?>">Privacy policy</a>
     </p>
   </div>
 </footer>
