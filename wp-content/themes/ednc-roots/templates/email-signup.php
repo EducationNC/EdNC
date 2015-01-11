@@ -42,5 +42,4 @@ if (isset($_GET['utm_source'])) {
     </form>
   </div>
   <!--End mc_embed_signup-->
-  <p class="caption"><br />Digests will be sent beginning January 12.</p>
 </div>
