@@ -1,5 +1,15 @@
 <?php
-$logged_in = is_user_logged_in();
+// detect launch
+$time = current_time('timestamp', true);
+$est = new DateTimeZone('America/New_York');
+$launch = new DateTime('01/12/2015 12:00 am', $est);
+$launchtime = intval($launch->format('U'));
+
+if ($time >= $launchtime) {
+  $logged_in = true;
+} else {
+  $logged_in = is_user_logged_in();
+}
 ?>
 
 <div class="mobile-bar hidden-md hidden-lg">

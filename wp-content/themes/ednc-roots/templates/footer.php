@@ -1,3 +1,17 @@
+<?php
+// detect launch
+$time = current_time('timestamp', true);
+$est = new DateTimeZone('America/New_York');
+$launch = new DateTime('01/12/2015 12:00 am', $est);
+$launchtime = intval($launch->format('U'));
+
+if ($time >= $launchtime) {
+  $logged_in = true;
+} else {
+  $logged_in = is_user_logged_in();
+}
+?>
+
 <footer class="content-info" role="contentinfo">
   <div class="above-footer">
     <ul class="list-inline text-center">
@@ -9,7 +23,7 @@
   </div>
 
   <?php
-  if (is_user_logged_in()) {
+  if ($logged_in) {
   wp_nav_menu(array(
     'theme_location' => 'footer_navigation',
     'container' => false,

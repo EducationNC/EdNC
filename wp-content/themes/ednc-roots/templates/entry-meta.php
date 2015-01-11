@@ -1,7 +1,15 @@
-<!-- <time class="published" datetime="<?php echo get_the_time('c'); ?>"><?php echo get_the_date(); ?></time>
-<p class="byline author vcard"><?php echo __('By', 'roots'); ?> <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn"><?php echo get_the_author(); ?></a></p> -->
 <?php
-$logged_in = is_user_logged_in();
+// detect launch
+$time = current_time('timestamp', true);
+$est = new DateTimeZone('America/New_York');
+$launch = new DateTime('01/12/2015 12:00 am', $est);
+$launchtime = intval($launch->format('U'));
+
+if ($time >= $launchtime) {
+  $logged_in = true;
+} else {
+  $logged_in = is_user_logged_in();
+}
 ?>
 
 <?php if ($logged_in) { ?>
