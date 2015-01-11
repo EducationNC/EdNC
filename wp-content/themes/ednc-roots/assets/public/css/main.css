@@ -8957,6 +8957,9 @@ section {
   margin-bottom: 2em;
 }
 
+.archive .hentry, .search .hentry {
+  margin: 0 0 3em;
+}
 .archive .hentry h2, .search .hentry h2 {
   margin-top: 0;
   font-size: 30px;
