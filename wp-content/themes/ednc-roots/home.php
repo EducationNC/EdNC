@@ -387,7 +387,7 @@ if ($time >= $launchtime) {
     <div class="col-md-4">
       <div class="extra-padding" id="poll-container">
         <?php echo do_shortcode('[polldaddy poll=8423767]'); ?>
-        <p><a href="https://www.ednc.org/2014-15-legislative-issues/" class="small">More information about these issues &raquo;</a></p>
+        <p><a href="https://www.ednc.org/2015-16-legislative-issues/" class="small">More information about these issues &raquo;</a></p>
       </div>
     </div>
 
