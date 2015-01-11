@@ -23,11 +23,13 @@
       <ul class="resource-cats">
         <?php foreach( $terms as $term) { ?>
         <li>
-          <p><a href="<?php echo esc_url( get_term_link( $term, $term->taxonomy ) ); ?>"><?php echo $term->name; ?></a></p>
+          <em><a href="<?php echo esc_url( get_term_link( $term, $term->taxonomy ) ); ?>"><?php echo $term->name; ?></a></em>
         </li>
         <?php } ?>
       </ul>
     </div>
+
+    <p><a class="btn btn-default" href="#" data-toggle="modal" data-target="#edLibrarySubmissionModal">Contribute EdLibrary resource</a></p>
   </div>
 
   <div class="col-md-9 col-lg-8 col-md-pull-3">
@@ -47,7 +49,7 @@
         <p class="meta">Added on <?php echo get_the_date(); ?> in <?php the_terms($post->ID, 'resource-type') ?></p>
         <p><?php the_content(); ?></p>
       </div>
-      
+
     <?php endwhile;
 
     if ($resources->max_num_pages > 1) { ?>

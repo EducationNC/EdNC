@@ -28,6 +28,8 @@
           <?php } ?>
         </ul>
       </div>
+
+      <p><a class="btn btn-default" href="#" data-toggle="modal" data-target="#edLibrarySubmissionModal">Contribute EdLibrary resource</a></p>
     </div>
 
     <div class="col-md-9 col-lg-8 col-md-pull-3">

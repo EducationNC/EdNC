@@ -100,4 +100,14 @@
 </div>
 <?php endif; ?>
 
+<?php if (is_page('edlibrary') || is_tax('resource-type')) : ?>
+  <div class="modal fade edLibrary-submission-modal" id="edLibrarySubmissionModal" tabindex="-3" role="dialog" aria-labelledby="edLibrarySubmissionModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <?php gravity_form(8, false, false, false, null, true, '-2'); ?>
+      </div>
+    </div>
+  </div>
+<?php endif; ?>
+
 <?php get_template_part('templates/splash'); ?>
