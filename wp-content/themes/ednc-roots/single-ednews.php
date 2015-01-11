@@ -3,7 +3,7 @@
     <header class="row">
       <div class="col-lg-7 col-md-9 col-centered">
         <h1 class="entry-title">EdNews: <?php the_title(); ?></h1>
-        <div class="row">
+        <div class="row bottom-margin">
           <div class="col-md-6">
             <?php previous_post_link('%link', '&laquo; Previous day') ?>
           </div>
@@ -16,6 +16,7 @@
 
     <div class="entry-content row">
       <div class="col-lg-7 col-md-9 col-centered content-listing">
+        <?php the_field('notes'); ?>
         <ul>
           <?php
           $date = get_the_time('n/j/Y');
