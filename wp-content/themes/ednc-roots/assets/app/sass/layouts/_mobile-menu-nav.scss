@@ -115,7 +115,7 @@
   left: 0;
   right: 0;
   visibility: hidden;
-  z-index: 1;
+  z-index: 0;
   transition: all .3s;
 
   input {
@@ -128,7 +128,7 @@
     visibility: visible;
   }
 
-  .content {
+  .wrap {
     transform: translate3d(0, 62px, 0);
   }
 }

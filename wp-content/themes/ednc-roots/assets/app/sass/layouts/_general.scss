@@ -7,7 +7,8 @@ section {
   background: $white;
   padding-top: 2em;
   margin-bottom: 5em;
-  z-index: 0;
+  z-index: 1;
+  transition: transform .3s;
 
   @media (min-width: $screen-md-min) {
     padding-top: 0;

@@ -7817,7 +7817,10 @@ section {
   background: #FFFFFF;
   padding-top: 2em;
   margin-bottom: 5em;
-  z-index: 0;
+  z-index: 1;
+  -webkit-transition: -webkit-transform .3s;
+       -o-transition: -o-transform .3s;
+          transition: transform .3s;
 }
 @media (min-width: 992px) {
   .wrap {
@@ -8105,7 +8108,7 @@ section {
   left: 0;
   right: 0;
   visibility: hidden;
-  z-index: 1;
+  z-index: 0;
   -webkit-transition: all .3s;
        -o-transition: all .3s;
           transition: all .3s;
@@ -8117,7 +8120,7 @@ section {
 .search-pushed .mobile-bar-search {
   visibility: visible;
 }
-.search-pushed .content {
+.search-pushed .wrap {
   -webkit-transform: translate3d(0, 62px, 0);
           transform: translate3d(0, 62px, 0);
 }

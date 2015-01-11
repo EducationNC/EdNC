@@ -20,11 +20,11 @@ if ($time >= $launchtime) {
     <div class="title"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></div>
   </section>
 
-  <?php if ($logged_in) { ?>
+  <?php //if ($logged_in) { ?>
   <section class="right-small">
     <a id="trigger-mobile-search" class="icon-search"></a>
   </section>
-  <?php } ?>
+  <?php //} ?>
 </div>
 
 <div class="mobile-bar-search">
