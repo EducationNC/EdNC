@@ -1,6 +1,7 @@
 <?php
-global $query_string;
-query_posts($query_string . '&post_type=any');
+global $wp_query;
+$args = array_merge($wp_query->query_vars, array('post_type' => array('post', 'map'), 'category__not_in' => 96));
+query_posts($args);
 ?>
 
 <div class="row">
