@@ -7,6 +7,7 @@ html {
 
 p {
   margin-bottom: 1em;
+  line-height: 1.55em;
 }
 
 a {
@@ -155,12 +156,19 @@ blockquote, .blockquote {
   margin: 0;
   padding: 0;
   border: none;
-  font-size: $font-size-h3;
 
   p {
     font-weight: inherit;
+    padding: 10px 20px;
+    border-left: 3px solid $ice;
+
+    &[style*=left], &[style*=right], &[style*=center] {
+      padding: 0;
+      border-left: 0;
+    }
 
     &[style*=left], &[style*=right] {
+      font-size: $font-size-h3;
       position: relative;
       padding: 1.25rem 0;
       border-top: 3px solid $ice;
@@ -192,6 +200,7 @@ blockquote, .blockquote {
     }
 
     &[style*=center] {
+      font-size: $font-size-h3;
       margin: 2.5rem 0;
 
       @media (min-width: $screen-md-min) {

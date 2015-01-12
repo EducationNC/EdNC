@@ -6765,6 +6765,7 @@ html {
 
 p {
   margin-bottom: 1em;
+  line-height: 1.55em;
 }
 
 a {
@@ -6909,12 +6910,18 @@ blockquote, .blockquote {
   margin: 0;
   padding: 0;
   border: none;
-  font-size: 24px;
 }
 blockquote p, .blockquote p {
   font-weight: inherit;
+  padding: 10px 20px;
+  border-left: 3px solid #ECF0F1;
+}
+blockquote p[style*=left], blockquote p[style*=right], blockquote p[style*=center], .blockquote p[style*=left], .blockquote p[style*=right], .blockquote p[style*=center] {
+  padding: 0;
+  border-left: 0;
 }
 blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
+  font-size: 24px;
   position: relative;
   padding: 1.25rem 0;
   border-top: 3px solid #ECF0F1;
@@ -6946,6 +6953,7 @@ blockquote p[style*=right], .blockquote p[style*=right] {
   }
 }
 blockquote p[style*=center], .blockquote p[style*=center] {
+  font-size: 24px;
   margin: 2.5rem 0;
 }
 @media (min-width: 992px) {
@@ -8974,11 +8982,9 @@ section {
   text-decoration: none;
 }
 
-.hentry .entry-header {
-  margin-bottom: 3em;
-}
 .hentry .entry-header.photo-overlay {
   margin-top: -52px;
+  margin-bottom: 3em;
   overflow: hidden;
 }
 .hentry .entry-header.photo-overlay .article-title-overlay {

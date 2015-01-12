@@ -71,7 +71,7 @@ if ($image_src) {
             $thumb_id = get_post_thumbnail_id();
             $thumb_post = get_post($thumb_id);
             ?>
-            <div class="text-right caption hidden-xs">
+            <div class="text-right caption hidden-xs extra-bottom-margin">
               <?php echo $thumb_post->post_excerpt; ?>
             </div>
             <?php
@@ -98,8 +98,8 @@ if ($image_src) {
     </div>
 
     <footer class="container">
+      <?php if ($comments_open == 1) { ?>
       <div class="row">
-        <?php if ($comments_open == 1) { ?>
         <div class="col-lg-7 col-md-9 col-centered">
           <h3>About <?php the_author(); ?></h3>
           <?php
