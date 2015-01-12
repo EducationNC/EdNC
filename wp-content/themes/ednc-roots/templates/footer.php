@@ -33,51 +33,6 @@ if ($time >= $launchtime) {
   }
   ?>
 
-  <!-- <div class="container">
-    <div class="col-lg-3 visible-lg-block">
-      <h4>EdNC.org</h4>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Issues</a></li>
-        <li><a href="#">Data</a></li>
-        <li><a href="#">Districts</a></li>
-        <li><a href="#">Voices</a></li>
-      </ul>
-    </div>
-
-    <div class="col-lg-3 col-md-4">
-      <h4>Stay Connected</h4>
-      <ul>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">YouTube</a></li>
-        <li><a href="#">Google+</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li>&nbsp;</li>
-        <li><a href="#">Email Digests &amp; Alerts</a></li>
-      </ul>
-    </div>
-
-    <div class="col-lg-3 col-md-4">
-      <h4>Support us</h4>
-      <ul>
-        <li><a href="#">Make a donation</a></li>
-        <li><a href="#">Sponsorship opportunities</a></li>
-      </ul>
-    </div>
-
-    <div class="col-lg-3 col-md-4">
-      <h4>EducationNC</h4>
-      <ul>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Board of Directors</a></li>
-        <li><a href="#">Supporters</a></li>
-        <li><a href="#">Contact us</a></li>
-      </ul>
-    </div>
-  </div> -->
-
   <div class="below-footer">
     <p class="text-center small">
       &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
