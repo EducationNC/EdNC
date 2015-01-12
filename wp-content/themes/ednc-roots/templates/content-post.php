@@ -57,11 +57,30 @@ if ($image_src) {
           } else {
             if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') {
             ?>
-            <span class="label"><?php echo $category[0]->cat_name; ?></span>
+            <span class="label">
+              <?php if (in_category(109)) {  // 1868 Constitutional Convention ?>
+              <a href="<?php echo get_category_link(109); ?>">
+                <?php echo $category[0]->cat_name; ?>
+              </a>
+              <?php } else {
+                echo $category[0]->cat_name;
+              } ?>
+              </span>
             <?php
             }
           }
           ?>
+
+          <?php
+          if (in_category('109')) {  // 1868 Constitutional Convention
+            ?>
+            <div class="top-margin">
+              <p><?php echo category_description(109); ?></p>
+            </div>
+            <?php
+          }
+          ?>
+
           <h1 class="entry-title"><?php the_title(); ?></h1>
           <?php get_template_part('templates/entry-meta'); ?>
           <?php get_template_part('templates/social', 'share'); ?>

@@ -6888,6 +6888,10 @@ li .meta a, li .attr a, li .duration a, li .tribe-events-adv-list-widget .vevent
   line-height: 1em;
   padding: 1rem 1.5rem 1.0625rem;
 }
+.label a {
+  text-decoration: none;
+  color: #ECF0F1;
+}
 
 .caption, .wp-caption-text {
   font-family: Lato, sans-serif;
@@ -7870,6 +7874,10 @@ section {
 
 .no-top-margin {
   margin-top: 0;
+}
+
+.top-margin {
+  margin-top: 1em;
 }
 
 .no-bottom-margin {

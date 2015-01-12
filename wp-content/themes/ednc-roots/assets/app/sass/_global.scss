@@ -133,6 +133,11 @@ h4, .h4, .article-section-subtitle {
     line-height: 1em;
     padding: 1rem 1.5rem 1.0625rem;
   }
+
+  a {
+    text-decoration: none;
+    color: $ice;
+  }
 }
 
 .caption {
