@@ -6365,7 +6365,10 @@ section {
   .content-info .menu-footer-nav li {
     list-style: none; }
   .content-info .menu-footer-nav ul {
-    padding: 1em 0 0 0; }
+    padding: 0 0 1em; }
+    @media (min-width: 768px) {
+      .content-info .menu-footer-nav ul {
+        padding: 1em 0 0 0; } }
   .content-info .menu-footer-nav > li > a {
     color: #8B185E;
     font-weight: normal;
@@ -6394,6 +6397,12 @@ section {
     width: 41.66667%;
     left: 8.33333%;
     padding-top: 70px; } }
+.salsa.salsa .search input {
+  margin: 0px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: Lato, sans-serif;
+  border: 1px solid #ccc; }
 .salsa.salsa legend {
   font-family: Lato, sans-serif;
   font-weight: 300;

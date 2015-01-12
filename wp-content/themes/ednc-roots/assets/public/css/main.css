@@ -8535,7 +8535,12 @@ section {
   list-style: none;
 }
 .content-info .menu-footer-nav ul {
-  padding: 1em 0 0 0;
+  padding: 0 0 1em;
+}
+@media (min-width: 768px) {
+  .content-info .menu-footer-nav ul {
+    padding: 1em 0 0 0;
+  }
 }
 .content-info .menu-footer-nav > li > a {
   color: #8B185E;
