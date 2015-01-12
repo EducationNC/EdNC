@@ -158,7 +158,7 @@ blockquote, .blockquote {
   font-family: $font-family-serif;
   font-weight: 300;
   font-style: italic;
-  margin: 0;
+  margin: 0 0 1em;
   padding: 0;
   border: none;
 
@@ -166,6 +166,7 @@ blockquote, .blockquote {
     font-weight: inherit;
     padding: 10px 20px;
     border-left: 3px solid $ice;
+    margin: 0;
 
     &[style*=left], &[style*=right], &[style*=center] {
       padding: 0;

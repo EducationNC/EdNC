@@ -277,7 +277,7 @@ if ($time >= $launchtime) {
 
         if ($cc->have_posts()) : while ($cc->have_posts()) : $cc->the_post();
           // Calc day number
-          $day1 = strtotime('January 12, 2015');
+          $day1 = strtotime('January 14, 2015');
           $whichday = strtotime(get_the_time('F j, Y'));
           $calc = floor (($whichday - $day1)/86400) + 1;
           ?>
