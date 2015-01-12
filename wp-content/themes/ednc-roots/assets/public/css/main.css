@@ -8977,6 +8977,9 @@ section {
 .hentry .entry-header {
   margin-bottom: 3em;
 }
+.hentry .entry-header img {
+  width: 100%;
+}
 .hentry .entry-header.photo-overlay {
   margin-top: -52px;
   overflow: hidden;
@@ -8987,6 +8990,7 @@ section {
 }
 .hentry .entry-header.photo-overlay img {
   position: relative;
+  width: auto;
 }
 .hentry .entry-header.photo-overlay h1 {
   margin-top: 0;
