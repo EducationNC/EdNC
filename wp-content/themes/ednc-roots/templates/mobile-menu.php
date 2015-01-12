@@ -32,10 +32,6 @@ if ($time >= $launchtime) {
     <div class="social-media">
       <a class="icon-facebook" href="http://facebook.com/educationnc" target="_blank"></a>
       <a class="icon-twitter" href="http://twitter.com/educationnc" target="_blank"></a>
-      <a class="icon-instagram" href="#"></a>
-      <a class="icon-youtube" href="#"></a>
-      <a class="icon-gplus" href="#"></a>
-      <a class="icon-linkedin" href="#"></a>
     </div>
 
     <ul>

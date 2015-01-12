@@ -5446,6 +5446,9 @@ h1, .h1, .article-title, .entry-title {
     font-weight: 300; }
   h1 + h2, h1 .h2, h1 .article-subtitle, .h1 + h2, .h1 .h2, .h1 .article-subtitle, .article-title + h2, .article-title .h2, .article-title .article-subtitle, .entry-title + h2, .entry-title .h2, .entry-title .article-subtitle {
     margin-top: 0; }
+  h1 a, .h1 a, .article-title a, .entry-title a {
+    color: #2B3E50;
+    text-decoration: none; }
 
 h2, .h2, .article-subtitle {
   font-family: Lato, sans-serif;
@@ -5530,7 +5533,7 @@ blockquote, .blockquote {
       border-top: 3px solid #ECF0F1;
       border-bottom: 3px solid #ECF0F1;
       margin: 0 0 1.25rem; }
-      @media (min-width: 768px) {
+      @media (min-width: 545px) {
         blockquote p[style*=left], blockquote p[style*=right], .blockquote p[style*=left], .blockquote p[style*=right] {
           width: 50%; } }
     blockquote p[style*=left], .blockquote p[style*=left] {
@@ -5551,6 +5554,12 @@ blockquote, .blockquote {
       @media (min-width: 992px) {
         blockquote p[style*=center], .blockquote p[style*=center] {
           margin: 2.5rem -14.7%; } }
+      @media (max-width: 767px) {
+        blockquote p[style*=center], .blockquote p[style*=center] {
+          font-weight: normal;
+          font-size: 22px;
+          text-align: left !important;
+          margin: 0 0 10px 0; } }
   blockquote cite, .blockquote cite {
     line-height: 2em; }
 
@@ -5564,6 +5573,9 @@ sup.footnote a:after {
   line-height: 0;
   vertical-align: top;
   display: inline-block; }
+
+.normal {
+  font-weight: normal; }
 
 @font-face {
   font-family: "ednc";
@@ -5685,6 +5697,8 @@ sup.footnote a:after {
     background-image: -o-linear-gradient(0deg, #971D67 0%, #7B1351 100%);
     background-image: linear-gradient(90deg, #971D67 0%, #7B1351 100%); }
 
+.btn-group .btn, .btn-group .button, .btn-group .salsa.salsa .submit, .salsa.salsa .btn-group .submit {
+  height: 44px; }
 .btn-group .btn + .btn, .btn-group .button + .btn, .btn-group .salsa.salsa .submit + .btn, .salsa.salsa .btn-group .submit + .btn, .btn-group .btn + .button, .btn-group .button + .button, .btn-group .salsa.salsa .submit + .button, .salsa.salsa .btn-group .submit + .button, .btn-group .salsa.salsa .btn + .submit, .salsa.salsa .btn-group .btn + .submit, .btn-group .salsa.salsa .button + .submit, .salsa.salsa .btn-group .button + .submit, .btn-group .salsa.salsa .submit + .submit, .salsa.salsa .btn-group .submit + .submit {
   margin-left: 0; }
 
@@ -5762,7 +5776,10 @@ section {
   background: #FFFFFF;
   padding-top: 2em;
   margin-bottom: 5em;
-  z-index: 0; }
+  z-index: 1;
+  -webkit-transition: -webkit-transform .3s;
+       -o-transition: -o-transform .3s;
+          transition: transform .3s; }
   @media (min-width: 992px) {
     .wrap {
       padding-top: 0; } }
@@ -5801,6 +5818,9 @@ section {
 .bottom-margin {
   margin-bottom: 1em; }
 
+.extra-bottom-margin {
+  margin-bottom: 3em; }
+
 .vertical-center {
   position: relative;
   z-index: 2;
@@ -5822,6 +5842,9 @@ section {
 .overflow-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis; }
+
+.nowrap {
+  white-space: nowrap; }
 
 .callout {
   background-color: #ECF0F1;
@@ -5992,7 +6015,7 @@ section {
   left: 0;
   right: 0;
   visibility: hidden;
-  z-index: 1;
+  z-index: 0;
   -webkit-transition: all .3s;
        -o-transition: all .3s;
           transition: all .3s; }
@@ -6001,7 +6024,7 @@ section {
 
 .search-pushed .mobile-bar-search {
   visibility: visible; }
-.search-pushed .content {
+.search-pushed .wrap {
   -webkit-transform: translate3d(0, 62px, 0);
           transform: translate3d(0, 62px, 0); }
 
