@@ -164,7 +164,7 @@ if ($time >= $launchtime) {
 
     <div class="col-sm-6 col-md-3">
       <div class="post has-photo-overlay row">
-        <div class="photo-overlay col-xs-3 col-xs-push-3 col-sm-12 col-sm-push-0">
+        <div class="photo-overlay col-xs-3 col-sm-12">
           <div class="hidden-xs">
             <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
               <span class="label"><?php echo $category[0]->cat_name; ?></span>
@@ -178,7 +178,7 @@ if ($time >= $launchtime) {
             <?php } ?>
           </div>
 
-          <div class="col-xs-9 col-xs-pull-3 col-sm-12 col-sm-pull-0 extra-padding">
+          <div class="col-xs-9 col-sm-12 extra-padding">
             <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
             <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
           </div>
@@ -212,7 +212,7 @@ if ($time >= $launchtime) {
 
       <div class="col-sm-6 col-md-3">
         <div class="post has-photo-overlay row">
-          <div class="photo-overlay col-xs-3 col-xs-push-3 col-sm-12 col-sm-push-0">
+          <div class="photo-overlay col-xs-3 col-sm-12">
             <div class="hidden-xs">
               <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
               <span class="label"><?php echo $category[0]->cat_name; ?></span>
@@ -226,7 +226,7 @@ if ($time >= $launchtime) {
             <?php } ?>
           </div>
 
-          <div class="col-xs-9 col-xs-pull-3 col-sm-12 col-sm-pull-0 extra-padding">
+          <div class="col-xs-9 col-sm-12 extra-padding">
             <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
             <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
           </div>
