@@ -57,20 +57,6 @@ if ($time >= $launchtime) {
                 ?>
 
                 <?php
-                if ($column_name) {
-                  ?>
-                  <span class="label"><?php echo $column_name; ?></span>
-                  <?php
-                } else {
-                  if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') {
-                  ?>
-                  <span class="label"><?php echo $category[0]->cat_name; ?></span>
-                  <?php
-                  }
-                }
-                ?>
-
-                <?php
                 if ($author_avatar) {
                   ?>
                   <div class="avatar">

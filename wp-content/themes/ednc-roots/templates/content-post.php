@@ -34,20 +34,6 @@ if ($image_src) {
                 <?php
               }
               ?>
-
-              <?php
-              if ($column_name) {
-                ?>
-                <span class="label"><?php echo $column_name; ?></span>
-                <?php
-              } else {
-                if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') {
-                ?>
-                <span class="label"><?php echo $category[0]->cat_name; ?></span>
-                <?php
-                }
-              }
-              ?>
               <h1 class="entry-title"><?php the_title(); ?></h1>
               <?php get_template_part('templates/entry-meta'); ?>
             </div>
@@ -64,20 +50,6 @@ if ($image_src) {
             ?>
             <span class="label"><?php echo $column[0]->name; ?></span>
             <?php
-          }
-          ?>
-          
-          <?php
-          if ($column_name) {
-            ?>
-            <span class="label"><?php echo $column_name; ?></span>
-            <?php
-          } else {
-            if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') {
-            ?>
-            <span class="label"><?php echo $category[0]->cat_name; ?></span>
-            <?php
-            }
           }
           ?>
           <h1 class="entry-title"><?php the_title(); ?></h1>
