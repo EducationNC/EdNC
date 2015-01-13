@@ -109,7 +109,7 @@ function sca_ajax_add_action() {
 
 	// validate data
 	$action_time = mktime( $_REQUEST[ 'dateHour' ], $_REQUEST[ 'dateMin' ], $_REQUEST[ 'dateSec' ], $_REQUEST[ 'dateMonth' ], $_REQUEST[ 'dateDay' ], $_REQUEST[ 'dateYear' ] );
-	$current_time = time();
+	$current_time = current_time( 'timestamp' );
 	if ( $action_time <= $current_time ) {
 		echo json_encode( array(
 			'error'		=> 1,
