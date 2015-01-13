@@ -93,7 +93,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       }
       if ($image_sized) {
         $image_post = get_post($image_id);
-        echo '<table border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
+        echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
         echo '<tr>';
         echo '<td style="width: 150px; max-width: 25%">';
         echo '<figure style="margin: 0 15px 0 0;">';
