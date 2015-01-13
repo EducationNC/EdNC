@@ -95,7 +95,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         $image_post = get_post($image_id);
         echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
         echo '<tr>';
-        echo '<td style="width: 150px; max-width: 25%">';
+        echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer">';
         echo '<figure style="margin: 0 15px 0 0;">';
         if ($image_src) {
           echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
@@ -105,7 +105,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '</figcaption>';
         echo '</figure>';
         echo '</td>';
-        echo '<td>';
+        echo '<td class="templateColumnContainer">';
       }
       the_excerpt();
       if ($image_sized) {
