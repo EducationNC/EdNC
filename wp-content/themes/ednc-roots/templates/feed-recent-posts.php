@@ -82,6 +82,8 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
       <description><![CDATA[<?php
       if (has_post_thumbnail()) {
+        echo '<table border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
+        echo '<tr style="width: 150px; max-width: 25%">';
         $image_id = get_post_thumbnail_id();
         $image_src = wp_get_attachment_image_src($image_id, 'full');
         if ($image_src) {
@@ -93,7 +95,8 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       }
       if ($image_sized) {
         $image_post = get_post($image_id);
-        echo '<figure style="float: left; margin: 0 15px 0 0; width: 150px; max-width: 25%;">';
+        echo '<td>';
+        echo '<figure style="margin: 0 15px 0 0;">';
         if ($image_src) {
           echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
         }
@@ -101,8 +104,15 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo $image_post->post_excerpt;
         echo '</figcaption>';
         echo '</figure>';
+        echo '</td>';
       }
-      the_excerpt(); ?>]]></description>
+      echo '<td>';
+      the_excerpt();
+      echo '</td>';
+      if (has_post_thumbnail()) {
+        echo '</tr>';
+        echo '</table>';
+      } ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
         echo '<figure>';
