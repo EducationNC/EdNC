@@ -48,6 +48,7 @@ function sca_columns_content( $column_name, $post_id ) {
 			<p>
 				<strong><?php echo date_i18n( 'd.m.Y H:i:s', $time ); ?>:</strong>
 				<?php foreach ( $actions as $action ) : ?>
+					<?php echo date_i18n( 'd.m.Y H:i:s', strtotime('now') ); ?>
 					<?php $type = $action[ 'type' ]; ?>
 					<?php echo $available_actions[ $type ]; ?><br />
 				<?php endforeach; ?>
