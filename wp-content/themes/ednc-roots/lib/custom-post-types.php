@@ -304,7 +304,7 @@ register_taxonomy( 'author-type',
 
 register_taxonomy( 'resource-type',
 	array('resource'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
-	array('hierarchical' => true,     /* if this is true it acts like categories */             
+	array('hierarchical' => true,     /* if this is true it acts like categories */
 	'labels' => array(
 		'name' => __( 'Resource Types' ),
 		'singular_name' => __( 'Resource Type' ),
@@ -320,6 +320,26 @@ register_taxonomy( 'resource-type',
 	'show_ui' => true,
 	'query_var' => true,
 	)
+);
+
+register_taxonomy( 'column',
+array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+array('hierarchical' => true,     /* if this is true it acts like categories */
+'labels' => array(
+	'name' => __( 'Columns' ),
+	'singular_name' => __( 'Column' ),
+	'search_items' =>  __( 'Search Columns' ),
+	'all_items' => __( 'All Columns' ),
+	'parent_item' => __( 'Parent Column' ),
+	'parent_item_colon' => __( 'Parent Column:' ),
+	'edit_item' => __( 'Edit Column' ),
+	'update_item' => __( 'Update Column' ),
+	'add_new_item' => __( 'Add New Column' ),
+	'new_item_name' => __( 'New Column Name' )
+),
+'show_ui' => true,
+'query_var' => true,
+)
 );
 
 // Order bios by menu order on admin page

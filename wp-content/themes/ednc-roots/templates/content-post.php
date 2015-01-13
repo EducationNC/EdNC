@@ -8,6 +8,8 @@ $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 $column_name = get_field('column_name', $author_bio[0]->ID);
 
 $category = get_the_category();
+$column = wp_get_post_terms(get_the_id(), 'column');
+
 $image_id = get_post_thumbnail_id();
 $image_src = wp_get_attachment_image_src($image_id, 'full');
 if ($image_src) {
@@ -25,6 +27,14 @@ if ($image_src) {
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-centered">
+              <?php
+              if ($column) {
+                ?>
+                <span class="label"><?php echo $column[0]->name; ?></span>
+                <?php
+              }
+              ?>
+
               <?php
               if ($column_name) {
                 ?>
@@ -49,6 +59,14 @@ if ($image_src) {
     <header class="entry-header container">
       <div class="row">
         <div class="col-md-9 col-centered">
+          <?php
+          if ($column) {
+            ?>
+            <span class="label"><?php echo $column[0]->name; ?></span>
+            <?php
+          }
+          ?>
+          
           <?php
           if ($column_name) {
             ?>

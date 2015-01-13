@@ -28,6 +28,7 @@ if ($time >= $launchtime) {
         if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
 
           $category = get_the_category();
+          $column = wp_get_post_terms(get_the_id(), 'column');
 
           $author_id = get_the_author_meta('ID');
           $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
@@ -47,6 +48,14 @@ if ($time >= $launchtime) {
           <div class="col-sm-6">
             <div class="post has-photo-overlay">
               <div class="photo-overlay small-wide">
+                <?php
+                if ($column) {
+                  ?>
+                  <span class="label"><?php echo $column[0]->name; ?></span>
+                  <?php
+                }
+                ?>
+
                 <?php
                 if ($column_name) {
                   ?>
