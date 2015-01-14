@@ -50,6 +50,11 @@
     font-style: italic;
     font-size: 1.125rem;
     font-weight: 300;
+
+    @media (max-width: 1100px) {
+      font-size: 1rem;
+      line-height: 1.75em;
+    }
   }
 
   .beta-banner {
@@ -69,7 +74,7 @@
 
   .search {
     float: right;
-    max-width: 300px;
+    max-width: 240px;
     margin-top: .5rem;
   }
 

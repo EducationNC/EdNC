@@ -8375,6 +8375,12 @@ section {
   font-size: 1.125rem;
   font-weight: 300;
 }
+@media (max-width: 1100px) {
+  .banner .caption, .banner .wp-caption-text {
+    font-size: 1rem;
+    line-height: 1.75em;
+  }
+}
 .banner .beta-banner {
   padding: .5rem 15px;
 }
@@ -8394,7 +8400,7 @@ section {
 }
 .banner .search {
   float: right;
-  max-width: 300px;
+  max-width: 240px;
   margin-top: .5rem;
 }
 .banner .navbar {
