@@ -99,8 +99,8 @@ if ($image_src) {
     </div>
 
     <footer class="container">
-      <div class="row">
       <?php if ($comments_open == 1) { ?>
+      <div class="row">
         <div class="col-lg-7 col-md-9 col-centered">
           <h3>About <?php the_author(); ?></h3>
           <?php
