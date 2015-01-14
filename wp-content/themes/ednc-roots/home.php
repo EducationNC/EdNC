@@ -279,7 +279,9 @@ if ($time >= $launchtime) {
           if ($calc > 0) { ?>
           <span class="label">Day <?php echo $calc; ?></span>
           <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-          <?php } ?>
+          <?php } else {
+            echo '<span class="label">Coming Tomorrow</span>';
+          } ?>
         <?php endwhile; endif; wp_reset_query(); ?>
           <div class="vertical-center">
             <h3 class="content-section-title">Learning from history</h3>
