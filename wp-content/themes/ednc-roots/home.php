@@ -280,14 +280,13 @@ if ($time >= $launchtime) {
           <span class="label">Day <?php echo $calc; ?></span>
           <a class="mega-link" href="<?php the_permalink(); ?>"></a>
           <?php } ?>
-
+        <?php endwhile; endif; wp_reset_query(); ?>
           <div class="vertical-center">
             <h3 class="content-section-title">Learning from history</h3>
             <div class="banner-line"></div>
             <h4 class="content-section-subtitle">The 1868 N.C. Constitutional Convention</h4>
           </div>
           <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/Fgallery1-1.jpg" alt="" />
-        <?php endwhile; endif; wp_reset_query(); ?>
       </div>
     </div>
 
