@@ -185,7 +185,7 @@ if ($time >= $launchtime) {
     <?php
     $args = array(
       'posts_per_page' => 3,
-      'category__not_in' => array(90, 96, 97) // id of "featured", "hide from home," and "leadership profile" categories in dev and prod
+      'category__not_in' => array(90, 96, 97, 109) // id of "featured", "hide from home," "leadership profile", and "1868 const. conv." categories in dev and prod
     );
 
     $stories = new WP_Query($args);
@@ -236,7 +236,7 @@ if ($time >= $launchtime) {
 <?php if ($logged_in) : ?>
 <section class="container-fluid banners">
   <div class="row no-padding">
-    <div class="col-md-6 has-photo-overlay">
+    <div class="col-md-4 has-photo-overlay">
       <div class="photo-overlay light">
         <?php
         $args = array(
@@ -245,19 +245,53 @@ if ($time >= $launchtime) {
         );
         $map = new WP_Query($args);
 
-        if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post(); ?>
-        <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-        <div class="vertical-center">
-          <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
-          <div class="banner-line"></div>
-          <h4 class="content-section-subtitle">Visualize education data across the state</h4>
-        </div>
-        <?php the_post_thumbnail(); ?>
+        if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post();
+          // Show label "New" when map was posted today
+          if( date('Yz') == get_the_time('Yz') ) {
+            echo '<span class="label">New</span>';
+          } ?>
+          <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+          <div class="vertical-center">
+            <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
+            <div class="banner-line"></div>
+            <h4 class="content-section-subtitle">Visualize education data across the state</h4>
+          </div>
+          <?php the_post_thumbnail(); ?>
         <?php endwhile; endif; wp_reset_query(); ?>
       </div>
     </div>
 
-    <div class="col-md-6 has-photo-overlay">
+    <div class="col-md-4 has-photo-overlay">
+      <div class="photo-overlay light">
+        <?php
+        $args = array(
+          'category__in' => '109',  // 1868 Constitutional Convention
+          'posts_per_page' => 1
+        );
+        $cc = new WP_Query($args);
+
+        if ($cc->have_posts()) : while ($cc->have_posts()) : $cc->the_post();
+          // Calc day number
+          $day1 = strtotime('January 14, 2015');
+          $whichday = current_time('timestamp');
+          $calc = floor (($whichday - $day1)/86400) + 1;
+
+          if ($calc > 0) { ?>
+          <span class="label">Day <?php echo $calc; ?></span>
+          <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+          <?php } ?>
+
+          <div class="vertical-center">
+            <h3 class="content-section-title">Learning from history</h3>
+            <div class="banner-line"></div>
+            <h4 class="content-section-subtitle">The 1868 N.C. Constitutional Convention</h4>
+          </div>
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/Fgallery1-1.jpg" alt="" />
+        <?php endwhile; endif; wp_reset_query(); ?>
+      </div>
+    </div>
+
+    <div class="col-md-4 has-photo-overlay">
       <div class="photo-overlay light">
         <!-- <a class="mega-link" href="#"></a> -->
         <div class="vertical-center">

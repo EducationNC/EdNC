@@ -1,5 +1,4 @@
 .hentry .entry-header {
-  margin-bottom: 3em;
 
   img {
     width: 100%;
@@ -7,6 +6,7 @@
 
   &.photo-overlay {
     margin-top: -52px;
+    margin-bottom: 3em;
     overflow: hidden;
 
     .article-title-overlay {
