@@ -21,7 +21,7 @@
     ), $atts ) );
 
     $output = '<div class="aside align'. $align . '">';
-    $output .= $content;
+    $output .= do_shortcode($content);
     $output .= '</div>';
 
     return $output;
