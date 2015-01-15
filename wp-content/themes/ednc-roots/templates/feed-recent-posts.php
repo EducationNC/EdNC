@@ -98,7 +98,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer">';
         echo '<figure style="margin: 0 15px 0 0;">';
         if ($image_src) {
-          echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
+          echo '<img src="' . $image_sized['url'] . '" />';
         }
         echo '<figcaption style="font-style: italic;">';
         echo $image_post->post_excerpt;
@@ -106,9 +106,11 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '</figure>';
         echo '</td>';
         echo '<td class="templateColumnContainer">';
+        echo '<div style="padding-left: 15px;">';
       }
       the_advanced_excerpt('add_link=1&read_more=Full story >>');
       if ($image_sized) {
+        echo '</div>';
         echo '</td>';
         echo '</tr>';
         echo '</table>';
