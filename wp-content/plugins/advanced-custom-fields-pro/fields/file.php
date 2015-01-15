@@ -247,31 +247,11 @@ class acf_field_file extends acf_field {
 		// format
 		if( $field['return_format'] == 'url' ) {
 		
-			$value = wp_get_attachment_url($value);
+			return wp_get_attachment_url($value);
 			
 		} elseif( $field['return_format'] == 'array' ) {
 			
-			$attachment = get_post( $value );
-			
-			
-			// validate
-			if( !$attachment )
-			{
-				return false;	
-			}
-			
-			
-			// create array to hold value data
-			$value = array(
-				'ID'			=> $attachment->ID,
-				'id'			=> $attachment->ID,
-				'alt'			=> get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
-				'title'			=> $attachment->post_title,
-				'caption'		=> $attachment->post_excerpt,
-				'description'	=> $attachment->post_content,
-				'mime_type'		=> $attachment->post_mime_type,
-				'url'			=> wp_get_attachment_url( $attachment->ID ),
-			);
+			return acf_get_attachment( $value );
 		}
 		
 		

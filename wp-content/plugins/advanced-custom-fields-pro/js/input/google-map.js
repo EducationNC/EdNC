@@ -61,6 +61,10 @@
 		
 		is_ready: function(){ 
 			
+			// reference
+			var self = this;
+			
+			
 			// debug
 			//console.log('is_ready: %o', this.status);
 			
@@ -75,11 +79,7 @@
 				
 			} else if( typeof google === 'undefined' ) {
 				
-				// reference
-				var self = this;
-				
-				
-				// se tstatus
+				// set status
 				self.status = 'loading';
 				
 				
@@ -99,6 +99,27 @@
 				    }});
 				    
 				});
+				
+				return false;
+					
+			} else if( typeof google.maps === 'undefined' ) {
+				
+				
+				// set status
+				self.status = 'loading';
+				
+				
+				// load maps
+			    google.load('maps', '3', { other_params: 'sensor=false&libraries=places', callback: function(){
+			    	
+			    	// set status
+			    	self.status = 'ready';
+			    	
+			    	
+			    	// initialize pending
+			    	self.initialize_pending();
+			        
+			    }});
 				
 				return false;
 					

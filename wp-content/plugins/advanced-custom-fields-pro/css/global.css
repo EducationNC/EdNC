@@ -628,18 +628,18 @@ td.acf-field[data-width] {
 	vertical-align: top;
 	padding: 13px 15px;
 	
-	border: 0 none;
-	border-top: 1px solid #F5F5F5;
-	border-left: 1px solid #F5F5F5;
+	border-style: solid;
+	border-color: #F5F5F5;
+	border-width: 1px 0 0 1px;
 }
 
 
 .acf-table > tbody > tr:first-child > td { 
-	border-top: 0;
+	border-top-width: 0;
 }
 
 .acf-table > tbody > tr > td:first-child { 
-	border-left: 0;
+	border-left-width: 0;
 }
 
 
@@ -659,7 +659,7 @@ td.acf-field[data-width] {
 /* clear table */
 .acf-clear-table > tbody > tr > td,
 .acf-clear-table > thead > tr > th {
-	border: 0 none;
+	border: 0 none !important;
 	padding: 4px;
 }
 
@@ -817,7 +817,7 @@ td.acf-field[data-width] {
 }
 
 .acf-fields > .acf-field:first-child {
-	border-top: 0 none;
+	border-top-width: 0;
 }
 
 
@@ -995,8 +995,9 @@ td.acf-field[data-width] {
 
 .acf-input-table > thead th {
 	background: #fff;
-	border-left: 1px solid #E1E1E1;
-	border-bottom: 1px solid #E1E1E1;
+	border-color: #E1E1E1;
+	border-style: solid;
+	border-width: 0 0 1px 1px;
     padding: 8px;
     position: relative;
     vertical-align: top;
@@ -1350,17 +1351,27 @@ html[dir="rtl"] .acf-icon.logo {
 	right: auto;
 }
 
+
+html[dir="rtl"] .acf-input-table thead th {
+	text-align: right;
+	border-right-width: 1px;
+	border-left-width: 0px;
+}
+
 html[dir="rtl"] .acf-table > tbody > tr > td {
-	border: 0 none;
-	border-top: 1px solid #F5F5F5;
-	border-right: 1px solid #F5F5F5;
+	text-align: right;
+	border-right-width: 1px;
+	border-left-width: 0px;
 }
 
-html[dir="rtl"] .acf-table td.acf-input {
-	border-left-color: #F5F5F5;
-	border-right-color: #E1E1E1;
+html[dir="rtl"] .acf-input-table > thead > tr > th:first-child, 
+html[dir="rtl"] .acf-input-table > tbody > tr > td:first-child {
+	border-right-width: 0;
 }
 
+html[dir="rtl"] .acf-input-table > tbody > tr > td.order + td {
+	border-right-color: #e1e1e1;
+}
 
 /*---------------------------------------------------------------------------------------------
 *

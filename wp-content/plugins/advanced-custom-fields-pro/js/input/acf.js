@@ -934,6 +934,50 @@ var acf;
 		
 		
 		/*
+		*  maybe_get
+		*
+		*  This function will attempt to return a value and return null if not possible
+		*
+		*  @type	function
+		*  @date	8/09/2014
+		*  @since	5.0.0
+		*
+		*  @param	(object)
+		*  @param	key1 (string)
+		*  @param	key2 (string)
+		*  @param	...
+		*  @return	(mixed)
+		*/
+		
+		maybe_get: function(){
+			
+			var a = arguments,
+		        l = a.length,
+		        c = null,
+		        undef;
+			
+		    if (l === 0) {
+		        return null;
+		    }
+			
+			c = a[0];
+			
+		    for (i = 1; i < l; i++) {
+		    	
+		        if (a[i] === undef || c[ a[i] ] === undef) {
+		            return null;
+		        }
+		        
+		        c = c[ a[i] ];
+		        
+		    }
+		    
+		    return c;
+			
+		},
+		
+		
+		/*
 		*  open_popup
 		*
 		*  This function will create and open a popup modal
@@ -2017,7 +2061,7 @@ frame.on('all', function( e ) {
 				
 					// set height
 					height = ($el.outerHeight() > height) ? $el.outerHeight() : height;
-				
+					
 					// append
 					$els = $els.add( $el );
 					
@@ -2033,6 +2077,14 @@ frame.on('all', function( e ) {
 					}
 					
 				});
+				
+				
+				// clean up
+				if( $els.exists() ) {
+					
+					$els.css({'min-height': (height+1)+'px'});
+					
+				}
 				
 				
 			});

@@ -373,8 +373,12 @@ function acf_enqueue_uploader() {
 	acf_update_setting('enqueue_uploader', 1);
 	
 	
-	// enqueue media
-	wp_enqueue_media();
+	// enqueue media if user can upload
+	if( current_user_can( 'upload_files' ) ) {
+		
+		wp_enqueue_media();
+		
+	}
 	
 	
 	// create dummy editor

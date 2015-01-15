@@ -2,7 +2,7 @@
 Contributors: elliotcondon
 Tags: custom, field, custom field, advanced, simple fields, magic fields, more fields, repeater, matrix, post, type, text, textarea, file, image, edit, admin
 Requires at least: 3.5.0
-Tested up to: 4.0
+Tested up to: 4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,22 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.1.6 =
+* Gallery field: More UI improvements including titles for non image attachments
+* Image field: Added more data to returned attachment including filename, icon, author and type
+* File field: Same as above
+* Gallery field: Same as above
+* Google Maps field: Fixed JS error when google object exists without maps API
+* Select field: Fixed bug where a single numeric value would not save as a default_value
+* Checkbox field: Same as above
+* Radio field: Same as above
+* API: Added $format parameter to the functions the_row() and get_row()
+* Core: Fixed bug when adding 'post_parent' value to post_object/relationship query args
+* Core: Minor fixes and improvements
+* Core: More RTL CSS improvements
+* Language: Updated Hebrew translation - thanks to Lavi Perchik
+* Language: Updated Persian translation - thanks to Kamel
 
 = 5.1.5 =
 * Taxonomy field: Fixed bug where values would not appear selected

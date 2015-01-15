@@ -1443,7 +1443,7 @@ this.$values.find('> .layout > .acf-table').each(function(){
 			
 		},
 		
-		add : function( image ){
+		add : function( a ){
 			
 			// validate
 			if( this.o.max > 0 && this.count() >= this.o.max ) {
@@ -1455,13 +1455,46 @@ this.$values.find('> .layout > .acf-table').each(function(){
 			}
 			
 			
-			// append to image data
-			image.name = this.$el.find('[data-name="ids"]').attr('name');
+			// vars
+			var thumb_url = a.url,
+				thumb_class = 'acf-gallery-attachment acf-soh',
+				filename = '',
+				name = this.$el.find('[data-name="ids"]').attr('name');
+
+			
+			// title
+			if( a.type !== 'image' && a.filename ) {
+				
+				filename = '<div class="filename">' + a.filename + '</div>';
+				
+			}
 			
 			
-			// template
-			var tmpl = acf._e('gallery', 'tmpl'),
-				html = _.template(tmpl, image);
+			// icon
+			if( !thumb_url ) {
+				
+				thumb_url = a.icon;
+				thumb_class += ' is-mime-icon';
+				
+			}
+			
+			
+			// html
+			var html = [
+			'<div class="' + thumb_class + '" data-id="' + a.id + '">',
+				'<input type="hidden" value="' + a.id + '" name="' + name + '[]">',
+				'<div class="margin" title="' + a.filename + '">',
+					'<div class="thumbnail">',
+						'<img src="' + thumb_url + '">',
+					'</div>',
+					filename,
+				'</div>',
+				'<div class="actions acf-soh-target">',
+					'<a href="#" class="acf-icon dark remove-attachment" data-id="' + a.id + '">',
+						'<i class="acf-sprite-delete"></i>',
+					'</a>',
+				'</div>',
+			'</div>'].join('');
 			
 			
 			// append
@@ -1608,46 +1641,51 @@ this.$values.find('> .layout > .acf-table').each(function(){
 			
 			// popup
 			var frame = acf.media.popup({
-				'title'			: acf._e('gallery', 'select'),
-				'mode'			: 'select',
-				'type'			: 'all',
-				'multiple'		: 'add',
-				'library'		: library,
-				'select'		: function( attachment, i ) {
+				title:		acf._e('gallery', 'select'),
+				mode:		'select',
+				type:		'all',
+				multiple:	'add',
+				library:	library,
+				
+				select: function( attachment, i ) {
+					
+					// vars
+					var atts = attachment.attributes;
+					
 					
 					// is image already in gallery?
-					if( self.get_attachment(attachment.id).exists() ) {
+					if( self.get_attachment(atts.id).exists() ) {
 					
 						return;
 						
 					}
 					
-					
+					//console.log( attachment );
+			    	
 			    	// vars
-			    	var image = {
-				    	'id'	: attachment.id,
-				    	'url'	: attachment.attributes.url
+			    	var a = {
+				    	id:			atts.id,
+				    	type:		atts.type,
+				    	icon:		atts.icon,
+				    	filename:	atts.filename,
+				    	url:		''
 			    	};
 			    	
 			    	
-			    	// file?
-				    if( attachment.attributes.type != 'image' ) {
-				    
-					    image.url = attachment.attributes.icon;
-					    
+			    	// type
+			    	if( a.type === 'image' ) {
+				    	
+				    	a.url = acf.maybe_get(atts, 'sizes', preview_size, 'url') || atts.url;
+				    	
+			    	} else {
+				    	
+				    	a.url = acf.maybe_get(atts, 'thumb', 'src') || '';
+				    	
 				    }
 				    
 				    
-				    // is preview size available?
-			    	if( acf.isset(attachment, 'attributes', 'sizes', preview_size) ) {
-			    	
-				    	image.url = attachment.attributes.sizes[ preview_size ].url;
-				    	
-			    	}
-				    
-				    
 			    	// add file to field
-			        self.add( image );
+			        self.add( a );
 					
 				}
 			});

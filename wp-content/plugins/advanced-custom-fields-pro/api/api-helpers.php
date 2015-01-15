@@ -1657,6 +1657,7 @@ function acf_get_posts( $args ) {
 			$match_id = $this_posts[ 0 ]->ID;
 			$offset = 0;
 			$length = count($this_posts);
+			$parent = acf_maybe_get( $args, 'post_parent', 0 );
 			
 			
 			// reset $this_posts
@@ -1686,7 +1687,7 @@ function acf_get_posts( $args ) {
 			
 			
 			// order posts
-			$all_posts = get_page_children( 0, $all_posts );
+			$all_posts = get_page_children( $parent, $all_posts );
 			
 			
 			for( $i = $offset; $i < ($offset + $length); $i++ ) {
@@ -2153,22 +2154,16 @@ function acf_get_updates() {
 
 function acf_encode_choices( $array = array() ) {
 	
-	// bail early if already string
-	if( is_string($array) ) {
+	// bail early if not array
+	if( !is_array($array) ) {
 		
 		return $array;
+		
 	}
 	
 	
 	// vars
 	$string = '';
-	
-	
-	// bail ealry if not array
-	if( !is_array($array) ) {
-		
-		return $string;
-	}
 	
 	
 	if( !empty($array) ) {
@@ -2195,10 +2190,11 @@ function acf_encode_choices( $array = array() ) {
 
 function acf_decode_choices( $string = '' ) {
 	
-	// bail early if already array
-	if( is_array($string) ) {
+	// bail early if nota a string
+	if( !is_string($string) ) {
 		
 		return $string;
+		
 	}
 	
 	
@@ -2206,39 +2202,48 @@ function acf_decode_choices( $string = '' ) {
 	$array = array();
 	
 	
-	// bail ealry if not string
-	if( !is_string($string) ) {
-		
-		return $array;
-	}
-	
-	
 	// explode choices from each line
-	if( !empty($string) ) {
+	//if( !empty($string) ) {
 		
-		// stripslashes ("")
-		$string = stripslashes_deep($string);
+	// stripslashes ("")
+	//$string = stripslashes_deep($string);
+	
+	
+	// explode
+	$lines = explode("\n", $string);
+	
+	
+	// key => value
+	foreach( $lines as $line ) {
+		
+		// vars
+		$k = trim($line);
+		$v = trim($line);
 		
 		
-		// explode
-		$temp = explode("\n", $string);
+		// look for ' : '
+		if( acf_str_exists(' : ', $line) ) {
 		
-		
-		// key => value
-		foreach( $temp as $v ) {
+			$line = explode(' : ', $line);
 			
-			if( acf_str_exists(' : ', $v) ) {
+			$k = trim($line[0]);
+			$v = trim($line[1]);
 			
-				$v = explode(' : ', $v);
-				
-				$array[ trim($v[0]) ] = trim($v[1]);
-				
-			}
-			else
-			{
-				$array[ trim($v) ] = trim($v);
-			}
 		}
+		
+		
+		// append
+		$array[ $k ] = $v;
+		
+	}
+	//}
+	
+	
+	// bail early if no choices
+	if( empty($array) ) {
+		
+		return '';
+		
 	}
 	
 	
@@ -2832,6 +2837,154 @@ function acf_maybe_get( $array, $key, $default = null ) {
 	
 	// return
 	return $default;
+	
+}
+
+
+/*
+*  acf_get_attachment
+*
+*  This function will return an array of attachment data
+*
+*  @type	function
+*  @date	5/01/2015
+*  @since	5.1.5
+*
+*  @param	$post (mixed) either post ID or post object
+*  @return	(array)
+*/
+
+function acf_get_attachment( $post ) {
+	
+	// get post
+	if ( !$post = get_post( $post ) ) {
+		
+		return false;
+		
+	}
+	
+	
+	// vars
+	$thumb_id = 0;
+	$id = $post->ID;
+	$a = array(
+		'ID'			=> $id,
+		'id'			=> $id,
+		'title'       	=> $post->post_title,
+		'filename'    	=> wp_basename( $post->guid ),
+		'url'			=> wp_get_attachment_url( $id ),
+		'alt'			=> get_post_meta($id, '_wp_attachment_image_alt', true),
+		'author'		=> $post->post_author,
+		'description'	=> $post->post_content,
+		'caption'		=> $post->post_excerpt,
+		'name'			=> $post->post_name,
+		'date'			=> $post->post_date_gmt,
+		'modified'		=> $post->post_modified_gmt,
+		'mime_type'		=> $post->post_mime_type,
+		'type'			=> acf_maybe_get( explode('/', $post->post_mime_type), 0, '' ),
+		'icon'			=> wp_mime_type_icon( $id )
+	);
+	
+	
+	// video may use featured image
+	if( $a['type'] === 'image' ) {
+		
+		$thumb_id = $id;
+		$src = wp_get_attachment_image_src( $id, 'full' );
+		
+		$a['url'] = $src[0];
+		$a['width'] = $src[1];
+		$a['height'] = $src[2];
+		
+		
+	} elseif( $a['type'] === 'audio' || $a['type'] === 'video' ) {
+		
+		// video dimentions
+		if( $a['type'] == 'video' ) {
+			
+			$meta = wp_get_attachment_metadata( $id );
+			$a['width'] = acf_maybe_get($meta, 'width', 0);
+			$a['height'] = acf_maybe_get($meta, 'height', 0);
+		
+		}
+		
+		
+		// feature image
+		if( $featured_id = get_post_thumbnail_id($id) ) {
+		
+			$thumb_id = $featured_id;
+			
+		}
+						
+	}
+	
+	
+	// sizes
+	if( $thumb_id ) {
+		
+		// find all image sizes
+		if( $sizes = get_intermediate_image_sizes() ) {
+			
+			$a['sizes'] = array();
+			
+			foreach( $sizes as $size ) {
+				
+				// url
+				$src = wp_get_attachment_image_src( $thumb_id, $size );
+				
+				// add src
+				$a['sizes'][ $size ] = $src[0];
+				$a['sizes'][ $size . '-width' ] = $src[1];
+				$a['sizes'][ $size . '-height' ] = $src[2];
+				
+			}
+			
+		}
+		
+	}
+	
+	
+	// return
+	return $a;
+	
+}
+
+
+/*
+*  acf_get_truncated
+*
+*  This function will truncate and return a string
+*
+*  @type	function
+*  @date	8/08/2014
+*  @since	5.0.0
+*
+*  @param	$text (string)
+*  @param	$length (int)
+*  @return	(string)
+*/
+
+function acf_get_truncated( $text, $length = 64 ) {
+	
+	// vars
+	$text = trim($text);
+	$the_length = strlen( $text );
+	
+	
+	// cut
+	$return = substr( $text, 0, ($length - 3) );
+	
+	
+	// ...
+	if( $the_length > ($length - 3) ) {
+	
+		$return .= '...';
+		
+	}
+	
+	
+	// return
+	return $return;
 	
 }
 

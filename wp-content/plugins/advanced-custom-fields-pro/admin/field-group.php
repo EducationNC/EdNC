@@ -92,11 +92,11 @@ class acf_admin_field_group {
 	*  @date	21/07/2014
 	*  @since	5.0.0
 	*
-	*  @param	$current_screen (object)
+	*  @param	n/a
 	*  @return	n/a
 	*/
 	
-	function current_screen( $current_screen ) {
+	function current_screen() {
 		
 		// validate screen
 		if( !acf_is_screen('acf-field-group') ) {

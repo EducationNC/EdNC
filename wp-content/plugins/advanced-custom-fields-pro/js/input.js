@@ -1183,6 +1183,50 @@ var acf;
 		
 		
 		/*
+		*  maybe_get
+		*
+		*  This function will attempt to return a value and return null if not possible
+		*
+		*  @type	function
+		*  @date	8/09/2014
+		*  @since	5.0.0
+		*
+		*  @param	(object)
+		*  @param	key1 (string)
+		*  @param	key2 (string)
+		*  @param	...
+		*  @return	(mixed)
+		*/
+		
+		maybe_get: function(){
+			
+			var a = arguments,
+		        l = a.length,
+		        c = null,
+		        undef;
+			
+		    if (l === 0) {
+		        return null;
+		    }
+			
+			c = a[0];
+			
+		    for (i = 1; i < l; i++) {
+		    	
+		        if (a[i] === undef || c[ a[i] ] === undef) {
+		            return null;
+		        }
+		        
+		        c = c[ a[i] ];
+		        
+		    }
+		    
+		    return c;
+			
+		},
+		
+		
+		/*
 		*  open_popup
 		*
 		*  This function will create and open a popup modal
@@ -2266,7 +2310,7 @@ frame.on('all', function( e ) {
 				
 					// set height
 					height = ($el.outerHeight() > height) ? $el.outerHeight() : height;
-				
+					
 					// append
 					$els = $els.add( $el );
 					
@@ -2282,6 +2326,14 @@ frame.on('all', function( e ) {
 					}
 					
 				});
+				
+				
+				// clean up
+				if( $els.exists() ) {
+					
+					$els.css({'min-height': (height+1)+'px'});
+					
+				}
 				
 				
 			});
@@ -3917,6 +3969,10 @@ frame.on('all', function( e ) {
 		
 		is_ready: function(){ 
 			
+			// reference
+			var self = this;
+			
+			
 			// debug
 			//console.log('is_ready: %o', this.status);
 			
@@ -3931,11 +3987,7 @@ frame.on('all', function( e ) {
 				
 			} else if( typeof google === 'undefined' ) {
 				
-				// reference
-				var self = this;
-				
-				
-				// se tstatus
+				// set status
 				self.status = 'loading';
 				
 				
@@ -3955,6 +4007,27 @@ frame.on('all', function( e ) {
 				    }});
 				    
 				});
+				
+				return false;
+					
+			} else if( typeof google.maps === 'undefined' ) {
+				
+				
+				// set status
+				self.status = 'loading';
+				
+				
+				// load maps
+			    google.load('maps', '3', { other_params: 'sensor=false&libraries=places', callback: function(){
+			    	
+			    	// set status
+			    	self.status = 'ready';
+			    	
+			    	
+			    	// initialize pending
+			    	self.initialize_pending();
+			        
+			    }});
 				
 				return false;
 					

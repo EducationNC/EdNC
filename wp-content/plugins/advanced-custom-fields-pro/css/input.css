@@ -48,13 +48,13 @@
 
 .acf-input-prepend {
 	float: left;
-	border-right: 0;
+	border-right-width: 0;
 	border-radius: 3px 0 0 3px;
 }
 
 .acf-input-append {
 	float: right;
-	border-left: 0;
+	border-left-width: 0;
 	border-radius: 0 3px 3px 0;
 }
 
@@ -80,6 +80,34 @@ input.acf-is-prepended.acf-is-appended {
 	border-radius: 0 !important;
 }
 
+
+/* rtl */
+html[dir="rtl"] .acf-input-prepend {
+	border-left-width: 0;
+	border-right-width: 1px;
+	border-radius: 0 3px 3px 0;
+	
+	float: right;
+}
+
+html[dir="rtl"] .acf-input-append {
+	border-left-width: 1px;
+	border-right-width: 0;
+	border-radius: 3px 0 0 3px;
+	float: left;
+}
+
+html[dir="rtl"] input.acf-is-prepended {
+	border-radius: 3px 0 0 3px !important;
+}
+
+html[dir="rtl"] input.acf-is-appended {
+	border-radius: 0 3px 3px 0 !important;
+}
+
+html[dir="rtl"] input.acf-is-prepended.acf-is-appended {
+	border-radius: 0 !important;
+}
 
 /*---------------------------------------------------------------------------------------------
 *
@@ -179,6 +207,15 @@ ul.acf-checkbox-list li label {
 	margin: 2px 0;
 }
 
+
+/* rtl */
+html[dir="rtl"] ul.acf-radio-list li input,
+html[dir="rtl"] ul.acf-checkbox-list li input {
+	margin-left: 4px;
+	margin-right: 0;
+}
+
+
 /*--------------------------------------------------------------------------
 *
 *	Google Map
@@ -247,6 +284,17 @@ ul.acf-checkbox-list li label {
 }
 
 
+/* rtl */
+html[dir="rtl"] .acf-google-map .title .acf-icon {
+	right: auto;
+	left: 7px;
+}
+
+html[dir="rtl"] .pac-container .pac-item {
+	text-align: right;
+}
+	
+	
 /*--------------------------------------------------------------------------
 *
 *	Relationship
@@ -710,6 +758,12 @@ ul.acf-checkbox-list li label {
 		max-width: 100%;
 	}
 	
+}
+
+
+/* rtl */
+html[dir="rtl"] .acf-image-uploader .view {
+	float: right;
 }
 
 
@@ -1189,10 +1243,3 @@ body.acf-wp-4 .media-modal.acf-media-modal .media-frame-content {
 .acf-postbox.acf-hidden {
 	display: none !important;
 }
-
-
-/*--------------------------------------------------------------------------------------------
-*
-*	RTL
-*
-*--------------------------------------------------------------------------------------------*/

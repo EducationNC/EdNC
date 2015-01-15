@@ -235,59 +235,11 @@ class acf_field_image extends acf_field {
 		// format
 		if( $field['return_format'] == 'url' ) {
 		
-			$value = wp_get_attachment_url( $value );
+			return wp_get_attachment_url( $value );
 			
 		} elseif( $field['return_format'] == 'array' ) {
 			
-			$attachment = get_post( $value );
-			
-			
-			// validate
-			if( !$attachment ) {
-			
-				return false;
-					
-			}
-			
-			
-			// create array to hold value data
-			$src = wp_get_attachment_image_src( $attachment->ID, 'full' );
-			
-			$value = array(
-				'ID'			=> $attachment->ID,
-				'id'			=> $attachment->ID,
-				'alt'			=> get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
-				'title'			=> $attachment->post_title,
-				'caption'		=> $attachment->post_excerpt,
-				'description'	=> $attachment->post_content,
-				'url'			=> $src[0],
-				'width'			=> $src[1],
-				'height'		=> $src[2],
-			);
-			
-			
-			// find all image sizes
-			$image_sizes = get_intermediate_image_sizes();
-			
-			if( $image_sizes ) {
-				
-				$value['sizes'] = array();
-				
-				foreach( $image_sizes as $image_size ) {
-					
-					// find src
-					$src = wp_get_attachment_image_src( $attachment->ID, $image_size );
-					
-					// add src
-					$value['sizes'][ $image_size ] = $src[0];
-					$value['sizes'][ $image_size . '-width' ] = $src[1];
-					$value['sizes'][ $image_size . '-height' ] = $src[2];
-					
-				}
-				// foreach( $image_sizes as $image_size )
-				
-			}
-			// if( $image_sizes )
+			return acf_get_attachment( $value );
 			
 		}
 		

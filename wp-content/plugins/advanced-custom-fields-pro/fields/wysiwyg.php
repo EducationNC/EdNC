@@ -151,9 +151,9 @@ class acf_field_wysiwyg extends acf_field {
    	
    	
    	/*
-   	*  input_form_data
+   	*  input_admin_footer
    	*
-   	*  This function is called once on the input page between the head and footer
+   	*  description
    	*
    	*  @type	function
    	*  @date	6/03/2014
@@ -163,7 +163,7 @@ class acf_field_wysiwyg extends acf_field {
    	*  @return	$post_id (int)
    	*/
    	
-   	function input_form_data( $args ) {
+   	function input_admin_footer() {
 	   	
 	   	// vars
 		$json = array();
