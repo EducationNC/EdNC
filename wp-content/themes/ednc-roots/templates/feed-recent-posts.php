@@ -95,12 +95,12 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         $image_post = get_post($image_id);
         echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
         echo '<tr>';
-        echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer">';
+        echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer" valign="top">';
         if ($image_src) {
           echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
         }
         echo '</td>';
-        echo '<td class="templateColumnContainer">';
+        echo '<td class="templateColumnContainer" valign="top">';
         echo '<div style="padding-left: 15px;">';
       }
       the_advanced_excerpt('add_link=1&read_more=Full story >>');
