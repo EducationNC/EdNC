@@ -31,6 +31,21 @@ add_filter('wp_title', 'roots_wp_title', 10);
 
 
 
+/**
+* Add options pages for weekly wrapups
+*/
+if( function_exists('acf_add_options_page') ) {
+
+  acf_add_options_page(array(
+    'page_title'     => 'Weekly Wrapup',
+    'menu_title'    => 'Weekly Wrapup',
+    'menu_slug'     => 'weekly-wrapup',
+    'redirect'        => false
+  ));
+}
+
+
+
 // Load CSS to TinyMCE editor
 function add_mce_css( $mce_css ) {
   if ( ! empty( $mce_css ) )
@@ -51,7 +66,7 @@ function catch_that_image() {
   ob_end_clean();
   $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
   $first_img = $matches[1][0];
-  
+
   return $first_img;
 }
 

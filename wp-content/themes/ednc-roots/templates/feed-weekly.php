@@ -1,55 +1,9 @@
 <?php
 /**
-* Posts since last email RSS2 Template
+* Posts from the Weekly Wrapup options page - RSS2 Template
 */
 
-$today = getdate();
-$yesterday = getdate(strtotime('-1 days'));
-$args = array(
-  'post_type' => array('post', 'map'),
-  'posts_per_page' => -1,
-  'category__not_in' => array(90, 96, 116), // id of "featured," "hide from home," and "hide from archive" categories
-  'date_query' => array(
-    'relation' => 'OR',
-    array(
-      'relation' => 'AND',
-      array(
-        'year' => $yesterday['year'],
-        'month' => $yesterday['mon'],
-        'day' => $yesterday['mday']
-      ),
-      array(
-        'hour' => 8,
-        'compare' => '>='
-      ),
-      array(
-        'hour' => 23,
-        'minute' => 59,
-        'second' => 59,
-        'compare' => '<='
-      )
-    ),
-    array(
-      'relation' => 'AND',
-      array(
-        'year' => $today['year'],
-        'month' => $today['mon'],
-        'day' => $today['mday']
-      ),
-      array(
-        'hour' => 0,
-        'minute' => 0,
-        'second' => 0,
-        'compare' => '>='
-      ),
-      array(
-        'hour' => 8,
-        'compare' => '<'
-      )
-    )
-  )
-);
-$features = new WP_Query($args);
+$articles = get_field('posts_to_include', 'option');
 
 header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('blog_charset'), true);
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
@@ -73,7 +27,8 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
   <sy:updatePeriod><?php echo apply_filters( 'rss_update_period', 'hourly' ); ?></sy:updatePeriod>
   <sy:updateFrequency><?php echo apply_filters( 'rss_update_frequency', '1' ); ?></sy:updateFrequency>
   <?php do_action('rss2_head'); ?>
-  <?php while($features->have_posts()) : $features->the_post(); ?>
+  <?php foreach ($articles as $post) : ?>
+    <?php setup_postdata($post); ?>
     <item>
       <title><?php the_title_rss(); ?></title>
       <link><?php the_permalink_rss(); ?></link>
@@ -96,14 +51,9 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
         echo '<tr>';
         echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer">';
-        echo '<figure style="margin: 0 15px 0 0;">';
         if ($image_src) {
-          echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
+          echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%; margin: 0 15px 0 0;" />';
         }
-        echo '<figcaption style="font-style: italic;">';
-        echo $image_post->post_excerpt;
-        echo '</figcaption>';
-        echo '</figure>';
         echo '</td>';
         echo '<td class="templateColumnContainer">';
       }
@@ -128,7 +78,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <?php rss_enclosure(); ?>
       <?php do_action('rss2_item'); ?>
     </item>
-  <?php endwhile; wp_reset_query(); ?>
+  <?php endforeach; wp_reset_postdata(); ?>
 </channel>
 
 </rss>
