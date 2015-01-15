@@ -7178,6 +7178,10 @@ label {
   font-weight: normal;
 }
 
+.wp-caption {
+  background: none;
+}
+
 .gallery-row {
   padding: 10px 0;
 }

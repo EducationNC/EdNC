@@ -1,6 +1,7 @@
 // Captions
 .wp-caption {
   @extend .thumbnail;
+  background: none;
 }
 
 .wp-caption-text {
