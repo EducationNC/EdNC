@@ -294,11 +294,11 @@ if ($time >= $launchtime) {
 
     <div class="col-md-4 has-photo-overlay">
       <div class="photo-overlay light">
-        <!-- <a class="mega-link" href="#"></a> -->
+        <a class="mega-link" href="/research/edlitigation/"></a>
         <div class="vertical-center">
           <h3 class="content-section-title">Ed<span class="normal">Litigation</span></h3>
           <div class="banner-line"></div>
-          <h4 class="content-section-subtitle"><!--Track education litigation across NC-->Coming Thursday, January 15</h4>
+          <h4 class="content-section-subtitle">Track education litigation across NC</h4>
         </div>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/1409595_99556189-2.jpg" alt="EdLawsuits" />
       </div>
