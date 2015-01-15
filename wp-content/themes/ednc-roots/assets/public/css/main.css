@@ -6898,6 +6898,7 @@ li .meta a, li .attr a, li .duration a, li .tribe-events-adv-list-widget .vevent
   font-weight: 300;
   font-size: 1rem;
   font-style: italic;
+  background: none;
 }
 
 .intro {
