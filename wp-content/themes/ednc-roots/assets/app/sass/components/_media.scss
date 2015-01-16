@@ -85,7 +85,7 @@ object, embed {
   max-width: 100%;
 }
 
-.entry-content-asset {
+.entry-content-asset:not(.instagram) {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;

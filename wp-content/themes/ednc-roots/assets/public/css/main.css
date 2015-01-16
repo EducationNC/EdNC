@@ -7240,14 +7240,14 @@ object, embed {
   max-width: 100%;
 }
 
-.entry-content-asset {
+.entry-content-asset:not(.instagram) {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;
   height: 0;
   margin-bottom: 1em;
 }
-.entry-content-asset iframe {
+.entry-content-asset:not(.instagram) iframe {
   position: absolute;
   top: 0;
   left: 0;

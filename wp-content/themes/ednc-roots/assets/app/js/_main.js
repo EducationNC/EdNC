@@ -75,7 +75,7 @@ var Roots = {
           e.preventDefault();
           return;
         }
-        
+
         if (!$(this).hasClass('oc-pushed')) {
           $('#trigger-offcanvas').removeClass('active');
         }
@@ -95,6 +95,9 @@ var Roots = {
       };
 
       $('object:not(childof(.tableauPlaceholder)').wrap('<div class="object-wrapper"></div>');
+
+      // Add special class to .entry-content-wrapper divs for Instagram embeds (not fixed ratio)
+      $('.instagram-media').parent('.entry-content-asset').addClass('instagram');
 
       // Open Magnific for all image link types inside articles
       $('.entry-content a[href$=".gif"], .entry-content a[href$=".jpg"], .entry-content a[href$=".png"], .entry-content a[href$=".jpeg"]').not('.gallery a').magnificPopup({
