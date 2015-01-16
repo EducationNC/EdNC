@@ -23,11 +23,11 @@ var Roots = {
   common: {
     init: function() {
       // Determine trigger for touch/click events
-      var trigger;
+      var clickortap;
       if ($('html').hasClass('touch')) {
-        trigger = 'touchend';
+        clickortap = 'touchend';
       } else {
-        trigger = 'click';
+        clickortap = 'click';
       }
 
       // Util function to check get variables
@@ -53,14 +53,14 @@ var Roots = {
         });
       }
 
-      $(document).on(trigger, '.popup-modal-dismiss', function (e) {
+      $(document).on(clickortap, '.popup-modal-dismiss', function (e) {
         e.preventDefault();
         $.magnificPopup.close();
         document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
       // Toggle menu button to x close state on click
-      $('#trigger-offcanvas').on(trigger, function() {
+      $('#trigger-offcanvas').on(clickortap, function() {
         if ($(this).hasClass('active')) {
           $(this).removeClass('active');
         } else {
@@ -69,7 +69,7 @@ var Roots = {
       });
 
       // Toggle menu button to normal state if clicking on page to close menu
-      $('#oc-pusher').on(trigger, function(e) {
+      $('#oc-pusher').on(clickortap, function(e) {
         // Exclude clicks on menu
         if($(e.target).is('#oc-menu')){
           e.preventDefault();
@@ -85,7 +85,7 @@ var Roots = {
       new MLPushMenu( document.getElementById( 'oc-menu' ), document.getElementById( 'trigger-offcanvas' ) );
 
       // Toggle visibility of search bar on mobile
-      $('#trigger-mobile-search').on(trigger, function() {
+      $('#trigger-mobile-search').on(clickortap, function() {
         $('#oc-pusher').toggleClass('search-pushed');
       });
 

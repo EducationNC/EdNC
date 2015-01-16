@@ -31,9 +31,16 @@ if ($image_src) {
     <div class="map-tablet">
       <?php the_field('tablet_map'); ?>
     </div>
+
+    <?php if (get_field('mobile_map')) { ?>
     <div class="map-mobile">
       <?php the_field('mobile_map'); ?>
     </div>
+    <?php } else { ?>
+    <div class="overflow-x-scroll">
+      <?php //the_field('tablet_map'); ?>
+    </div>
+    <?php } ?>
   </div>
 
   <div class="entry-content container">
