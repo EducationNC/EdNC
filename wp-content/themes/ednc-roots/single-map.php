@@ -37,8 +37,8 @@ if ($image_src) {
       <?php the_field('mobile_map'); ?>
     </div>
     <?php } else { ?>
-    <div class="overflow-x-scroll">
-      <?php //the_field('tablet_map'); ?>
+    <div class="map-mobile-scroll">
+      <?php the_field('tablet_map'); ?>
     </div>
     <?php } ?>
   </div>

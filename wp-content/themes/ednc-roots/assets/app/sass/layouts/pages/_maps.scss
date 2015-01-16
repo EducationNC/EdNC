@@ -3,6 +3,11 @@
   width: 320px;
 }
 
+.map-mobile-scroll {
+  width: 100%;
+  overflow-x: scroll;
+}
+
 .map-tablet {
   width: 764px;
 }
@@ -29,7 +34,8 @@
   }
 
   .map-tablet,
-  .map-mobile {
+  .map-mobile,
+  .map-mobile-scroll {
     display: none;
   }
 }
@@ -39,7 +45,8 @@
     display: block;
   }
 
-  .map-mobile {
+  .map-mobile,
+  .map-mobile-scroll {
     display: none;
   }
 }
