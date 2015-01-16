@@ -271,17 +271,11 @@ if ($time >= $launchtime) {
         $cc = new WP_Query($args);
 
         if ($cc->have_posts()) : while ($cc->have_posts()) : $cc->the_post();
-          // Calc day number
-          $day1 = strtotime('January 14, 2015');
-          $whichday = current_time('timestamp');
-          $calc = floor (($whichday - $day1)/86400) + 1;
-
-          if ($calc > 0) { ?>
-          <span class="label">Day <?php echo $calc; ?></span>
+          // Show label with title when post is dated today
+          if( date('Yz') == get_the_time('Yz') ) { ?>
+            <span class="label"><?php the_title(); ?></span>
+          <?php } ?>
           <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-          <?php } else {
-            echo '<span class="label">Coming Tomorrow</span>';
-          } ?>
         <?php endwhile; endif; wp_reset_query(); ?>
           <div class="vertical-center">
             <h3 class="content-section-title">Learning from history</h3>
