@@ -51,7 +51,7 @@ if ($image_src) {
             <span class="label"><?php echo $column[0]->name; ?></span>
             <?php
           } else {
-            if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') {
+            if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home' && $category[0]->cat_name != 'Hide from archives') {
               ?>
               <span class="label">
                 <?php if (in_category(109)) {  // 1868 Constitutional Convention ?>
