@@ -48,6 +48,9 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 		// Allow for different retina sizes
 		$retina = $retina ? ( $retina === true ? 2 : $retina ) : 1;
 
+		// Remove original image size suffix if exists
+		$url = preg_replace('/-\d+x\d+(?=\.[a-z]{3,4}$)/i', '', $url);
+
 		// Get the image file path
 		$file_path = parse_url( $url );
 		$file_path = $_SERVER['DOCUMENT_ROOT'] . $file_path['path'];
@@ -72,7 +75,7 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 		$ext = $info['extension'];
 		$name = wp_basename( $file_path, ".$ext" );
 
-	        if ( 'bmp' == $ext ) {
+    if ( 'bmp' == $ext ) {
 			return new WP_Error( 'bmp_mime_type', __( 'Image is BMP. Please use either JPG or PNG.','wta' ), $url );
 		}
 
@@ -163,7 +166,7 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 
 		// Return image array
 		return $image_array;
-
+print_r($image_array);
 	}
 }
 else {
