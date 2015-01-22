@@ -34,7 +34,7 @@ if ($time >= $launchtime) {
       </ul>
 
       <div class="search">
-        <form>
+        <form role="search" method="get" action="<?php echo home_url( '/' ); ?>">
           <div class="row">
             <div class="col-sm-12">
               <div class="input-group">

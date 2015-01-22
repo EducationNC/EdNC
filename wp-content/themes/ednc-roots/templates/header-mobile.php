@@ -25,7 +25,7 @@ if ($time >= $launchtime) {
 </div>
 
 <div class="mobile-bar-search">
-  <form>
+  <form role="search" method="get" action="<?php echo home_url( '/' ); ?>">
     <div class="container">
       <div class="col-sm-12">
         <div class="input-group">
