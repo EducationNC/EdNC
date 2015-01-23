@@ -1,18 +1,4 @@
-<?php
-// detect launch
-$time = current_time('timestamp', true);
-$est = new DateTimeZone('America/New_York');
-$launch = new DateTime('01/12/2015 12:00 am', $est);
-$launchtime = intval($launch->format('U'));
-
-if ($time >= $launchtime) {
-  $logged_in = true;
-} else {
-  $logged_in = is_user_logged_in();
-}
-?>
-
-<section class="container <?php if (!$logged_in) { echo 'no-bottom-margin'; } ?>">
+<section class="container">
   <div class="row">
     <div class="col-md-9">
       <div class="row">
@@ -130,14 +116,24 @@ if ($time >= $launchtime) {
     </div>
   </div>
 
-  <?php if ($logged_in) : ?>
   <div class="row">
     <?php
-    // TEMPORARY: LEADERSHIP PROFILES
+    // TEMPORARY: THEME SPOT
+
+    $time = current_time('timestamp', true);
+    $est_zone = new DateTimeZone('America/New_York');
+    $switch = new DateTime('01/26/2015 12:00 am', $est_zone);
+    $switchtime = intval($switch->format('U'));
+
+    if ($time >= $switchtime) {
+      $cat_id = 119;  // School choice
+    } else {
+      $cat_id = 97;   // Leadership profile
+    }
 
     $args = array(
       'posts_per_page' => 1,
-      'category__in' => array(97) // id of "leadership profile" category in dev and prod
+      'category__in' => array($cat_id)
     );
 
     $stories = new WP_Query($args);
@@ -230,10 +226,8 @@ if ($time >= $launchtime) {
 
     <?php endwhile; endif; wp_reset_query(); ?>
   </div>
-  <?php endif; ?>
 </section>
 
-<?php if ($logged_in) : ?>
 <section class="container-fluid banners">
   <div class="row no-padding">
     <div class="col-md-4 has-photo-overlay">
@@ -378,7 +372,6 @@ if ($time >= $launchtime) {
     </div>
   </div>
 </section>
-<?php endif; ?>
 
 <section class="container-fluid">
   <div class="row">
