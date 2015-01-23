@@ -78,8 +78,8 @@ if ($time >= $launchtime) {
         <ul class="list-inline">
           <li><a class="icon-facebook" href="http://facebook.com/educationnc" target="_blank"></a></li>
           <li><a class="icon-twitter" href="http://twitter.com/educationnc" target="_blank"></a></li>
-          <li><a class="icon-youtube" href="https://www.youtube.com/channel/UCJto5My-_AVw1Nx5AGq8TEQ"></a></li>
-          <!-- <li><a class="icon-gplus" href="https://plus.google.com/100573388543000216336/about"></a></li> -->
+          <li><a class="icon-youtube" href="https://www.youtube.com/channel/UCJto5My-_AVw1Nx5AGq8TEQ" target="_blank"></a></li>
+          <!-- <li><a class="icon-gplus" href="https://plus.google.com/100573388543000216336/about" target="_blank"></a></li> -->
           <!-- <li><a class="icon-instagram" href="#"></a></li> -->
           <!-- <li><a class="icon-linkedin" href="#"></a></li> -->
         </ul>
