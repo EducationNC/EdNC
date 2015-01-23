@@ -74,7 +74,7 @@
         if ($columnists->have_posts()) : while ($columnists->have_posts()) : $columnists->the_post();
           $user = get_field('user'); ?>
 
-          <div class="col-md-3 has-photo-overlay">
+          <div class="col-md-4 has-photo-overlay">
             <div class="photo-overlay">
               <?php
               $image_id = get_post_thumbnail_id();
