@@ -7,7 +7,7 @@
 ga('create', 'UA-57754133-1', {'siteSpeedSampleRate': 50});
 ga('require', 'displayfeatures');
 ga('send', 'pageview');
-ga('set', 'dimension1', '<?php echo get_the_author(); ?>');
+ga('set', 'dimension1', '<?php echo get_the_author_meta('user_nicename'); ?>');
 
 </script>
 
