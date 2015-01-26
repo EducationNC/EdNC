@@ -65,6 +65,11 @@ function roots_scripts() {
   if (is_home()) {
     wp_enqueue_script('grid_rotator', get_template_directory_uri() . $assets['grid_rotator'], array('jquery'), null, true);
   }
+
+  // Enqueue Antenna scripts on single posts only
+  if (is_single()) {
+    wp_enqueue_script('antenna', '//www.antenna.is/static/engage.js', array(), null, true);
+  }
 }
 add_action('wp_enqueue_scripts', 'roots_scripts', 100);
 
