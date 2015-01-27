@@ -39,7 +39,6 @@ query_posts( $query_string . '&orderby=title&order=ASC' );
     <?php while (have_posts()) : the_post(); ?>
 
       <div class="clearfix">
-        <hr class="separator" />
         <h3 class="resource-title"><a href="<?php the_field('link_to_bill'); ?>" target="_blank"><?php the_title() ?>: <?php echo the_field('short_title'); ?></a></h4>
         <?php if (get_field('description')) { ?>
         <p><?php the_field('description'); ?></p>
