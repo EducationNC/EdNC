@@ -241,7 +241,7 @@ function add_custom_post_types() {
 				'parent_item_colon' => ''
 			), /* end of arrays */
 			'public' => false,
-			'exclude_from_search' => false,
+			'exclude_from_search' => true,
 			'publicly_queryable' => true,
 			'show_ui' => true,
 			'show_in_nav_menus' => false,
@@ -254,6 +254,37 @@ function add_custom_post_types() {
 			'rewrite' => false,
 			'query_var' => true
 		)
+	);
+
+	register_post_type( 'bill',
+	array('labels' => array(
+			'name' => 'Bills',
+			'singular_name' => 'Bill',
+			'add_new' => 'Add New',
+			'add_new_item' => 'Add New Bill',
+			'edit' => 'Edit',
+			'edit_item' => 'Edit Bill',
+			'new_item' => 'New Bill',
+			'view_item' => 'View Bill',
+			'search_items' => 'Search Bills',
+			'not_found' =>  'Nothing found in the Database.',
+			'not_found_in_trash' => 'Nothing found in Trash',
+			'parent_item_colon' => ''
+		), /* end of arrays */
+		'public' => false,
+		'exclude_from_search' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true,
+		'show_in_nav_menus' => false,
+		'menu_position' => 8,
+		//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+		'capability_type' => 'post',
+		'hierarchical' => false,
+		'supports' => array( 'title', 'revisions'),
+		'has_archive' => false,
+		'rewrite' => false,
+		'query_var' => true
+	)
 	);
 
 }
@@ -305,41 +336,61 @@ register_taxonomy( 'author-type',
 register_taxonomy( 'resource-type',
 	array('resource'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
-	'labels' => array(
-		'name' => __( 'Resource Types' ),
-		'singular_name' => __( 'Resource Type' ),
-		'search_items' =>  __( 'Search Resource Types' ),
-		'all_items' => __( 'All Resource Types' ),
-		'parent_item' => __( 'Parent Resource Type' ),
-		'parent_item_colon' => __( 'Parent Resource Type:' ),
-		'edit_item' => __( 'Edit Resource Type' ),
-		'update_item' => __( 'Update Resource Type' ),
-		'add_new_item' => __( 'Add New Resource Type' ),
-		'new_item_name' => __( 'New Resource Type Name' )
-	),
-	'show_ui' => true,
-	'query_var' => true,
+		'labels' => array(
+			'name' => __( 'Resource Types' ),
+			'singular_name' => __( 'Resource Type' ),
+			'search_items' =>  __( 'Search Resource Types' ),
+			'all_items' => __( 'All Resource Types' ),
+			'parent_item' => __( 'Parent Resource Type' ),
+			'parent_item_colon' => __( 'Parent Resource Type:' ),
+			'edit_item' => __( 'Edit Resource Type' ),
+			'update_item' => __( 'Update Resource Type' ),
+			'add_new_item' => __( 'Add New Resource Type' ),
+			'new_item_name' => __( 'New Resource Type Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
+);
+
+register_taxonomy( 'bill-type',
+	array('bill'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Bill Types' ),
+			'singular_name' => __( 'Bill Type' ),
+			'search_items' =>  __( 'Search Bill Types' ),
+			'all_items' => __( 'All Bill Types' ),
+			'parent_item' => __( 'Parent Bill Type' ),
+			'parent_item_colon' => __( 'Parent Bill Type:' ),
+			'edit_item' => __( 'Edit Bill Type' ),
+			'update_item' => __( 'Update Bill Type' ),
+			'add_new_item' => __( 'Add New Bill Type' ),
+			'new_item_name' => __( 'New Bill Type Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
 	)
 );
 
 register_taxonomy( 'column',
-array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
-array('hierarchical' => true,     /* if this is true it acts like categories */
-'labels' => array(
-	'name' => __( 'Columns' ),
-	'singular_name' => __( 'Column' ),
-	'search_items' =>  __( 'Search Columns' ),
-	'all_items' => __( 'All Columns' ),
-	'parent_item' => __( 'Parent Column' ),
-	'parent_item_colon' => __( 'Parent Column:' ),
-	'edit_item' => __( 'Edit Column' ),
-	'update_item' => __( 'Update Column' ),
-	'add_new_item' => __( 'Add New Column' ),
-	'new_item_name' => __( 'New Column Name' )
-),
-'show_ui' => true,
-'query_var' => true,
-)
+	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Columns' ),
+			'singular_name' => __( 'Column' ),
+			'search_items' =>  __( 'Search Columns' ),
+			'all_items' => __( 'All Columns' ),
+			'parent_item' => __( 'Parent Column' ),
+			'parent_item_colon' => __( 'Parent Column:' ),
+			'edit_item' => __( 'Edit Column' ),
+			'update_item' => __( 'Update Column' ),
+			'add_new_item' => __( 'Add New Column' ),
+			'new_item_name' => __( 'New Column Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
 );
 
 // Order bios by menu order on admin page
