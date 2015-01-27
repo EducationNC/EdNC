@@ -132,7 +132,7 @@
     }
 
     $args = array(
-      'posts_per_page' => 1,
+      'posts_per_page' => 2,
       'category__in' => array($cat_id)
     );
 
@@ -180,7 +180,7 @@
 
     <?php
     $args = array(
-      'posts_per_page' => 3,
+      'posts_per_page' => 6,
       'category__not_in' => array(90, 96, 97, 109, 119) // id of "featured", "hide from home," "leadership profile", and "1868 const. conv.", and "school choice" categories in dev and prod
     );
 
