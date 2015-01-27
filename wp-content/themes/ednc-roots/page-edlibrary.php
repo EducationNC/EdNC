@@ -34,9 +34,6 @@
 
     <div class="col-md-9 col-lg-8 col-md-pull-3">
       <?php
-
-      the_content();
-
       $paged = get_query_var('paged') ? get_query_var('paged') : 1;
       $args = array(
         'post_type' => 'resource',
@@ -48,11 +45,11 @@
         $args['s'] = $_GET['k'];
         echo '<h2>Search results for: <em>' . sanitize_text_field($_GET['k']) . '</em></h2>';
       } else {
+        the_content();
         echo '<h2>Recently added resources</h2>';
       }
 
       $resources = new WP_Query( $args );
-
       if ($resources->have_posts()) : while ( $resources->have_posts() ) : $resources->the_post(); ?>
 
       <div class="clearfix">

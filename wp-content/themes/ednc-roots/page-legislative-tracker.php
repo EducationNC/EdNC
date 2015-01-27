@@ -32,9 +32,6 @@
 
     <div class="col-md-9 col-lg-8 col-md-pull-3">
       <?php
-
-      the_content();
-
       // $paged = get_query_var('paged') ? get_query_var('paged') : 1;
       $args = array(
         'post_type' => 'bill',
@@ -45,8 +42,17 @@
       );
 
       if (isset($_GET['k'])) {
-        $args['s'] = $_GET['k'];
+        // $args['s'] = $_GET['k'];
+        $args['meta_query'] = array(
+          array(
+            'key' => 'short_title',
+            'value' => $_GET['k'],
+            'compare' => 'LIKE'
+          )
+        );
         echo '<h2>Search results for: <em>' . sanitize_text_field($_GET['k']) . '</em></h2>';
+      } else {
+        the_content();
       }
 
       $resources = new WP_Query( $args );
