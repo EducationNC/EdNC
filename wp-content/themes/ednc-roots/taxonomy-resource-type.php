@@ -1,3 +1,8 @@
+<?php
+global $query_string;
+query_posts( $query_string . '&post_type=resource' );
+?>
+
 <div class="page-header">
   <h1><a href="<?php echo get_permalink('2968'); ?>">EdLibrary</a></h1>
   <h2><?php echo roots_title(); ?></h2>
@@ -50,13 +55,11 @@
         <p><?php the_content(); ?></p>
       </div>
 
-    <?php endwhile;
+    <?php endwhile; ?>
 
-    if ($resources->max_num_pages > 1) { ?>
-      <nav class="post-nav">
-        <?php wp_pagenavi(); ?>
-      </nav>
-      <?php } ?>
+    <nav class="post-nav">
+      <?php wp_pagenavi(); ?>
+    </nav>
 
     <?php wp_reset_query(); ?>
   </div>

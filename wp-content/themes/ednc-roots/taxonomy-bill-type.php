@@ -1,6 +1,6 @@
 <?php
 global $query_string;
-query_posts( $query_string . '&orderby=title&order=ASC' );
+query_posts( $query_string . '&post_type=bill&orderby=title&order=ASC' );
 ?>
 
 <div class="page-header">
@@ -45,13 +45,11 @@ query_posts( $query_string . '&orderby=title&order=ASC' );
         <?php } ?>
       </div>
 
-    <?php endwhile;
+    <?php endwhile; ?>
 
-    if ($resources->max_num_pages > 1) { ?>
-      <nav class="post-nav">
-        <?php wp_pagenavi(); ?>
-      </nav>
-      <?php } ?>
+    <nav class="post-nav">
+      <?php wp_pagenavi(); ?>
+    </nav>
 
     <?php wp_reset_query(); ?>
   </div>
