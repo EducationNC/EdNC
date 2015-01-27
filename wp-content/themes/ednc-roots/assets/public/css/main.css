@@ -8015,6 +8015,10 @@ section {
   border-radius: 0;
 }
 
+.ant_sandbox {
+  z-index: 1000;
+}
+
 .mobile-bar {
   color: #707273;
   height: 2.8125rem;
