@@ -409,10 +409,10 @@
     </div>
 
     <div class="col-md-4 text-center">
-      <a href="https://salsa4.salsalabs.com/o/51260/donate">
+      <a href="https://support.ednc.org/donate">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/shutterstock_10038223.jpg" alt="" />
       </a>
-      <a href="https://salsa4.salsalabs.com/o/51260/donate" class="btn btn-primary btn-lg btn-wide bottom-margin">Make a donation today &raquo;</a>
+      <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg btn-wide bottom-margin">Make a donation today &raquo;</a>
     </div>
 
     <div class="col-md-4">

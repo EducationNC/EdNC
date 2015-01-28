@@ -27,7 +27,7 @@
 
     <!-- <ul>
       <li>
-        <a href="https://salsa4.salsalabs.com/o/51260/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
+        <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
       </li>
     </ul> -->
   </div>

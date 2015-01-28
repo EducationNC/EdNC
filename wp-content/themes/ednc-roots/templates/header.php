@@ -61,7 +61,7 @@
 
       <div class="btn-group">
         <a href="<?php echo get_permalink('1491'); ?>" class="btn btn-default btn-lg"><small>Get Involved</small></a>
-        <a href="https://salsa4.salsalabs.com/o/51260/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
+        <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
       </div>
     </div>
   </nav>
