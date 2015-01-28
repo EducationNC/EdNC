@@ -128,11 +128,11 @@
 if ($time < $switchtime) :
   $news_posts = 2;
 
-    if ($time >= $switchtime) {
+    // if ($time >= $switchtime) {
       $cat_id = 119;  // School choice
-    } else {
-      $cat_id = 97;   // Leadership profile
-    }
+    // } else {
+    //   $cat_id = 97;   // Leadership profile
+    // }
 
     $args = array(
       'posts_per_page' => 2,
