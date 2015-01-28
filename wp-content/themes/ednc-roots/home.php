@@ -122,8 +122,11 @@
 
     $time = current_time('timestamp', true);
     $est_zone = new DateTimeZone('America/New_York');
-    $switch = new DateTime('01/26/2015 12:00 am', $est_zone);
+    $switch = new DateTime('01/29/2015 12:00 am', $est_zone);
     $switchtime = intval($switch->format('U'));
+
+if ($time < $switchtime) :
+  $news_posts = 2;
 
     if ($time >= $switchtime) {
       $cat_id = 119;  // School choice
@@ -176,11 +179,17 @@
         </div>
       </div>
 
-    <?php endwhile; endif; wp_reset_query(); ?>
+    <?php endwhile; endif; wp_reset_query();
+
+else :
+  $news_posts = 4;
+endif;
+
+    ?>
 
     <?php
     $args = array(
-      'posts_per_page' => 2,
+      'posts_per_page' => $news_posts,
       'category__not_in' => array(90, 96, 97, 109, 119) // id of "featured", "hide from home," "leadership profile", and "1868 const. conv.", and "school choice" categories in dev and prod
     );
 
