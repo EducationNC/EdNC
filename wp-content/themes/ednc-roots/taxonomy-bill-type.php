@@ -4,7 +4,7 @@ query_posts( $query_string . '&post_type=bill&orderby=title&order=ASC' );
 ?>
 
 <div class="page-header">
-  <h1><a href="<?php echo get_permalink('3997'); ?>">Legislative tracker</a></h1>
+  <h1><a href="<?php echo get_permalink('3997'); ?>">Legislation tracker</a></h1>
   <h2><?php echo roots_title(); ?></h2>
 </div>
 
