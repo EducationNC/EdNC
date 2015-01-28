@@ -134,7 +134,14 @@ if ($image_src) {
 
           <?php the_content(); ?>
 
-          <?php wp_link_pages(array('before' => '<nav class="page-nav"><p>' . __('Pages:', 'roots'), 'after' => '</p></nav>')); ?>
+          <?php
+          wp_link_pages(
+            array(
+              'before' => '<nav class="page-nav"><p><span class="pages">Skip to page:</span>',
+              'after' => '</p></nav>'
+            )
+          );
+          ?>
 
           <?php get_template_part('templates/social', 'share'); ?>
 

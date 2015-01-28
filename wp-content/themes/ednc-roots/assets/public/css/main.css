@@ -7307,13 +7307,18 @@ figure.alignnone {
     display: block;
   }
 }
-.wp-pagenavi span, .wp-pagenavi a {
+.wp-pagenavi span, .wp-pagenavi a, .page-nav span, .page-nav a {
   display: inline-block;
   padding: 3px 8px;
+  border: none;
 }
-.wp-pagenavi a, .wp-pagenavi .current {
+.wp-pagenavi span:first-child, .wp-pagenavi a:first-child, .page-nav span:first-child, .page-nav a:first-child {
+  padding-left: 0;
+}
+.wp-pagenavi a, .wp-pagenavi .current, .page-nav a, .page-nav .current {
   background: #ECF0F1;
   margin: 0 5px;
+  text-decoration: none;
 }
 
 td, th {

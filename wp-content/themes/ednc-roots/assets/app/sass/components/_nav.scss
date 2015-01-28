@@ -1,11 +1,17 @@
-.wp-pagenavi {
+.wp-pagenavi, .page-nav {
   span, a {
     display: inline-block;
     padding: 3px 8px;
+    border: none;
+
+    &:first-child {
+      padding-left: 0;
+    }
   }
 
   a, .current {
     background: $ice;
     margin: 0 5px;
+    text-decoration: none;
   }
 }
