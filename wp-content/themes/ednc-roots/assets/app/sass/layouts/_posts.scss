@@ -6,8 +6,12 @@
 
   &.photo-overlay {
     margin-top: -52px;
-    margin-bottom: 3em;
+    margin-bottom: 0;
     overflow: hidden;
+
+    & + div {
+      margin-top: 3em;
+    }
 
     .article-title-overlay {
       padding-bottom: 2.5em;
@@ -29,8 +33,9 @@
       color: $white;
     }
 
-    @media (min-width: $screen-lg-min) {
+    @media (min-width: $screen-md-min) {
       height: 600px;
+      margin-top: -5em;
 
       img {
         position: absolute;
@@ -40,9 +45,10 @@
       }
     }
 
-    @media (min-width: $screen-md-min) {
-      margin-top: -5em;
-    }
+    // @media (min-width: $screen-md-min) {
+    //   height: 600px;
+    //   margin-top: -5em;
+    // }
 
     @media (max-width: $screen-xs-max) {
       margin-bottom: 1em;
@@ -70,6 +76,16 @@
 }
 .hentry time { }
 .hentry .byline { }
+.hentry .longform-intro {
+  background: $deep-purple;
+  color: $white;
+  margin-top: 0 !important;
+  padding: 3em 0;
+
+  & + div {
+    margin-top: 3em;
+  }
+}
 .hentry .entry-content { }
 .hentry footer {
   margin-bottom: 5em;

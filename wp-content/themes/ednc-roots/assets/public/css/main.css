@@ -6841,6 +6841,12 @@ h3, .h3, .article-section-title {
 .entry-content h3, .entry-content .h3, .entry-content .article-section-title {
   margin-top: 2em;
 }
+.entry-content li h3, .entry-content li .h3, .entry-content li .article-section-title {
+  font-family: Merriweather, serif;
+  font-weight: 300;
+  font-style: italic;
+  margin-top: 1em;
+}
 
 h4, .h4, .content-info .menu-footer-nav > li > a, .article-section-subtitle {
   font-family: Lato, sans-serif;
@@ -6905,7 +6911,7 @@ li .meta a, li .attr a, li .duration a, li .tribe-events-adv-list-widget .vevent
   font-family: Merriweather, serif;
   font-weight: 300;
   font-size: 18px;
-  line-height: 1.5em;
+  line-height: 1.7em;
 }
 
 blockquote, .blockquote {
@@ -9018,8 +9024,11 @@ section {
 }
 .hentry .entry-header.photo-overlay {
   margin-top: -52px;
-  margin-bottom: 3em;
+  margin-bottom: 0;
   overflow: hidden;
+}
+.hentry .entry-header.photo-overlay + div {
+  margin-top: 3em;
 }
 .hentry .entry-header.photo-overlay .article-title-overlay {
   padding-bottom: 2.5em;
@@ -9037,9 +9046,10 @@ section {
 .hentry .entry-header.photo-overlay a {
   color: #FFFFFF;
 }
-@media (min-width: 1280px) {
+@media (min-width: 992px) {
   .hentry .entry-header.photo-overlay {
     height: 600px;
+    margin-top: -5em;
   }
   .hentry .entry-header.photo-overlay img {
     position: absolute;
@@ -9049,11 +9059,6 @@ section {
         -ms-transform: translateY(-50%) translateX(-50%);
          -o-transform: translateY(-50%) translateX(-50%);
             transform: translateY(-50%) translateX(-50%);
-  }
-}
-@media (min-width: 992px) {
-  .hentry .entry-header.photo-overlay {
-    margin-top: -5em;
   }
 }
 @media (max-width: 767px) {
@@ -9075,6 +9080,16 @@ section {
     font-size: 2em;
     text-shadow: none;
   }
+}
+
+.hentry .longform-intro {
+  background: #26071C;
+  color: #FFFFFF;
+  margin-top: 0 !important;
+  padding: 3em 0;
+}
+.hentry .longform-intro + div {
+  margin-top: 3em;
 }
 
 .hentry footer {

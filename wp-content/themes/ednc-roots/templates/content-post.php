@@ -1,4 +1,6 @@
 <?php
+$page = get_query_var('page');
+
 $comments_open = comments_open();
 
 $author_id = get_the_author_meta('ID');
@@ -32,6 +34,20 @@ if ($image_src) {
                 ?>
                 <span class="label"><?php echo $column[0]->name; ?></span>
                 <?php
+              } else {
+                if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home' && $category[0]->cat_name != 'Hide from archives') {
+                  ?>
+                  <span class="label">
+                    <?php if (in_category(109)) {  // 1868 Constitutional Convention ?>
+                    <a href="<?php echo get_category_link(109); ?>">
+                      <?php echo $category[0]->cat_name; ?>
+                    </a>
+                    <?php } else {
+                      echo $category[0]->cat_name;
+                    } ?>
+                  </span>
+                  <?php
+                }
               }
               ?>
               <h1 class="entry-title"><?php the_title(); ?></h1>
@@ -96,6 +112,19 @@ if ($image_src) {
       </div>
     </header>
   <?php } ?>
+
+  <?php if (get_field('longform_intro') && $page < 2) { ?>
+    <div class="longform-intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-centered intro">
+            <?php the_field('longform_intro'); ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+
     <div class="entry-content container">
       <div class="row">
         <div class="col-lg-7 col-md-9 col-centered">
@@ -104,6 +133,8 @@ if ($image_src) {
           } ?>
 
           <?php the_content(); ?>
+
+          <?php wp_link_pages(array('before' => '<nav class="page-nav"><p>' . __('Pages:', 'roots'), 'after' => '</p></nav>')); ?>
 
           <?php get_template_part('templates/social', 'share'); ?>
 
