@@ -9118,6 +9118,12 @@ section {
   }
 }
 
+.author-photo {
+  float: left;
+  margin: 0 20px 20px 0;
+  width: 33%;
+}
+
 .single-bio .entry-header {
   border-bottom: 1px solid #ECF0F1;
   margin-bottom: 1em;
