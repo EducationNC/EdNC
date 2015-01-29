@@ -119,20 +119,17 @@
   <div class="row">
     <?php
     // TEMPORARY: THEME SPOT
-
+    /*
     $time = current_time('timestamp', true);
     $est_zone = new DateTimeZone('America/New_York');
     $switch = new DateTime('01/29/2015 12:00 am', $est_zone);
     $switchtime = intval($switch->format('U'));
 
-if ($time < $switchtime) :
-  $news_posts = 2;
-
-    // if ($time >= $switchtime) {
+    if ($time >= $switchtime) {
       $cat_id = 119;  // School choice
-    // } else {
-    //   $cat_id = 97;   // Leadership profile
-    // }
+    } else {
+      $cat_id = 97;   // Leadership profile
+    }
 
     $args = array(
       'posts_per_page' => 2,
@@ -179,18 +176,14 @@ if ($time < $switchtime) :
         </div>
       </div>
 
-    <?php endwhile; endif; wp_reset_query();
-
-else :
-  $news_posts = 4;
-endif;
-
-    ?>
+    <?php endwhile; endif; wp_reset_query(); ?>
 
     <?php
+    */
+    
     $args = array(
-      'posts_per_page' => $news_posts,
-      'category__not_in' => array(90, 96, 97, 109, 119) // id of "featured", "hide from home," "leadership profile", and "1868 const. conv.", and "school choice" categories in dev and prod
+      'posts_per_page' => 4,
+      'category__not_in' => array(90, 96) // id of "featured" and "hide from home" categories
     );
 
     $stories = new WP_Query($args);
