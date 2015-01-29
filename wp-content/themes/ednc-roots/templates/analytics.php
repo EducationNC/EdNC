@@ -6,7 +6,9 @@
 
 ga('create', 'UA-57754133-1', {'siteSpeedSampleRate': 50});
 ga('require', 'displayfeatures');
+<?php if (!is_home()) { ?>
 ga('set', 'dimension1', '<?php echo str_replace(" ", "_", get_the_author()); ?>');
+<?php } ?>
 ga('send', 'pageview');
 </script>
 
