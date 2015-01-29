@@ -83,34 +83,27 @@
 
         <div class="col-md-12 col-sm-6 text-center">
           <?php
-          // get multiple random ads
           $args = array(
             'post_type' => 'underwriter',
-            'posts_per_page' => -1,
+            'posts_per_page' => 1,
             'orderby' => 'rand'
           );
 
-          $ads = new WP_Query($args);
+          $ad = new WP_Query($args);
 
-          // Get random result from query
-          $k = array_rand($ads->posts, 1);
-          $post = $ads->posts[$k];
+          if ($ad->have_posts()) : while ($ad->have_posts()) : $ad->the_post();
+            $link = get_field('link_url');
+            $image = mr_image_resize(get_field('image'), 350, 350, true, false);
 
-          setup_postdata($post);
+            if ($link) {
+              echo '<a href="' . $link . '" target="_blank" onclick="ga(\'send\', \'event\', \'ad\', \'click\');">';
+            }
+            echo '<img src="' . $image['url'] . '" alt="' . get_the_title() . '" />';
+            if ($link) {
+              echo '</a>';
+            }
 
-          $link = get_field('link_url');
-          $image = mr_image_resize(get_field('image'), 350, 350, true, false);
-
-          if ($link) {
-            echo '<a href="' . $link . '" target="_blank" onclick="ga(\'send\', \'event\', \'ad\', \'click\');">';
-          }
-          echo '<img src="' . $image['url'] . '" alt="' . get_the_title() . '" />';
-          if ($link) {
-            echo '</a>';
-          }
-
-          wp_reset_postdata();
-          wp_reset_query();
+          endwhile; endif; wp_reset_query();
           ?>
         </div>
       </div>
