@@ -7325,6 +7325,31 @@ td, th {
   padding: 5px;
 }
 
+.accordion .panel {
+  background: none;
+  border-radius: 0;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.accordion .panel .panel {
+  margin-bottom: 10px;
+}
+.accordion h3 {
+  margin-top: 0;
+}
+.accordion h3 a {
+  text-decoration: none;
+  color: inherit;
+}
+.accordion h4 a {
+  text-decoration: none;
+  color: inherit;
+}
+.accordion ul {
+  font-style: italic;
+}
+
 /* Magnific Popup CSS */
 .mfp-bg {
   top: 0;

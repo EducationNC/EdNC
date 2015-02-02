@@ -186,6 +186,13 @@ var Roots = {
     init: function() {
       // JavaScript to be fired on the about us page
     }
+  },
+  // Archive pages
+  archive: {
+    init: function() {
+      // console.log('archive');
+      // $('.collapse').collapse();
+    }
   }
 };
 

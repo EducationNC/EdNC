@@ -1,3 +1,8 @@
+<?php
+$category = get_the_category();
+$column = wp_get_post_terms(get_the_id(), 'column');
+?>
+
 <article <?php post_class('row'); ?>>
   <div class="col-md-3">
     <?php
@@ -18,7 +23,14 @@
   </div>
   <div class="col-md-9">
     <header>
-      <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+      <h2 class="entry-title">
+        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        <?php if ($column) { ?>
+          <span class="label"><?php echo $column[0]->name; ?></span>
+        <?php } elseif ($category && ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured' && $category[0]->cat_name != "Hide from archives" && $category[0]->cat_name != 'Hide from home')) { ?>
+          <span class="label"><?php echo $category[0]->cat_name; ?></span>
+        <?php } ?>
+      </h2>
       <?php if (!is_category('97')) get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-summary">
