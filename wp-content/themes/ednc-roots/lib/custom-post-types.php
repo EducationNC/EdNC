@@ -258,34 +258,34 @@ function add_custom_post_types() {
 
 	register_post_type( 'bill',
 	array('labels' => array(
-			'name' => 'Bills',
-			'singular_name' => 'Bill',
-			'add_new' => 'Add New',
-			'add_new_item' => 'Add New Bill',
-			'edit' => 'Edit',
-			'edit_item' => 'Edit Bill',
-			'new_item' => 'New Bill',
-			'view_item' => 'View Bill',
-			'search_items' => 'Search Bills',
-			'not_found' =>  'Nothing found in the Database.',
-			'not_found_in_trash' => 'Nothing found in Trash',
-			'parent_item_colon' => ''
-		), /* end of arrays */
-		'public' => false,
-		'exclude_from_search' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'show_in_nav_menus' => false,
-		'menu_position' => 8,
-		//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
-		'capability_type' => 'post',
-		'hierarchical' => false,
-		'supports' => array( 'title', 'revisions'),
-		'has_archive' => false,
-		'rewrite' => false,
-		'query_var' => true
-	)
-	);
+				'name' => 'Bills',
+				'singular_name' => 'Bill',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New Bill',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit Bill',
+				'new_item' => 'New Bill',
+				'view_item' => 'View Bill',
+				'search_items' => 'Search Bills',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'public' => false,
+			'exclude_from_search' => true,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array( 'title', 'revisions', 'page-attributes'),
+			'has_archive' => false,
+			'rewrite' => false,
+			'query_var' => true
+		)
+);
 
 }
 add_action( 'init', 'add_custom_post_types');
@@ -393,9 +393,9 @@ register_taxonomy( 'column',
 	)
 );
 
-// Order bios by menu order on admin page
+// Order bios and bills by menu order on admin page
 function ednc_bios_admin_orderby( $vars ) {
-	if ( isset( $vars['post_type']) && $vars['post_type'] == 'bio' && !isset( $vars['orderby'] ) ) {
+	if ( isset( $vars['post_type']) && ($vars['post_type'] == 'bio' || $vars['post_type'] == 'bill') && !isset( $vars['orderby'] ) ) {
 
 		$vars = array_merge( $vars, array(
 			'orderby' => 'menu_order',
