@@ -1,19 +1,27 @@
 <div class="callout accordion" id="accordion-years" role="tablist" aria-multiselectable="true">
   <?php
   /*
-   * Daily archives, grouped by year and month
+   * Collapsing daily archives widget, grouped by year and month
    *
    */
-  global $wpdb;
+  global $wpdb, $wp_query;
 
   $year_prev = null;
   $month_prev = null;
 
-  $year_i = 1;
-  $month_i = 1;
-
+  // Get unique dates of each post in the database
   $days = $wpdb->get_results("SELECT DISTINCT DAY (post_date) AS day, MONTH( post_date ) AS month ,	YEAR( post_date ) AS year, COUNT( id ) as post_count FROM $wpdb->posts WHERE post_status = 'publish' and post_date <= now( ) and post_type = 'post' GROUP BY day, month , year ORDER BY post_date DESC");
 
+  // Determine which years and months need to be expanded on page load
+  if (is_archive()) {
+    $expanded_year = $wp_query->query_vars['year'];
+    $expanded_month = $wp_query->query_vars['monthnum'];
+  } else {
+    $expanded_year = $days[0]->year;
+    $expanded_month = $days[0]->month;
+  }
+
+  // Loop through each date to create the nested structure
   foreach($days as $day) :
     $year_current = $day->year;
     $month_current = $day->month; ?>
@@ -37,7 +45,7 @@
             <?php echo $day->year; ?>
           </a>
         </h3>
-        <div class="panel-collapse collapse <?php if ($year_i == 1) { echo 'in';  $year_i ++; } ?> wrapper-year" id="collapse-<?php echo $day->year; ?>" role="tabpanel" aria-labelledby="heading-<?php echo $day->year; ?>">
+        <div class="panel-collapse collapse <?php if ($day->year == $expanded_year) { echo 'in'; } ?> wrapper-year" id="collapse-<?php echo $day->year; ?>" role="tabpanel" aria-labelledby="heading-<?php echo $day->year; ?>">
           <div class="accordion" id="accordion-months-<?php echo $day->year; ?>" role="tablist" aria-multiselectable="true">
     <?php } ?>
 
@@ -48,7 +56,7 @@
             <?php echo date_i18n("F", mktime(0, 0, 0, $day->month, 1, $day->year)); ?>
           </a>
         </h4>
-        <div class="panel-collapse collapse <?php if ($month_i == 1) { echo 'in'; $month_i ++; } ?> wrapper-month" id="collapse-<?php echo $day->month; ?>-<?php echo $day->year; ?>" role="tabpanel" aria-labelledby="heading-<?php echo $day->month; ?>-<?php echo $day->year; ?>">
+        <div class="panel-collapse collapse <?php if ($day->year == $expanded_year && $day->month == $expanded_month) { echo 'in'; } ?> wrapper-month" id="collapse-<?php echo $day->month; ?>-<?php echo $day->year; ?>" role="tabpanel" aria-labelledby="heading-<?php echo $day->month; ?>-<?php echo $day->year; ?>">
           <ul>
     <?php } ?>
 
