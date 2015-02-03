@@ -18,11 +18,14 @@
     $year_current = $day->year;
     $month_current = $day->month; ?>
 
+    <?php if (($month_prev !== null) && ($month_current != $month_prev)) { ?>
+      </ul>
+      </div><!-- .wrapper-month -->
+      </div><!-- .archive-month -->
+    <?php } ?>
+
     <?php if ($year_current != $year_prev) { ?>
-      <?php if ($year_prev !== null) { ?>
-        </ul>
-        </div><!-- .wrapper-month -->
-        </div><!-- .archive-month -->
+      <?php if ($year_prev !== null) {?>
         </div><!-- #accordion-months -->
         </div><!-- .wrapper-year -->
         </div><!-- .archive-year -->
@@ -55,16 +58,9 @@
       </a>
     </li>
 
-    <?php if (($month_prev !== null) && ($month_current != $month_prev)) { ?>
-      </ul>
-      </div><!-- .wrapper-month -->
-      </div><!-- .archive-month -->
-    <?php } ?>
-
     <?php
     $year_prev = $year_current;
     $month_prev = $month_current;
-
   endforeach;
   ?>
   </div><!-- #accordion-months -->
