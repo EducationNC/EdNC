@@ -1,6 +1,7 @@
 <?php
 $category = get_the_category();
 $column = wp_get_post_terms(get_the_id(), 'column');
+$post_type = get_post_type();
 ?>
 
 <article <?php post_class('row'); ?>>
@@ -30,12 +31,24 @@ $column = wp_get_post_terms(get_the_id(), 'column');
         <?php } elseif ($category && ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured' && $category[0]->cat_name != "Hide from archives" && $category[0]->cat_name != 'Hide from home')) { ?>
           <span class="label"><?php echo $category[0]->cat_name; ?></span>
         <?php } ?>
+        <?php if ($post_type == 'ednews') { ?>
+          <span class="label">EdNews</label>
+        <?php } ?>
       </h2>
       <?php if (!is_category('97')) get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-summary">
-      <?php the_excerpt(); ?>
-      <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
+      <?php if ($post_type == 'ednews') {
+        the_field('notes');
+        ?>
+        <a href="<?php the_permalink(); ?>" class="read-more">See all EdNews &raquo;</a>
+        <?php
+      } else {
+        the_excerpt();
+        ?>
+        <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
+        <?php
+      } ?>
     </div>
   </div>
 </article>

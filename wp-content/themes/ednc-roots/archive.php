@@ -1,3 +1,15 @@
+<?php
+global $wp_query;
+$args = array_merge(
+  $wp_query->query_vars,
+  array(
+    'post_type' => array('post', 'map', 'ednews'),
+    'category__not_in' => 116  // Hide from archives
+  )
+);
+query_posts($args);
+?>
+
 <div class="page-header">
   <h1><?php echo roots_title(); ?></h1>
 </div>
