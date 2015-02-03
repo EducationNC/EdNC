@@ -3,6 +3,28 @@
  * Define image sizes
  */
 
+add_image_size('medium-square', 400, 400, true);
+
+
+/**
+ * Enable adding images with custom image sizes in posts through media library
+ * http://kucrut.org/insert-image-with-custom-size-into-post/
+ */
+function ednc_insert_custom_image_sizes( $sizes ) {
+  global $_wp_additional_image_sizes;
+  if ( empty($_wp_additional_image_sizes) ) {
+    return $sizes;
+  }
+
+  foreach ( $_wp_additional_image_sizes as $id => $data ) {
+    if ( !isset($sizes[$id]) )
+    $sizes[$id] = ucfirst( str_replace( '-', ' ', $id ) );
+  }
+
+  return $sizes;
+}
+add_filter( 'image_size_names_choose', 'ednc_insert_custom_image_sizes' );
+
 
 
 /**
