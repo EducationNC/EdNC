@@ -52,12 +52,16 @@
     }
   }
 
+  .thumbnail {
+    margin-bottom: 0;
+  }
+
   img {
     width: 100%;
   }
 
   .gallery-caption {
-    display: none;
+    // display: none;
   }
 }
 

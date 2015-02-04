@@ -97,7 +97,7 @@ if ($image_src) {
           <?php get_template_part('templates/entry-meta'); ?>
           <?php get_template_part('templates/social', 'share'); ?>
           <?php
-          if (has_post_thumbnail()) {
+          if (has_post_thumbnail() && $featured_image_align != 'none') {
             the_post_thumbnail('large');
             $thumb_id = get_post_thumbnail_id();
             $thumb_post = get_post($thumb_id);

@@ -7216,11 +7216,11 @@ label {
     width: 50%;
   }
 }
+.gallery .thumbnail, .gallery .wp-caption, .gallery .wp-caption-text {
+  margin-bottom: 0;
+}
 .gallery img {
   width: 100%;
-}
-.gallery .gallery-caption {
-  display: none;
 }
 
 img {
