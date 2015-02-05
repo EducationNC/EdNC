@@ -129,6 +129,19 @@ function cpd_custom_column_sort($columns) {
     return $columns;
 }
 
+function cpd_custom_column_orderby($query) {
+  if( ! is_admin() )
+    return;
+
+  $orderby = $query->get( 'orderby');
+
+  if( 'updated' == $orderby ) {
+    $query->set('meta_key','updated_date');
+    $query->set('orderby','meta_value_num');
+  }
+}
+
 add_filter( "manage_post_posts_columns", 'cpd_custom_column_heading', 10, 1 );
 add_action( "manage_post_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
 add_action( "manage_edit-post_sortable_columns", 'cpd_custom_column_sort', 10, 2 );
+add_action( "pre_get_posts", 'cpd_custom_column_orderby' );
