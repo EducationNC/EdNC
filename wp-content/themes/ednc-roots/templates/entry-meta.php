@@ -9,7 +9,7 @@
   </time>
   <?php
   $updated_date = get_post_meta(get_the_id(), 'updated_date', true);
-  if ($updated_date > strtotime(get_the_date())) { ?>
+  if ($updated_date > get_the_time('U')) { ?>
     &mdash; updated
     <time class="revised" datetime="<?php echo get_the_modified_date('c'); ?>">
       <?php echo date(get_option('date_format'), $updated_date); ?>
