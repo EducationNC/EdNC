@@ -4,7 +4,9 @@ $args = array(
   'post_type' => array('post', 'map', 'ednews'),
   'category__not_in' => 116,  // Hide from archives
   'paged' => $paged,
-  'orderby' => 'modified'
+  'meta_key' => 'updated_date',
+  'orderby' => 'meta_value_num',
+  'order' => 'DESC'
 );
 
 query_posts($args);

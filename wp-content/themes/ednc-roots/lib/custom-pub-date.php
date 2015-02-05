@@ -11,6 +11,10 @@
  */
 function cpd_updated_date_in_pub_box() {
   global $post_id;
+  $post_type = get_post_type($post_id);
+
+  wp_nonce_field('cpd','cpd_nonce');
+
   $updated_date = get_post_meta($post_id, 'updated_date', true);
 
   if ($updated_date) {
@@ -20,8 +24,6 @@ function cpd_updated_date_in_pub_box() {
     $G = date('G', $updated_date);
     $i = date('i', $updated_date);
     $s = date('s', $updated_date);
-
-    if (get_post_status($post_id) == 'publish') {
     ?>
 
     <div class="misc-pub-section curtime misc-pub-updated">
@@ -62,7 +64,6 @@ function cpd_updated_date_in_pub_box() {
     </div>
 
     <?php
-    }
   }
 }
 add_action( 'post_submitbox_misc_actions', 'cpd_updated_date_in_pub_box' );
@@ -72,37 +73,62 @@ add_action( 'post_submitbox_misc_actions', 'cpd_updated_date_in_pub_box' );
  * Update custom meta for updated datetime
  *
  */
-function cpd_copy_pub_date( $post_id ) {
+function cpd_copy_pub_date( $post_id, $post, $update ) {
+  // Check if our nonce is set.
+  if ( ! isset( $_POST['cpd_nonce'] ) ) {
+    return;
+  }
+
+  // Verify that the nonce is valid.
+  if ( ! wp_verify_nonce( $_POST['cpd_nonce'], 'cpd' ) ) {
+    return;
+  }
+
+  // If this is an autosave, our form has not been submitted, so we don't want to do anything.
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  // Check the user's permissions.
+  if ( ! current_user_can( 'edit_post', $post_id ) ) {
+    return;
+  }
+
+  // Only do this on posts, maps, and ednews
+  if ($post->post_type != 'post' && $post->post_type != 'map' && $post->post_type != 'ednews') {
+    return;
+  }
+
+  /* OK, it's safe for us to save the data now. */
 
   // Get the saved updated datetime
   $saved_updated_time = get_post_meta($post_id, 'updated_date', true);
 
   // Get the updated datetime
-  $m = $_POST['update_mm'];
-  $j = $_POST['update_jj'];
-  $Y = $_POST['update_aa'];
-  $G = $_POST['update_hh'];
-  $i = $_POST['update_mn'];
-  $s = $_POST['update_ss'];
+  if (isset($_POST['update_mm'])) {
+    $m = $_POST['update_mm'];
+    $j = $_POST['update_jj'];
+    $Y = $_POST['update_aa'];
+    $G = $_POST['update_hh'];
+    $i = $_POST['update_mn'];
+    $s = $_POST['update_ss'];
 
-  $updated_time = strtotime("$Y-$m-$j $G:$i:$s");
+    $updated_time = strtotime("$Y-$m-$j $G:$i:$s");
+  }
 
   // Get the WP publish datetime
   $pub_time = get_the_time('U', $post_id);
 
-  // If publish and update datetime match, don't update post meta
-  if ($updated_time == $pub_time)
-    return;
-
   // If there is no saved updated datetime, set to publish datetime
   if (!$saved_updated_time) {
+    echo 'save pub time';
     update_post_meta( $post_id, 'updated_date', $pub_time );
   } else {
+    echo 'save updated time';
     update_post_meta( $post_id, 'updated_date', $updated_time );
   }
-
 }
-add_action( 'save_post_post', 'cpd_copy_pub_date', 10, 3 );
+add_action( 'save_post', 'cpd_copy_pub_date', 10, 3 );
 
 
 /**
@@ -141,7 +167,17 @@ function cpd_custom_column_orderby($query) {
   }
 }
 
+add_action( "pre_get_posts", 'cpd_custom_column_orderby' );
+
+// posts
 add_filter( "manage_post_posts_columns", 'cpd_custom_column_heading', 10, 1 );
 add_action( "manage_post_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
 add_action( "manage_edit-post_sortable_columns", 'cpd_custom_column_sort', 10, 2 );
-add_action( "pre_get_posts", 'cpd_custom_column_orderby' );
+// maps
+add_filter( "manage_map_posts_columns", 'cpd_custom_column_heading', 10, 1 );
+add_action( "manage_map_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
+add_action( "manage_edit-map_sortable_columns", 'cpd_custom_column_sort', 10, 2 );
+// ednews
+add_filter( "manage_ednews_posts_columns", 'cpd_custom_column_heading', 10, 1 );
+add_action( "manage_ednews_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
+add_action( "manage_edit-ednews_sortable_columns", 'cpd_custom_column_sort', 10, 2 );

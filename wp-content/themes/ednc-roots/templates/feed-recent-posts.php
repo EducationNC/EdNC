@@ -9,45 +9,19 @@ $args = array(
   'post_type' => array('post', 'map'),
   'posts_per_page' => -1,
   'category__not_in' => array(90, 96, 116), // id of "featured," "hide from home," and "hide from archive" categories
-  'date_query' => array(
-    'relation' => 'OR',
+  'meta_query' => array(
     array(
-      'relation' => 'AND',
-      array(
-        'year' => $yesterday['year'],
-        'month' => $yesterday['mon'],
-        'day' => $yesterday['mday']
+      'key' => 'updated_date',
+      'value' => array(
+        strtotime("{$yesterday['year']}-{$yesterday['mon']}-{$yesterday['mday']} 7:59:59"),
+        strtotime("{$today['year']}-{$today['mon']}-{$today['mday']} 8:00:00")
       ),
-      array(
-        'hour' => 8,
-        'compare' => '>='
-      ),
-      array(
-        'hour' => 23,
-        'minute' => 59,
-        'second' => 59,
-        'compare' => '<='
-      )
-    ),
-    array(
-      'relation' => 'AND',
-      array(
-        'year' => $today['year'],
-        'month' => $today['mon'],
-        'day' => $today['mday']
-      ),
-      array(
-        'hour' => 0,
-        'minute' => 0,
-        'second' => 0,
-        'compare' => '>='
-      ),
-      array(
-        'hour' => 8,
-        'compare' => '<'
-      )
+      'compare' => 'BETWEEN'
     )
-  )
+  ),
+  'meta_key' => 'updated_date',
+  'orderby' => 'meta_value_num',
+  'order' => 'DESC'
 );
 $features = new WP_Query($args);
 
