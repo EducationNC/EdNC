@@ -7,10 +7,12 @@
   <time class="published" datetime="<?php echo get_the_time('c'); ?>">
     <?php the_time(get_option('date_format')); ?>
   </time>
-  <?php if (strtotime(get_the_modified_date()) > strtotime(get_the_date())) { ?>
-    &mdash; updated on
+  <?php
+  $updated_date = get_post_meta(get_the_id(), 'updated_date', true);
+  if ($updated_date > strtotime(get_the_date())) { ?>
+    &mdash; updated
     <time class="revised" datetime="<?php echo get_the_modified_date('c'); ?>">
-      <?php the_modified_time(get_option('date_format')); ?>
+      <?php echo date(get_option('date_format'), $updated_date); ?>
     </time>
   <?php } ?>
 </p>

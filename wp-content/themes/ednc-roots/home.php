@@ -183,7 +183,7 @@
 
     $args = array(
       'posts_per_page' => 8,
-      // 'category__not_in' => array(90, 96), // id of "featured" and "hide from home" categories
+      'category__not_in' => array(90, 96), // id of "featured" and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
       'order' => 'DESC'
