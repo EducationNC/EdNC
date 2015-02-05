@@ -16,7 +16,9 @@
 
     <div class="entry-content row">
       <div class="col-lg-7 col-md-9 col-centered content-listing">
-        <?php the_field('notes'); ?>
+        <div class="callout">
+          <?php the_field('notes'); ?>
+        </div>
         <ul>
           <?php
           $date = get_the_time('n/j/Y');
