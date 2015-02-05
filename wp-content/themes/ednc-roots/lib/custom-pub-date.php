@@ -9,7 +9,7 @@
  * Add updated date to pub box with ability to edit date & time
  *
  */
-function clmd_updated_date_in_pub_box() {
+function cpd_updated_date_in_pub_box() {
   global $post_id;
   $updated_date = get_post_meta($post_id, 'updated_date', true);
 
@@ -65,14 +65,14 @@ function clmd_updated_date_in_pub_box() {
     }
   }
 }
-add_action( 'post_submitbox_misc_actions', 'clmd_updated_date_in_pub_box' );
+add_action( 'post_submitbox_misc_actions', 'cpd_updated_date_in_pub_box' );
 
 
 /**
  * Update custom meta for updated datetime
  *
  */
-function clmd_copy_pub_date( $post_id ) {
+function cpd_copy_pub_date( $post_id ) {
 
   // Get the saved updated datetime
   $saved_updated_time = get_post_meta($post_id, 'updated_date', true);
@@ -102,7 +102,7 @@ function clmd_copy_pub_date( $post_id ) {
   }
 
 }
-add_action( 'save_post_post', 'clmd_copy_pub_date', 10, 3 );
+add_action( 'save_post_post', 'cpd_copy_pub_date', 10, 3 );
 
 
 /**
@@ -110,28 +110,25 @@ add_action( 'save_post_post', 'clmd_copy_pub_date', 10, 3 );
  *
  */
 
-function clmd_custom_column_heading($columns) {
+function cpd_custom_column_heading($columns) {
   $columns['last-updated'] = 'Last Updated';
   return $columns;
 }
 
-function clmd_custom_column_content($column_name, $id) {
+function cpd_custom_column_content($column_name, $id) {
   if ( 'last-updated' == $column_name ) {
     $updated_time = get_post_meta($id, 'updated_date', true);
     if ($updated_time) {
       echo date('Y/m/j', $updated_time);
-    } else {
-      $pub_time = get_the_time('U', $id);
-      update_post_meta( $id, 'updated_date', $pub_time );
     }
   }
 }
 
-function clmd_custom_column_sort($columns) {
+function cpd_custom_column_sort($columns) {
   $columns['last-updated'] = 'updated';
     return $columns;
 }
 
-add_filter( "manage_post_posts_columns", 'clmd_custom_column_heading', 10, 1 );
-add_action( "manage_post_posts_custom_column", 'clmd_custom_column_content', 10, 2 );
-add_action( "manage_edit-post_sortable_columns", 'clmd_custom_column_sort', 10, 2 );
+add_filter( "manage_post_posts_columns", 'cpd_custom_column_heading', 10, 1 );
+add_action( "manage_post_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
+add_action( "manage_edit-post_sortable_columns", 'cpd_custom_column_sort', 10, 2 );
