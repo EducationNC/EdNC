@@ -73,6 +73,13 @@ function roots_scripts() {
 }
 add_action('wp_enqueue_scripts', 'roots_scripts', 100);
 
+// Add admin scripts and styles
+function ednc_admin_scripts() {
+  wp_enqueue_style('ednc_admin_css', get_template_directory_uri() . '/assets/public/css/admin.css');
+  wp_enqueue_script('ednc_admin_js', get_template_directory_uri() . '/assets/public/js/admin.js');
+}
+add_action('admin_enqueue_scripts', 'ednc_admin_scripts');
+
 // http://wordpress.stackexchange.com/a/12450
 function roots_jquery_local_fallback($src, $handle = null) {
   static $add_jquery_fallback = false;

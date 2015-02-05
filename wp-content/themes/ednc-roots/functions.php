@@ -25,7 +25,8 @@ $roots_includes = array(
   'lib/resize.php',           // Resize images on the fly
   'lib/shortcodes.php',       // Shortcodes
   'lib/extras.php',           // Custom functions
-  'lib/feeds.php'             // Adding/modifying RSS feeds
+  'lib/feeds.php',            // Adding/modifying RSS feeds,
+  'lib/custom-pub-date.php'   // Temporary functions for adding pub date to custom field
 );
 
 foreach ($roots_includes as $file) {
