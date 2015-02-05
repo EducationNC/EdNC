@@ -44,6 +44,8 @@ if (is_day()) {
 
   // Query posts from first 2 queries and order by updated date
   $final_args = array(
+    'post_type' => array('post', 'map', 'ednews'),
+    'category__not_in' => 116,  // Hide from archives
     'post__in' => $unique,
     'paged' => $paged,
     'meta_key' => 'updated_date',
