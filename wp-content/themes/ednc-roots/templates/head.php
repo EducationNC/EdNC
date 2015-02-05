@@ -6,6 +6,10 @@
   <title><?php wp_title('|', true, 'right'); ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <?php if (strtotime(get_the_modified_date()) > strtotime(get_the_date())) { ?>
+    <meta name="revised" content="<?php echo get_the_modified_date('l, F j, Y'); ?>">
+  <?php } ?>
+
   <!--[if gte IE 9]>
     <style type="text/css">
     .gradient {
