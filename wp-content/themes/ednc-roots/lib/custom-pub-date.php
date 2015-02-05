@@ -144,9 +144,6 @@ function cpd_custom_column_content($column_name, $id) {
     $updated_time = get_post_meta($id, 'updated_date', true);
     if ($updated_time) {
       echo date('Y/m/j', $updated_time);
-    } else {
-      $pub_time = get_the_time('U', $id);
-      update_post_meta( $id, 'updated_date', $pub_time );
     }
   }
 }
