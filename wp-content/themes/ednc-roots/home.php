@@ -183,7 +183,8 @@
 
     $args = array(
       'posts_per_page' => 4,
-      'category__not_in' => array(90, 96) // id of "featured" and "hide from home" categories
+      'category__not_in' => array(90, 96), // id of "featured" and "hide from home" categories
+      'orderby' => 'modified'
     );
 
     $stories = new WP_Query($args);

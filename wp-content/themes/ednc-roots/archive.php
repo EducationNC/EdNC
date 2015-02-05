@@ -4,7 +4,8 @@ $args = array_merge(
   $wp_query->query_vars,
   array(
     'post_type' => array('post', 'map', 'ednews'),
-    'category__not_in' => 116  // Hide from archives
+    'category__not_in' => 116,  // Hide from archives
+    'orderby' => 'modified'
   )
 );
 query_posts($args);

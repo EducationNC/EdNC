@@ -3,7 +3,8 @@ $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 $args = array(
   'post_type' => array('post', 'map', 'ednews'),
   'category__not_in' => 116,  // Hide from archives
-  'paged' => $paged
+  'paged' => $paged,
+  'orderby' => 'modified'
 );
 
 query_posts($args);
