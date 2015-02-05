@@ -121,10 +121,8 @@ function cpd_copy_pub_date( $post_id, $post, $update ) {
 
   // If there is no saved updated datetime, set to publish datetime
   if (!$saved_updated_time) {
-    echo 'save pub time';
     update_post_meta( $post_id, 'updated_date', $pub_time );
   } else {
-    echo 'save updated time';
     update_post_meta( $post_id, 'updated_date', $updated_time );
   }
 }
@@ -146,6 +144,9 @@ function cpd_custom_column_content($column_name, $id) {
     $updated_time = get_post_meta($id, 'updated_date', true);
     if ($updated_time) {
       echo date('Y/m/j', $updated_time);
+    } else {
+      $pub_time = get_the_time('U', $id);
+      update_post_meta( $id, 'updated_date', $pub_time );
     }
   }
 }
