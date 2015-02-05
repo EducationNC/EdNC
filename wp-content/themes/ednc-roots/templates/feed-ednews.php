@@ -40,7 +40,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <dc:creator><?php the_author(); ?></dc:creator>
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
       <description><![CDATA[<?php
-      // TODO: Limit to first 5
+      the_field('notes');
       echo '<ul>';
       $date = get_the_time('n/j/Y');
       $items = get_field('news_item');
@@ -64,6 +64,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       echo '</ul>';
       ?>]]></description>
       <content:encoded><![CDATA[<?php
+      the_field('notes');
       echo '<ul>';
       $date = get_the_time('n/j/Y');
       $items = get_field('news_item');
