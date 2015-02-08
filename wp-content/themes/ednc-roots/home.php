@@ -388,7 +388,7 @@
 <section class="container-fluid">
   <div class="row">
     <?php
-    $gallery_id = 1404;
+    $gallery_id = 4813;
     $gallery = get_post($gallery_id);
     $photos = get_field('gallery', $gallery_id);
     shuffle($photos);
@@ -415,8 +415,8 @@
   <div class="row">
     <div class="col-md-4">
       <div class="extra-padding" id="poll-container">
-        <?php echo do_shortcode('[polldaddy poll=8423767]'); ?>
-        <p><a href="https://www.ednc.org/2015-16-legislative-issues/" class="small">More information about these issues &raquo;</a></p>
+        <?php echo do_shortcode('[polldaddy poll=8638681]'); ?>
+        <!-- <p><a href="https://www.ednc.org/2015-16-legislative-issues/" class="small">More information about these issues &raquo;</a></p> -->
       </div>
     </div>
 
