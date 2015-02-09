@@ -3654,9 +3654,9 @@ tbody.collapse.in {
   list-style: none;
   font-size: 16px;
   text-align: left;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #ECF0F1;
+  border: 1px solid transparent;
+  border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -3671,7 +3671,7 @@ tbody.collapse.in {
   height: 1px;
   margin: 9px 0;
   overflow: hidden;
-  background-color: #e5e5e5;
+  background-color: transparent;
 }
 .dropdown-menu > li > a {
   display: block;
@@ -3679,21 +3679,21 @@ tbody.collapse.in {
   clear: both;
   font-weight: normal;
   line-height: 1.42857;
-  color: #333333;
+  color: #2B3E50;
   white-space: nowrap;
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   text-decoration: none;
-  color: #262626;
-  background-color: #f5f5f5;
+  color: #8B185E;
+  background-color: #ECF0F1;
 }
 
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
-  color: #fff;
+  color: #8B185E;
   text-decoration: none;
   outline: 0;
-  background-color: #428bca;
+  background-color: #ECF0F1;
 }
 
 .dropdown-menu > .disabled > a, .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
@@ -7100,6 +7100,13 @@ sup.footnote a:after {
   content: "p";
 }
 
+.dropdown-menu {
+  margin-top: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .btn, .button {
   border: none;
   border-radius: 0;
@@ -8461,7 +8468,7 @@ section {
 .banner .navbar-nav a {
   overflow: hidden;
 }
-.banner .navbar-nav a:before {
+.banner .navbar-nav > li > a:before {
   content: '';
   width: 100%;
   height: 3px;
@@ -8477,13 +8484,13 @@ section {
        -o-transition: -o-transform .3s;
           transition: transform .3s;
 }
-.banner .navbar-nav li:not(.active) > a:hover:before {
+.banner .navbar-nav > li:not(.active):hover > a:before {
   -webkit-transform: translateY(-3px);
       -ms-transform: translateY(-3px);
        -o-transform: translateY(-3px);
           transform: translateY(-3px);
 }
-.banner .navbar-nav li.active > a:before {
+.banner .navbar-nav > li.active > a:before {
   background: #731454;
   -webkit-transform: translateY(-3px);
       -ms-transform: translateY(-3px);
@@ -8552,6 +8559,10 @@ section {
 }
 .banner .btn-group a {
   color: #FFFFFF;
+}
+
+.dropdown:hover > ul.dropdown-menu {
+  display: block;
 }
 
 .sidebar {

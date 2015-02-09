@@ -4,7 +4,7 @@
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
     </div>
 
-    <div class="caption">Including you in a conversation about our public schools</div>
+    <div class="caption">Including you in a conversation about our schools</div>
 
     <div class="pull-right text-right">
       <ul class="list-inline minor-links small">
