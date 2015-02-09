@@ -385,7 +385,7 @@
   </div>
 </section>
 
-<section class="container-fluid">
+<section class="container-fluid" id="gallery">
   <div class="row">
     <?php
     $gallery_id = 4813;
