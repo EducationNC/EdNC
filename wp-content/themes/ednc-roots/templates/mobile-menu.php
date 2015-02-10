@@ -3,7 +3,8 @@
     <?php
     wp_nav_menu(array(
       'theme_location' => 'primary_navigation',
-      'container' => false
+      'container' => false,
+      'walker' => new Mobile_Nav_Walker
     ));
     ?>
 
