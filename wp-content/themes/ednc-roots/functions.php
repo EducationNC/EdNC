@@ -26,7 +26,8 @@ $roots_includes = array(
   'lib/shortcodes.php',       // Shortcodes
   'lib/extras.php',           // Custom functions
   'lib/feeds.php',            // Adding/modifying RSS feeds,
-  'lib/custom-pub-date.php'   // Temporary functions for adding pub date to custom field
+  'lib/custom-pub-date.php',  // Temporary functions for adding pub date to custom field
+  'lib/customizer.php'        // Customizer settings
 );
 
 foreach ($roots_includes as $file) {

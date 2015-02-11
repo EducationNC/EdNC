@@ -180,9 +180,10 @@
 
     <?php
     */
+    $post_num = get_theme_mod('news_post_num', 4);
 
     $args = array(
-      'posts_per_page' => 4,
+      'posts_per_page' => $post_num,
       'category__not_in' => array(90, 96), // id of "featured" and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
