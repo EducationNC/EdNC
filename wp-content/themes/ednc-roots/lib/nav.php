@@ -112,7 +112,7 @@ class Mobile_Nav_Walker extends Walker_Nav_Menu {
 
    if ($item->is_dropdown && ($depth === 0)) {
      $item_html = str_replace('<a', '<a data-target="#"', $item_html);
-     $item_html = str_replace('</a>', ' <b class="caret"></b></a><div class="oc-level"><h2>' . $item->title . '</h2><a class="oc-back">back</a>', $item_html);
+     $item_html = str_replace('</a>', ' &raquo;</a><div class="oc-level"><h2>' . $item->title . '</h2><a class="oc-back">&laquo; back</a>', $item_html);
    }
    elseif (stristr($item_html, 'li class="divider')) {
      $item_html = preg_replace('/<a[^>]*>.*?<\/a>/iU', '', $item_html);

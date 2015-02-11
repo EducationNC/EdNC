@@ -161,16 +161,17 @@
   transform: translate3d(-100%, 0, 0);
 
   h4 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: normal;
     color: $purple-text;
-    padding: 0 10px;
-    margin: 0 0 .75em;
+    padding: 2px 10px;
+    margin: 0;
   }
 
   ul {
     list-style: none;
     margin-left: 0;
+    padding-left: 0;
     font-size: 1.25rem;
     border-bottom: 1px solid $ice;
 
