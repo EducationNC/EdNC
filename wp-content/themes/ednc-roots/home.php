@@ -119,20 +119,20 @@
   <div class="row">
     <?php
     // TEMPORARY: THEME SPOT
-    /*
+
     $time = current_time('timestamp', true);
     $est_zone = new DateTimeZone('America/New_York');
     $switch = new DateTime('01/29/2015 12:00 am', $est_zone);
     $switchtime = intval($switch->format('U'));
 
-    if ($time >= $switchtime) {
-      $cat_id = 119;  // School choice
-    } else {
-      $cat_id = 97;   // Leadership profile
-    }
+    // if ($time >= $switchtime) {
+    //   $cat_id = 119;  // School choice
+    // } else {
+      $cat_id = 126;   // Common Core
+    // }
 
     $args = array(
-      'posts_per_page' => 2,
+      'posts_per_page' => 1,
       'category__in' => array($cat_id)
     );
 
@@ -179,7 +179,6 @@
     <?php endwhile; endif; wp_reset_query(); ?>
 
     <?php
-    */
     $post_num = get_theme_mod('news_post_num', 4);
 
     $args = array(
