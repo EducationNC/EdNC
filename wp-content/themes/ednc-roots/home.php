@@ -118,72 +118,69 @@
 
   <div class="row">
     <?php
-    // TEMPORARY: THEME SPOT
+    $theme_spot = get_theme_mod('theme_spot_category');
+    if ($theme_spot && $theme_spot !== 'None') {
 
-    $time = current_time('timestamp', true);
-    $est_zone = new DateTimeZone('America/New_York');
-    $switch = new DateTime('01/29/2015 12:00 am', $est_zone);
-    $switchtime = intval($switch->format('U'));
+      $args = array(
+        'posts_per_page' => 1,
+        'category__in' => array($theme_spot)
+      );
 
-    // if ($time >= $switchtime) {
-    //   $cat_id = 119;  // School choice
-    // } else {
-      $cat_id = 126;   // Common Core
-    // }
+      $stories = new WP_Query($args);
 
-    $args = array(
-      'posts_per_page' => 1,
-      'category__in' => array($cat_id)
-    );
+      if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
 
-    $stories = new WP_Query($args);
-
-    if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
-
-    $category = get_the_category();
-    if (has_post_thumbnail()) {
-      $image_id = get_post_thumbnail_id();
-      $image_src = wp_get_attachment_image_src($image_id, 'full');
-      if ($image_src) {
-        $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+      $category = get_the_category();
+      if (has_post_thumbnail()) {
+        $image_id = get_post_thumbnail_id();
+        $image_src = wp_get_attachment_image_src($image_id, 'full');
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+        }
+      } else {
+        $image_src = catch_that_image();
+        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
       }
-    } else {
-      $image_src = catch_that_image();
-      $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-    }
-    ?>
+      ?>
 
-    <div class="col-sm-6 col-md-3">
-      <div class="post has-photo-overlay row">
-        <div class="photo-overlay col-xs-3 col-sm-12">
-          <div class="hidden-xs">
-            <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
-              <span class="label"><?php echo $category[0]->cat_name; ?></span>
+      <div class="col-sm-6 col-md-3">
+        <div class="post has-photo-overlay row">
+          <div class="photo-overlay col-xs-3 col-sm-12">
+            <div class="hidden-xs">
+              <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
+                <span class="label"><?php echo $category[0]->cat_name; ?></span>
+                <?php } ?>
+                <h4 class="post-title"><?php the_title(); ?></h4>
+                <div class="line"></div>
+              </div>
+              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+              <?php if ($image_src) { ?>
+              <img src="<?php echo $image_sized['url']; ?>" />
               <?php } ?>
-              <h4 class="post-title"><?php the_title(); ?></h4>
-              <div class="line"></div>
             </div>
-            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-            <?php if ($image_src) { ?>
-            <img src="<?php echo $image_sized['url']; ?>" />
-            <?php } ?>
-          </div>
 
-          <div class="col-xs-9 col-sm-12 extra-padding">
-            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-            <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
+            <div class="col-xs-9 col-sm-12 extra-padding">
+              <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+              <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
+            </div>
           </div>
         </div>
-      </div>
 
-    <?php endwhile; endif; wp_reset_query(); ?>
+      <?php endwhile; endif; wp_reset_query(); ?>
+    <?php } ?>
 
     <?php
     $post_num = get_theme_mod('news_post_num', 4);
 
+    if ($theme_spot && $theme_spot !== 'None') {
+      $post_num--;
+    }
+
+    echo $post_num;
+
     $args = array(
       'posts_per_page' => $post_num,
-      'category__not_in' => array(90, 96, 126), // id of "featured" and "hide from home" categories
+      'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
       'order' => 'DESC'

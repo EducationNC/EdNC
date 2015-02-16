@@ -5095,10 +5095,10 @@ a.active.wp-caption-text {
 }
 
 .alert {
-  padding: 15px;
+  padding: 10px;
   margin-bottom: 20px;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 .alert h4 {
   margin-top: 0;
@@ -5117,7 +5117,7 @@ a.active.wp-caption-text {
 
 .alert-dismissable,
 .alert-dismissible {
-  padding-right: 35px;
+  padding-right: 30px;
 }
 .alert-dismissable .close,
 .alert-dismissible .close {
@@ -5164,15 +5164,15 @@ a.active.wp-caption-text {
 }
 
 .alert-danger {
-  background-color: #f2dede;
-  border-color: #ebccd1;
-  color: #a94442;
+  background-color: #67124B;
+  border-color: #67124B;
+  color: #FFFFFF;
 }
 .alert-danger hr {
-  border-top-color: #e4b9c0;
+  border-top-color: #510e3b;
 }
 .alert-danger .alert-link {
-  color: #843534;
+  color: #e6e6e6;
 }
 
 @-webkit-keyframes progress-bar-stripes {
