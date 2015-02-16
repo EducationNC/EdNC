@@ -176,8 +176,6 @@
       $post_num--;
     }
 
-    echo $post_num;
-
     $args = array(
       'posts_per_page' => $post_num,
       'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
