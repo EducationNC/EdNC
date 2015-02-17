@@ -1248,7 +1248,7 @@ function _acf_pre_save_post( $post_id, $form ) {
 function acf_form( $args = array() ) {
 	
 	// vars
-	$url = home_url( $_SERVER['REQUEST_URI'] );
+	$url = acf_get_current_url();
 	
 	
 	// defaults
@@ -1343,7 +1343,7 @@ function acf_form( $args = array() ) {
 		
 		foreach( $args['fields'] as $selector ) {
 		
-			$fields[] = acf_get_field( $selector );
+			$fields[] = get_field_object( $selector, $post_id, false, false );
 			
 		}
 		

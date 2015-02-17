@@ -15,7 +15,7 @@ $config = array(
 	"dismiss" => 0,
 	"html_entities" => 0,
 	"utf8_decode" => 0,
-	"cron_job_key" => url_title(rand_char(12)),
+	"cron_job_key" => wp_all_import_url_title(wp_all_import_rand_char(12)),
 	"chunk_size" => 32,
 	"pingbacks" => 1,
 	"legacy_special_character_handling" => 1,
@@ -27,5 +27,10 @@ $config = array(
 	"secure" => 1,
 	"log_storage" => 5,
 	"cron_sleep" => "",
-	"port" => ""
+	"port" => "",
+	"google_client_id" => "",
+	"google_signature" => "",
+	"licenses" => array(),
+	"statuses" => array()
 );
+if (!defined('WPALLIMPORT_SIGNATURE')) define('WPALLIMPORT_SIGNATURE', '');

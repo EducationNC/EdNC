@@ -48,8 +48,8 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 		$this->data['page_links'] = paginate_links(array(
 			'base' => add_query_arg('pagenum', '%#%', $this->baseUrl),
 			'format' => '',
-			'prev_text' => __('&laquo;', 'pmxi_plugin'),
-			'next_text' => __('&raquo;', 'pmxi_plugin'),
+			'prev_text' => __('&laquo;', 'wp_all_import_plugin'),
+			'next_text' => __('&raquo;', 'wp_all_import_plugin'),
 			'total' => ceil($list->total() / $perPage),
 			'current' => $pagenum,
 		));
@@ -117,7 +117,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 			'canceled_on' => date('Y-m-d H:i:s')
 		))->update();		
 
-		wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Import canceled', 'pmxi_plugin')), $this->baseUrl)); die();
+		wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Import canceled', 'wp_all_import_plugin')), $this->baseUrl)); die();
 	}
 	
 	/**
@@ -252,7 +252,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 				}				
 
 				if (empty($chunks)) 
-					$this->errors->add('form-validation', __('No matching elements found for Root element and XPath expression specified', 'pmxi_plugin'));						
+					$this->errors->add('form-validation', __('No matching elements found for Root element and XPath expression specified', 'wp_all_import_plugin'));						
 																		   							
 			}							
 			
@@ -325,7 +325,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 			do_action('pmxi_before_import_delete', $item, $this->input->post('is_delete_posts'));
 
 			$item->delete( ! $this->input->post('is_delete_posts'));
-			wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Import deleted', 'pmxi_plugin')), $this->baseUrl)); die();
+			wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Import deleted', 'wp_all_import_plugin')), $this->baseUrl)); die();
 		}
 		
 		$this->render();
@@ -353,7 +353,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 				$item->delete( ! $is_delete_posts);
 			}
 			
-			wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(__('<strong>%d</strong> %s deleted', 'pmxi_plugin'), $items->count(), _n('import', 'imports', $items->count(), 'pmxi_plugin'))), $this->baseUrl)); die();
+			wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(__('<strong>%d</strong> %s deleted', 'wp_all_import_plugin'), $items->count(), _n('import', 'imports', $items->count(), 'wp_all_import_plugin'))), $this->baseUrl)); die();
 		}
 		
 		$this->render();

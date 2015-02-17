@@ -1584,7 +1584,10 @@
 
 	$('.add-new-cat').click(function(){
 		var $template = $(this).parents('td:first').find('ul.tax_hierarchical_logic').children('li.template');		
+		var $number = $(this).parents('td:first').find('ul.tax_hierarchical_logic').children('li').length - 1;
+		var $cloneName = $template.find('input.assign_term').attr('name').replace('NUMBER', $number);		
 		$clone = $template.clone(true);
+		$clone.find('input[name^=tax_hierarchical_assing]').attr('name', $cloneName);
 		$clone.insertBefore($template).css('display', 'none').removeClass('template').fadeIn().find('input.switcher').change();	
 	});
 

@@ -11,7 +11,7 @@ Fully customise WordPress edit screens with powerful fields. Boasting a professi
 
 == Description ==
 
-Advanced Custom Fields is the perfect solution for any wordpress website which needs more flexible data like other Content Management Systems. 
+Advanced Custom Fields is the perfect solution for any WordPress website which needs more flexible data like other Content Management Systems. 
 
 * Visually create your Fields
 * Select from multiple input types (text, textarea, wysiwyg, image, file, page link, post object, relationship, select, checkbox, radio buttons, date picker, true / false, repeater, flexible content, gallery and more to come!)
@@ -38,7 +38,7 @@ Advanced Custom Fields is the perfect solution for any wordpress website which n
 * Relationship (search, select and order post objects with a tidy interface, api returns the selected post objects)
 * Taxonomy (select taxonomy terms with options to load, display and save, api returns the selected term objects)
 * User (select 1 or more WP users, api returns the selected user objects)
-* Google Maps (interactive map, api returns lat,lng,address data)
+* Google Maps (interactive map, api returns lat, lng, address data)
 * Date Picker (jQuery date picker, options for format, api returns string)
 * Color Picker (WP color swatch picker)
 * Tab (Group fields into tabs)
@@ -106,6 +106,29 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.1.8 =
+* WYSIWYG field: Fixed bug causing formatting issue when drag/drop
+* Tab field: Fixed UI glitch where left aligned tabs would get cut off in small field group
+* Message field: Added missing wrapper settings
+* Core: Minor fixes and improvements
+* Language: Updated Russian translation - thanks to Andy Toniyevych
+
+= 5.1.7.1 =
+* Core: Fixed JS error on data input screens
+* Core: Fixed incorrect return_url when using `acf_form()`
+
+= 5.1.7 =
+* Tab field: Added new placement setting for top aligned / left aligned
+* Image field: Fixed selection bug when attachment popup also contains an image field
+* File field: Fixed selection bug when attachment popup also contains a file field
+* WYSIWYG field: Prevented full-height feature until WP provide compatibility for multiple editors 
+* Core: Fixed many field bugs in WP media grid popup
+* Core: Added new friendly field wrap classes: acf-field-{$type} acf-field-{$key}
+* Core: JS speed improvements due to new field wrap classes
+* Core: Added new filter for removing compatibility http://www.advancedcustomfields.com/resources/acfcompatibility/
+* Core: Minor fixes and improvements
+* Language: Updated German translation - thanks to Thomas Meyer
 
 = 5.1.6 =
 * Gallery field: More UI improvements including titles for non image attachments

@@ -10,6 +10,7 @@ if (!defined('URE_PLUGIN_URL')) {
   die;  // Silence is golden, direct call is prohibited
 }
 
+$edit_user_caps_mode = $this->get_edit_user_caps_mode();
 ?>
 
 <div class="has-sidebar-content">
@@ -115,7 +116,7 @@ if (function_exists('bbp_filter_blog_editable_roles') ) {  // bbPress plugin is 
   <table class="form-table" style="clear:none;" cellpadding="0" cellspacing="0">
     <tr>
       <td style="vertical-align:top;">
-				<?php $this->show_capabilities( true, false ); ?>
+				<?php $this->show_capabilities( true, false, $edit_user_caps_mode ); ?>
       </td>
 			<td>
 				<?php $this->toolbar();?>
@@ -131,7 +132,7 @@ if (function_exists('bbp_filter_blog_editable_roles') ) {  // bbPress plugin is 
   <table class="form-table" style="clear:none;" cellpadding="0" cellspacing="0">
     <tr>
       <td style="vertical-align:top;">
-				<?php $this->show_capabilities( false, false ); ?>
+				<?php $this->show_capabilities( false, false, $edit_user_caps_mode ); ?>
       </td>
     </tr>
   </table>	

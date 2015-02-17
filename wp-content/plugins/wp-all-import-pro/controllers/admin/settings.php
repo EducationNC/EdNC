@@ -22,7 +22,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		
 		if ( ! $is_secure_import ){
 
-			self::$path = pmxi_secure_file($uploads['basedir'] . '/wpallimport/uploads', 'uploads');
+			self::$path = wp_all_import_secure_file($uploads['basedir'] . '/wpallimport/uploads', 'uploads');
 			
 		}
 		else {			
@@ -30,7 +30,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			self::$path = get_transient( self::$upload_transient );
 
 			if ( empty(self::$path) ) {
-				self::$path = pmxi_secure_file($uploads['basedir'] . '/wpallimport/uploads', 'uploads');
+				self::$path = wp_all_import_secure_file($uploads['basedir'] . '/wpallimport/uploads', 'uploads');
 				set_transient( self::$upload_transient, self::$path);
 			}
 
@@ -41,15 +41,26 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 	public function index() {
 
 		$this->data['post'] = $post = $this->input->post(PMXI_Plugin::getInstance()->getOption());
+
+		/*$addons = new PMXI_Admin_Addons();
+
+		$this->data['addons'] = $addons->get_premium_addons();*/
+
+		$this->data['addons']['PMXI_Plugin'] = array(
+			'title' => __('WP All Import', 'wp_all_import_plugin'),
+			'active' => (class_exists('PMXI_Plugin') and defined('PMXI_EDITION') and PMXI_EDITION == 'paid')
+		);
+
+		$this->data['addons'] = array_reverse($this->data['addons']);
 		
 		if ($this->input->post('is_settings_submitted')) { // save settings form
 			check_admin_referer('edit-settings', '_wpnonce_edit-settings');
 			
 			if ( ! preg_match('%^\d+$%', $post['history_file_count'])) {
-				$this->errors->add('form-validation', __('History File Count must be a non-negative integer', 'pmxi_plugin'));
+				$this->errors->add('form-validation', __('History File Count must be a non-negative integer', 'wp_all_import_plugin'));
 			}
 			if ( ! preg_match('%^\d+$%', $post['history_file_age'])) {
-				$this->errors->add('form-validation', __('History Age must be a non-negative integer', 'pmxi_plugin'));
+				$this->errors->add('form-validation', __('History Age must be a non-negative integer', 'wp_all_import_plugin'));
 			}
 			if (empty($post['html_entities'])) $post['html_entities'] = 0;
 			if (empty($post['utf8_decode'])) $post['utf8_decode'] = 0;
@@ -57,12 +68,30 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			if ( ! $this->errors->get_error_codes()) { // no validation errors detected
 
 				PMXI_Plugin::getInstance()->updateOption($post);
+
+				if (empty($_POST['pmxi_license_activate']) and empty($_POST['pmxi_license_deactivate'])) {
+					foreach ($this->data['addons'] as $class => $addon) {
+						$post['statuses'][$class] = $this->check_license($class);
+					}					
+					PMXI_Plugin::getInstance()->updateOption($post);
+				}				
+
+				isset( $_POST['pmxi_license_activate'] ) and $this->activate_licenses();
+
 				$files = new PMXI_File_List(); $files->sweepHistory(); // adjust file history to new settings specified
 				
-				wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Settings saved', 'pmxi_plugin')), $this->baseUrl)); die();
+				wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Settings saved', 'wp_all_import_plugin')), $this->baseUrl)); die();
 			}
 		}
-		
+		/*else{			
+
+			foreach ($this->data['addons'] as $class => $addon) {
+				$post['statuses'][$class] = $this->check_license($class);
+			}								
+
+			PMXI_Plugin::getInstance()->updateOption($post);	
+		}*/
+
 		if ($this->input->post('is_templates_submitted')) { // delete templates form
 
 			if ($this->input->post('import_templates')){
@@ -80,7 +109,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 										
 						if (($extension != "txt")) 
 						{							
-							$this->errors->add('form-validation', __('Unknown File extension. Only txt files are permitted', 'pmxi_plugin'));
+							$this->errors->add('form-validation', __('Unknown File extension. Only txt files are permitted', 'wp_all_import_plugin'));
 						}
 						else {
 							$import_data = @file_get_contents($tmp_name);
@@ -93,22 +122,22 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 										unset($template_data['id']);
 										$template->clear()->set($template_data)->insert();
 									}
-									wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(_n('%d template imported', '%d templates imported', count($templates_data), 'pmxi_plugin'), count($templates_data))), $this->baseUrl)); die();
+									wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(_n('%d template imported', '%d templates imported', count($templates_data), 'wp_all_import_plugin'), count($templates_data))), $this->baseUrl)); die();
 								}
-								else $this->errors->add('form-validation', __('Wrong imported data format', 'pmxi_plugin'));							
+								else $this->errors->add('form-validation', __('Wrong imported data format', 'wp_all_import_plugin'));							
 							}
-							else $this->errors->add('form-validation', __('File is empty or doesn\'t exests', 'pmxi_plugin'));
+							else $this->errors->add('form-validation', __('File is empty or doesn\'t exests', 'wp_all_import_plugin'));
 						}
 					}
-					else $this->errors->add('form-validation', __('Undefined entry!', 'pmxi_plugin'));
+					else $this->errors->add('form-validation', __('Undefined entry!', 'wp_all_import_plugin'));
 				}
-				else $this->errors->add('form-validation', __('Please select file.', 'pmxi_plugin'));
+				else $this->errors->add('form-validation', __('Please select file.', 'wp_all_import_plugin'));
 
 			}
 			else{
 				$templates_ids = $this->input->post('templates', array());
 				if (empty($templates_ids)) {
-					$this->errors->add('form-validation', __('Templates must be selected', 'pmxi_plugin'));
+					$this->errors->add('form-validation', __('Templates must be selected', 'wp_all_import_plugin'));
 				}
 				
 				if ( ! $this->errors->get_error_codes()) { // no validation errors detected
@@ -117,7 +146,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						foreach ($templates_ids as $template_id) {
 							$template->clear()->set('id', $template_id)->delete();
 						}
-						wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(_n('%d template deleted', '%d templates deleted', count($templates_ids), 'pmxi_plugin'), count($templates_ids))), $this->baseUrl)); die();
+						wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(_n('%d template deleted', '%d templates deleted', count($templates_ids), 'wp_all_import_plugin'), count($templates_ids))), $this->baseUrl)); die();
 					}
 					if ($this->input->post('export_templates')){
 						$export_data = array();
@@ -140,6 +169,103 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		
 		$this->render();
 	}
+
+	/*
+	*
+	* Activate licenses for main plugin and all premium addons
+	*
+	*/
+	protected function activate_licenses() {
+
+		// listen for our activate button to be clicked
+		if( isset( $_POST['pmxi_license_activate'] ) ) {			
+
+			// retrieve the license from the database
+			$options = PMXI_Plugin::getInstance()->getOption();
+			
+			foreach ($_POST['pmxi_license_activate'] as $class => $val) {							
+
+				if (!empty($options['licenses'][$class])){
+
+					$product_name = (method_exists($class, 'getEddName')) ? call_user_func(array($class, 'getEddName')) : false;
+
+					if ( $product_name !== false ){
+						// data to send in our API request
+						$api_params = array( 
+							'edd_action'=> 'activate_license', 
+							'license' 	=> $options['licenses'][$class], 
+							'item_name' => urlencode( $product_name ) // the name of our product in EDD
+						);
+						
+						// Call the custom API.
+						$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+						// make sure the response came back okay
+						if ( is_wp_error( $response ) )
+							continue;
+
+						// decode the license data
+						$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+						
+						// $license_data->license will be either "active" or "inactive"
+
+						$options['statuses'][$class] = $license_data->license;
+						
+						PMXI_Plugin::getInstance()->updateOption($options);	
+					}
+				}
+
+			}				
+
+		}
+	}	
+
+	/*
+	*
+	* Check plugin's license
+	*
+	*/
+	public static function check_license($class) {
+
+		global $wp_version;
+
+		$options = PMXI_Plugin::getInstance()->getOption();	
+
+		if (!empty($options['licenses'][$class])){
+
+			$product_name = (method_exists($class, 'getEddName')) ? call_user_func(array($class, 'getEddName')) : false;
+
+			if ( $product_name !== false ){
+
+				$api_params = array( 
+					'edd_action' => 'check_license', 
+					'license' => $options['licenses'][$class], 
+					'item_name' => urlencode( $product_name ) 
+				);
+
+				// Call the custom API.
+				$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+				if ( is_wp_error( $response ) )
+					return false;
+
+				$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+				return $license_data->license;
+
+				/*if( $license_data->license == 'valid' ) {
+					return true;
+				
+				} else {
+					return false;
+				
+				}*/
+			}
+		}
+
+		return false;
+
+	}
 	
 	public function cleanup(){
 
@@ -155,15 +281,15 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 		$cacheFiles = array_diff(@scandir($cacheDir), array('.','..'));
 
-		$msg = __('Files not found', 'pmxi_plugin');
+		$msg = __('Files not found', 'wp_all_import_plugin');
 
 		if ( count($files) or count($cacheFiles)){
 
-			pmxi_clear_directory( $dir );
+			wp_all_import_clear_directory( $dir );
 
-			pmxi_clear_directory( $cacheDir );		
+			wp_all_import_clear_directory( $cacheDir );		
 
-			$msg = __('Clean Up has been successfully completed.', 'pmxi_plugin');
+			$msg = __('Clean Up has been successfully completed.', 'wp_all_import_plugin');
 		}
 
 		wp_redirect(add_query_arg('pmxi_nt', urlencode($msg), $this->baseUrl)); die();
@@ -221,7 +347,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		//$targetDir = ini_get("upload_tmp_dir") . DIRECTORY_SEPARATOR . "plupload";
 		//$uploads = wp_upload_dir();	
 
-		$targetDir = self::$path;//pmxi_secure_file($uploads['basedir'] . '/wpallimport/uploads', 'uploads');
+		$targetDir = self::$path;//wp_all_import_secure_file($uploads['basedir'] . '/wpallimport/uploads', 'uploads');
 
 		if (! is_dir($targetDir) || ! is_writable($targetDir)){
 			delete_transient( self::$upload_transient );
@@ -412,7 +538,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 					ob_start();
 					?>
 					
-					<div class="error inline"><p><?php _e('Please confirm you are importing a valid feed.<br/> Often, feed providers distribute feeds with invalid data, improperly wrapped HTML, line breaks where they should not be, faulty character encodings, syntax errors in the XML, and other issues.<br/><br/>WP All Import has checks in place to automatically fix some of the most common problems, but we can’t catch every single one.<br/><br/>It is also possible that there is a bug in WP All Import, and the problem is not with the feed.<br/><br/>If you need assistance, please contact support – <a href="mailto:support@wpallimport.com">support@wpallimport.com</a> – with your XML/CSV file. We will identify the problem and release a bug fix if necessary.', 'pmxi_plugin'); ?></p></div>
+					<div class="error inline"><p><?php _e('Please confirm you are importing a valid feed.<br/> Often, feed providers distribute feeds with invalid data, improperly wrapped HTML, line breaks where they should not be, faulty character encodings, syntax errors in the XML, and other issues.<br/><br/>WP All Import has checks in place to automatically fix some of the most common problems, but we can’t catch every single one.<br/><br/>It is also possible that there is a bug in WP All Import, and the problem is not with the feed.<br/><br/>If you need assistance, please contact support – <a href="mailto:support@wpallimport.com">support@wpallimport.com</a> – with your XML/CSV file. We will identify the problem and release a bug fix if necessary.', 'wp_all_import_plugin'); ?></p></div>
 					
 					<?php
 					$response = ob_get_clean();

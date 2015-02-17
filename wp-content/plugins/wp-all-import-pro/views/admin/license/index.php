@@ -1,6 +1,6 @@
 <form class="licenses" method="post" action="<?php echo $this->baseUrl ?>" enctype="multipart/form-data">
 
-	<h2><?php _e('WP All Import Licenses', 'pmxi_plugin') ?></h2>
+	<h2><?php _e('WP All Import Licenses', 'wp_all_import_plugin') ?></h2>
 	<hr />
 	<?php if ($this->errors->get_error_codes()): ?>
 		<?php $this->error() ?>
@@ -20,10 +20,11 @@
 					<?php if( ! empty($post['licenses'][$class]) ) { ?>
 
 						<?php if( ! empty($post['statuses'][$class]) && $post['statuses'][$class] == 'valid' ) { ?>														
-							<p style="color:green;"><?php _e('Active', 'pmxi_plugin'); ?></p>
-							<!--input type="submit" class="button-secondary" name="pmxi_license_deactivate[<?php echo $class; ?>]" value="<?php _e('Deactivate License', 'pmxi_plugin'); ?>"/-->
-						<?php } else { ?>							
-							<input type="submit" class="button-secondary" name="pmxi_license_activate[<?php echo $class; ?>]" value="<?php _e('Activate License', 'pmxi_plugin'); ?>"/>
+							<p style="color:green;"><?php _e('Active', 'wp_all_import_plugin'); ?></p>
+							<!--input type="submit" class="button-secondary" name="pmxi_license_deactivate[<?php echo $class; ?>]" value="<?php _e('Deactivate License', 'wp_all_import_plugin'); ?>"/-->
+						<?php } else { ?>													
+							<input type="submit" class="button-secondary" name="pmxi_license_activate[<?php echo $class; ?>]" value="<?php _e('Activate License', 'wp_all_import_plugin'); ?>"/>
+							<span style="line-height: 28px;"><?php echo $post['statuses'][$class]; ?></span>
 						<?php } ?>
 					
 					<?php } ?>
@@ -36,6 +37,6 @@
 	<p>
 		<?php wp_nonce_field('edit-licenses', '_wpnonce_edit-licenses') ?>
 		<input type="hidden" name="is_licenses_submitted" value="1" />		
-		<input type="submit" class="button-primary" value="<?php _e('Save', 'pmxi_plugin') ?>" />
+		<input type="submit" class="button-primary" value="<?php _e('Save', 'wp_all_import_plugin') ?>" />
 	</p>
 </form>

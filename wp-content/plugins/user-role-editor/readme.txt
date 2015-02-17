@@ -68,7 +68,6 @@ To read full FAQ section visit [this page](http://www.shinephp.com/user-role-edi
 To read more about 'User Role Editor' visit [this page](http://www.shinephp.com/user-role-editor-wordpress-plugin/) at [shinephp.com](shinephp.com).
 
 = Translations =
-* Catalan: [Efraim Bayarri](http://replicantsfactory.com/) - needs update;
 * Dutch: Arjan Bosch - needs update;
 * French: [Transifex](https://www.transifex.com);
 * Hebrew: [atar4u](http://atar4u.com) - needs update;
@@ -87,6 +86,16 @@ Some translations may be outdated. If you have better translation for some phras
 
 == Changelog ==
 
+= 4.18.2 =
+* 06.02.2015
+* New option "Edit user capabilities" was added. If it is unchecked - capabilities section of selected user will be shown in the readonly mode. Administrator (except superadmin for multisite) can not assign capabilities to the user directly. He should make it using roles only.
+* More universal checking applied to the custom post type capabilities creation to exclude not existing property notices.
+* Multisite: URE's options page is prohibited by 'manage_network_users' capability instead of 'ure_manage_options' in case single site administrators does not have permission to use URE.
+* URE protects administrator user from editing by other users by default. If you wish to turn off such protection, you may add filter 'ure_supress_administrators_protection' and return 'true' from it.
+* Plugin installation to the WordPress multisite with large (thousands) subsites had a problem with script execution time. Fixed. URE does not try to update all subsites at once now. It does it for every subsite separately, only when you visit that subsite.
+* Fixed JavaScript bug with 'Reset Roles' for FireFox v.34.
+
+
 = 4.18.1 =
 * 14.12.2014
 * As activation hook does not fire during bulk plugins update, automatic plugin version check and upgrade execution were added.
@@ -94,6 +103,7 @@ Some translations may be outdated. If you have better translation for some phras
 = 4.18 =
 * 14.12.2014
 * Own custom user capabilities, e.g. 'ure_edit_roles' are used to restrict access to User Role Editor functionality ([read more](https://www.role-editor.com/user-role-editor-4-18-new-permissions/)).
+* If custom post type uses own custom user capabilities URE add them to the 'Custom Capabilities' section automatically.
 * Multisite: You may allow to the users without superadmin privileges to add/create site users without sending them email confirmation request.
 * Bug fix: when non-admin user updated other user profile, that user lost secondary roles.
 * Italian translation was added. Thanks to [Giuseppe Velardo](http://www.comprensivoleopardi.gov.it/).

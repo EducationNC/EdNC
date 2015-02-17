@@ -112,7 +112,7 @@ class PMXI_CsvParser
 
         $wp_uploads = wp_upload_dir();
         
-        $this->targetDir = (empty($options['targetDir'])) ? pmxi_secure_file($wp_uploads['basedir'] . '/wpallimport/uploads', 'uploads') : $options['targetDir'];
+        $this->targetDir = (empty($options['targetDir'])) ? wp_all_import_secure_file($wp_uploads['basedir'] . '/wpallimport/uploads', 'uploads') : $options['targetDir'];
 
         $this->load($options['filename']);
     }
@@ -926,7 +926,7 @@ class PMXI_CsvParser
 
         $tmpname = wp_unique_filename($this->targetDir, str_replace("csv", "xml", basename($this->_filename)));
         if ("" == $this->xml_path) 
-            $this->xml_path = $this->targetDir  .'/'. url_title($tmpname);            
+            $this->xml_path = $this->targetDir  .'/'. wp_all_import_url_title($tmpname);            
         
         $this->toXML(true);        
 

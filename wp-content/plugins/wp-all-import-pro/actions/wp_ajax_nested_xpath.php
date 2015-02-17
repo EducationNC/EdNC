@@ -40,7 +40,7 @@ function pmxi_wp_ajax_nested_xpath(){
 					}										
 				}
 				else {
-					exit(json_encode(array('success' => false, 'msg' => __('XPath is required', 'pmxi_plugin'))));
+					exit(json_encode(array('success' => false, 'msg' => __('XPath is required', 'wp_all_import_plugin'))));
 					die;
 				}
 		    }
@@ -48,7 +48,7 @@ function pmxi_wp_ajax_nested_xpath(){
 		unset($file);					
 	}
 	else{
-		exit(json_encode(array('success' => false, 'msg' => 'File path is required', 'pmxi_plugin'))); die;		
+		exit(json_encode(array('success' => false, 'msg' => 'File path is required', 'wp_all_import_plugin'))); die;		
 	}
 
 	exit(json_encode(array(		

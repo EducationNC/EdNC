@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Role Editor 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-21 10:25+0700\n"
+"POT-Creation-Date: 2015-02-06 11:48+0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vladimir Garagulya <support@role-editor.com>\n"
 "Language-Team: http://al-badar.net <nasrulhaq81@gmail.com>\n"
@@ -16,84 +16,136 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../includes/settings-template.php:81 ../includes/settings-template.php:117
-#: ../includes/settings-template.php:149 ../includes/settings-template.php:181
+#: ../includes/settings-template.php:17
+#, fuzzy
+msgid "User Role Editor - Options"
+msgstr "User Role Editor"
+
+#: ../includes/settings-template.php:21
+#: ../includes/class-user-role-editor.php:591
+msgid "General"
+msgstr ""
+
+#: ../includes/settings-template.php:26
+#: ../includes/class-user-role-editor.php:597
+msgid "Additional Modules"
+msgstr ""
+
+#: ../includes/settings-template.php:30
+#: ../includes/class-user-role-editor.php:603
+#, fuzzy
+msgid "Default Roles"
+msgstr "Peran "
+
+#: ../includes/settings-template.php:34
+#: ../includes/class-user-role-editor.php:609
+msgid "Multisite"
+msgstr ""
+
+#: ../includes/settings-template.php:39
+msgid "About"
+msgstr ""
+
+#: ../includes/settings-template.php:53
+#: ../includes/class-ure-screen-help.php:15
+msgid "Show Administrator role at User Role Editor"
+msgstr "Tampilkan peran Administrator di User Role Editor"
+
+#: ../includes/settings-template.php:61
+#: ../includes/class-ure-screen-help.php:18
+msgid "Show capabilities in the human readable form"
+msgstr "Tampilkan kemampuan dalam bentuk yang dapat dibaca manusia"
+
+#: ../includes/settings-template.php:69 ../includes/ure-role-edit.php:40
+#: ../includes/ure-user-edit.php:64 ../includes/class-ure-screen-help.php:21
+msgid "Show deprecated capabilities"
+msgstr "Tampilkan kemampuan usang"
+
+#: ../includes/settings-template.php:77
+#: ../includes/class-ure-screen-help.php:25
+#, fuzzy
+msgid "Edit user capabilities"
+msgstr "Kustom kemampuan:"
+
+#: ../includes/settings-template.php:90 ../includes/settings-template.php:126
+#: ../includes/settings-template.php:158 ../includes/settings-template.php:190
 msgid "Save"
 msgstr "Simpan"
 
-#: ../includes/settings-template.php:142
+#: ../includes/settings-template.php:111
+#: ../includes/class-ure-screen-help.php:45
+msgid "Count users without role"
+msgstr ""
+
+#: ../includes/settings-template.php:138
+#, fuzzy
+msgid "Primary default role: "
+msgstr "Peran Utama:"
+
+#: ../includes/settings-template.php:145
+msgid "Other default roles for new registered user: "
+msgstr ""
+
+#: ../includes/settings-template.php:151
 msgid ""
 "Note for multisite environment: take into account that other default roles "
 "should exist at the site, in order to be assigned to the new registered "
 "users."
 msgstr ""
 
-#: ../includes/class-user-role-editor.php:195
+#: ../includes/settings-template.php:177
+msgid "Allow non super administrators to create, edit, and delete users"
+msgstr ""
+
+#: ../includes/class-user-role-editor.php:233
 msgid "Change role for users without role"
 msgstr ""
 
-#: ../includes/class-user-role-editor.php:196
+#: ../includes/class-user-role-editor.php:234
 msgid "No rights"
 msgstr ""
 
-#: ../includes/class-user-role-editor.php:197
+#: ../includes/class-user-role-editor.php:235
 msgid "Provide new role"
 msgstr ""
 
-#: ../includes/class-user-role-editor.php:281
-#: ../includes/class-user-role-editor.php:283
+#: ../includes/class-user-role-editor.php:319
+#: ../includes/class-user-role-editor.php:321
 msgid "You do not have permission to edit this user."
 msgstr "Anda tidak diizinkan untuk menyunting user ini. "
 
-#: ../includes/class-user-role-editor.php:422
+#: ../includes/class-user-role-editor.php:460
 msgid "Capabilities"
 msgstr "Kemampuan"
 
-#: ../includes/class-user-role-editor.php:514
+#: ../includes/class-user-role-editor.php:558
 msgid "Settings"
 msgstr "Pengaturan"
 
-#: ../includes/class-user-role-editor.php:525
-#: ../includes/class-ure-lib.php:2295
+#: ../includes/class-user-role-editor.php:569
+#: ../includes/class-ure-lib.php:2529
 msgid "Changelog"
 msgstr "log Perubahan"
 
-#: ../includes/class-user-role-editor.php:547
-msgid "General"
-msgstr ""
-
-#: ../includes/class-user-role-editor.php:553
-msgid "Additional Modules"
-msgstr ""
-
-#: ../includes/class-user-role-editor.php:559
-#, fuzzy
-msgid "Default Roles"
-msgstr "Peran "
-
-#: ../includes/class-user-role-editor.php:565
-msgid "Multisite"
-msgstr ""
-
-#: ../includes/class-user-role-editor.php:575
-#: ../includes/class-user-role-editor.php:603
-#: ../includes/class-user-role-editor.php:948
-#: ../includes/class-ure-lib.php:251
+#: ../includes/class-user-role-editor.php:619
+#: ../includes/class-user-role-editor.php:648
+#: ../includes/class-user-role-editor.php:1029
+#: ../includes/class-ure-lib.php:337
 msgid "User Role Editor"
 msgstr "User Role Editor"
 
-#: ../includes/class-user-role-editor.php:660
-#: ../includes/class-user-role-editor.php:678
-#: ../includes/class-user-role-editor.php:722
+#: ../includes/class-user-role-editor.php:708
+#: ../includes/class-user-role-editor.php:726
+#: ../includes/class-user-role-editor.php:770
 msgid "User Role Editor options are updated"
 msgstr "Pilihan User Role Editor diperbarui"
 
-#: ../includes/class-user-role-editor.php:706
+#: ../includes/class-user-role-editor.php:754
 #, fuzzy
 msgid "Default Roles are updated"
 msgstr "Peran "
 
-#: ../includes/class-user-role-editor.php:730
+#: ../includes/class-user-role-editor.php:778
 msgid ""
 "You do not have sufficient permissions to manage options for User Role "
 "Editor."
@@ -101,45 +153,48 @@ msgstr ""
 "Anda tidak memiliki izin yang memadai untuk mengelola pilihan User Role "
 "Editor."
 
-#: ../includes/class-user-role-editor.php:809
+#: ../includes/class-user-role-editor.php:850
+#: ../includes/class-ure-lib.php:1697 ../includes/class-ure-lib.php:1950
+#: ../includes/class-ure-lib.php:2066 ../includes/class-ure-lib.php:2114
+#: ../includes/class-ure-lib.php:2350 ../includes/class-ure-lib.php:2395
 msgid "Insufficient permissions to work with User Role Editor"
 msgstr "Izin yang tidak sesuai untuk bekerja dengan User Role Editor"
 
-#: ../includes/class-user-role-editor.php:890
+#: ../includes/class-user-role-editor.php:976
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: ../includes/class-user-role-editor.php:891
+#: ../includes/class-user-role-editor.php:977
 msgid "Unselect All"
 msgstr "Batalkan Semua"
 
-#: ../includes/class-user-role-editor.php:892
+#: ../includes/class-user-role-editor.php:978
 msgid "Reverse"
 msgstr "Memutar"
 
-#: ../includes/class-user-role-editor.php:893
+#: ../includes/class-user-role-editor.php:979
 msgid "Update"
 msgstr "Pembaruan"
 
-#: ../includes/class-user-role-editor.php:894
+#: ../includes/class-user-role-editor.php:980
 msgid "Please confirm permissions update"
 msgstr "Harap konfirmasi pembaruan izin"
 
-#: ../includes/class-user-role-editor.php:895
+#: ../includes/class-user-role-editor.php:981
 msgid "Add New Role"
 msgstr "Tambah Peran Baru"
 
-#: ../includes/class-user-role-editor.php:896
-#: ../includes/class-user-role-editor.php:901
+#: ../includes/class-user-role-editor.php:982
+#: ../includes/class-user-role-editor.php:987
 #, fuzzy
 msgid "Rename Role"
 msgstr "Hapus Peran"
 
-#: ../includes/class-user-role-editor.php:897
+#: ../includes/class-user-role-editor.php:983
 msgid " Role name (ID) can not be empty!"
 msgstr "Nama peran (ID) tidak boleh kosong!"
 
-#: ../includes/class-user-role-editor.php:898
+#: ../includes/class-user-role-editor.php:984
 msgid ""
 " Role name (ID) must contain latin characters, digits, hyphens or underscore "
 "only!"
@@ -147,43 +202,43 @@ msgstr ""
 "Nama peran (ID) harus berisi karakter latin, angka, tanda hubung atau garis "
 "bawah saja!"
 
-#: ../includes/class-user-role-editor.php:899
+#: ../includes/class-user-role-editor.php:985
 msgid ""
 " WordPress does not support numeric Role name (ID). Add latin characters to "
 "it."
 msgstr ""
 
-#: ../includes/class-user-role-editor.php:900
+#: ../includes/class-user-role-editor.php:986
 msgid "Add Role"
 msgstr "Tambah Peran"
 
-#: ../includes/class-user-role-editor.php:902
+#: ../includes/class-user-role-editor.php:988
 msgid "Delete Role"
 msgstr "Hapus Peran"
 
-#: ../includes/class-user-role-editor.php:903
+#: ../includes/class-user-role-editor.php:989
 msgid "Cancel"
 msgstr "Batalkan"
 
-#: ../includes/class-user-role-editor.php:904
+#: ../includes/class-user-role-editor.php:990
 msgid "Add Capability"
 msgstr "Tambah Kemampuan"
 
-#: ../includes/class-user-role-editor.php:905
-#: ../includes/class-user-role-editor.php:914
+#: ../includes/class-user-role-editor.php:991
+#: ../includes/class-user-role-editor.php:1000
 msgid "Delete Capability"
 msgstr "Hapus Kemampuan"
 
-#: ../includes/class-user-role-editor.php:906
+#: ../includes/class-user-role-editor.php:992
 msgid "Reset"
 msgstr "Atur Ulang"
 
-#: ../includes/class-user-role-editor.php:907
+#: ../includes/class-user-role-editor.php:993
 msgid "DANGER! Resetting will restore default settings from WordPress Core."
 msgstr ""
 "BAHAYA! Reset akan mengembalikan pengaturan default dari WordPress Inti."
 
-#: ../includes/class-user-role-editor.php:908
+#: ../includes/class-user-role-editor.php:994
 msgid ""
 "If any plugins have changed capabilities in any way upon installation (such "
 "as S2Member, WooCommerce, and many more), those capabilities will be DELETED!"
@@ -192,7 +247,7 @@ msgstr ""
 "(seperti S2Member, WooCommerce, dan banyak lagi), kemampuan mereka akan "
 "DIHAPUS!"
 
-#: ../includes/class-user-role-editor.php:909
+#: ../includes/class-user-role-editor.php:995
 msgid ""
 "For more information on how to undo changes and restore plugin capabilities "
 "go to"
@@ -200,19 +255,19 @@ msgstr ""
 "Untuk informasi lebih lanjut tentang cara membatalkan perubahan dan "
 "mengembalikan kemampuan Plugin pergi ke"
 
-#: ../includes/class-user-role-editor.php:911
+#: ../includes/class-user-role-editor.php:997
 msgid "Continue?"
 msgstr "Lanjut?"
 
-#: ../includes/class-user-role-editor.php:912
+#: ../includes/class-user-role-editor.php:998
 msgid "Default Role"
 msgstr "Peran "
 
-#: ../includes/class-user-role-editor.php:913
+#: ../includes/class-user-role-editor.php:999
 msgid "Set New Default Role"
 msgstr "Atur Peran Baru Default"
 
-#: ../includes/class-user-role-editor.php:915
+#: ../includes/class-user-role-editor.php:1001
 msgid ""
 "Warning! Be careful - removing critical capability could crash some plugin "
 "or other custom code"
@@ -220,11 +275,11 @@ msgstr ""
 "Peringatan! Hati-hati - menghapus kemampuan kritis dapat menyebabkan crash "
 "beberapa Plugin atau kode kustom lainnya"
 
-#: ../includes/class-user-role-editor.php:916
+#: ../includes/class-user-role-editor.php:1002
 msgid " Capability name (ID) can not be empty!"
 msgstr "Nama Kemampuan (ID) tidak boleh kosong!"
 
-#: ../includes/class-user-role-editor.php:917
+#: ../includes/class-user-role-editor.php:1003
 msgid ""
 " Capability name (ID) must contain latin characters, digits, hyphens or "
 "underscore only!"
@@ -232,69 +287,118 @@ msgstr ""
 "Nama Kemampuan (ID) harus mengandung karakter latin, angka, kata penghubung "
 "atau garis bawah saja!"
 
-#: ../includes/class-user-role-editor.php:951
-#: ../includes/class-user-role-editor.php:980
+#: ../includes/class-user-role-editor.php:1032
+#: ../includes/class-user-role-editor.php:1065
 msgid "Other Roles"
 msgstr "Peran Lainnya"
 
-#: ../includes/class-user-role-editor.php:962
+#: ../includes/class-user-role-editor.php:1046
 msgid "Edit"
 msgstr "Sunting"
+
+#: ../includes/ure-role-edit.php:17
+#, fuzzy
+msgid "Select Role and change its capabilities:"
+msgstr "Pilih Peran dan ubah daftar kemampuan"
+
+#: ../includes/ure-role-edit.php:30 ../includes/ure-user-edit.php:54
+msgid "Show capabilities in human readable form"
+msgstr "Tampilkan kemampuan dalam bentuk yang dapat dibaca manusia"
 
 #: ../includes/ure-role-edit.php:44
 msgid "If checked, then apply action to ALL sites of this Network"
 msgstr ""
 "Jika dicentang, kemudian terapkan tindakan untuk SEMUA situs Jaringan ini"
 
-#: ../includes/class-ure-lib.php:159
+#: ../includes/ure-role-edit.php:56
+msgid "Apply to All Sites"
+msgstr "Terapkan ke Semua Situs"
+
+#: ../includes/ure-role-edit.php:63 ../includes/ure-user-edit.php:110
+msgid "Core capabilities:"
+msgstr "Kemampuan inti:"
+
+#: ../includes/ure-role-edit.php:65 ../includes/ure-user-edit.php:112
+msgid "Quick filter:"
+msgstr "Saring Cepat:"
+
+#: ../includes/ure-role-edit.php:83 ../includes/ure-user-edit.php:131
+msgid "Custom capabilities:"
+msgstr "Kustom kemampuan:"
+
+#: ../includes/class-ure-lib.php:245
 msgid "Error: wrong request"
 msgstr "Salah: salah permintaan"
 
-#: ../includes/class-ure-lib.php:348
+#: ../includes/class-ure-lib.php:278 ../includes/class-ure-lib.php:289
+msgid "Role name (ID): "
+msgstr "Nama Peran (ID):"
+
+#: ../includes/class-ure-lib.php:280 ../includes/class-ure-lib.php:291
+msgid "Display Role Name: "
+msgstr "Tampilkan Nama Peran:"
+
+#: ../includes/class-ure-lib.php:282
+msgid "Make copy of: "
+msgstr "buat salinan:"
+
+#: ../includes/class-ure-lib.php:298
+msgid "Select Role:"
+msgstr "Pilih Peran:"
+
+#: ../includes/class-ure-lib.php:313
+msgid "Delete:"
+msgstr "Hapus:"
+
+#: ../includes/class-ure-lib.php:320
+msgid "Capability name (ID): "
+msgstr "Nama Kemampuan (ID):"
+
+#: ../includes/class-ure-lib.php:434
 msgid "Error: "
 msgstr "Salah:"
 
-#: ../includes/class-ure-lib.php:348
+#: ../includes/class-ure-lib.php:434
 msgid "Role"
 msgstr "Peran"
 
-#: ../includes/class-ure-lib.php:349
+#: ../includes/class-ure-lib.php:435
 msgid "does not exist"
 msgstr "tidak ada"
 
-#: ../includes/class-ure-lib.php:392
+#: ../includes/class-ure-lib.php:478
 msgid "Role is updated successfully"
 msgstr "Peran berhasil diperbarui"
 
-#: ../includes/class-ure-lib.php:394
+#: ../includes/class-ure-lib.php:480
 msgid "Roles are updated for all network"
 msgstr "Peran diperbarui untuk semua jaringan"
 
-#: ../includes/class-ure-lib.php:400
+#: ../includes/class-ure-lib.php:486
 msgid "Error occured during role(s) update"
 msgstr "Kesalahan terjadi selama pembaruan peran"
 
-#: ../includes/class-ure-lib.php:407
+#: ../includes/class-ure-lib.php:493
 msgid "User capabilities are updated successfully"
 msgstr "Kemampuan pengguna berhasil diperbarui"
 
-#: ../includes/class-ure-lib.php:412
+#: ../includes/class-ure-lib.php:498
 msgid "Error occured during user update"
 msgstr "Kesalahan terjadi sepanjang pembaruan pengguna"
 
-#: ../includes/class-ure-lib.php:470
+#: ../includes/class-ure-lib.php:556
 msgid "User Roles are restored to WordPress default values. "
 msgstr "Peran Pengguna dikembalikan ke nilai Wordpress default."
 
-#: ../includes/class-ure-lib.php:1337
+#: ../includes/class-ure-lib.php:1445
 msgid "Help"
 msgstr "Bantuan"
 
-#: ../includes/class-ure-lib.php:1695
+#: ../includes/class-ure-lib.php:1913
 msgid "Error is occur. Please check the log file."
 msgstr "kesalahan terjadi, Harap periksa log data."
 
-#: ../includes/class-ure-lib.php:1738 ../includes/class-ure-lib.php:1805
+#: ../includes/class-ure-lib.php:1959 ../includes/class-ure-lib.php:2026
 msgid ""
 "Error: Role ID must contain latin characters, digits, hyphens or underscore "
 "only!"
@@ -302,394 +406,406 @@ msgstr ""
 "Kesalahan: ID Peran harus mengandung karakter latin, angka, kata penghubung "
 "dan garis bawah saja!"
 
-#: ../includes/class-ure-lib.php:1742 ../includes/class-ure-lib.php:1809
+#: ../includes/class-ure-lib.php:1963 ../includes/class-ure-lib.php:2030
 msgid ""
 "Error: WordPress does not support numeric Role name (ID). Add latin "
 "characters to it."
 msgstr ""
 
-#: ../includes/class-ure-lib.php:1757
+#: ../includes/class-ure-lib.php:1978
 #, php-format
 msgid "Role %s exists already"
 msgstr "Peran %s telah ada"
 
-#: ../includes/class-ure-lib.php:1772
+#: ../includes/class-ure-lib.php:1993
 msgid "Error is encountered during new role create operation"
 msgstr "Kesalahan ditemui selama peran baru membuat operasi"
 
-#: ../includes/class-ure-lib.php:1774
+#: ../includes/class-ure-lib.php:1995
 #, php-format
 msgid "Role %s is created successfully"
 msgstr "Peran %s berhasil dibuat"
 
-#: ../includes/class-ure-lib.php:1798
+#: ../includes/class-ure-lib.php:2019
 msgid "Error: Role ID is empty!"
 msgstr ""
 
-#: ../includes/class-ure-lib.php:1816
+#: ../includes/class-ure-lib.php:2037
 msgid "Error: Empty role display name is not allowed."
 msgstr ""
 
-#: ../includes/class-ure-lib.php:1823
+#: ../includes/class-ure-lib.php:2044
 #, fuzzy, php-format
 msgid "Role %s does not exists"
 msgstr "tidak ada"
 
-#: ../includes/class-ure-lib.php:1831
+#: ../includes/class-ure-lib.php:2052
 #, fuzzy, php-format
 msgid "Role %s is renamed to %s successfully"
 msgstr "Peran %s berhasil dibuat"
 
-#: ../includes/class-ure-lib.php:1898
+#: ../includes/class-ure-lib.php:2125
 msgid "Error encountered during role delete operation"
 msgstr "Kesalahan ditemui selama operasi penghapusan peran"
 
-#: ../includes/class-ure-lib.php:1900
+#: ../includes/class-ure-lib.php:2127
 msgid "Unused roles are deleted successfully"
 msgstr "Peran yang tidak digunakan berhasil dihapus"
 
-#: ../includes/class-ure-lib.php:1902
+#: ../includes/class-ure-lib.php:2129
 #, php-format
 msgid "Role %s is deleted successfully"
 msgstr "Peran %s berhasil dihapus"
 
-#: ../includes/class-ure-lib.php:1927
+#: ../includes/class-ure-lib.php:2154
 msgid "Error encountered during default role change operation"
 msgstr "Kesalahan ditemui selama operasi perubahan peran standar"
 
-#: ../includes/class-ure-lib.php:1933
+#: ../includes/class-ure-lib.php:2160
 #, php-format
 msgid "Default role for new users is set to %s successfully"
 msgstr "Peran standar untuk pengguna  baru  diatur ke %s dengan sukses"
 
-#: ../includes/class-ure-lib.php:1952
+#: ../includes/class-ure-lib.php:2179
 msgid "Editor"
 msgstr "Penyunting"
 
-#: ../includes/class-ure-lib.php:1953
+#: ../includes/class-ure-lib.php:2180
 msgid "Author"
 msgstr "Pengarang"
 
-#: ../includes/class-ure-lib.php:1954
+#: ../includes/class-ure-lib.php:2181
 msgid "Contributor"
 msgstr "Kontributor"
 
-#: ../includes/class-ure-lib.php:1955
+#: ../includes/class-ure-lib.php:2182
 msgid "Subscriber"
 msgstr "Pelanggan"
 
-#: ../includes/class-ure-lib.php:1957
+#: ../includes/class-ure-lib.php:2184
 msgid "Switch themes"
 msgstr "Ganti tema"
 
-#: ../includes/class-ure-lib.php:1958
+#: ../includes/class-ure-lib.php:2185
 msgid "Edit themes"
 msgstr "Sunting tema"
 
-#: ../includes/class-ure-lib.php:1959
+#: ../includes/class-ure-lib.php:2186
 msgid "Activate plugins"
 msgstr "Aktifkan plugin"
 
-#: ../includes/class-ure-lib.php:1960
+#: ../includes/class-ure-lib.php:2187
 msgid "Edit plugins"
 msgstr "Sunting plugin"
 
-#: ../includes/class-ure-lib.php:1961
+#: ../includes/class-ure-lib.php:2188
 msgid "Edit users"
 msgstr "Sunting pengguna"
 
-#: ../includes/class-ure-lib.php:1962
+#: ../includes/class-ure-lib.php:2189
 msgid "Edit files"
 msgstr "Sunting data"
 
-#: ../includes/class-ure-lib.php:1963
+#: ../includes/class-ure-lib.php:2190
 msgid "Manage options"
 msgstr "kelola pilihan"
 
-#: ../includes/class-ure-lib.php:1964
+#: ../includes/class-ure-lib.php:2191
 msgid "Moderate comments"
 msgstr "Moderasi komentar"
 
-#: ../includes/class-ure-lib.php:1965
+#: ../includes/class-ure-lib.php:2192
 msgid "Manage categories"
 msgstr "Kelola kategori"
 
-#: ../includes/class-ure-lib.php:1966
+#: ../includes/class-ure-lib.php:2193
 msgid "Manage links"
 msgstr "Kelola tautan"
 
-#: ../includes/class-ure-lib.php:1967
+#: ../includes/class-ure-lib.php:2194
 msgid "Upload files"
 msgstr "Unggah data"
 
-#: ../includes/class-ure-lib.php:1968
+#: ../includes/class-ure-lib.php:2195
 msgid "Import"
 msgstr "Impor"
 
-#: ../includes/class-ure-lib.php:1969
+#: ../includes/class-ure-lib.php:2196
 msgid "Unfiltered html"
 msgstr "HTML tidak tersaring"
 
-#: ../includes/class-ure-lib.php:1970
+#: ../includes/class-ure-lib.php:2197
 msgid "Edit posts"
 msgstr "Sunting posting"
 
-#: ../includes/class-ure-lib.php:1971
+#: ../includes/class-ure-lib.php:2198
 msgid "Edit others posts"
 msgstr "Sunting posting lainnya"
 
-#: ../includes/class-ure-lib.php:1972
+#: ../includes/class-ure-lib.php:2199
 msgid "Edit published posts"
 msgstr "Sunting posting terpublikasi"
 
-#: ../includes/class-ure-lib.php:1973
+#: ../includes/class-ure-lib.php:2200
 msgid "Publish posts"
 msgstr "Publikasi posting"
 
-#: ../includes/class-ure-lib.php:1974
+#: ../includes/class-ure-lib.php:2201
 msgid "Edit pages"
 msgstr "Sunting halaman"
 
-#: ../includes/class-ure-lib.php:1975
+#: ../includes/class-ure-lib.php:2202
 msgid "Read"
 msgstr "Baca"
 
-#: ../includes/class-ure-lib.php:1976
+#: ../includes/class-ure-lib.php:2203
 msgid "Level 10"
 msgstr "Tingkat 10"
 
-#: ../includes/class-ure-lib.php:1977
+#: ../includes/class-ure-lib.php:2204
 msgid "Level 9"
 msgstr "Tingkat 9"
 
-#: ../includes/class-ure-lib.php:1978
+#: ../includes/class-ure-lib.php:2205
 msgid "Level 8"
 msgstr "Tingkat 8"
 
-#: ../includes/class-ure-lib.php:1979
+#: ../includes/class-ure-lib.php:2206
 msgid "Level 7"
 msgstr "Tingkat 7"
 
-#: ../includes/class-ure-lib.php:1980
+#: ../includes/class-ure-lib.php:2207
 msgid "Level 6"
 msgstr "Tingkat 6"
 
-#: ../includes/class-ure-lib.php:1981
+#: ../includes/class-ure-lib.php:2208
 msgid "Level 5"
 msgstr "Tingkat 5"
 
-#: ../includes/class-ure-lib.php:1982
+#: ../includes/class-ure-lib.php:2209
 msgid "Level 4"
 msgstr "Tingkat 4"
 
-#: ../includes/class-ure-lib.php:1983
+#: ../includes/class-ure-lib.php:2210
 msgid "Level 3"
 msgstr "Tingkat 3"
 
-#: ../includes/class-ure-lib.php:1984
+#: ../includes/class-ure-lib.php:2211
 msgid "Level 2"
 msgstr "Tingkat 2"
 
-#: ../includes/class-ure-lib.php:1985
+#: ../includes/class-ure-lib.php:2212
 msgid "Level 1"
 msgstr "Tingkat 1"
 
-#: ../includes/class-ure-lib.php:1986
+#: ../includes/class-ure-lib.php:2213
 msgid "Level 0"
 msgstr "Tingkat 0"
 
-#: ../includes/class-ure-lib.php:1987
+#: ../includes/class-ure-lib.php:2214
 msgid "Edit others pages"
 msgstr "Sunting halaman lainnya"
 
-#: ../includes/class-ure-lib.php:1988
+#: ../includes/class-ure-lib.php:2215
 msgid "Edit published pages"
 msgstr "Sunting halaman terpublikasi"
 
-#: ../includes/class-ure-lib.php:1989
+#: ../includes/class-ure-lib.php:2216
 msgid "Publish pages"
 msgstr "Publikasi halaman"
 
-#: ../includes/class-ure-lib.php:1990
+#: ../includes/class-ure-lib.php:2217
 msgid "Delete pages"
 msgstr "Hapus halaman"
 
-#: ../includes/class-ure-lib.php:1991
+#: ../includes/class-ure-lib.php:2218
 msgid "Delete others pages"
 msgstr "Hapus halaman lainnya"
 
-#: ../includes/class-ure-lib.php:1992
+#: ../includes/class-ure-lib.php:2219
 msgid "Delete published pages"
 msgstr "Hapus halaman terpublikasi"
 
-#: ../includes/class-ure-lib.php:1993
+#: ../includes/class-ure-lib.php:2220
 msgid "Delete posts"
 msgstr "hapus posting"
 
-#: ../includes/class-ure-lib.php:1994
+#: ../includes/class-ure-lib.php:2221
 msgid "Delete others posts"
 msgstr "Hapus posting lainnya"
 
-#: ../includes/class-ure-lib.php:1995
+#: ../includes/class-ure-lib.php:2222
 msgid "Delete published posts"
 msgstr "Hapus posting terpublikasi"
 
-#: ../includes/class-ure-lib.php:1996
+#: ../includes/class-ure-lib.php:2223
 msgid "Delete private posts"
 msgstr "Hapus posting pribadi"
 
-#: ../includes/class-ure-lib.php:1997
+#: ../includes/class-ure-lib.php:2224
 msgid "Edit private posts"
 msgstr "Sunting posting pribadi"
 
-#: ../includes/class-ure-lib.php:1998
+#: ../includes/class-ure-lib.php:2225
 msgid "Read private posts"
 msgstr "Baca posting pribadi"
 
-#: ../includes/class-ure-lib.php:1999
+#: ../includes/class-ure-lib.php:2226
 msgid "Delete private pages"
 msgstr "Hapus halaman pribadi"
 
-#: ../includes/class-ure-lib.php:2000
+#: ../includes/class-ure-lib.php:2227
 msgid "Edit private pages"
 msgstr "Sunting halaman pribadi"
 
-#: ../includes/class-ure-lib.php:2001
+#: ../includes/class-ure-lib.php:2228
 msgid "Read private pages"
 msgstr "baca halaman pribadi"
 
-#: ../includes/class-ure-lib.php:2002
+#: ../includes/class-ure-lib.php:2229
 msgid "Delete users"
 msgstr "Hapus pengguna"
 
-#: ../includes/class-ure-lib.php:2003
+#: ../includes/class-ure-lib.php:2230
 msgid "Create users"
 msgstr "Buat pengguna"
 
-#: ../includes/class-ure-lib.php:2004
+#: ../includes/class-ure-lib.php:2231
 msgid "Unfiltered upload"
 msgstr "Unggahan tidak tersaring"
 
-#: ../includes/class-ure-lib.php:2005
+#: ../includes/class-ure-lib.php:2232
 msgid "Edit dashboard"
 msgstr "Sunting dasbor"
 
-#: ../includes/class-ure-lib.php:2006
+#: ../includes/class-ure-lib.php:2233
 msgid "Update plugins"
 msgstr "Perbarui plugin"
 
-#: ../includes/class-ure-lib.php:2007
+#: ../includes/class-ure-lib.php:2234
 msgid "Delete plugins"
 msgstr "Hapus plugin"
 
-#: ../includes/class-ure-lib.php:2008
+#: ../includes/class-ure-lib.php:2235
 msgid "Install plugins"
 msgstr "Pasang plugin"
 
-#: ../includes/class-ure-lib.php:2009
+#: ../includes/class-ure-lib.php:2236
 msgid "Update themes"
 msgstr "Perbarui tema"
 
-#: ../includes/class-ure-lib.php:2010
+#: ../includes/class-ure-lib.php:2237
 msgid "Install themes"
 msgstr "Pasang tema"
 
-#: ../includes/class-ure-lib.php:2011
+#: ../includes/class-ure-lib.php:2238
 msgid "Update core"
 msgstr "Perbarui inti"
 
-#: ../includes/class-ure-lib.php:2012
+#: ../includes/class-ure-lib.php:2239
 msgid "List users"
 msgstr "Daftar pengguna"
 
-#: ../includes/class-ure-lib.php:2013
+#: ../includes/class-ure-lib.php:2240
 msgid "Remove users"
 msgstr "Hapus pengguna"
 
-#: ../includes/class-ure-lib.php:2014
+#: ../includes/class-ure-lib.php:2241
 msgid "Add users"
 msgstr "Tambah pengguna"
 
-#: ../includes/class-ure-lib.php:2015
+#: ../includes/class-ure-lib.php:2242
 msgid "Promote users"
 msgstr "Promosi pengguna"
 
-#: ../includes/class-ure-lib.php:2016
+#: ../includes/class-ure-lib.php:2243
 msgid "Edit theme options"
 msgstr "Sunting pilihan tema"
 
-#: ../includes/class-ure-lib.php:2017
+#: ../includes/class-ure-lib.php:2244
 msgid "Delete themes"
 msgstr "Hapus tema"
 
-#: ../includes/class-ure-lib.php:2018
+#: ../includes/class-ure-lib.php:2245
 msgid "Export"
 msgstr "Ekspor"
 
-#: ../includes/class-ure-lib.php:2128
+#: ../includes/class-ure-lib.php:2358
 msgid "Error: Capability name must contain latin characters and digits only!"
 msgstr "Salah: Kemampuan nama harus mengandung karakter latin dan angka saja!"
 
-#: ../includes/class-ure-lib.php:2141
+#: ../includes/class-ure-lib.php:2371
 #, php-format
 msgid "Capability %s is added successfully"
 msgstr "Kemampuan %s berhasil ditambahkan"
 
-#: ../includes/class-ure-lib.php:2143
+#: ../includes/class-ure-lib.php:2373
 #, php-format
 msgid "Capability %s exists already"
 msgstr "Kemampuan %s telah ada"
 
-#: ../includes/class-ure-lib.php:2168
+#: ../includes/class-ure-lib.php:2402
 #, php-format
 msgid "Error! You do not have permission to delete this capability: %s!"
 msgstr "Salah! Anda tidak memiliki izin untuk menghapus kemampuan ini: %s!"
 
-#: ../includes/class-ure-lib.php:2187
+#: ../includes/class-ure-lib.php:2421
 #, php-format
 msgid "Capability %s is removed successfully"
 msgstr "Kemampuan %s berhasil dihapus"
 
-#: ../includes/class-ure-lib.php:2292
+#: ../includes/class-ure-lib.php:2525
+msgid "Version:"
+msgstr ""
+
+#: ../includes/class-ure-lib.php:2526
 msgid "Author's website"
 msgstr "Website pengarang"
 
-#: ../includes/class-ure-lib.php:2293
+#: ../includes/class-ure-lib.php:2527
 msgid "Plugin webpage"
 msgstr "Halaman web Plugin"
 
-#: ../includes/class-ure-lib.php:2294
+#: ../includes/class-ure-lib.php:2528
 #, fuzzy
 msgid "Plugin download"
 msgstr "Halaman web Plugin"
 
-#: ../includes/class-ure-lib.php:2296
+#: ../includes/class-ure-lib.php:2530
 msgid "FAQ"
 msgstr "FAQ"
 
-#: ../includes/class-ure-lib.php:2344
+#: ../includes/class-ure-lib.php:2578
 msgid "None"
 msgstr "Nihil"
 
-#: ../includes/class-ure-lib.php:2371
+#: ../includes/class-ure-lib.php:2605
 msgid "Delete All Unused Roles"
 msgstr "Hapus Peran Tidak Terpakai"
 
-#: ../includes/class-ure-lib.php:2395
+#: ../includes/class-ure-lib.php:2629
 msgid "&mdash; No role for this site &mdash;"
 msgstr "&mdash; Tidak ada peran untuk situs ini &mdash;"
 
-#: ../includes/ure-user-edit.php:31
+#: ../includes/ure-user-edit.php:32
 msgid "Network Super Admin"
 msgstr "Jaringan Super Admin"
 
-#: ../includes/ure-user-edit.php:34
+#: ../includes/ure-user-edit.php:35
 msgid "Change capabilities for user"
 msgstr "Ubah kemampuan untuk pengguna"
 
-#: ../includes/class-ure-screen-help.php:15
-msgid "Show Administrator role at User Role Editor"
-msgstr "Tampilkan peran Administrator di User Role Editor"
+#: ../includes/ure-user-edit.php:72
+msgid "Primary Role:"
+msgstr "Peran Utama:"
+
+#: ../includes/ure-user-edit.php:82
+msgid "bbPress Role:"
+msgstr "Peran bbPress:"
+
+#: ../includes/ure-user-edit.php:92
+msgid "Other Roles:"
+msgstr "Peran Lain:"
 
 #: ../includes/class-ure-screen-help.php:16
 msgid ""
@@ -701,10 +817,6 @@ msgstr ""
 "daftar seleksi pilihan peran User Role Editor. Akan tersembunyi secara "
 "default demi alasan keamanan."
 
-#: ../includes/class-ure-screen-help.php:18
-msgid "Show capabilities in the human readable form"
-msgstr "Tampilkan kemampuan dalam bentuk yang dapat dibaca manusia"
-
 #: ../includes/class-ure-screen-help.php:19
 msgid ""
 "automatically converts capability names from the technical form for internal "
@@ -714,10 +826,6 @@ msgstr ""
 "secara otomatis mengkonversi nama kemampuan dari bentuk teknis untuk "
 "penggunaan internal seperti \"edit_others_posts\" ke bentuk yang lebih user "
 "friendly, misalnya \"Edit posting orang lain\"."
-
-#: ../includes/class-ure-screen-help.php:21
-msgid "Show deprecated capabilities"
-msgstr "Tampilkan kemampuan usang"
 
 #: ../includes/class-ure-screen-help.php:22
 msgid ""
@@ -731,22 +839,25 @@ msgstr ""
 "kompatibilitas dengan tema lama dan kode plugin. Menyalakan opsi ini akan "
 "menunjukkan kemampuan mereka usang."
 
-#: ../includes/class-ure-screen-help.php:41
-msgid "Count users without role"
+#: ../includes/class-ure-screen-help.php:26
+msgid ""
+"If turned off - capabilities section of selected user is shown in readonly "
+"mode. Administrator can not assign capabilities to the user directly. He "
+"should make it using roles only."
 msgstr ""
 
-#: ../includes/class-ure-screen-help.php:42
+#: ../includes/class-ure-screen-help.php:46
 msgid ""
 "Show at the \"Users\" page a quant of users without role. Module allows to "
 "assign all of them an empty role \"No rights\", in order to look on the "
 "users list with role \"No rights\" at the separate tab then."
 msgstr ""
 
-#: ../includes/class-ure-screen-help.php:59
+#: ../includes/class-ure-screen-help.php:63
 msgid "Other default roles for new registered user"
 msgstr ""
 
-#: ../includes/class-ure-screen-help.php:60
+#: ../includes/class-ure-screen-help.php:64
 msgid ""
 "select roles below to assign them to the new user automatically as an "
 "addition to the primary role. Note for multisite environment: take into "
@@ -754,11 +865,11 @@ msgid ""
 "assigned to the new registered users."
 msgstr ""
 
-#: ../includes/class-ure-screen-help.php:78
+#: ../includes/class-ure-screen-help.php:82
 msgid "Allow non super-admininstrators to create, edit and delete users"
 msgstr ""
 
-#: ../includes/class-ure-screen-help.php:79
+#: ../includes/class-ure-screen-help.php:83
 #, fuzzy
 msgid ""
 "Super administrator only may create, edit and delete users under WordPress "
@@ -768,60 +879,6 @@ msgstr ""
 "Super administrator hanya dapat membuat, mengedit dan menghapus pengguna di "
 "bawah WordPress multi-situs. Aktifkan pilihan ini dalam rangka menghapus "
 "keterbatasan ini."
-
-#, fuzzy
-#~ msgid "User Role Editor - Options"
-#~ msgstr "User Role Editor"
-
-#, fuzzy
-#~ msgid "Primary default role: "
-#~ msgstr "Peran Utama:"
-
-#, fuzzy
-#~ msgid "Select Role and change its capabilities:"
-#~ msgstr "Pilih Peran dan ubah daftar kemampuan"
-
-#~ msgid "Show capabilities in human readable form"
-#~ msgstr "Tampilkan kemampuan dalam bentuk yang dapat dibaca manusia"
-
-#~ msgid "Apply to All Sites"
-#~ msgstr "Terapkan ke Semua Situs"
-
-#~ msgid "Core capabilities:"
-#~ msgstr "Kemampuan inti:"
-
-#~ msgid "Quick filter:"
-#~ msgstr "Saring Cepat:"
-
-#~ msgid "Custom capabilities:"
-#~ msgstr "Kustom kemampuan:"
-
-#~ msgid "Role name (ID): "
-#~ msgstr "Nama Peran (ID):"
-
-#~ msgid "Display Role Name: "
-#~ msgstr "Tampilkan Nama Peran:"
-
-#~ msgid "Make copy of: "
-#~ msgstr "buat salinan:"
-
-#~ msgid "Select Role:"
-#~ msgstr "Pilih Peran:"
-
-#~ msgid "Delete:"
-#~ msgstr "Hapus:"
-
-#~ msgid "Capability name (ID): "
-#~ msgstr "Nama Kemampuan (ID):"
-
-#~ msgid "Primary Role:"
-#~ msgstr "Peran Utama:"
-
-#~ msgid "bbPress Role:"
-#~ msgstr "Peran bbPress:"
-
-#~ msgid "Other Roles:"
-#~ msgstr "Peran Lain:"
 
 #, fuzzy
 #~ msgid "select roles below"

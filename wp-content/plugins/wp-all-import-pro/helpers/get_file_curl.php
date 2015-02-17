@@ -13,7 +13,7 @@ if ( ! function_exists('get_file_curl') ):
 			if (empty($rawdata)){
 				$result =  pmxi_curl_download($url, $fullpath, $to_variable);					
 				if ( ! $result and ! $iteration){					
-					$url = pmxi_translate_uri($url);
+					$url = wp_all_import_translate_uri($url);
 					return get_file_curl($url, $fullpath, $to_variable, 1);
 				}
 				return $result;
@@ -29,7 +29,7 @@ if ( ! function_exists('get_file_curl') ):
 			{			
 				$result =  pmxi_curl_download($url, $fullpath, $to_variable);	
 				if ( ! $result and ! $iteration){
-					$url = pmxi_translate_uri($url);
+					$url = wp_all_import_translate_uri($url);
 					return get_file_curl($url, $fullpath, $to_variable, 1);
 				}
 				return $result;
@@ -43,7 +43,7 @@ if ( ! function_exists('get_file_curl') ):
 			$curl = pmxi_curl_download($url, $fullpath, $to_variable);							
 
 			if ($curl === false and ! $iteration){				
-				$url = pmxi_translate_uri($url);
+				$url = wp_all_import_translate_uri($url);
 				return get_file_curl($url, $fullpath, $to_variable, 1);
 								
 			}

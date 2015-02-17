@@ -24,14 +24,14 @@ $l10n = array(
 
 ?>
 <script type="text/javascript">
-	var plugin_url = '<?php echo PMXI_ROOT_URL; ?>';
+	var plugin_url = '<?php echo WP_ALL_IMPORT_ROOT_URL; ?>';
 	var swfuploadL10n = <?php echo json_encode($l10n); ?>;
 </script>
 
 <div class="change_file">
 	<div class="wpallimport-content-section">
 		<div class="wpallimport-collapsed-header" style="padding-left:30px;">
-			<h3><?php _e('Import File','pmxi_plugin');?></h3>	
+			<h3><?php _e('Import File','wp_all_import_plugin');?></h3>	
 		</div>
 		<div class="wpallimport-collapsed-content" style="padding-bottom: 40px;">
 			<hr>
@@ -40,18 +40,18 @@ $l10n = array(
 					<td colspan="3">
 
 						<div class="wpallimport-import-types">
-							<h3><?php _e('Specify the location of the file to use for future runs of this import.', 'pmxi_plugin'); ?></h3>
+							<h3><?php _e('Specify the location of the file to use for future runs of this import.', 'wp_all_import_plugin'); ?></h3>
 							<a class="wpallimport-import-from wpallimport-upload-type <?php echo 'upload' == $import->type ? 'selected' : '' ?>" rel="upload_type" href="javascript:void(0);">
 								<span class="wpallimport-icon"></span>
-								<span class="wpallimport-icon-label"><?php _e('Upload a file', 'pmxi_plugin'); ?></span>
+								<span class="wpallimport-icon-label"><?php _e('Upload a file', 'wp_all_import_plugin'); ?></span>
 							</a>
 							<a class="wpallimport-import-from wpallimport-url-type <?php echo 'url' == $import->type ? 'selected' : '' ?>" rel="url_type" href="javascript:void(0);">
 								<span class="wpallimport-icon"></span>
-								<span class="wpallimport-icon-label"><?php _e('Download from URL', 'pmxi_plugin'); ?></span>
+								<span class="wpallimport-icon-label"><?php _e('Download from URL', 'wp_all_import_plugin'); ?></span>
 							</a>
 							<a class="wpallimport-import-from wpallimport-file-type <?php echo 'file' == $import->type ? 'selected' : '' ?>" rel="file_type" href="javascript:void(0);">
 								<span class="wpallimport-icon"></span>
-								<span class="wpallimport-icon-label"><?php _e('Use existing file', 'pmxi_plugin'); ?></span>
+								<span class="wpallimport-icon-label"><?php _e('Use existing file', 'wp_all_import_plugin'); ?></span>
 							</a>
 						</div>						
 						
@@ -61,9 +61,9 @@ $l10n = array(
 							<div id="plupload-ui" class="wpallimport-file-type-options">
 					            <div>				                
 					                <input type="hidden" name="filepath" value="<?php if ('upload' == $import->type) echo $import->path; ?>" id="filepath"/>
-					                <a id="select-files" href="javascript:void(0);"/><?php _e('Click here to select file from your computer...', 'pmxi_plugin'); ?></a>
+					                <a id="select-files" href="javascript:void(0);"/><?php _e('Click here to select file from your computer...', 'wp_all_import_plugin'); ?></a>
 					                <div id="progressbar" class="wpallimport-progressbar">
-					                	<?php if ('upload' == $import->type) _e( '<span>Upload Complete</span> - '.basename($import->path).' 100%', 'pmxi_plugin'); ?>
+					                	<?php if ('upload' == $import->type) _e( '<span>Upload Complete</span> - '.basename($import->path).' 100%', 'wp_all_import_plugin'); ?>
 					                </div>
 					                <div id="progress" class="wpallimport-progress" <?php if ('upload' == $import->type):?>style="display: block;"<?php endif;?>>
 					                	<div id="upload_process" class="wpallimport-upload-process"></div>				                	
@@ -75,7 +75,7 @@ $l10n = array(
 							<div class="wpallimport-file-type-options">
 								<span class="wpallimport-url-icon"></span>
 								<input type="text" class="regular-text" name="url" value="<?php echo ('url' == $import->type) ? esc_attr($import->path) : 'Enter a web address to download the file from...'; ?>"/> 
-								<!--a href="javascript:void(0);" class="wpallimport-download-from-url"><?php _e('Upload', 'pmxi_plugin'); ?></a-->
+								<!--a href="javascript:void(0);" class="wpallimport-download-from-url"><?php _e('Upload', 'wp_all_import_plugin'); ?></a-->
 							</div>
 							<input type="hidden" name="downloaded"/>
 						</div>
@@ -109,7 +109,7 @@ $l10n = array(
 								</script>
 
 								<select name="" id="file_selector">
-									<option value=""><?php _e('Select a previously uploaded file', 'pmxi_plugin'); ?></option>
+									<option value=""><?php _e('Select a previously uploaded file', 'wp_all_import_plugin'); ?></option>
 									<?php foreach ($local_files as $file) :?>
 										<option value="<?php echo $file; ?>" <?php if ( 'file' == $import->type and $file == basename(esc_attr($import->path))):?>selected="selected"<?php endif; ?>><?php echo basename($file); ?></option>
 									<?php endforeach; ?>
@@ -121,7 +121,7 @@ $l10n = array(
 									var existing_file_sizes = <?php echo json_encode($sizes) ?>;
 								</script>
 								<div class="wpallimport-note" style="width:60%; margin: 0 auto; ">
-									<?php printf(__('Upload files to <strong>%s</strong> and they will appear in this list', 'pmxi_plugin'), $upload_dir['basedir'] . '/wpallimport/files') ?>
+									<?php printf(__('Upload files to <strong>%s</strong> and they will appear in this list', 'wp_all_import_plugin'), $upload_dir['basedir'] . '/wpallimport/files') ?>
 								</div>
 							</div>
 						</div>						

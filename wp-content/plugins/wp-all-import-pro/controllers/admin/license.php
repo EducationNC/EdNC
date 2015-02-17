@@ -10,33 +10,48 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 		$this->data['post'] = $post = $this->input->post(PMXI_Plugin::getInstance()->getOption());		
 
-		if ($this->input->post('is_licenses_submitted')) { // save settings form
+		/*$addons = new PMXI_Admin_Addons();
 
-			check_admin_referer('edit-licenses', '_wpnonce_edit-licenses');													
-
-			if ( ! $this->errors->get_error_codes()) { // no validation errors detected				
-
-				PMXI_Plugin::getInstance()->updateOption($post);				
-				
-				$this->activate_licenses();
-
-				$this->deactivate_licenses();
-
-				wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Licenses saved', 'pmxi_plugin')), $this->baseUrl)); die();
-			}
-
-		}						
-
-		$addons = new PMXI_Admin_Addons();
-
-		$this->data['addons'] = $addons->get_premium_addons();			
+		$this->data['addons'] = $addons->get_premium_addons();*/
 
 		$this->data['addons']['PMXI_Plugin'] = array(
-			'title' => __('WP All Import', 'pmxi_plugin'),
+			'title' => __('WP All Import', 'wp_all_import_plugin'),
 			'active' => (class_exists('PMXI_Plugin') and defined('PMXI_EDITION') and PMXI_EDITION == 'paid')
 		);
 
 		$this->data['addons'] = array_reverse($this->data['addons']);
+
+		if ($this->input->post('is_licenses_submitted')) { // save settings form
+
+			check_admin_referer('edit-licenses', '_wpnonce_edit-licenses');													
+
+			if ( ! $this->errors->get_error_codes()) { // no validation errors detected																
+
+				PMXI_Plugin::getInstance()->updateOption($post);
+
+				if (empty($_POST['pmxi_license_activate']) and empty($_POST['pmxi_license_deactivate'])) {
+					foreach ($this->data['addons'] as $class => $addon) {
+						$post['statuses'][$class] = $this->check_license($class);
+					}					
+					PMXI_Plugin::getInstance()->updateOption($post);
+				}				
+
+				isset( $_POST['pmxi_license_activate'] ) and $this->activate_licenses();
+
+				isset( $_POST['pmxi_license_deactivate'] ) and $this->deactivate_licenses();
+
+				wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Licenses saved', 'wp_all_import_plugin')), $this->baseUrl)); die();
+			}
+
+		}		
+		else{			
+
+			foreach ($this->data['addons'] as $class => $addon) {
+				$post['statuses'][$class] = $this->check_license($class);
+			}								
+
+			PMXI_Plugin::getInstance()->updateOption($post);	
+		}							
 
 		$this->render();
 	}	
@@ -162,7 +177,7 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 				$api_params = array( 
 					'edd_action' => 'check_license', 
-					'license' => $license, 
+					'license' => $options['licenses'][$class], 
 					'item_name' => urlencode( $product_name ) 
 				);
 
@@ -174,13 +189,15 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 				$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-				if( $license_data->license == 'valid' ) {
+				return $license_data->license;
+
+				/*if( $license_data->license == 'valid' ) {
 					return true;
-					// this license is still valid
+				
 				} else {
 					return false;
-					// this license is no longer valid
-				}
+				
+				}*/
 			}
 		}
 

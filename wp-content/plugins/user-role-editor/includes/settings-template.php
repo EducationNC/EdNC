@@ -69,7 +69,16 @@ if (!$license_key_only) {
                         <label for="show_deprecated_caps"><?php esc_html_e('Show deprecated capabilities', 'ure'); ?></label></td>
                     <td>                        
                     </td>
-                </tr>                   
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="edit_user_caps" id="edit_user_caps" value="1" 
+                               <?php echo ($edit_user_caps == 1) ? 'checked="checked"' : ''; ?> /> 
+                        <label for="edit_user_caps"><?php esc_html_e('Edit user capabilities', 'ure'); ?></label></td>
+                    <td>                        
+                    </td>
+                </tr>
+                
 <?php
 }
     do_action('ure_settings_show1');

@@ -80,7 +80,7 @@ class acf_field_flexible_content extends acf_field {
 			'key'			=> uniqid(),
 			'name'			=> '',
 			'label'			=> '',
-			'display'		=> 'row',
+			'display'		=> 'block',
 			'sub_fields'	=> array(),
 			'min'			=> '',
 			'max'			=> '',

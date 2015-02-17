@@ -61,7 +61,7 @@ class PMXI_API
 				<?php endforeach;?>							
 				<div class="form-field wpallimport-radio-field">
 					<input type="radio" id="<?php echo sanitize_title($params['field_name']); ?>_xpath" class="switcher" name="<?php echo $params['field_name']; ?>" value="xpath" <?php echo 'xpath' == $params['field_value'] ? 'checked="checked"': '' ?>/>
-					<label for="<?php echo sanitize_title($params['field_name']); ?>_xpath"><?php _e('Set with XPath', 'pmxi_plugin' )?></label>
+					<label for="<?php echo sanitize_title($params['field_name']); ?>_xpath"><?php _e('Set with XPath', 'wp_all_import_plugin' )?></label>
 					<span class="wpallimport-clear"></span>
 					<div class="switcher-target-<?php echo sanitize_title($params['field_name']); ?>_xpath set_with_xpath">
 						<span class="wpallimport-slide-content" style="padding-left:0px;">
@@ -76,10 +76,10 @@ class PMXI_API
 										<?php $custom_mapping_rules = (!empty($params['mapping_rules'])) ? json_decode($params['mapping_rules'], true) : false; ?>
 										
 										<div class="input wpallimport-custom-fields-actions">
-											<a href="javascript:void(0);" class="wpallimport-cf-options"><?php _e('Field Options...', 'pmxi_plugin'); ?></a>
+											<a href="javascript:void(0);" class="wpallimport-cf-options"><?php _e('Field Options...', 'wp_all_import_plugin'); ?></a>
 											<ul id="wpallimport-cf-menu-<?php echo sanitize_title($params['field_name']);?>" class="wpallimport-cf-menu">						
 												<li class="<?php echo ( ! empty($custom_mapping_rules) ) ? 'active' : ''; ?>">
-													<a href="javascript:void(0);" class="set_mapping pmxi_cf_mapping" rel="cf_mapping_<?php echo sanitize_title($params['field_name']); ?>"><?php _e('Mapping', 'pmxi_plugin'); ?></a>
+													<a href="javascript:void(0);" class="set_mapping pmxi_cf_mapping" rel="cf_mapping_<?php echo sanitize_title($params['field_name']); ?>"><?php _e('Mapping', 'wp_all_import_plugin'); ?></a>
 												</li>
 											</ul>														
 										</div>
@@ -88,8 +88,8 @@ class PMXI_API
 												<table cellpadding="0" cellspacing="5" class="cf-form-table" rel="cf_mapping_<?php echo sanitize_title($params['field_name']); ?>">
 													<thead>
 														<tr>
-															<td><?php _e('In Your File', 'pmxi_plugin') ?></td>
-															<td><?php _e('Translated To', 'pmxi_plugin') ?></td>
+															<td><?php _e('In Your File', 'wp_all_import_plugin') ?></td>
+															<td><?php _e('Translated To', 'wp_all_import_plugin') ?></td>
 															<td>&nbsp;</td>						
 														</tr>
 													</thead>
@@ -168,13 +168,13 @@ class PMXI_API
 														</tr>
 														<tr>
 															<td colspan="3">
-																<a href="javascript:void(0);" title="<?php _e('Add Another', 'pmxi_plugin')?>" class="action add-new-key add-new-entry"><?php _e('Add Another', 'pmxi_plugin') ?></a>
+																<a href="javascript:void(0);" title="<?php _e('Add Another', 'wp_all_import_plugin')?>" class="action add-new-key add-new-entry"><?php _e('Add Another', 'wp_all_import_plugin') ?></a>
 															</td>
 														</tr>
 														<tr>																										
 															<td colspan="3">
 																<div class="wrap" style="position:relative;">
-																	<a class="save_popup save_mr" href="javascript:void(0);"><?php _e('Save Rules', 'pmxi_plugin'); ?></a>
+																	<a class="save_popup save_mr" href="javascript:void(0);"><?php _e('Save Rules', 'wp_all_import_plugin'); ?></a>
 																</div>
 															</td>
 														</tr>
@@ -203,12 +203,12 @@ class PMXI_API
 					<div class="input" style="margin: 0px;">
 						<input type="radio" name="<?php echo $params['addon_prefix'];?>[download_image][<?php echo $params['field_key'];?>]" value="yes" id="<?php echo sanitize_title($params['field_name']); ?>_yes" <?php echo ("yes" == $params['download_image']) ? 'checked="checked"' : '';?>/>
 						<label for="<?php echo sanitize_title($params['field_name']); ?>_yes"><?php _e('Download image hosted elsewhere'); ?></label>
-						<a href="#help" class="wpallimport-help" title="<?php _e('http:// or https://', 'pmxi_plugin') ?>" style="position: relative; top: -2px;">?</a>
+						<a href="#help" class="wpallimport-help" title="<?php _e('http:// or https://', 'wp_all_import_plugin') ?>" style="position: relative; top: -2px;">?</a>
 					</div>
 					<div class="input" style="margin: 0px;">
 						<?php $wp_uploads = wp_upload_dir(); ?>																					
 						<input type="radio" name="<?php echo $params['addon_prefix'];?>[download_image][<?php echo $params['field_key'];?>]" value="no" id="<?php echo sanitize_title($params['field_name']); ?>_no" <?php echo ("yes" != $params['download_image']) ? 'checked="checked"' : '';?>/>
-						<label for="<?php echo sanitize_title($params['field_name']); ?>_no"><?php printf(__('Use image(s) currently uploaded in %s/wpallimport/files/', 'pmxi_plugin'), $wp_uploads['basedir']); ?></label>
+						<label for="<?php echo sanitize_title($params['field_name']); ?>_no"><?php printf(__('Use image(s) currently uploaded in %s/wpallimport/files/', 'wp_all_import_plugin'), $wp_uploads['basedir']); ?></label>
 					</div>						
 					<div class="input">						
 						<input type="text" name="<?php echo $params['field_name']; ?>" style="width:100%;" placeholder="" value="<?php echo esc_attr($params['field_value']); ?>"/>
@@ -253,15 +253,15 @@ class PMXI_API
 			$wpai_uploads = $uploads['basedir'] . '/wpallimport/files/';
 			$wpai_image_path = $wpai_uploads . str_replace('%20', ' ', $url);
 
-			$logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` in `%s` folder', 'pmxi_plugin'), $wpai_image_path, $wpai_uploads));
+			$logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` in `%s` folder', 'wp_all_import_plugin'), $wpai_image_path, $wpai_uploads));
 
 			if ( @file_exists($wpai_image_path) and @copy( $wpai_image_path, $image_filepath )){
 				$download_image = false;																				
 				if( ! ($image_info = @getimagesize($image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
-					$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'pmxi_plugin'), $image_filepath));					
+					$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));					
 					@unlink($image_filepath);
 				} else {
-					$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully founded', 'pmxi_plugin'), $wpai_image_path));
+					$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully founded', 'wp_all_import_plugin'), $wpai_image_path));
 					$result = true;
 				}
 			}													
@@ -269,14 +269,14 @@ class PMXI_API
 
 		if ($download_image){
 			
-			$logger and call_user_func($logger, sprintf(__('- Downloading image from `%s`', 'pmxi_plugin'), $url));
+			$logger and call_user_func($logger, sprintf(__('- Downloading image from `%s`', 'wp_all_import_plugin'), $url));
 
 			$request = get_file_curl($url, $image_filepath);
 
 			if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($url))) {
 				@unlink($image_filepath); // delete file since failed upload may result in empty file created
 			} elseif( ($image_info = @getimagesize($image_filepath)) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
-				$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'pmxi_plugin'), $url));									
+				$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));									
 				$result = true;
 			}																	
 
@@ -285,20 +285,20 @@ class PMXI_API
 			$request = get_file_curl($url, $image_filepath);
 
 			if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($url))) {
-				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s cannot be saved locally as %s', 'pmxi_plugin'), $url, $image_filepath));				
+				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s cannot be saved locally as %s', 'wp_all_import_plugin'), $url, $image_filepath));				
 				@unlink($image_filepath); // delete file since failed upload may result in empty file created										
 			} elseif( ! ($image_info = @getimagesize($image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
-				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'pmxi_plugin'), $url));		
+				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $url));		
 				@unlink($image_filepath);
 			} else {				
-				$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'pmxi_plugin'), $url));											
+				$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));											
 				$result = true;
 			}			
 		}
 
 		if ($create_image and $result){
 
-			$logger and call_user_func($logger, sprintf(__('- Creating an attachment for image `%s`', 'pmxi_plugin'), $targetUrl . '/' . $image_filename));	
+			$logger and call_user_func($logger, sprintf(__('- Creating an attachment for image `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . $image_filename));	
 
 			$attachment = array(
 				'post_mime_type' => image_type_to_mime_type($image_info[2]),
@@ -316,14 +316,14 @@ class PMXI_API
 			$attid = wp_insert_attachment($attachment, $image_filepath, $pid);
 
 			if (is_wp_error($attid)) {
-				$logger and call_user_func($logger, __('- <b>WARNING</b>', 'pmxi_plugin') . ': ' . $attid->get_error_message());			
+				$logger and call_user_func($logger, __('- <b>WARNING</b>', 'wp_all_import_plugin') . ': ' . $attid->get_error_message());			
 				return false;
 			} else {
 				// you must first include the image.php file
 				// for the function wp_generate_attachment_metadata() to work
 				require_once(ABSPATH . 'wp-admin/includes/image.php');
 				wp_update_attachment_metadata($attid, wp_generate_attachment_metadata($attid, $image_filepath));																
-				$logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for image `%s`', 'pmxi_plugin'), $targetUrl . '/' . $image_filename));
+				$logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for image `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . $image_filename));
 				return $attid;											
 			}
 

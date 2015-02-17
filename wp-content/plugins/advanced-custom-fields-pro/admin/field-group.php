@@ -583,7 +583,7 @@ class acf_admin_field_group {
 
 				if( is_multisite() )
 				{
-					$choices['super_admin'] = __('Super Admin');
+					$choices['super_admin'] = __('Super Admin', 'acf');
 				}
 								
 				break;

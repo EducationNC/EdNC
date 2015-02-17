@@ -1,7 +1,35 @@
 ------------------------------------------------------------------------------------------------------------------
+Version 3.5
+    - Updated required version of Gravity Forms to 1.8.17.
+    - Fixed an issue with Address fields where MailChimp would ignore the passed string if it did not contain the street address, city, state, or zip.
+
+------------------------------------------------------------------------------------------------------------------
+Version 3.4
+    - Added support for the middle name input when preparing Name field values.
+    - Updated required version of Gravity Forms to 1.9.
+    - Fixed an issue causing checkbox fields not to be mapped under certain conditions.
+    - Fixed fatal error with PHP < 5.4.
+
+------------------------------------------------------------------------------------------------------------------
+Version 3.3
+    - Updated logging statements.
+	- Updated the gform_mailchimp_field_value filter to have an additional parameter which includes the name of the custom mapped field.
+	- Fixed issue causing address not to be mapped properly under certain scenarios.
+	- Fixed Notice.
+    - Fixed an issue with the concatenated string for Checkbox fields not being cleared before the next field is processed.
+    - Fixed a warning when MailChimp interest groups aren't enabled on the list.
+
+------------------------------------------------------------------------------------------------------------------
 Version 3.2
     - Added hook to allow args to be changed before sending submission to MailChimp.
+        add_filter( 'gform_mailchimp_args_pre_subscribe', 'override_mailchimp_params', 10, 4 );
+        function override_mailchimp_params( $params, $form, $entry, $feed ) {
+            // do stuff
+
+            return $params;
+        }
     - Added hook to select whether empty mapped fields should override existing values on Mailchimp; defaults to override.
+        add_filter('gform_mailchimp_override_empty_fields', '__return_false' );
     - Fixed issue where existing groups were not maintained for users already subscribed.
 	- Fixed notice messages.
 	- Fixed fatal error displayed on certain situations.

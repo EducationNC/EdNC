@@ -13,26 +13,18 @@
 *  @return	(boolean)
 */
 
-function acf_is_field_group_key( $group_key = '' ) {
+function acf_is_field_group_key( $key = '' ) {
 	
-	// validate type
-	if( ! is_string($group_key) ) {
-	
-		return false;
+	// look for 'field_' prefix
+	if( is_string($key) && substr($key, 0, 6) === 'group_' ) {
 		
-	}
-	
-	
-	// search for 'field_'
-	if( substr($group_key, 0, 6) === 'group_' ) {
-	
 		return true;
 		
 	}
 	
 	
-	// allow local field key to not start with '_field'
-	if( acf_is_local_field_group($group_key) ) {
+	// allow local field group key to not start with prefix
+	if( acf_is_local_field_group($key) ) {
 		
 		return true;
 		
@@ -41,6 +33,44 @@ function acf_is_field_group_key( $group_key = '' ) {
 	
 	// return
 	return false;
+	
+}
+
+
+/*
+*  acf_get_valid_field_group_key
+*
+*  This function will return a valid field group key starting with 'group_'
+*
+*  @type	function
+*  @date	2/02/2015
+*  @since	5.1.5
+*
+*  @param	$key (string)
+*  @return	$key
+*/
+
+function acf_get_valid_field_group_key( $key = '' ) {
+	
+	// test if valid
+	if( !acf_is_field_group_key($key) ) {
+		
+		// empty
+		if( !$key ) {
+			
+			$key = uniqid();
+			
+		} 
+		
+		
+		// add prefix
+		$key = "group_{$key}";
+		
+	}
+	
+	
+	// return
+	return $key;
 	
 }
 

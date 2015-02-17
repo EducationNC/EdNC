@@ -77,7 +77,7 @@ class PMXI_File_Record extends PMXI_Model_Record {
 		if ($this->id) { // delete history file first
 			$uploads = wp_upload_dir();
 			$file_name = $uploads['basedir']  . '/wpallimport/history/' . $this->id;
-			@file_exists($file_name) and @is_file($file_name) and pmxi_remove_source($file_name, false);
+			@file_exists($file_name) and @is_file($file_name) and wp_all_import_remove_source($file_name, false);
 		}
 		return parent::delete();
 	}

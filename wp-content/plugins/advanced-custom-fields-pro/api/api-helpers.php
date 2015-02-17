@@ -41,6 +41,26 @@ function acf_get_setting( $name, $allow_filter = true ) {
 
 
 /*
+*  acf_get_compatibility
+*
+*  This function will return true or false for a given compatibility setting
+*
+*  @type	function
+*  @date	20/01/2015
+*  @since	5.1.5
+*
+*  @param	$name (string)
+*  @return	(boolean)
+*/
+
+function acf_get_compatibility( $name ) {
+	
+	return apply_filters( "acf/compatibility/{$name}", true );
+	
+}
+
+
+/*
 *  acf_update_setting
 *
 *  This function will update a value into the settings array found in the acf object
@@ -418,29 +438,48 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 	);
 	
 	
-	// merge in atts
-	$wrapper = acf_merge_atts( $wrapper, $field['wrapper'] );
-	
-	
-	// add type
-	$wrapper['class'] .= " field_type-{$field['type']}";
-	
-	
-	// add key
-	if( $field['key'] ) {
-		
-		$wrapper['class'] .= " field_key-{$field['key']}";
-		$wrapper['data-key'] = $field['key'];
-		
-	}
-	
-	
 	// add required
 	if( $field['required'] ) {
 		
 		$wrapper['data-required'] = 1;
 		
 	}
+	
+	
+	// add type
+	$wrapper['class'] .= " acf-field-{$field['type']}";
+	
+	
+	// add key
+	if( $field['key'] ) {
+		
+		$wrapper['class'] .= " acf-field-{$field['key']}";
+		$wrapper['data-key'] = $field['key'];
+		
+	}
+	
+	
+	// replace
+	$wrapper['class'] = str_replace('_', '-', $wrapper['class']);
+	$wrapper['class'] = str_replace('field-field-', 'field-', $wrapper['class']);
+	
+	
+	// compatibility
+	if( acf_get_compatibility('field_wrapper_class') ) {
+		
+		$wrapper['class'] .= " field_type-{$field['type']}";
+		
+		if( $field['key'] ) {
+			
+			$wrapper['class'] .= " field_key-{$field['key']}";
+			
+		}
+		
+	}
+		
+	
+	// merge in atts
+	$wrapper = acf_merge_atts( $wrapper, $field['wrapper'] );
 	
 	
 	// add width
@@ -450,9 +489,7 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 		
 		$width = 0;
 		
-	}
-	
-	if( $width > 0 && $width < 100 ) {
+	} elseif( $width > 0 && $width < 100 ) {
 		
 		$wrapper['data-width'] = $width;
 		$wrapper['style'] .= " width:{$width}%;";
@@ -2190,9 +2227,15 @@ function acf_encode_choices( $array = array() ) {
 
 function acf_decode_choices( $string = '' ) {
 	
-	// bail early if nota a string
-	if( !is_string($string) ) {
+	// validate
+	if( is_numeric($string) ) {
 		
+		// force array on single numeric values
+		return array( $string );
+		
+	} elseif( !is_string($string) ) {
+		
+		// bail early if not a a string
 		return $string;
 		
 	}
@@ -2200,13 +2243,6 @@ function acf_decode_choices( $string = '' ) {
 	
 	// vars
 	$array = array();
-	
-	
-	// explode choices from each line
-	//if( !empty($string) ) {
-		
-	// stripslashes ("")
-	//$string = stripslashes_deep($string);
 	
 	
 	// explode
@@ -2234,15 +2270,6 @@ function acf_decode_choices( $string = '' ) {
 		
 		// append
 		$array[ $k ] = $v;
-		
-	}
-	//}
-	
-	
-	// bail early if no choices
-	if( empty($array) ) {
-		
-		return '';
 		
 	}
 	
@@ -2985,6 +3012,67 @@ function acf_get_truncated( $text, $length = 64 ) {
 	
 	// return
 	return $return;
+	
+}
+
+
+/*
+*  acf_get_current_url
+*
+*  This function will return the current URL
+*
+*  @type	function
+*  @date	23/01/2015
+*  @since	5.1.5
+*
+*  @param	n/a
+*  @return	(string)
+*/
+
+function acf_get_current_url() {
+	
+	// vars
+	$home = home_url();
+	$url = home_url($_SERVER['REQUEST_URI']);
+	
+	
+	// test
+	//$home = 'http://acf5/dev/wp-admin';
+	//$url = $home . '/dev/wp-admin/api-template/acf_form';
+	
+	
+	// explode url (4th bit is the sub folder)
+	$bits = explode('/', $home, 4);
+	
+	
+	/*
+	Array (
+	    [0] => http:
+	    [1] => 
+	    [2] => acf5
+	    [3] => dev
+	)
+	*/
+	
+	
+	// handle sub folder
+	if( !empty($bits[3]) ) {
+		
+		$find = '/' . $bits[3];
+		$pos = strpos($url, $find);
+		$length = strlen($find);
+		
+		if( $pos !== false ) {
+			
+		    $url = substr_replace($url, '', $pos, $length);
+		    
+		}
+				
+	}
+	
+	
+	// return
+	return $url;
 	
 }
 

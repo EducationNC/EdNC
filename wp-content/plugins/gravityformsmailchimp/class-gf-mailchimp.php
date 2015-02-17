@@ -46,14 +46,14 @@ class GFMailChimp extends GFFeedAddOn {
 
 	}
 
-	public function init_ajax(){
+	public function init_ajax() {
 		parent::init_ajax();
 
 		add_action( 'wp_ajax_gf_dismiss_mailchimp_menu', array( $this, 'ajax_dismiss_menu' ) );
 
 	}
 
-	public function init_admin(){
+	public function init_admin() {
 
 		parent::init_admin();
 
@@ -94,21 +94,20 @@ class GFMailChimp extends GFFeedAddOn {
 			require_once( 'api/Mailchimp.php' );
 		}
 
-		$this->log_debug( "Validating login for API Info for key {$apikey}" );
+		$this->log_debug( __METHOD__ . "(): Validating login for API Info for key {$apikey}." );
 		$api = new Mailchimp( trim( $apikey ), null );
 		try {
 			$lists = $api->call( 'lists/list', '' );
-		}
-		catch ( Exception $e ) {
-			$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+		} catch ( Exception $e ) {
+			$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
 		}
 
 		if ( empty( $lists ) ) {
-			$this->log_error( 'Invalid API Key. Error ' . $e->getCode() . ' - ' . $e->getMessage() );
+			$this->log_error( __METHOD__ . '(): Invalid API Key. Error ' . $e->getCode() . ' - ' . $e->getMessage() );
 
 			return false;
 		} else {
-			$this->log_debug( 'API Key is valid.' );
+			$this->log_debug( __METHOD__ . '(): API Key is valid.' );
 
 			return true;
 		}
@@ -183,7 +182,6 @@ class GFMailChimp extends GFFeedAddOn {
 							),
 						)
 					),
-
 					array( 'type' => 'save' ),
 				)
 			),
@@ -246,16 +244,15 @@ class GFMailChimp extends GFFeedAddOn {
 		$html = '';
 
 		// getting all contact lists
-		$this->log_debug( 'Retrieving contact lists' );
+		$this->log_debug( __METHOD__ . '(): Retrieving contact lists.' );
 		try {
 			$params = array(
 				'start' => 0,
 				'limit' => 100,
 			);
 			$lists  = $api->call( 'lists/list', $params );
-		}
-		catch ( Exception $e ) {
-			$this->log_error( 'Could not load MailChimp contact lists. Error ' . $e->getCode() . ' - ' . $e->getMessage() );
+		} catch ( Exception $e ) {
+			$this->log_error( __METHOD__ . '(): Could not load MailChimp contact lists. Error ' . $e->getCode() . ' - ' . $e->getMessage() );
 		}
 
 		if ( empty( $lists ) ) {
@@ -264,18 +261,23 @@ class GFMailChimp extends GFFeedAddOn {
 			if ( $lists['total'] == 0 ) {
 				//no lists found
 				echo __( 'Could not load MailChimp contact lists. <br/>Error: ', 'gravityformsmailchimp' ) . 'No lists found.';
-				$this->log_error( 'Could not load MailChimp contact lists. Error ' . 'No lists found.' );
+				$this->log_error( __METHOD__ . '(): Could not load MailChimp contact lists. Error ' . 'No lists found.' );
 			} else {
 				echo __( 'Could not load MailChimp contact lists. <br/>Error: ', 'gravityformsmailchimp' ) . rgar( $lists['errors'][0], 'error' );
-				$this->log_error( 'Could not load MailChimp contact lists. Error ' . rgar( $lists['errors'][0], 'error' ) );
+				$this->log_error( __METHOD__ . '(): Could not load MailChimp contact lists. Error ' . rgar( $lists['errors'][0], 'error' ) );
 			}
 		} else {
 			if ( isset( $lists['data'] ) && isset( $lists['total'] ) ) {
 				$lists = $lists['data'];
-				$this->log_debug( 'Number of lists: ' . count( $lists ) );
+				$this->log_debug( __METHOD__ . '(): Number of lists: ' . count( $lists ) );
 			}
 
-			$options = array( array( 'label' => __( 'Select a MailChimp List', 'gravityformsmailchimp' ), 'value' => '' ) );
+			$options = array(
+				array(
+					'label' => __( 'Select a MailChimp List', 'gravityformsmailchimp' ),
+					'value' => ''
+				)
+			);
 			foreach ( $lists as $list ) {
 				$options[] = array(
 					'label' => esc_html( $list['name'] ),
@@ -301,7 +303,7 @@ class GFMailChimp extends GFFeedAddOn {
 
 		$groupings = $this->get_mailchimp_groups();
 		if ( empty( $groupings ) ) {
-			$this->log_debug( 'No groups found' );
+			$this->log_debug( __METHOD__ . '(): No groups found.' );
 
 			return;
 		}
@@ -369,15 +371,14 @@ class GFMailChimp extends GFFeedAddOn {
 				);
 
 				$lists = $api->call( 'lists/merge-vars', $params );
-			}
-			catch ( Exception $e ) {
-				$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+			} catch ( Exception $e ) {
+				$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
 
 				return $field_map;
 			}
 
 			if ( empty( $lists['data'] ) ) {
-				$this->log_error( 'Unable to retrieve list due to ' . $lists['errors'][0]['code'] . ' - ' . $lists['errors'][0]['error'] );
+				$this->log_error( __METHOD__ . '(): Unable to retrieve list due to ' . $lists['errors'][0]['code'] . ' - ' . $lists['errors'][0]['error'] );
 
 				return $field_map;
 			}
@@ -409,7 +410,7 @@ class GFMailChimp extends GFFeedAddOn {
 		$container_style           = ! $is_enabled ? "style='display:none;'" : '';
 
 		$str = "<div id='{$setting_name_root}_condition_container' {$container_style} class='condition_container'>" .
-			__( 'Assign to group:', 'gravityformsmailchimp' ) . ' ';
+		       __( 'Assign to group:', 'gravityformsmailchimp' ) . ' ';
 
 		$str .= $this->settings_select(
 			array(
@@ -437,10 +438,10 @@ class GFMailChimp extends GFFeedAddOn {
 		$conditional_style = $decision == 'always' ? "style='display:none;'" : '';
 
 		$str .= '   <span id="' . $setting_name_root . '_decision_container" ' . $conditional_style . '><br />' .
-			$this->simple_condition( $setting_name_root, $is_enabled ) .
-			'   </span>' .
+		        $this->simple_condition( $setting_name_root, $is_enabled ) .
+		        '   </span>' .
 
-			'</div>';
+		        '</div>';
 
 		return $str;
 	}
@@ -451,8 +452,22 @@ class GFMailChimp extends GFFeedAddOn {
 		foreach ( $form['fields'] as $field ) {
 			$type                     = GFFormsModel::get_input_type( $field );
 			$conditional_logic_fields = array(
-				'checkbox', 'radio', 'select', 'text', 'website', 'textarea', 'email', 'hidden', 'number', 'phone', 'multiselect', 'post_title',
-				'post_tags', 'post_custom_field', 'post_content', 'post_excerpt',
+				'checkbox',
+				'radio',
+				'select',
+				'text',
+				'website',
+				'textarea',
+				'email',
+				'hidden',
+				'number',
+				'phone',
+				'multiselect',
+				'post_title',
+				'post_tags',
+				'post_custom_field',
+				'post_content',
+				'post_excerpt',
 			);
 			if ( in_array( $type, $conditional_logic_fields ) ) {
 				$fields[] = array( 'value' => $field['id'], 'label' => $field['label'] );
@@ -466,12 +481,12 @@ class GFMailChimp extends GFFeedAddOn {
 	//------ Core Functionality ------
 
 	public function process_feed( $feed, $entry, $form ) {
-		$this->log_debug( 'Processing feed.' );
+		$this->log_debug( __METHOD__ . '(): Processing feed.' );
 
 		// login to MailChimp
 		$api = $this->get_api();
 		if ( ! is_object( $api ) ) {
-			$this->log_error( 'Failed to set up the API' );
+			$this->log_error( __METHOD__ . '(): Failed to set up the API.' );
 
 			return;
 		}
@@ -484,14 +499,19 @@ class GFMailChimp extends GFFeedAddOn {
 		// retrieve name => value pairs for all fields mapped in the 'mappedFields' field map
 		$field_map = $this->get_field_map_fields( $feed, 'mappedFields' );
 		$email     = rgar( $entry, $field_map['EMAIL'] );
-        
-        $override_empty_fields = apply_filters( "gform_mailchimp_override_empty_fields_{$form['id']}", apply_filters( 'gform_mailchimp_override_empty_fields', true, $form, $entry, $feed ), $form, $entry, $feed );
-        if ( !$override_empty_fields ) {
-               $this->log_debug( 'Empty fields will not be overriden.' );
-        }
-        
+
+		$override_empty_fields = apply_filters( "gform_mailchimp_override_empty_fields_{$form['id']}", apply_filters( 'gform_mailchimp_override_empty_fields', true, $form, $entry, $feed ), $form, $entry, $feed );
+		if ( ! $override_empty_fields ) {
+			$this->log_debug( __METHOD__ . '(): Empty fields will not be overridden.' );
+		}
+
 		$merge_vars = array( '' );
 		foreach ( $field_map as $name => $field_id ) {
+
+			if ( $name == 'EMAIL' ) {
+				continue;
+			}
+
 			// $field_id can also be a string like 'date_created'
 			switch ( strtolower( $field_id ) ) {
 				case 'form_title':
@@ -510,41 +530,36 @@ class GFMailChimp extends GFFeedAddOn {
 					$input_type  = RGFormsModel::get_input_type( $field );
 					$field_value = rgar( $entry, $field_id );
 
-                    if(empty($field_value) && !$override_empty_fields) 
-                        break;
-                    
 					// handling full address
-					if ( $is_integer && $input_type == 'address' ) {                       
-						$merge_vars[ $name ] = $this->get_address( $entry, $field_id );
+					if ( $is_integer && $input_type == 'address' ) {
+						$field_value = $this->get_address( $entry, $field_id );
 					} // handling full name
-					else if ( $is_integer && $input_type == 'name' ) {
-						$merge_vars[ $name ] = $this->get_name( $entry, $field_id );
+					elseif ( $is_integer && $input_type == 'name' ) {
+						$field_value = $this->get_name( $entry, $field_id );
 					} // handling phone
-					else if ( $is_integer && $input_type == 'phone' && $field['phoneFormat'] == 'standard' ) {
-
+					elseif ( $is_integer && $input_type == 'phone' && $field['phoneFormat'] == 'standard' ) {
 						// reformat phone to go to mailchimp when standard format (US/CAN)
 						// needs to be in the format NPA-NXX-LINE 404-555-1212 when US/CAN
 						$phone = $field_value;
 						if ( preg_match( '/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/', $phone, $matches ) ) {
-							$phone = sprintf( '%s-%s-%s', $matches[1], $matches[2], $matches[3] );
+							$field_value = sprintf( '%s-%s-%s', $matches[1], $matches[2], $matches[3] );
 						}
-
-						$merge_vars[ $name ] = $phone;
-					} // ignoring email field as it will be handled separately
-					else if ( $name == 'EMAIL' ) {
 					} // send selected checkboxes as a concatenated string
-					else if ( $is_integer && RGFormsModel::get_input_type( $field ) == 'checkbox' ) {
-
+					elseif ( $is_integer && $input_type == 'checkbox' ) {
+						$selected = array();
 						foreach ( $field['inputs'] as $input ) {
 							$index = (string) $input['id'];
 							if ( ! rgempty( $index, $entry ) ) {
-								$selected[] = apply_filters( 'gform_mailchimp_field_value', rgar( $entry, $index ), $form['id'], $field_id, $entry );
+								$selected[] = apply_filters( 'gform_mailchimp_field_value', rgar( $entry, $index ), $form['id'], $field_id, $entry, $name );
 							}
 						}
-						$merge_vars[ $name ] = join( ', ', $selected );
-					} // handle all other mailchimp fields
-					else {
-						$merge_vars[ $name ] = apply_filters( 'gform_mailchimp_field_value', $field_value, $form['id'], $field_id, $entry );
+						$field_value = join( ', ', $selected );
+					}
+
+					if ( empty( $field_value ) && ! $override_empty_fields ) {
+						break;
+					} else {
+						$merge_vars[ $name ] = apply_filters( 'gform_mailchimp_field_value', $field_value, $form['id'], $field_id, $entry, $name );
 					}
 			}
 		}
@@ -555,8 +570,8 @@ class GFMailChimp extends GFFeedAddOn {
 		if ( $mc_groupings !== false ) {
 			foreach ( $mc_groupings as $grouping ) {
 
-				if ( ! is_array( $grouping['groups'] ) ){
-					cotinue;
+				if ( ! is_array( $grouping['groups'] ) ) {
+					continue;
 				}
 
 				$groups = array();
@@ -568,7 +583,7 @@ class GFMailChimp extends GFFeedAddOn {
 						continue;
 					}
 
-					$groups[]   = $group['name'];
+					$groups[] = $group['name'];
 				}
 
 				if ( ! empty( $groups ) ) {
@@ -586,7 +601,7 @@ class GFMailChimp extends GFFeedAddOn {
 			$merge_vars['GROUPINGS'] = $groupings;
 		}
 
-		$this->log_debug( "Checking to see if $email is already on the list" );
+		$this->log_debug( __METHOD__ . "(): Checking to see if $email is already on the list." );
 		$list_id = $feed_meta['mailchimpList'];
 		try {
 			$params      = array(
@@ -596,32 +611,31 @@ class GFMailChimp extends GFFeedAddOn {
 				)
 			);
 			$member_info = $api->call( 'lists/member-info', $params );
-		}
-		catch ( Exception $e ) {
-			$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+		} catch ( Exception $e ) {
+			$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
 		}
 
 		if ( empty( $member_info ) ) {
-			$this->log_error( 'There was an error while trying to retrieve member information. Unable to process feed.' );
+			$this->log_error( __METHOD__ . '(): There was an error while trying to retrieve member information. Unable to process feed.' );
 
 			return;
 		}
 
 		$subscribe_or_update = false;
-		$member_not_found = absint( rgar( $member_info, 'error_count' ) ) > 0;
-		$member_status    = rgars( $member_info, 'data/0/status' );
+		$member_not_found    = absint( rgar( $member_info, 'error_count' ) ) > 0;
+		$member_status       = rgars( $member_info, 'data/0/status' );
 
 		if ( $member_not_found || $member_status != 'subscribed' ) {
 			$allow_resubscription = apply_filters( 'gform_mailchimp_allow_resubscription', apply_filters( "gform_mailchimp_allow_resubscription_{$form['id']}", true, $form, $entry, $feed ), $form, $entry, $feed );
 			if ( $member_status == 'unsubscribed' && ! $allow_resubscription ) {
-				$this->log_debug( 'User is unsubscribed and resubscription is not allowed.' );
+				$this->log_debug( __METHOD__ . '(): User is unsubscribed and resubscription is not allowed.' );
 
 				return true;
 			}
 
 			// adding member to list, statuses of $member_status != 'subscribed', 'pending', 'cleaned' need to be
 			// 're-subscribed' to send out confirmation email
-			$this->log_debug( "{$email} is either not on the list or on the list but the status is not subscribed - status: " . $member_status . '; adding to list' );
+			$this->log_debug( __METHOD__ . "(): {$email} is either not on the list or on the list but the status is not subscribed - status: " . $member_status . '; adding to list.' );
 			$transaction = 'Subscribe';
 			try {
 				$params = array(
@@ -634,15 +648,14 @@ class GFMailChimp extends GFFeedAddOn {
 					'replace_interests' => true,
 					'send_welcome'      => $send_welcome,
 				);
-				$this->log_debug( 'Calling - subscribe, Parameters ' . print_r( $params, true ) );
+				$this->log_debug( __METHOD__ . '(): Calling - subscribe, Parameters ' . print_r( $params, true ) );
 				$subscribe_or_update = $api->call( 'lists/subscribe', $params );
-			}
-			catch ( Exception $e ) {
-				$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+			} catch ( Exception $e ) {
+				$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
 			}
 		} else {
 			// updating member
-			$this->log_debug( "{$email} is already on the list; updating info" );
+			$this->log_debug( __METHOD__ . "(): {$email} is already on the list; updating info." );
 
 			// retrieve existing groups for subscribers; add existing groups to selected groups from form so that existing
 			// groups are maintained for that subscriber
@@ -650,13 +663,13 @@ class GFMailChimp extends GFFeedAddOn {
 
 			$keep_existing_groups = apply_filters( "gform_mailchimp_keep_existing_groups_{$form['id']}", apply_filters( 'gform_mailchimp_keep_existing_groups', true, $form, $entry, $feed ), $form, $entry, $feed );
 			if ( is_array( $current_groups ) && $keep_existing_groups ) {
-				$this->log_debug( 'Appending existing groups.' );
+				$this->log_debug( __METHOD__ . '(): Appending existing groups.' );
 				$merge_vars = $this->append_groups( $merge_vars, $current_groups );
 			}
 
 			$transaction = 'Update';
-            
-            $params = apply_filters( "gform_mailchimp_args_pre_subscribe_{$form['id']}", apply_filters( 'gform_mailchimp_args_pre_subscribe', $params, $form, $entry, $feed ), $form, $entry, $feed );
+
+			$params = apply_filters( "gform_mailchimp_args_pre_subscribe_{$form['id']}", apply_filters( 'gform_mailchimp_args_pre_subscribe', $params, $form, $entry, $feed ), $form, $entry, $feed );
 
 			try {
 				$params = array(
@@ -666,19 +679,18 @@ class GFMailChimp extends GFFeedAddOn {
 					'email_type'        => 'html',
 					'replace_interests' => true,
 				);
-				$this->log_debug( 'Calling - update-member, Parameters ' . print_r( $params, true ) );
+				$this->log_debug( __METHOD__ . '(): Calling - update-member, Parameters ' . print_r( $params, true ) );
 				$subscribe_or_update = $api->call( 'lists/update-member', $params );
-			}
-			catch ( Exception $e ) {
-				$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+			} catch ( Exception $e ) {
+				$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
 			}
 		}
 
 		if ( rgar( $subscribe_or_update, 'email' ) ) {
 			//email will be returned if successful
-			$this->log_debug( "{$transaction} successful" );
+			$this->log_debug( __METHOD__ . "(): {$transaction} successful." );
 		} else {
-			$this->log_error( "{$transaction} failed." );
+			$this->log_error( __METHOD__ . "(): {$transaction} failed." );
 		}
 	}
 
@@ -700,30 +712,29 @@ class GFMailChimp extends GFFeedAddOn {
 			}
 
 			$apikey = $settings['apiKey'];
-			$this->log_debug( 'Retrieving API Info for key ' . $apikey );
+			$this->log_debug( __METHOD__ . '(): Retrieving API Info for key ' . $apikey );
 
 			try {
 				$api = new Mailchimp( trim( $apikey ), null );
-			}
-			catch ( Exception $e ) {
-				$this->log_error( 'Failed to set up the API' );
-				$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+			} catch ( Exception $e ) {
+				$this->log_error( __METHOD__ . '(): Failed to set up the API.' );
+				$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
 
 				return null;
 			}
 		} else {
-			$this->log_debug( 'API credentials not set' );
+			$this->log_debug( __METHOD__ . '(): API credentials not set.' );
 
 			return null;
 		}
 
 		if ( ! is_object( $api ) ) {
-			$this->log_error( 'Failed to set up the API' );
+			$this->log_error( __METHOD__ . '(): Failed to set up the API.' );
 
 			return null;
 		}
 
-		$this->log_debug( 'Successful API response received' );
+		$this->log_debug( __METHOD__ . '(): Successful API response received.' );
 		self::$api = $api;
 
 		return self::$api;
@@ -734,7 +745,7 @@ class GFMailChimp extends GFFeedAddOn {
 		if ( ! isset( $_lists ) ) {
 			$api = $this->get_api();
 			if ( ! is_object( $api ) ) {
-				$this->log_error( 'Failed to set up the API' );
+				$this->log_error( __METHOD__ . '(): Failed to set up the API.' );
 
 				return '';
 			}
@@ -744,9 +755,8 @@ class GFMailChimp extends GFFeedAddOn {
 					'limit' => 100,
 				);
 				$_lists = $api->call( 'lists/list', $params );
-			}
-			catch ( Exception $e ) {
-				$this->log_debug( 'Could not load MailChimp contact lists. Error ' . $e->getCode() . ' - ' . $e->getMessage() );
+			} catch ( Exception $e ) {
+				$this->log_debug( __METHOD__ . '(): Could not load MailChimp contact lists. Error ' . $e->getCode() . ' - ' . $e->getMessage() );
 
 				return '';
 			}
@@ -769,7 +779,7 @@ class GFMailChimp extends GFFeedAddOn {
 
 	private function get_mailchimp_groups( $mailchimp_list = false ) {
 
-		$this->log_debug( 'Retrieving groups' );
+		$this->log_debug( __METHOD__ . '(): Retrieving groups.' );
 		$api = $this->get_api();
 
 		if ( ! $mailchimp_list ) {
@@ -777,22 +787,25 @@ class GFMailChimp extends GFFeedAddOn {
 		}
 
 		if ( ! $mailchimp_list ) {
-			$this->log_error( 'Could not find mailchimp list' );
+			$this->log_error( __METHOD__ . '(): Could not find mailchimp list.' );
 
 			return false;
 		}
 
 		try {
 			$params = array( 'id' => $mailchimp_list );
-			if ( empty($api) ) {
+			if ( empty( $api ) ) {
 				$groups = array();
-			}
-			else {
+			} else {
 				$groups = $api->call( 'lists/interest-groupings', $params );
 			}
+		} catch ( Exception $e ) {
+			$this->log_error( __METHOD__ . '(): ' . $e->getCode() . ' - ' . $e->getMessage() );
+			$groups = array();
 		}
-		catch ( Exception $e ) {
-			$this->log_error( $e->getCode() . ' - ' . $e->getMessage() );
+
+		if ( rgar( $groups, 'status' ) == 'error' ) {
+			$this->log_error( __METHOD__ . '(): ' . print_r( $groups, 1 ) );
 			$groups = array();
 		}
 
@@ -823,7 +836,7 @@ class GFMailChimp extends GFFeedAddOn {
 		$key = 'group_key_' . $grouping_id . '_' . str_replace( '%', '', sanitize_title_with_dashes( $group_name ) );
 
 		if ( ! isset( $plugin_settings[ $key ] ) ) {
-			$group_key             = 'mc_group_' . uniqid();
+			$group_key               = 'mc_group_' . uniqid();
 			$plugin_settings[ $key ] = $group_key;
 			$this->update_plugin_settings( $plugin_settings );
 			GFCache::set( 'mailchimp_plugin_settings', $plugin_settings );
@@ -848,31 +861,28 @@ class GFMailChimp extends GFFeedAddOn {
 		}
 
 	}
-    
+
 	public function append_groups( $merge_vars, $current_groupings ) {
 
 		if ( ! isset( $merge_vars['GROUPINGS'] ) ) {
 			return $merge_vars;
 		}
 
-        $active_current_groups = array();
-        $i=0;
-        foreach ( $current_groupings as &$current_group )
-        {
-            foreach ($current_group["groups"] as $current_grouping)
-            {
-            if($current_grouping["interested"] == true)
-                {
-                    $active_current_groups[$i]["name"]= $current_group["name"];
-                    $active_current_groups[$i]["groups"][]= $current_grouping["name"];
-                }
-            }
-            
-            $i++;
-        }
-        
-        $active_merged_groups = array_merge_recursive($merge_vars['GROUPINGS'], $active_current_groups);
-        $merge_vars['GROUPINGS'] = $active_merged_groups;
+		$active_current_groups = array();
+		$i                     = 0;
+		foreach ( $current_groupings as &$current_group ) {
+			foreach ( $current_group["groups"] as $current_grouping ) {
+				if ( $current_grouping["interested"] == true ) {
+					$active_current_groups[ $i ]["name"]     = $current_group["name"];
+					$active_current_groups[ $i ]["groups"][] = $current_grouping["name"];
+				}
+			}
+
+			$i ++;
+		}
+
+		$active_merged_groups    = array_merge_recursive( $merge_vars['GROUPINGS'], $active_current_groups );
+		$merge_vars['GROUPINGS'] = $active_merged_groups;
 
 		return $merge_vars;
 	}
@@ -888,25 +898,31 @@ class GFMailChimp extends GFFeedAddOn {
 		return array();
 	}
 
-	private function get_address( $entry, $field_id ){
-		$street_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.1' ] ) );
-		$street2_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.2' ] ) );
-		$city_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.3' ] ) );
-		$state_value 	= str_replace( '  ', ' ', trim( $entry[ $field_id . '.4' ] ) );
-		$zip_value 		= trim( $entry[ $field_id . '.5' ] );
-		$country_value 	= GFCommon::get_country_code( trim( $entry[ $field_id . '.6' ] ) );
+	private function get_address( $entry, $field_id ) {
+		$street_value  = str_replace( '  ', ' ', trim( rgar( $entry, $field_id . '.1' ) ) );
+		$street2_value = str_replace( '  ', ' ', trim( rgar( $entry, $field_id . '.2' ) ) );
+		$city_value    = str_replace( '  ', ' ', trim( rgar( $entry, $field_id . '.3' ) ) );
+		$state_value   = str_replace( '  ', ' ', trim( rgar( $entry, $field_id . '.4' ) ) );
+		$zip_value     = trim( rgar( $entry, $field_id . '.5' ) );
+		$country_value = trim( rgar( $entry, $field_id . '.6' ) );
 
-		$address = $street_value;
-		$address .= ! empty( $address ) && ! empty( $street2_value ) ? '  ' . $street2_value : $street2_value;
-		$address .= ! empty( $address ) && ( ! empty( $city_value ) || ! empty( $state_value ) ) ? '  ' . $city_value : $city_value;
-		$address .= ! empty( $address ) && ! empty( $city_value ) && ! empty( $state_value ) ? '  ' . $state_value : $state_value;
-		$address .= ! empty( $address ) && ! empty( $zip_value ) ? '  ' . $zip_value : $zip_value;
-		$address .= ! empty( $address ) && ! empty( $country_value ) ? '  ' . $country_value : $country_value;
+		if ( ! empty( $country_value ) ) {
+			$country_value = class_exists( 'GF_Field_Address' ) ? GF_Fields::get( 'address' )->get_country_code( $country_value ) : GFCommon::get_country_code( $country_value );
+		}
 
-		return $address;
+		$address = array(
+			! empty( $street_value ) ? $street_value : '-',
+			$street2_value,
+			! empty( $city_value ) ? $city_value : '-',
+			! empty( $state_value ) ? $state_value : '-',
+			! empty( $zip_value ) ? $zip_value : '-',
+			$country_value,
+		);
+
+		return implode( '  ', $address );
 	}
 
-	private function get_name( $entry, $field_id ){
+	private function get_name( $entry, $field_id ) {
 
 		//If field is simple (one input), simply return full content
 		$name = rgar( $entry, $field_id );
@@ -916,48 +932,56 @@ class GFMailChimp extends GFFeedAddOn {
 
 		//Complex field (multiple inputs). Join all pieces and create name
 		$prefix = trim( rgar( $entry, $field_id . '.2' ) );
-		$first 	= trim( rgar( $entry, $field_id . '.3' ) );
-		$last 	= trim( rgar( $entry, $field_id . '.6' ) );
+		$first  = trim( rgar( $entry, $field_id . '.3' ) );
+		$middle = trim( rgar( $entry, $field_id . '.4' ) );
+		$last   = trim( rgar( $entry, $field_id . '.6' ) );
 		$suffix = trim( rgar( $entry, $field_id . '.8' ) );
 
 		$name = $prefix;
-		$name .= ! empty( $name ) && ! empty( $first ) 	? ' ' . $first : $first;
-		$name .= ! empty( $name ) && ! empty( $last ) 	? ' ' . $last : $last;
+		$name .= ! empty( $name ) && ! empty( $first ) ? ' ' . $first : $first;
+		$name .= ! empty( $name ) && ! empty( $middle ) ? ' ' . $middle : $middle;
+		$name .= ! empty( $name ) && ! empty( $last ) ? ' ' . $last : $last;
 		$name .= ! empty( $name ) && ! empty( $suffix ) ? ' ' . $suffix : $suffix;
+
 		return $name;
 	}
 
 
 	//------ Temporary Notice for Main Menu --------------------//
 
-	public function maybe_create_menu( $menus ){
+	public function maybe_create_menu( $menus ) {
 
-		$current_user = wp_get_current_user();
+		$current_user           = wp_get_current_user();
 		$dismiss_mailchimp_menu = get_metadata( 'user', $current_user->ID, 'dismiss_mailchimp_menu', true );
-		if ( $dismiss_mailchimp_menu != '1' ){
-			$menus[] = array( 'name' => $this->_slug, 'label' => $this->get_short_title(), 'callback' => array( $this, 'temporary_plugin_page' ), 'permission' => $this->_capabilities_form_settings );
+		if ( $dismiss_mailchimp_menu != '1' ) {
+			$menus[] = array(
+				'name'       => $this->_slug,
+				'label'      => $this->get_short_title(),
+				'callback'   => array( $this, 'temporary_plugin_page' ),
+				'permission' => $this->_capabilities_form_settings
+			);
 		}
 
 		return $menus;
 	}
 
-	public function ajax_dismiss_menu(){
+	public function ajax_dismiss_menu() {
 
 		$current_user = wp_get_current_user();
 		update_metadata( 'user', $current_user->ID, 'dismiss_mailchimp_menu', '1' );
 	}
 
-	public function temporary_plugin_page(){
+	public function temporary_plugin_page() {
 		$current_user = wp_get_current_user();
 		?>
 		<script type="text/javascript">
-			function dismissMenu(){
+			function dismissMenu() {
 				jQuery('#gf_spinner').show();
 				jQuery.post(ajaxurl, {
-						action : "gf_dismiss_mailchimp_menu"
+						action: "gf_dismiss_mailchimp_menu"
 					},
 					function (response) {
-						document.location.href='?page=gf_edit_forms';
+						document.location.href = '?page=gf_edit_forms';
 						jQuery('#gf_spinner').hide();
 					}
 				);
@@ -967,12 +991,15 @@ class GFMailChimp extends GFFeedAddOn {
 
 		<div class="wrap about-wrap">
 			<h1><?php _e( 'MailChimp Add-On v3.0', 'gravityformsmailchimp' ) ?></h1>
-			<div class="about-text"><?php _e( 'Thank you for updating! The new version of the Gravity Forms MailChimp Add-On makes changes to how you manage your MailChimp integration.', 'gravityformsmailchimp' ) ?></div>
+
+			<div
+				class="about-text"><?php _e( 'Thank you for updating! The new version of the Gravity Forms MailChimp Add-On makes changes to how you manage your MailChimp integration.', 'gravityformsmailchimp' ) ?></div>
 			<div class="changelog">
 				<hr/>
 				<div class="feature-section col two-col">
 					<div class="col-1">
 						<h3><?php _e( 'Manage MailChimp Contextually', 'gravityformsmailchimp' ) ?></h3>
+
 						<p><?php _e( 'MailChimp Feeds are now accessed via the MailChimp sub-menu within the Form Settings for the Form with which you would like to integrate MailChimp.', 'gravityformsmailchimp' ) ?></p>
 					</div>
 					<div class="col-2 last-feature">
@@ -983,8 +1010,10 @@ class GFMailChimp extends GFFeedAddOn {
 				<hr/>
 
 				<form method="post" id="dismiss_menu_form" style="margin-top: 20px;">
-					<input type="checkbox" name="dismiss_mailchimp_menu" value="1" onclick="dismissMenu();"> <label><?php _e( 'I understand this change, dismiss this message!', 'gravityformsmailchimp' ) ?></label>
-					<img id="gf_spinner" src="<?php echo GFCommon::get_base_url() . '/images/spinner.gif'?>" alt="<?php _e( 'Please wait...', 'gravityformsmailchimp' ) ?>" style="display:none;"/>
+					<input type="checkbox" name="dismiss_mailchimp_menu" value="1" onclick="dismissMenu();">
+					<label><?php _e( 'I understand this change, dismiss this message!', 'gravityformsmailchimp' ) ?></label>
+					<img id="gf_spinner" src="<?php echo GFCommon::get_base_url() . '/images/spinner.gif'?>"
+					     alt="<?php _e( 'Please wait...', 'gravityformsmailchimp' ) ?>" style="display:none;"/>
 				</form>
 
 			</div>
@@ -1006,7 +1035,7 @@ class GFMailChimp extends GFFeedAddOn {
 			$old_settings = get_option( 'gf_mailchimp_settings' );
 			//remove username and password from the old settings; these were very old legacy api settings that we do not support anymore
 
-			if ( is_array( $old_settings ) ){
+			if ( is_array( $old_settings ) ) {
 
 				foreach ( $old_settings as $id => $setting ) {
 					if ( $id != 'username' && $id != 'password' ) {
@@ -1065,7 +1094,7 @@ class GFMailChimp extends GFFeedAddOn {
 
 							if ( is_array( $group ) ) {
 								foreach ( $group as $subkey => $subgroup ) {
-									$setting_key_root                          = $this->get_group_setting_key( $group_id, $subgroup['group_label'] );
+									$setting_key_root                            = $this->get_group_setting_key( $group_id, $subgroup['group_label'] );
 									$new_meta[ $setting_key_root . '_enabled' ]  = rgar( $subgroup, 'enabled' ) ? '1' : '0';
 									$new_meta[ $setting_key_root . '_decision' ] = rgar( $subgroup, 'decision' );
 									$new_meta[ $setting_key_root . '_field_id' ] = rgar( $subgroup, 'field_id' );
@@ -1110,14 +1139,14 @@ class GFMailChimp extends GFFeedAddOn {
 		}
 	}
 
-	public function ensure_upgrade(){
+	public function ensure_upgrade() {
 
-		if ( get_option( 'gf_mailchimp_update' ) ){
+		if ( get_option( 'gf_mailchimp_update' ) ) {
 			return false;
 		}
 
 		$feeds = $this->get_feeds();
-		if ( empty( $feeds ) ){
+		if ( empty( $feeds ) ) {
 
 			//Force Add-On framework upgrade
 			$this->upgrade( '2.0' );
@@ -1127,9 +1156,9 @@ class GFMailChimp extends GFFeedAddOn {
 	}
 
 
-	public function update_paypal_delay_settings( $old_delay_setting_name ){
+	public function update_paypal_delay_settings( $old_delay_setting_name ) {
 		global $wpdb;
-		$this->log_debug( 'Checking to see if there are any delay settings that need to be migrated for PayPal Standard.' );
+		$this->log_debug( __METHOD__ . '(): Checking to see if there are any delay settings that need to be migrated for PayPal Standard.' );
 
 		$new_delay_setting_name = 'delay_' . $this->_slug;
 
@@ -1137,26 +1166,26 @@ class GFMailChimp extends GFFeedAddOn {
 		$paypal_feeds_old = $this->get_old_paypal_feeds();
 
 		//loop through feeds and look for delay setting and create duplicate with new delay setting for the framework version of PayPal Standard
-		if ( ! empty( $paypal_feeds_old ) ){
-			$this->log_debug( 'Old feeds found for ' . $this->_slug . ' - copying over delay settings.' );
+		if ( ! empty( $paypal_feeds_old ) ) {
+			$this->log_debug( __METHOD__ . '(): Old feeds found for ' . $this->_slug . ' - copying over delay settings.' );
 			foreach ( $paypal_feeds_old as $old_feed ) {
 				$meta = $old_feed['meta'];
-				if ( ! rgempty( $old_delay_setting_name, $meta ) ){
+				if ( ! rgempty( $old_delay_setting_name, $meta ) ) {
 					$meta[ $new_delay_setting_name ] = $meta[ $old_delay_setting_name ];
 					//update paypal meta to have new setting
 					$meta = maybe_serialize( $meta );
-					$wpdb->update( "{$wpdb->prefix}rg_paypal", array( 'meta' => $meta ), array( 'id' => $old_feed['id'] ), array('%s'), array('%d') );
+					$wpdb->update( "{$wpdb->prefix}rg_paypal", array( 'meta' => $meta ), array( 'id' => $old_feed['id'] ), array( '%s' ), array( '%d' ) );
 				}
 			}
 		}
 
 		//get paypal feeds from new framework table
 		$paypal_feeds = $this->get_feeds_by_slug( 'gravityformspaypal' );
-		if ( ! empty( $paypal_feeds ) ){
-			$this->log_debug( 'New feeds found for ' . $this->_slug . ' - copying over delay settings.' );
+		if ( ! empty( $paypal_feeds ) ) {
+			$this->log_debug( __METHOD__ . '(): New feeds found for ' . $this->_slug . ' - copying over delay settings.' );
 			foreach ( $paypal_feeds as $feed ) {
 				$meta = $feed['meta'];
-				if ( ! rgempty( $old_delay_setting_name, $meta ) ){
+				if ( ! rgempty( $old_delay_setting_name, $meta ) ) {
 					$meta[ $new_delay_setting_name ] = $meta[ $old_delay_setting_name ];
 					$this->update_feed_meta( $feed['id'], $meta );
 				}
@@ -1169,19 +1198,19 @@ class GFMailChimp extends GFFeedAddOn {
 		$table_name = $wpdb->prefix . 'rg_paypal';
 
 		$form_table_name = GFFormsModel::get_form_table_name();
-		$sql     = "SELECT s.id, s.is_active, s.form_id, s.meta, f.title as form_title
+		$sql             = "SELECT s.id, s.is_active, s.form_id, s.meta, f.title as form_title
 				FROM {$table_name} s
 				INNER JOIN {$form_table_name} f ON s.form_id = f.id";
 
-		$this->log_debug( "getting old paypal feeds: {$sql}" );
+		$this->log_debug( __METHOD__ . "(): getting old paypal feeds: {$sql}" );
 
 		$results = $wpdb->get_results( $sql, ARRAY_A );
 
-		$this->log_debug( "error?: {$wpdb->last_error}" );
+		$this->log_debug( __METHOD__ . "(): error?: {$wpdb->last_error}" );
 
 		$count = sizeof( $results );
 
-		$this->log_debug( "count: {$count}" );
+		$this->log_debug( __METHOD__ . "(): count: {$count}" );
 
 		for ( $i = 0; $i < $count; $i ++ ) {
 			$results[ $i ]['meta'] = maybe_unserialize( $results[ $i ]['meta'] );

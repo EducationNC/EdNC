@@ -21,7 +21,11 @@ class URE_Screen_Help {
             <li><strong>' . esc_html__('Show deprecated capabilities','ure').'</strong> - '.
                 esc_html__('Capabilities like "level_0", "level_1" are deprecated and are not used by WordPress. '
                         . 'They are left at the user roles for the compatibility purpose with the old themes and plugins code. '
-                        . 'Turning on this option will show those deprecated capabilities.', 'ure') . '</li>';
+                        . 'Turning on this option will show those deprecated capabilities.', 'ure') . '</li>
+            <li><strong>' . esc_html__('Edit user capabilities','ure').'</strong> - '.
+                esc_html__('If turned off - capabilities section of selected user is shown in readonly mode. '
+                        . 'Administrator can not assign capabilities to the user directly. '
+                        . 'He should make it using roles only.', 'ure') . '</li>';
 
         $text = apply_filters('ure_get_settings_general_tab_help', $text);
         $text .='

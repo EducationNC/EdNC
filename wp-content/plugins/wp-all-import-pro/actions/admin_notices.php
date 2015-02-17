@@ -111,10 +111,10 @@ function pmxi_admin_notices() {
 		foreach ($warnings as $code) {			
 			switch ($code) {
 				case 1:
-					$m = __('<strong>Warning:</strong> your title is blank.', 'pmxi_plugin');
+					$m = __('<strong>Warning:</strong> your title is blank.', 'wp_all_import_plugin');
 					break;
 				case 2:
-					$m = __('<strong>Warning:</strong> your content is blank.', 'pmxi_plugin');
+					$m = __('<strong>Warning:</strong> your content is blank.', 'wp_all_import_plugin');
 					break;
 				default:
 					$m = false;

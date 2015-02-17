@@ -345,7 +345,8 @@
 				}
 				
 				if (id) {
-						ret.push({"item_id": id[2], "left": left, "right": right, "parent_id": pid, "xpath":$(item).find('input.xpath_field').val()});
+					var pmxi_is_assign = $(item).find('input.assign_term:first').is(':checked');
+					ret.push({"item_id": id[2], "left": left, "right": right, "parent_id": pid, "xpath":$(item).find('input.xpath_field').val(), "assign" : pmxi_is_assign });
 				}
 
 				left = right + 1;

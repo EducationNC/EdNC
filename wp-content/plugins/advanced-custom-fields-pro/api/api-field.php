@@ -13,26 +13,18 @@
 *  @return	(boolean)
 */
 
-function acf_is_field_key( $field_key = '' ) {
+function acf_is_field_key( $key = '' ) {
 	
-	// validate type
-	if( ! is_string($field_key) ) {
+	// look for 'field_' prefix
+	if( is_string($key) && substr($key, 0, 6) === 'field_' ) {
 		
-		return false;
-		
-	}
-	
-	
-	// search for 'field_'
-	if( substr($field_key, 0, 6) === 'field_' ) {
-	
 		return true;
 		
 	}
 	
 	
-	// allow local field key to not start with 'field_'
-	if( acf_is_local_field($field_key) ) {
+	// allow local field group key to not start with prefix
+	if( acf_is_local_field($key) ) {
 		
 		return true;
 		
@@ -43,6 +35,45 @@ function acf_is_field_key( $field_key = '' ) {
 	return false;
 	
 }
+
+
+/*
+*  acf_get_valid_field_key
+*
+*  This function will return a valid field key starting with 'field_'
+*
+*  @type	function
+*  @date	2/02/2015
+*  @since	5.1.5
+*
+*  @param	$key (string)
+*  @return	$key
+*/
+
+function acf_get_valid_field_key( $key = '' ) {
+	
+	// test if valid
+	if( !acf_is_field_key($key) ) {
+		
+		// empty
+		if( !$key ) {
+			
+			$key =  uniqid();
+			
+		} 
+		
+		
+		// add prefix
+		$key = "field_{$key}";
+		
+	}
+	
+	
+	// return
+	return $key;
+	
+}
+
 
 
 /*
@@ -145,34 +176,34 @@ function acf_get_valid_field( $field = false ) {
 function acf_prepare_field( $field ) {
 	
 	// _input
-	if( !$field['_input'] )
-	{
+	if( !$field['_input'] ) {
+		
 		$field['_input'] = $field['name'];
 	
 	
 		// _input: key overrides name
-		if( $field['key'] )
-		{
+		if( $field['key'] ) {
+			
 			$field['_input'] = $field['key'];
+			
 		}
 	
 		
 		// _input: prefix prepends name
-		if( $field['prefix'] )
-		{
+		if( $field['prefix'] ) {
+			
 			$field['_input'] = "{$field['prefix']}[{$field['_input']}]";
+			
 		}
+		
 	}
 	
 	
 	// add id (may be custom set)
-	if( !$field['id'] )
-	{
-		$field['id'] = str_replace(
-			array('][', '[', ']'),
-			array('-', '-', ''),
-			$field['_input']
-		);
+	if( !$field['id'] ) {
+		
+		$field['id'] = str_replace(array('][', '[', ']'), array('-', '-', ''), $field['_input']);
+		
 	}
 	
 	

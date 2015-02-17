@@ -294,8 +294,8 @@ class acf_field_wysiwyg extends acf_field {
 				<?php endif; ?>
 				<?php if( user_can_richedit() && $show_tabs ): ?>
 					<div class="wp-editor-tabs">
-						<a id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></a>
-						<a id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);"><?php echo __('Visual'); ?></a>
+						<button id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);" type="button"><?php echo __('Visual', 'acf'); ?></button>
+						<button id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);" type="button"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></button>
 					</div>
 				<?php endif; ?>
 			</div>
