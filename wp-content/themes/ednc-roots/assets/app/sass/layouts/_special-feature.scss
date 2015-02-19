@@ -120,9 +120,10 @@
       }
     }
 
-    .entry-content {
+    .entry-content, .entry-footer {
       background: $white;
       padding: 20px;
+      overflow: hidden;
     }
   }
 }
@@ -194,7 +195,7 @@
       &:before, &:after {
         transition-delay: 0s;
       }
-      
+
       &:before {
         opacity: 1;
       }

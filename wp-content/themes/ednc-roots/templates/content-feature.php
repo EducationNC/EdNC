@@ -49,7 +49,26 @@ $column = wp_get_post_terms(get_the_id(), 'column');
       <?php the_content(); ?>
     </div>
 
-    <footer>
+    <footer class="entry-footer">
+      <h3>About <?php the_author(); ?></h3>
+      <?php
+      $author_id = get_the_author_meta('ID');
+      $args = array(
+        'post_type' => 'bio',
+        'meta_query' => array(
+          array(
+            'key' => 'user',
+            'value' => $author_id
+          )
+        )
+      );
+
+      $bio = new WP_Query($args);
+
+      if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+        <?php the_post_thumbnail('full', array('class' => 'author-photo')); ?>
+        <?php get_template_part('templates/author', 'excerpt'); ?>
+      <?php endwhile; endif; wp_reset_query(); ?>
     </footer>
     <?php // comments_template('/templates/comments.php'); ?>
   </article>

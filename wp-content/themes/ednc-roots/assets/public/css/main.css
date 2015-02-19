@@ -9257,9 +9257,10 @@ section {
   .special-feature-content .entry-title a, .special-feature-content .entry-header a {
     color: #FFFFFF;
   }
-  .special-feature-content .entry-content {
+  .special-feature-content .entry-content, .special-feature-content .entry-footer {
     background: #FFFFFF;
     padding: 20px;
+    overflow: hidden;
   }
 }
 @media (min-width: 992px) {
