@@ -24,7 +24,7 @@ function roots_setup() {
 
   // Add post formats
   // http://codex.wordpress.org/Post_Formats
-  add_theme_support('post-formats', array('video'));
+  add_theme_support('post-formats', array('chat', 'video'));
 
   // Add HTML5 markup for captions
   // http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5

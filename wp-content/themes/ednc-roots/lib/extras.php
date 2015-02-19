@@ -94,6 +94,39 @@ function catch_that_image() {
 
 
 /**
+ * Rename post format to allow for "custom" format
+ * http://premium.wpmudev.org/blog/how-to-quickly-rename-a-wordpress-post-format/
+ */
+
+function rename_post_formats( $safe_text ) {
+  if ( $safe_text == 'Chat' )
+    return 'Feature';
+
+  return $safe_text;
+}
+add_filter( 'esc_html', 'rename_post_formats' );
+
+//rename Aside in posts list table
+function live_rename_formats() {
+  global $current_screen;
+
+  if ( $current_screen->id == 'edit-post' ) { ?>
+    <script type="text/javascript">
+    jQuery('document').ready(function() {
+
+      jQuery("span.post-state-format").each(function() {
+        if ( jQuery(this).text() == "Chat" )
+          jQuery(this).text("Feature");
+      });
+
+    });
+    </script>
+<?php }
+}
+add_action('admin_head', 'live_rename_formats');
+
+
+/**
 * Auto-subscribe or unsubscribe an Edit Flow user group when a post changes status
 *
 * @see http://editflow.org/extend/auto-subscribe-user-groups-for-notifications/

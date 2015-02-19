@@ -1,0 +1,234 @@
+// Format height stuff for fixed background image
+.single-format-chat {
+  height: 100%;
+
+  .wrapper, .oc-pusher, .inner-wrapper {
+    height: 100%;
+  }
+
+  // Make sure footer still appears
+  .content-info {
+    position: relative;
+    z-index: 200;
+  }
+}
+
+// Fixed background image
+.special-feature-bg {
+  position: absolute;
+  margin: -5em 0 0;
+  min-height: 600px;
+  height: calc(100% - 89px);
+  width: 100%;
+
+  .bg-img {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: auto;
+      min-width: 100%;
+      max-width: none;
+      min-height: 100%;
+    }
+
+    @media (min-width: $screen-md-min) {
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        z-index: 100;
+      }
+
+      &:before {
+        width: 100%;
+        height: 100%;
+        background-color: $deep-purple30;
+      }
+
+      &:after {
+        background: $white;
+        top: 0;
+        right: 0;
+        width: 60%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+// Left side intro text
+.special-feature-intro {
+  color: $white;
+  @extend .intro;
+}
+
+// A few special formatting requirements for the article content itself
+.special-feature-content {
+  .h1 {
+    margin-top: 3em;
+    margin-bottom: 1em;
+  }
+
+  h2 {
+    overflow: hidden;
+  }
+
+  img.alignleft {
+    margin-left: 0 !important;
+  }
+
+  img.alignnone {
+    width: 100%;
+  }
+
+  .callout {
+    margin-bottom: 4em;
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .special-feature-content {
+    .entry-title {
+      font-size: 5em;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .special-feature-content {
+    .entry-header {
+      padding: 4em 0 5em;
+    }
+
+    .entry-title, .entry-header {
+      color: $white;
+
+      a {
+        color: $white;
+      }
+    }
+
+    .entry-content {
+      background: $white;
+      padding: 20px;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  // Set up transition stuff for the landing page and initial scroll effect
+  .single-format-chat .oc-pusher:not(.notrans) {
+    .special-feature-bg .bg-img {
+      &:before, &:after {
+        transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+        transition-duration: 0.5s;
+        transition-delay: 0.45s;
+      }
+
+      &:before {
+        opacity: 0;
+        transition-property: opacity;
+      }
+
+      &:after {
+        transform: translateX(100%);
+        transition-property: transform;
+      }
+    }
+
+    .special-feature-intro {
+      opacity: 0;
+      transform: translateY(200px);
+      transition-property: transform, opacity;
+      transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+      transition-duration: 0.5s;
+      transition-delay: 0.15s;
+    }
+
+    .special-feature-content {
+      .entry-title, .entry-header {
+        color: $white;
+        transition-property: transform, color;
+        transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+        transition-duration: 0.5s;
+        transition-delay: 0.3s;
+
+        a {
+          color: $white;
+          transition-property: color;
+          transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+          transition-duration: 0.5s;
+          transition-delay: 0.3s;
+        }
+      }
+
+      .entry-header, .entry-content {
+        transform: translateY(200px);
+      }
+
+      .entry-content, .social-buttons {
+        opacity: 0;
+        transition-property: transform, opacity;
+        transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+        transition-duration: 0.5s;
+        transition-delay: 0s;
+      }
+    }
+  }
+
+  // Actual transitions after scroll
+  .single-format-chat .oc-pusher.scrolled {
+    .special-feature-bg .bg-img {
+      &:before, &:after {
+        transition-delay: 0s;
+      }
+      
+      &:before {
+        opacity: 1;
+      }
+
+      &:after {
+        transform: translateX(0);
+      }
+    }
+
+    .special-feature-intro {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.3s;
+    }
+
+    .special-feature-content {
+      .entry-title, .entry-header {
+        color: $midnight;
+        transition-delay: 0.15s;
+
+        a {
+          color: $blue;
+          transition-delay: 0.15s;
+        }
+      }
+
+      .entry-header, .entry-content {
+        transform: translateY(0);
+      }
+
+      .entry-content, .social-buttons {
+        opacity: 1;
+        transition-delay: 0.45s;
+      }
+    }
+  }
+}
