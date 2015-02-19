@@ -182,7 +182,7 @@
         transform: translateY(200px);
       }
 
-      .entry-content, .social-buttons {
+      .entry-content, .social-buttons, .ant.ant-summary {
         opacity: 0;
         transition-property: transform, opacity;
         transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -229,7 +229,7 @@
         transform: translateY(0);
       }
 
-      .entry-content, .social-buttons {
+      .entry-content, .social-buttons, .ant.ant-summary {
         opacity: 1;
         transition-delay: 0.45s;
       }

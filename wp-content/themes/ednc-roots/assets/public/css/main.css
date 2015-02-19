@@ -9347,7 +9347,7 @@ section {
          -o-transform: translateY(200px);
             transform: translateY(200px);
   }
-  .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-content, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .social-buttons {
+  .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-content, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .social-buttons, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .ant.ant-summary {
     opacity: 0;
     -webkit-transition-property: -webkit-transform, opacity;
          -o-transition-property: -o-transform, opacity;
@@ -9405,7 +9405,7 @@ section {
          -o-transform: translateY(0);
             transform: translateY(0);
   }
-  .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-content, .single-format-chat .oc-pusher.scrolled .special-feature-content .social-buttons {
+  .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-content, .single-format-chat .oc-pusher.scrolled .special-feature-content .social-buttons, .single-format-chat .oc-pusher.scrolled .special-feature-content .ant.ant-summary {
     opacity: 1;
     -webkit-transition-delay: 0.45s;
          -o-transition-delay: 0.45s;
