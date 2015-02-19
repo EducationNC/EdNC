@@ -1,4 +1,6 @@
 <?php
+$comments_open = comments_open();
+
 $category = get_the_category();
 $column = wp_get_post_terms(get_the_id(), 'column');
 ?>
@@ -70,7 +72,13 @@ $column = wp_get_post_terms(get_the_id(), 'column');
         <?php get_template_part('templates/author', 'excerpt'); ?>
       <?php endwhile; endif; wp_reset_query(); ?>
     </footer>
-    <?php // comments_template('/templates/comments.php'); ?>
+
+    <?php if ($comments_open == 1) { ?>
+      <div class="entry-footer">
+        <h3>Join the conversation</h3>
+        <?php comments_template('/templates/comments.php'); ?>
+      </div>
+    <?php } ?>
   </article>
 </div>
 

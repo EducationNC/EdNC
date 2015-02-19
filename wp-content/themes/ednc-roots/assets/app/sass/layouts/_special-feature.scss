@@ -96,6 +96,10 @@
       margin-top: 0;
     }
   }
+
+  .entry-footer {
+    overflow: hidden;
+  }
 }
 
 @media (min-width: $screen-sm-min) {
@@ -123,7 +127,6 @@
     .entry-content, .entry-footer {
       background: $white;
       padding: 20px;
-      overflow: hidden;
     }
   }
 }

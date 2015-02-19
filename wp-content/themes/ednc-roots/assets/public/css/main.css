@@ -9241,6 +9241,9 @@ section {
 .special-feature-content .callout h3 {
   margin-top: 0;
 }
+.special-feature-content .entry-footer {
+  overflow: hidden;
+}
 
 @media (min-width: 768px) {
   .special-feature-content .entry-title {
@@ -9260,7 +9263,6 @@ section {
   .special-feature-content .entry-content, .special-feature-content .entry-footer {
     background: #FFFFFF;
     padding: 20px;
-    overflow: hidden;
   }
 }
 @media (min-width: 992px) {
