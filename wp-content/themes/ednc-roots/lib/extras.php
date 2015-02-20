@@ -127,6 +127,21 @@ add_action('admin_head', 'live_rename_formats');
 
 
 /**
+ * Update Reimagining the school lunch master post to display updated date of most recent child post
+ */
+function school_lunch_master_update($post) {
+  // Make sure this is firing when one of the children's statuses change to published
+  $children = array('reimagining-school-lunch-day-1', 'reimagining-school-lunch-day-2', 'reimagining-school-lunch-day-3');
+  if (in_array($post->post_name, $children)) {
+    // Get publish date of child post and set updated_date of master post
+    $date = get_post_meta($post->ID, 'updated_date', true);
+    update_post_meta( 3350, 'updated_date', $date );
+  }
+}
+add_action('future_to_publish', 'school_lunch_master_update', 10, 1);
+
+
+/**
 * Auto-subscribe or unsubscribe an Edit Flow user group when a post changes status
 *
 * @see http://editflow.org/extend/auto-subscribe-user-groups-for-notifications/

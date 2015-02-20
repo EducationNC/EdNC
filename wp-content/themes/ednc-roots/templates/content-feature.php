@@ -10,9 +10,22 @@ $column = wp_get_post_terms(get_the_id(), 'column');
     <?php the_post_thumbnail(); ?>
   </div>
 </div>
+
+<button class="trigger" data-info="Click for full article">
+  <span></span>
+</button>
+
 <div class="special-feature-content container">
   <div class="special-feature-intro col-md-4 hidden-sm hidden-xs">
-    <?php echo get_field('longform_intro'); ?>
+    <?php
+    // If this is the school lunch series master post
+    if ($post->post_name == 'reimagining-school-lunch') {
+      $parent_content = get_the_content();
+      echo $parent_content;
+    } else {
+      the_field('longform_intro');
+    }
+    ?>
   </div>
 
   <article <?php post_class('special-feature col-md-7 col-md-push-1'); ?>>
@@ -44,11 +57,69 @@ $column = wp_get_post_terms(get_the_id(), 'column');
     </header>
 
     <div class="entry-content">
-      <div class="intro visible-sm visible-xs">
-        <?php echo get_field('longform_intro'); ?>
-      </div>
+      <?php
+      // If this is the school lunch series master post
+      if ($post->post_name == 'reimagining-school-lunch') {
+        // Get each of the child post's data
+        global $wpdb;
+        $day1 = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_name = 'reimagining-school-lunch-day-1'");
+        $day2 = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_name = 'reimagining-school-lunch-day-2'");
+        $day3 = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_name = 'reimagining-school-lunch-day-3'");
+        ?>
+        <div class="row no-margin no-padding special-feature-nav">
+          <div class="col-sm-4">
+            <a <?php if (get_post_status($day1) != 'publish') { echo 'class="inactive"'; } ?> href="#reimagining-school-lunch-day-1">
+              <small>Day 1</small><br />
+              Vansana Nolintha
+            </a>
+          </div>
 
-      <?php the_content(); ?>
+          <div class="col-sm-4">
+            <a <?php if (get_post_status($day2) != 'publish') { echo 'class="inactive"'; } ?> href="#reimagining-school-lunch-day-2">
+              <small>Day 2</small><br />
+              Vivian Howard
+            </a>
+          </div>
+
+          <div class="col-sm-4">
+            <a <?php if (get_post_status($day3) != 'publish') { echo 'class="inactive"'; } ?> href="#reimagining-school-lunch-day-3">
+              <small>Day 3</small><br />
+              Ashley Christensen
+            </a>
+          </div>
+        </div>
+
+        <?php
+        $args = array(
+          'post__in' => array($day1, $day2, $day3)
+        );
+
+        $lunch_series = new WP_Query($args);
+
+        if ($lunch_series->have_posts()) : while ($lunch_series->have_posts()) : $lunch_series->the_post();
+          ?>
+
+          <div class="intro visible-sm visible-xs">
+            <?php echo $parent_content; ?>
+          </div>
+
+          <a name="<?php echo $post->post_name; ?>"></a>
+
+          <?php
+          the_content();
+
+        endwhile; endif; wp_reset_query();
+      } else {
+        ?>
+
+        <div class="intro visible-sm visible-xs">
+          <?php echo get_field('longform_intro'); ?>
+        </div>
+
+        <?php
+        the_content();
+      }
+      ?>
     </div>
 
     <footer class="entry-footer">
@@ -153,7 +224,7 @@ jQuery(document).ready(function() {
       noscroll,
       isAnimating,
       container = document.getElementById( 'oc-pusher' ),
-      trigger = container.querySelector( 'button.trigger' );  // not using this
+      trigger = container.querySelector( 'button.trigger' );
 
     function scrollY() {
       return window.pageYOffset || docElem.scrollTop;
@@ -221,7 +292,7 @@ jQuery(document).ready(function() {
     }
 
     window.addEventListener( 'scroll', scrollPage );
-    // trigger.addEventListener( 'click', function() { toggle( 'reveal' ); } );
+    trigger.addEventListener( 'click', function() { toggle( 'reveal' ); } );
   })();
 });
 </script>

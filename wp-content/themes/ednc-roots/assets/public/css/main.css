@@ -9222,6 +9222,40 @@ section {
   color: #FFFFFF;
 }
 
+.special-feature-nav {
+  margin: 4em 0 0 0;
+}
+.special-feature-nav a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  background-color: #ADBB4A;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFB8C455', endColorstr='#FFA1AD42');
+  background-image: -o-linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
+  background-image: -webkit-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+  background-image: -o-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+  background-image: linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
+  color: #FFFFFF;
+}
+.special-feature-nav a:hover {
+  background-color: #98A941;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFA5B54C', endColorstr='#FF89983B');
+  background-image: -o-linear-gradient(90deg, #A5B54C 0%, #89983B 100%);
+  background-image: -webkit-linear-gradient(0deg, #A5B54C 0%, #89983B 100%);
+  background-image: -o-linear-gradient(0deg, #A5B54C 0%, #89983B 100%);
+  background-image: linear-gradient(90deg, #A5B54C 0%, #89983B 100%);
+}
+.special-feature-nav a.inactive {
+  background-color: #ECF0F1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFF3F3', endColorstr='#FFD4D8D9');
+  background-image: -o-linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: -webkit-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: -o-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+  color: #707273;
+  cursor: default;
+}
+
 .special-feature-content .h1 {
   margin-top: 3em;
   margin-bottom: 1em;
@@ -9292,6 +9326,57 @@ section {
          -o-transition-property: -o-transform;
             transition-property: transform;
   }
+  .single-format-chat .oc-pusher:not(.notrans) button.trigger {
+    display: block;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    margin-left: -.5em;
+    padding: 0;
+    width: 1em;
+    height: 1em;
+    border: none;
+    background: transparent;
+    color: transparent;
+    font-size: 2em;
+    z-index: 5000;
+    cursor: pointer;
+    -webkit-transition: opacity 0.3s 0.5s;
+         -o-transition: opacity 0.3s 0.5s;
+            transition: opacity 0.3s 0.5s;
+  }
+  .single-format-chat .oc-pusher:not(.notrans) button.trigger:before {
+    position: absolute;
+    bottom: 100%;
+    left: -100%;
+    width: 300%;
+    color: #fff;
+    content: attr(data-info);
+    font-size: 0.35em;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+  }
+  .single-format-chat .oc-pusher:not(.notrans) button.trigger:focus {
+    outline: none;
+  }
+  .single-format-chat .oc-pusher:not(.notrans) button.trigger span {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .single-format-chat .oc-pusher:not(.notrans) button.trigger span:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    content: "\25BF";
+    line-height: 1;
+    speak: none;
+  }
   .single-format-chat .oc-pusher:not(.notrans) .special-feature-intro {
     opacity: 0;
     -webkit-transform: translateY(200px);
@@ -9341,13 +9426,13 @@ section {
          -o-transition-delay: 0.3s;
             transition-delay: 0.3s;
   }
-  .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-header, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-content {
+  .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-header, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-content, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-footer {
     -webkit-transform: translateY(200px);
         -ms-transform: translateY(200px);
          -o-transform: translateY(200px);
             transform: translateY(200px);
   }
-  .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-content, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .social-buttons, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .ant.ant-summary {
+  .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-content, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .entry-footer, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .social-buttons, .single-format-chat .oc-pusher:not(.notrans) .special-feature-content .ant.ant-summary {
     opacity: 0;
     -webkit-transition-property: -webkit-transform, opacity;
          -o-transition-property: -o-transform, opacity;
@@ -9377,6 +9462,10 @@ section {
          -o-transform: translateX(0);
             transform: translateX(0);
   }
+  .single-format-chat .oc-pusher.scrolled button.trigger {
+    opacity: 0;
+    pointer-events: none;
+  }
   .single-format-chat .oc-pusher.scrolled .special-feature-intro {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -9399,13 +9488,13 @@ section {
          -o-transition-delay: 0.15s;
             transition-delay: 0.15s;
   }
-  .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-header, .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-content {
+  .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-header, .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-content, .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-footer {
     -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
          -o-transform: translateY(0);
             transform: translateY(0);
   }
-  .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-content, .single-format-chat .oc-pusher.scrolled .special-feature-content .social-buttons, .single-format-chat .oc-pusher.scrolled .special-feature-content .ant.ant-summary {
+  .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-content, .single-format-chat .oc-pusher.scrolled .special-feature-content .entry-footer, .single-format-chat .oc-pusher.scrolled .special-feature-content .social-buttons, .single-format-chat .oc-pusher.scrolled .special-feature-content .ant.ant-summary {
     opacity: 1;
     -webkit-transition-delay: 0.45s;
          -o-transition-delay: 0.45s;
