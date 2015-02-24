@@ -117,6 +117,12 @@
   </div>
 
   <div class="row">
+    <div class="col-xs-12">
+      <h2>News</h2>
+    </div>
+  </div>
+
+  <div class="row">
     <?php
     $theme_spot = get_theme_mod('theme_spot_category');
     if ($theme_spot && $theme_spot !== 'None') {
@@ -234,6 +240,12 @@
 
     <?php endwhile; endif; wp_reset_query(); ?>
   </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Perspectives</h2>
+      </div>
+    </div>
 
   <div class="row">
     <?php
