@@ -9178,6 +9178,7 @@ section {
   min-height: 600px;
   height: calc(100% - 89px);
   width: 100%;
+  z-index: 1;
 }
 .special-feature-bg .bg-img {
   position: fixed;
@@ -9220,6 +9221,8 @@ section {
 
 .special-feature-intro {
   color: #FFFFFF;
+  z-index: 100;
+  position: relative;
 }
 
 .special-feature-nav {
@@ -9256,6 +9259,12 @@ section {
   cursor: default;
 }
 
+.special-feature-content {
+  z-index: 2;
+}
+.special-feature-content .post {
+  z-index: 100;
+}
 .special-feature-content .h1 {
   margin-top: 3em;
   margin-bottom: 1em;

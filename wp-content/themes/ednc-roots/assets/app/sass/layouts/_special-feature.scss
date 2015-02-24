@@ -20,6 +20,7 @@
   min-height: 600px;
   height: calc(100% - 89px);
   width: 100%;
+  z-index: 1;
 
   .bg-img {
     position: fixed;
@@ -68,6 +69,8 @@
 .special-feature-intro {
   color: $white;
   @extend .intro;
+  z-index: 100;
+  position: relative;
 }
 
 // Article navigation
@@ -95,6 +98,12 @@
 
 // A few special formatting requirements for the article content itself
 .special-feature-content {
+  z-index: 2;
+
+  .post {
+    z-index: 100;
+  }
+
   .h1 {
     margin-top: 3em;
     margin-bottom: 1em;
