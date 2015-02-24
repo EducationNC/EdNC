@@ -56,21 +56,21 @@ function ednc_customizer_settings($wp_customize) {
     )
   );
 
-  $wp_customize->add_setting(
-    'theme_spot_category',
-    array()
-  );
-
-  $wp_customize->add_control(new Category_Dropdown_Custom_Control(
-      $wp_customize,
-      'theme_spot_category',
-      array(
-        'label' => 'Optional: Choose a category to stick to the beginning of the news posts',
-        'section' => 'front_page_settings',
-        'priority' => 2
-      )
-    )
-  );
+  // $wp_customize->add_setting(
+  //   'theme_spot_category',
+  //   array()
+  // );
+  //
+  // $wp_customize->add_control(new Category_Dropdown_Custom_Control(
+  //     $wp_customize,
+  //     'theme_spot_category',
+  //     array(
+  //       'label' => 'Optional: Choose a category to stick to the beginning of the news posts',
+  //       'section' => 'front_page_settings',
+  //       'priority' => 2
+  //     )
+  //   )
+  // );
 
   /**
    * Remove unneeded sections

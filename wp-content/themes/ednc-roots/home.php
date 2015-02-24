@@ -178,6 +178,68 @@
 
     $args = array(
       'posts_per_page' => $post_num,
+      'author__in' => array(11),  // Alex Granados
+      'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
+      'meta_key' => 'updated_date',
+      'orderby' => 'meta_value_num',
+      'order' => 'DESC'
+    );
+
+    $stories = new WP_Query($args);
+
+    if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
+
+      $updated_date = get_post_meta(get_the_id(), 'updated_date', true);
+      if ($updated_date) {
+        $date = date(get_option('date_format'), $updated_date);
+      } else {
+        $date = get_the_time(get_option('date_format'));
+      }
+
+      $category = get_the_category();
+      if (has_post_thumbnail()) {
+        $image_id = get_post_thumbnail_id();
+        $image_src = wp_get_attachment_image_src($image_id, 'full');
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+        }
+      } else {
+        $image_src = catch_that_image();
+        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
+      }
+      ?>
+
+      <div class="col-sm-6 col-md-3">
+        <div class="post has-photo-overlay row">
+          <div class="photo-overlay col-xs-3 col-sm-12">
+            <div class="hidden-xs">
+              <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
+              <span class="label"><?php echo $category[0]->cat_name; ?></span>
+              <?php } ?>
+              <h4 class="post-title"><?php the_title(); ?></h4>
+              <div class="line"></div>
+            </div>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <?php if ($image_src) { ?>
+              <img src="<?php echo $image_sized['url']; ?>" />
+            <?php } ?>
+          </div>
+
+          <div class="col-xs-9 col-sm-12 extra-padding">
+            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+            <p class="meta">by <?php the_author(); ?> on <date><?php echo $date; ?></date></p>
+          </div>
+        </div>
+      </div>
+
+    <?php endwhile; endif; wp_reset_query(); ?>
+  </div>
+
+  <div class="row">
+    <?php
+    $args = array(
+      'posts_per_page' => 4,
+      'author__not_in' => array(11),  // Alex Granados
       'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
