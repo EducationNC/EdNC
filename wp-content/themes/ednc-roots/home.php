@@ -6,7 +6,10 @@
         $args = array(
           'posts_per_page' => 2,
           'post_type' => 'post',
-          'category__in' => array(90) // id of "featured" category in dev and prod
+          'category__in' => array(90), // id of "featured" category in dev and prod
+          'meta_key' => 'updated_date',
+          'orderby' => 'meta_value_num',
+          'order' => 'DESC'
         );
 
         $featured = new WP_Query($args);
