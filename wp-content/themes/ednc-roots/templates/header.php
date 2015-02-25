@@ -12,7 +12,7 @@ if ($alert) { ?>
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
     </div>
 
-    <div class="caption"><?php echo get_bloginfo('description'); ?></div>
+    <div class="caption"><?php // echo get_bloginfo('description'); ?></div>
 
     <div class="pull-right text-right">
       <ul class="list-inline minor-links small">
