@@ -27,10 +27,15 @@
 
           $column_name = get_field('column_name', $author_bio[0]->ID);
 
-          $image_id = get_post_thumbnail_id();
-          $image_src = wp_get_attachment_image_src($image_id, 'full');
-          if ($image_src) {
-            $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+          if (has_post_thumbnail()) {
+            $image_id = get_post_thumbnail_id();
+            $image_src = wp_get_attachment_image_src($image_id, 'full');
+            if ($image_src) {
+              $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+            }
+          } else {
+            $image_src = catch_that_image();
+            $image_sized = mr_image_resize($image_src, 295, 295, true, false);
           }
           ?>
 
