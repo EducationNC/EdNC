@@ -182,7 +182,7 @@ $link-hover-color:      $blue-dark;
   background-image: linear-gradient(90deg, $red-light 0%, $red-dark 100%);
 }
 
-@mixin blue-gradient-right() {
+@mixin light-blue-gradient-right() {
   background-color: $blue;
   @include filter-gradient($blue-light, $blue-dark, horizontal);
   background-image: -olinear-gradient(90deg, $blue-light 0%, $blue-dark 100%);

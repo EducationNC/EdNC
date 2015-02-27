@@ -20,7 +20,7 @@
 }
 
 .Democrat {
-  @include blue-gradient-right();
+  @include light-blue-gradient-right();
   color: $white;
 }
 
