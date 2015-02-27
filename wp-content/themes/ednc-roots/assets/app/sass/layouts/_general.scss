@@ -96,6 +96,18 @@ section {
   padding: 30px;
   margin: 0 0 1.25rem;
 
+  .h1 {
+    font-size: $font-size-h1;
+    font-style: normal;
+    margin-top: 0;
+    color: inherit;
+
+    .big {
+      font-size: 1.5em;
+      line-height: 1;
+    }
+  }
+
   h4 {
     margin-top: 0;
   }

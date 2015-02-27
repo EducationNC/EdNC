@@ -1,7 +1,11 @@
-.single-bio {
+.single-bio, .single-legislator {
   .entry-header {
     border-bottom: 1px solid $ice;
     margin-bottom: 1em;
+  }
+
+  .wp-post-image {
+    width: 100%;
   }
 }
 
@@ -13,4 +17,14 @@
       width: 100%;
     }
   }
+}
+
+.Democrat {
+  @include blue-gradient-right();
+  color: $white;
+}
+
+.Republican {
+  @include red-gradient-right();
+  color: $white;
 }
