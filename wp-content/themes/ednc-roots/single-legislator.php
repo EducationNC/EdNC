@@ -1,7 +1,7 @@
 <?php while (have_posts()) : the_post(); ?>
   <div class="row">
     <div class="col-sm-5 col-md-4">
-      <?php the_post_thumbnail('full'); ?>
+      <?php the_post_thumbnail('medium'); ?>
     </div>
     <div <?php post_class('col-sm-7 col-md-8'); ?>>
       <header class="entry-header extra-bottom-margin">
