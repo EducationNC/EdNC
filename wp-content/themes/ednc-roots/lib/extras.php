@@ -135,7 +135,7 @@ function school_lunch_master_update($post) {
   if (in_array($post->post_name, $children)) {
     // Get publish date of child post and set updated_date of master post
     $date = get_post_meta($post->ID, 'updated_date', true);
-    update_post_meta( 3350, 'updated_date', $date );
+    update_post_meta( 5429, 'updated_date', $date );
   }
 }
 add_action('future_to_publish', 'school_lunch_master_update', 10, 1);

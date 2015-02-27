@@ -14,3 +14,13 @@
     }
   }
 }
+
+.Democrat {
+  @include blue-gradient-right();
+  color: $white;
+}
+
+.Republican {
+  @include red-gradient-right();
+  color: $white;
+}
