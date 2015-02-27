@@ -32,6 +32,14 @@ wp-content/themes/ednc-new/*
 wp-content/themes/ednc/assets/app/bower_components/*
 wp-content/themes/ednc/node_modules/*
 
+# pro plugins
+wp-content/plugins/advanced-custom-fields-pro/*
+wp-content/plugins/events-calendar-pro/*
+wp-content/plugins/gravityforms/*
+wp-content/plugins/gravityformsmailchimp/*
+wp-content/plugins/wp-all-import-pro/*
+wp-content/plugins/wpai-acf-add-on/*
+
 # wpengine specific
 .smushit-status
 .gitattributes
