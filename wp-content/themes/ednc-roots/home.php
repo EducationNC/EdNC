@@ -259,7 +259,7 @@
     <?php
     $args = array(
       'posts_per_page' => 4,
-      'author__not_in' => array(11),  // Alex Granados
+      'author__not_in' => array(11, 9),  // Alex Granados, Mebane Rash
       'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
