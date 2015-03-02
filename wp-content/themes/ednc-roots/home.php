@@ -236,10 +236,10 @@
               <?php
               $cats_hide = array();
               // Determine array indexes for labels we don't want to show
-              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
-              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+              // $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
+              // $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+              // $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+              // $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
 
               // Only show label of category if it's not in above list
               foreach ($category as $key=>$value) {
