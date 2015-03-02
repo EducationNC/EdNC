@@ -188,11 +188,12 @@
 
     if ($theme_spot && $theme_spot !== 'None') {
       $post_num--;
+      $theme_spot = null;
     }
 
     $args = array(
       'posts_per_page' => $post_num,
-      'author__in' => array(11, 9),  // Alex Granados or Mebane Rash
+      'category__in' => array(93),   // News
       'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
@@ -211,6 +212,11 @@
       }
 
       $category = get_the_category();
+      // Convert category results to array instead of object
+      foreach ($category as &$cat) {
+        $cat = (array) $cat;
+      }
+
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
         $image_src = wp_get_attachment_image_src($image_id, 'full');
@@ -227,10 +233,24 @@
         <div class="post has-photo-overlay row">
           <div class="photo-overlay col-xs-3 col-sm-12">
             <div class="hidden-xs">
-              <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
-              <span class="label"><?php echo $category[0]->cat_name; ?></span>
-              <?php } ?>
+              <?php
+              $cats_hide = array();
+              // Determine array indexes for labels we don't want to show
+              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
+              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+
+              // Only show label of category if it's not in above list
+              foreach ($category as $key=>$value) {
+                if (!in_array($key, $cats_hide)) {
+                  echo '<span class="label">' . $value['cat_name'] . '</span>';
+                }
+              }
+              ?>
+
               <h4 class="post-title"><?php the_title(); ?></h4>
+
               <div class="line"></div>
             </div>
             <a class="mega-link" href="<?php the_permalink(); ?>"></a>
