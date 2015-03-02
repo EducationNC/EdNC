@@ -236,10 +236,10 @@
               <?php
               $cats_hide = array();
               // Determine array indexes for labels we don't want to show
-              // $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
-              // $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-              // $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-              // $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
+              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
 
               // Only show label of category if it's not in above list
               foreach ($category as $key=>$value) {
@@ -279,8 +279,7 @@
     <?php
     $args = array(
       'posts_per_page' => 4,
-      'author__not_in' => array(11, 9),  // Alex Granados, Mebane Rash
-      'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
+      'category__not_in' => array(93, 90, 96, $theme_spot), // id of "news," "featured," and "hide from home" categories
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
       'order' => 'DESC'
