@@ -43,9 +43,9 @@ function ednc_gallery($attr) {
     'order'      => 'ASC',
     'orderby'    => 'menu_order ID',
     'id'         => $post ? $post->ID : 0,
-    'itemtag'    => 'figure',
-    'icontag'    => 'div',
-    'captiontag' => 'figcaption',
+    'itemtag'    => 'dl',
+    'icontag'    => 'dt',
+    'captiontag' => 'dd',
     'columns'    => 3,
     'size'       => 'thumbnail',
     'include'    => '',
@@ -136,7 +136,15 @@ function ednc_gallery($attr) {
         </{$captiontag}>";
     }
     $output .= "</{$itemtag}>";
+		if ( $columns > 0 && ++$i % $columns == 0 ) {
+			$output .= '<br style="clear: both" />';
+		}
   }
+
+	if ( $columns > 0 && $i % $columns !== 0 ) {
+		$output .= "
+			<br style='clear: both' />";
+	}
 
   $output .= "
     </div>\n";
