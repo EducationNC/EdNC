@@ -222,7 +222,7 @@ function get_adjacent_author_post( $previous = true ) {
   $excluded_terms = '';
   $join  = apply_filters( "get_{$adjacent}_post_join", $join, $in_same_term, $excluded_terms );
 
-print_r($join);
+  print_r($join);
 
   /**
   * Filter the WHERE clause in the SQL for an adjacent post query.

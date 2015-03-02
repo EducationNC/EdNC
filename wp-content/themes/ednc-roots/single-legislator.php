@@ -41,13 +41,23 @@
           </div>
 
           <div class="callout">
-            <p>Terms in Senate and House</p>
+            <p>Seat</p>
+            <p class="h1"><span class="big"><?php the_field('seat'); ?></span></p>
+          </div>
+
+          <div class="callout">
+            <p>Total Legislative Terms</p>
             <p class="h1"><span class="big"><?php the_field('terms'); ?></span></p>
             <p class="caption small"><?php the_field('notes_about_terms'); ?></p>
           </div>
         </div>
 
         <div class="col-sm-12 col-md-5">
+          <div class="callout">
+            <p>Home county</p>
+            <p class="h1"><?php the_field('home_county'); ?></p>
+          </div>
+
           <div class="callout">
             <p>Education Committees</p>
             <?php
@@ -57,7 +67,7 @@
             $ed_senate = get_field('ed_higher_ed');
 
             if ($ed_approp_house) { ?>
-              <p class="normal-style"><a href="/house-education-appropriations-committee/">Education Appropriations</a>, <?php echo $ed_approp_house; ?></p>
+              <p class="normal-style"><a href="/house-education-appropriations-committee/">Appropriations Subcommittee on Education</a>, <?php echo $ed_approp_house; ?></p>
               <?php
             }
 
@@ -67,7 +77,7 @@
             }
 
             if ($ed_approp_senate) { ?>
-              <p class="normal-style"><a href="/senate-appropriations-on-education-higher-education-committee/">Appropriations on Education/Higher Education</a>, <?php echo $ed_approp_senate; ?></p>
+              <p class="normal-style"><a href="/senate-appropriations-on-education-higher-education-committee/">Appropriations Subcommittee on Education/Higher Education</a>, <?php echo $ed_approp_senate; ?></p>
               <?php
             }
 
