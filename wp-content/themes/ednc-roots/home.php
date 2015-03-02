@@ -465,7 +465,7 @@
 <section class="container-fluid" id="gallery">
   <div class="row">
     <?php
-    $gallery_id = 4813;
+    $gallery_id = 5918;
     $gallery = get_post($gallery_id);
     $photos = get_field('gallery', $gallery_id);
     shuffle($photos);
