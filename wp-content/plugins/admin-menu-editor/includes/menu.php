@@ -1,7 +1,7 @@
 <?php
 abstract class ameMenu {
 	const format_name = 'Admin Menu Editor menu';
-	const format_version = '5.41';
+	const format_version = '6.0';
 
 	/**
 	 * Load an admin menu from a JSON string.
@@ -58,6 +58,10 @@ abstract class ameMenu {
 			throw new InvalidMenuException("Failed to load a menu - the menu tree is missing.");
 		}
 
+		if ( isset($arr['format']) && !empty($arr['format']['compressed']) ) {
+			$arr = self::decompress($arr);
+		}
+
 		$menu = array('tree' => array());
 		$menu = self::add_format_header($menu);
 
@@ -100,9 +104,15 @@ abstract class ameMenu {
 	}
 
 	private static function add_format_header($menu) {
-		$menu['format'] = array(
-			'name' => self::format_name,
-			'version' => self::format_version,
+		if ( !isset($menu['format']) || !is_array($menu['format']) ) {
+			$menu['format'] = array();
+		}
+		$menu['format'] = array_merge(
+			$menu['format'],
+			array(
+				'name' => self::format_name,
+				'version' => self::format_version,
+			)
 		);
 		return $menu;
 	}
@@ -200,6 +210,31 @@ abstract class ameMenu {
 	}
 
 	/**
+	 * Sanitize a list of menu items. Array indexes will be preserved.
+	 *
+	 * @param array $treeItems A list of menu items.
+	 * @param bool $unfiltered_html Whether the current user has the unfiltered_html capability.
+	 * @return array List of sanitized items.
+	 */
+	public static function sanitize($treeItems, $unfiltered_html = null) {
+		if ( $unfiltered_html === null ) {
+			$unfiltered_html = current_user_can('unfiltered_html');
+		}
+
+		$result = array();
+		foreach($treeItems as $key => $item) {
+			$item = ameMenuItem::sanitize($item, $unfiltered_html);
+
+			if ( !empty($item['items']) ) {
+				$item['items'] = self::sanitize($item['items'], $unfiltered_html);
+			}
+			$result[$key] = $item;
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Recursively filter a list of menu items and remove items flagged as missing.
 	 *
 	 * @param array $items An array of menu items to filter.
@@ -219,6 +254,129 @@ abstract class ameMenu {
 
 	protected static function is_not_missing($item) {
 		return empty($item['missing']);
+	}
+
+	/**
+	 * Compress menu configuration (lossless).
+	 *
+	 * Reduces data size by storing commonly used properties and defaults in one place
+	 * instead of in every menu item.
+	 *
+	 * @param array $menu
+	 * @return array
+	 */
+	public static function compress($menu) {
+		$property_dict = ameMenuItem::blank_menu();
+		unset($property_dict['defaults']);
+
+		$common = array(
+			'properties' => $property_dict,
+			'basic_defaults' => ameMenuItem::basic_defaults(),
+			'custom_item_defaults' => ameMenuItem::custom_item_defaults(),
+		);
+
+		$menu['tree'] = self::map_items(
+			$menu['tree'],
+			array(__CLASS__, 'compress_item'),
+			array($common)
+		);
+
+		$menu = self::add_format_header($menu);
+		$menu['format']['compressed'] = true;
+		$menu['format']['common'] = $common;
+
+		return $menu;
+	}
+
+	protected static function compress_item($item, $common) {
+		//These empty arrays can be dropped. They'll be restored either by merging common properties,
+		//or by ameMenuItem::normalize().
+		if ( empty($item['grant_access']) ) {
+			unset($item['grant_access']);
+		}
+		if ( empty($item['items']) ) {
+			unset($item['items']);
+		}
+
+		//Normal and custom menu items have different defaults.
+		//Remove defaults that are the same for all items of that type.
+		$defaults = !empty($item['custom']) ? $common['custom_item_defaults'] : $common['basic_defaults'];
+		if ( isset($item['defaults']) ) {
+			foreach($defaults as $key => $value) {
+				if ( array_key_exists($key, $item['defaults']) && $item['defaults'][$key] === $value ) {
+					unset($item['defaults'][$key]);
+				}
+			}
+		}
+
+		//Remove properties that match the common values.
+		foreach($common['properties'] as $key => $value) {
+			if ( array_key_exists($key, $item) && $item[$key] === $value ) {
+				unset($item[$key]);
+			}
+		}
+
+		return $item;
+	}
+
+	/**
+	 * Decompress menu configuration that was previously compressed by ameMenu::compress().
+	 *
+	 * If the input $menu is not compressed, this method will return it unchanged.
+	 *
+	 * @param array $menu
+	 * @return array
+	 */
+	public static function decompress($menu) {
+		if ( !isset($menu['format']) || empty($menu['format']['compressed']) ) {
+			return $menu;
+		}
+
+		$common = $menu['format']['common'];
+		$menu['tree'] = self::map_items(
+			$menu['tree'],
+			array(__CLASS__, 'decompress_item'),
+			array($common)
+		);
+
+		unset($menu['format']['compressed'], $menu['format']['common']);
+		return $menu;
+	}
+
+	protected static function decompress_item($item, $common) {
+		$item = array_merge($common['properties'], $item);
+
+		$defaults = !empty($item['custom']) ? $common['custom_item_defaults'] : $common['basic_defaults'];
+		$item['defaults'] = array_merge($defaults, $item['defaults']);
+
+		return $item;
+	}
+
+	/**
+	 * Recursively apply a callback to every menu item in an array and return the results.
+	 * Array keys are preserved.
+	 *
+	 * @param array $items
+	 * @param callable $callback
+	 * @param array|null $extra_params Optional. An array of additional parameters to pass to the callback.
+	 * @return array
+	 */
+	protected static function map_items($items, $callback, $extra_params = null) {
+		if ( $extra_params === null ) {
+			$extra_params = array();
+		}
+
+		$result = array();
+		foreach($items as $key => $item) {
+			$args = array_merge(array($item), $extra_params);
+			$item = call_user_func_array($callback, $args);
+
+			if ( !empty($item['items']) ) {
+				$item['items'] = self::map_items($item['items'], $callback, $extra_params);
+			}
+			$result[$key] = $item;
+		}
+		return $result;
 	}
 }
 

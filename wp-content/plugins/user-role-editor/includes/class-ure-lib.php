@@ -1441,7 +1441,8 @@ class Ure_Lib extends Garvs_WP_Lib {
         }
         // end of switch
         if (!empty($url)) {
-            $link = '<a href="' . $url . '" title="read about ' . $capability . ' user capability" target="new"><img src="' . 
+            $link = '<a href="' . $url . '" title="' . esc_html__('read about', 'ure') .' '. $capability .' '. 
+                    esc_html__('user capability', 'ure') .'" target="new"><img src="' . 
                     URE_PLUGIN_URL . 'images/help.png" alt="' . esc_html__('Help', 'ure') . '" /></a>';
         } else {
             $link = '';
@@ -1698,7 +1699,7 @@ class Ure_Lib extends Garvs_WP_Lib {
         }
               
         $this->wp_roles_reinit();
-        $this->_init_ure_caps();
+        $this->init_ure_caps();
         if ($this->is_full_network_synch() || $this->apply_to_all) {
             $this->current_role = '';
             $this->direct_network_roles_update();

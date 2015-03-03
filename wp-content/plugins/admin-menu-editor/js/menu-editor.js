@@ -3,6 +3,7 @@
 /*global wsEditorData, defaultMenu, customMenu */
 /** @namespace wsEditorData */
 
+wsEditorData.wsMenuEditorPro = !!wsEditorData.wsMenuEditorPro; //Cast to boolean.
 var wsIdCounter = 0;
 
 var AmeCapabilityManager = (function(roles, users) {
@@ -153,6 +154,9 @@ var AmeCapabilityManager = (function(roles, users) {
 
 	return me;
 })(wsEditorData.roles, wsEditorData.users);
+
+
+var AmeEditorApi = {};
 
 (function ($){
 
@@ -363,7 +367,7 @@ function buildMenuItem(itemData, isTopLevel) {
 			itemData.separator ? '' : '<a class="ws_edit_link"> </a><div class="ws_flag_container"> </div>',
 			'<input type="checkbox" class="ws_actor_access_checkbox">',
 			'<span class="ws_item_title">',
-				menuTitle,
+				stripAllTags(menuTitle),
 			'&nbsp;</span>',
 
 		'</div>',
@@ -414,6 +418,13 @@ function jsTrim(str){
 	return str.replace(/^\s+|\s+$/g, "");
 }
 
+function stripAllTags(input) {
+	//Based on: http://phpjs.org/functions/strip_tags/
+	var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+		commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+	return input.replace(commentsAndPhpTags, '').replace(tags, '');
+}
+
 //Editor field spec template.
 var baseField = {
 	caption : '[No caption]',
@@ -437,16 +448,12 @@ var knownMenuFields = {
 		caption : 'Menu title',
 		display: function(menuItem, displayValue, input, containerNode) {
 			//Update the header as well.
-			var itemTitle = displayValue;
-			if (itemTitle === '') {
-				itemTitle = '&nbsp;';
-			}
-			containerNode.find('.ws_item_title').html(itemTitle);
+			containerNode.find('.ws_item_title').html(stripAllTags(displayValue) + '&nbsp;');
 			return displayValue;
 		},
 		write: function(menuItem, value, input, containerNode) {
 			menuItem.menu_title = value;
-			containerNode.find('.ws_item_title').html(input.val() + '&nbsp;');
+			containerNode.find('.ws_item_title').html(stripAllTags(input.val()) + '&nbsp;');
 		}
 	}),
 
@@ -798,11 +805,8 @@ function buildEditboxFields(fieldContainer, entry, isTopLevel){
 /*
  * Create an editor for a specified field.
  */
+//noinspection JSUnusedLocalSymbols
 function buildEditboxField(entry, field_name, field_settings){
-	if (typeof entry[field_name] === 'undefined') {
-		return null; //skip fields this entry doesn't have
-	}
-
 	//Build a form field of the appropriate type
 	var inputBox = null;
 	var basicTextField = '<input type="text" class="ws_field_value">';
@@ -1093,6 +1097,8 @@ function readMenuTreeState(){
 	};
 }
 
+AmeEditorApi.readMenuTreeState = readMenuTreeState;
+
 /**
  * Extract the current menu item settings from its editor widget.
  *
@@ -1233,6 +1239,8 @@ function actorCanAccessMenu(menuItem, actor) {
 	return actorHasAccess;
 }
 
+AmeEditorApi.actorCanAccessMenu = actorCanAccessMenu;
+
 function actorHasCustomPermissions(menuItem, actor) {
 	if (menuItem.grant_access && menuItem.grant_access.hasOwnProperty && menuItem.grant_access.hasOwnProperty(actor)) {
 		return (menuItem.grant_access[actor] !== null);
@@ -1337,6 +1345,9 @@ $(document).ready(function(){
 
 		$('.ws_hide_if_pro').hide();
 	}
+
+	//Let other plugins filter knownMenuFields.
+	$(document).trigger('filterMenuFields.adminMenuEditor', [knownMenuFields, baseField]);
 
 	//Make the top menu box sortable (we only need to do this once)
     var mainMenuBox = $('#ws_menu_box');
@@ -1949,7 +1960,7 @@ $(document).ready(function(){
         //Create a custom media frame.
         frame = wp.media.frames.customAdminMenuIcon = wp.media({
             //Set the title of the modal.
-            title: 'Choose a Custom Icon (16x16)',
+            title: 'Choose a Custom Icon (20x20)',
 
             //Tell it to show only images.
             library: {
@@ -2185,26 +2196,46 @@ $(document).ready(function(){
 		menuDeletionDialog.dialog('close');
 		var selection = menuDeletionDialog.data('selected_menu');
 
-		function hideRecursively(containerNode, exceptActor) {
-			denyAccessForAllExcept(containerNode.data('menu_item'), exceptActor);
+		function applyCallbackRecursively(containerNode, callback) {
+			callback(containerNode.data('menu_item'));
 
 			var subMenuId = containerNode.data('submenu_id');
 			if (subMenuId && containerNode.hasClass('ws_menu')) {
 				$('.ws_item', '#' + subMenuId).each(function() {
 					var node = $(this);
-					denyAccessForAllExcept(node.data('menu_item'), exceptActor);
+					callback(node.data('menu_item'));
 					updateItemEditor(node);
 				});
 			}
 
 			updateItemEditor(containerNode);
+		}
+
+		function hideRecursively(containerNode, exceptActor) {
+			applyCallbackRecursively(containerNode, function(menuItem) {
+				denyAccessForAllExcept(menuItem, exceptActor);
+			});
 			updateParentAccessUi(containerNode);
 		}
 
 		if (hide === 'all') {
-			hideRecursively(selection, null);
+			if (wsEditorData.wsMenuEditorPro) {
+				hideRecursively(selection, null);
+			} else {
+				//The free version doesn't have role permissions, so use the global "hidden" flag.
+				applyCallbackRecursively(selection, function(menuItem) {
+					menuItem.hidden = true;
+				});
+			}
 		} else if (hide === 'except_current_user') {
 			hideRecursively(selection, 'user:' + wsEditorData.currentUserLogin);
+		} else if (hide === 'except_administrator' && !wsEditorData.wsMenuEditorPro) {
+			//Set "required capability" to something only the Administrator role would have.
+			var adminOnlyCap = 'manage_options';
+			applyCallbackRecursively(selection, function(menuItem) {
+				menuItem.extra_capability = adminOnlyCap;
+			});
+			alert('The "required capability" field was set to "' + adminOnlyCap + '".')
 		}
 	};
 
@@ -2217,6 +2248,9 @@ $(document).ready(function(){
 	});
 	$('#ws_hide_menu_except_current_user').click(function() {
 		menuDeletionCallback('except_current_user');
+	});
+	$('#ws_hide_menu_except_administrator').click(function() {
+		menuDeletionCallback('except_administrator');
 	});
 
 	/**
@@ -2247,9 +2281,8 @@ $(document).ready(function(){
 			});
 		}
 
-		if (!isDefaultItem || otherCopiesExist || !wsEditorData.wsMenuEditorPro) {
-			//Custom and duplicate items can be deleted normally. The free version doesn't get the dialog
-			//because it doesn't have role-specific permissions.
+		if (!isDefaultItem || otherCopiesExist) {
+			//Custom and duplicate items can be deleted normally.
 			shouldDelete = confirm('Delete this menu?');
 		} else {
 			//Non-custom items can not be deleted, but they can be hidden. Ask the user if they want to do that.
@@ -2257,6 +2290,12 @@ $(document).ready(function(){
 				menuItem.defaults.is_plugin_page ? 'an item added by another plugin' : 'a built-in menu item'
 			);
 			menuDeletionDialog.data('selected_menu', selection);
+
+			//Different versions get slightly different options because only the Pro version has
+			//role-specific permissions.
+			$('#ws_hide_menu_except_current_user').toggleClass('hidden', !wsEditorData.wsMenuEditorPro);
+			$('#ws_hide_menu_except_administrator').toggleClass('hidden', wsEditorData.wsMenuEditorPro);
+
 			menuDeletionDialog.dialog('open');
 
 			//Select "Cancel" as the default button.
@@ -2365,7 +2404,7 @@ $(document).ready(function(){
 			menu_title : 'Custom Menu ' + ws_paste_count,
 			file : randomId,
 			items: [],
-			defaults: itemTemplates.getDefaults('')
+			defaults: $.extend({}, itemTemplates.getDefaults(''))
 		});
 
 		//Make it accessible only to the current actor if one is selected.
@@ -2616,7 +2655,7 @@ $(document).ready(function(){
 			menu_title : 'Custom Item ' + ws_paste_count,
 			file : randomMenuId(),
 			items: [],
-			defaults: itemTemplates.getDefaults('')
+			defaults: $.extend({}, itemTemplates.getDefaults(''))
 		});
 
 		//Make it accessible to only the currently selected actor.
@@ -2803,7 +2842,7 @@ $(document).ready(function(){
 
 				if ( (typeof data['download_url'] != 'undefined') && data.download_url ){
 					//window.location = data.download_url;
-					$('#download_menu_button').attr('href', data.download_url);
+					$('#download_menu_button').attr('href', data.download_url).data('filesize', data.filesize);
 					$('#export_progress_notice').hide();
 					$('#export_complete_notice, #download_menu_button').show();
 				}

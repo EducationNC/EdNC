@@ -3,7 +3,7 @@ Contributors: shinephp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=vladimir%40shinephp%2ecom&lc=RU&item_name=ShinePHP%2ecom&item_number=User%20Role%20Editor%20WordPress%20plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: user, role, editor, security, access, permission, capability
 Requires at least: 4.0
-Tested up to: 4.1
+Tested up to: 4.1.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -70,10 +70,10 @@ To read more about 'User Role Editor' visit [this page](http://www.shinephp.com/
 = Translations =
 * Dutch: Arjan Bosch - needs update;
 * French: [Transifex](https://www.transifex.com);
-* Hebrew: [atar4u](http://atar4u.com) - needs update;
+* Hebrew: [atar4u](http://atar4u.com);
 * Hungarian: Németh Balázs;
 * Italian: [Giuseppe Velardo](http://www.comprensivoleopardi.gov.it/);
-* Persian: Morteza - needs update;
+* Persian: [Morteza](https://wordpress.org/support/profile/mo0orteza);
 * Russian: [Vladimir Garagulya](https://www.role-editor.com)
 * Spanish: [Dario Ferrer](http://darioferrer.com/) - needs update;
 * Turkish: [Transifex](https://www.transifex.com).
@@ -85,6 +85,14 @@ Some translations may be outdated. If you have better translation for some phras
 
 
 == Changelog ==
+
+= 4.18.3 =
+* 24.02.2015
+* Fixed PHP fatal error for roles reset operation.
+* Fixed current user capability checking before URE Options page open.
+* 3 missed phrases were added to the translations files. Thanks to [Morteza](https://wordpress.org/support/profile/mo0orteza)
+* Hebrew translation updated. Thanks to [atar4u](http://atar4u.com)
+* Persian translation updated. Thanks to [Morteza](https://wordpress.org/support/profile/mo0orteza)
 
 = 4.18.2 =
 * 06.02.2015

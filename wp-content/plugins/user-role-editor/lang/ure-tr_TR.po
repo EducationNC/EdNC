@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Role Editor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 11:48+0700\n"
-"PO-Revision-Date: 2015-02-06 12:04+0700\n"
+"POT-Creation-Date: 2015-02-23 11:48+0700\n"
+"PO-Revision-Date: 2015-02-23 12:13+0700\n"
 "Last-Translator: Vladimir Garagulya <support@role-editor.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/user-"
 "role-editor/language/tr_TR/)\n"
@@ -103,20 +103,20 @@ msgstr ""
 "Süper yönetici olmayanların kullanıcı oluşturma, düzenleme ve silmelerine "
 "izin ver"
 
-#: ../includes/class-user-role-editor.php:233
+#: ../includes/class-user-role-editor.php:234
 msgid "Change role for users without role"
 msgstr "Rolsüz kullanıcıların rolünü değiştir"
 
-#: ../includes/class-user-role-editor.php:234
+#: ../includes/class-user-role-editor.php:235
 msgid "No rights"
 msgstr "İzin yok"
 
-#: ../includes/class-user-role-editor.php:235
+#: ../includes/class-user-role-editor.php:236
 msgid "Provide new role"
 msgstr "Yeni rol sağla"
 
-#: ../includes/class-user-role-editor.php:319
-#: ../includes/class-user-role-editor.php:321
+#: ../includes/class-user-role-editor.php:320
+#: ../includes/class-user-role-editor.php:322
 msgid "You do not have permission to edit this user."
 msgstr "Bu kullanıcıyı düzenlemek için izniniz yok."
 
@@ -129,13 +129,13 @@ msgid "Settings"
 msgstr "Ayarlar"
 
 #: ../includes/class-user-role-editor.php:569
-#: ../includes/class-ure-lib.php:2529
+#: ../includes/class-ure-lib.php:2540
 msgid "Changelog"
 msgstr "Değişiklik Günlüğü"
 
 #: ../includes/class-user-role-editor.php:619
 #: ../includes/class-user-role-editor.php:648
-#: ../includes/class-user-role-editor.php:1029
+#: ../includes/class-user-role-editor.php:1030
 #: ../includes/class-ure-lib.php:337
 msgid "User Role Editor"
 msgstr "Kullanıcı Rol Editörü"
@@ -150,53 +150,53 @@ msgstr "Kullanıcı Rol Editörü seçenekleri güncellendi"
 msgid "Default Roles are updated"
 msgstr "Varsayılan Roller güncellendi"
 
-#: ../includes/class-user-role-editor.php:778
+#: ../includes/class-user-role-editor.php:779
 msgid ""
 "You do not have sufficient permissions to manage options for User Role "
 "Editor."
 msgstr "Kullanıcı Rol Editörü seçeneklerini yönetmek için yeterli izniniz yok."
 
-#: ../includes/class-user-role-editor.php:850
-#: ../includes/class-ure-lib.php:1697 ../includes/class-ure-lib.php:1950
-#: ../includes/class-ure-lib.php:2066 ../includes/class-ure-lib.php:2114
-#: ../includes/class-ure-lib.php:2350 ../includes/class-ure-lib.php:2395
+#: ../includes/class-user-role-editor.php:851
+#: ../includes/class-ure-lib.php:1698 ../includes/class-ure-lib.php:1951
+#: ../includes/class-ure-lib.php:2067 ../includes/class-ure-lib.php:2115
+#: ../includes/class-ure-lib.php:2361 ../includes/class-ure-lib.php:2406
 msgid "Insufficient permissions to work with User Role Editor"
 msgstr "Kullanıcı Rol Editörü ile çalışmak için yetersiz izin"
 
-#: ../includes/class-user-role-editor.php:976
+#: ../includes/class-user-role-editor.php:977
 msgid "Select All"
 msgstr "Hepsini Seç"
 
-#: ../includes/class-user-role-editor.php:977
+#: ../includes/class-user-role-editor.php:978
 msgid "Unselect All"
 msgstr "Hiçbirini Seçme"
 
-#: ../includes/class-user-role-editor.php:978
+#: ../includes/class-user-role-editor.php:979
 msgid "Reverse"
 msgstr "Evir"
 
-#: ../includes/class-user-role-editor.php:979
+#: ../includes/class-user-role-editor.php:980
 msgid "Update"
 msgstr "Güncelle"
 
-#: ../includes/class-user-role-editor.php:980
+#: ../includes/class-user-role-editor.php:981
 msgid "Please confirm permissions update"
 msgstr "Lütfen izin güncellemesini onaylayın"
 
-#: ../includes/class-user-role-editor.php:981
+#: ../includes/class-user-role-editor.php:982
 msgid "Add New Role"
 msgstr "Yeni Rol Ekle"
 
-#: ../includes/class-user-role-editor.php:982
-#: ../includes/class-user-role-editor.php:987
+#: ../includes/class-user-role-editor.php:983
+#: ../includes/class-user-role-editor.php:988
 msgid "Rename Role"
 msgstr "Rol İsmi Değiştir"
 
-#: ../includes/class-user-role-editor.php:983
+#: ../includes/class-user-role-editor.php:984
 msgid " Role name (ID) can not be empty!"
 msgstr "Rol ismi (ID) boş olamaz!"
 
-#: ../includes/class-user-role-editor.php:984
+#: ../includes/class-user-role-editor.php:985
 msgid ""
 " Role name (ID) must contain latin characters, digits, hyphens or underscore "
 "only!"
@@ -204,44 +204,44 @@ msgstr ""
 "Rol ismi (ID) yalnızca latin karakterleri, rakamlar, tireler veya alt "
 "çizgiler içermeli!"
 
-#: ../includes/class-user-role-editor.php:985
+#: ../includes/class-user-role-editor.php:986
 msgid ""
 " WordPress does not support numeric Role name (ID). Add latin characters to "
 "it."
 msgstr ""
 "WordPress sayısal rol ismi (ID) desteklemiyor. Latin karakterler ekleyin."
 
-#: ../includes/class-user-role-editor.php:986
+#: ../includes/class-user-role-editor.php:987
 msgid "Add Role"
 msgstr "Rol Ekle"
 
-#: ../includes/class-user-role-editor.php:988
+#: ../includes/class-user-role-editor.php:989
 msgid "Delete Role"
 msgstr "Rol Sil"
 
-#: ../includes/class-user-role-editor.php:989
+#: ../includes/class-user-role-editor.php:990
 msgid "Cancel"
 msgstr "İptal"
 
-#: ../includes/class-user-role-editor.php:990
+#: ../includes/class-user-role-editor.php:991
 msgid "Add Capability"
 msgstr "Kabiliyet Ekle"
 
-#: ../includes/class-user-role-editor.php:991
-#: ../includes/class-user-role-editor.php:1000
+#: ../includes/class-user-role-editor.php:992
+#: ../includes/class-user-role-editor.php:1001
 msgid "Delete Capability"
 msgstr "Kabiliyet Sil"
 
-#: ../includes/class-user-role-editor.php:992
+#: ../includes/class-user-role-editor.php:993
 msgid "Reset"
 msgstr "Sıfırla"
 
-#: ../includes/class-user-role-editor.php:993
+#: ../includes/class-user-role-editor.php:994
 msgid "DANGER! Resetting will restore default settings from WordPress Core."
 msgstr ""
 "TEHLİKE! Sıfırlama WordPress Çekirdeğinin varsayılan ayarlarını geri yükler."
 
-#: ../includes/class-user-role-editor.php:994
+#: ../includes/class-user-role-editor.php:995
 msgid ""
 "If any plugins have changed capabilities in any way upon installation (such "
 "as S2Member, WooCommerce, and many more), those capabilities will be DELETED!"
@@ -249,7 +249,7 @@ msgstr ""
 "Herhangi eklenti (S2Member, WooCommerce gibi) kurulumdan sonra herhangi "
 "yoldan kabiliyetleri değiştirdiyse, o kabiliyetler SİLİNİR!"
 
-#: ../includes/class-user-role-editor.php:995
+#: ../includes/class-user-role-editor.php:996
 msgid ""
 "For more information on how to undo changes and restore plugin capabilities "
 "go to"
@@ -257,19 +257,19 @@ msgstr ""
 "Değişiklikleri geri alma ve eklenti kabiliyetlerini geri yükleme hakkında "
 "daha fazla bilgi için gideceğiniz adres:"
 
-#: ../includes/class-user-role-editor.php:997
+#: ../includes/class-user-role-editor.php:998
 msgid "Continue?"
 msgstr "Devam mı?"
 
-#: ../includes/class-user-role-editor.php:998
+#: ../includes/class-user-role-editor.php:999
 msgid "Default Role"
 msgstr "Varsayılan Rol"
 
-#: ../includes/class-user-role-editor.php:999
+#: ../includes/class-user-role-editor.php:1000
 msgid "Set New Default Role"
 msgstr "Yeni Varsayılan Rol Belirle"
 
-#: ../includes/class-user-role-editor.php:1001
+#: ../includes/class-user-role-editor.php:1002
 msgid ""
 "Warning! Be careful - removing critical capability could crash some plugin "
 "or other custom code"
@@ -277,11 +277,11 @@ msgstr ""
 "Uyarı! Dikkatli olun - kritik kabiliyetleri kaldırmak bazı eklentileri veya "
 "diğer özel kodları bozabilir"
 
-#: ../includes/class-user-role-editor.php:1002
+#: ../includes/class-user-role-editor.php:1003
 msgid " Capability name (ID) can not be empty!"
 msgstr "Kabiliyet ismi (ID) boş olamaz!"
 
-#: ../includes/class-user-role-editor.php:1003
+#: ../includes/class-user-role-editor.php:1004
 msgid ""
 " Capability name (ID) must contain latin characters, digits, hyphens or "
 "underscore only!"
@@ -289,12 +289,12 @@ msgstr ""
 "Kabiliyet ismi (ID) yalnızca latin karakterleri, rakamlar, tireler veya alt "
 "çizgiler içermeli!"
 
-#: ../includes/class-user-role-editor.php:1032
-#: ../includes/class-user-role-editor.php:1065
+#: ../includes/class-user-role-editor.php:1033
+#: ../includes/class-user-role-editor.php:1066
 msgid "Other Roles"
 msgstr "Diğer Roller"
 
-#: ../includes/class-user-role-editor.php:1046
+#: ../includes/class-user-role-editor.php:1047
 msgid "Edit"
 msgstr "Düzenle"
 
@@ -390,15 +390,23 @@ msgstr "Kullanıcı güncellemesi esnasında hata meydana geldi"
 msgid "User Roles are restored to WordPress default values. "
 msgstr "Kullanıcı Rolleri WordPress varsayılanlarına geri döndürüldü."
 
+#: ../includes/class-ure-lib.php:1444
+msgid "read about"
+msgstr ""
+
 #: ../includes/class-ure-lib.php:1445
+msgid "user capability"
+msgstr ""
+
+#: ../includes/class-ure-lib.php:1446
 msgid "Help"
 msgstr "Yardım"
 
-#: ../includes/class-ure-lib.php:1913
+#: ../includes/class-ure-lib.php:1914
 msgid "Error is occur. Please check the log file."
 msgstr "Hata oluştu. Lütfen günlük dosyasını denetleyiniz."
 
-#: ../includes/class-ure-lib.php:1959 ../includes/class-ure-lib.php:2026
+#: ../includes/class-ure-lib.php:1960 ../includes/class-ure-lib.php:2027
 msgid ""
 "Error: Role ID must contain latin characters, digits, hyphens or underscore "
 "only!"
@@ -406,7 +414,7 @@ msgstr ""
 "Hata: Rol ID yalnızca latin karakterleri, rakamlar, tireler veya alt "
 "çizgiler içermeli!"
 
-#: ../includes/class-ure-lib.php:1963 ../includes/class-ure-lib.php:2030
+#: ../includes/class-ure-lib.php:1964 ../includes/class-ure-lib.php:2031
 msgid ""
 "Error: WordPress does not support numeric Role name (ID). Add latin "
 "characters to it."
@@ -414,377 +422,377 @@ msgstr ""
 "Hata: WordPress sayısal rol isimlerini (ID) desteklemiyor. Latin "
 "karakterleri ekleyin."
 
-#: ../includes/class-ure-lib.php:1978
+#: ../includes/class-ure-lib.php:1979
 #, php-format
 msgid "Role %s exists already"
 msgstr "%s rolü zaten mevcut"
 
-#: ../includes/class-ure-lib.php:1993
+#: ../includes/class-ure-lib.php:1994
 msgid "Error is encountered during new role create operation"
 msgstr "Yeni rol oluşturma işlemi sırasında hata oluştu"
 
-#: ../includes/class-ure-lib.php:1995
+#: ../includes/class-ure-lib.php:1996
 #, php-format
 msgid "Role %s is created successfully"
 msgstr "%s rolü başarıyla oluşturuldu"
 
-#: ../includes/class-ure-lib.php:2019
+#: ../includes/class-ure-lib.php:2020
 msgid "Error: Role ID is empty!"
 msgstr "Hata: Rol ID'si boş!"
 
-#: ../includes/class-ure-lib.php:2037
+#: ../includes/class-ure-lib.php:2038
 msgid "Error: Empty role display name is not allowed."
 msgstr "Hata: Boş görünen rol adına izin yok."
 
-#: ../includes/class-ure-lib.php:2044
+#: ../includes/class-ure-lib.php:2045
 #, php-format
 msgid "Role %s does not exists"
 msgstr "%s rolü mevcut değil"
 
-#: ../includes/class-ure-lib.php:2052
+#: ../includes/class-ure-lib.php:2053
 #, php-format
 msgid "Role %s is renamed to %s successfully"
 msgstr "%s rolünün ismi %s olarak başarıyla değiştirildi"
 
-#: ../includes/class-ure-lib.php:2125
+#: ../includes/class-ure-lib.php:2126
 msgid "Error encountered during role delete operation"
 msgstr "Rol silme işlemi sırasında hata oluştu"
 
-#: ../includes/class-ure-lib.php:2127
+#: ../includes/class-ure-lib.php:2128
 msgid "Unused roles are deleted successfully"
 msgstr "Kullanılmayan roller başarıyla silindi"
 
-#: ../includes/class-ure-lib.php:2129
+#: ../includes/class-ure-lib.php:2130
 #, php-format
 msgid "Role %s is deleted successfully"
 msgstr "%s rolü başarıyla silindi"
 
-#: ../includes/class-ure-lib.php:2154
+#: ../includes/class-ure-lib.php:2155
 msgid "Error encountered during default role change operation"
 msgstr "Varsayılan rol değişimi işlemi sırasında hata oluştu"
 
-#: ../includes/class-ure-lib.php:2160
+#: ../includes/class-ure-lib.php:2161
 #, php-format
 msgid "Default role for new users is set to %s successfully"
 msgstr "Yeni kullanıcılar için varsayılan rol %s rolüne başarıyla ayarlandı"
 
-#: ../includes/class-ure-lib.php:2179
+#: ../includes/class-ure-lib.php:2180
 msgid "Editor"
 msgstr "Editör"
 
-#: ../includes/class-ure-lib.php:2180
+#: ../includes/class-ure-lib.php:2181
 msgid "Author"
 msgstr "Yazar"
 
-#: ../includes/class-ure-lib.php:2181
+#: ../includes/class-ure-lib.php:2182
 msgid "Contributor"
 msgstr "İçerik Sağlayıcı"
 
-#: ../includes/class-ure-lib.php:2182
+#: ../includes/class-ure-lib.php:2183
 msgid "Subscriber"
 msgstr "Abone"
 
-#: ../includes/class-ure-lib.php:2184
+#: ../includes/class-ure-lib.php:2185
 msgid "Switch themes"
 msgstr "Tema değiştirme"
 
-#: ../includes/class-ure-lib.php:2185
+#: ../includes/class-ure-lib.php:2186
 msgid "Edit themes"
 msgstr "Tema düzenleme"
 
-#: ../includes/class-ure-lib.php:2186
+#: ../includes/class-ure-lib.php:2187
 msgid "Activate plugins"
 msgstr "Eklenti etkinleştirme"
 
-#: ../includes/class-ure-lib.php:2187
+#: ../includes/class-ure-lib.php:2188
 msgid "Edit plugins"
 msgstr "Eklenti düzenleme"
 
-#: ../includes/class-ure-lib.php:2188
+#: ../includes/class-ure-lib.php:2189
 msgid "Edit users"
 msgstr "Kullanıcı düzenleme"
 
-#: ../includes/class-ure-lib.php:2189
+#: ../includes/class-ure-lib.php:2190
 msgid "Edit files"
 msgstr "Dosya düzenleme"
 
-#: ../includes/class-ure-lib.php:2190
+#: ../includes/class-ure-lib.php:2191
 msgid "Manage options"
 msgstr "Seçenek yönetme"
 
-#: ../includes/class-ure-lib.php:2191
+#: ../includes/class-ure-lib.php:2192
 msgid "Moderate comments"
 msgstr "Yorum ılıtma"
 
-#: ../includes/class-ure-lib.php:2192
+#: ../includes/class-ure-lib.php:2193
 msgid "Manage categories"
 msgstr "Kategori yönetme"
 
-#: ../includes/class-ure-lib.php:2193
+#: ../includes/class-ure-lib.php:2194
 msgid "Manage links"
 msgstr "Bağlantı yönetme"
 
-#: ../includes/class-ure-lib.php:2194
+#: ../includes/class-ure-lib.php:2195
 msgid "Upload files"
 msgstr "Dosya yükleme"
 
-#: ../includes/class-ure-lib.php:2195
+#: ../includes/class-ure-lib.php:2196
 msgid "Import"
 msgstr "İçe Aktarma"
 
-#: ../includes/class-ure-lib.php:2196
+#: ../includes/class-ure-lib.php:2197
 msgid "Unfiltered html"
 msgstr "Süzülmemiş html"
 
-#: ../includes/class-ure-lib.php:2197
+#: ../includes/class-ure-lib.php:2198
 msgid "Edit posts"
 msgstr "Yazı düzenleme"
 
-#: ../includes/class-ure-lib.php:2198
+#: ../includes/class-ure-lib.php:2199
 msgid "Edit others posts"
 msgstr "Başkalarının yazılarını düzenleme"
 
-#: ../includes/class-ure-lib.php:2199
+#: ../includes/class-ure-lib.php:2200
 msgid "Edit published posts"
 msgstr "Yayımdaki yazıları düzenleme"
 
-#: ../includes/class-ure-lib.php:2200
+#: ../includes/class-ure-lib.php:2201
 msgid "Publish posts"
 msgstr "Yazı yayımlama"
 
-#: ../includes/class-ure-lib.php:2201
+#: ../includes/class-ure-lib.php:2202
 msgid "Edit pages"
 msgstr "Sayfa düzenleme"
 
-#: ../includes/class-ure-lib.php:2202
+#: ../includes/class-ure-lib.php:2203
 msgid "Read"
 msgstr "Okuma"
 
-#: ../includes/class-ure-lib.php:2203
+#: ../includes/class-ure-lib.php:2204
 msgid "Level 10"
 msgstr "Seviye 10"
 
-#: ../includes/class-ure-lib.php:2204
+#: ../includes/class-ure-lib.php:2205
 msgid "Level 9"
 msgstr "Seviye 9"
 
-#: ../includes/class-ure-lib.php:2205
+#: ../includes/class-ure-lib.php:2206
 msgid "Level 8"
 msgstr "Seviye 8"
 
-#: ../includes/class-ure-lib.php:2206
+#: ../includes/class-ure-lib.php:2207
 msgid "Level 7"
 msgstr "Seviye 7"
 
-#: ../includes/class-ure-lib.php:2207
+#: ../includes/class-ure-lib.php:2208
 msgid "Level 6"
 msgstr "Seviye 6"
 
-#: ../includes/class-ure-lib.php:2208
+#: ../includes/class-ure-lib.php:2209
 msgid "Level 5"
 msgstr "Seviye 5"
 
-#: ../includes/class-ure-lib.php:2209
+#: ../includes/class-ure-lib.php:2210
 msgid "Level 4"
 msgstr "Seviye 4"
 
-#: ../includes/class-ure-lib.php:2210
+#: ../includes/class-ure-lib.php:2211
 msgid "Level 3"
 msgstr "Seviye 3"
 
-#: ../includes/class-ure-lib.php:2211
+#: ../includes/class-ure-lib.php:2212
 msgid "Level 2"
 msgstr "Seviye 2"
 
-#: ../includes/class-ure-lib.php:2212
+#: ../includes/class-ure-lib.php:2213
 msgid "Level 1"
 msgstr "Seviye 1"
 
-#: ../includes/class-ure-lib.php:2213
+#: ../includes/class-ure-lib.php:2214
 msgid "Level 0"
 msgstr "Seviye 0"
 
-#: ../includes/class-ure-lib.php:2214
+#: ../includes/class-ure-lib.php:2215
 msgid "Edit others pages"
 msgstr "Başkalarının sayfalarını düzenleme"
 
-#: ../includes/class-ure-lib.php:2215
+#: ../includes/class-ure-lib.php:2216
 msgid "Edit published pages"
 msgstr "Yayımdaki sayfaları düzenleme"
 
-#: ../includes/class-ure-lib.php:2216
+#: ../includes/class-ure-lib.php:2217
 msgid "Publish pages"
 msgstr "Sayfa yayımlama"
 
-#: ../includes/class-ure-lib.php:2217
+#: ../includes/class-ure-lib.php:2218
 msgid "Delete pages"
 msgstr "Sayfa silme"
 
-#: ../includes/class-ure-lib.php:2218
+#: ../includes/class-ure-lib.php:2219
 msgid "Delete others pages"
 msgstr "Başkalarının sayfalarını silme"
 
-#: ../includes/class-ure-lib.php:2219
+#: ../includes/class-ure-lib.php:2220
 msgid "Delete published pages"
 msgstr "Yayımdaki sayfaları silme"
 
-#: ../includes/class-ure-lib.php:2220
+#: ../includes/class-ure-lib.php:2221
 msgid "Delete posts"
 msgstr "Yazı silme"
 
-#: ../includes/class-ure-lib.php:2221
+#: ../includes/class-ure-lib.php:2222
 msgid "Delete others posts"
 msgstr "Başkalarının yazılarını silme"
 
-#: ../includes/class-ure-lib.php:2222
+#: ../includes/class-ure-lib.php:2223
 msgid "Delete published posts"
 msgstr "Yayımdaki yazıları silme"
 
-#: ../includes/class-ure-lib.php:2223
+#: ../includes/class-ure-lib.php:2224
 msgid "Delete private posts"
 msgstr "Kişisel yazıları silme"
 
-#: ../includes/class-ure-lib.php:2224
+#: ../includes/class-ure-lib.php:2225
 msgid "Edit private posts"
 msgstr "Kişisel yazıları düzenleme"
 
-#: ../includes/class-ure-lib.php:2225
+#: ../includes/class-ure-lib.php:2226
 msgid "Read private posts"
 msgstr "Kişisel yazıları okuma"
 
-#: ../includes/class-ure-lib.php:2226
+#: ../includes/class-ure-lib.php:2227
 msgid "Delete private pages"
 msgstr "Kişisel sayfaları silme"
 
-#: ../includes/class-ure-lib.php:2227
+#: ../includes/class-ure-lib.php:2228
 msgid "Edit private pages"
 msgstr "Kişisel sayfaları düzenleme"
 
-#: ../includes/class-ure-lib.php:2228
+#: ../includes/class-ure-lib.php:2229
 msgid "Read private pages"
 msgstr "Kişisel sayfaları okuma"
 
-#: ../includes/class-ure-lib.php:2229
+#: ../includes/class-ure-lib.php:2230
 msgid "Delete users"
 msgstr "Kullanıcı silme"
 
-#: ../includes/class-ure-lib.php:2230
+#: ../includes/class-ure-lib.php:2231
 msgid "Create users"
 msgstr "Kullanıcı oluşturma"
 
-#: ../includes/class-ure-lib.php:2231
+#: ../includes/class-ure-lib.php:2232
 msgid "Unfiltered upload"
 msgstr "Süzülmemiş yükleme"
 
-#: ../includes/class-ure-lib.php:2232
+#: ../includes/class-ure-lib.php:2233
 msgid "Edit dashboard"
 msgstr "Panel düzenleme"
 
-#: ../includes/class-ure-lib.php:2233
+#: ../includes/class-ure-lib.php:2234
 msgid "Update plugins"
 msgstr "Eklenti güncelleme"
 
-#: ../includes/class-ure-lib.php:2234
+#: ../includes/class-ure-lib.php:2235
 msgid "Delete plugins"
 msgstr "Eklenti silme"
 
-#: ../includes/class-ure-lib.php:2235
+#: ../includes/class-ure-lib.php:2236
 msgid "Install plugins"
 msgstr "Eklenti kurma"
 
-#: ../includes/class-ure-lib.php:2236
+#: ../includes/class-ure-lib.php:2237
 msgid "Update themes"
 msgstr "Tema güncelleme"
 
-#: ../includes/class-ure-lib.php:2237
+#: ../includes/class-ure-lib.php:2238
 msgid "Install themes"
 msgstr "Tema kurma"
 
-#: ../includes/class-ure-lib.php:2238
+#: ../includes/class-ure-lib.php:2239
 msgid "Update core"
 msgstr "Çekirdek güncelleme"
 
-#: ../includes/class-ure-lib.php:2239
+#: ../includes/class-ure-lib.php:2240
 msgid "List users"
 msgstr "Kullanıcı listeleme"
 
-#: ../includes/class-ure-lib.php:2240
+#: ../includes/class-ure-lib.php:2241
 msgid "Remove users"
 msgstr "Kullanıcı kaldırma"
 
-#: ../includes/class-ure-lib.php:2241
+#: ../includes/class-ure-lib.php:2242
 msgid "Add users"
 msgstr "Kullanıcı ekleme"
 
-#: ../includes/class-ure-lib.php:2242
+#: ../includes/class-ure-lib.php:2243
 msgid "Promote users"
 msgstr "Kullanıcı teşvik etme"
 
-#: ../includes/class-ure-lib.php:2243
+#: ../includes/class-ure-lib.php:2244
 msgid "Edit theme options"
 msgstr "Tema seçenekleri düzenleme"
 
-#: ../includes/class-ure-lib.php:2244
+#: ../includes/class-ure-lib.php:2245
 msgid "Delete themes"
 msgstr "Tema silme"
 
-#: ../includes/class-ure-lib.php:2245
+#: ../includes/class-ure-lib.php:2246
 msgid "Export"
 msgstr "Dışa Aktarma"
 
-#: ../includes/class-ure-lib.php:2358
+#: ../includes/class-ure-lib.php:2369
 msgid "Error: Capability name must contain latin characters and digits only!"
 msgstr "Hata: Kabiliyet ismi yalnızca latin karakterleri ve rakamlar içermeli!"
 
-#: ../includes/class-ure-lib.php:2371
+#: ../includes/class-ure-lib.php:2382
 #, php-format
 msgid "Capability %s is added successfully"
 msgstr "%s kabiliyeti başarıyla eklendi"
 
-#: ../includes/class-ure-lib.php:2373
+#: ../includes/class-ure-lib.php:2384
 #, php-format
 msgid "Capability %s exists already"
 msgstr "%s kabiliyeti zaten mevcut"
 
-#: ../includes/class-ure-lib.php:2402
+#: ../includes/class-ure-lib.php:2413
 #, php-format
 msgid "Error! You do not have permission to delete this capability: %s!"
 msgstr "Hata! Bu kabiliyeti silmeye izniniz yok: %s!"
 
-#: ../includes/class-ure-lib.php:2421
+#: ../includes/class-ure-lib.php:2432
 #, php-format
 msgid "Capability %s is removed successfully"
 msgstr "%s kabiliyeti başarıyla kaldırıldı"
 
-#: ../includes/class-ure-lib.php:2525
+#: ../includes/class-ure-lib.php:2536
 msgid "Version:"
 msgstr "Sürüm:"
 
-#: ../includes/class-ure-lib.php:2526
+#: ../includes/class-ure-lib.php:2537
 msgid "Author's website"
 msgstr "Yazarın web sitesi"
 
-#: ../includes/class-ure-lib.php:2527
+#: ../includes/class-ure-lib.php:2538
 msgid "Plugin webpage"
 msgstr "Eklenti web sayfası"
 
-#: ../includes/class-ure-lib.php:2528
+#: ../includes/class-ure-lib.php:2539
 msgid "Plugin download"
 msgstr "Eklenti indirme"
 
-#: ../includes/class-ure-lib.php:2530
+#: ../includes/class-ure-lib.php:2541
 msgid "FAQ"
 msgstr "S.S.S."
 
-#: ../includes/class-ure-lib.php:2578
+#: ../includes/class-ure-lib.php:2589
 msgid "None"
 msgstr "Hiçbiri"
 
-#: ../includes/class-ure-lib.php:2605
+#: ../includes/class-ure-lib.php:2616
 msgid "Delete All Unused Roles"
 msgstr "Tüm Kullanılmayan Rolleri Sil"
 
-#: ../includes/class-ure-lib.php:2629
+#: ../includes/class-ure-lib.php:2640
 msgid "&mdash; No role for this site &mdash;"
 msgstr "&mdash; Bu site için hiç rol yok &mdash;"
 
@@ -807,6 +815,13 @@ msgstr "bbPress Rolü:"
 #: ../includes/ure-user-edit.php:92
 msgid "Other Roles:"
 msgstr "Diğer Roller:"
+
+#: ../includes/class-ure-screen-help.php:12
+#: ../includes/class-ure-screen-help.php:41
+#: ../includes/class-ure-screen-help.php:60
+#: ../includes/class-ure-screen-help.php:79
+msgid "User Role Editor Options page help"
+msgstr "Kullanıcı Rol Editörü Seçenekler"
 
 #: ../includes/class-ure-screen-help.php:16
 msgid ""

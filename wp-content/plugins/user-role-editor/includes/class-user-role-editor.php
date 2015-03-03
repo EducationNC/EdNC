@@ -588,25 +588,25 @@ class User_Role_Editor {
         $screen_help = new Ure_Screen_Help();
         $screen->add_help_tab( array(
             'id'	=> 'general',
-            'title'	=> esc_html__('General'),
+            'title'	=> esc_html__('General', 'ure'),
             'content'	=> $screen_help->get_settings_help('general')
             ));
         if ($this->lib->is_pro() || !$this->lib->multisite) {
             $screen->add_help_tab( array(
                 'id'	=> 'additional_modules',
-                'title'	=> esc_html__('Additional Modules'),
+                'title'	=> esc_html__('Additional Modules', 'ure'),
                 'content'	=> $screen_help->get_settings_help('additional_modules')
                 ));
         }
         $screen->add_help_tab( array(
             'id'	=> 'default_roles',
-            'title'	=> esc_html__('Default Roles'),
+            'title'	=> esc_html__('Default Roles', 'ure'),
             'content'	=> $screen_help->get_settings_help('default_roles')
             ));
         if ($this->lib->multisite) {
             $screen->add_help_tab( array(
                 'id'	=> 'multisite',
-                'title'	=> esc_html__('Multisite'),
+                'title'	=> esc_html__('Multisite', 'ure'),
                 'content'	=> $screen_help->get_settings_help('multisite')
                 ));
         }
@@ -774,7 +774,8 @@ class User_Role_Editor {
     
 
     public function settings() {
-        if (!current_user_can('ure_manage_options')) {
+        $settings_capability = $this->lib->get_settings_capability();
+        if (!current_user_can($settings_capability)) {
             wp_die(esc_html__( 'You do not have sufficient permissions to manage options for User Role Editor.', 'ure' ));
         }
         $action = $this->get_settings_action();

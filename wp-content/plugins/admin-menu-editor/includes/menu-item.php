@@ -124,13 +124,13 @@ abstract class ameMenuItem {
 		$blank_menu = array_merge($blank_menu, array(
 			'items' => array(), //List of sub-menu items.
 			'grant_access' => array(), //Per-role and per-user access. Supersedes role_access.
-			'role_access' => array(), //Per-role access settings.
 			'colors' => null,
 
 			'custom' => false,  //True if item is made-from-scratch and has no template.
 			'missing' => false, //True if our template is no longer present in the default admin menu. Note: Stored values will be ignored. Set upon merging.
 			'unused' => false,  //True if this item was generated from an unused default menu. Note: Stored values will be ignored. Set upon merging.
 			'hidden' => false,  //Hide/show the item. Hiding is purely cosmetic, the item remains accessible.
+			'separator' => false,  //True if the item is a menu separator.
 
 			'defaults' => self::basic_defaults(),
 		));
@@ -319,7 +319,7 @@ abstract class ameMenuItem {
 			foreach($item['role_access'] as $role_id => $has_access) {
 				$item['grant_access']['role:' . $role_id] = $has_access;
 			}
-			$item['role_access'] = array();
+			unset($item['role_access']);
 		}
 
 		if ( isset($item['items']) ) {
@@ -362,6 +362,66 @@ abstract class ameMenuItem {
 			}
 			$item['defaults'] = $new_defaults;
 		}
+		return $item;
+	}
+
+	/**
+	 * Sanitize item properties.
+	 *
+	 * Strips disallowed HTML and invalid characters from many fields. For example, only users who
+	 * have the "unfiltered_html" capability can use arbitrary HTML in menu titles.
+	 *
+	 * To avoid the performance hit of calling current_user_can('unfiltered_html') for every item,
+	 * you can call it once and pass the result to this function.
+	 *
+	 * @param array $item Menu item in the internal format.
+	 * @param bool|null $user_can_unfiltered_html
+	 * @return array Sanitized menu item.
+	 */
+	public static function sanitize($item, $user_can_unfiltered_html = null) {
+		if ( $user_can_unfiltered_html === null ) {
+			$user_can_unfiltered_html = current_user_can('unfiltered_html');
+		}
+
+		if ( !$user_can_unfiltered_html ) {
+			$kses_fields = array('menu_title', 'page_title', 'file', 'page_heading');
+			foreach($kses_fields as $field) {
+				$value = self::get($item, $field);
+				if ( is_string($value) && !empty($value) && !self::is_default($item, $field) ) {
+					$item[$field] = wp_kses_post($value);
+				}
+			}
+		}
+
+		//Sanitize CSS class names. Note that the WP implementation of sanitize_html_class() is very basic
+		//and doesn't comply with the CSS2 spec, but that's probably OK in this case.
+		$css_class = self::get($item, 'css_class');
+		if ( !self::is_default($item, 'css_class') && is_string($css_class) && function_exists('sanitize_html_class') ) {
+			$item['css_class'] = implode(' ', array_map('sanitize_html_class', explode(' ', $css_class)));
+		}
+
+		//While menu capabilities are generally not displayed anywhere except this plugin (which already
+		//escapes them properly), lets sanitize them anyway in case another plugin displays them as-is.
+		$capability_fields = array('access_level', 'extra_capability');
+		foreach($capability_fields as $field) {
+			$value = self::get($item, $field);
+			if ( !self::is_default($item, $field) && is_string($value) ) {
+				$item[$field] = strip_tags($value);
+			}
+		}
+
+		//Menu icons can be all kinds of stuff (dashicons, data URIs, etc), but they can't contain HTML.
+		//See /wp-admin/menu-header.php line #90 and onwards for how WordPress handles icons.
+		if ( !self::is_default($item, 'icon_url') ) {
+			$item['icon_url'] = strip_tags($item['icon_url']);
+		}
+
+		//WordPress already sanitizes the menu ID (hookname) on display, but, again, lets clean it just in case.
+		if ( !self::is_default($item, 'hookname') ) {
+			//Regex from menu-header.php, WP 4.1.
+			$item['hookname'] = preg_replace('@[^a-zA-Z0-9_:.]@', '-', self::get($item, 'hookname'));
+		}
+
 		return $item;
 	}
 

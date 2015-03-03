@@ -256,7 +256,7 @@ if ( apply_filters('admin_menu_editor_is_pro', false) ) {
 		<input type="button" class="button"
 		   id="ws_choose_icon_from_media"
 		   title="Upload an image or choose one from your media library"
-		   value="Choose Icon">
+		   value="Media Library">
 		<div class="clear"></div>
 	<?php
 	endif;
@@ -433,6 +433,12 @@ if ( apply_filters('admin_menu_editor_is_pro', false) ) {
 			sprintf('Hide it from everyone except "%s"', $current_user->get('user_login')),
 			'secondary',
 			'ws_hide_menu_except_current_user',
+			false
+		);
+		submit_button(
+			'Hide it from everyone except Administrator',
+			'secondary',
+			'ws_hide_menu_except_administrator',
 			false
 		);
 		submit_button('Cancel', 'secondary', 'ws_cancel_menu_deletion', false);

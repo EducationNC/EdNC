@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Role Editor 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 11:48+0700\n"
+"POT-Creation-Date: 2015-02-23 11:48+0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vladimir Garagulya <support@role-editor.com>\n"
 "Language-Team: Morteza Gholami <Morteza.Gholami@Yahoo.Com>\n"
-"Language: en_RU\n"
+"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,6 +14,7 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
@@ -62,9 +63,8 @@ msgstr "نمایش قابلیت‌های بد دانسته ‌شده"
 
 #: ../includes/settings-template.php:77
 #: ../includes/class-ure-screen-help.php:25
-#, fuzzy
 msgid "Edit user capabilities"
-msgstr "قابلیت‌های سفارشی:"
+msgstr "ویرایش قابلیت‌های کاربر"
 
 #: ../includes/settings-template.php:90 ../includes/settings-template.php:126
 #: ../includes/settings-template.php:158 ../includes/settings-template.php:190
@@ -90,27 +90,27 @@ msgid ""
 "should exist at the site, in order to be assigned to the new registered "
 "users."
 msgstr ""
-"قابل توجه محیط چند سایتی: رفتن به حسابی که در سایت نقش‌های پیش فرض دیگری "
-"موجود است، به منظور اختصاص دادن به کاربران تازه ثبت‌نام شده."
+"قابل توجه محیط چند سایتی: به منظور اختصاص‌دادن نقش‌ها به کاربران تازه ثبت‌نام "
+"شده، به حسابی بروید که نقش‌های پیش‌فرض دیگر می‌بایست در سایت موجود باشد."
 
 #: ../includes/settings-template.php:177
 msgid "Allow non super administrators to create, edit, and delete users"
-msgstr "اجازه به غیر مدیران اصلی برای ایجاد، ویرایش و حذف کاربران"
+msgstr "اجازه به مدیران غیر اصلی برای ایجاد، ویرایش و حذف کاربران"
 
-#: ../includes/class-user-role-editor.php:233
+#: ../includes/class-user-role-editor.php:234
 msgid "Change role for users without role"
 msgstr "تغییر نقش برای کاربران بدون نقش"
 
-#: ../includes/class-user-role-editor.php:234
-msgid "No rights"
-msgstr "هیچ حقوقی"
-
 #: ../includes/class-user-role-editor.php:235
+msgid "No rights"
+msgstr "بدون هیچ حقی"
+
+#: ../includes/class-user-role-editor.php:236
 msgid "Provide new role"
 msgstr "ارائه‌ی نقش جدید"
 
-#: ../includes/class-user-role-editor.php:319
-#: ../includes/class-user-role-editor.php:321
+#: ../includes/class-user-role-editor.php:320
+#: ../includes/class-user-role-editor.php:322
 msgid "You do not have permission to edit this user."
 msgstr "شما اجازه‌ی ویرایش این کاربر را ندارید."
 
@@ -123,13 +123,13 @@ msgid "Settings"
 msgstr "تنظیمات"
 
 #: ../includes/class-user-role-editor.php:569
-#: ../includes/class-ure-lib.php:2529
+#: ../includes/class-ure-lib.php:2540
 msgid "Changelog"
 msgstr "گزارش تغییرات"
 
 #: ../includes/class-user-role-editor.php:619
 #: ../includes/class-user-role-editor.php:648
-#: ../includes/class-user-role-editor.php:1029
+#: ../includes/class-user-role-editor.php:1030
 #: ../includes/class-ure-lib.php:337
 msgid "User Role Editor"
 msgstr "ویرایش‌گر نقش کاربر"
@@ -144,97 +144,96 @@ msgstr "تنظیمات ویرایش‌گر نقش کاربر بروز شد"
 msgid "Default Roles are updated"
 msgstr "نقش‌های پیش فرض بروز شدند"
 
-#: ../includes/class-user-role-editor.php:778
+#: ../includes/class-user-role-editor.php:779
 msgid ""
 "You do not have sufficient permissions to manage options for User Role "
 "Editor."
 msgstr "شما مجوز کافی برای مدیریت تنظیمات ویرایش‌گر نقش کاربر را ندارید."
 
-#: ../includes/class-user-role-editor.php:850
-#: ../includes/class-ure-lib.php:1697 ../includes/class-ure-lib.php:1950
-#: ../includes/class-ure-lib.php:2066 ../includes/class-ure-lib.php:2114
-#: ../includes/class-ure-lib.php:2350 ../includes/class-ure-lib.php:2395
+#: ../includes/class-user-role-editor.php:851
+#: ../includes/class-ure-lib.php:1698 ../includes/class-ure-lib.php:1951
+#: ../includes/class-ure-lib.php:2067 ../includes/class-ure-lib.php:2115
+#: ../includes/class-ure-lib.php:2361 ../includes/class-ure-lib.php:2406
 msgid "Insufficient permissions to work with User Role Editor"
 msgstr "مجوز ناکافی برای کار با ویرایش‌گر نقش کاربر"
 
-#: ../includes/class-user-role-editor.php:976
+#: ../includes/class-user-role-editor.php:977
 msgid "Select All"
 msgstr "انتخاب همه"
 
-#: ../includes/class-user-role-editor.php:977
+#: ../includes/class-user-role-editor.php:978
 msgid "Unselect All"
 msgstr "عدم‌انتخاب همه"
 
-#: ../includes/class-user-role-editor.php:978
+#: ../includes/class-user-role-editor.php:979
 msgid "Reverse"
 msgstr "وارونه"
 
-#: ../includes/class-user-role-editor.php:979
+#: ../includes/class-user-role-editor.php:980
 msgid "Update"
 msgstr "بروزرسانی"
 
-#: ../includes/class-user-role-editor.php:980
+#: ../includes/class-user-role-editor.php:981
 msgid "Please confirm permissions update"
 msgstr "لطفا مجوز بروزرسانی را تایید کنید"
 
-#: ../includes/class-user-role-editor.php:981
+#: ../includes/class-user-role-editor.php:982
 msgid "Add New Role"
 msgstr "افزودن نقش جدید"
 
-#: ../includes/class-user-role-editor.php:982
-#: ../includes/class-user-role-editor.php:987
-#, fuzzy
-msgid "Rename Role"
-msgstr "حذف نقش"
-
 #: ../includes/class-user-role-editor.php:983
+#: ../includes/class-user-role-editor.php:988
+msgid "Rename Role"
+msgstr "تغییرنام نقش"
+
+#: ../includes/class-user-role-editor.php:984
 msgid " Role name (ID) can not be empty!"
 msgstr " نام نقش (شناسه) نمی تواند خالی باشد!"
 
-#: ../includes/class-user-role-editor.php:984
+#: ../includes/class-user-role-editor.php:985
 msgid ""
 " Role name (ID) must contain latin characters, digits, hyphens or underscore "
 "only!"
 msgstr ""
 " نام نقش (شناسه) باید فقط شامل حروف لاتین، اعداد، خط فاصله یا زیرخط باشد!"
 
-#: ../includes/class-user-role-editor.php:985
+#: ../includes/class-user-role-editor.php:986
 msgid ""
 " WordPress does not support numeric Role name (ID). Add latin characters to "
 "it."
 msgstr ""
 " وردپرس از نام نقش (شناسه) عددی پشتیبانی نمی‌کند. حروف لاتین به آن اضافه کنید."
 
-#: ../includes/class-user-role-editor.php:986
+#: ../includes/class-user-role-editor.php:987
 msgid "Add Role"
 msgstr "افزودن نقش"
 
-#: ../includes/class-user-role-editor.php:988
+#: ../includes/class-user-role-editor.php:989
 msgid "Delete Role"
 msgstr "حذف نقش"
 
-#: ../includes/class-user-role-editor.php:989
+#: ../includes/class-user-role-editor.php:990
 msgid "Cancel"
 msgstr "لغو"
 
-#: ../includes/class-user-role-editor.php:990
+#: ../includes/class-user-role-editor.php:991
 msgid "Add Capability"
 msgstr "افزودن قابلیت"
 
-#: ../includes/class-user-role-editor.php:991
-#: ../includes/class-user-role-editor.php:1000
+#: ../includes/class-user-role-editor.php:992
+#: ../includes/class-user-role-editor.php:1001
 msgid "Delete Capability"
 msgstr "حذف قابلیت"
 
-#: ../includes/class-user-role-editor.php:992
+#: ../includes/class-user-role-editor.php:993
 msgid "Reset"
 msgstr "بازنشانی"
 
-#: ../includes/class-user-role-editor.php:993
+#: ../includes/class-user-role-editor.php:994
 msgid "DANGER! Resetting will restore default settings from WordPress Core."
 msgstr "خطر! بازنشانی، تنظیمات پیش‌فرض را از هسته‌ی وردپرس بازمی‌گرداند."
 
-#: ../includes/class-user-role-editor.php:994
+#: ../includes/class-user-role-editor.php:995
 msgid ""
 "If any plugins have changed capabilities in any way upon installation (such "
 "as S2Member, WooCommerce, and many more), those capabilities will be DELETED!"
@@ -242,51 +241,51 @@ msgstr ""
 "اگر هریک از افزونه‌ها پس از نصب به هر نحو قابلیت‌ها را تغییر دهند (مانند "
 "S2Member ، WooCommerce و بسیاری دیگر) آن قابلیت‌ها حذف خواهند شد!"
 
-#: ../includes/class-user-role-editor.php:995
+#: ../includes/class-user-role-editor.php:996
 msgid ""
 "For more information on how to undo changes and restore plugin capabilities "
 "go to"
 msgstr ""
-"برای کسب اطلاعات بیشتر درباره چگونگی خنثی‌سازی تغییرات و ترمیم‌کردن قابلیت ها "
+"برای کسب اطلاعات بیشتر درباره چگونگی خنثی‌سازی تغییرات و ترمیم‌کردن قابلیت‌ها "
 "مراجعه کنید به"
 
-#: ../includes/class-user-role-editor.php:997
-msgid "Continue?"
-msgstr "ادامه؟"
-
 #: ../includes/class-user-role-editor.php:998
+msgid "Continue?"
+msgstr "ادامه می‌دهید؟"
+
+#: ../includes/class-user-role-editor.php:999
 msgid "Default Role"
 msgstr "نقش پیش‌فرض"
 
-#: ../includes/class-user-role-editor.php:999
+#: ../includes/class-user-role-editor.php:1000
 msgid "Set New Default Role"
 msgstr "نشاندن نقش پیش‌فرض جدید"
 
-#: ../includes/class-user-role-editor.php:1001
+#: ../includes/class-user-role-editor.php:1002
 msgid ""
 "Warning! Be careful - removing critical capability could crash some plugin "
 "or other custom code"
 msgstr ""
 "اخطار! مراقب باشید - حذف قابلیت مهم می‌تواند برخی از افزونه‌ها یا دیگر کدهای "
-"سفارشی را دچار سانحه کند"
+"سفارشی را دچار اشکال کند"
 
-#: ../includes/class-user-role-editor.php:1002
+#: ../includes/class-user-role-editor.php:1003
 msgid " Capability name (ID) can not be empty!"
 msgstr " نام قابلیت (شناسه) نمی تواند خالی باشد!"
 
-#: ../includes/class-user-role-editor.php:1003
+#: ../includes/class-user-role-editor.php:1004
 msgid ""
 " Capability name (ID) must contain latin characters, digits, hyphens or "
 "underscore only!"
 msgstr ""
 " نام قابلیت (شناسه) باید فقط شامل حروف لاتین، اعداد، خط فاصله یا زیرخط باشد!"
 
-#: ../includes/class-user-role-editor.php:1032
-#: ../includes/class-user-role-editor.php:1065
+#: ../includes/class-user-role-editor.php:1033
+#: ../includes/class-user-role-editor.php:1066
 msgid "Other Roles"
 msgstr "دیگر نقش‌ها"
 
-#: ../includes/class-user-role-editor.php:1046
+#: ../includes/class-user-role-editor.php:1047
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -328,7 +327,7 @@ msgstr "نام نقش (شناسه): "
 
 #: ../includes/class-ure-lib.php:280 ../includes/class-ure-lib.php:291
 msgid "Display Role Name: "
-msgstr "نمایش نام نقش: "
+msgstr "نام نمایشی نقش:"
 
 #: ../includes/class-ure-lib.php:282
 msgid "Make copy of: "
@@ -382,22 +381,30 @@ msgstr "خطایی در هنگام بروزرسانی کاربر رخ داد"
 msgid "User Roles are restored to WordPress default values. "
 msgstr "نقش‌های کاربر به مقدار پیش‌فرض وردپرس ترمیم شد."
 
+#: ../includes/class-ure-lib.php:1444
+msgid "read about"
+msgstr ""
+
 #: ../includes/class-ure-lib.php:1445
+msgid "user capability"
+msgstr ""
+
+#: ../includes/class-ure-lib.php:1446
 msgid "Help"
 msgstr "راهنما"
 
-#: ../includes/class-ure-lib.php:1913
+#: ../includes/class-ure-lib.php:1914
 msgid "Error is occur. Please check the log file."
 msgstr "خطایی رخ داده است. لطفا فایل گزارش را چک کنید."
 
-#: ../includes/class-ure-lib.php:1959 ../includes/class-ure-lib.php:2026
+#: ../includes/class-ure-lib.php:1960 ../includes/class-ure-lib.php:2027
 msgid ""
 "Error: Role ID must contain latin characters, digits, hyphens or underscore "
 "only!"
 msgstr ""
 "خطا: شناسه‌ی نقش باید فقط شامل حروف لاتین، اعداد، خط فاصله یا زیرخط باشد!"
 
-#: ../includes/class-ure-lib.php:1963 ../includes/class-ure-lib.php:2030
+#: ../includes/class-ure-lib.php:1964 ../includes/class-ure-lib.php:2031
 msgid ""
 "Error: WordPress does not support numeric Role name (ID). Add latin "
 "characters to it."
@@ -405,377 +412,377 @@ msgstr ""
 "خطا: وردپرس از نام نقش (شناسه) عددی پشتیبانی نمی‌کند. حروف لاتین به آن اضافه "
 "کنید."
 
-#: ../includes/class-ure-lib.php:1978
+#: ../includes/class-ure-lib.php:1979
 #, php-format
 msgid "Role %s exists already"
 msgstr "نقش %s از پیش موجود است"
 
-#: ../includes/class-ure-lib.php:1993
+#: ../includes/class-ure-lib.php:1994
 msgid "Error is encountered during new role create operation"
 msgstr "با خطایی در هنگام عملیات ساخت نقش جدید روبرو شدیم"
 
-#: ../includes/class-ure-lib.php:1995
+#: ../includes/class-ure-lib.php:1996
 #, php-format
 msgid "Role %s is created successfully"
 msgstr "نقش %s با موفقیت ایجاد شد"
 
-#: ../includes/class-ure-lib.php:2019
+#: ../includes/class-ure-lib.php:2020
 msgid "Error: Role ID is empty!"
-msgstr ""
+msgstr "خطا: شناسه‌ی نقش خالی است!"
 
-#: ../includes/class-ure-lib.php:2037
+#: ../includes/class-ure-lib.php:2038
 msgid "Error: Empty role display name is not allowed."
-msgstr ""
+msgstr "خطا: خالی بودن نام نمایشی نقش مجاز نیست."
 
-#: ../includes/class-ure-lib.php:2044
-#, fuzzy, php-format
+#: ../includes/class-ure-lib.php:2045
+#, php-format
 msgid "Role %s does not exists"
-msgstr "موجود نمی‌باشد"
+msgstr "نقش %s موجود نیست"
 
-#: ../includes/class-ure-lib.php:2052
-#, fuzzy, php-format
+#: ../includes/class-ure-lib.php:2053
+#, php-format
 msgid "Role %s is renamed to %s successfully"
-msgstr "نقش %s با موفقیت ایجاد شد"
+msgstr "نقش %s با موفقیت به %s تغییرنام داده شد"
 
-#: ../includes/class-ure-lib.php:2125
+#: ../includes/class-ure-lib.php:2126
 msgid "Error encountered during role delete operation"
 msgstr "با خطایی در هنگام عملیات حذف نقش روبرو شدیم"
 
-#: ../includes/class-ure-lib.php:2127
+#: ../includes/class-ure-lib.php:2128
 msgid "Unused roles are deleted successfully"
 msgstr "نقش‌های استفاده نشده با موفقیت حذف شدند"
 
-#: ../includes/class-ure-lib.php:2129
+#: ../includes/class-ure-lib.php:2130
 #, php-format
 msgid "Role %s is deleted successfully"
 msgstr "نقش %s با موفقیت حذف شد"
 
-#: ../includes/class-ure-lib.php:2154
+#: ../includes/class-ure-lib.php:2155
 msgid "Error encountered during default role change operation"
 msgstr "با خطایی در هنگام عملیات تغییر نقش پیش‌فرض روبرو شدیم"
 
-#: ../includes/class-ure-lib.php:2160
+#: ../includes/class-ure-lib.php:2161
 #, php-format
 msgid "Default role for new users is set to %s successfully"
-msgstr "نقش پیش‌فرض برای کاربران جدید با موفقیت روی %s نشانده شد"
+msgstr "نقش پیش‌فرض برای کاربران جدید با موفقیت روی %s تنظیم شد"
 
-#: ../includes/class-ure-lib.php:2179
+#: ../includes/class-ure-lib.php:2180
 msgid "Editor"
 msgstr "ویرایش‌گر"
 
-#: ../includes/class-ure-lib.php:2180
+#: ../includes/class-ure-lib.php:2181
 msgid "Author"
 msgstr "نویسنده"
 
-#: ../includes/class-ure-lib.php:2181
+#: ../includes/class-ure-lib.php:2182
 msgid "Contributor"
 msgstr "مشارکت‌کننده"
 
-#: ../includes/class-ure-lib.php:2182
+#: ../includes/class-ure-lib.php:2183
 msgid "Subscriber"
 msgstr "مشترک"
 
-#: ../includes/class-ure-lib.php:2184
+#: ../includes/class-ure-lib.php:2185
 msgid "Switch themes"
 msgstr "تغییر پوسته‌ها"
 
-#: ../includes/class-ure-lib.php:2185
+#: ../includes/class-ure-lib.php:2186
 msgid "Edit themes"
 msgstr "ویرایش پوسته‌ها"
 
-#: ../includes/class-ure-lib.php:2186
+#: ../includes/class-ure-lib.php:2187
 msgid "Activate plugins"
 msgstr "فعال‌سازی افزونه‌ها"
 
-#: ../includes/class-ure-lib.php:2187
+#: ../includes/class-ure-lib.php:2188
 msgid "Edit plugins"
 msgstr "ویرایش افزونه‌ها"
 
-#: ../includes/class-ure-lib.php:2188
+#: ../includes/class-ure-lib.php:2189
 msgid "Edit users"
 msgstr "ویرایش کاربران"
 
-#: ../includes/class-ure-lib.php:2189
+#: ../includes/class-ure-lib.php:2190
 msgid "Edit files"
 msgstr "ویرایش فایل‌ها"
 
-#: ../includes/class-ure-lib.php:2190
+#: ../includes/class-ure-lib.php:2191
 msgid "Manage options"
 msgstr "مدیریت تنظیمات"
 
-#: ../includes/class-ure-lib.php:2191
+#: ../includes/class-ure-lib.php:2192
 msgid "Moderate comments"
 msgstr "مدیریت دیدگاه‌ها"
 
-#: ../includes/class-ure-lib.php:2192
+#: ../includes/class-ure-lib.php:2193
 msgid "Manage categories"
 msgstr "مدیریت دسته‌ها"
 
-#: ../includes/class-ure-lib.php:2193
+#: ../includes/class-ure-lib.php:2194
 msgid "Manage links"
 msgstr "مدیریت پیوندها"
 
-#: ../includes/class-ure-lib.php:2194
+#: ../includes/class-ure-lib.php:2195
 msgid "Upload files"
 msgstr "بارگذاری فایل‌ها"
 
-#: ../includes/class-ure-lib.php:2195
+#: ../includes/class-ure-lib.php:2196
 msgid "Import"
 msgstr "درون‌ریزی"
 
-#: ../includes/class-ure-lib.php:2196
+#: ../includes/class-ure-lib.php:2197
 msgid "Unfiltered html"
 msgstr "اچ‌تی‌ام‌ال فیلتر‌نشده"
 
-#: ../includes/class-ure-lib.php:2197
+#: ../includes/class-ure-lib.php:2198
 msgid "Edit posts"
 msgstr "ویرایش نوشته‌ها"
 
-#: ../includes/class-ure-lib.php:2198
+#: ../includes/class-ure-lib.php:2199
 msgid "Edit others posts"
 msgstr "ویرایش نوشته‌ی دیگران"
 
-#: ../includes/class-ure-lib.php:2199
+#: ../includes/class-ure-lib.php:2200
 msgid "Edit published posts"
 msgstr "ویرایش نوشته‌های منتشر‌شده"
 
-#: ../includes/class-ure-lib.php:2200
+#: ../includes/class-ure-lib.php:2201
 msgid "Publish posts"
 msgstr "انتشار نوشته‌ها"
 
-#: ../includes/class-ure-lib.php:2201
+#: ../includes/class-ure-lib.php:2202
 msgid "Edit pages"
 msgstr "ویرایش صفحات"
 
-#: ../includes/class-ure-lib.php:2202
+#: ../includes/class-ure-lib.php:2203
 msgid "Read"
 msgstr "خواندن"
 
-#: ../includes/class-ure-lib.php:2203
+#: ../includes/class-ure-lib.php:2204
 msgid "Level 10"
 msgstr "سطح ۱۰"
 
-#: ../includes/class-ure-lib.php:2204
+#: ../includes/class-ure-lib.php:2205
 msgid "Level 9"
 msgstr "سطح ۹"
 
-#: ../includes/class-ure-lib.php:2205
+#: ../includes/class-ure-lib.php:2206
 msgid "Level 8"
 msgstr "سطح ۸"
 
-#: ../includes/class-ure-lib.php:2206
+#: ../includes/class-ure-lib.php:2207
 msgid "Level 7"
 msgstr "سطح ۷"
 
-#: ../includes/class-ure-lib.php:2207
+#: ../includes/class-ure-lib.php:2208
 msgid "Level 6"
 msgstr "سطح ۶"
 
-#: ../includes/class-ure-lib.php:2208
+#: ../includes/class-ure-lib.php:2209
 msgid "Level 5"
 msgstr "سطح ۵"
 
-#: ../includes/class-ure-lib.php:2209
+#: ../includes/class-ure-lib.php:2210
 msgid "Level 4"
 msgstr "سطح ۴"
 
-#: ../includes/class-ure-lib.php:2210
+#: ../includes/class-ure-lib.php:2211
 msgid "Level 3"
 msgstr "سطح ۳"
 
-#: ../includes/class-ure-lib.php:2211
+#: ../includes/class-ure-lib.php:2212
 msgid "Level 2"
 msgstr "سطح ۲"
 
-#: ../includes/class-ure-lib.php:2212
+#: ../includes/class-ure-lib.php:2213
 msgid "Level 1"
 msgstr "سطح ۱"
 
-#: ../includes/class-ure-lib.php:2213
+#: ../includes/class-ure-lib.php:2214
 msgid "Level 0"
 msgstr "سطح ۰"
 
-#: ../includes/class-ure-lib.php:2214
-msgid "Edit others pages"
-msgstr "ویرایش صفحات دیگران"
-
 #: ../includes/class-ure-lib.php:2215
-msgid "Edit published pages"
-msgstr "ویرایش صفحات منتشر‌شده"
+msgid "Edit others pages"
+msgstr "ویرایش برگه‌های دیگران"
 
 #: ../includes/class-ure-lib.php:2216
-msgid "Publish pages"
-msgstr "انتشار صفحات"
+msgid "Edit published pages"
+msgstr "ویرایش برگه‌های منتشر‌شده"
 
 #: ../includes/class-ure-lib.php:2217
-msgid "Delete pages"
-msgstr "حذف صفحات"
+msgid "Publish pages"
+msgstr "انتشار برگه‌ها"
 
 #: ../includes/class-ure-lib.php:2218
-msgid "Delete others pages"
-msgstr "حذف صفحات دیگران"
+msgid "Delete pages"
+msgstr "حذف برگه‌ها"
 
 #: ../includes/class-ure-lib.php:2219
-msgid "Delete published pages"
-msgstr "حذف صفحات منتشر‌شده"
+msgid "Delete others pages"
+msgstr "حذف برگه‌های دیگران"
 
 #: ../includes/class-ure-lib.php:2220
-msgid "Delete posts"
-msgstr "حذف صفحات"
+msgid "Delete published pages"
+msgstr "حذف برگه‌های منتشر‌شده"
 
 #: ../includes/class-ure-lib.php:2221
+msgid "Delete posts"
+msgstr "حذف برگه‌ها"
+
+#: ../includes/class-ure-lib.php:2222
 msgid "Delete others posts"
 msgstr "حذف نوشته‌های دیگران"
 
-#: ../includes/class-ure-lib.php:2222
+#: ../includes/class-ure-lib.php:2223
 msgid "Delete published posts"
 msgstr "حذف نوشته‌های منتشر‌شده"
 
-#: ../includes/class-ure-lib.php:2223
+#: ../includes/class-ure-lib.php:2224
 msgid "Delete private posts"
 msgstr "حذف نوشته‌های خصوصی"
 
-#: ../includes/class-ure-lib.php:2224
+#: ../includes/class-ure-lib.php:2225
 msgid "Edit private posts"
 msgstr "ویرایش نوشته‌های خصوصی"
 
-#: ../includes/class-ure-lib.php:2225
+#: ../includes/class-ure-lib.php:2226
 msgid "Read private posts"
 msgstr "خواندن نوشته‌های خصوصی"
 
-#: ../includes/class-ure-lib.php:2226
-msgid "Delete private pages"
-msgstr "حذف صفحات خصوصی"
-
 #: ../includes/class-ure-lib.php:2227
-msgid "Edit private pages"
-msgstr "ویرایش صفحات خصوصی"
+msgid "Delete private pages"
+msgstr "حذف برگه‌های خصوصی"
 
 #: ../includes/class-ure-lib.php:2228
-msgid "Read private pages"
-msgstr "خواندن صفحات خصوصی"
+msgid "Edit private pages"
+msgstr "ویرایش برگه‌های خصوصی"
 
 #: ../includes/class-ure-lib.php:2229
+msgid "Read private pages"
+msgstr "خواندن برگه‌های خصوصی"
+
+#: ../includes/class-ure-lib.php:2230
 msgid "Delete users"
 msgstr "حذف کاربران"
 
-#: ../includes/class-ure-lib.php:2230
+#: ../includes/class-ure-lib.php:2231
 msgid "Create users"
 msgstr "ایجاد کاربران"
 
-#: ../includes/class-ure-lib.php:2231
+#: ../includes/class-ure-lib.php:2232
 msgid "Unfiltered upload"
 msgstr "بارگذاری فیلتر‌شده"
 
-#: ../includes/class-ure-lib.php:2232
+#: ../includes/class-ure-lib.php:2233
 msgid "Edit dashboard"
 msgstr "ویرایش پیشخوان"
 
-#: ../includes/class-ure-lib.php:2233
+#: ../includes/class-ure-lib.php:2234
 msgid "Update plugins"
 msgstr "بروزرسانی افزونه‌ها"
 
-#: ../includes/class-ure-lib.php:2234
+#: ../includes/class-ure-lib.php:2235
 msgid "Delete plugins"
 msgstr "حذف افزونه‌ها"
 
-#: ../includes/class-ure-lib.php:2235
+#: ../includes/class-ure-lib.php:2236
 msgid "Install plugins"
 msgstr "نصب افزونه‌ها"
 
-#: ../includes/class-ure-lib.php:2236
+#: ../includes/class-ure-lib.php:2237
 msgid "Update themes"
 msgstr "بروزرسانی پوسته‌ها"
 
-#: ../includes/class-ure-lib.php:2237
+#: ../includes/class-ure-lib.php:2238
 msgid "Install themes"
 msgstr "نصب پوسته‌ها"
 
-#: ../includes/class-ure-lib.php:2238
+#: ../includes/class-ure-lib.php:2239
 msgid "Update core"
 msgstr "بروزرسانی هسته"
 
-#: ../includes/class-ure-lib.php:2239
+#: ../includes/class-ure-lib.php:2240
 msgid "List users"
 msgstr "فهرست کاربران"
 
-#: ../includes/class-ure-lib.php:2240
+#: ../includes/class-ure-lib.php:2241
 msgid "Remove users"
 msgstr "حذف کابران"
 
-#: ../includes/class-ure-lib.php:2241
+#: ../includes/class-ure-lib.php:2242
 msgid "Add users"
 msgstr "افزودن کاربران"
 
-#: ../includes/class-ure-lib.php:2242
+#: ../includes/class-ure-lib.php:2243
 msgid "Promote users"
 msgstr "ارتقاء کاربران"
 
-#: ../includes/class-ure-lib.php:2243
+#: ../includes/class-ure-lib.php:2244
 msgid "Edit theme options"
 msgstr "ویرایش تنظیمات پوسته"
 
-#: ../includes/class-ure-lib.php:2244
+#: ../includes/class-ure-lib.php:2245
 msgid "Delete themes"
 msgstr "حذف پوسته‌ها"
 
-#: ../includes/class-ure-lib.php:2245
+#: ../includes/class-ure-lib.php:2246
 msgid "Export"
 msgstr "برون‌ریزی"
 
-#: ../includes/class-ure-lib.php:2358
+#: ../includes/class-ure-lib.php:2369
 msgid "Error: Capability name must contain latin characters and digits only!"
 msgstr "خطا: نام قابلیت باید فقط شامل حروف لاتین و اعداد باشد!"
 
-#: ../includes/class-ure-lib.php:2371
+#: ../includes/class-ure-lib.php:2382
 #, php-format
 msgid "Capability %s is added successfully"
 msgstr "قابلیت %s با موفقیت افزوده شد"
 
-#: ../includes/class-ure-lib.php:2373
+#: ../includes/class-ure-lib.php:2384
 #, php-format
 msgid "Capability %s exists already"
 msgstr "قابلیت %s از پیش موجود است"
 
-#: ../includes/class-ure-lib.php:2402
+#: ../includes/class-ure-lib.php:2413
 #, php-format
 msgid "Error! You do not have permission to delete this capability: %s!"
 msgstr "خطا! شما اجازه‌ی حذف این قابلیت را ندارید: %s!"
 
-#: ../includes/class-ure-lib.php:2421
+#: ../includes/class-ure-lib.php:2432
 #, php-format
 msgid "Capability %s is removed successfully"
 msgstr "قابلیت %s با موفقیت حذف شد"
 
-#: ../includes/class-ure-lib.php:2525
+#: ../includes/class-ure-lib.php:2536
 msgid "Version:"
-msgstr ""
+msgstr "نسخه:"
 
-#: ../includes/class-ure-lib.php:2526
+#: ../includes/class-ure-lib.php:2537
 msgid "Author's website"
 msgstr "وبگاه نویسنده"
 
-#: ../includes/class-ure-lib.php:2527
+#: ../includes/class-ure-lib.php:2538
 msgid "Plugin webpage"
-msgstr "صفحه افزونه"
+msgstr "برگه‌ی افزونه"
 
-#: ../includes/class-ure-lib.php:2528
+#: ../includes/class-ure-lib.php:2539
 msgid "Plugin download"
 msgstr "بارگیری افزونه"
 
-#: ../includes/class-ure-lib.php:2530
+#: ../includes/class-ure-lib.php:2541
 msgid "FAQ"
 msgstr "سوالات مکرر"
 
-#: ../includes/class-ure-lib.php:2578
+#: ../includes/class-ure-lib.php:2589
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: ../includes/class-ure-lib.php:2605
+#: ../includes/class-ure-lib.php:2616
 msgid "Delete All Unused Roles"
 msgstr "حذف همه‌ی نقش‌های استفاده‌نشده"
 
-#: ../includes/class-ure-lib.php:2629
+#: ../includes/class-ure-lib.php:2640
 msgid "&mdash; No role for this site &mdash;"
 msgstr "&mdash; هیچ نقشی برای این سایت &mdash;"
 
@@ -799,15 +806,21 @@ msgstr "نقش بی‌بی‌پرس:"
 msgid "Other Roles:"
 msgstr "دیگر نقش‌ها:"
 
+#: ../includes/class-ure-screen-help.php:12
+#: ../includes/class-ure-screen-help.php:41
+#: ../includes/class-ure-screen-help.php:60
+#: ../includes/class-ure-screen-help.php:79
+msgid "User Role Editor Options page help"
+msgstr ""
+
 #: ../includes/class-ure-screen-help.php:16
 msgid ""
 "turn this option on in order to make the \"Administrator\" role available at "
 "the User Role Editor roles selection drop-down list. It is hidden by default "
 "for security reasons."
 msgstr ""
-"روشن کردن این گزینه به منظور قابل دسترس شدن نقش \"مدیر\" در فهرست کشویی "
-"ویرایش‌گر نقش کاربر می‌باشد. این امکان به صورت پیش‌فرض به دلیل مسائل امنیتی "
-"مخفی می‌باشد."
+"به منظور قابل دسترس شدن نقش «مدیر» در فهرست کشویی ویرایش‌گر نقش کاربر این "
+"گزینه را روشن کنید. این امکان به دلیل مسائل امنیتی به‌طور پیش‌فرض مخفی است."
 
 #: ../includes/class-ure-screen-help.php:19
 msgid ""
@@ -816,8 +829,8 @@ msgid ""
 "others posts\"."
 msgstr ""
 "به طور خودکار نام قابلیت‌ها را از حالت فنی به منظور استفاده‌های داخلی تبدیل "
-"می‌کند.  مانند \"edit_others_posts\" به حالت کاربر پسندتر، مثلا \"ویرایش "
-"نوشته‌های دیگران\"."
+"می‌کند. مانند «edit_others_posts» به حالت کاربر پسندتر، مثلا «ویرایش نوشته‌های "
+"دیگران»."
 
 #: ../includes/class-ure-screen-help.php:22
 msgid ""
@@ -826,7 +839,7 @@ msgid ""
 "with the old themes and plugins code. Turning on this option will show those "
 "deprecated capabilities."
 msgstr ""
-"قابلیت‌هایی شبیه \"سطح ۰\"، \"سطح ۱\" بد دانسته شده‌اند و توسط وردپرس استفاده "
+"قابلیت‌هایی شبیه «سطح ۰»، «سطح ۱» بد دانسته شده‌اند و توسط وردپرس استفاده "
 "نمی‌شوند. این قابلیت‌ها در نقش‌های کاربران به منظور سازگاری با پوسته‌های قدیمی و "
 "کد افزونه‌ها باقی گذاشته شده‌اند. روشن کردن این گزینه، آن قابلیت‌های بد دانسته "
 "شده را نمایش می‌دهد."
@@ -837,44 +850,44 @@ msgid ""
 "mode. Administrator can not assign capabilities to the user directly. He "
 "should make it using roles only."
 msgstr ""
+"اگر خاموش شود - بخش قابلیت‌های کاربر انتخاب شده در حالت فقط خواندنی نمایش "
+"داده می‌شود. مدیران به طور مستقیم نمی‌توانند به کاربر قابلیتی اختصاص دهند. او "
+"باید تنها از نقش‌ها استفاده کند."
 
 #: ../includes/class-ure-screen-help.php:46
 msgid ""
 "Show at the \"Users\" page a quant of users without role. Module allows to "
 "assign all of them an empty role \"No rights\", in order to look on the "
 "users list with role \"No rights\" at the separate tab then."
-msgstr ""
+msgstr "نمایش کاربران بدون نقش در برگه‌ی «کاربران» "
 
 #: ../includes/class-ure-screen-help.php:63
-#, fuzzy
 msgid "Other default roles for new registered user"
-msgstr "دیگر نقش‌های پیش‌فرض برای کاربران تازه ثبت‌نام شده: "
+msgstr "دیگر نقش‌های پیش‌فرض برای کاربران تازه ثبت‌نام شده"
 
 #: ../includes/class-ure-screen-help.php:64
-#, fuzzy
 msgid ""
 "select roles below to assign them to the new user automatically as an "
 "addition to the primary role. Note for multisite environment: take into "
 "account that other default roles should exist at the site, in order to be "
 "assigned to the new registered users."
 msgstr ""
-"قابل توجه محیط چند سایتی: رفتن به حسابی که در سایت نقش‌های پیش فرض دیگری "
-"موجود است، به منظور اختصاص دادن به کاربران تازه ثبت‌نام شده."
+"نقش‌های زیر را علاوه بر نقش ابتدایی برای اختصاص خودکار به کاربر جدید انتخاب "
+"کنید. قابل توجه محیط چند سایتی: به منظور اختصاص‌دادن نقش‌ها به کاربران تازه "
+"ثبت‌نام شده، به حسابی بروید که نقش‌های پیش‌فرض دیگر می‌بایست در سایت موجود باشد."
 
 #: ../includes/class-ure-screen-help.php:82
-#, fuzzy
 msgid "Allow non super-admininstrators to create, edit and delete users"
-msgstr "اجازه به غیر مدیران اصلی برای ایجاد، ویرایش و حذف کاربران"
+msgstr "اجازه به مدیران غیر اصلی برای ایجاد، ویرایش و حذف کاربران"
 
 #: ../includes/class-ure-screen-help.php:83
-#, fuzzy
 msgid ""
 "Super administrator only may create, edit and delete users under WordPress "
 "multi-site by default. Turn this option on in order to remove this "
 "limitation."
 msgstr ""
-"در وردپرس چند سایتی تنها مدیران اصلی اجازه‌ی ایجاد، ویرایش و حذف کاربران را "
-"دارند. این "
+"در وردپرس چندسایتی به طور پیش‌فرض تنها مدیر اصلی اجازه‌ی ایجاد، ویرایش و حذف "
+"کاربران را دارد. برای حذف این محدودیت این گزینه را روشن کنید."
 
 #, fuzzy
 #~ msgid "select roles below"

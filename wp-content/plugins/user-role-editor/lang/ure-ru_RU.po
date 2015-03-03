@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Role Editor v.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 11:48+0700\n"
+"POT-Creation-Date: 2015-02-23 11:48+0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vladimir Garagulya <support@role-editor.com>\n"
 "Language-Team: ShinePHP.com <vladimir@shinephp.com>\n"
@@ -97,20 +97,20 @@ msgid "Allow non super administrators to create, edit, and delete users"
 msgstr ""
 "Разрешить простым администраторам создавать, изменять, удалять пользователей"
 
-#: ../includes/class-user-role-editor.php:233
+#: ../includes/class-user-role-editor.php:234
 msgid "Change role for users without role"
 msgstr "Изменить роль для пользователей без роли"
 
-#: ../includes/class-user-role-editor.php:234
+#: ../includes/class-user-role-editor.php:235
 msgid "No rights"
 msgstr "Нет прав"
 
-#: ../includes/class-user-role-editor.php:235
+#: ../includes/class-user-role-editor.php:236
 msgid "Provide new role"
 msgstr "Выберите новую роль"
 
-#: ../includes/class-user-role-editor.php:319
-#: ../includes/class-user-role-editor.php:321
+#: ../includes/class-user-role-editor.php:320
+#: ../includes/class-user-role-editor.php:322
 msgid "You do not have permission to edit this user."
 msgstr "Нет прав на редактирование этого пользователя"
 
@@ -123,13 +123,13 @@ msgid "Settings"
 msgstr "Установки"
 
 #: ../includes/class-user-role-editor.php:569
-#: ../includes/class-ure-lib.php:2529
+#: ../includes/class-ure-lib.php:2540
 msgid "Changelog"
 msgstr "Журнал изменений"
 
 #: ../includes/class-user-role-editor.php:619
 #: ../includes/class-user-role-editor.php:648
-#: ../includes/class-user-role-editor.php:1029
+#: ../includes/class-user-role-editor.php:1030
 #: ../includes/class-ure-lib.php:337
 msgid "User Role Editor"
 msgstr "Редактор ролей пользователей"
@@ -144,53 +144,53 @@ msgstr "Изменения в настройках Редактора ролей
 msgid "Default Roles are updated"
 msgstr "Изменения в роли по-умолчанию сохранены"
 
-#: ../includes/class-user-role-editor.php:778
+#: ../includes/class-user-role-editor.php:779
 msgid ""
 "You do not have sufficient permissions to manage options for User Role "
 "Editor."
 msgstr "У вас нет прав на изменение настроек плагина"
 
-#: ../includes/class-user-role-editor.php:850
-#: ../includes/class-ure-lib.php:1697 ../includes/class-ure-lib.php:1950
-#: ../includes/class-ure-lib.php:2066 ../includes/class-ure-lib.php:2114
-#: ../includes/class-ure-lib.php:2350 ../includes/class-ure-lib.php:2395
+#: ../includes/class-user-role-editor.php:851
+#: ../includes/class-ure-lib.php:1698 ../includes/class-ure-lib.php:1951
+#: ../includes/class-ure-lib.php:2067 ../includes/class-ure-lib.php:2115
+#: ../includes/class-ure-lib.php:2361 ../includes/class-ure-lib.php:2406
 msgid "Insufficient permissions to work with User Role Editor"
 msgstr "Не достаточно прав для работы с User Role Editor"
 
-#: ../includes/class-user-role-editor.php:976
+#: ../includes/class-user-role-editor.php:977
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: ../includes/class-user-role-editor.php:977
+#: ../includes/class-user-role-editor.php:978
 msgid "Unselect All"
 msgstr "Исключить все"
 
-#: ../includes/class-user-role-editor.php:978
+#: ../includes/class-user-role-editor.php:979
 msgid "Reverse"
 msgstr "Обратить"
 
-#: ../includes/class-user-role-editor.php:979
+#: ../includes/class-user-role-editor.php:980
 msgid "Update"
 msgstr "Сохранить"
 
-#: ../includes/class-user-role-editor.php:980
+#: ../includes/class-user-role-editor.php:981
 msgid "Please confirm permissions update"
 msgstr "Пожалуйста, подтвердите продолжение "
 
-#: ../includes/class-user-role-editor.php:981
+#: ../includes/class-user-role-editor.php:982
 msgid "Add New Role"
 msgstr "Добавить новую роль"
 
-#: ../includes/class-user-role-editor.php:982
-#: ../includes/class-user-role-editor.php:987
+#: ../includes/class-user-role-editor.php:983
+#: ../includes/class-user-role-editor.php:988
 msgid "Rename Role"
 msgstr "Переименовать роль"
 
-#: ../includes/class-user-role-editor.php:983
+#: ../includes/class-user-role-editor.php:984
 msgid " Role name (ID) can not be empty!"
 msgstr "Идентификатор роли (ID) не может быть пустым!"
 
-#: ../includes/class-user-role-editor.php:984
+#: ../includes/class-user-role-editor.php:985
 msgid ""
 " Role name (ID) must contain latin characters, digits, hyphens or underscore "
 "only!"
@@ -198,7 +198,7 @@ msgstr ""
 "Ошибка: идентификатор роли может содержать только латинские буквы, цифры, "
 "тире и знак подчеркивания"
 
-#: ../includes/class-user-role-editor.php:985
+#: ../includes/class-user-role-editor.php:986
 msgid ""
 " WordPress does not support numeric Role name (ID). Add latin characters to "
 "it."
@@ -206,38 +206,38 @@ msgstr ""
 "WordPress не поддерживает цифровые идентификаторы ролей. Начните имя роли с "
 "латинских символов."
 
-#: ../includes/class-user-role-editor.php:986
+#: ../includes/class-user-role-editor.php:987
 msgid "Add Role"
 msgstr "Добавить роль"
 
-#: ../includes/class-user-role-editor.php:988
+#: ../includes/class-user-role-editor.php:989
 msgid "Delete Role"
 msgstr "Удалить роль"
 
-#: ../includes/class-user-role-editor.php:989
+#: ../includes/class-user-role-editor.php:990
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../includes/class-user-role-editor.php:990
+#: ../includes/class-user-role-editor.php:991
 msgid "Add Capability"
 msgstr "Новая возм."
 
-#: ../includes/class-user-role-editor.php:991
-#: ../includes/class-user-role-editor.php:1000
+#: ../includes/class-user-role-editor.php:992
+#: ../includes/class-user-role-editor.php:1001
 msgid "Delete Capability"
 msgstr "Удалить возм."
 
-#: ../includes/class-user-role-editor.php:992
+#: ../includes/class-user-role-editor.php:993
 msgid "Reset"
 msgstr "Сброс"
 
-#: ../includes/class-user-role-editor.php:993
+#: ../includes/class-user-role-editor.php:994
 msgid "DANGER! Resetting will restore default settings from WordPress Core."
 msgstr ""
 "ВНИМАНИЕ! Очистка восстановит роли по состоянию на момент установки "
 "WordPress."
 
-#: ../includes/class-user-role-editor.php:994
+#: ../includes/class-user-role-editor.php:995
 msgid ""
 "If any plugins have changed capabilities in any way upon installation (such "
 "as S2Member, WooCommerce, and many more), those capabilities will be DELETED!"
@@ -245,7 +245,7 @@ msgstr ""
 "Если плагины изменяли пользовательские права после установки WordPress "
 "(S2Member, WooCommerce и др.), права, созданные плагинами будут УДАЛЕНЫ!"
 
-#: ../includes/class-user-role-editor.php:995
+#: ../includes/class-user-role-editor.php:996
 msgid ""
 "For more information on how to undo changes and restore plugin capabilities "
 "go to"
@@ -253,19 +253,19 @@ msgstr ""
 "Подробнее о том, как откатить сделанные изменения и восстановить разрешения "
 "для плагинов, можно узнать здесь"
 
-#: ../includes/class-user-role-editor.php:997
+#: ../includes/class-user-role-editor.php:998
 msgid "Continue?"
 msgstr "Продолжить?"
 
-#: ../includes/class-user-role-editor.php:998
+#: ../includes/class-user-role-editor.php:999
 msgid "Default Role"
 msgstr "Роль по-умолчанию"
 
-#: ../includes/class-user-role-editor.php:999
+#: ../includes/class-user-role-editor.php:1000
 msgid "Set New Default Role"
 msgstr "Установить"
 
-#: ../includes/class-user-role-editor.php:1001
+#: ../includes/class-user-role-editor.php:1002
 msgid ""
 "Warning! Be careful - removing critical capability could crash some plugin "
 "or other custom code"
@@ -273,11 +273,11 @@ msgstr ""
 "Внимание! Будьте осторожны - удаление критичной возможности может привести к "
 "прекращеню работы одного из плагинов или другого кода."
 
-#: ../includes/class-user-role-editor.php:1002
+#: ../includes/class-user-role-editor.php:1003
 msgid " Capability name (ID) can not be empty!"
 msgstr "Идентификатор возможности (ID) не может быть пустым!"
 
-#: ../includes/class-user-role-editor.php:1003
+#: ../includes/class-user-role-editor.php:1004
 msgid ""
 " Capability name (ID) must contain latin characters, digits, hyphens or "
 "underscore only!"
@@ -285,12 +285,12 @@ msgstr ""
 "Ошибка: Наименование возможности должно содержать только латинские буквы и "
 "цифры, знаки подчеркивания"
 
-#: ../includes/class-user-role-editor.php:1032
-#: ../includes/class-user-role-editor.php:1065
+#: ../includes/class-user-role-editor.php:1033
+#: ../includes/class-user-role-editor.php:1066
 msgid "Other Roles"
 msgstr "Другие роли"
 
-#: ../includes/class-user-role-editor.php:1046
+#: ../includes/class-user-role-editor.php:1047
 msgid "Edit"
 msgstr "Изменить"
 
@@ -386,15 +386,23 @@ msgstr "При изменении прав пользователя произо
 msgid "User Roles are restored to WordPress default values. "
 msgstr "Роли возвращены к начальному состоянию"
 
+#: ../includes/class-ure-lib.php:1444
+msgid "read about"
+msgstr "прочесть о"
+
 #: ../includes/class-ure-lib.php:1445
+msgid "user capability"
+msgstr "праве пользователя"
+
+#: ../includes/class-ure-lib.php:1446
 msgid "Help"
 msgstr "Помощь"
 
-#: ../includes/class-ure-lib.php:1913
+#: ../includes/class-ure-lib.php:1914
 msgid "Error is occur. Please check the log file."
 msgstr "Произошла ошибка. Проверьте лог-файл."
 
-#: ../includes/class-ure-lib.php:1959 ../includes/class-ure-lib.php:2026
+#: ../includes/class-ure-lib.php:1960 ../includes/class-ure-lib.php:2027
 msgid ""
 "Error: Role ID must contain latin characters, digits, hyphens or underscore "
 "only!"
@@ -402,7 +410,7 @@ msgstr ""
 "Ошибка: идентификатор роли (ID) должен содержать только латинские буквы, "
 "цифры, знак подчеркивания и дефис."
 
-#: ../includes/class-ure-lib.php:1963 ../includes/class-ure-lib.php:2030
+#: ../includes/class-ure-lib.php:1964 ../includes/class-ure-lib.php:2031
 msgid ""
 "Error: WordPress does not support numeric Role name (ID). Add latin "
 "characters to it."
@@ -410,377 +418,377 @@ msgstr ""
 "Ошибка: WordPress не поддерживает цифровые идентификаторы ролей. Начните имя "
 "роли с латинских символов."
 
-#: ../includes/class-ure-lib.php:1978
+#: ../includes/class-ure-lib.php:1979
 #, php-format
 msgid "Role %s exists already"
 msgstr "Роль %s уже существует"
 
-#: ../includes/class-ure-lib.php:1993
+#: ../includes/class-ure-lib.php:1994
 msgid "Error is encountered during new role create operation"
 msgstr "Произошла ошибка при создании новой роли"
 
-#: ../includes/class-ure-lib.php:1995
+#: ../includes/class-ure-lib.php:1996
 #, php-format
 msgid "Role %s is created successfully"
 msgstr "Роль %s создана успешно"
 
-#: ../includes/class-ure-lib.php:2019
+#: ../includes/class-ure-lib.php:2020
 msgid "Error: Role ID is empty!"
 msgstr "Ошибка: пустой идентификатор (ID) роли!"
 
-#: ../includes/class-ure-lib.php:2037
+#: ../includes/class-ure-lib.php:2038
 msgid "Error: Empty role display name is not allowed."
 msgstr "Ошибка: пустое наименование роли не допускается"
 
-#: ../includes/class-ure-lib.php:2044
+#: ../includes/class-ure-lib.php:2045
 #, php-format
 msgid "Role %s does not exists"
 msgstr "Роль %s не существует"
 
-#: ../includes/class-ure-lib.php:2052
+#: ../includes/class-ure-lib.php:2053
 #, php-format
 msgid "Role %s is renamed to %s successfully"
 msgstr "Роль %s успешно переименована в %s"
 
-#: ../includes/class-ure-lib.php:2125
+#: ../includes/class-ure-lib.php:2126
 msgid "Error encountered during role delete operation"
 msgstr "Произошла ошибка при удалении роли"
 
-#: ../includes/class-ure-lib.php:2127
+#: ../includes/class-ure-lib.php:2128
 msgid "Unused roles are deleted successfully"
 msgstr "Неиспользуемые роли удалены успешно"
 
-#: ../includes/class-ure-lib.php:2129
+#: ../includes/class-ure-lib.php:2130
 #, php-format
 msgid "Role %s is deleted successfully"
 msgstr "Роль %s удалена успешно"
 
-#: ../includes/class-ure-lib.php:2154
+#: ../includes/class-ure-lib.php:2155
 msgid "Error encountered during default role change operation"
 msgstr "Произошла ошибка при изменении роли по-умолчанию"
 
-#: ../includes/class-ure-lib.php:2160
+#: ../includes/class-ure-lib.php:2161
 #, php-format
 msgid "Default role for new users is set to %s successfully"
 msgstr "Роль по-умолчанию для новых пользователй изменена на %s успешно."
 
-#: ../includes/class-ure-lib.php:2179
+#: ../includes/class-ure-lib.php:2180
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../includes/class-ure-lib.php:2180
+#: ../includes/class-ure-lib.php:2181
 msgid "Author"
 msgstr "Автор"
 
-#: ../includes/class-ure-lib.php:2181
+#: ../includes/class-ure-lib.php:2182
 msgid "Contributor"
 msgstr "Участник"
 
-#: ../includes/class-ure-lib.php:2182
+#: ../includes/class-ure-lib.php:2183
 msgid "Subscriber"
 msgstr "Подписчик"
 
-#: ../includes/class-ure-lib.php:2184
+#: ../includes/class-ure-lib.php:2185
 msgid "Switch themes"
 msgstr "Менять темы"
 
-#: ../includes/class-ure-lib.php:2185
+#: ../includes/class-ure-lib.php:2186
 msgid "Edit themes"
 msgstr "Изменять темы"
 
-#: ../includes/class-ure-lib.php:2186
+#: ../includes/class-ure-lib.php:2187
 msgid "Activate plugins"
 msgstr "Активировать плагины"
 
-#: ../includes/class-ure-lib.php:2187
+#: ../includes/class-ure-lib.php:2188
 msgid "Edit plugins"
 msgstr "Редактировать плагины"
 
-#: ../includes/class-ure-lib.php:2188
+#: ../includes/class-ure-lib.php:2189
 msgid "Edit users"
 msgstr "Изменять пользователей"
 
-#: ../includes/class-ure-lib.php:2189
+#: ../includes/class-ure-lib.php:2190
 msgid "Edit files"
 msgstr "Изменять файлы"
 
-#: ../includes/class-ure-lib.php:2190
+#: ../includes/class-ure-lib.php:2191
 msgid "Manage options"
 msgstr "Управлять установками"
 
-#: ../includes/class-ure-lib.php:2191
+#: ../includes/class-ure-lib.php:2192
 msgid "Moderate comments"
 msgstr "Модерировать комментарии"
 
-#: ../includes/class-ure-lib.php:2192
+#: ../includes/class-ure-lib.php:2193
 msgid "Manage categories"
 msgstr "Управлять категориями"
 
-#: ../includes/class-ure-lib.php:2193
+#: ../includes/class-ure-lib.php:2194
 msgid "Manage links"
 msgstr "Управлять ссылками"
 
-#: ../includes/class-ure-lib.php:2194
+#: ../includes/class-ure-lib.php:2195
 msgid "Upload files"
 msgstr "Загружать файлы"
 
-#: ../includes/class-ure-lib.php:2195
+#: ../includes/class-ure-lib.php:2196
 msgid "Import"
 msgstr "Импорт"
 
-#: ../includes/class-ure-lib.php:2196
+#: ../includes/class-ure-lib.php:2197
 msgid "Unfiltered html"
 msgstr "html без фильтра"
 
-#: ../includes/class-ure-lib.php:2197
+#: ../includes/class-ure-lib.php:2198
 msgid "Edit posts"
 msgstr "Изменять статьи"
 
-#: ../includes/class-ure-lib.php:2198
+#: ../includes/class-ure-lib.php:2199
 msgid "Edit others posts"
 msgstr "Изменять чужие статьи"
 
-#: ../includes/class-ure-lib.php:2199
+#: ../includes/class-ure-lib.php:2200
 msgid "Edit published posts"
 msgstr "Редактировать опубликованные статьи"
 
-#: ../includes/class-ure-lib.php:2200
+#: ../includes/class-ure-lib.php:2201
 msgid "Publish posts"
 msgstr "Публиковать статьи"
 
-#: ../includes/class-ure-lib.php:2201
+#: ../includes/class-ure-lib.php:2202
 msgid "Edit pages"
 msgstr "Изменять страницы"
 
-#: ../includes/class-ure-lib.php:2202
+#: ../includes/class-ure-lib.php:2203
 msgid "Read"
 msgstr "Чтение"
 
-#: ../includes/class-ure-lib.php:2203
+#: ../includes/class-ure-lib.php:2204
 msgid "Level 10"
 msgstr "Уровень 10"
 
-#: ../includes/class-ure-lib.php:2204
+#: ../includes/class-ure-lib.php:2205
 msgid "Level 9"
 msgstr "Уровень 9"
 
-#: ../includes/class-ure-lib.php:2205
+#: ../includes/class-ure-lib.php:2206
 msgid "Level 8"
 msgstr "Уровень 9"
 
-#: ../includes/class-ure-lib.php:2206
+#: ../includes/class-ure-lib.php:2207
 msgid "Level 7"
 msgstr "Уровень 7"
 
-#: ../includes/class-ure-lib.php:2207
+#: ../includes/class-ure-lib.php:2208
 msgid "Level 6"
 msgstr "Уровень 6"
 
-#: ../includes/class-ure-lib.php:2208
+#: ../includes/class-ure-lib.php:2209
 msgid "Level 5"
 msgstr "Уровень 5"
 
-#: ../includes/class-ure-lib.php:2209
+#: ../includes/class-ure-lib.php:2210
 msgid "Level 4"
 msgstr "Уровень 4"
 
-#: ../includes/class-ure-lib.php:2210
+#: ../includes/class-ure-lib.php:2211
 msgid "Level 3"
 msgstr "Уровень 3"
 
-#: ../includes/class-ure-lib.php:2211
+#: ../includes/class-ure-lib.php:2212
 msgid "Level 2"
 msgstr "Уровень 2"
 
-#: ../includes/class-ure-lib.php:2212
+#: ../includes/class-ure-lib.php:2213
 msgid "Level 1"
 msgstr "Уровень 1"
 
-#: ../includes/class-ure-lib.php:2213
+#: ../includes/class-ure-lib.php:2214
 msgid "Level 0"
 msgstr "Уровень 0"
 
-#: ../includes/class-ure-lib.php:2214
+#: ../includes/class-ure-lib.php:2215
 msgid "Edit others pages"
 msgstr "Редактировать чужие страницы"
 
-#: ../includes/class-ure-lib.php:2215
+#: ../includes/class-ure-lib.php:2216
 msgid "Edit published pages"
 msgstr "Редактировать опубликованные страницы"
 
-#: ../includes/class-ure-lib.php:2216
+#: ../includes/class-ure-lib.php:2217
 msgid "Publish pages"
 msgstr "Публиковать страницы"
 
-#: ../includes/class-ure-lib.php:2217
+#: ../includes/class-ure-lib.php:2218
 msgid "Delete pages"
 msgstr "Удалять страницы"
 
-#: ../includes/class-ure-lib.php:2218
+#: ../includes/class-ure-lib.php:2219
 msgid "Delete others pages"
 msgstr "Удалить чужие страницы"
 
-#: ../includes/class-ure-lib.php:2219
+#: ../includes/class-ure-lib.php:2220
 msgid "Delete published pages"
 msgstr "Удалять опубликованные страницы"
 
-#: ../includes/class-ure-lib.php:2220
+#: ../includes/class-ure-lib.php:2221
 msgid "Delete posts"
 msgstr "Удалять статьи"
 
-#: ../includes/class-ure-lib.php:2221
+#: ../includes/class-ure-lib.php:2222
 msgid "Delete others posts"
 msgstr "Удалять чужие статьи"
 
-#: ../includes/class-ure-lib.php:2222
+#: ../includes/class-ure-lib.php:2223
 msgid "Delete published posts"
 msgstr "Удалять опубликованные статьи"
 
-#: ../includes/class-ure-lib.php:2223
+#: ../includes/class-ure-lib.php:2224
 msgid "Delete private posts"
 msgstr "Удалять частные статьи"
 
-#: ../includes/class-ure-lib.php:2224
+#: ../includes/class-ure-lib.php:2225
 msgid "Edit private posts"
 msgstr "Редактировать частные статьи"
 
-#: ../includes/class-ure-lib.php:2225
+#: ../includes/class-ure-lib.php:2226
 msgid "Read private posts"
 msgstr "Читать частные статьи"
 
-#: ../includes/class-ure-lib.php:2226
+#: ../includes/class-ure-lib.php:2227
 msgid "Delete private pages"
 msgstr "Удалять частные страницы"
 
-#: ../includes/class-ure-lib.php:2227
+#: ../includes/class-ure-lib.php:2228
 msgid "Edit private pages"
 msgstr "Редактировать частные страницы"
 
-#: ../includes/class-ure-lib.php:2228
+#: ../includes/class-ure-lib.php:2229
 msgid "Read private pages"
 msgstr "Читать частные страницы"
 
-#: ../includes/class-ure-lib.php:2229
+#: ../includes/class-ure-lib.php:2230
 msgid "Delete users"
 msgstr "Удалять пользователей"
 
-#: ../includes/class-ure-lib.php:2230
+#: ../includes/class-ure-lib.php:2231
 msgid "Create users"
 msgstr "Создавать пользователей"
 
-#: ../includes/class-ure-lib.php:2231
+#: ../includes/class-ure-lib.php:2232
 msgid "Unfiltered upload"
 msgstr "Загрузка без фильтра"
 
-#: ../includes/class-ure-lib.php:2232
+#: ../includes/class-ure-lib.php:2233
 msgid "Edit dashboard"
 msgstr "Изменять панель администратора"
 
-#: ../includes/class-ure-lib.php:2233
+#: ../includes/class-ure-lib.php:2234
 msgid "Update plugins"
 msgstr "Обновлять плагины"
 
-#: ../includes/class-ure-lib.php:2234
+#: ../includes/class-ure-lib.php:2235
 msgid "Delete plugins"
 msgstr "Удалять плагины"
 
-#: ../includes/class-ure-lib.php:2235
+#: ../includes/class-ure-lib.php:2236
 msgid "Install plugins"
 msgstr "Устанавливать плагины"
 
-#: ../includes/class-ure-lib.php:2236
+#: ../includes/class-ure-lib.php:2237
 msgid "Update themes"
 msgstr "Обновлять темы"
 
-#: ../includes/class-ure-lib.php:2237
+#: ../includes/class-ure-lib.php:2238
 msgid "Install themes"
 msgstr "Устанавливать темы"
 
-#: ../includes/class-ure-lib.php:2238
+#: ../includes/class-ure-lib.php:2239
 msgid "Update core"
 msgstr "Обновлять ядро"
 
-#: ../includes/class-ure-lib.php:2239
+#: ../includes/class-ure-lib.php:2240
 msgid "List users"
 msgstr "Список пользователей"
 
-#: ../includes/class-ure-lib.php:2240
+#: ../includes/class-ure-lib.php:2241
 msgid "Remove users"
 msgstr "Удалять пользователей"
 
-#: ../includes/class-ure-lib.php:2241
+#: ../includes/class-ure-lib.php:2242
 msgid "Add users"
 msgstr "Добавлять пользователей"
 
-#: ../includes/class-ure-lib.php:2242
+#: ../includes/class-ure-lib.php:2243
 msgid "Promote users"
 msgstr "Продвигать пользователей"
 
-#: ../includes/class-ure-lib.php:2243
+#: ../includes/class-ure-lib.php:2244
 msgid "Edit theme options"
 msgstr "Изменять настройки темы"
 
-#: ../includes/class-ure-lib.php:2244
+#: ../includes/class-ure-lib.php:2245
 msgid "Delete themes"
 msgstr "Удалять темы"
 
-#: ../includes/class-ure-lib.php:2245
+#: ../includes/class-ure-lib.php:2246
 msgid "Export"
 msgstr "Экспорт"
 
-#: ../includes/class-ure-lib.php:2358
+#: ../includes/class-ure-lib.php:2369
 msgid "Error: Capability name must contain latin characters and digits only!"
 msgstr "Ошибка: Имя должно содержать только латинские буквы и цифры"
 
-#: ../includes/class-ure-lib.php:2371
+#: ../includes/class-ure-lib.php:2382
 #, php-format
 msgid "Capability %s is added successfully"
 msgstr "Возможность %s добавлена успешно"
 
-#: ../includes/class-ure-lib.php:2373
+#: ../includes/class-ure-lib.php:2384
 #, php-format
 msgid "Capability %s exists already"
 msgstr "Возможность %s уже существует"
 
-#: ../includes/class-ure-lib.php:2402
+#: ../includes/class-ure-lib.php:2413
 #, php-format
 msgid "Error! You do not have permission to delete this capability: %s!"
 msgstr "Ошибка! Вам запрещено удалять эту возможность: %s!"
 
-#: ../includes/class-ure-lib.php:2421
+#: ../includes/class-ure-lib.php:2432
 #, php-format
 msgid "Capability %s is removed successfully"
 msgstr "Возможность %s удалена успешно"
 
-#: ../includes/class-ure-lib.php:2525
+#: ../includes/class-ure-lib.php:2536
 msgid "Version:"
 msgstr "Версия:"
 
-#: ../includes/class-ure-lib.php:2526
+#: ../includes/class-ure-lib.php:2537
 msgid "Author's website"
 msgstr "Вебсайт автора"
 
-#: ../includes/class-ure-lib.php:2527
+#: ../includes/class-ure-lib.php:2538
 msgid "Plugin webpage"
 msgstr "Страница плагина"
 
-#: ../includes/class-ure-lib.php:2528
+#: ../includes/class-ure-lib.php:2539
 msgid "Plugin download"
 msgstr "Загрузить плагин"
 
-#: ../includes/class-ure-lib.php:2530
+#: ../includes/class-ure-lib.php:2541
 msgid "FAQ"
 msgstr "Часто задаваемые вопросы"
 
-#: ../includes/class-ure-lib.php:2578
+#: ../includes/class-ure-lib.php:2589
 msgid "None"
 msgstr "Нет"
 
-#: ../includes/class-ure-lib.php:2605
+#: ../includes/class-ure-lib.php:2616
 msgid "Delete All Unused Roles"
 msgstr "Удалить все неиспользуемые роли"
 
-#: ../includes/class-ure-lib.php:2629
+#: ../includes/class-ure-lib.php:2640
 msgid "&mdash; No role for this site &mdash;"
 msgstr "&mdash; Нет роли для этого сайта &mdash;"
 
@@ -803,6 +811,13 @@ msgstr "Роль bbPress:"
 #: ../includes/ure-user-edit.php:92
 msgid "Other Roles:"
 msgstr "Другие Роли:"
+
+#: ../includes/class-ure-screen-help.php:12
+#: ../includes/class-ure-screen-help.php:41
+#: ../includes/class-ure-screen-help.php:60
+#: ../includes/class-ure-screen-help.php:79
+msgid "User Role Editor Options page help"
+msgstr "Редактор ролей пользователей - Опции - помощь"
 
 #: ../includes/class-ure-screen-help.php:16
 msgid ""
