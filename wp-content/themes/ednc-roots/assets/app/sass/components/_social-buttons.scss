@@ -1,16 +1,5 @@
 .social-buttons {
-  li {
-    vertical-align: top;
-    height: 27px;
+  * {
+    box-sizing: content-box;
   }
-}
-
-.fb-share-button {
-  span {
-    vertical-align: top !important;
-  }
-}
-
-.twitter-share-button {
-  width: 85px !important;
 }
