@@ -47,6 +47,22 @@
                   ?>
                   <span class="label"><?php echo $column[0]->name; ?></span>
                   <?php
+                } else {
+                  $cats_hide = array();
+                  // Determine array indexes for labels we don't want to show
+                  $cats_hide[] = array_search('Featured', array_column($category, 'cat_name'));
+                  $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+                  $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+                  $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+                  // Remove empty results
+                  $cats_hide = array_filter($cats_hide, 'strlen');
+
+                  // Only show label of category if it's not in above list
+                  foreach ($category as $key=>$value) {
+                    if (!in_array($key, $cats_hide)) {
+                      echo '<span class="label">' . $value['cat_name'] . '</span>';
+                    }
+                  }
                 }
                 ?>
 
