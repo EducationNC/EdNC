@@ -1,6 +1,6 @@
 <?php get_template_part('templates/head'); ?>
 <body <?php body_class(); ?>>
-  <a id="trigger-offcanvas" class="nav-toggle hidden-md hidden-lg" href="#"><span>Menu</span></a>
+  <a id="trigger-offcanvas" class="nav-toggle hidden-md hidden-lg hidden-print" href="#"><span>Menu</span></a>
 
   <div class="wrapper">
     <div id="oc-pusher" class="oc-pusher">

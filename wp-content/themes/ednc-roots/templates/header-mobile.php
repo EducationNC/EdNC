@@ -3,7 +3,7 @@
     <div class="title"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></div>
   </section>
 
-  <section class="right-small">
+  <section class="right-small hidden-print">
     <a id="trigger-mobile-search" class="icon-search"></a>
   </section>
 </div>

@@ -1,4 +1,4 @@
-<nav id="oc-menu" class="oc-menu">
+<nav id="oc-menu" class="oc-menu hidden-print">
   <div class="oc-level">
     <?php
     wp_nav_menu(array(

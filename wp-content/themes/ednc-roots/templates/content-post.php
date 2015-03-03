@@ -186,7 +186,7 @@ if ($image_src) {
 
       <div class="row">
         <?php if ($comments_open == 1) { ?>
-        <div class="col-md-8 col-lg-7">
+        <div class="col-md-8 col-lg-7 hidden-print">
           <h3>Join the conversation</h3>
           <?php comments_template('templates/comments'); ?>
         </div>
@@ -214,11 +214,11 @@ if ($image_src) {
           <?php endwhile; endif; wp_reset_query(); ?>
 
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4 hidden-print">
         <?php } ?>
 
         <?php if ($comments_open == 1) { ?>
-        <div class="col-sm-6 col-md-12">
+        <div class="col-sm-6 col-md-12 hidden-print">
         <?php } ?>
           <h3>Recommended for you</h3>
           <?php
@@ -297,9 +297,9 @@ if ($image_src) {
           ?>
         </div>
         <?php if ($comments_open == 1) { ?>
-        <div class="col-sm-6 col-md-12">
+        <div class="col-sm-6 col-md-12 hidden-print">
         <?php } else { ?>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4 hidden-print">
         <?php } ?>
 
           <h3>Stay connected</h3>
