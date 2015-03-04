@@ -7839,6 +7839,9 @@ img.mfp-img {
   padding-top: 0;
 }
 
+.social-buttons {
+  margin-bottom: 1em;
+}
 .social-buttons * {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
