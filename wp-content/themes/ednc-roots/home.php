@@ -21,7 +21,7 @@
           foreach ($category as &$cat) {
             $cat = (array) $cat;
           }
-          
+
           $column = wp_get_post_terms(get_the_id(), 'column');
 
           $author_id = get_the_author_meta('ID');
@@ -104,9 +104,9 @@
       <div class="row">
         <div class="col-md-12 col-sm-6">
           <div class="callout">
-            <h4>Hi there, we're new here.</h4>
-            <p>We'd like to make EdNC a part of your day. What features would you like to see here?</p>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#suggestionModal">Send us your thoughts</button>
+            <h4>Register for free email subscription</h4>
+            <p>Sign up now to receive EdNC straight to your inbox. Unsubscribe at any time.</p>
+            <a href="#" class="button btn-default" data-toggle="modal" data-target="#emailSignupModal">Subscribe now &raquo;</a>
           </div>
         </div>
 
