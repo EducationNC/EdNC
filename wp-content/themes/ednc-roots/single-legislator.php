@@ -54,7 +54,7 @@
 
         <div class="col-sm-12 col-md-5">
           <div class="callout">
-            <p>Home county</p>
+            <p>Home County</p>
             <p class="h1"><?php the_field('home_county'); ?></p>
           </div>
 
