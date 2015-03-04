@@ -539,11 +539,25 @@
       </div>
     </div>
 
-    <div class="col-md-4 text-center">
-      <a href="https://support.ednc.org/donate">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/shutterstock_10038223.jpg" alt="" />
-      </a>
-      <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg btn-wide bottom-margin">Make a donation today &raquo;</a>
+    <div class="col-md-4">
+      <h3 class="content-section-title">Ed<span class="normal">Advocacy</span></h3>
+      <p class="content-section-subtitle">Resources for education advocates</p>
+      <div class="content-listing extra-padding">
+        <ul>
+          <li>
+            <h4><a href="https://www.ednc.org/2015/03/04/education-policy-boot-camp-101/">EdAdvocacy 101</a></h4>
+          </li>
+          <li>
+            <h4><a href="https://www.ednc.org/research/leadership-profiles/">Leadership profiles</a></h4>
+          </li>
+          <li>
+            <h4><a href="https://www.ednc.org/ncga-education-committees/">NCGA education committees</a></h4>
+          </li>
+          <li>
+            <h4><a href="https://www.ednc.org/legislation-tracker/">Legislation tracker</a></h4>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="col-md-4">
