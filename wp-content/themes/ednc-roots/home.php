@@ -534,7 +534,8 @@
   <div class="row">
     <div class="col-md-4">
       <div class="extra-padding" id="poll-container">
-        <?php echo do_shortcode('[polldaddy poll=8638681]'); ?>
+        <?php $poll_shortcode = get_theme_mod('poll_shortcode'); ?>
+        <?php echo do_shortcode($poll_shortcode); ?>
         <!-- <p><a href="https://www.ednc.org/2015-16-legislative-issues/" class="small">More information about these issues &raquo;</a></p> -->
       </div>
     </div>

@@ -39,6 +39,23 @@ function ednc_customizer_settings($wp_customize) {
     )
   );
 
+  // Poll shortcode
+  $wp_customize->add_setting(
+    'poll_shortcode',
+    array()
+  );
+
+  $wp_customize->add_control(
+    'poll_shortcode',
+    array(
+      'label' => 'Enter the shortcode for the poll at bottom of home page',
+      'section' => 'front_page_settings',
+      'type' => 'text',
+      'priority' => 1
+    )
+  );
+
+  // Number of news posts to show
   $wp_customize->add_setting(
     'news_post_num',
     array(
@@ -52,10 +69,11 @@ function ednc_customizer_settings($wp_customize) {
       'label' => 'Enter the total number of news posts to display',
       'section' => 'front_page_settings',
       'type' => 'number',
-      'priority' => 1
+      'priority' => 2
     )
   );
 
+  // Custom category spot
   // $wp_customize->add_setting(
   //   'theme_spot_category',
   //   array()
@@ -67,7 +85,7 @@ function ednc_customizer_settings($wp_customize) {
   //     array(
   //       'label' => 'Optional: Choose a category to stick to the beginning of the news posts',
   //       'section' => 'front_page_settings',
-  //       'priority' => 2
+  //       'priority' => 3
   //     )
   //   )
   // );
