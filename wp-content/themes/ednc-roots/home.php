@@ -81,6 +81,14 @@
                 }
                 ?>
 
+                <?php
+                if (has_post_format('video')) {
+                  ?>
+                  <div class="video-button"></div>
+                  <?php
+                }
+                ?>
+
                 <h2 class="post-title"><?php the_title(); ?></h2>
                 <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>

@@ -188,3 +188,14 @@ section {
 .ant_sandbox {
   z-index: 1000;
 }
+
+.video-button {
+  position: absolute;
+  width: 103px;
+  height: 103px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  @include at2x('play', 103px, 103px);
+  z-index: 3;
+}
