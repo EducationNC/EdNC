@@ -145,6 +145,13 @@ h4, .h4, .article-section-subtitle {
     text-decoration: none;
     color: $ice;
   }
+
+  [class^="icon-"],
+  [class*=" icon-"] {
+    line-height: 0;
+    font-size: 1.5em;
+    vertical-align: -5px;
+  }
 }
 
 .caption {

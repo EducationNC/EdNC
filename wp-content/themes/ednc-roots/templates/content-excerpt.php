@@ -1,5 +1,10 @@
 <?php
 $category = get_the_category();
+// Convert category results to array instead of object
+foreach ($category as &$cat) {
+  $cat = (array) $cat;
+}
+
 $column = wp_get_post_terms(get_the_id(), 'column');
 $post_type = get_post_type();
 ?>
@@ -26,13 +31,32 @@ $post_type = get_post_type();
     <header>
       <h2 class="entry-title">
         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        <?php if ($column) { ?>
+        <?php
+        if ($column) {
+          ?>
           <span class="label"><?php echo $column[0]->name; ?></span>
-        <?php } elseif ($category && ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured' && $category[0]->cat_name != "Hide from archives" && $category[0]->cat_name != 'Hide from home')) { ?>
-          <span class="label"><?php echo $category[0]->cat_name; ?></span>
-        <?php } ?>
+          <?php
+        } else {
+          $cats_hide = array();
+          // Determine array indexes for labels we don't want to show
+          $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+          $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
+          // Remove empty results
+          $cats_hide = array_filter($cats_hide, 'strlen');
+
+          // Only show label of category if it's not in above list
+          foreach ($category as $key=>$value) {
+            if (!in_array($key, $cats_hide)) {
+              echo '<span class="label">' . $value['cat_name'] . '</span> ';
+            }
+          }
+        }
+        ?>
         <?php if ($post_type == 'ednews') { ?>
-          <span class="label">EdNews</label>
+          <span class="label">EdNews</span>
+        <?php } ?>
+        <?php if (has_post_format('video')) { ?>
+          <span class="label"><span class="icon-video"></span></span>
         <?php } ?>
       </h2>
       <?php if (!is_category('97')) get_template_part('templates/entry-meta'); ?>

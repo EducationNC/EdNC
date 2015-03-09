@@ -3,6 +3,7 @@
 
 // Roots
 @import "_global.scss";              // Base styling & custom mixins
+@import "_rewrite-url.scss";         // Functions to rewite relative asset urls
 @import "components/_icons";         // Custom icon fonts for EdNC
 @import "components/_retina";        // Retina mixin
 @import "components/_dropdowns";     // Dropdowns

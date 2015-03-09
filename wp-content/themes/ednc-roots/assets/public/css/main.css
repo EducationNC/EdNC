@@ -6898,6 +6898,12 @@ li .meta a, li .attr a, li .duration a, li .tribe-events-adv-list-widget .vevent
   text-decoration: none;
   color: #ECF0F1;
 }
+.label [class^="icon-"],
+.label [class*=" icon-"] {
+  line-height: 0;
+  font-size: 1.5em;
+  vertical-align: -5px;
+}
 
 .caption, .wp-caption-text {
   font-family: Lato, sans-serif;
@@ -7007,10 +7013,15 @@ sup.footnote a:after {
   font-style: normal !important;
 }
 
+/**
+ *
+ * https://github.com/glebm/sass-rewrite-url
+ *
+ */
 @font-face {
   font-family: "ednc";
-  src: url("../fonts/ednc.eot");
-  src: url("../fonts/ednc.eot?#iefix") format("embedded-opentype"), url("../fonts/ednc.woff") format("woff"), url("../fonts/ednc.ttf") format("truetype"), url("../fonts/ednc.svg#ednc") format("svg");
+  src: url(../fonts/ednc.eot);
+  src: url(../fonts/ednc.eot?#iefix) format("embedded-opentype"), url(../fonts/ednc.woff) format("woff"), url(../fonts/ednc.ttf) format("truetype"), url(../fonts/ednc.svg#ednc) format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -7102,6 +7113,10 @@ sup.footnote a:after {
 
 .icon-rss:before {
   content: "p";
+}
+
+.icon-video:before {
+  content: "q";
 }
 
 .dropdown-menu {
@@ -8072,25 +8087,38 @@ section {
   z-index: 1000;
 }
 
-.video-button {
+.video-play {
   position: absolute;
-  width: 103px;
-  height: 103px;
+  width: 102px;
+  height: 102px;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
        -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  background-image: url('../imgs/play.png?1425913496');
+  background-image: url(../imgs/play.png);
   background-repeat: no-repeat;
   z-index: 3;
 }
 @media (-moz-min-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
-  .video-button {
-    background-image: url('../imgs/play@2x.png?1425913513');
-    -webkit-background-size: 103px 103px;
-            background-size: 103px 103px;
+  .video-play {
+    background-image: url(../imgs/play@2x.png);
+    -webkit-background-size: 102px 102px;
+            background-size: 102px 102px;
+  }
+}
+.video-play.small {
+  width: 51px;
+  height: 51px;
+  background-image: url(../imgs/play.png);
+  background-repeat: no-repeat;
+}
+@media (-moz-min-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+  .video-play.small {
+    background-image: url(../imgs/play@2x.png);
+    -webkit-background-size: 51px 51px;
+            background-size: 51px 51px;
   }
 }
 

@@ -84,7 +84,7 @@
                 <?php
                 if (has_post_format('video')) {
                   ?>
-                  <div class="video-button"></div>
+                  <div class="video-play"></div>
                   <?php
                 }
                 ?>
@@ -174,6 +174,11 @@
       if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
 
       $category = get_the_category();
+      // Convert category results to array instead of object
+      foreach ($category as &$cat) {
+        $cat = (array) $cat;
+      }
+
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
         $image_src = wp_get_attachment_image_src($image_id, 'full');
@@ -190,24 +195,41 @@
         <div class="post has-photo-overlay row">
           <div class="photo-overlay col-xs-3 col-sm-12">
             <div class="hidden-xs">
-              <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
-                <span class="label"><?php echo $category[0]->cat_name; ?></span>
-                <?php } ?>
-                <h4 class="post-title"><?php the_title(); ?></h4>
-                <div class="line"></div>
-              </div>
-              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-              <?php if ($image_src) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-              <?php } ?>
-            </div>
+              <?php
+              $cats_hide = array();
+              // Determine array indexes for labels we don't want to show
+              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
+              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+              // Remove empty results
+              $cats_hide = array_filter($cats_hide, 'strlen');
 
-            <div class="col-xs-9 col-sm-12 extra-padding">
-              <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-              <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
+              // Only show label of category if it's not in above list
+              foreach ($category as $key=>$value) {
+                if (!in_array($key, $cats_hide)) {
+                  echo '<span class="label">' . $value['cat_name'] . '</span>';
+                }
+              }
+              ?>
+              <h4 class="post-title"><?php the_title(); ?></h4>
+              <div class="line"></div>
             </div>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <?php if (has_post_format('video')) { ?>
+              <div class="video-play small"></div>
+            <?php } ?>
+            <?php if ($image_src) { ?>
+              <img src="<?php echo $image_sized['url']; ?>" />
+            <?php } ?>
+          </div>
+
+          <div class="col-xs-9 col-sm-12 extra-padding">
+            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+            <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
           </div>
         </div>
+      </div>
 
       <?php endwhile; endif; wp_reset_query(); ?>
     <?php } ?>
@@ -279,12 +301,13 @@
                 }
               }
               ?>
-
               <h4 class="post-title"><?php the_title(); ?></h4>
-
               <div class="line"></div>
             </div>
             <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <?php if (has_post_format('video')) { ?>
+              <div class="video-play small"></div>
+            <?php } ?>
             <?php if ($image_src) { ?>
               <img src="<?php echo $image_sized['url']; ?>" />
             <?php } ?>
@@ -328,6 +351,11 @@
       }
 
       $category = get_the_category();
+      // Convert category results to array instead of object
+      foreach ($category as &$cat) {
+        $cat = (array) $cat;
+      }
+
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
         $image_src = wp_get_attachment_image_src($image_id, 'full');
@@ -344,13 +372,29 @@
         <div class="post has-photo-overlay row">
           <div class="photo-overlay col-xs-3 col-sm-12">
             <div class="hidden-xs">
-              <?php if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Featured') { ?>
-              <span class="label"><?php echo $category[0]->cat_name; ?></span>
-              <?php } ?>
+              <?php
+              $cats_hide = array();
+              // Determine array indexes for labels we don't want to show
+              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
+              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+              // Remove empty results
+              $cats_hide = array_filter($cats_hide, 'strlen');
+
+              // Only show label of category if it's not in above list
+              foreach ($category as $key=>$value) {
+                if (!in_array($key, $cats_hide)) {
+                  echo '<span class="label">' . $value['cat_name'] . '</span>';
+                }
+              }
+              ?>
               <h4 class="post-title"><?php the_title(); ?></h4>
               <div class="line"></div>
             </div>
             <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <?php if (has_post_format('video')) { ?>
+              <div class="video-play small"></div>
+            <?php } ?>
             <?php if ($image_src) { ?>
               <img src="<?php echo $image_sized['url']; ?>" />
             <?php } ?>
