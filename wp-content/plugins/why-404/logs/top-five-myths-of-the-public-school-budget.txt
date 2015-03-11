@@ -1,0 +1,67 @@
+Date 2015-03-10 11:31:06 
+ID : 6427 
+post_author : 73 
+post_date : 2015-03-10 00:00:08 
+post_date_gmt : 2015-03-10 04:00:08 
+post_content : <p>Ninety percent of North Carolina’s children attend public schools, and educating all 1.5 million of them costs the state about $8.8 billion each year. Add $3 billion in local funds and $1.4 billion in federal funds, and it’s easy to understand why taxpayers and politicians care about the public school budget. Education at all levels is one-third of the state’s annual budget and a large percentage of each local county’s budget as well.</p>
+<p>[full-width]</p>
+[caption id="attachment_6428" align="alignnone" width="1024"]<a href="http://www.osbm.state.nc.us/files/pdf_files/Table02_TotalNCBudget_2014-15.pdf" target="_blank"><img class="wp-image-6428 size-large" src="http://local.wordpress.dev/wp-content/uploads/2015/03/Screen-Shot-2015-03-09-at-10.45.28-AM-1024x831.png" alt="Screen Shot 2015-03-09 at 10.45.28 AM" width="1024" height="831" /></a> Courtesy NC Office of State Budget and Management[/caption]
+<p>[/full-width]</p>
+<p>Funding such a large enterprise requires a complex budget in order to be equitable; to meet the needs of school districts that are large, small, rich, poor, rural, urban and in-between; and to provide the best educational opportunities possible for students. The public school budget is intended to provide the resources to educate each child, regardless of their needs or goals or where they live. In all its complexity, there are many common misunderstandings about how North Carolinians pay for public schools.</p>
+<blockquote>
+<p style="text-align: center;">Myth #1 – Money doesn’t matter in school quality.</p>
+</blockquote>
+<p>Since the recession of 2008, total North Carolina spending for public schools has increased slightly overall, but the amount of funding per student has actually decreased from $5,779 per student to $5,716. Since 2008, there have been cuts in textbooks, instructional supplies, teachers, teacher assistants, school technology, professional development and mentor teachers. Even with the loss of these funds, schools have remained open and serving students, prompting some to ask whether money matters. The impact of having limited textbook funding, larger classes (fewer teachers), fewer courses and fewer other materials may not show up immediately in student test scores or other measures because education is a cumulative activity. Students who spend their K-12 education in schools with fewer resources may spend many years in crowded classrooms with less experienced teachers and too few textbooks for students to take them home, for example. The impact will be seen in future years as North Carolina’s performance is measured against the performance of other states’ students and in the workforce as these students enter adulthood.</p>
+<blockquote>
+<p style="text-align: center;">Myth #2 – North Carolina automatically funds all public school students.</p>
+</blockquote>
+<p>Many categories of public school funds are distributed according to the Average Daily Membership (ADM) of students in each district. For many years, the state included an automatic adjustment to the state’s budget that covered new students entering the public schools. In a growing state such as North Carolina, this allowed local school districts to know that all students, including new students, would be funded. This allowed districts to plan with this in mind. If a district’s student population grew, the ADM base would increase to support the additional students. This is no longer necessarily the case. Now, the General Assembly has to take action to include the funding for any increase in the number of students who enter North Carolina public schools next year. (Before, lawmakers had to vote to remove the funding for any increase in the number of students.) If lawmakers do not act each year, there will not be a funding adjustment to serve new students. Public schools will still serve these students by spreading existing dollars across more students to meet educational needs, but would have to do so through larger classes, fewer textbooks and other materials and fewer support staff in schools.</p>
+<blockquote>
+<p style="text-align: center;">Myth #3 – The NC Education Lottery should be able to solve all of North Carolina’s public school funding troubles.</p>
+</blockquote>
+<p>In 2013, the lottery’s total revenue was $1,695,453,000 (which was used for prizes, operations, and education). Of that total, $454,199,439 was distributed to education programs (49 percent for teachers, 22 percent for school construction/renovation, 14 percent for pre-school, and 15 percent for scholarships/financial aid. Per legislation, school districts must use lottery money only for these specific spending categories). Also, while the amount of funding is substantial for classroom teachers and construction, it is important to note that the total lottery funds going to support public schools accounted for only 3.4 percent of the total $8.3 billion annual state funding for K-12 public education.</p>
+<blockquote>
+<p style="text-align: center;">Myth #4 – Textbook funding is no longer important because soon all students will use digital resources that are available for free on the Internet.</p>
+</blockquote>
+<p>Textbook funding is, in fact, MORE important than ever before because digital resources are more expensive than traditional textbooks. Textbook funding can be used to purchase digital content as well as paper books. The transition to digital textbooks requires funding for school-wide licenses, professional development for teachers, and digital learning devices for students. At the same time, dollars appropriated for textbooks in the state budget have gone from $68 per student in 2008-09 to about $15 per student in 2014-15 (a 78 percent reduction). As a result of this reduction, students must share books, books cannot be taken home, some books are in poor physical condition and/or out-of-date and some schools have resorted to using only paper handouts and funding is not sufficient to sustain digital resource commitments. State law requires that by 2017, North Carolina schools will transition from textbooks to digital materials. If textbook funding continues at this low level, some districts will face significant challenges in meeting the requirements set out in law.</p>
+<blockquote>
+<p style="text-align: center;">Myth #5 – There would be plenty of money for schools if North Carolina just cut out the education bureaucracy.</p>
+</blockquote>
+<p>This idea sounds good because, let’s face it, who wants to advocate for more bureaucracy? In truth, public schools have a low percentage of bureaucracy or administration. In fact, if North Carolina eliminated the entire Department of Public Instruction, all local central office staff leading local school districts, all principals and assistant principals, this would total approximately 6 percent of all public school funding and would leave teachers to handle all administrative tasks for themselves, from payroll to school scheduling, purchasing and transporting students to and from school and more.</p>
+<hr />
+<p>Where can North Carolinians learn more about the public school budget? Summary information is online at <a href="http://www.ncpublicschools.org/fbs" target="_blank">www.ncpublicschools.org/fbs</a> under Resources.</p> 
+post_title : Top five myths of the public school budget 
+post_excerpt :  
+post_status : publish 
+comment_status : open 
+ping_status : open 
+post_password :  
+post_name : top-five-myths-of-the-public-school-budget 
+to_ping :  
+pinged :  
+post_modified : 2015-03-09 10:53:38 
+post_modified_gmt : 2015-03-09 14:53:38 
+post_content_filtered :  
+post_parent : 0 
+guid : http://local.wordpress.dev/?p=6427 
+menu_order : 0 
+post_type : post 
+post_mime_type :  
+comment_count : 0 
+filter : raw 
+PERMALINK: http://local.wordpress.dev/2015/03/10/top-five-myths-of-the-public-school-budget/ 
+
+ --CURL-- 
+headers: 
+	 server: nginx 
+	 date: Tue, 10 Mar 2015 11:31:06 GMT 
+	 content-type: text/html; charset=UTF-8 
+	 connection: close 
+	 x-powered-by: PHP/5.5.9-1ubuntu4.5 
+	 x-pingback: http://local.wordpress.dev/xmlrpc.php 
+response: 
+	 code: 200 
+	 message: OK 
+cookies: 
+filename:  
+--RESPONSE WAS 200--
