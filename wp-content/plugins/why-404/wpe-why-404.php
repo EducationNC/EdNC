@@ -42,7 +42,7 @@ function wpe_debug_publish_post($post_id, $post) {
         if( $check['response']['code'] == '404' ) {
                 $output .= "--RECIEVED 404 - PURGING VARNISH--";
                  wp_mail('aherr@ednc.org','ednc.org missed a post', "$output");
-                Wpe_Common::purge_varnish_cache();
+                // Wpe_Common::purge_varnish_cache();
         } else {
                 $output .= "--RESPONSE WAS ".$check['response']['code']."--\n";
         }
