@@ -601,6 +601,9 @@
             <h4><a href="https://www.ednc.org/2015/03/04/education-policy-boot-camp-101/">EdAdvocacy 101</a></h4>
           </li>
           <li>
+            <h4><a href="https://www.ednc.org/2015/03/11/edadvocacy-201-13-tips-for-luck-with-the-legislature/">EdAdvocacy 201</a></h4>
+          </li>
+          <li>
             <h4><a href="https://www.ednc.org/research/leadership-profiles/">Leadership profiles</a></h4>
           </li>
           <li>

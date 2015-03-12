@@ -10,6 +10,10 @@ $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 $column_name = get_field('column_name', $author_bio[0]->ID);
 
 $category = get_the_category();
+// Convert category results to array instead of object
+foreach ($category as &$cat) {
+  $cat = (array) $cat;
+}
 $column = wp_get_post_terms(get_the_id(), 'column');
 
 $image_id = get_post_thumbnail_id();
@@ -35,18 +39,19 @@ if ($image_src) {
                 <span class="label"><?php echo $column[0]->name; ?></span>
                 <?php
               } else {
-                if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home' && $category[0]->cat_name != 'Hide from archives') {
-                  ?>
-                  <span class="label">
-                    <?php if (in_category(109)) {  // 1868 Constitutional Convention ?>
-                    <a href="<?php echo get_category_link(109); ?>">
-                      <?php echo $category[0]->cat_name; ?>
-                    </a>
-                    <?php } else {
-                      echo $category[0]->cat_name;
-                    } ?>
-                  </span>
-                  <?php
+                $cats_hide = array();
+                // Determine array indexes for labels we don't want to show
+                $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+                $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
+                $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+                // Remove empty results
+                $cats_hide = array_filter($cats_hide, 'strlen');
+
+                // Only show label of category if it's not in above list
+                foreach ($category as $key=>$value) {
+                  if (!in_array($key, $cats_hide)) {
+                    echo '<span class="label">' . $value['cat_name'] . '</span> ';
+                  }
                 }
               }
               ?>
