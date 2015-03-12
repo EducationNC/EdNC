@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
-    // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+    'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
     'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
     // 'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
     'assets/app/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',

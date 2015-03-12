@@ -1,0 +1,26 @@
+.carousel {
+  @include gray-gradient-right();
+
+  @media (max-width: $screen-md-max) {
+    padding-bottom: 30px;
+    margin-bottom: 1.25em;
+  }
+}
+
+.carousel-indicators {
+  margin: 0;
+  bottom: 10px;
+  @include green-gradient-right();
+  width: auto;
+  padding: 5px 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.carousel-inner {
+  z-index: 1;
+}
+
+.carousel-control {
+  z-index: 10;
+}
