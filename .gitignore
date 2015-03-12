@@ -32,6 +32,10 @@ wp-content/themes/ednc-new/*
 wp-content/themes/ednc/assets/app/bower_components/*
 wp-content/themes/ednc/node_modules/*
 
+# ignorable plugin files
+wp-content/plugins/why-404/logs/*
+wp-content/plugins/wpe-why-404/404-logs/*
+
 # pro plugins
 wp-content/plugins/advanced-custom-fields-pro/*
 wp-content/plugins/events-calendar-pro/*
