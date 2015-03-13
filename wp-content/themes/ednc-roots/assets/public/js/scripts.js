@@ -1873,7 +1873,55 @@ var Roots = {
       $('#trigger-mobile-search').on(clickortap, function() {
         $('#oc-pusher').toggleClass('search-pushed');
       });
+    }
+  },
+  // Home page
+  home: {
+    init: function() {
 
+      // Photo strip grid rotation on home page
+      $('#photo-strip').gridrotator({
+        rows: 1,
+        columns: 5,
+        w1024: {
+          rows: 1,
+          columns: 4
+        },
+        w768: {
+          rows: 2,
+          columns: 2
+        },
+        w480: {
+          rows: 1,
+          columns: 1
+        },
+        step: 1,
+        maxStep: 1,
+        animType: 'slideTop',
+        animSpeed: 300,
+        animEasingOut: 'ease',
+        animEasingIn: 'ease',
+        interval: 6000
+      });
+
+    }
+  },
+  // About us page, note the change from about-us to about_us.
+  about_us: {
+    init: function() {
+      // JavaScript to be fired on the about us page
+    }
+  },
+  // Archive pages
+  archive: {
+    init: function() {
+      // console.log('archive');
+      // $('.collapse').collapse();
+    }
+  },
+  // Single posts
+  single: {
+    init: function() {
       // Wrap any object embed with responsive wrapper (except for map embeds)
       $.expr[':'].childof = function(obj, index, meta, stack){
         return $(obj).parent().is(meta[3]);
@@ -1935,7 +1983,7 @@ var Roots = {
       });
 
       // Smooth scroll to anchor on same page
-      $('a[href*=#]:not([href=#])').click(function() {
+      $('a[href*=#]:not([href=#]):not(.collapsed)').click(function() {
         if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
           var target = $(this.hash);
           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -1947,50 +1995,6 @@ var Roots = {
           }
         }
       });
-    }
-  },
-  // Home page
-  home: {
-    init: function() {
-
-      // Photo strip grid rotation on home page
-      $('#photo-strip').gridrotator({
-        rows: 1,
-        columns: 5,
-        w1024: {
-          rows: 1,
-          columns: 4
-        },
-        w768: {
-          rows: 2,
-          columns: 2
-        },
-        w480: {
-          rows: 1,
-          columns: 1
-        },
-        step: 1,
-        maxStep: 1,
-        animType: 'slideTop',
-        animSpeed: 300,
-        animEasingOut: 'ease',
-        animEasingIn: 'ease',
-        interval: 6000
-      });
-
-    }
-  },
-  // About us page, note the change from about-us to about_us.
-  about_us: {
-    init: function() {
-      // JavaScript to be fired on the about us page
-    }
-  },
-  // Archive pages
-  archive: {
-    init: function() {
-      // console.log('archive');
-      // $('.collapse').collapse();
     }
   }
 };
