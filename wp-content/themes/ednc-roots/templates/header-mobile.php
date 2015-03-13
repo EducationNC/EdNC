@@ -9,16 +9,7 @@
 </div>
 
 <div class="mobile-bar-search">
-  <form role="search" method="get" action="<?php echo home_url( '/' ); ?>">
-    <div class="container">
-      <div class="col-sm-12">
-        <div class="input-group">
-          <input class="form-control" type="text" placeholder="Search..." name="search" />
-          <span class="input-group-btn">
-            <input type="submit" class="btn btn-default" value="Go" class="postfix" />
-          </span>
-        </div>
-      </div>
-    </div>
-  </form>
+  <div class="container">
+    <?php get_template_part('templates/searchform'); ?>
+  </div>
 </div>

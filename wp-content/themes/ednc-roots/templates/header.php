@@ -27,18 +27,7 @@ if ($alert) { ?>
       </ul>
 
       <div class="search">
-        <form role="search" method="get" action="<?php echo home_url( '/' ); ?>">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="input-group">
-                <input class="form-control input-sm" type="text" placeholder="Search..." name="s" />
-                <span class="input-group-btn">
-                  <input type="submit" class="btn btn-sm" value="Go" class="postfix" />
-                </span>
-              </div>
-            </div>
-          </div>
-        </form>
+        <?php get_template_part('templates/searchform'); ?>
       </div>
     </div>
   </div>
