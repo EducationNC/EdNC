@@ -27,6 +27,7 @@ $roots_includes = array(
   'lib/extras.php',           // Custom functions
   'lib/feeds.php',            // Adding/modifying RSS feeds,
   'lib/custom-pub-date.php',  // Temporary functions for adding pub date to custom field
+  'lib/plugin-support-plugins.php',  // Add notices of required plugins for this theme
   'lib/customizer.php'        // Customizer settings
 );
 
