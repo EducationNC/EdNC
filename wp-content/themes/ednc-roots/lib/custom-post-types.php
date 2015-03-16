@@ -8,37 +8,6 @@
 */
 
 function add_custom_post_types() {
-	// register_post_type( 'feature',
-	// 	array('labels' => array(
-	// 		'name' => 'Features',
-	// 		'singular_name' => 'Feature',
-	// 		'add_new' => 'Add New',
-	// 		'add_new_item' => 'Add New Feature',
-	// 		'edit' => 'Edit',
-	// 		'edit_item' => 'Edit Feature',
-	// 		'new_item' => 'New Feature',
-	// 		'view_item' => 'View Feature',
-	// 		'search_items' => 'Search Feature',
-	// 		'not_found' =>  'Nothing found in the Database.',
-	// 		'not_found_in_trash' => 'Nothing found in Trash',
-	// 		'parent_item_colon' => ''
-	// 	), /* end of arrays */
-	// 	'public' => true,
-	// 	'exclude_from_search' => false,
-	// 	'publicly_queryable' => true,
-	// 	'show_ui' => true,
-	// 	'show_in_nav_menus' => false,
-	// 	'menu_position' => 8,
-	// 	//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
-	// 	'capability_type' => 'post',
-	// 	'hierarchical' => false,
-	// 	'supports' => array( 'title', 'editor', 'revisions', 'comments', 'trackbacks'),
-	// 	'has_archive' => false,
-	// 	'rewrite' => true,
-	// 	'query_var' => true
-	// )
-	// );
-
 	register_post_type( 'underwriter',
 		array('labels' => array(
 				'name' => 'Underwriters',
@@ -251,7 +220,7 @@ function add_custom_post_types() {
 			'hierarchical' => false,
 			'supports' => array( 'title', 'editor', 'author', 'revisions', 'thumbnail', 'comments'),
 			'has_archive' => false,
-			'rewrite' => true,
+			'rewrite' => false,	// set to false and then create custom rewrite rules below
 			'query_var' => true
 		)
 	);
@@ -323,24 +292,24 @@ add_action( 'init', 'add_custom_post_types');
 
 
 register_taxonomy( 'district-type',
-array('district'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
-array('hierarchical' => true,     /* if this is true it acts like categories */
-'labels' => array(
-	'name' => 'District Types', /* name of the custom taxonomy */
-	'singular_name' => 'District Type', /* single taxonomy name */
-	'search_items' =>  'Search District Types', /* search title for taxomony */
-	'all_items' => 'All District Types',  /*all title for taxonomies */
-	'parent_item' => 'Parent District Type', /* parent title for taxonomy */
-	'parent_item_colon' => 'Parent District Type:', /* parent taxonomy title */
-	'edit_item' => 'Edit District Type', /* edit custom taxonomy title */
-	'update_item' => 'Update District Type', /* update title for taxonomy */
-	'add_new_item' => 'Add New District Type', /* add new title for taxonomy */
-	'new_item_name' => 'New District Type Name' /* name title for taxonomy */
-),
-'show_ui' => true,
-'query_var' => true,
-'public' => false
-)
+	array('district'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+	'labels' => array(
+		'name' => 'District Types', /* name of the custom taxonomy */
+		'singular_name' => 'District Type', /* single taxonomy name */
+		'search_items' =>  'Search District Types', /* search title for taxomony */
+		'all_items' => 'All District Types',  /*all title for taxonomies */
+		'parent_item' => 'Parent District Type', /* parent title for taxonomy */
+		'parent_item_colon' => 'Parent District Type:', /* parent taxonomy title */
+		'edit_item' => 'Edit District Type', /* edit custom taxonomy title */
+		'update_item' => 'Update District Type', /* update title for taxonomy */
+		'add_new_item' => 'Add New District Type', /* add new title for taxonomy */
+		'new_item_name' => 'New District Type Name' /* name title for taxonomy */
+	),
+	'show_ui' => true,
+	'query_var' => true,
+	'public' => false
+	)
 );
 
 register_taxonomy( 'author-type',
@@ -437,3 +406,84 @@ function ednc_bios_admin_orderby( $vars ) {
 	return $vars;
 }
 add_filter( 'request', 'ednc_bios_admin_orderby' );
+
+/**
+ * Add rewrite rules for map permalinks
+ * http://shibashake.com/wordpress-theme/custom-post-type-permalinks-part-2
+ *
+ */
+function ednc_map_rewrite_rules() {
+	global $wp_rewrite;
+
+	$permalink_structure = '/map/%year%/%monthnum%/%map%';
+	$wp_rewrite->add_rewrite_tag("%map%", '([^/]+)', "map=");
+	$wp_rewrite->add_permastruct('map', $permalink_structure, false);
+
+}
+add_action('init', 'ednc_map_rewrite_rules');
+
+// Translate custom post type permalink tokens (%year% and %monthnum%)
+// Adapted from get_permalink function in wp-includes/link-template.php
+function replace_permalink_tokens($permalink, $post_id, $leavename) {
+  $post = get_post($post_id);
+  $rewritecode = array(
+    '%year%',
+    '%monthnum%',
+    '%day%',
+    '%hour%',
+    '%minute%',
+    '%second%',
+    $leavename? '' : '%postname%',
+    '%post_id%',
+    '%category%',
+    '%author%',
+    $leavename? '' : '%pagename%',
+  );
+
+  if ( '' != $permalink && !in_array($post->post_status, array('draft', 'pending', 'auto-draft')) ) {
+      $unixtime = strtotime($post->post_date);
+
+      $category = '';
+      if ( strpos($permalink, '%category%') !== false ) {
+          $cats = get_the_category($post->ID);
+          if ( $cats ) {
+              usort($cats, '_usort_terms_by_ID'); // order by ID
+              $category = $cats[0]->slug;
+              if ( $parent = $cats[0]->parent )
+                  $category = get_category_parents($parent, false, '/', true) . $category;
+          }
+          // show default category in permalinks, without
+          // having to assign it explicitly
+          if ( empty($category) ) {
+              $default_category = get_category( get_option( 'default_category' ) );
+              $category = is_wp_error( $default_category ) ? '' : $default_category->slug;
+          }
+      }
+
+      $author = '';
+      if ( strpos($permalink, '%author%') !== false ) {
+          $authordata = get_userdata($post->post_author);
+          $author = $authordata->user_nicename;
+      }
+
+      $date = explode(" ",date('Y m d H i s', $unixtime));
+      $rewritereplace =
+      array(
+          $date[0],
+          $date[1],
+          $date[2],
+          $date[3],
+          $date[4],
+          $date[5],
+          $post->post_name,
+          $post->ID,
+          $category,
+          $author,
+          $post->post_name,
+      );
+      $permalink = str_replace($rewritecode, $rewritereplace, $permalink);
+  } else { // if they're not using the fancy permalink option
+  }
+  return $permalink;
+}
+add_filter('post_type_link', 'replace_permalink_tokens', 10, 3);
