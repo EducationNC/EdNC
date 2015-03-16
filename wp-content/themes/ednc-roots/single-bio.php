@@ -1,7 +1,7 @@
 <?php while (have_posts()) : the_post(); ?>
   <div class="row">
     <div class="col-md-4">
-      <?php the_post_thumbnail('full'); ?>
+      <?php the_post_thumbnail('bio-headshot'); ?>
       <h3>Links</h3>
       <?php
       $user = get_field('user');

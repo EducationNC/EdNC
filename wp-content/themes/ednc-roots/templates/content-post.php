@@ -179,7 +179,7 @@ if ($image_src) {
           ?>
           <div class="row has-photo-overlay">
             <div class="col-xs-5 col-sm-3">
-              <?php the_post_thumbnail('full'); ?>
+              <?php the_post_thumbnail('bio-headshot'); ?>
             </div>
 
             <div class="col-xs-7 col-sm-9">
@@ -216,7 +216,7 @@ if ($image_src) {
           $bio = new WP_Query($args);
 
           if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-            <?php the_post_thumbnail('full', array('class' => 'author-photo')); ?>
+            <?php the_post_thumbnail('bio-headshot'); ?>
             <?php get_template_part('templates/author', 'excerpt'); ?>
           <?php endwhile; endif; wp_reset_query(); ?>
 

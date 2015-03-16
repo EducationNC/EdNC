@@ -4,6 +4,7 @@
  */
 
 add_image_size('medium-square', 400, 400, true);
+add_image_size('bio-headshot', 380, 425, true);
 
 
 /**

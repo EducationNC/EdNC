@@ -139,7 +139,7 @@ $column = wp_get_post_terms(get_the_id(), 'column');
       $bio = new WP_Query($args);
 
       if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-        <?php the_post_thumbnail('full', array('class' => 'author-photo')); ?>
+        <?php the_post_thumbnail('bio-headshot'); ?>
         <?php get_template_part('templates/author', 'excerpt'); ?>
       <?php endwhile; endif; wp_reset_query(); ?>
     </footer>

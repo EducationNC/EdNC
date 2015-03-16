@@ -77,7 +77,7 @@ if ($image_src) {
           ?>
           <div class="row has-photo-overlay">
             <div class="col-xs-5 col-sm-3">
-              <?php the_post_thumbnail('full'); ?>
+              <?php the_post_thumbnail('bio-headshot'); ?>
             </div>
 
             <div class="col-xs-7 col-sm-9">
@@ -117,7 +117,7 @@ if ($image_src) {
           ?>
           <div class="row has-photo-overlay">
             <div class="col-xs-5 col-sm-3 col-md-5">
-              <?php the_post_thumbnail('full'); ?>
+              <?php the_post_thumbnail('bio-headshot'); ?>
             </div>
 
             <div class="col-xs-7 col-sm-9 col-md-7">

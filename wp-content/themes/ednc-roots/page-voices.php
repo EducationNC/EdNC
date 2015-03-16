@@ -35,14 +35,7 @@
 
         <div class="col-md-4 has-photo-overlay">
           <div class="photo-overlay">
-            <?php
-            $image_id = get_post_thumbnail_id();
-            $image_src = wp_get_attachment_image_src($image_id, 'full');
-            if ($image_src) {
-              $image_sized = mr_image_resize($image_src[0], 295, 330, true, false);
-            }
-            ?>
-            <img src="<?php echo $image_sized['url']; ?>" />
+            <?php the_post_thumbnail('bio-headshot'); ?>
             <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
             <h3 class="post-title"><?php the_title(); ?></h3>
             <div class="line"></div>
@@ -76,14 +69,7 @@
 
           <div class="col-md-3 has-photo-overlay">
             <div class="photo-overlay">
-              <?php
-              $image_id = get_post_thumbnail_id();
-              $image_src = wp_get_attachment_image_src($image_id, 'full');
-              if ($image_src) {
-                $image_sized = mr_image_resize($image_src[0], 295, 330, true, false);
-              }
-              ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
+              <?php the_post_thumbnail('bio-headshot'); ?>
               <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
               <h3 class="post-title"><?php the_title(); ?></h3>
               <div class="line"></div>
@@ -117,14 +103,7 @@
 
           <div class="col-md-3 has-photo-overlay">
             <div class="photo-overlay">
-              <?php
-              $image_id = get_post_thumbnail_id();
-              $image_src = wp_get_attachment_image_src($image_id, 'full');
-              if ($image_src) {
-                $image_sized = mr_image_resize($image_src[0], 295, 330, true, false);
-              }
-              ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
+              <?php the_post_thumbnail('bio-headshot'); ?>
               <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
               <h3 class="post-title"><?php the_title(); ?></h3>
               <div class="line"></div>

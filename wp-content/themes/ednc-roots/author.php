@@ -49,7 +49,7 @@ query_posts($args);
     if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
     <div class="has-photo-overlay">
       <div class="photo-overlay">
-        <?php the_post_thumbnail('medium'); ?>
+        <?php the_post_thumbnail('bio-headshot'); ?>
         <h3 class="post-title no-transform"><?php the_title(); ?></h3>
       </div>
 
