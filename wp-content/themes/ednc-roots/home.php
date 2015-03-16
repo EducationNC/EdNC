@@ -37,7 +37,7 @@ $whichday = current_time('w');
             <?php
             foreach ($posts_asc_order as $i=>$slide) {
               ?>
-              <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {echo 'class="active"';} ?>></li>
+              <li data-target="#carousel-xs" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {echo 'class="active"';} ?>></li>
               <?php
             }
             ?>
@@ -148,7 +148,7 @@ $whichday = current_time('w');
             $n = 0;
             foreach ($posts_asc_order as $i=>$slide) {
               if ($i % 2 == 0) { ?>
-              <li data-target="#carousel-example-generic" data-slide-to="<?php echo $n; ?>" <?php if ($i == 0) {echo 'class="active"';} ?>></li>
+              <li data-target="#carousel-sm-up" data-slide-to="<?php echo $n; ?>" <?php if ($i == 0) {echo 'class="active"';} ?>></li>
               <?php
               $n++;
               }
