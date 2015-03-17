@@ -5,6 +5,7 @@
 
 add_image_size('medium-square', 400, 400, true);
 add_image_size('bio-headshot', 380, 425, true);
+add_image_size('featured-thumbnail', 295, 295, true);
 
 
 /**
@@ -17,10 +18,13 @@ function ednc_insert_custom_image_sizes( $sizes ) {
     return $sizes;
   }
 
-  foreach ( $_wp_additional_image_sizes as $id => $data ) {
-    if ( !isset($sizes[$id]) )
-    $sizes[$id] = ucfirst( str_replace( '-', ' ', $id ) );
-  }
+  // foreach ( $_wp_additional_image_sizes as $id => $data ) {
+  //   if ( !isset($sizes[$id]) )
+  //   $sizes[$id] = ucfirst( str_replace( '-', ' ', $id ) );
+  // }
+
+  // I just want to do this with medium-square size for now
+  $sizes['medium-square'] = 'Medium Square';
 
   return $sizes;
 }

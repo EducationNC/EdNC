@@ -16,12 +16,7 @@ foreach ($category as &$cat) {
 }
 
 $column = wp_get_post_terms(get_the_id(), 'column');
-
-$image_id = get_post_thumbnail_id();
-$image_src = wp_get_attachment_image_src($image_id, 'full');
-if ($image_src) {
-  $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-} ?>
+?>
 
 <article <?php post_class('article'); ?>>
   <?php
@@ -246,10 +241,8 @@ if ($image_src) {
             $category = get_the_category($pid);
             if (has_post_thumbnail()) {
               $image_id = get_post_thumbnail_id();
-              $image_src = wp_get_attachment_image_src($image_id, 'full');
-              if ($image_src) {
-                $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-              }
+              $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail');
+              $image_sized['url'] = $image_url[0];
             } else {
               $image_src = catch_that_image();
               $image_sized = mr_image_resize($image_src, 295, 295, true, false);
@@ -261,7 +254,7 @@ if ($image_src) {
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
                 <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-                <?php if ($image_src) { ?>
+                <?php if ($image_sized['url']) { ?>
                 <img src="<?php echo $image_sized['url']; ?>" />
                 <?php } ?>
               </div>
@@ -281,10 +274,13 @@ if ($image_src) {
             $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 
             $category = get_the_category($pid);
-            $image_id = get_post_thumbnail_id($pid);
-            $image_src = wp_get_attachment_image_src($image_id, 'full');
-            if ($image_src) {
-              $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+            if (has_post_thumbnail()) {
+              $image_id = get_post_thumbnail_id();
+              $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail');
+              $image_sized['url'] = $image_url[0];
+            } else {
+              $image_src = catch_that_image();
+              $image_sized = mr_image_resize($image_src, 295, 295, true, false);
             }
             ?>
             <div class="has-photo-overlay">
@@ -293,7 +289,7 @@ if ($image_src) {
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
                 <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-                <?php if ($image_src) { ?>
+                <?php if ($image_sized['url']) { ?>
                 <img src="<?php echo $image_sized['url']; ?>" />
                 <?php } ?>
               </div>

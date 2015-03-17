@@ -57,10 +57,8 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <description><![CDATA[<?php
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
-        $image_src = wp_get_attachment_image_src($image_id, 'full');
-        if ($image_src) {
-          $image_sized = mr_image_resize($image_src[0], 150, 150, true, false);
-        }
+        $image_url = wp_get_attachment_image_src($image_id, 'thumbnail');
+        $image_sized['url'] = $image_url[0];
       } else {
         $image_src = catch_that_image();
         $image_sized = mr_image_resize($image_src, 150, 150, true, false);
@@ -70,7 +68,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
         echo '<tr>';
         echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer" valign="top">';
-        if ($image_src) {
+        if ($image_sized['url']) {
           echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
         }
         echo '</td>';

@@ -12,10 +12,13 @@ $whichday = current_time('w');
         <h2>Week in review</h2>
       </div>
     </div>
+  <?php } ?>
 
-    <div class="row">
-      <div class="col-md-9">
-        <?php
+  <div class="row">
+    <div class="col-md-9">
+      <?php
+      // Show slideshow if this is a weekend
+      if ($whichday == 0 || $whichday == 6) {
         $args = array(
           'posts_per_page' => 10,
           'post_type' => 'post',
@@ -30,6 +33,8 @@ $whichday = current_time('w');
         // Reverse order of posts
         $posts_asc_order = array_reverse($featured->posts);
         ?>
+
+        <!-- Carousel for xs screens shows 1 post per slide -->
 
         <div id="carousel-xs" class="carousel slide visible-xs-block" data-ride="carousel">
           <!-- Indicators -->
@@ -48,86 +53,11 @@ $whichday = current_time('w');
             <?php
             foreach ($posts_asc_order as $i=>$post) {
 
-              setup_postdata($post);
-
-              $category = get_the_category();
-              // Convert category results to array instead of object
-              foreach ($category as &$cat) {
-                $cat = (array) $cat;
-              }
-
-              $column = wp_get_post_terms(get_the_id(), 'column');
-
-              $author_id = get_the_author_meta('ID');
-              $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-              $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
-              $author_avatar = get_field('avatar', $author_bio[0]->ID);
-              $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
-
-              if (has_post_thumbnail()) {
-                $image_id = get_post_thumbnail_id();
-                $image_src = wp_get_attachment_image_src($image_id, 'full');
-                if ($image_src) {
-                  $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-                }
-              } else {
-                $image_src = catch_that_image();
-                $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-              }
-              ?>
+              setup_postdata($post); ?>
 
               <div class="item <?php if ($i == 0) {echo 'active';} ?>">
                 <div class="post has-photo-overlay">
-                  <div class="photo-overlay">
-                    <?php
-                    if ($column) {
-                      ?>
-                      <span class="label"><?php echo $column[0]->name; ?></span>
-                      <?php
-                    } else {
-                      $cats_hide = array();
-                      // Determine array indexes for labels we don't want to show
-                      $cats_hide[] = array_search('Featured', array_column($category, 'cat_name'));
-                      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-                      $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-                      $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-                      // Remove empty results
-                      $cats_hide = array_filter($cats_hide, 'strlen');
-
-                      // Only show label of category if it's not in above list
-                      foreach ($category as $key=>$value) {
-                        if (!in_array($key, $cats_hide)) {
-                          echo '<span class="label">' . $value['cat_name'] . '</span>';
-                        }
-                      }
-                    }
-                    ?>
-
-                    <?php
-                    if ($author_avatar) {
-                      ?>
-                      <div class="avatar">
-                        <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
-                      </div>
-                      <?php
-                    }
-                    ?>
-
-                    <?php
-                    if (has_post_format('video')) {
-                      ?>
-                      <div class="video-play"></div>
-                      <?php
-                    }
-                    ?>
-
-                    <h2 class="post-title"><?php the_title(); ?></h2>
-                    <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
-                    <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-                    <?php if ($image_src) { ?>
-                      <img src="<?php echo $image_sized['url']; ?>" />
-                    <?php } ?>
-                  </div>
+                  <?php get_template_part('templates/thumb-overlay', 'feature'); ?>
 
                   <div class="extra-padding">
                     <?php the_advanced_excerpt('length=100&length_type=characters&finish=word&add_link=1&read_more=Full article >>'); ?>
@@ -140,6 +70,8 @@ $whichday = current_time('w');
             ?>
           </div>
         </div>
+
+        <!-- Carousel for sm screens & up shows 2 posts per slide -->
 
         <div id="carousel-sm-up" class="carousel slide hidden-xs" data-ride="carousel">
           <!-- Indicators -->
@@ -163,88 +95,18 @@ $whichday = current_time('w');
 
               setup_postdata($post);
 
-              $category = get_the_category();
-              // Convert category results to array instead of object
-              foreach ($category as &$cat) {
-                $cat = (array) $cat;
-              }
+              // Wrap every other post in div.item and make first one .active
+              if ($i % 2 == 0) {
+                echo '<div class="item';
 
-              $column = wp_get_post_terms(get_the_id(), 'column');
+                if ($i == 0) { echo ' active'; }
 
-              $author_id = get_the_author_meta('ID');
-              $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-              $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
-              $author_avatar = get_field('avatar', $author_bio[0]->ID);
-              $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
-
-              if (has_post_thumbnail()) {
-                $image_id = get_post_thumbnail_id();
-                $image_src = wp_get_attachment_image_src($image_id, 'full');
-                if ($image_src) {
-                  $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-                }
-              } else {
-                $image_src = catch_that_image();
-                $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-              }
-              ?>
-
-              <?php if ($i % 2 == 0) { ?>
-                <div class="item <?php if ($i == 0) {echo 'active';} ?>">
-              <?php } ?>
+                echo '">';
+              } ?>
 
               <div class="col-sm-6 top-padding">
                 <div class="post has-photo-overlay">
-                  <div class="photo-overlay">
-                    <?php
-                    if ($column) {
-                      ?>
-                      <span class="label"><?php echo $column[0]->name; ?></span>
-                      <?php
-                    } else {
-                      $cats_hide = array();
-                      // Determine array indexes for labels we don't want to show
-                      $cats_hide[] = array_search('Featured', array_column($category, 'cat_name'));
-                      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-                      $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-                      $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-                      // Remove empty results
-                      $cats_hide = array_filter($cats_hide, 'strlen');
-
-                      // Only show label of category if it's not in above list
-                      foreach ($category as $key=>$value) {
-                        if (!in_array($key, $cats_hide)) {
-                          echo '<span class="label">' . $value['cat_name'] . '</span>';
-                        }
-                      }
-                    }
-                    ?>
-
-                    <?php
-                    if ($author_avatar) {
-                      ?>
-                      <div class="avatar">
-                        <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
-                      </div>
-                      <?php
-                    }
-                    ?>
-
-                    <?php
-                    if (has_post_format('video')) {
-                      ?>
-                      <div class="video-play"></div>
-                      <?php
-                    }
-                    ?>
-
-                    <h2 class="post-title"><?php the_title(); ?></h2>
-                    <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
-                    <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-                    <?php if ($image_src) { ?>
-                      <img src="<?php echo $image_sized['url']; ?>" />
-                    <?php } ?>
-                  </div>
+                  <?php get_template_part('templates/thumb-overlay', 'feature'); ?>
 
                   <div class="extra-padding">
                     <?php the_advanced_excerpt('length=100&length_type=characters&finish=word&add_link=1&read_more=Full article >>'); ?>
@@ -252,9 +114,12 @@ $whichday = current_time('w');
                 </div>
               </div>
 
-              <?php if ($i % 2 == 1) { ?>
-                </div>
-              <?php } ?>
+              <?php
+              // Close div.item
+              if ($i % 2 == 1) {
+                echo '</div>';
+              }
+              ?>
 
               <?php
             }
@@ -262,18 +127,12 @@ $whichday = current_time('w');
           </div>
         </div>
 
-        <?php wp_reset_postdata(); wp_reset_query(); ?>
-      </div>
+        <?php
+        wp_reset_postdata(); wp_reset_query();
 
-      <div class="col-md-3">
-        <?php get_template_part('templates/sidebar', 'home'); ?>
-      </div>
-    </div>
-  <?php
-  } else {
-  ?>
-    <div class="row">
-      <div class="col-md-9">
+      // If it's not the weekend, show 2 most recent features
+      } else { ?>
+
         <div class="row">
           <?php
           $args = array(
@@ -287,105 +146,29 @@ $whichday = current_time('w');
 
           $featured = new WP_Query($args);
 
-          if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
-
-            $category = get_the_category();
-            // Convert category results to array instead of object
-            foreach ($category as &$cat) {
-              $cat = (array) $cat;
-            }
-
-            $column = wp_get_post_terms(get_the_id(), 'column');
-
-            $author_id = get_the_author_meta('ID');
-            $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-            $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
-            $author_avatar = get_field('avatar', $author_bio[0]->ID);
-            $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
-
-            $column_name = get_field('column_name', $author_bio[0]->ID);
-
-            if (has_post_thumbnail()) {
-              $image_id = get_post_thumbnail_id();
-              $image_src = wp_get_attachment_image_src($image_id, 'full');
-              if ($image_src) {
-                $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-              }
-            } else {
-              $image_src = catch_that_image();
-              $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-            }
-            ?>
+          if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post(); ?>
 
             <div class="col-sm-6">
               <div class="post has-photo-overlay">
-                <div class="photo-overlay small-wide">
-                  <?php
-                  if ($column) {
-                    ?>
-                    <span class="label"><?php echo $column[0]->name; ?></span>
-                    <?php
-                  } else {
-                    $cats_hide = array();
-                    // Determine array indexes for labels we don't want to show
-                    $cats_hide[] = array_search('Featured', array_column($category, 'cat_name'));
-                    $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-                    $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-                    $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-                    // Remove empty results
-                    $cats_hide = array_filter($cats_hide, 'strlen');
-
-                    // Only show label of category if it's not in above list
-                    foreach ($category as $key=>$value) {
-                      if (!in_array($key, $cats_hide)) {
-                        echo '<span class="label">' . $value['cat_name'] . '</span>';
-                      }
-                    }
-                  }
-                  ?>
-
-                  <?php
-                  if ($author_avatar) {
-                    ?>
-                    <div class="avatar">
-                      <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
-                    </div>
-                    <?php
-                  }
-                  ?>
-
-                  <?php
-                  if (has_post_format('video')) {
-                    ?>
-                    <div class="video-play"></div>
-                    <?php
-                  }
-                  ?>
-
-                  <h2 class="post-title"><?php the_title(); ?></h2>
-                  <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
-                  <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-                  <?php if ($image_src) { ?>
-                    <img src="<?php echo $image_sized['url']; ?>" />
-                  <?php } ?>
-                </div>
+                <?php get_template_part('templates/thumb-overlay', 'feature'); ?>
 
                 <div class="excerpt extra-padding">
                   <?php the_excerpt(); ?>
                   <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
                 </div>
               </div>
+
             </div>
 
           <?php endwhile; endif; wp_reset_query(); ?>
         </div>
-      </div>
-
-      <div class="col-md-3">
-        <?php get_template_part('templates/sidebar', 'home'); ?>
-      </div>
+      <?php } ?>
     </div>
-  <?php }  // $v != 1; ?>
+
+    <div class="col-md-3">
+      <?php get_template_part('templates/sidebar', 'home'); ?>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-xs-12">
@@ -395,6 +178,7 @@ $whichday = current_time('w');
 
   <div class="row">
     <?php
+    // If set, show most recent post from theme spot category set in customizer
     $theme_spot = get_theme_mod('theme_spot_category');
     if ($theme_spot && $theme_spot !== 'None') {
 
@@ -403,74 +187,37 @@ $whichday = current_time('w');
         'category__in' => array($theme_spot)
       );
 
-      $stories = new WP_Query($args);
+      $theme = new WP_Query($args);
 
-      if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
+      if ($theme->have_posts()) : while ($theme->have_posts()) : $theme->the_post();
 
-      $category = get_the_category();
-      // Convert category results to array instead of object
-      foreach ($category as &$cat) {
-        $cat = (array) $cat;
-      }
-
-      if (has_post_thumbnail()) {
-        $image_id = get_post_thumbnail_id();
-        $image_src = wp_get_attachment_image_src($image_id, 'full');
-        if ($image_src) {
-          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
+        $category = get_the_category();
+        // Convert category results to array instead of object
+        foreach ($category as &$cat) {
+          $cat = (array) $cat;
         }
-      } else {
-        $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-      }
-      ?>
 
-      <div class="col-sm-6 col-md-3">
-        <div class="post has-photo-overlay row">
-          <div class="photo-overlay col-xs-3 col-sm-12">
-            <div class="hidden-xs">
-              <?php
-              $cats_hide = array();
-              // Determine array indexes for labels we don't want to show
-              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
-              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-              // Remove empty results
-              $cats_hide = array_filter($cats_hide, 'strlen');
+        $cats_hide = array();
+        // Determine array indexes for labels we don't want to show
+        $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+        $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+        $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+        // Remove empty results
+        $cats_hide = array_filter($cats_hide, 'strlen');
+        ?>
 
-              // Only show label of category if it's not in above list
-              foreach ($category as $key=>$value) {
-                if (!in_array($key, $cats_hide)) {
-                  echo '<span class="label">' . $value['cat_name'] . '</span>';
-                }
-              }
-              ?>
-              <h4 class="post-title"><?php the_title(); ?></h4>
-              <div class="line"></div>
-            </div>
-            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-            <?php if (has_post_format('video')) { ?>
-              <div class="video-play small"></div>
-            <?php } ?>
-            <?php if ($image_src) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-            <?php } ?>
-          </div>
-
-          <div class="col-xs-9 col-sm-12 extra-padding">
-            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-            <p class="meta">by <?php the_author(); ?> on <date><?php the_time(get_option('date_format')); ?></date></p>
-          </div>
+        <div class="col-sm-6 col-md-3">
+          <?php include(locate_template('templates/thumb-overlay-small.php')); ?>
         </div>
-      </div>
 
       <?php endwhile; endif; wp_reset_query(); ?>
     <?php } ?>
 
     <?php
+    // Show configured number of news posts set in customizer (default = 4)
     $post_num = get_theme_mod('news_post_num', 4);
 
+    // If theme spot is set, subtract 1 from the number of news posts to show
     if ($theme_spot && $theme_spot !== 'None') {
       $post_num--;
       $theme_spot = null;
@@ -485,16 +232,9 @@ $whichday = current_time('w');
       'order' => 'DESC'
     );
 
-    $stories = new WP_Query($args);
+    $news = new WP_Query($args);
 
-    if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
-
-      $updated_date = get_post_meta(get_the_id(), 'updated_date', true);
-      if ($updated_date) {
-        $date = date(get_option('date_format'), $updated_date);
-      } else {
-        $date = get_the_time(get_option('date_format'));
-      }
+    if ($news->have_posts()) : while ($news->have_posts()) : $news->the_post();
 
       $category = get_the_category();
       // Convert category results to array instead of object
@@ -502,69 +242,31 @@ $whichday = current_time('w');
         $cat = (array) $cat;
       }
 
-      if (has_post_thumbnail()) {
-        $image_id = get_post_thumbnail_id();
-        $image_src = wp_get_attachment_image_src($image_id, 'full');
-        if ($image_src) {
-          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-        }
-      } else {
-        $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-      }
+      $cats_hide = array();
+      // Determine array indexes for labels we don't want to show
+      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+      $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+      $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+      // Remove empty results
+      $cats_hide = array_filter($cats_hide, 'strlen');
       ?>
 
       <div class="col-sm-6 col-md-3">
-        <div class="post has-photo-overlay row">
-          <div class="photo-overlay col-xs-3 col-sm-12">
-            <div class="hidden-xs">
-              <?php
-              $cats_hide = array();
-              // Determine array indexes for labels we don't want to show
-              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
-              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-              // Remove empty results
-              $cats_hide = array_filter($cats_hide, 'strlen');
-
-              // Only show label of category if it's not in above list
-              foreach ($category as $key=>$value) {
-                if (!in_array($key, $cats_hide)) {
-                  echo '<span class="label">' . $value['cat_name'] . '</span>';
-                }
-              }
-              ?>
-              <h4 class="post-title"><?php the_title(); ?></h4>
-              <div class="line"></div>
-            </div>
-            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-            <?php if (has_post_format('video')) { ?>
-              <div class="video-play small"></div>
-            <?php } ?>
-            <?php if ($image_src) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-            <?php } ?>
-          </div>
-
-          <div class="col-xs-9 col-sm-12 extra-padding">
-            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-            <p class="meta">by <?php the_author(); ?> on <date><?php echo $date; ?></date></p>
-          </div>
-        </div>
+        <?php include(locate_template('templates/thumb-overlay-small.php')); ?>
       </div>
 
     <?php endwhile; endif; wp_reset_query(); ?>
   </div>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Perspectives</h2>
-      </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Perspectives</h2>
     </div>
+  </div>
 
   <div class="row">
     <?php
+    // Show 4 most recent perspectives
     $args = array(
       'posts_per_page' => 4,
       'category__not_in' => array(93, 90, 96, $theme_spot), // id of "news," "featured," and "hide from home" categories
@@ -573,16 +275,9 @@ $whichday = current_time('w');
       'order' => 'DESC'
     );
 
-    $stories = new WP_Query($args);
+    $perspectives = new WP_Query($args);
 
-    if ($stories->have_posts()) : while ($stories->have_posts()) : $stories->the_post();
-
-      $updated_date = get_post_meta(get_the_id(), 'updated_date', true);
-      if ($updated_date) {
-        $date = date(get_option('date_format'), $updated_date);
-      } else {
-        $date = get_the_time(get_option('date_format'));
-      }
+    if ($perspectives->have_posts()) : while ($perspectives->have_posts()) : $perspectives->the_post();
 
       $category = get_the_category();
       // Convert category results to array instead of object
@@ -590,55 +285,16 @@ $whichday = current_time('w');
         $cat = (array) $cat;
       }
 
-      if (has_post_thumbnail()) {
-        $image_id = get_post_thumbnail_id();
-        $image_src = wp_get_attachment_image_src($image_id, 'full');
-        if ($image_src) {
-          $image_sized = mr_image_resize($image_src[0], 295, 295, true, false);
-        }
-      } else {
-        $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-      }
+      $cats_hide = array();
+      // Determine array indexes for labels we don't want to show
+      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+      $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+      // Remove empty results
+      $cats_hide = array_filter($cats_hide, 'strlen');
       ?>
 
       <div class="col-sm-6 col-md-3">
-        <div class="post has-photo-overlay row">
-          <div class="photo-overlay col-xs-3 col-sm-12">
-            <div class="hidden-xs">
-              <?php
-              $cats_hide = array();
-              // Determine array indexes for labels we don't want to show
-              $cats_hide[] = array_search($theme_spot, array_column($category, 'term_id'));
-              $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-              $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-              // Remove empty results
-              $cats_hide = array_filter($cats_hide, 'strlen');
-
-              // Only show label of category if it's not in above list
-              foreach ($category as $key=>$value) {
-                if (!in_array($key, $cats_hide)) {
-                  echo '<span class="label">' . $value['cat_name'] . '</span>';
-                }
-              }
-              ?>
-              <h4 class="post-title"><?php the_title(); ?></h4>
-              <div class="line"></div>
-            </div>
-            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-            <?php if (has_post_format('video')) { ?>
-              <div class="video-play small"></div>
-            <?php } ?>
-            <?php if ($image_src) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-            <?php } ?>
-          </div>
-
-          <div class="col-xs-9 col-sm-12 extra-padding">
-            <h4 class="post-title visible-xs-block"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-            <p class="meta">by <?php the_author(); ?> on <date><?php echo $date; ?></date></p>
-          </div>
-        </div>
+        <?php include(locate_template('templates/thumb-overlay-small.php')); ?>
       </div>
 
     <?php endwhile; endif; wp_reset_query(); ?>
