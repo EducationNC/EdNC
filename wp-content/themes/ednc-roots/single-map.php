@@ -33,6 +33,7 @@ $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
     </div>
     <?php } else { ?>
     <div class="map-mobile-scroll">
+      <div class="alert alert-warning" role="alert">This map is not optimized for small displays. Please check back on a tablet or computer.</div>
       <?php the_field('tablet_map'); ?>
     </div>
     <?php } ?>

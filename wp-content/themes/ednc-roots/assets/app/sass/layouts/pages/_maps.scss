@@ -5,10 +5,13 @@
 
 .map-mobile-scroll {
   width: 100%;
-  overflow-x: scroll;
+  min-height: .01%;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .map-tablet {
+  margin: 0 auto;
   width: 764px;
 }
 
