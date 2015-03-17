@@ -14,6 +14,7 @@
       <div class="h2">Staff</div>
       <div class="row">
         <?php
+        $i = 0;
         $args = array(
           'post_type' => 'bio',
           'posts_per_page' => -1,
@@ -31,23 +32,29 @@
         $staff = new WP_Query($args);
 
         if ($staff->have_posts()) : while ($staff->have_posts()) : $staff->the_post();
-          $user = get_field('user'); ?>
+          $user = get_field('user');
 
-        <div class="col-md-4 col-sm-6 has-photo-overlay">
-          <div class="photo-overlay">
-            <?php the_post_thumbnail('bio-headshot'); ?>
-            <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
-            <h3 class="post-title"><?php the_title(); ?></h3>
-            <div class="line"></div>
+          if ($i % 3 == 0 && $i != 0) {
+            echo '</div><div class="row">';
+          }
+          ?>
+
+          <div class="col-md-4 col-sm-6 has-photo-overlay">
+            <div class="photo-overlay">
+              <?php the_post_thumbnail('bio-headshot'); ?>
+              <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
+              <h3 class="post-title"><?php the_title(); ?></h3>
+              <div class="line"></div>
+            </div>
           </div>
-        </div>
 
-        <?php endwhile; endif; wp_reset_query(); ?>
+        <?php $i++; endwhile; endif; wp_reset_query(); ?>
       </div>
 
       <div class="h2">Columnists</div>
       <div class="row">
         <?php
+        $i = 0;
         $args = array(
           'post_type' => 'bio',
           'posts_per_page' => -1,
@@ -65,7 +72,12 @@
         $columnists = new WP_Query($args);
 
         if ($columnists->have_posts()) : while ($columnists->have_posts()) : $columnists->the_post();
-          $user = get_field('user'); ?>
+          $user = get_field('user');
+
+          if ($i % 4 == 0 && $i != 0) {
+            echo '</div><div class="row">';
+          }
+          ?>
 
           <div class="col-md-3 col-xs-6 has-photo-overlay">
             <div class="photo-overlay">
@@ -76,12 +88,13 @@
             </div>
           </div>
 
-        <?php endwhile; endif; wp_reset_query(); ?>
+        <?php $i++; endwhile; endif; wp_reset_query(); ?>
       </div>
 
       <div class="h2">Contributors</div>
       <div class="row">
         <?php
+        $i = 0;
         $args = array(
           'post_type' => 'bio',
           'posts_per_page' => -1,
@@ -99,7 +112,12 @@
         $contributors = new WP_Query($args);
 
         if ($contributors->have_posts()) : while ($contributors->have_posts()) : $contributors->the_post();
-          $user = get_field('user'); ?>
+          $user = get_field('user');
+
+          if ($i % 4 == 0 && $i != 0) {
+            echo '</div><div class="row">';
+          }
+          ?>
 
           <div class="col-md-3 col-xs-6 has-photo-overlay">
             <div class="photo-overlay">
@@ -110,7 +128,7 @@
             </div>
           </div>
 
-        <?php endwhile; endif; wp_reset_query(); ?>
+        <?php $i++; endwhile; endif; wp_reset_query(); ?>
       </div>
     </div>
   </div>
