@@ -1,3 +1,52 @@
+.column-banner {
+  display: none;
+  position: relative;
+  margin-top: -3.25em;
+  margin-bottom: 5em;
+  width: 100%;
+  height: 162px;
+  background-size: cover;
+  background-position: center;
+
+  @media (min-width: $screen-sm-min) {
+    height: 262px;
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-top: -5em;
+  }
+
+  &.meck-monday {
+    display: block;
+    background-image: url('../imgs/meck-monday.jpg');
+  }
+
+  &.the-monday-missive {
+    display: block;
+    background-image: url('../imgs/the-monday-missive.jpg');
+  }
+
+  &.tech-tuesday {
+    display: block;
+    background-image: url('../imgs/tech-tuesday.jpg');
+  }
+
+  &.the-wednesday-wire {
+    display: block;
+    background-image: url('../imgs/the-wednesday-wire.jpg');
+  }
+
+  &.the-thursday-transcript {
+    display: block;
+    background-image: url('../imgs/the-thursday-transcript.jpg');
+  }
+
+  &.friday-with-ferrel {
+    display: block;
+    background-image: url('../imgs/friday-with-ferrel.jpg');
+  }
+}
+
 .hentry .entry-header {
 
   img {

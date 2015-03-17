@@ -154,6 +154,14 @@ h4, .h4, .article-section-subtitle {
   }
 }
 
+.column-name {
+  font-family: $font-family-serif;
+  font-size: $font-size-h2;
+  font-style: italic;
+  color: $white;
+  margin: 1em 0 0;
+}
+
 .caption {
   font-family: $font-family-sans-serif;
   font-weight: 300;

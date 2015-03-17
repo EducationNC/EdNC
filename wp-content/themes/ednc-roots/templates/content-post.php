@@ -5,17 +5,16 @@ $comments_open = comments_open();
 
 $author_id = get_the_author_meta('ID');
 $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-$author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
+$author_avatar = get_field('avatar', $author_bio[0]->ID);
+$author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 
-$column_name = get_field('column_name', $author_bio[0]->ID);
+$column = wp_get_post_terms(get_the_id(), 'column');
 
 $category = get_the_category();
 // Convert category results to array instead of object
 foreach ($category as &$cat) {
   $cat = (array) $cat;
 }
-
-$column = wp_get_post_terms(get_the_id(), 'column');
 ?>
 
 <article <?php post_class('article'); ?>>
@@ -58,7 +57,26 @@ $column = wp_get_post_terms(get_the_id(), 'column');
         </div>
       </div>
     </header>
-  <?php } else { ?>
+  <?php } else {
+    if ($column) {
+      ?>
+      <div class="column-banner <?php echo $column[0]->slug; ?>">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-centered">
+              <div class="column-name"><?php echo $column[0]->name; ?></div>
+              <?php if ($author_avatar) { ?>
+                <div class="avatar hidden-xs">
+                  <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
+                </div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php
+    }
+    ?>
     <header class="entry-header container">
       <div class="row">
         <div class="col-md-9 col-centered">
@@ -236,7 +254,6 @@ $column = wp_get_post_terms(get_the_id(), 'column');
 
             $author_id = get_the_author_meta('ID');
             $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-            $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 
             $category = get_the_category($pid);
             if (has_post_thumbnail()) {
@@ -250,7 +267,7 @@ $column = wp_get_post_terms(get_the_id(), 'column');
             ?>
             <div class="has-photo-overlay">
               <div class="photo-overlay">
-                <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if (is_singular('feature')) { echo $author_type[0]->name; } elseif ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
+                <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
                 <h2 class="post-title"><?php echo $post->post_title; ?></h2>
                 <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
