@@ -8,7 +8,7 @@ $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
 ?>
 
 <article <?php post_class('article'); ?>>
-  <header class="entry-header container">
+  <header class="entry-header">
     <div class="row">
       <div class="col-md-9 col-centered">
         <span class="label">EdMaps</span>
@@ -39,50 +39,48 @@ $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
     <?php } ?>
   </div>
 
-  <div class="entry-content container">
-    <div class="row">
-      <div class="col-lg-7 col-md-9 col-centered">
-        <?php the_content(); ?>
+  <div class="entry-content row">
+    <div class="col-lg-7 col-md-9 col-centered">
+      <?php the_content(); ?>
 
-        <?php get_template_part('templates/social', 'share'); ?>
+      <?php get_template_part('templates/social', 'share'); ?>
 
-        <div class="sep"></div>
-      </div>
+      <div class="sep"></div>
     </div>
   </div>
 
-  <footer class="container">
-    <div class="row">
-      <?php if ($comments_open == 1) { ?>
-        <div class="col-lg-7 col-md-9 col-centered">
-          <h3>About <?php the_author(); ?></h3>
-          <?php
-          $args = array(
-          'post_type' => 'bio',
-          'meta_query' => array(
-          array(
-          'key' => 'user',
-          'value' => $author_id
-          )
-          )
-          );
+  <footer class="entry-footer">
+    <?php if ($comments_open == 1) { ?>
+      <div class="row">
+          <div class="col-lg-7 col-md-9 col-centered">
+            <h3>About <?php the_author(); ?></h3>
+            <?php
+            $args = array(
+            'post_type' => 'bio',
+            'meta_query' => array(
+            array(
+            'key' => 'user',
+            'value' => $author_id
+            )
+            )
+            );
 
-          $bio = new WP_Query($args);
+            $bio = new WP_Query($args);
 
-          if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
-          ?>
-          <div class="row has-photo-overlay">
-            <div class="col-xs-5 col-sm-3">
-              <?php the_post_thumbnail('bio-headshot'); ?>
+            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
+            ?>
+            <div class="row has-photo-overlay">
+              <div class="col-xs-5 col-sm-3">
+                <?php the_post_thumbnail('bio-headshot'); ?>
+              </div>
+
+              <div class="col-xs-7 col-sm-9">
+                <?php get_template_part('templates/author', 'excerpt'); ?>
+              </div>
             </div>
-
-            <div class="col-xs-7 col-sm-9">
-              <?php get_template_part('templates/author', 'excerpt'); ?>
-            </div>
-          </div>
-        <?php endwhile; endif; wp_reset_query(); ?>
+          <?php endwhile; endif; wp_reset_query(); ?>
+        </div>
       </div>
-    </div>
     <?php } ?>
 
     <div class="row">
