@@ -6,7 +6,7 @@
  */
 class ManualImageCrop {
 
-	private static $instance; 
+	private static $instance;
 
 	/**
 	 * Returns the instance of the class [Singleton]
@@ -34,7 +34,7 @@ class ManualImageCrop {
 
 		wp_register_style( 'jquery-jcrop', plugins_url('assets/css/jquery.Jcrop.min.css', dirname( __FILE__ ) ) );
 		wp_enqueue_style( 'jquery-jcrop' );
-		
+
 		wp_enqueue_script( 'jquery-color', plugins_url('assets/js/jquery.color.js', dirname( __FILE__ )), array( 'jquery') );
 		wp_enqueue_script( 'jquery-jcrop', plugins_url('assets/js/jquery.Jcrop.min.js', dirname( __FILE__ )), array( 'jquery') );
 		wp_enqueue_script( 'miccrop', plugins_url('assets/js/microp.js', dirname( __FILE__ )), array( 'jquery') );
@@ -84,11 +84,11 @@ setInterval(function() {
 	<script>
 		var micEditAttachemtnLinkAdded = false;
 		var micEditAttachemtnLinkAddedInterval = 0;
-		jQuery(document).ready(function() {			
+		jQuery(document).ready(function() {
 			micEditAttachemtnLinkAddedInterval = setInterval(function() {
 				if (jQuery('.details .edit-attachment').length) {
 					try {
-						var mRegexp = /\?post=([0-9]+)/; 
+						var mRegexp = /\?post=([0-9]+)/;
 						var match = mRegexp.exec(jQuery('.details .edit-attachment').attr('href'));
 						jQuery('.crop-image-ml.crop-image').remove();
 						jQuery('.details .edit-attachment').after( '<a class="thickbox mic-link crop-image-ml crop-image" rel="crop" title="Manual Image Crop" href="' + ajaxurl + '?action=mic_editor_window&postId=' + match[1] + '"><?php _e('Crop Image','microp') ?></a>' );
@@ -125,7 +125,7 @@ setInterval(function() {
 				if (jQuery('#media-items .edit-attachment').length) {
 					jQuery('#media-items .edit-attachment').each(function(i, k) {
 						try {
-							var mRegexp = /\?post=([0-9]+)/; 
+							var mRegexp = /\?post=([0-9]+)/;
 							var match = mRegexp.exec(jQuery(this).attr('href'));
 							if (!jQuery(this).parent().find('.edit-attachment.crop-image').length && jQuery(this).parent().find('.pinkynail').attr('src').match(/upload/g)) {
 								jQuery(this).after( '<a class="thickbox mic-link edit-attachment crop-image" rel="crop" title="Manual Image Crop" href="' + ajaxurl + '?action=mic_editor_window&postId=' + match[1] + '"><?php _e('Crop Image','microp') ?></a>' );
@@ -148,9 +148,9 @@ setInterval(function() {
 		global $_wp_additional_image_sizes;
 
 		$uploadsDir = wp_upload_dir();
-		
+
 		// checks for ssl. wp_upload_dir does not handle ssl (ssl admin trips on this and subsequent ajax success to browser)
-		if (is_ssl()) {			
+		if (is_ssl()) {
 			$uploadsDir['baseurl'] = preg_replace('#^http://#i', 'https://', $uploadsDir['baseurl']);
 		}
 
@@ -160,27 +160,36 @@ setInterval(function() {
 			echo json_encode (array('status' => 'error', 'message' => 'wrong attachment' ) );
 			exit;
 		}
-		
-		
+
+		if (is_ssl()) {
+			$src_file_url = preg_replace('#^http://#i', 'https://', $src_file_url);
+		}
+
 		$src_file = str_replace($uploadsDir['baseurl'], $uploadsDir['basedir'], $src_file_url[0]);
+
 		$dst_file_url = wp_get_attachment_image_src($_POST['attachmentId'], $_POST['editedSize']);
-		
+
 		if (!$dst_file_url) {
 			exit;
 		}
-		$dst_file = str_replace($uploadsDir['baseurl'], $uploadsDir['basedir'], $dst_file_url[0]);
+
+		if (is_ssl()) {
+			$dst_file_url = preg_replace('#^http://#i', 'https://', $dst_file_url);
+		}
 		
+		$dst_file = str_replace($uploadsDir['baseurl'], $uploadsDir['basedir'], $dst_file_url[0]);
+
 
 		//checks if the destination image file is present (if it's not, we want to create a new file, as the WordPress returns the original image instead of specific one)
 		if ($dst_file == $src_file) {
 			$attachmentData = wp_generate_attachment_metadata( $_POST['attachmentId'], $dst_file );
-			
+
 			//new destination file path - replaces original file name with the correct one
 			$dst_file = str_replace( basename($attachmentData['file']), $attachmentData['sizes'][ $_POST['editedSize'] ]['file'], $dst_file);
 
 			//saves new path to the image size in the database
 			wp_update_attachment_metadata( $_POST['attachmentId'],  $attachmentData );
-			
+
 			//retrieves the new url to file (needet to refresh the preview)
 			$dst_file_url = wp_get_attachment_image_src($_POST['attachmentId'], $_POST['editedSize']);
 		}
@@ -193,7 +202,7 @@ setInterval(function() {
 			$dst_w = min(get_option($_POST['editedSize'].'_size_w'), $_POST['select']['w'] * $_POST['previewScale']);
 			$dst_h = min(get_option($_POST['editedSize'].'_size_h'), $_POST['select']['h'] * $_POST['previewScale']);
 		}
-		
+
 		if (!$dst_w || !$dst_h) {
 			echo json_encode (array('status' => 'error', 'message' => 'wrong dimensions' ) );
 			exit;
@@ -206,7 +215,7 @@ setInterval(function() {
 		$src_y = max(0, $_POST['select']['y']) * $_POST['previewScale'];
 		$src_w = max(0, $_POST['select']['w']) * $_POST['previewScale'];
 		$src_h = max(0, $_POST['select']['h']) * $_POST['previewScale'];
-		
+
 		//saves the selected area
 		$imageMetadata = wp_get_attachment_metadata($_POST['attachmentId']);
 		$imageMetadata['micSelectedArea'][$_POST['editedSize']] = array(
@@ -216,14 +225,14 @@ setInterval(function() {
 																	'h' => $_POST['select']['h'],
 																);
 		wp_update_attachment_metadata($_POST['attachmentId'], $imageMetadata);
-		
+
 		$quality = intval($_POST['mic_quality']);
 
         if ( function_exists('wp_get_image_editor') ) {
             $img = wp_get_image_editor( $src_file );
-            
+
             if ( ! is_wp_error( $img ) ) {
-				
+
             	$img->crop( $src_x, $src_y, $src_w, $src_h, $dst_w, $dst_h, false );
                 $img->set_quality( $quality );
                 $img->save($dst_file);
@@ -241,20 +250,20 @@ setInterval(function() {
             } else {
                 $src_img = imagecreatefromjpeg($src_file);
             }
-            
+
             if ($src_img === false ) {
             	echo json_encode (array('status' => 'error', 'message' => 'PHP ERROR: Cannot create image from the source file' ) );
             	exit;
             }
-            
+
             $dst_img = imagecreatetruecolor($dst_w, $dst_h);
             $resampleReturn  = imagecopyresampled($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
-            
+
             if ($resampleReturn === false ) {
             	echo json_encode (array('status' => 'error', 'message' => 'PHP ERROR: imagecopyresampled' ) );
 	          	exit;
             }
-            
+
 			$imageSaveReturn = true;
             if ($ext == "gif"){
                 $imageSaveReturn = imagegif($dst_img, $dst_file);
@@ -263,21 +272,21 @@ setInterval(function() {
             } else {
                 $imageSaveReturn = imagejpeg($dst_img, $dst_file, $quality);
             }
-            
+
             if ($imageSaveReturn === false ) {
             	echo json_encode (array('status' => 'error', 'message' => 'PHP ERROR: imagejpeg/imagegif/imagepng' ) );
             	exit;
         	}
         }
-        
+
 		// Generate Retina Image
 		if( isset( $_POST['make2x'] ) && $_POST['make2x'] === 'true' ) {
 			$dst_w2x = $dst_w * 2;
 			$dst_h2x = $dst_h * 2;
-		
+
 			$dot = strrpos($dst_file,".");
 			$dst_file2x = substr($dst_file,0,$dot).'@2x'.substr($dst_file,$dot);
-		
+
 			// Check image size and create the retina file if possible
 			if ( $src_w > $dst_w2x && $src_h > $dst_h2x) {
 				if ( function_exists('wp_get_image_editor') ) {
@@ -290,15 +299,15 @@ setInterval(function() {
             			echo json_encode (array('status' => 'error', 'message' => 'WP_ERROR: ' . $img->get_error_message() ) );
 						exit;
             		}
-				} else {			
+				} else {
 					$dst_img2x = imagecreatetruecolor($dst_w2x, $dst_h2x);
 					$resampleReturn = imagecopyresampled($dst_img2x, $src_img, $dst_x, $dst_y, $src_x, $src_y, $dst_w2x, $dst_h2x, $src_w, $src_h);
-            
+
 		            if ($resampleReturn === false ) {
 		            	echo json_encode (array('status' => 'error', 'message' => 'PHP ERROR: imagecopyresampled' ) );
 			          	exit;
 		            }
-		            
+
 		            $imageSaveReturn = true;
 					if ($ext == "gif"){
 						$imageSaveReturn = imagegif($dst_img2x, $dst_file2x);
@@ -307,7 +316,7 @@ setInterval(function() {
 					} else {
 						$imageSaveReturn = imagejpeg($dst_img2x, $dst_file2x, $quality);
 					}
-					
+
 					if ($imageSaveReturn === false ) {
 						echo json_encode (array('status' => 'error', 'message' => 'PHP ERROR: imagejpeg/imagegif/imagepng' ) );
 						exit;
@@ -315,7 +324,7 @@ setInterval(function() {
 				}
 			}
 		}
-		// update 'mic_make2x' option status to persist choice  
+		// update 'mic_make2x' option status to persist choice
 		if( isset( $_POST['make2x'] ) && $_POST['make2x'] !== get_option('mic_make2x') ) {
 			update_option('mic_make2x', $_POST['make2x']);
 		}
