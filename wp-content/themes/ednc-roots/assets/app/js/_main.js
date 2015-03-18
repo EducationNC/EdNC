@@ -43,7 +43,7 @@ var Roots = {
       }
 
       // Open splash on page load only on first page load
-      if ( firstImpression() || getVariable('splash') ) {
+      if (( firstImpression() || getVariable('splash') ) && !getVariable('nosplash')) {
         $.magnificPopup.open({
           items: {
             src: '#splash',

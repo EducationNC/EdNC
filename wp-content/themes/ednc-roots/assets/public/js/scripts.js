@@ -1828,7 +1828,7 @@ var Roots = {
       }
 
       // Open splash on page load only on first page load
-      if ( firstImpression() || getVariable('splash') ) {
+      if (( firstImpression() || getVariable('splash') ) && !getVariable('nosplash')) {
         $.magnificPopup.open({
           items: {
             src: '#splash',
@@ -1926,7 +1926,6 @@ var Roots = {
       $.expr[':'].childof = function(obj, index, meta, stack){
         return $(obj).parent().is(meta[3]);
       };
-
       $('object:not(childof(.tableauPlaceholder)').wrap('<div class="object-wrapper"></div>');
 
       // Add special class to .entry-content-wrapper divs for Instagram embeds (not fixed ratio)

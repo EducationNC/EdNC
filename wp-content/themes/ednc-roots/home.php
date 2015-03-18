@@ -303,7 +303,7 @@ $whichday = current_time('w');
 
 <section class="container-fluid banners">
   <div class="row no-padding">
-    <div class="col-md-4 has-photo-overlay">
+    <div class="col-md-6 has-photo-overlay">
       <div class="photo-overlay light">
         <?php
         $args = array(
@@ -328,32 +328,7 @@ $whichday = current_time('w');
       </div>
     </div>
 
-    <div class="col-md-4 has-photo-overlay">
-      <div class="photo-overlay light">
-        <?php
-        $args = array(
-          'category__in' => '109',  // 1868 Constitutional Convention
-          'posts_per_page' => 1
-        );
-        $cc = new WP_Query($args);
-
-        if ($cc->have_posts()) : while ($cc->have_posts()) : $cc->the_post();
-          // Show label with title when post is dated today
-          if( date('Yz') == get_the_time('Yz') ) { ?>
-            <span class="label"><?php the_title(); ?></span>
-          <?php } ?>
-          <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-        <?php endwhile; endif; wp_reset_query(); ?>
-          <div class="vertical-center">
-            <h3 class="content-section-title">Learning from history</h3>
-            <div class="banner-line"></div>
-            <h4 class="content-section-subtitle">The 1868 N.C. Constitutional Convention</h4>
-          </div>
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/Fgallery1-1.jpg" alt="" />
-      </div>
-    </div>
-
-    <div class="col-md-4 has-photo-overlay">
+    <div class="col-md-6 has-photo-overlay">
       <div class="photo-overlay light">
         <a class="mega-link" href="/research/edlitigation/"></a>
         <div class="vertical-center">
