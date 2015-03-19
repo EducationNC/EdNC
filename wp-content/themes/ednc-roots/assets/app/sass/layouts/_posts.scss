@@ -17,33 +17,35 @@
   }
 
   &.meck-monday {
-    display: block;
     background-image: url('../imgs/meck-monday.jpg');
   }
 
   &.the-monday-missive {
-    display: block;
     background-image: url('../imgs/the-monday-missive.jpg');
   }
 
   &.tech-tuesday {
-    display: block;
     background-image: url('../imgs/tech-tuesday.jpg');
   }
 
   &.the-wednesday-wire {
-    display: block;
     background-image: url('../imgs/the-wednesday-wire.jpg');
   }
 
   &.the-thursday-transcript {
-    display: block;
     background-image: url('../imgs/the-thursday-transcript.jpg');
   }
 
   &.friday-with-ferrel {
-    display: block;
     background-image: url('../imgs/friday-with-ferrel.jpg');
+  }
+
+  &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel {
+    display: block;
+
+    & + .entry-header .label {
+      display: none;
+    }
   }
 }
 

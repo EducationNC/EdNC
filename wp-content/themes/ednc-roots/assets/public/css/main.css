@@ -9196,28 +9196,28 @@ section {
   }
 }
 .column-banner.meck-monday {
-  display: block;
   background-image: url(../imgs/../imgs/meck-monday.jpg);
 }
 .column-banner.the-monday-missive {
-  display: block;
   background-image: url(../imgs/../imgs/the-monday-missive.jpg);
 }
 .column-banner.tech-tuesday {
-  display: block;
   background-image: url(../imgs/../imgs/tech-tuesday.jpg);
 }
 .column-banner.the-wednesday-wire {
-  display: block;
   background-image: url(../imgs/../imgs/the-wednesday-wire.jpg);
 }
 .column-banner.the-thursday-transcript {
-  display: block;
   background-image: url(../imgs/../imgs/the-thursday-transcript.jpg);
 }
 .column-banner.friday-with-ferrel {
-  display: block;
   background-image: url(../imgs/../imgs/friday-with-ferrel.jpg);
+}
+.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel {
+  display: block;
+}
+.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label {
+  display: none;
 }
 
 .hentry .entry-header img {
