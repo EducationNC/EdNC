@@ -393,6 +393,26 @@ register_taxonomy( 'column',
 	)
 );
 
+register_taxonomy( 'District',
+	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Districts' ),
+			'singular_name' => __( 'District' ),
+			'search_items' =>  __( 'Search Districts' ),
+			'all_items' => __( 'All Districts' ),
+			'parent_item' => __( 'Parent District' ),
+			'parent_item_colon' => __( 'Parent District:' ),
+			'edit_item' => __( 'Edit District' ),
+			'update_item' => __( 'Update District' ),
+			'add_new_item' => __( 'Add New District' ),
+			'new_item_name' => __( 'New District Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
+);
+
 // Order bios and bills by menu order on admin page
 function ednc_bios_admin_orderby( $vars ) {
 	if ( isset( $vars['post_type']) && ($vars['post_type'] == 'bio' || $vars['post_type'] == 'bill' || $vars['post_type'] == 'legislator') && !isset( $vars['orderby'] ) ) {
