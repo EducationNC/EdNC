@@ -442,10 +442,10 @@ function cpt_custom_column_heading($columns) {
 
 function cpt_custom_column_content($column_name, $id) {
   if ( 'district' == $column_name ) {
-    echo get_the_term_list($id, 'district');
+    echo get_the_term_list($id, 'district', '', ', ', '');
   }
 	if ( 'column' == $column_name ) {
-		echo get_the_term_list($id, 'column');
+		echo get_the_term_list($id, 'column', '', ', ', '');
 	}
 }
 
