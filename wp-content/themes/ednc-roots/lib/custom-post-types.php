@@ -393,7 +393,7 @@ register_taxonomy( 'column',
 	)
 );
 
-register_taxonomy( 'District',
+register_taxonomy( 'district',
 	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
@@ -426,6 +426,34 @@ function ednc_bios_admin_orderby( $vars ) {
 	return $vars;
 }
 add_filter( 'request', 'ednc_bios_admin_orderby' );
+
+
+
+/**
+ * Add columns to admin screen for posts
+ *
+ */
+
+function cpt_custom_column_heading($columns) {
+	$columns['column'] = 'Column';
+  $columns['district'] = 'District';
+  return $columns;
+}
+
+function cpt_custom_column_content($column_name, $id) {
+  if ( 'district' == $column_name ) {
+    echo get_the_term_list($id, 'district');
+  }
+	if ( 'column' == $column_name ) {
+		echo get_the_term_list($id, 'column');
+	}
+}
+
+// posts
+add_filter( "manage_post_posts_columns", 'cpt_custom_column_heading', 10, 1 );
+add_action( "manage_post_posts_custom_column", 'cpt_custom_column_content', 10, 2 );
+
+
 
 /**
  * Add rewrite rules for map permalinks
