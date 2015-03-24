@@ -430,17 +430,18 @@ add_filter( 'request', 'ednc_bios_admin_orderby' );
 
 
 /**
- * Add columns to admin screen for posts
+ * Add columns to admin screen for post lists
  *
  */
 
-function cpt_custom_column_heading($columns) {
+// posts
+function posts_custom_column_heading($columns) {
 	$columns['column'] = 'Column';
   $columns['district'] = 'District';
   return $columns;
 }
 
-function cpt_custom_column_content($column_name, $id) {
+function posts_custom_column_content($column_name, $id) {
   if ( 'district' == $column_name ) {
     echo get_the_term_list($id, 'district', '', ', ', '');
   }
@@ -449,9 +450,65 @@ function cpt_custom_column_content($column_name, $id) {
 	}
 }
 
-// posts
-add_filter( "manage_post_posts_columns", 'cpt_custom_column_heading', 10, 1 );
-add_action( "manage_post_posts_custom_column", 'cpt_custom_column_content', 10, 2 );
+add_filter( 'manage_post_posts_columns', 'posts_custom_column_heading', 10, 1 );
+add_action( 'manage_post_posts_custom_column', 'posts_custom_column_content', 10, 2 );
+
+// bills
+function bills_custom_column_heading($columns) {
+	$new_columns['title'] = 'Title';
+	$new_columns['bill-type'] = 'Bill Type';
+	$new_columns['date'] = 'Date';
+
+	$columns = $new_columns;
+	return $columns;
+}
+
+function bills_custom_column_content($column_name, $id) {
+	if ( 'bill-type' == $column_name ) {
+		echo get_the_term_list($id, 'bill-type', '', ', ', '');
+	}
+}
+
+add_filter( 'manage_bill_posts_columns', 'bills_custom_column_heading', 10, 1 );
+add_filter( 'manage_bill_posts_custom_column', 'bills_custom_column_content', 10, 2 );
+
+// resources
+function resources_custom_column_heading($columns) {
+	$new_columns['title'] = 'Title';
+	$new_columns['resource-type'] = 'Resource Type';
+	$new_columns['date'] = 'Date';
+
+	$columns = $new_columns;
+	return $columns;
+}
+
+function resources_custom_column_content($column_name, $id) {
+	if ( 'resource-type' == $column_name ) {
+		echo get_the_term_list($id, 'resource-type', '', ', ', '');
+	}
+}
+
+add_filter( 'manage_resource_posts_columns', 'resources_custom_column_heading', 10, 1 );
+add_filter( 'manage_resource_posts_custom_column', 'resources_custom_column_content', 10, 2 );
+
+// bios
+function bios_custom_column_heading($columns) {
+	$new_columns['title'] = 'Title';
+	$new_columns['author-type'] = 'Author Type';
+	$new_columns['date'] = 'Date';
+
+	$columns = $new_columns;
+	return $columns;
+}
+
+function bios_custom_column_content($column_name, $id) {
+	if ( 'author-type' == $column_name ) {
+		echo get_the_term_list($id, 'author-type', '', ', ', '');
+	}
+}
+
+add_filter( 'manage_bio_posts_columns', 'bios_custom_column_heading', 10, 1 );
+add_filter( 'manage_bio_posts_custom_column', 'bios_custom_column_content', 10, 2 );
 
 
 
