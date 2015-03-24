@@ -1,6 +1,6 @@
 <?php
 global $query_string;
-query_posts( $query_string . '&post_type=bill&orderby=title&order=ASC' );
+query_posts( $query_string . '&post_type=bill&orderby=menu_order&order=ASC&posts_per_page=-1' );
 ?>
 
 <div class="page-header">
