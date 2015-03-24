@@ -1,6 +1,9 @@
 <?php
 // What day of the week is it?
 $whichday = current_time('w');
+
+// Set up variable to catch featured post ids -- we will exclude these ids from news query
+$featured_ids = array();
 ?>
 
 <section class="container">
@@ -148,6 +151,8 @@ $whichday = current_time('w');
 
           if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post(); ?>
 
+            <?php $featured_ids[] = get_the_id(); ?>
+
             <div class="col-sm-6">
               <div class="post has-photo-overlay">
                 <?php get_template_part('templates/thumb-overlay', 'feature'); ?>
@@ -225,8 +230,9 @@ $whichday = current_time('w');
 
     $args = array(
       'posts_per_page' => $post_num,
+      'post__not_in' => $featured_ids,
       'category__in' => array(93),   // News
-      'category__not_in' => array(90, 96, $theme_spot), // id of "featured" and "hide from home" categories
+      'category__not_in' => array(96, $theme_spot), // id "hide from home" category
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
       'order' => 'DESC'
@@ -247,6 +253,7 @@ $whichday = current_time('w');
       $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
       $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
       $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
+      $cats_hide[] = array_search('Featured', array_column($category, 'cat_name'));
       // Remove empty results
       $cats_hide = array_filter($cats_hide, 'strlen');
       ?>
