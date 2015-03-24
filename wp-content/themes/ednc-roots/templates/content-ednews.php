@@ -1,7 +1,6 @@
 <li>
   <h4>
     <a href="<?php echo $item['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">
-      <span class="normal"><?php echo $item['scope']; ?>:</span>
       <?php echo $item['title']; ?>
     </a>
   </h4>
