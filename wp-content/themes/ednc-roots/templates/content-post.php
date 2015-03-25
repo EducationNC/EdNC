@@ -109,6 +109,14 @@ foreach ($category as &$cat) {
             <div class="top-margin">
               <p><?php echo category_description(109); ?></p>
             </div>
+            <div class="row bottom-margin">
+              <div class="col-md-6">
+                <?php previous_post_link('%link', '&laquo; Previous day', true, 'category'); ?>
+              </div>
+              <div class="col-md-6 text-right">
+                <?php next_post_link('%link', 'Next day &raquo;', true, 'category'); ?>
+              </div>
+            </div>
             <?php
           }
           ?>
@@ -166,80 +174,108 @@ foreach ($category as &$cat) {
           <?php get_template_part('templates/social', 'share'); ?>
 
           <div class="sep"></div>
+
+          <?php
+          if (in_category('109')) {  // 1868 Constitutional Convention
+            ?>
+            <div class="row bottom-margin">
+              <div class="col-md-6">
+                <?php previous_post_link('%link', '&laquo; Previous day', true, 'category'); ?>
+              </div>
+              <div class="col-md-6 text-right">
+                <?php next_post_link('%link', 'Next day &raquo;', true, 'category'); ?>
+              </div>
+            </div>
+            <?php
+          }
+          ?>
         </div>
       </div>
     </div>
 
     <footer class="container">
       <?php if ($comments_open == 1) { ?>
-      <div class="row">
-        <div class="col-lg-7 col-md-9 col-centered">
-          <h3>About <?php the_author(); ?></h3>
-          <?php
-          $args = array(
-            'post_type' => 'bio',
-            'meta_query' => array(
-              array(
-                'key' => 'user',
-                'value' => $author_id
+        <div class="row">
+          <div class="col-lg-7 col-md-9 col-centered">
+            <h3>About <?php the_author(); ?></h3>
+            <?php
+            $args = array(
+              'post_type' => 'bio',
+              'meta_query' => array(
+                array(
+                  'key' => 'user',
+                  'value' => $author_id
+                )
               )
-            )
-          );
+            );
 
-          $bio = new WP_Query($args);
+            $bio = new WP_Query($args);
 
-          if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
-          ?>
-          <div class="row has-photo-overlay">
-            <div class="col-xs-5 col-sm-3">
-              <?php the_post_thumbnail('bio-headshot'); ?>
-            </div>
+            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
 
-            <div class="col-xs-7 col-sm-9">
-              <?php get_template_part('templates/author', 'excerpt'); ?>
-            </div>
+              <div class="row has-photo-overlay">
+                <div class="col-xs-5 col-sm-3">
+                  <?php the_post_thumbnail('bio-headshot'); ?>
+                </div>
+
+                <div class="col-xs-7 col-sm-9">
+                  <?php get_template_part('templates/author', 'excerpt'); ?>
+                </div>
+              </div>
+
+            <?php endwhile; endif; wp_reset_query(); ?>
           </div>
-          <?php endwhile; endif; wp_reset_query(); ?>
         </div>
-      </div>
       <?php } ?>
 
       <div class="row">
         <?php if ($comments_open == 1) { ?>
-        <div class="col-md-8 col-lg-7 hidden-print">
-          <h3>Join the conversation</h3>
-          <?php comments_template('templates/comments'); ?>
-        </div>
+          <div class="col-md-8 col-lg-7 hidden-print">
+            <h3>Join the conversation</h3>
+            <?php comments_template('templates/comments'); ?>
+          </div>
 
-        <div class="col-md-4 col-lg-push-1">
+          <div class="col-md-4 col-lg-push-1">
         <?php } else { ?>
-        <div class="col-sm-12 col-md-4">
-          <h3>About <?php the_author(); ?></h3>
-          <?php
-          $args = array(
-            'post_type' => 'bio',
-            'meta_query' => array(
-              array(
-                'key' => 'user',
-                'value' => $author_id
+
+          <?php if (in_category('109')) { // 1868 ?>
+            <div class="hidden-sm hidden-xs col-md-2"></div>
+          <?php } ?>
+
+          <div class="col-sm-12 col-md-4">
+            <h3>About <?php the_author(); ?></h3>
+            <?php
+            $args = array(
+              'post_type' => 'bio',
+              'meta_query' => array(
+                array(
+                  'key' => 'user',
+                  'value' => $author_id
+                )
               )
-            )
-          );
+            );
 
-          $bio = new WP_Query($args);
+            $bio = new WP_Query($args);
 
-          if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-            <?php the_post_thumbnail('bio-headshot'); ?>
-            <?php get_template_part('templates/author', 'excerpt'); ?>
-          <?php endwhile; endif; wp_reset_query(); ?>
+            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+              <?php the_post_thumbnail('bio-headshot'); ?>
+              <?php get_template_part('templates/author', 'excerpt'); ?>
+            <?php endwhile; endif; wp_reset_query(); ?>
 
-        </div>
-        <div class="col-sm-6 col-md-4 hidden-print">
+          </div>
+
+          <?php if (!in_category('109')) { // 1868 ?>
+            <div class="col-sm-6 col-md-4 hidden-print">
+          <?php } ?>
+
         <?php } ?>
 
-        <?php if ($comments_open == 1) { ?>
-        <div class="col-sm-6 col-md-12 hidden-print">
-        <?php } ?>
+        <?php if (!in_category('109')) { // 1868 ?>
+
+          <?php if ($comments_open == 1) { ?>
+            <div class="col-sm-6 col-md-12 hidden-print">
+          <?php } ?>
+
           <h3>Recommended for you</h3>
           <?php
           $recommended = get_field('recommended_articles');
@@ -315,7 +351,11 @@ foreach ($category as &$cat) {
             wp_reset_postdata();
           }
           ?>
-        </div>
+          
+          </div>
+
+        <?php } ?>
+
         <?php if ($comments_open == 1) { ?>
         <div class="col-sm-6 col-md-12 hidden-print">
         <?php } else { ?>
@@ -326,6 +366,11 @@ foreach ($category as &$cat) {
           <?php get_template_part('templates/email-signup'); ?>
 
         </div>
+
+        <?php if (in_category('109')) { // 1868 ?>
+          <div class="hidden-sm hidden-xs col-md-2"></div>
+        <?php } ?>
+
       </div>
     </footer>
 </article>
