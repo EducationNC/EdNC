@@ -52,7 +52,6 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<li>';
           echo '<h3 style="margin-bottom: 0;">';
             echo '<a href="' . $item['link'] . '" target="_blank">';
-              echo '<span class="normal">' . $item['scope'] . ':</span> ';
               echo $item['title'];
             echo '</a>';
           echo '</h3>';
@@ -72,7 +71,6 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         echo '<li>';
           echo '<h3 style="margin-bottom: 0;">';
             echo '<a href="' . $item['link'] . '" target="_blank">';
-              echo '<span class="normal">' . $item['scope'] . ':</span> ';
               echo $item['title'];
             echo '</a>';
           echo '</h3>';
