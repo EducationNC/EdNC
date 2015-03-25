@@ -123,7 +123,13 @@ function cpd_copy_pub_date( $post_id, $post, $update ) {
   if (!$saved_updated_time) {
     update_post_meta( $post_id, 'updated_date', $pub_time );
   } else {
-    update_post_meta( $post_id, 'updated_date', $updated_time );
+    // If saved updated datetime is older than publish datetime, then we want to set it equal to publish datetime
+    if ($saved_updated_time < $pub_time) {
+      update_post_meta( $post_id, 'updated_date', $pub_time );
+    } else {
+      // Otherwise, set it to the configured datetime
+      update_post_meta( $post_id, 'updated_date', $updated_time );
+    }
   }
 }
 add_action( 'save_post', 'cpd_copy_pub_date', 10, 3 );
