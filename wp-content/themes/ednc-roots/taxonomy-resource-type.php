@@ -1,8 +1,3 @@
-<?php
-global $query_string;
-query_posts( $query_string . '&post_type=resource' );
-?>
-
 <div class="page-header">
   <h1><a href="<?php echo get_permalink('2968'); ?>">EdLibrary</a></h1>
   <h2><?php echo roots_title(); ?></h2>

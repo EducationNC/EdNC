@@ -1,9 +1,3 @@
-<?php
-global $wp_query;
-$args = array_merge($wp_query->query_vars, array('post_type' => array('post', 'map'), 'category__not_in' => 116));  // Hide from archives
-query_posts($args);
-?>
-
 <div class="row">
   <div class="col-lg-8 col-md-9">
     <div class="page-header">

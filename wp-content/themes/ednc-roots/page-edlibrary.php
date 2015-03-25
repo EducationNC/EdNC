@@ -45,7 +45,9 @@
         $args['s'] = $_GET['k'];
         echo '<h2>Search results for: <em>' . sanitize_text_field($_GET['k']) . '</em></h2>';
       } else {
-        the_content();
+        if ($paged == 1) {
+          the_content();
+        }
         echo '<h2>Recently added resources</h2>';
       }
 
