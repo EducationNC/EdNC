@@ -373,6 +373,27 @@ register_taxonomy( 'bill-type',
 	)
 );
 
+register_taxonomy( 'appearance',
+	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Appearances' ),
+			'singular_name' => __( 'Appearance' ),
+			'search_items' =>  __( 'Search Appearances' ),
+			'all_items' => __( 'All Appearances' ),
+			'parent_item' => __( 'Parent Appearance' ),
+			'parent_item_colon' => __( 'Parent Appearance:' ),
+			'edit_item' => __( 'Edit Appearance' ),
+			'update_item' => __( 'Update Appearance' ),
+			'add_new_item' => __( 'Add New Appearance' ),
+			'new_item_name' => __( 'New Appearance Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true,
+		'public' => false
+	)
+);
+
 register_taxonomy( 'column',
 	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
@@ -393,7 +414,7 @@ register_taxonomy( 'column',
 	)
 );
 
-register_taxonomy( 'district',
+register_taxonomy( 'district-posts',
 	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
@@ -409,7 +430,7 @@ register_taxonomy( 'district',
 			'new_item_name' => __( 'New District Name' )
 		),
 		'show_ui' => true,
-		'query_var' => true
+		'rewrite' => 'district-posts'
 	)
 );
 

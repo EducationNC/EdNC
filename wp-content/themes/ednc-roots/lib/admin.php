@@ -24,14 +24,26 @@ add_filter( 'request', 'ednc_bios_admin_orderby' );
 
 // posts
 function posts_custom_column_heading($columns) {
-	$columns['column'] = 'Column';
-  $columns['district'] = 'District';
+	$new_columns['cb'] = 'cb';
+	$new_columns['title'] = 'Title';
+	$new_columns['author'] = 'Author';
+	$new_columns['appearance'] = 'Appearance';
+	$new_columns['categories'] = 'Categories';
+	$new_columns['column'] = 'Column';
+  $new_columns['district'] = 'District';
+	$new_columns['comments'] = '<span><span class="vers"><span title="Comments" class="comment-grey-bubble"></span></span></span>';
+	$new_columns['date'] = 'Date';
+
+	$columns = $new_columns;
   return $columns;
 }
 
 function posts_custom_column_content($column_name, $id) {
+  if ( 'appearance' == $column_name ) {
+    echo get_the_term_list($id, 'appearance', '', ', ', '');
+  }
   if ( 'district' == $column_name ) {
-    echo get_the_term_list($id, 'district', '', ', ', '');
+    echo get_the_term_list($id, 'district-posts', '', ', ', '');
   }
 	if ( 'column' == $column_name ) {
 		echo get_the_term_list($id, 'column', '', ', ', '');
@@ -43,6 +55,7 @@ add_action( 'manage_post_posts_custom_column', 'posts_custom_column_content', 10
 
 // bills
 function bills_custom_column_heading($columns) {
+	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
 	$new_columns['bill-type'] = 'Bill Type';
 	$new_columns['date'] = 'Date';
@@ -62,6 +75,7 @@ add_filter( 'manage_bill_posts_custom_column', 'bills_custom_column_content', 10
 
 // resources
 function resources_custom_column_heading($columns) {
+	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
 	$new_columns['resource-type'] = 'Resource Type';
 	$new_columns['date'] = 'Date';
@@ -81,6 +95,7 @@ add_filter( 'manage_resource_posts_custom_column', 'resources_custom_column_cont
 
 // bios
 function bios_custom_column_heading($columns) {
+	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
 	$new_columns['author-type'] = 'Author Type';
 	$new_columns['date'] = 'Date';

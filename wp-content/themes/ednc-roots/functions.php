@@ -21,7 +21,7 @@ $roots_includes = array(
   'lib/comments.php',         // Custom comments modifications
   'lib/scripts.php',          // Scripts and stylesheets
   'lib/custom-post-types.php',// Custom post types
-  // 'lib/author-types.php',     // Add author types taxonomy for users
+  'lib/admin.php',            // Admin columns for post types
   'lib/resize.php',           // Resize images on the fly
   'lib/shortcodes.php',       // Shortcodes
   'lib/extras.php',           // Custom functions
