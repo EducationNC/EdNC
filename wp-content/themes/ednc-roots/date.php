@@ -9,7 +9,14 @@ if (is_day()) {
     $wp_query->query_vars,
     array(
       'post_type' => array('post', 'map', 'ednews'),
-      'category__not_in' => 116  // Hide from archives
+      'tax_query' => array(
+  			array(
+  				'taxonomy' => 'appearance',
+  				'field' => 'slug',
+  				'terms' => 'hide-from-archives',
+  				'operator' => 'NOT IN'
+  			)
+  		)
     )
   );
   $args1['posts_per_page'] = -1;
@@ -20,7 +27,14 @@ if (is_day()) {
   $args2 = array(
     'posts_per_page' => -1,
     'post_type' => array('post', 'map', 'ednews'),
-    'category__not_in' => 116,  // Hide from archives
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'appearance',
+        'field' => 'slug',
+        'terms' => 'hide-from-archives',
+        'operator' => 'NOT IN'
+      )
+    ),
     'meta_query' => array(
       array(
         'key' => 'updated_date',
@@ -45,7 +59,14 @@ if (is_day()) {
   // Query posts from first 2 queries and order by updated date
   $final_args = array(
     'post_type' => array('post', 'map', 'ednews'),
-    'category__not_in' => 116,  // Hide from archives
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'appearance',
+        'field' => 'slug',
+        'terms' => 'hide-from-archives',
+        'operator' => 'NOT IN'
+      )
+    ),
     'post__in' => $unique,
     'paged' => $paged,
     'meta_key' => 'updated_date',

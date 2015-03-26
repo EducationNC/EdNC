@@ -390,7 +390,8 @@ register_taxonomy( 'appearance',
 		),
 		'show_ui' => true,
 		'query_var' => true,
-		'public' => false
+		'public' => false,
+		'rewrite' => false
 	)
 );
 
@@ -439,6 +440,19 @@ register_taxonomy( 'district-posts',
  * Modify queries on specific templates
  */
 function ednc_pre_get_posts($query) {
+	// all archives should hide anything tagged with 'hide from archives'
+	if ($query->is_author() || $query->is_category() || $query->is_date()) {
+		$tax_query = array(
+			array(
+				'taxonomy' => 'appearance',
+				'field' => 'slug',
+				'terms' => 'hide-from-archives',
+				'operator' => 'NOT IN'
+			)
+		);
+		$query->set('tax_query', $tax_query);
+	}
+
 	// resource-type should query the resource CPT
 	if ($query->is_tax('resource-type')) {
 		$query->set('post_type', 'resource');
@@ -455,7 +469,6 @@ function ednc_pre_get_posts($query) {
 	// author archives should query posts and maps
 	if ($query->is_author()) {
 		$query->set('post_type', array('post', 'map'));
-		$query->set('category__not_in', 116);	// Hide from archives
 	}
 
 	// 1868 category archives should show in asc order

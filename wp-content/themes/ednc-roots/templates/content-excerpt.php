@@ -1,11 +1,28 @@
 <?php
-$category = get_the_category();
-// Convert category results to array instead of object
-foreach ($category as &$cat) {
-  $cat = (array) $cat;
-}
-
 $column = wp_get_post_terms(get_the_id(), 'column');
+
+$appearances = wp_get_post_terms(get_the_id(), 'appearance');
+  // Convert results to array instead of object
+  foreach ($appearances as &$app) {
+    $app = (array) $app;
+  }
+  $app_hide = array();
+  // Determine array indexes for labels we don't want to show
+  $app_hide[] = array_search('Hide from home', array_column($appearances, 'name'));
+  // Remove empty results
+  $app_hide = array_filter($app_hide, 'strlen');
+
+$category = get_the_category();
+  // Convert category results to array instead of object
+  foreach ($category as &$cat) {
+    $cat = (array) $cat;
+  }
+  $cats_hide = array();
+  // Determine array indexes for labels we don't want to show
+  $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+  // Remove empty results
+  $cats_hide = array_filter($cats_hide, 'strlen');
+
 $post_type = get_post_type();
 ?>
 
@@ -37,17 +54,19 @@ $post_type = get_post_type();
           <span class="label"><?php echo $column[0]->name; ?></span>
           <?php
         } else {
-          $cats_hide = array();
-          // Determine array indexes for labels we don't want to show
-          $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-          $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
-          // Remove empty results
-          $cats_hide = array_filter($cats_hide, 'strlen');
-
-          // Only show label of category if it's not in above list
+          // Only show label of category if it's not in hidden list
           foreach ($category as $key=>$value) {
             if (!in_array($key, $cats_hide)) {
               echo '<span class="label">' . $value['cat_name'] . '</span> ';
+            }
+          }
+        }
+        ?>
+        <?php
+        if ($appearances) {
+          foreach ($appearances as $key=>$value) {
+            if (!in_array($key, $app_hide)) {
+              echo '<span class="label">' . $value['name'] . '</span> ';
             }
           }
         }

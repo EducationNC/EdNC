@@ -1,6 +1,14 @@
 <?php
 $video = has_post_format('video');
 
+$column = wp_get_post_terms(get_the_id(), 'column');
+
+$category = get_the_category();
+// Convert category results to array instead of object
+foreach ($category as &$cat) {
+  $cat = (array) $cat;
+}
+
 // If post has been updated, we want to get that date
 $updated_date = get_post_meta(get_the_id(), 'updated_date', true);
 if ($updated_date) {
@@ -24,6 +32,14 @@ if (has_post_thumbnail()) {
   <div class="photo-overlay col-xs-3 col-sm-12">
     <div class="hidden-xs">
       <?php
+      $cats_hide = array();
+
+      // Determine array indexes for labels we don't want to show
+      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+
+      // Remove empty results
+      $cats_hide = array_filter($cats_hide, 'strlen');
+
       // Only show label of category if it's not in exclusion list
       foreach ($category as $key=>$value) {
         if (!in_array($key, $cats_hide)) {

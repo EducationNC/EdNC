@@ -25,7 +25,13 @@ $featured_ids = array();
         $args = array(
           'posts_per_page' => 10,
           'post_type' => 'post',
-          'category__in' => array(90), // id of "featured" category in dev and prod
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'appearance',
+              'field' => 'slug',
+              'terms' => 'featured'
+            )
+          ),
           'meta_key' => 'updated_date',
           'orderby' => 'meta_value_num',
           'order' => 'DESC'
@@ -141,7 +147,13 @@ $featured_ids = array();
           $args = array(
             'posts_per_page' => 2,
             'post_type' => 'post',
-            'category__in' => array(90), // id of "featured" category in dev and prod
+            'tax_query' => array(
+              array(
+                'taxonomy' => 'appearance',
+                'field' => 'slug',
+                'terms' => 'featured'
+              )
+            ),
             'meta_key' => 'updated_date',
             'orderby' => 'meta_value_num',
             'order' => 'DESC'
@@ -194,25 +206,10 @@ $featured_ids = array();
 
       $theme = new WP_Query($args);
 
-      if ($theme->have_posts()) : while ($theme->have_posts()) : $theme->the_post();
-
-        $category = get_the_category();
-        // Convert category results to array instead of object
-        foreach ($category as &$cat) {
-          $cat = (array) $cat;
-        }
-
-        $cats_hide = array();
-        // Determine array indexes for labels we don't want to show
-        $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-        $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-        $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-        // Remove empty results
-        $cats_hide = array_filter($cats_hide, 'strlen');
-        ?>
+      if ($theme->have_posts()) : while ($theme->have_posts()) : $theme->the_post(); ?>
 
         <div class="col-sm-6 col-md-3">
-          <?php include(locate_template('templates/thumb-overlay-small.php')); ?>
+          <?php get_template_part('templates/thumb-overlay', 'small'); ?>
         </div>
 
       <?php endwhile; endif; wp_reset_query(); ?>
@@ -231,8 +228,26 @@ $featured_ids = array();
     $args = array(
       'posts_per_page' => $post_num,
       'post__not_in' => $featured_ids,
-      'category__in' => array(93),   // News
-      'category__not_in' => array(96, $theme_spot), // id "hide from home" category
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'news'
+        ),
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'hide-from-home',
+          'operator' => 'NOT IN'
+        ),
+        array(
+          'taxonomy' => 'category',
+          'field' => 'id',
+          'terms' => $theme_spot,
+          'operator' => 'NOT IN'
+        )
+      ),
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
       'order' => 'DESC'
@@ -240,26 +255,10 @@ $featured_ids = array();
 
     $news = new WP_Query($args);
 
-    if ($news->have_posts()) : while ($news->have_posts()) : $news->the_post();
-
-      $category = get_the_category();
-      // Convert category results to array instead of object
-      foreach ($category as &$cat) {
-        $cat = (array) $cat;
-      }
-
-      $cats_hide = array();
-      // Determine array indexes for labels we don't want to show
-      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-      $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-      $cats_hide[] = array_search('News', array_column($category, 'cat_name'));
-      $cats_hide[] = array_search('Featured', array_column($category, 'cat_name'));
-      // Remove empty results
-      $cats_hide = array_filter($cats_hide, 'strlen');
-      ?>
+    if ($news->have_posts()) : while ($news->have_posts()) : $news->the_post(); ?>
 
       <div class="col-sm-6 col-md-3">
-        <?php include(locate_template('templates/thumb-overlay-small.php')); ?>
+        <?php get_template_part('templates/thumb-overlay', 'small'); ?>
       </div>
 
     <?php endwhile; endif; wp_reset_query(); ?>
@@ -276,7 +275,27 @@ $featured_ids = array();
     // Show 4 most recent perspectives
     $args = array(
       'posts_per_page' => 4,
-      'category__not_in' => array(93, 90, 96, $theme_spot), // id of "news," "featured," and "hide from home" categories
+      'post__not_in' => $featured_ids,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'perspectives'
+        ),
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'hide-from-home',
+          'operator' => 'NOT IN'
+        ),
+        array(
+          'taxonomy' => 'category',
+          'field' => 'id',
+          'terms' => $theme_spot,
+          'operator' => 'NOT IN'
+        )
+      ),
       'meta_key' => 'updated_date',
       'orderby' => 'meta_value_num',
       'order' => 'DESC'
@@ -284,24 +303,10 @@ $featured_ids = array();
 
     $perspectives = new WP_Query($args);
 
-    if ($perspectives->have_posts()) : while ($perspectives->have_posts()) : $perspectives->the_post();
-
-      $category = get_the_category();
-      // Convert category results to array instead of object
-      foreach ($category as &$cat) {
-        $cat = (array) $cat;
-      }
-
-      $cats_hide = array();
-      // Determine array indexes for labels we don't want to show
-      $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-      $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-      // Remove empty results
-      $cats_hide = array_filter($cats_hide, 'strlen');
-      ?>
+    if ($perspectives->have_posts()) : while ($perspectives->have_posts()) : $perspectives->the_post(); ?>
 
       <div class="col-sm-6 col-md-3">
-        <?php include(locate_template('templates/thumb-overlay-small.php')); ?>
+        <?php get_template_part('templates/thumb-overlay', 'small'); ?>
       </div>
 
     <?php endwhile; endif; wp_reset_query(); ?>

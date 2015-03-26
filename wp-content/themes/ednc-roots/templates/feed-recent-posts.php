@@ -8,7 +8,14 @@ $yesterday = getdate(strtotime('-1 days'));
 $args = array(
   'post_type' => array('post', 'map'),
   'posts_per_page' => -1,
-  'category__not_in' => array(90, 96, 116), // id of "featured," "hide from home," and "hide from archive" categories
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'appearance',
+      'field' => 'slug',
+      'terms' => array('featured', 'hide-from-home', 'hide-from-archives'),
+      'operator' => 'NOT IN'
+    )
+  ),
   'meta_query' => array(
     array(
       'key' => 'updated_date',

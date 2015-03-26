@@ -2,7 +2,14 @@
 $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 $args = array(
   'post_type' => array('post', 'map', 'ednews'),
-  'category__not_in' => 116,  // Hide from archives
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'appearance',
+      'field' => 'slug',
+      'terms' => 'hide-from-archives',
+      'operator' => 'NOT IN'
+    )
+  ),
   'paged' => $paged,
   'meta_key' => 'updated_date',
   'orderby' => 'meta_value_num',
