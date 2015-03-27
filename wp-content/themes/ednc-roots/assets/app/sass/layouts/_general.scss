@@ -114,6 +114,7 @@ section {
   @include gray-gradient-right;
   padding: 30px;
   margin: 0 0 1.25rem;
+  overflow: hidden;
 
   .h1 {
     font-size: $font-size-h1;

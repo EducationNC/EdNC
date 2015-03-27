@@ -8090,6 +8090,7 @@ section {
   background-image: linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
   padding: 30px;
   margin: 0 0 1.25rem;
+  overflow: hidden;
 }
 .callout .h1 {
   font-size: 36px;
