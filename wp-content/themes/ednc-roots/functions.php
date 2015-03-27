@@ -22,6 +22,7 @@ $roots_includes = array(
   'lib/scripts.php',          // Scripts and stylesheets
   'lib/custom-post-types.php',// Custom post types
   'lib/admin.php',            // Admin columns for post types
+  'lib/acf-fields.php',       // Generated code that registers custom fields by ACF
   'lib/resize.php',           // Resize images on the fly
   'lib/shortcodes.php',       // Shortcodes
   'lib/extras.php',           // Custom functions
