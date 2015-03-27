@@ -13,7 +13,7 @@ http://www.apache.org/licenses/LICENSE-2.0
             ifr = $('<iframe scrolling="no">');
             ifr.addClass('player');
         }
-        var src = 'http://www.youtube.com/embed/' + video.id;
+        var src = 'https://www.youtube.com/embed/' + video.id;
         if (options.playopts) {
             src += '?';
             for (var k in options.playopts) {
@@ -76,7 +76,7 @@ http://www.apache.org/licenses/LICENSE-2.0
             md.addClass('youtube-channel');
             var allopts = $.extend(true, {}, defoptions, options);
             allopts.maindiv = md;
-            $.getJSON('http://gdata.youtube.com/feeds/users/' + allopts.user + '/uploads?alt=json-in-script&format=5&callback=?', null, function(data) {
+            $.getJSON('https://gdata.youtube.com/feeds/users/' + allopts.user + '/uploads?alt=json-in-script&format=5&callback=?', null, function(data) {
                 var feed = data.feed;
                 var videos = [];
                 $.each(feed.entry, function(i, entry) {
