@@ -5,7 +5,7 @@
         <h1>
           <?php echo roots_title(); ?>
         </h1>
-        <?php the_post_thumbnail(); ?>
+        <?php the_post_thumbnail('large', array('class' => 'district-map')); ?>
       </div>
     </div>
   </div>
@@ -14,7 +14,7 @@
     <div class="col-lg-9">
       <h2>County School Districts</h2>
 
-      <div class="text-col-lg-3">
+      <div class="text-col-md-3 text-col-sm-2">
         <ul>
           <?php
           $args = array(

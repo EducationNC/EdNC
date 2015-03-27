@@ -46,7 +46,7 @@
           </div>
 
           <div class="callout">
-            <p>Total Legislative Terms</p>
+            <p>Total legislative terms</p>
             <p class="h1"><span class="big"><?php the_field('terms'); ?></span></p>
             <p class="caption small"><?php the_field('notes_about_terms'); ?></p>
           </div>
@@ -54,12 +54,12 @@
 
         <div class="col-sm-12 col-md-5">
           <div class="callout">
-            <p>Home County</p>
+            <p>Home county</p>
             <p class="h1"><?php the_field('home_county'); ?></p>
           </div>
 
           <div class="callout">
-            <p>Education Committees</p>
+            <p>Education committees</p>
             <?php
             $ed_approp_house = get_field('education_appropriations');
             $ed_house = get_field('education_k-12');

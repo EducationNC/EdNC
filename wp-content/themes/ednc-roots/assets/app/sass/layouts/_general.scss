@@ -63,6 +63,10 @@ section {
   margin-bottom: 1em;
 }
 
+.bottom-margin-important {
+  margin-bottom: 1em !important;
+}
+
 .extra-bottom-margin {
   margin-bottom: 3em;
 }
@@ -79,11 +83,22 @@ section {
   }
 }
 
-.text-col-lg-3 {
-  -moz-column-count: 3;
-  -moz-column-gap: 20px;
-  -webkit-column-count: 3;
-  -webkit-column-gap: 20px;
+@media (min-width: $screen-sm-min) {
+  .text-col-sm-2 {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .text-col-md-3 {
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+  }
 }
 
 .overflow-ellipsis {
