@@ -73,7 +73,7 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
 
   <footer class="entry-footer">
     <div class="row">
-      <div class="col-lg-7 col-md-9 col-centered">
+      <div class="col-md-9 col-centered">
         <div class="col-md-8 col-lg-7">
           <h3>Related maps</h3>
           <?php
