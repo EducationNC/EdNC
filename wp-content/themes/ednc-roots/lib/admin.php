@@ -53,6 +53,27 @@ function posts_custom_column_content($column_name, $id) {
 add_filter( 'manage_post_posts_columns', 'posts_custom_column_heading', 10, 1 );
 add_action( 'manage_post_posts_custom_column', 'posts_custom_column_content', 10, 2 );
 
+// maps
+function maps_custom_column_heading($columns) {
+	$new_columns['cb'] = 'cb';
+	$new_columns['title'] = 'Title';
+	$new_columns['author'] = 'Author';
+	$new_columns['map-category'] = 'Map Category';
+	$new_columns['date'] = 'Date';
+
+	$columns = $new_columns;
+	return $columns;
+}
+
+function maps_custom_column_content($column_name, $id) {
+	if ( 'map-category' == $column_name ) {
+		echo get_the_term_list($id, 'map-category', '', ', ', '');
+	}
+}
+
+add_filter( 'manage_map_posts_columns', 'maps_custom_column_heading', 10, 1 );
+add_filter( 'manage_map_posts_custom_column', 'maps_custom_column_content', 10, 2 );
+
 // bills
 function bills_custom_column_heading($columns) {
 	$new_columns['cb'] = 'cb';

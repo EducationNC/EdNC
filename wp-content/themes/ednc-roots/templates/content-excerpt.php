@@ -25,6 +25,17 @@ $category = get_the_category();
   // Remove empty results
   $cats_hide = array_filter($cats_hide, 'strlen');
 
+$map_category = wp_get_post_terms(get_the_id(), 'map-category');
+  // Convert category results to array instead of object
+  foreach ($map_category as &$mcat) {
+    $mcat = (array) $mcat;
+  }
+  $mcats_hide = array();
+  // Determine array indexes for labels we don't want to show
+  $mcats_hide[] = array_search('Uncategorized', array_column($map_category, 'cat_name'));
+  // Remove empty results
+  $mcats_hide = array_filter($mcats_hide, 'strlen');
+
 $post_type = get_post_type();
 ?>
 
@@ -60,6 +71,16 @@ $post_type = get_post_type();
           foreach ($category as $key=>$value) {
             if (!in_array($key, $cats_hide)) {
               echo '<span class="label">' . $value['cat_name'] . '</span> ';
+            }
+          }
+        }
+        ?>
+        <?php
+        // Map categories
+        if ($map_category) {
+          foreach ($map_category as $key=>$value) {
+            if (!in_array($key, $mcats_hide)) {
+              echo '<span class="label">' . $value['name'] . '</span> ';
             }
           }
         }

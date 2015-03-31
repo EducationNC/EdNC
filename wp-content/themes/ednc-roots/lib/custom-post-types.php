@@ -435,6 +435,26 @@ register_taxonomy( 'district-posts',
 	)
 );
 
+register_taxonomy( 'map-category',
+	array('map'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Map Categories' ),
+			'singular_name' => __( 'Map Category' ),
+			'search_items' =>  __( 'Search Map Categories' ),
+			'all_items' => __( 'All Map Categories' ),
+			'parent_item' => __( 'Parent Map Category' ),
+			'parent_item_colon' => __( 'Parent Map Category:' ),
+			'edit_item' => __( 'Edit Map Category' ),
+			'update_item' => __( 'Update Map Category' ),
+			'add_new_item' => __( 'Add New Map Category' ),
+			'new_item_name' => __( 'New Map Category Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
+);
+
 
 /**
  * Modify queries on specific templates
