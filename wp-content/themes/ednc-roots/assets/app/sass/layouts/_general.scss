@@ -222,6 +222,6 @@ section {
   &.small {
     width: 51px;
     height: 51px;
-    @include at2x('play', 51px, 51px);
+    @include at2x('play-small', 51px, 51px);
   }
 }
