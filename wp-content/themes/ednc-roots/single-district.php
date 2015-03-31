@@ -52,17 +52,17 @@
 
       <div class="s-box">
         <div class="callout">
-          <p>Contact Information</p>
+          <p>Contact information</p>
           <p class="normal-style">
             <?php if (get_field('phone')) { ?><span class="icon-phone"></span> <?php the_field('phone'); ?><br /><?php } ?>
             <?php if (get_field('fax')) { ?><span class="icon-fax"></span> <?php the_field('fax'); ?><br /><?php } ?>
           </p>
 
-          <p>Street Address</p>
+          <p>Street address</p>
           <p class="normal-style"><?php the_field('address'); ?></p>
 
           <?php if (get_field('mailing_address')) { ?>
-            <p>Mailing Address</p>
+            <p>Mailing address</p>
             <p class="normal-style"><?php the_field('mailing_address'); ?></p>
           <?php } ?>
         </div>

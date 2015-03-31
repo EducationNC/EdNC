@@ -213,7 +213,7 @@ foreach ($category as &$cat) {
 
             if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
 
-              <div class="row has-photo-overlay">
+              <div class="row">
                 <div class="col-xs-5 col-sm-3">
                   <?php the_post_thumbnail('bio-headshot'); ?>
                 </div>
@@ -258,7 +258,7 @@ foreach ($category as &$cat) {
             $bio = new WP_Query($args);
 
             if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-              <?php the_post_thumbnail('bio-headshot'); ?>
+              <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
               <?php get_template_part('templates/author', 'excerpt'); ?>
             <?php endwhile; endif; wp_reset_query(); ?>
 
@@ -351,7 +351,7 @@ foreach ($category as &$cat) {
             wp_reset_postdata();
           }
           ?>
-          
+
           </div>
 
         <?php } ?>
