@@ -110,9 +110,9 @@ function ednc_gallery($attr) {
   $i = 0;
   foreach ( $attachments as $id => $attachment ) {
 
-    $attr = ( trim( $attachment->post_content ) ) ? array( 'aria-describedby' => "$selector-$id" ) : '';
+    $attr = ( trim( $attachment->post_excerpt ) ) ? array( 'aria-describedby' => "$selector-$id" ) : '';
     if ( ! empty( $atts['link'] ) && 'file' === $atts['link'] ) {
-      $image_output = wp_get_attachment_link( $id, $atts['size'], false, false, false, array('alt' => $attachment->post_content) );
+      $image_output = wp_get_attachment_link( $id, $atts['size'], false, false, false, array('alt' => $attachment->post_excerpt) );
     } elseif ( ! empty( $atts['link'] ) && 'none' === $atts['link'] ) {
       $image_output = wp_get_attachment_image( $id, $atts['size'], false, $attr );
     } else {
@@ -129,10 +129,10 @@ function ednc_gallery($attr) {
       <{$icontag} class='gallery-icon {$orientation}'>
         $image_output
       </{$icontag}>";
-    if ( $captiontag && trim($attachment->post_content) ) {
+    if ( $captiontag && trim($attachment->post_excerpt) ) {
       $output .= "
         <{$captiontag} class='wp-caption-text gallery-caption' id='$selector-$id'>
-        " . wptexturize($attachment->post_content) . "
+        " . wptexturize($attachment->post_excerpt) . "
         </{$captiontag}>";
     }
     $output .= "</{$itemtag}>";
