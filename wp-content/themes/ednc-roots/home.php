@@ -449,7 +449,7 @@ $featured_ids = array();
           $resized = mr_image_resize($photo['url'], 300, 300, true, false);
           echo '<li><a>';
             echo '<img src="' . $resized['url'] . '" alt="" />';
-            echo '<p class="meta"><strong>' . $photo['title'] . '</strong><br />' . nl2br($photo['caption']) . '</p>';
+            echo '<p class="meta"><strong>' . $photo['title'] . '</strong><br />' . nl2br($photo['description']) . '</p>';
           echo '</a></li>';
         }
         ?>
