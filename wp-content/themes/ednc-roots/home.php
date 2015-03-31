@@ -329,7 +329,7 @@ $featured_ids = array();
           if( date('Yz') == get_the_time('Yz') ) {
             echo '<span class="label">New</span>';
           } ?>
-          <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+          <a class="mega-link" href="/maps"></a>
           <div class="vertical-center">
             <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
             <div class="banner-line"></div>
