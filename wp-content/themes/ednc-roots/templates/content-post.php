@@ -11,10 +11,18 @@ $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', fal
 $column = wp_get_post_terms(get_the_id(), 'column');
 
 $category = get_the_category();
-// Convert category results to array instead of object
-foreach ($category as &$cat) {
-  $cat = (array) $cat;
-}
+  // Convert category results to array instead of object
+  foreach ($category as &$cat) {
+    $cat = (array) $cat;
+  }
+  $cats_hide = array();
+  // Determine array indexes for labels we don't want to show
+  $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+  $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
+  $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
+  // Remove empty results
+  $cats_hide = array_filter($cats_hide, 'strlen');
+
 ?>
 
 <article <?php post_class('article'); ?>>
@@ -34,14 +42,6 @@ foreach ($category as &$cat) {
                 <span class="label"><?php echo $column[0]->name; ?></span>
                 <?php
               } else {
-                $cats_hide = array();
-                // Determine array indexes for labels we don't want to show
-                $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-                $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
-                $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-                // Remove empty results
-                $cats_hide = array_filter($cats_hide, 'strlen');
-
                 // Only show label of category if it's not in above list
                 foreach ($category as $key=>$value) {
                   if (!in_array($key, $cats_hide)) {

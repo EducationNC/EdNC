@@ -218,7 +218,7 @@ function add_custom_post_types() {
 			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
 			'capability_type' => 'post',
 			'hierarchical' => false,
-			'supports' => array( 'title', 'editor', 'author', 'revisions', 'thumbnail', 'comments'),
+			'supports' => array( 'title', 'editor', 'author', 'revisions', 'thumbnail'),
 			'has_archive' => false,
 			'rewrite' => false,	// set to false and then create custom rewrite rules below
 			'query_var' => true

@@ -110,7 +110,7 @@ $post_type = get_post_type();
         <a href="<?php the_permalink(); ?>" class="read-more">See all EdNews &raquo;</a>
         <?php
       } else {
-        the_excerpt();
+        the_advanced_excerpt();
         ?>
         <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a>
         <?php
