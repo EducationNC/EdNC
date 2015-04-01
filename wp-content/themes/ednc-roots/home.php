@@ -400,7 +400,7 @@ $featured_ids = array();
       <div class="extra-padding" ng-controller="example">
         <?php the_widget('TribeEventsAdvancedListWidget', array(
           'title' => '',
-          'limit' => '5',
+          'limit' => '6',
           'no_upcoming_events' => false,
           'venue' => true,
           'country' => false,
