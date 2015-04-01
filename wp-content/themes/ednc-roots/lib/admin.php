@@ -133,3 +133,23 @@ function bios_custom_column_content($column_name, $id) {
 
 add_filter( 'manage_bio_posts_columns', 'bios_custom_column_heading', 10, 1 );
 add_filter( 'manage_bio_posts_custom_column', 'bios_custom_column_content', 10, 2 );
+
+// galleries
+function galleries_custom_column_heading($columns) {
+	$new_columns['cb'] = 'cb';
+	$new_columns['title'] = 'Title';
+	$new_columns['id'] = 'ID';
+	$new_columns['date'] = 'Date';
+
+	$columns = $new_columns;
+	return $columns;
+}
+
+function galleries_custom_column_content($column_name, $id) {
+	if ( 'id' == $column_name ) {
+		echo get_the_id();
+	}
+}
+
+add_filter( 'manage_gallery_posts_columns', 'galleries_custom_column_heading', 10, 1 );
+add_filter( 'manage_gallery_posts_custom_column', 'galleries_custom_column_content', 10, 2 );

@@ -436,7 +436,7 @@ $featured_ids = array();
 <section class="container-fluid" id="gallery">
   <div class="row">
     <?php
-    $gallery_id = 5918;
+    $gallery_id = get_theme_mod('gallery_id');
     $gallery = get_post($gallery_id);
     $photos = get_field('gallery', $gallery_id);
     shuffle($photos);

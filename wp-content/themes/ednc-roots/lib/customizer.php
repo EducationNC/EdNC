@@ -39,21 +39,37 @@ function ednc_customizer_settings($wp_customize) {
     )
   );
 
-  // Poll shortcode
+  // Gallery post ID
   $wp_customize->add_setting(
-    'poll_shortcode',
+    'gallery_id',
     array()
   );
 
   $wp_customize->add_control(
-    'poll_shortcode',
+    'gallery_id',
     array(
-      'label' => 'Enter the shortcode for the poll at bottom of home page',
+      'label' => 'Enter the ID of the gallery post that will show at the bottom of home page',
       'section' => 'front_page_settings',
       'type' => 'text',
       'priority' => 1
     )
   );
+
+  // Poll shortcode
+  // $wp_customize->add_setting(
+  //   'poll_shortcode',
+  //   array()
+  // );
+  //
+  // $wp_customize->add_control(
+  //   'poll_shortcode',
+  //   array(
+  //     'label' => 'Enter the shortcode for the poll at bottom of home page',
+  //     'section' => 'front_page_settings',
+  //     'type' => 'text',
+  //     'priority' => 1
+  //   )
+  // );
 
   // Number of news posts to show
   $wp_customize->add_setting(
