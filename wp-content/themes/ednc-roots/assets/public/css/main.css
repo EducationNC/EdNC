@@ -8150,7 +8150,7 @@ section {
     width: 50%;
   }
 }
-.aside > h3:first-child {
+.aside > h3:first-of-type {
   margin-top: 0;
 }
 
