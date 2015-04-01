@@ -8150,6 +8150,9 @@ section {
     width: 50%;
   }
 }
+.aside > h3:first-child {
+  margin-top: 0;
+}
 
 @media (min-width: 1280px) {
   .full-width {

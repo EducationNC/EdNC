@@ -178,6 +178,10 @@ section {
   @media (min-width: 545px) {
     width: 50%;
   }
+
+  & > h3:first-child {
+    margin-top: 0;
+  }
 }
 
 .full-width {
