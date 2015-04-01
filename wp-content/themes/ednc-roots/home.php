@@ -376,7 +376,7 @@ $featured_ids = array();
           $items = get_field('news_item');
 
           $i = 0;
-          $limit = 5;
+          $limit = 7;
           $count = count($items);
 
           while ($i < $limit && $i < $count) {
