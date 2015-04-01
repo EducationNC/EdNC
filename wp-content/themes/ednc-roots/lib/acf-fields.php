@@ -1771,13 +1771,6 @@ register_field_group(array (
 				'value' => 'post',
 			),
 		),
-		array (
-			array (
-				'param' => 'post_type',
-				'operator' => '==',
-				'value' => 'map',
-			),
-		),
 	),
 	'menu_order' => 0,
 	'position' => 'normal',
