@@ -313,47 +313,6 @@ $featured_ids = array();
   </div>
 </section>
 
-<section class="container-fluid banners">
-  <div class="row no-padding">
-    <div class="col-md-6 has-photo-overlay">
-      <div class="photo-overlay light">
-        <?php
-        $args = array(
-          'post_type' => 'map',
-          'posts_per_page' => 1
-        );
-        $map = new WP_Query($args);
-
-        if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post();
-          // Show label "New" when map was posted today
-          if( date('Yz') == get_the_time('Yz') ) {
-            echo '<span class="label">New</span>';
-          } ?>
-          <a class="mega-link" href="/maps"></a>
-          <div class="vertical-center">
-            <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
-            <div class="banner-line"></div>
-            <h4 class="content-section-subtitle">Visualize education data across the state</h4>
-          </div>
-          <?php the_post_thumbnail(); ?>
-        <?php endwhile; endif; wp_reset_query(); ?>
-      </div>
-    </div>
-
-    <div class="col-md-6 has-photo-overlay">
-      <div class="photo-overlay light">
-        <a class="mega-link" href="/research/edlitigation/"></a>
-        <div class="vertical-center">
-          <h3 class="content-section-title">Ed<span class="normal">Litigation</span></h3>
-          <div class="banner-line"></div>
-          <h4 class="content-section-subtitle">Track education litigation across NC</h4>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/1409595_99556189-2.jpg" alt="EdLawsuits" />
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="container">
   <div class="row">
     <div class="col-md-4">
@@ -428,6 +387,47 @@ $featured_ids = array();
         <hr />
         <a class="twitter-timeline" height="600" data-dnt="true" href="https://twitter.com/EducationNC" data-widget-id="549987364819705857" data-chrome="">Tweets by @EducationNC</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container-fluid banners">
+  <div class="row no-padding">
+    <div class="col-md-6 has-photo-overlay">
+      <div class="photo-overlay light">
+        <?php
+        $args = array(
+          'post_type' => 'map',
+          'posts_per_page' => 1
+        );
+        $map = new WP_Query($args);
+
+        if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post();
+          // Show label "New" when map was posted today
+          if( date('Yz') == get_the_time('Yz') ) {
+            echo '<span class="label">New</span>';
+          } ?>
+          <a class="mega-link" href="/maps"></a>
+          <div class="vertical-center">
+            <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
+            <div class="banner-line"></div>
+            <h4 class="content-section-subtitle">Visualize education data across the state</h4>
+          </div>
+          <?php the_post_thumbnail(); ?>
+        <?php endwhile; endif; wp_reset_query(); ?>
+      </div>
+    </div>
+
+    <div class="col-md-6 has-photo-overlay">
+      <div class="photo-overlay light">
+        <a class="mega-link" href="/research/edlitigation/"></a>
+        <div class="vertical-center">
+          <h3 class="content-section-title">Ed<span class="normal">Litigation</span></h3>
+          <div class="banner-line"></div>
+          <h4 class="content-section-subtitle">Track education litigation across NC</h4>
+        </div>
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/1409595_99556189-2.jpg" alt="EdLawsuits" />
       </div>
     </div>
   </div>
