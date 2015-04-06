@@ -153,3 +153,66 @@ function galleries_custom_column_content($column_name, $id) {
 
 add_filter( 'manage_gallery_posts_columns', 'galleries_custom_column_heading', 10, 1 );
 add_filter( 'manage_gallery_posts_custom_column', 'galleries_custom_column_content', 10, 2 );
+
+/**
+ * Patch to allow private pages to appear as options in parent select menu for other pages
+ * https://core.trac.wordpress.org/ticket/8592#comment:129
+ *
+ */
+function admin_private_parent_metabox($output) {
+	global $post;
+
+	$args = array(
+		'post_type'			=> $post->post_type,
+		'exclude_tree'		=> $post->ID,
+		'selected'			=> $post->post_parent,
+		'name'				=> 'parent_id',
+		'show_option_none'	=> __('(no parent)'),
+		'sort_column'		=> 'menu_order, post_title',
+		'echo'				=> 0,
+		'post_status'		=> array('publish', 'private'),
+	);
+
+	$defaults = array(
+		'depth'					=> 0,
+		'child_of'				=> 0,
+		'selected'				=> 0,
+		'echo'					=> 1,
+		'name'					=> 'page_id',
+		'id'					=> '',
+		'show_option_none'		=> '',
+		'show_option_no_change'	=> '',
+		'option_none_value'		=> '',
+	);
+
+	$r = wp_parse_args($args, $defaults);
+	extract($r, EXTR_SKIP);
+
+	$pages = get_pages($r);
+	$name = esc_attr($name);
+	// Back-compat with old system where both id and name were based on $name argument
+	if (empty($id))
+	{
+		$id = $name;
+	}
+
+	if (!empty($pages))
+	{
+		$output = "<select name=\"$name\" id=\"$id\">\n";
+
+		if ($show_option_no_change)
+		{
+			$output .= "\t<option value=\"-1\">$show_option_no_change</option>";
+		}
+		if ($show_option_none)
+		{
+			$output .= "\t<option value=\"" . esc_attr($option_none_value) . "\">$show_option_none</option>\n";
+		}
+		$output .= walk_page_dropdown_tree($pages, $depth, $r);
+		$output .= "</select>\n";
+	}
+
+	return $output;
+}
+
+add_filter('wp_dropdown_pages', 'admin_private_parent_metabox');
