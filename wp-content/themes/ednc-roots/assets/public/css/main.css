@@ -7031,6 +7031,10 @@ sup.footnote a:after {
   font-style: normal !important;
 }
 
+pre {
+  margin-top: 10px;
+}
+
 /**
  *
  * https://github.com/glebm/sass-rewrite-url
@@ -8000,6 +8004,10 @@ section {
   }
 }
 
+.main li, .entry-content li {
+  margin: 1em 0;
+}
+
 .extra-padding {
   padding-left: 10px;
   padding-right: 10px;
@@ -8119,6 +8127,7 @@ section {
 }
 .callout .menu li {
   padding-bottom: .25em;
+  margin: 0;
 }
 .callout .menu li.active a {
   color: #8B185E;

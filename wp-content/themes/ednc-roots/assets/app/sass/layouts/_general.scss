@@ -27,6 +27,12 @@ section {
   }
 }
 
+.main, .entry-content {
+  li {
+    margin: 1em 0;
+  }
+}
+
 .extra-padding {
   padding-left: 10px;
   padding-right: 10px;
@@ -148,6 +154,7 @@ section {
 
     li {
       padding-bottom: .25em;
+      margin: 0;
 
       &.active {
         a {
