@@ -121,7 +121,7 @@ function live_rename_formats() {
 
       jQuery("span.post-state-format").each(function() {
         if ( jQuery(this).text() == "Chat" )
-          jQuery(this).text("Feature");
+          jQuery(this).text("Special");
       });
 
     });
