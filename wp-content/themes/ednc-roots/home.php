@@ -443,7 +443,7 @@ $featured_ids = array();
     ?>
     <h2 class="no-bottom-margin"><span class="label big"><?php echo $gallery->post_title; ?></span></h2>
     <div id="photo-strip" class="photo-strip">
-      <ul>
+      <ul class="tight">
         <?php
         foreach ($photos as $photo) {
           $resized = mr_image_resize($photo['url'], 300, 300, true, false);
