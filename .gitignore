@@ -27,10 +27,9 @@ wp-content/uploads/
 wp-content/wp-cache-config.php
 
 # ignorable theme files
-wp-content/themes/ednc-broke/*
-wp-content/themes/ednc-new/*
-wp-content/themes/ednc/assets/app/bower_components/*
-wp-content/themes/ednc/node_modules/*
+wp-content/themes/ednc-roots/node_modules/*
+wp-content/themes/ednc-roots/assets/app/vendor/*
+wp-content/themes/ednc-roots/.sass-cache
 
 # ignorable plugin files
 wp-content/plugins/why-404/logs/*

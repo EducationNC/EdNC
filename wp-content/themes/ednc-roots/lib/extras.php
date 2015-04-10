@@ -105,7 +105,7 @@ function catch_that_image() {
 
 function rename_post_formats( $safe_text ) {
   if ( $safe_text == 'Chat' )
-    return 'Feature';
+    return 'Special';
 
   return $safe_text;
 }
