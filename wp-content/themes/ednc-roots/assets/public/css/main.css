@@ -7035,6 +7035,10 @@ pre {
   margin-top: 10px;
 }
 
+.tight.tight li {
+  margin: 0;
+}
+
 /**
  *
  * https://github.com/glebm/sass-rewrite-url
@@ -7454,6 +7458,9 @@ td, th {
 }
 .accordion ul {
   font-style: italic;
+}
+.accordion ul li {
+  margin: 0;
 }
 
 /* Magnific Popup CSS */

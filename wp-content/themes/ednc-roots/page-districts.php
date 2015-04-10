@@ -15,7 +15,7 @@
       <h2>County School Districts</h2>
 
       <div class="text-col-md-3 text-col-sm-2">
-        <ul>
+        <ul class="tight">
           <?php
           $args = array(
             'post_type' => 'district',
@@ -42,7 +42,7 @@
     <div class="col-lg-3">
       <h2>City School Districts</h2>
 
-      <ul>
+      <ul class="tight">
         <?php
         $args = array(
           'post_type' => 'district',

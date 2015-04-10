@@ -27,7 +27,7 @@ function roots_sidebar_body_class($classes) {
   }
   return $classes;
 }
-add_filter('body_class', 'roots_sidebar_body_class');
+// add_filter('body_class', 'roots_sidebar_body_class');
 
 /**
  * Define which pages shouldn't have the sidebar

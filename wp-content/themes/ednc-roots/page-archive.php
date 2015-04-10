@@ -45,7 +45,7 @@ query_posts($args);
     <?php endif; ?>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-3 col-lg-push-1">
     <?php get_template_part('templates/sidebar', 'archives'); ?>
   </div>
 </div>

@@ -183,7 +183,7 @@
         <div class="s-box">
           <div class="callout">
             <p>Facebook</p>
-            <div class="fb-like-box" data-href="<?php echo $facebook; ?>" data-height="400" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="true"></div>
+            <div class="fb-page" data-href="<?php echo $facebook; ?>" data-height="400" data-hide-cover="false" data-show-facepile="false" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="<?php echo $facebook; ?>"><a href="<?php echo $facebook; ?>">Facebook</a></blockquote></div></div>
           </div>
         </div>
       <?php } ?>

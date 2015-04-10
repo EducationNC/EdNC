@@ -25,7 +25,7 @@
 
         <div class="wrap" role="document">
           <div class="content clearfix">
-            <main class="main container" role="main">
+            <main class="main container-fluid" role="main">
               <?php include roots_template_path(); ?>
             </main><!-- /.main -->
           </div><!-- /.content -->

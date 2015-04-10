@@ -24,7 +24,7 @@
     <?php endif; ?>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-3 col-lg-push-1">
     <?php
     $author = get_user_by( 'slug', get_query_var( 'author_name' ) );
     $author_id = $author->ID;
