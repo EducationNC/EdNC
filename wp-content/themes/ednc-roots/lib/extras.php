@@ -85,6 +85,18 @@ function add_mce_css( $mce_css ) {
 add_filter( 'mce_css', 'add_mce_css' );
 
 
+
+// Modify TinyMCE editor to remove unused items
+function customformatTinyMCE($init) {
+	// Add block format elements you want to show in dropdown
+  $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;';
+
+	return $init;
+}
+add_filter('tiny_mce_before_init', 'customformatTinyMCE' );
+
+
+
 // Get first image inside post content
 function catch_that_image() {
   global $post, $posts;
