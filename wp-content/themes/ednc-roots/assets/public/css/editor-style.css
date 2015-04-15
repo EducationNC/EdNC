@@ -236,6 +236,7 @@ figure {
 img {
   vertical-align: middle;
   max-width: 100%;
+  height: auto;
 }
 .img-responsive {
   display: block;
