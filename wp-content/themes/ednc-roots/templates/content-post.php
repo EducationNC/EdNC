@@ -50,8 +50,18 @@ $category = get_the_category();
                 }
               }
               ?>
+
               <h1 class="entry-title"><?php the_title(); ?></h1>
+
               <?php get_template_part('templates/entry-meta'); ?>
+
+              <?php
+              $thumb_id = get_post_thumbnail_id();
+              $thumb_post = get_post($thumb_id);
+              ?>
+              <div class="text-right caption hidden-xs no-bottom-margin">
+                <?php echo $thumb_post->post_excerpt; ?>
+              </div>
             </div>
           </div>
         </div>
