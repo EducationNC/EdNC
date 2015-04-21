@@ -232,7 +232,7 @@ section {
   top: 50%;
   transform: translate(-50%, -50%);
   @include at2x('play', 102px, 102px);
-  z-index: 3;
+  z-index: 1;
 
   &.small {
     width: 51px;
