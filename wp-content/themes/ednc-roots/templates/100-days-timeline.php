@@ -17,7 +17,7 @@
     <div class="row-pc">
       <div class="col-60-pc"><img class="hundred-label" src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/100-days-label.svg" /></div>
       <div class="col-40-pc hidden-xs">
-        <div class="vertical-center">Nothing is as important to the future of North Carolina as education. We believe the issues that divide us matter less than what unites us.</div>
+        <div class="vertical-center">Nothing is as important to the future of North Carolina as education. The issues that divide us matter less than what unites us.</div>
       </div>
     </div>
     <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/colored-pencils.jpg" />

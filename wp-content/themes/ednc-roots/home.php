@@ -358,16 +358,16 @@ $featured_ids = array();
       <p class="content-section-subtitle">EdNC on Facebook</p>
       <div class="extra-padding">
         <hr />
-        <div class="fb-page" data-href="https://www.facebook.com/educationnc" data-height="600" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/educationnc"><a href="https://www.facebook.com/educationnc">EducationNC</a></blockquote></div></div>
+        <div class="fb-page" data-href="https://www.facebook.com/educationnc" data-height="650" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/educationnc"><a href="https://www.facebook.com/educationnc">EducationNC</a></blockquote></div></div>
       </div>
     </div>
 
     <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">Tweets</span></h3>
       <p class="content-section-subtitle">Education buzz on Twitter</p>
-      <div class="extra-padding">
+      <div class="extra-padding text-center">
         <hr />
-        <a class="twitter-timeline" height="600" data-dnt="true" href="https://twitter.com/EducationNC" data-widget-id="549987364819705857" data-chrome="">Tweets by @EducationNC</a>
+        <a class="twitter-timeline" height="650" data-dnt="true" href="https://twitter.com/EducationNC" data-widget-id="549987364819705857" data-chrome="">Tweets by @EducationNC</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>
     </div>
