@@ -183,7 +183,7 @@ $featured_ids = array();
     </div>
 
     <div class="col-md-3">
-      <?php get_template_part('templates/sidebar', 'home'); ?>
+      <?php get_template_part('templates/sidebar', 'home-100-days'); ?>
     </div>
   </div>
 
@@ -318,7 +318,7 @@ $featured_ids = array();
     <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">News</span></h3>
       <p class="content-section-subtitle">Today's top education news stories</p>
-      <div class="content-listing extra-padding" ng-controller="example">
+      <div class="content-listing extra-padding">
         <?php
         $args = array(
           'post_type' => 'ednews',
@@ -354,29 +354,11 @@ $featured_ids = array();
     </div>
 
     <div class="col-md-4">
-      <h3 class="content-section-title">Ed<span class="normal">Events</span></h3>
-      <p class="content-section-subtitle">Upcoming education events</p>
-      <div class="extra-padding" ng-controller="example">
-        <?php the_widget('TribeEventsAdvancedListWidget', array(
-          'title' => '',
-          'limit' => '6',
-          'no_upcoming_events' => false,
-          'venue' => true,
-          'country' => false,
-          'address' => false,
-          'city' => true,
-          'region' => false,
-          'zip' => false,
-          'phone' => false,
-          'cost' => false,
-          'organizer' => false,
-          'operand' => 'OR',
-          'filters' => ''
-        )); ?>
-        <p class="text-center">
-          <a href="/events/" class="btn btn-default no-margin">See all upcoming EdEvents</a><br />
-          <a href="#" class="small" data-toggle="modal" data-target="#eventSubmissionModal">Submit your event &raquo;</a>
-        </p>
+      <h3 class="content-section-title">Ed<span class="normal">Facebook</span></h3>
+      <p class="content-section-subtitle">EdNC on Facebook</p>
+      <div class="extra-padding">
+        <hr />
+        <div class="fb-page" data-href="https://www.facebook.com/educationnc" data-height="600" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/educationnc"><a href="https://www.facebook.com/educationnc">EducationNC</a></blockquote></div></div>
       </div>
     </div>
 
@@ -394,7 +376,7 @@ $featured_ids = array();
 
 <section class="container-fluid banners">
   <div class="row no-padding">
-    <div class="col-md-6 has-photo-overlay">
+    <div class="col-md-4 has-photo-overlay">
       <div class="photo-overlay light">
         <?php
         $args = array(
@@ -419,7 +401,19 @@ $featured_ids = array();
       </div>
     </div>
 
-    <div class="col-md-6 has-photo-overlay">
+    <div class="col-md-4 has-photo-overlay">
+      <div class="photo-overlay light">
+        <a class="mega-link" href="/events/"></a>
+        <div class="vertical-center">
+          <h3 class="content-section-title">Ed<span class="normal">Events</span></h3>
+          <div class="banner-line"></div>
+          <h4 class="content-section-subtitle">Upcoming education events</h4>
+        </div>
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/544232_23915496_resized.jpg" alt="EdEvents" />
+      </div>
+    </div>
+
+    <div class="col-md-4 has-photo-overlay">
       <div class="photo-overlay light">
         <a class="mega-link" href="/research/edlitigation/"></a>
         <div class="vertical-center">

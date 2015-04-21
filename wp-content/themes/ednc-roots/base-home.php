@@ -1,5 +1,7 @@
 <?php get_template_part('templates/head'); ?>
 <body <?php body_class(); ?>>
+  <?php get_template_part('templates/facebook-sdk'); ?>
+
   <a id="trigger-offcanvas" class="nav-toggle hidden-md hidden-lg hidden-print" href="#"><span>Menu</span></a>
 
   <div class="wrapper">
@@ -20,6 +22,7 @@
         <?php
           do_action('get_header');
           get_template_part('templates/header-mobile');
+          get_template_part('templates/100-days', 'timeline');
           get_template_part('templates/header');
         ?>
 

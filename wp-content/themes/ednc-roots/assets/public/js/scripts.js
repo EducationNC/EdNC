@@ -1932,23 +1932,6 @@ var Roots = {
         return(false);
       }
 
-      // Open splash on page load only on first page load
-      if (( firstImpression() || getVariable('splash') ) && !getVariable('nosplash')) {
-        $.magnificPopup.open({
-          items: {
-            src: '#splash',
-            type: 'inline'
-          },
-          modal: true
-        });
-      }
-
-      $(document).on(clickortap, '.popup-modal-dismiss', function (e) {
-        e.preventDefault();
-        $.magnificPopup.close();
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-      });
-
       // Toggle menu button to x close state on click
       $('#trigger-offcanvas').on(clickortap, function() {
         if ($(this).hasClass('active')) {

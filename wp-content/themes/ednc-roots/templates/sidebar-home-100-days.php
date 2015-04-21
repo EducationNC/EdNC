@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="callout">
+      <h4>Look how far we have come in just 100 days:</h4>
+      <p>
+        <a href="https://support.ednc.org/donate">
+          <img class="hidden-sm hidden-xs" src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/100-days-numbers.png" />
+          <img class="hidden-md hidden-lg hidden-xl" src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/friendraiser-numbers.png" />
+        </a>
+      </p>
+
+      <h4>With your help, imagine how much further we can go.</h4>
+
+      <a href="https://support.ednc.org/donate" class="button btn-primary btn-lg btn-wide">Donate now &raquo;</a>
+
+      <?php
+      $unique_supporters = get_transient('unique_supporters');
+
+      if (!$unique_supporters) {
+        include_once(get_template_directory() . '/lib/salsa-api.php');
+        set_transient('unique_supporters', $unique_supporters, HOUR_IN_SECONDS);
+      }
+
+      // Add 9 supporters (checks directly to Mebane)
+      $unique_supporters = $unique_supporters + 9;
+      ?>
+
+      <div class="progress top-margin">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $unique_supporters; ?>" aria-valuemin="0" aria-valuemax="1000" style="min-width:2em; width:<?php echo ($unique_supporters / 1000) * 100; ?>%;">
+          <?php echo $unique_supporters; ?>
+        </div>
+      </div>
+
+      <p>Help us get 1,000 supporters by June 30.</p>
+    </div>
+  </div>
+</div>

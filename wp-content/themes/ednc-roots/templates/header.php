@@ -57,8 +57,7 @@ if ($alert) { ?>
       </div>
 
       <div class="btn-group">
-        <a href="<?php echo get_permalink('1491'); ?>" class="btn btn-default btn-lg"><small>Get Involved</small></a>
-        <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg"><small>Donate Now</small></a>
+        <a href="#" class="btn btn-default btn-lg" data-toggle="modal" data-target="#emailSignupModal"><small>Free email subscription</small></a>
       </div>
     </div>
   </nav>
