@@ -23,6 +23,7 @@
           do_action('get_header');
           get_template_part('templates/header-mobile');
           get_template_part('templates/100-days', 'timeline');
+          // get_template_part('templates/friendraiser', 'banner');
           get_template_part('templates/header');
         ?>
 

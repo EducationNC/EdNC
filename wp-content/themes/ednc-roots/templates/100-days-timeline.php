@@ -22,6 +22,7 @@
     </div>
     <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/colored-pencils.jpg" />
   </div>
+
   <div class="timeline-100 hidden-sm hidden-xs">
     <div id="timeline-100"></div>
   </div>
@@ -31,7 +32,7 @@
       <div class="col-md-7 col-centered">
         <blockquote>
           <p style="text-align: center;" class="no-margin-bottom">Raise your voice. Invest in the EdNC conversation.<br />
-            <a href="https://support.ednc.org/donate" class="btn btn-primary btn-lg">Donate now &raquo;</a>
+            <a href="https://support.ednc.org/donate-recurring" class="btn btn-primary btn-lg">Donate now &raquo;</a>
           </p>
         </blockquote>
       </div>

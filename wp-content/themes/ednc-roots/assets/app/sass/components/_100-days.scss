@@ -7,7 +7,7 @@
 }
 
 .timeline-banner {
-  height: 147px;
+  height: 115px;
   overflow: hidden;
   position: relative;
 
@@ -25,8 +25,7 @@
   .hundred-label {
     position: absolute;
     display: block;
-    width: 405px;
-    height: 179px;
+    width: 297px;
     top: 61%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
@@ -54,7 +53,7 @@
       height: 100%;
       width: 40%;
       float: left;
-      padding: 30px 0 10px;
+      padding: 10px 0 10px;
       color: $white;
       text-shadow: 0px 0px 58px rgba(0,0,0,0.76);
 
@@ -66,7 +65,7 @@
 }
 
 .timeline-ask {
-  @include gray-gradient-right;
+  background: $ice;
 }
 
 .timeline-100 {

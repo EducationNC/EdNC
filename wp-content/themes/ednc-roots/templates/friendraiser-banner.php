@@ -16,7 +16,9 @@
       <div class="row">
         <div class="col-sm-6 dark">
           <p>Look how far we have come in just 100 days:<br />
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/friendraiser-numbers.png" />
+            <a href="https://support.ednc.org/donate-recurring">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/friendraiser-numbers.png" />
+            </a>
           </p>
         </div>
 
@@ -47,7 +49,7 @@
                 </div>
               </div>
 
-              <p><a href="https://support.ednc.org/donate" class="button btn-primary btn-lg btn-wide">Donate now &raquo;</a></p>
+              <p><a href="https://support.ednc.org/donate-recurring" class="button btn-primary btn-lg btn-wide">Donate now &raquo;</a></p>
             </div>
           </div>
         </div>
