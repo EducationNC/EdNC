@@ -43,17 +43,21 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 			
 		}
 		
-		// Users -> Your Profile
+		// Your Profile
 		settype( $this->POST['your_profile_class'], 'string' );
 		settype( $this->POST['your_profile_style'], 'string' );
 		settype( $this->POST['your_profile_anchor'], 'string' );
-		settype( $this->POST['your_profile_js_confirm'], 'string' );
+		settype( $this->POST['your_profile_confirm_heading'], 'string' );
+		settype( $this->POST['your_profile_confirm_warning'], 'string' );
+		settype( $this->POST['your_profile_confirm_button'], 'string' );
 		settype( $this->POST['your_profile_landing_url'], 'string' );
 		settype( $this->POST['your_profile_enabled'], 'bool' );
 		$this->option['settings']['your_profile_class'] = empty( $this->POST['your_profile_class'] ) ? NULL : $this->POST['your_profile_class'];
 		$this->option['settings']['your_profile_style'] = empty( $this->POST['your_profile_style'] ) ? NULL : $this->POST['your_profile_style'];
 		$this->option['settings']['your_profile_anchor'] = empty( $this->POST['your_profile_anchor'] ) ? $default_option['settings']['your_profile_anchor'] : $this->POST['your_profile_anchor'];
-		$this->option['settings']['your_profile_js_confirm'] = empty( $this->POST['your_profile_js_confirm'] ) ? $default_option['settings']['your_profile_js_confirm'] : $this->POST['your_profile_js_confirm'];
+		$this->option['settings']['your_profile_confirm_heading'] = empty( $this->POST['your_profile_confirm_heading'] ) ? $default_option['settings']['your_profile_confirm_heading'] : $this->POST['your_profile_confirm_heading'];
+		$this->option['settings']['your_profile_confirm_warning'] = empty( $this->POST['your_profile_confirm_warning'] ) ? $default_option['settings']['your_profile_confirm_warning'] : $this->POST['your_profile_confirm_warning'];
+		$this->option['settings']['your_profile_confirm_button'] = empty( $this->POST['your_profile_confirm_button'] ) ? $default_option['settings']['your_profile_confirm_button'] : $this->POST['your_profile_confirm_button'];
 		$this->option['settings']['your_profile_landing_url'] = empty( $this->POST['your_profile_landing_url'] ) ? '' : $this->POST['your_profile_landing_url'];
 		$this->option['settings']['your_profile_enabled'] = $this->POST['your_profile_enabled'];
 		
@@ -61,12 +65,14 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 		settype( $this->POST['shortcode_class'], 'string' );
 		settype( $this->POST['shortcode_style'], 'string' );
 		settype( $this->POST['shortcode_anchor'], 'string' );
-		settype( $this->POST['shortcode_js_confirm'], 'string' );
+		settype( $this->POST['shortcode_js_confirm_warning'], 'string' );
+		settype( $this->POST['shortcode_js_confirm_enabled'], 'bool' );
 		settype( $this->POST['shortcode_landing_url'], 'string' );
 		$this->option['settings']['shortcode_class'] = empty( $this->POST['shortcode_class'] ) ? NULL : $this->POST['shortcode_class'];
 		$this->option['settings']['shortcode_style'] = empty( $this->POST['shortcode_style'] ) ? NULL : $this->POST['shortcode_style'];
 		$this->option['settings']['shortcode_anchor'] = empty( $this->POST['shortcode_anchor'] ) ? $default_option['settings']['shortcode_anchor'] : $this->POST['shortcode_anchor'];
-		$this->option['settings']['shortcode_js_confirm'] = empty( $this->POST['shortcode_js_confirm'] ) ? $default_option['settings']['shortcode_js_confirm'] : $this->POST['shortcode_js_confirm'];
+		$this->option['settings']['shortcode_js_confirm_warning'] = empty( $this->POST['shortcode_js_confirm_warning'] ) ? $default_option['settings']['shortcode_js_confirm_warning'] : $this->POST['shortcode_js_confirm_warning'];
+		$this->option['settings']['shortcode_js_confirm_enabled'] = $this->POST['shortcode_js_confirm_enabled'];
 		$this->option['settings']['shortcode_landing_url'] = empty( $this->POST['shortcode_landing_url'] ) ? '' : $this->POST['shortcode_landing_url'];
 		
 		// Multisite: Delete from Network
@@ -134,10 +140,10 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 				</td>
 			</tr>
 		</table>
-		<h3>Users &rarr; Your Profile</h3>
+		<h3>Your Profile</h3>
 		<table class="form-table">
 			<tr>
-				<th scope="row"><label for="your_profile_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in raw HTML (e.g. Delete Profile &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;)">[?]</a></th>
+				<th scope="row"><label for="your_profile_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in HTML (e.g. Delete Account &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;)">[?]</a></th>
 				<td>
 					<code>
 						&lt;a
@@ -150,9 +156,30 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 				</td>
 			</tr>
 			<tr>
-				<th scope="row"><label for="your_profile_js_confirm">Javascript Confirm</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Text used for Javascript confirm dialog box. Use \n for new lines and %username% for Username.">[?]</a></th>
+				<th scope="row"><label for="your_profile_confirm_heading">Confirm Heading</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Heading, in HTML, used on confirmation page.">[?]</a></th>
 				<td>
-					<input type="text" id="your_profile_js_confirm" name="your_profile_js_confirm" class="code large-text" value="<?php echo esc_attr( $this->option['settings']['your_profile_js_confirm'] ); ?>" />
+					<code>
+						&lt;h2&gt;
+						<input type="text" id="your_profile_confirm_heading" name="your_profile_confirm_heading" class="code" value="<?php echo esc_attr( $this->option['settings']['your_profile_confirm_heading'] ); ?>" />
+						&lt;/h2&gt;
+					</code>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="your_profile_confirm_warning">Confirm Warning</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Warning, in HTML, used on confirmation page. Use %username% for Username.">[?]</a></th>
+				<td>
+					<input type="text" id="your_profile_confirm_warning" name="your_profile_confirm_warning" class="code large-text" value="<?php echo esc_attr( $this->option['settings']['your_profile_confirm_warning'] ); ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="your_profile_confirm_button">Confirm Button</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Button text used on confirmation page. Use %username% for Username.">[?]</a></th>
+				<td>
+					<code>
+						&lt;input
+						type="submit"
+						value="<input type="text" id="your_profile_confirm_button" name="your_profile_confirm_button" class="code" value="<?php echo esc_attr( $this->option['settings']['your_profile_confirm_button'] ); ?>" />"
+						/&gt;
+					</code>
 				</td>
 			</tr>
 			<tr>
@@ -163,7 +190,7 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 				</td>
 			</tr>
 			<tr>
-				<th scope="row"><label for="your_profile_enabled">Enabled</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Check box to show delete link, uncheck box to hide delete link.">[?]</a></th>
+				<th scope="row"><label for="your_profile_enabled">Link Enabled</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Check box to show delete link near the bottom of the Your Profile page, uncheck box to hide delete link.">[?]</a></th>
 				<td>
 					<input type="checkbox" id="your_profile_enabled" name="your_profile_enabled" value="1"<?php echo ( $this->option['settings']['your_profile_enabled'] == true ) ? ' checked="checked"' : ''; ?> />
 				</td>
@@ -172,7 +199,7 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 		<h3>Shortcode</h3>
 		<table class="form-table">
 			<tr>
-				<th scope="row"><label for="shortcode_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in raw HTML (e.g. Delete Profile &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;)">[?]</a></th>
+				<th scope="row"><label for="shortcode_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in HTML (e.g. Delete Account &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;)">[?]</a></th>
 				<td>
 					<code>
 						&lt;a
@@ -185,9 +212,15 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 				</td>
 			</tr>
 			<tr>
-				<th scope="row"><label for="shortcode_js_confirm">Javascript Confirm</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Text used for Javascript confirm dialog box. Use \n for new lines and %username% for Username.">[?]</a></th>
+				<th scope="row"><label for="shortcode_js_confirm_warning">JS Confirm Warning</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Warning text used for Javascript confirm dialog. Use \n for new lines and %username% for Username.">[?]</a></th>
 				<td>
-					<input type="text" id="shortcode_js_confirm" name="shortcode_js_confirm" class="code large-text" value="<?php echo esc_attr( $this->option['settings']['shortcode_js_confirm'] ); ?>" />
+					<input type="text" id="shortcode_js_confirm_warning" name="shortcode_js_confirm_warning" class="code large-text" value="<?php echo esc_attr( $this->option['settings']['shortcode_js_confirm_warning'] ); ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="shortcode_js_confirm_enabled">JS Confirm Enabled</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Check box to use Javascript confirm dialog, uncheck box for deletion without further confirmation. Disabling this can be useful when setting up your own custom confirmation page. You'd place the shortcode on your custom confirmation page and the user simply clicks the delete link text or image you've configured to confirm deletion.">[?]</a></th>
+				<td>
+					<input type="checkbox" id="shortcode_js_confirm_enabled" name="shortcode_js_confirm_enabled" value="1"<?php echo ( $this->option['settings']['shortcode_js_confirm_enabled'] == true ) ? ' checked="checked"' : ''; ?> />
 				</td>
 			</tr>
 			<tr>

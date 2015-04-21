@@ -2,15 +2,15 @@
 /*
 Plugin Name: Delete Me
 Plugin URI: https://wordpress.org/plugins/delete-me/
-Description: Allow users with specific WordPress roles to delete themselves from the <code>Users &rarr; Your Profile</code> subpanel or anywhere Shortcodes can be used using the Shortcode <code>[plugin_delete_me /]</code>. Settings for this plugin are found on the <code>Settings &rarr; Delete Me</code> subpanel. Multisite and Network Activation supported.
-Version: 1.5
+Description: Allow users with specific WordPress roles to delete themselves from the <code>Your Profile</code> page or anywhere Shortcodes can be used using the Shortcode <code>[plugin_delete_me /]</code>. Settings for this plugin are found on the <code>Settings &rarr; Delete Me</code> subpanel. Multisite and Network Activation supported.
+Version: 1.6
 Author: Clinton Caldwell
 Author URI: https://profiles.wordpress.org/cmc3215/
 License: GPL2 http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 /*
-Copyright (c) 2014 - Clinton Caldwell <clint3215@gmail.com>
+Copyright (c) 2015 - Clinton Caldwell <clint3215@gmail.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -62,7 +62,7 @@ class plugin_delete_me {
 			'name' => 'Delete Me',
 			'uri' => 'https://wordpress.org/plugins/delete-me/',
 			'donate_link' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L5VY6QDSAAZUL',
-			'version' => '1.5',
+			'version' => '1.6',
 			'wp_version_min' => '3.4',
 			'option' => 'plugin_delete_me',
 			'shortcode' => 'plugin_delete_me',
@@ -187,8 +187,9 @@ class plugin_delete_me {
 	// Admin init
 	private function admin_init() {
 		
-		add_action( 'admin_menu', array( &$this, 'add_submenu_page' ) );
+		add_action( 'admin_menu', array( &$this, 'add_submenu_pages' ) );
 		add_action( 'show_user_profile', array( &$this, 'your_profile' ) );
+		add_filter( 'admin_title', array( &$this, 'admin_title' ), 10, 2 );
 		add_filter( 'plugin_row_meta', array( &$this, 'plugin_row_meta' ), 10, 2 );
 		
 	}
@@ -201,8 +202,8 @@ class plugin_delete_me {
 		
 	}
 	
-	// Add submenu page
-	public function add_submenu_page() {
+	// Add submenu pages
+	public function add_submenu_pages() {
 		
 		add_submenu_page(
 			'options-general.php',						// parent menu slug or wordpress filename
@@ -211,6 +212,15 @@ class plugin_delete_me {
 			'delete_users',								// capability
 			$this->info['slug_prefix'] . '_settings',	// unique page slug (i.e. ?page=slug)
 			array( &$this, 'admin_page_settings' )		// function to be called to output the page
+		);
+		
+		add_submenu_page(
+			'options.php',									// parent menu slug or wordpress filename
+			NULL,											// page <title>
+			NULL,											// submenu title
+			'read',											// capability
+			$this->info['slug_prefix'] . '_confirmation',	// unique page slug (i.e. ?page=slug)
+			array( &$this, 'admin_page_confirmation' )		// function to be called to output the page
 		);
 		
 	}
@@ -222,10 +232,32 @@ class plugin_delete_me {
 		
 	}
 	
+	// Admin page confirmation
+	public function admin_page_confirmation() {
+		
+		include_once( $this->info['dirname'] . '/inc/admin_page_confirmation.php' );
+		
+	}
+	
 	// Your profile
 	public function your_profile( $profileuser ) {
 		
 		include_once( $this->info['dirname'] . '/inc/your_profile.php' );
+		
+	}
+	
+	// Admin title
+	public function admin_title( $admin_title, $title ) {
+		
+		global $pagenow, $parent_file;
+		
+		if (
+		$pagenow == 'options.php' &&
+		$parent_file == 'options.php' &&
+		isset( $this->GET['page'] ) &&
+		$this->GET['page'] == $this->info['slug_prefix'] . '_confirmation' ) $admin_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress' ), __( 'Profile' ), get_bloginfo( 'name' ) );
+		
+		return $admin_title;
 		
 	}
 	
@@ -252,13 +284,16 @@ class plugin_delete_me {
 				'your_profile_class' => NULL,
 				'your_profile_style' => NULL,
 				'your_profile_anchor' => 'Delete Account',
-				'your_profile_js_confirm' => 'WARNING!\n\nAre you sure you want to delete user %username%?',
+				'your_profile_confirm_heading' => 'Delete Account',
+				'your_profile_confirm_warning' => 'WARNING!<br /><br />Are you sure you want to delete user %username%?',
+				'your_profile_confirm_button' => 'Confirm Deletion',
 				'your_profile_landing_url' => home_url(),
 				'your_profile_enabled' => true,
 				'shortcode_class' => NULL,
 				'shortcode_style' => NULL,
 				'shortcode_anchor' => 'Delete Account',
-				'shortcode_js_confirm' => 'WARNING!\n\nAre you sure you want to delete user %username%?',
+				'shortcode_js_confirm_warning' => 'WARNING!\n\nAre you sure you want to delete user %username%?',
+				'shortcode_js_confirm_enabled' => true,
 				'shortcode_landing_url' => home_url(),
 				'ms_delete_from_network' => true,
 				'delete_comments' => false,

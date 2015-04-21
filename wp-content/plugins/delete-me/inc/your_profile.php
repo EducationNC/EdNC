@@ -12,8 +12,7 @@ if ( $profileuser->has_cap( $this->info['cap'] ) == false || ( is_multisite() &&
 $attributes = array();
 $attributes['class'] = $this->option['settings']['your_profile_class'];
 $attributes['style'] = $this->option['settings']['your_profile_style'];
-$attributes['href'] = esc_url( add_query_arg( array( $this->info['trigger'] => $profileuser->ID, $this->info['nonce'] => wp_create_nonce( $this->info['nonce'] ) ) ) );
-$attributes['onclick'] = "if ( ! confirm( '" . esc_html( addcslashes( str_replace( '%username%', $profileuser->user_login, $this->option['settings']['your_profile_js_confirm'] ), "'" ) ) . "' ) ) return false;";
+$attributes['href'] = esc_url( self_admin_url( 'options.php?page=' . $this->info['slug_prefix'] . '_confirmation' ) );
 
 // Remove empty attributes
 $attributes = array_filter( $attributes );

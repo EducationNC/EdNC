@@ -3,26 +3,26 @@ Contributors: cmc3215
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L5VY6QDSAAZUL
 Tags: delete, user delete, delete profile, delete account, delete own account, unregister, user unregister, unsubscribe, user unsubscribe, user management, multisite
 Requires at least: 3.4
-Tested up to: 4.0
-Stable tag: 1.5
+Tested up to: 4.2
+Stable tag: 1.6
 License: GPL2 http://www.gnu.org/licenses/gpl-2.0.html
 
-Allow users with specific WordPress roles to delete themselves from the `Users -> Your Profile` subpanel or anywhere Shortcodes can be used.
+Allow users with specific WordPress roles to delete themselves from the Your Profile page or anywhere Shortcodes can be used.
 
 == Description ==
 
-Allow users with specific WordPress roles to delete themselves from the `Users -> Your Profile` subpanel or anywhere Shortcodes can be used using the Shortcode `[plugin_delete_me /]`.
-Settings for this plugin are found on the `Settings -> Delete Me` subpanel. Multisite and Network Activation supported.
+Allow users with specific WordPress roles to delete themselves from the **Your Profile** page or anywhere Shortcodes can be used using the Shortcode `[plugin_delete_me /]`.
+Settings for this plugin are found on the **Settings -> Delete Me** subpanel. Multisite and Network Activation supported.
 
 **How it works:**
 
-* A user clicks the delete link, which defaults to `Delete Account`, but can be changed.
+* A user clicks the delete link, which defaults to "Delete Account", but can be changed.
 
-* User is asked to confirm they want to delete themselves, [OK] or [Cancel].
+* User is asked to confirm they want to delete themselves.
 
-* If [OK] the user is deleted along with all their Posts, Links, and (optionally) Comments.
+* If confirmed, user and all their Posts, Links, and (optionally) Comments are deleted.
 
-* Deleted user is (optionally) redirected to a landing page URL, which defaults to your homepage, but can be changed or left blank.
+* Deleted user (optionally) redirected to landing page URL, default is homepage, can be changed or left blank.
 
 **Settings available:**
 
@@ -32,11 +32,15 @@ Settings for this plugin are found on the `Settings -> Delete Me` subpanel. Mult
 
 * `<a>` tag clickable content of the delete link.
 
-* Javascript confirm text.
-
 * Landing page URL.
 
-* Enable or disable delete link on the `Users -> Your Profile` subpanel.
+* **Your Profile** confirmation page Heading, Warning, Button.
+
+* Enable or disable delete link on the **Your Profile** page.
+
+* Javascript confirm text for Shortcode.
+
+* Enable or disable Javascript confirm for Shortcode.
 
 * Multisite: Delete user from Network if they no longer belong to any other Network Sites after deletion from current Site.
 
@@ -46,13 +50,13 @@ Settings for this plugin are found on the `Settings -> Delete Me` subpanel. Mult
 
 == Installation ==
 
-1. Install automatically in WordPress on the `Plugins -> Add New` subpanel or upload the `delete-me` folder to the `/wp-content/plugins/` directory.
+1. Install automatically in WordPress on the **Plugins -> Add New** subpanel or upload the **delete-me** folder to the **/wp-content/plugins/** directory.
 
-2. Activate the plugin on the `Plugins` panel in WordPress.
+2. Activate the plugin on the **Plugins** panel in WordPress.
 
-3. Go to the `Settings -> Delete Me` subpanel. Select the WordPress roles you want to allow to delete themselves using Delete Me and save changes.
+3. Go to the **Settings -> Delete Me** subpanel. Select the WordPress roles you want to allow to delete themselves using Delete Me and save changes.
 
-4. The delete link will be placed automatically on the `Users -> Your Profile` subpanel for roles you allow, but if you have a Post or Page you'd like the delete link to appear on just copy and paste the Shortcode `[plugin_delete_me /]` there. A custom PHP template can use the Shortcode like so `<?php echo do_shortcode( '[plugin_delete_me /]' ); ?>`
+4. The delete link will be placed automatically on the **Your Profile** page for roles you allow, but if you have a Post or Page you'd like the delete link to appear on just copy and paste the Shortcode `[plugin_delete_me /]` there. A custom PHP template can use the Shortcode like so `<?php echo do_shortcode( '[plugin_delete_me /]' ); ?>`
 
 == Frequently Asked Questions ==
 
@@ -78,28 +82,36 @@ Nothing when using the self-closing Shortcode tag (i.e. `[plugin_delete_me /]`).
 
 = Where is a user sent after deleting themselves? =
 
-The `Settings -> Delete Me` subpanel lets you enter any URL you'd like to redirect deleted users to, set to homepage by default. You can leave "Landing URL" blank to remain at the same URL after deletion.
+The **Settings -> Delete Me** subpanel lets you enter any URL you'd like to redirect deleted users to, set to homepage by default. You can leave "Landing URL" blank to remain at the same URL after deletion.
 
 = Is there a confirmation before the user deletes themselves? =
 
-Yes, users must confirm by Javascript dialog box [OK] or [Cancel].
+Yes, the delete link on the **Your Profile** page leads to a confirmation page. The Shortcode delete link provides a Javascript confirm dialog [OK] [Cancel] by default, but may be disabled to make using a custom confirmation page easier.
 
 = May I be notified of users who delete themselves and what was deleted? =
 
-Yes. The `Settings -> Delete Me` subpanel has a setting called "E-mail Notification", just check the box and save changes.
+Yes. The **Settings -> Delete Me** subpanel has a setting called "E-mail Notification", just check the box and save changes.
 
 == Screenshots ==
 
-1. `Users -> Your Profile` subpanel.
-2. Post or Page using the Shortcode.
-3. `Settings -> Delete Me` subpanel.
+1. **Your Profile** page.
+2. **Your Profile** confirmation page.
+3. Post or Page using the Shortcode. You can disable the Javascript confirm and use the Shortcode on a custom confirmation page.
+4. **Settings -> Delete Me** subpanel.
 
 == Changelog ==
+
+= 1.6 =
+
+* Release date: 03/09/2015
+* **Your Profile** delete link now leads to a customizable confirmation page instead of the Javascript confirm dialog.
+* Added settings for **Your Profile** confirmation page Heading, Warning, and Button.
+* Added setting to enable or disable Javascript confirm dialog for Shortcode delete link. This was added to make it easier to use a custom confirmation page with the Shortcode.
 
 = 1.5 =
 
 * Release date: 10/18/2014
-* Your Profile and Shortcode "Landing URL" may now be left blank to remain at the same URL after deletion.
+* **Your Profile** and Shortcode "Landing URL" may now be left blank to remain at the same URL after deletion.
 * Removed setting and code for "Uninstall on Deactivate". You can still wipe all traces of the plugin from the Plugins panel by deactivating and clicking Delete.
 * Added button on settings page, "Restore Default Settings".
 * Shortcode deletion link no longer relies on the get_permalink() function. This makes the shortcode's placement more flexible and the link location more accurate.
@@ -110,7 +122,7 @@ Yes. The `Settings -> Delete Me` subpanel has a setting called "E-mail Notificat
 = 1.4 =
 
 * Release date: 04/24/2013
-* Added setting to enable or disable the delete link on the `Users -> Your Profile` subpanel.
+* Added setting to enable or disable the delete link on the **Your Profile** page.
 * Added an uninstall.php file. This enables removal of the plugin capabilities and settings when you "Delete" the plugin from the `Plugins` panel in WordPress.
 * Fixed possible PHP Warning: missing argument 2 `$wpdb->prepare()` on Multisite installations using WordPress 3.5+
 * Fixed possible PHP Fatal error: undefined function `is_plugin_active_for_network()` on Multisite installations when adding a new Site from outside the WordPress Admin pages.
@@ -133,7 +145,7 @@ Yes. The `Settings -> Delete Me` subpanel has a setting called "E-mail Notificat
 = 1.1 =
 
 * Release date: 04/11/2011
-* Added setting for detailed e-mail notification when user deletes themselves.
+* Added setting for detailed e-mail notification when a user deletes themselves.
 * Fixed undefined function errors for wp_delete_post and wp_delete_link when user has Posts or Links.
 
 = 1.0 =
@@ -143,26 +155,6 @@ Yes. The `Settings -> Delete Me` subpanel has a setting called "E-mail Notificat
 
 == Upgrade Notice ==
 
-= 1.5 =
+= 1.6 =
 
-Recommended - Minor stability fixes and improvements. See Changelog - https://wordpress.org/plugins/delete-me/changelog/
-
-= 1.4 =
-
-Critical - Major stability fixes and minor improvements. See Changelog - https://wordpress.org/plugins/delete-me/changelog/
-
-= 1.3 =
-
-Recommended - Added a setting to customize the text of the Javascript confirm dialog box.
-
-= 1.2 =
-
-Recommended - Major improvements added. See Changelog - https://wordpress.org/plugins/delete-me/changelog/
-
-= 1.1 =
-
-Critical - Major stability fix and minor improvement. See Changelog - https://wordpress.org/plugins/delete-me/changelog/
-
-= 1.0 =
-
-Initial release.
+Recommended - Improvements added. See Changelog - https://wordpress.org/plugins/delete-me/changelog/

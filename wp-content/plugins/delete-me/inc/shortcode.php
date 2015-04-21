@@ -10,7 +10,7 @@ $attributes = array();
 $attributes['class'] = $this->option['settings']['shortcode_class'];
 $attributes['style'] = $this->option['settings']['shortcode_style'];
 $attributes['href'] = esc_url( add_query_arg( array( $this->info['trigger'] => $this->user_ID, $this->info['nonce'] => wp_create_nonce( $this->info['nonce'] ) ) ) );
-$attributes['onclick'] = "if ( ! confirm( '" . esc_html( addcslashes( str_replace( '%username%', $this->user_login, $this->option['settings']['shortcode_js_confirm'] ), "'" ) ) . "' ) ) return false;";
+if ( $this->option['settings']['shortcode_js_confirm_enabled'] ) $attributes['onclick'] = "if ( ! confirm( '" . esc_html( addcslashes( str_replace( '%username%', $this->user_login, $this->option['settings']['shortcode_js_confirm_warning'] ), "'" ) ) . "' ) ) return false;";
 
 // Remove empty attributes
 $attributes = array_filter( $attributes );

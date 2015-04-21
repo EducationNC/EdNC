@@ -1,7 +1,6 @@
 <?php
 /**
- * @package    WPSEO
- * @subpackage Admin
+ * @package WPSEO\Admin
  */
 
 /**
@@ -246,7 +245,7 @@ class Yoast_TextStatistics {
 
 		$strText = $this->clean_text( $strText );
 		// Will be tripped by em dashes with spaces either side, among other similar characters
-		$intWords = (1 + $this->text_length( preg_replace( '`[^ ]`', '', $strText ) )); // Space count + 1 is word count
+		$intWords = ( 1 + $this->text_length( preg_replace( '`[^ ]`', '', $strText ) ) ); // Space count + 1 is word count
 		return $intWords;
 	}
 
@@ -386,7 +385,7 @@ class Yoast_TextStatistics {
 
 		// Some syllables do not follow normal rules - check for them
 		// Thanks to Joe Kovar for correcting a bug in the following lines
-		$intSyllableCount = ($intWordPartCount + $intPrefixSuffixCount);
+		$intSyllableCount = ( $intWordPartCount + $intPrefixSuffixCount );
 		foreach ( $arrSubSyllables as $strSyllable ) {
 			$intSyllableCount -= preg_match( '`' . $strSyllable . '`', $strWord );
 		}
@@ -407,7 +406,7 @@ class Yoast_TextStatistics {
 	 * @param    int|float $score Initial score
 	 * @param    int       $min   Minimum score allowed
 	 * @param    int       $max   Maximum score allowed
-	 * @param    int       $dps
+	 * @param    int       $dps   Round to # decimals
 	 *
 	 * @return    int|float
 	 */

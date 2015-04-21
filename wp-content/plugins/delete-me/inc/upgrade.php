@@ -6,6 +6,12 @@ if ( isset( $this ) == false || get_class( $this ) != 'plugin_delete_me' ) exit;
 $previous_version = $this->option['version'];
 
 // Make option changes
+if ( version_compare( $previous_version, '1.2', '>' ) && version_compare( $previous_version, '1.6', '<' ) ) {
+	
+	$this->option['settings']['your_profile_confirm_warning'] = str_replace( '\n', '<br />', $this->option['settings']['your_profile_js_confirm'] );
+	$this->option['settings']['shortcode_js_confirm_warning'] = $this->option['settings']['shortcode_js_confirm'];
+	
+}
 $this->option['version'] = $this->info['version'];
 $this->option = $this->sync_arrays( $this->default_option(), $this->option ); // sync old & new option arrays
 

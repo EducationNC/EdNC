@@ -1,7 +1,6 @@
 <?php
 /**
- * @package    WPSEO
- * @subpackage Admin
+ * @package WPSEO\Admin
  */
 
 /**
@@ -33,13 +32,13 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 
 		$options = WPSEO_Options::get_all();
 
-		foreach (
-			array(
+		$social_networks = array(
 				'opengraph'  => __( 'Facebook', 'wordpress-seo' ),
 				'twitter'    => __( 'Twitter', 'wordpress-seo' ),
 				'googleplus' => __( 'Google+', 'wordpress-seo' ),
-			) as $network => $label
-		) {
+		);
+
+		foreach ( $social_networks as $network => $label ) {
 			if ( true === $options[ $network ] ) {
 				if ( 'googleplus' == $network ) {
 					$network = 'google-plus'; // Yuck, I know.
@@ -55,14 +54,13 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 				self::$meta_fields['social'][ $network . '-image' ]['description'] = sprintf( $image_text, $label );
 			}
 		}
-
 	}
 
 	/**
 	 * Output the tab header for the Social tab
 	 */
 	public function tab_header() {
-		echo '<li class="social"><a class="wpseo_tablink" href="#wpseo_social">' . __( 'Social', 'wordpress-seo' ) . '</a></li>';
+		echo '<li class="social"><a class="wpseo_tablink" href="#wpseo_social">', __( 'Social', 'wordpress-seo' ), '</a></li>';
 	}
 
 	/**
@@ -120,6 +118,7 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 					break;
 				}
 			}
+			unset( $field_to_compare, $old_value, $new_value );
 
 			if ( $reset_facebook_cache ) {
 				wp_remote_get(

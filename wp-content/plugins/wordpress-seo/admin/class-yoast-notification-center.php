@@ -1,7 +1,6 @@
 <?php
 /**
- * @package    WPSEO
- * @subpackage Admin
+ * @package WPSEO\Admin
  */
 
 /**
@@ -120,10 +119,8 @@ class Yoast_Notification_Center {
 			}
 
 			// Set the cookie with notifications
-			set_transient( self::TRANSIENT_KEY, json_encode( $arr_notifications ), (MINUTE_IN_SECONDS * 10) );
-
+			set_transient( self::TRANSIENT_KEY, json_encode( $arr_notifications ), ( MINUTE_IN_SECONDS * 10 ) );
 		}
-
 	}
 
 	/**
@@ -149,7 +146,6 @@ class Yoast_Notification_Center {
 
 		// Clear the local stored notifications
 		$this->clear_notifications();
-
 	}
 
 	/**

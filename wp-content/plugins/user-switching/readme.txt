@@ -3,8 +3,8 @@
 Contributors: johnbillion  
 Tags: users, profiles, user switching, fast user switching, multisite, buddypress, bbpress, become, user management, developer  
 Requires at least: 3.1  
-Tested up to: 4.1  
-Stable tag: 1.0.3  
+Tested up to: 4.1.1  
+Stable tag: 1.0.5  
 License: GPL v2 or later  
 
 Instant switching between user accounts in WordPress.
@@ -53,6 +53,7 @@ See the [FAQ](https://wordpress.org/plugins/user-switching/faq/) for information
  * Italiano (Italian)
  * 日本語 (Japanese)
  * Lietuvių kalba (Lithuanian)
+ * Norsk bokmål (Norwegian)
  * فارسی (Persian)
  * Polski (Polish)
  * Português do Brasil (Brazilian Portuguese)
@@ -62,7 +63,7 @@ See the [FAQ](https://wordpress.org/plugins/user-switching/faq/) for information
  * Español (Spanish)
  * Türkçe (Turkish)
 
-Thanks to translations by Hassan Hisham, Tunghsiao Liu, Francois-Xavier Bénard, Ralph Stenzel, Rami Y, Yusuke Hayasaki, Tommixoft, Amin Ab, Bartosz Arendt, Raphael Mendonça, R J, Max Samael, Eko Ikhyar, Marcelo Pedra, Abdullah Pazarbasi, ArianServ, SilverXp, Evi Giannakou, Petya Raykovska, Martin Sauter, Yaser Tallo, Enrique Errando, Sami Keijonen, Ishka Michocka, Alessandro Curci, Alessandro Tesoro, and Ante Sepic!
+Thanks to translations by Hassan Hisham, Tunghsiao Liu, Francois-Xavier Bénard, Ralph Stenzel, Rami Y, Yusuke Hayasaki, Tommixoft, Amin Ab, Bartosz Arendt, Raphael Mendonça, R J, Max Samael, Eko Ikhyar, Marcelo Pedra, Abdullah Pazarbasi, ArianServ, SilverXp, Evi Giannakou, Petya Raykovska, Martin Sauter, Yaser Tallo, Enrique Errando, Sami Keijonen, Kalina Michocka, Alessandro Curci, Alessandro Tesoro, Ante Sepic, and Per Søderlind!
 
 == Screenshots ==
 
@@ -122,19 +123,23 @@ When a user switches off, the `switch_off_user` hook is called with the old user
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-
-* Croatian translation, plus a small fix to avoid PHP notices triggered by poorly coded plugins.
+= 1.0.5 =
+* Norwegian translation by Per Søderlind.
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.0.5 =
+* Norwegian translation by Per Søderlind.
+* Code standards tweaks.
 
-* Croation translation.
+= 1.0.4 =
+* Support for the new `logout_redirect` and `removable_query_args` filters in WordPress 4.2.
+
+= 1.0.3 =
+* Croation translation by Ante Sepic.
 * Avoid PHP notices caused by other plugins which erroneously use boolean `true` as a capability.
 
 = 1.0.2 =
-
 * Turkish translation by Abdullah Pazarbasi.
 * Romanian translation by ArianServ.
 * Dutch translation by Thom.
@@ -145,18 +150,15 @@ When a user switches off, the `switch_off_user` hook is called with the old user
 * Updated Arabic, Spanish, German, and Polish translations.
 
 = 1.0.1 =
-
 * Shorten the names of User Switching's cookies to avoid problems with Suhosin's over-zealous default rules.
 * Add backwards compatibility for the deprecated `OLDUSER_COOKIE` constant.
 
 = 1.0 =
-
 * Security hardening for sites that use HTTPS in the admin area and HTTP on the front end.
 * Add an extra auth check before the nonce verification.
 * Pretty icon next to the switch back links.
 
 = 0.9 =
-
 * Minor fixes for the `login_redirect` filter.
 * Increase the specificity of the `switch_to_old_user` and `switch_off` nonces.
 
