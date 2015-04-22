@@ -37,7 +37,8 @@ $auth = curl_exec($ch);
 // * Example:
 //   https://sandbox.salsalabs.com/api/getReport.sjs?object=supporter&groupBy=Date_Created
 //
-$fields = 'report_KEY=109985&userVals=u128425=2015-01-01&userVals=u128426=2015-12-31';
+// $fields = 'report_KEY=109985&userVals=u128425=2015-01-01&userVals=u128426=2015-12-31';
+$fields = 'report_KEY=110123';
 curl_setopt($ch, CURLOPT_URL, "$url/getReport.sjs");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 $count = curl_exec($ch);
@@ -56,4 +57,4 @@ $response = simplexml_load_string($count);
 // print_r($response);
 
 // Parse SimpleXML object and return unique number of supporters to the variable.
-$unique_supporters = $response->report->row->UniqueDonorsinDateRange->__toString();
+$unique_supporters = $response->report->row->SupportersinGroup->__toString();
