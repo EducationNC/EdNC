@@ -33,6 +33,18 @@ add_filter( 'image_size_names_choose', 'ednc_insert_custom_image_sizes' );
 
 
 /**
+ * Clear transient whenever thank you page is loaded after donation
+ */
+function clear_supporter_transient() {
+  if (is_page('thank-you')) {
+    delete_transient('unique_supporters');
+  }
+}
+add_filter('wp', 'clear_supporter_transient');
+
+
+
+/**
  * Clean up the_excerpt()
  */
 function roots_excerpt_more($more) {
