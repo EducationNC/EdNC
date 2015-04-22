@@ -78,4 +78,15 @@
     return $output;
   }
   add_shortcode('email-signup', 'email_signup_shortcode');
+
+  // Donation social share shortcode
+  function donate_share_shortcode($atts, $content = null) {
+    extract( shortcode_atts( array(
+    ), $atts) );
+
+    $output = get_template_part('templates/donate-social-share');
+
+    return $output;
+  }
+  add_shortcode('donate-share', 'donate_share_shortcode');
 ?>
