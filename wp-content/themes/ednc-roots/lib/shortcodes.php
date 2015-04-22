@@ -73,9 +73,10 @@
     extract( shortcode_atts( array(
     ), $atts) );
 
-    $output = get_template_part('templates/email-signup');
+    ob_start();
+    get_template_part('templates/email-signup');
 
-    return $output;
+    return ob_get_clean();
   }
   add_shortcode('email-signup', 'email_signup_shortcode');
 
@@ -84,9 +85,10 @@
     extract( shortcode_atts( array(
     ), $atts) );
 
-    $output = get_template_part('templates/donate-social-share');
+    ob_start();
+    get_template_part('templates/donate-social-share');
 
-    return $output;
+    return ob_get_clean();
   }
   add_shortcode('donate-share', 'donate_share_shortcode');
 ?>
