@@ -39,8 +39,8 @@
                 set_transient('unique_supporters', $unique_supporters, HOUR_IN_SECONDS);
               }
 
-              // Add 9 supporters (checks directly to Mebane)
-              $unique_supporters = $unique_supporters + 9;
+              // Add 5 supporters (checks directly to Mebane)
+              $unique_supporters = $unique_supporters + 5;
               ?>
 
               <div class="progress">
