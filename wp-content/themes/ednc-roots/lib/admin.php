@@ -79,6 +79,7 @@ function bills_custom_column_heading($columns) {
 	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
 	$new_columns['bill-type'] = 'Bill Type';
+	$new_columns['bill-status'] = 'Bill Status';
 	$new_columns['date'] = 'Date';
 
 	$columns = $new_columns;
@@ -88,6 +89,10 @@ function bills_custom_column_heading($columns) {
 function bills_custom_column_content($column_name, $id) {
 	if ( 'bill-type' == $column_name ) {
 		echo get_the_term_list($id, 'bill-type', '', ', ', '');
+	}
+
+	if ( 'bill-status' == $column_name ) {
+		echo get_the_term_list($id, 'bill-status', '', ', ', '');
 	}
 }
 

@@ -373,6 +373,26 @@ register_taxonomy( 'bill-type',
 	)
 );
 
+register_taxonomy( 'bill-status',
+	array('bill'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Bill Status' ),
+			'singular_name' => __( 'Bill Status' ),
+			'search_items' =>  __( 'Search Bill Statuses' ),
+			'all_items' => __( 'All Bill Statuses' ),
+			'parent_item' => __( 'Parent Bill Status' ),
+			'parent_item_colon' => __( 'Parent Bill Status:' ),
+			'edit_item' => __( 'Edit Bill Status' ),
+			'update_item' => __( 'Update Bill Status' ),
+			'add_new_item' => __( 'Add New Bill Status' ),
+			'new_item_name' => __( 'New Bill Status Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
+);
+
 register_taxonomy( 'appearance',
 	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
