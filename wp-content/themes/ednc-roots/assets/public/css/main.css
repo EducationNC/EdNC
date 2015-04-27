@@ -7426,6 +7426,9 @@ td, th {
        -o-transform: translateX(-50%);
           transform: translateX(-50%);
 }
+.carousel-indicators li {
+  margin: 0 !important;
+}
 
 .carousel-inner {
   z-index: 1;
