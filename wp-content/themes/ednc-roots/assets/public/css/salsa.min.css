@@ -6950,6 +6950,22 @@ section {
       color: #8B185E;
       text-decoration: none; }
 
+.top-banner {
+  position: relative;
+  margin-top: -3.25em;
+  margin-bottom: 5em;
+  width: 100%;
+  height: 162px;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: center; }
+  @media (min-width: 768px) {
+    .top-banner {
+      height: 262px; } }
+  @media (min-width: 992px) {
+    .top-banner {
+      margin-top: -5em; } }
+
 #salsaDonationHeader, .orderform {
   position: relative;
   min-height: 1px;
@@ -6967,9 +6983,11 @@ section {
 
   .orderform {
     float: left;
-    width: 41.66667%;
+    width: 50%;
     left: 8.33333%;
-    padding-top: 70px; } }
+    padding-top: 60px; } }
+.salsa.salsa .content {
+  margin: 0; }
 .salsa.salsa .search input {
   margin: 0px;
   padding: 5px 10px;
@@ -6987,9 +7005,23 @@ section {
 .salsa.salsa label {
   font-family: Merriweather, serif;
   font-size: 16px;
-  font-weight: 300;
   line-height: 1.42857;
   color: #2B3E50; }
+.salsa.salsa input[type=text] {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  border: 2px solid #D4D8D9;
+  height: 44px;
+  padding: 12px;
+  width: 100%; }
+.salsa.salsa select {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  border: 2px solid #D4D8D9;
+  background: #FFFFFF;
+  border-radius: 0px !important;
+  height: 44px;
+  padding: 12px; }
 .salsa.salsa .helpText {
   font-family: Lato, sans-serif;
   font-size: 16px;
@@ -7000,28 +7032,167 @@ section {
 .salsa.salsa .formRow {
   margin-bottom: 1em;
   padding-left: 0; }
+.salsa.salsa #donation_amount .select_amount .amount {
+  display: inline-block;
+  margin: 0 15px 15px 0; }
+  .salsa.salsa #donation_amount .select_amount .amount a {
+    background-color: #ECF0F1;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFF3F3', endColorstr='#FFD4D8D9');
+    background-image: -o-linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+    background-image: -webkit-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+    background-image: -o-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+    background-image: linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+    display: block;
+    padding: 11px 12px;
+    height: 44px;
+    color: #2B3E50;
+    text-decoration: none; }
+    .salsa.salsa #donation_amount .select_amount .amount a.active {
+      background-color: #ADBB4A;
+      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFB8C455', endColorstr='#FFA1AD42');
+      background-image: -o-linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
+      background-image: -webkit-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+      background-image: -o-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+      background-image: linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
+      color: #FFFFFF; }
+  .salsa.salsa #donation_amount .select_amount .amount.other {
+    background-color: #ECF0F1;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFF3F3', endColorstr='#FFD4D8D9');
+    background-image: -o-linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+    background-image: -webkit-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+    background-image: -o-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+    background-image: linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+    padding: 11px 12px;
+    height: 44px; }
+    .salsa.salsa #donation_amount .select_amount .amount.other.active {
+      background-color: #ADBB4A;
+      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFB8C455', endColorstr='#FFA1AD42');
+      background-image: -o-linear-gradient(90deg, #B8C455 0%, #A1AD42 100%);
+      background-image: -webkit-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+      background-image: -o-linear-gradient(0deg, #B8C455 0%, #A1AD42 100%);
+      background-image: linear-gradient(90deg, #B8C455 0%, #A1AD42 100%); }
+    .salsa.salsa #donation_amount .select_amount .amount.other input {
+      margin: 0;
+      height: 22px;
+      width: 100px;
+      padding: 0 5px;
+      border: none;
+      color: #2B3E50; }
 .salsa.salsa #donation_amount .formRow.formRow {
   clear: both !important;
   margin-bottom: 0; }
 .salsa.salsa #donation_amount .formRow.otherRow {
   margin-bottom: 1em; }
-.salsa.salsa input[type=text] {
+.salsa.salsa #credit_card_information {
+  background-color: #ECF0F1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFF3F3', endColorstr='#FFD4D8D9');
+  background-image: -o-linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: -webkit-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: -o-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+  padding: 14px;
+  margin-bottom: 40px; }
+  .salsa.salsa #credit_card_information .cc_card {
+    display: inline-block;
+    margin: 0 15px 0 0; }
+    .salsa.salsa #credit_card_information .cc_card path {
+      fill: #2B3E50; }
+    .salsa.salsa #credit_card_information .cc_card .active path {
+      fill: #ADBB4A; }
+  @media (min-width: 768px) {
+    .salsa.salsa #credit_card_information > div:nth-child(3) {
+      float: left;
+      width: 50%;
+      padding-right: 20px; } }
+  @media (min-width: 768px) {
+    .salsa.salsa #credit_card_information > div:nth-child(5) {
+      float: left;
+      width: 50%;
+      clear: none; } }
+  .salsa.salsa #credit_card_information > div:nth-child(5) a {
+    font-family: Lato, sans-serif;
+    font-weight: 300;
+    font-style: italic; }
+  .salsa.salsa #credit_card_information > div:nth-child(5) .input3 {
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    border: 2px solid #D4D8D9;
+    height: 44px;
+    padding: 12px;
+    width: 75px;
+    display: block; }
+  .salsa.salsa #credit_card_information > div:nth-child(5) .required {
+    display: none; }
+.salsa.salsa .supporterInfo > br {
+  display: none; }
+.salsa.salsa .supporterInfo > .diaFields .clear {
+  clear: none; }
+@media (min-width: 768px) {
+  .salsa.salsa .supporterInfo > .diaFields > div:nth-child(3) {
+    float: left;
+    width: 50%;
+    padding-right: 20px; }
+  .salsa.salsa .supporterInfo > .diaFields > div:nth-child(5) {
+    float: left;
+    width: 50%;
+    clear: none; }
+  .salsa.salsa .supporterInfo > .diaFields > div:nth-child(13), .salsa.salsa .supporterInfo > .diaFields > div:nth-child(15) {
+    float: left;
+    width: 33%;
+    padding-right: 20px;
+    clear: none; }
+  .salsa.salsa .supporterInfo > .diaFields > div:nth-child(17) {
+    float: left;
+    width: 33%;
+    clear: none; } }
+.salsa.salsa .supporterInfo .state_dropdown {
   width: 100%; }
-.salsa.salsa input[name=amountOther] {
-  width: 185px; }
-.salsa.salsa .supporterInfo > br,
 .salsa.salsa #preCustomText {
   display: none; }
+.salsa.salsa .customFields {
+  clear: both; }
+.salsa.salsa #personal_information {
+  margin-bottom: 30px; }
+.salsa.salsa #honorof label {
+  display: block; }
+.salsa.salsa #honorof textarea {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  border: 2px solid #D4D8D9;
+  padding: 12px;
+  width: 100%; }
+.salsa.salsa #honorof input {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  border: 2px solid #D4D8D9;
+  height: 44px;
+  padding: 12px;
+  width: 100%; }
+.salsa.salsa #honorof input[type=radio] {
+  display: block;
+  float: left;
+  clear: left;
+  height: auto;
+  width: auto; }
 .salsa.salsa .error {
-  background: #f7d2ec;
-  border-color: #67124B;
-  color: #8B185E; }
+  background: #ffe5e5;
+  border-color: #FF4C4C;
+  color: #FF4C4C;
+  padding-bottom: 25px;
+  width: 100%; }
 .salsa.salsa .message {
   background: #cedceb;
   border-color: #4D74A1;
-  color: #2B3E50; }
+  color: #2B3E50;
+  padding-bottom: 25px;
+  width: 100%; }
 .salsa.salsa #submit {
   margin: 1.5em 0 0 0; }
+.salsa.salsa .submit {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  min-width: 50%; }
 
 .timeline-wrap {
   -webkit-transition: -webkit-transform .3s;

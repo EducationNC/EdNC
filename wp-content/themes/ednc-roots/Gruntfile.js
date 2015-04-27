@@ -94,8 +94,8 @@ module.exports = function(grunt) {
       salsa: {
         option: {
           style: 'compressed',
-          compass: true,
-          sourcemap: 'auto'
+          compass: false,
+          sourcemap: false
         },
         files: {
           'assets/public/css/salsa.min.css': [
