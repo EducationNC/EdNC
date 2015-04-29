@@ -183,7 +183,7 @@ $featured_ids = array();
     </div>
 
     <div class="col-md-3">
-      <?php get_template_part('templates/sidebar', 'home-100-days'); ?>
+      <?php get_template_part('templates/sidebar', 'home'); ?>
     </div>
   </div>
 

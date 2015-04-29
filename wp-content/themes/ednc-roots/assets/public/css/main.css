@@ -10053,7 +10053,7 @@ section {
 }
 
 .friendraiser-banner {
-  height: 115px;
+  height: 220px;
   overflow: hidden;
   position: relative;
 }
@@ -10074,14 +10074,31 @@ section {
 .friendraiser-banner .container, .friendraiser-banner .row {
   height: 100%;
 }
-.friendraiser-banner .col-md-8 {
-  height: 100%;
-  position: relative;
-}
-.friendraiser-banner p {
+.friendraiser-banner h2, .friendraiser-banner p {
   color: #FFFFFF;
   text-shadow: 0px 0px 58px rgba(0, 0, 0, 0.76);
   text-align: left;
+  margin-top: 20px;
+}
+@media (max-width: 991px) {
+  .friendraiser-banner p {
+    -webkit-transform: none;
+        -ms-transform: none;
+         -o-transform: none;
+            transform: none;
+  }
+}
+@media (min-width: 992px) {
+  .friendraiser-banner {
+    height: 133px;
+  }
+  .friendraiser-banner .col-md-7 {
+    height: 100%;
+    position: relative;
+  }
+  .friendraiser-banner p {
+    margin-top: 0px;
+  }
 }
 
 .friendraiser-ask {
