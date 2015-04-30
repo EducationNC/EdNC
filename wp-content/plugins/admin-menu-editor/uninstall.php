@@ -2,7 +2,7 @@
 
 /**
  * @author W-Shadow 
- * @copyright 2009
+ * @copyright 2015
  *
  * The uninstallation script.
  */

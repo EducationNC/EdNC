@@ -3,7 +3,7 @@
 Plugin Name: TinyMCE Advanced
 Plugin URI: http://www.laptoptips.ca/projects/tinymce-advanced/
 Description: Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
-Version: 4.1.7
+Version: 4.1.9
 Author: Andrew Ozz
 Author URI: http://www.laptoptips.ca/
 
@@ -19,6 +19,7 @@ if ( ! class_exists('Tinymce_Advanced') ) :
 
 class Tinymce_Advanced {
 
+	private $required_version = '4.2';
 	private $settings;
 	private $admin_settings;
 	private $admin_options;
@@ -75,11 +76,6 @@ class Tinymce_Advanced {
 			add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
 		}
 
-		// Don't load on non-supported WP versions
-		if ( ! $this->check_minimum_supported_version() ) {
-			return;
-		}
-
 		add_filter( 'mce_buttons', array( &$this, 'mce_buttons_1' ), 999, 2 );
 		add_filter( 'mce_buttons_2', array( &$this, 'mce_buttons_2' ), 999 );
 		add_filter( 'mce_buttons_3', array( &$this, 'mce_buttons_3' ), 999 );
@@ -90,6 +86,8 @@ class Tinymce_Advanced {
 		add_filter( 'mce_external_plugins', array( &$this, 'mce_external_plugins' ), 999 );
 		add_filter( 'tiny_mce_plugins', array( &$this, 'tiny_mce_plugins' ), 999 );
 		add_action( 'after_wp_tiny_mce', array( &$this, 'after_wp_tiny_mce' ) );
+
+		add_action( 'before_wp_tiny_mce', array( &$this, 'show_version_warning' ) );
 	}
 
 	// When using a plugin that changes the paths dinamically, set these earlier than 'plugins_loaded' 50.
@@ -101,33 +99,13 @@ class Tinymce_Advanced {
 			define( 'TADV_PATH', plugin_dir_path( __FILE__ ) );
 	}
 
-	private function remove_settings( $all = false ) {
-		if ( $all ) {
-			delete_option( 'tadv_settings' );
-			delete_option( 'tadv_admin_settings' );
-			delete_option( 'tadv_version' );
-		}
-
-		// Delete old options
-		delete_option('tadv_options');
-		delete_option('tadv_toolbars');
-		delete_option('tadv_plugins');
-		delete_option('tadv_btns1');
-		delete_option('tadv_btns2');
-		delete_option('tadv_btns3');
-		delete_option('tadv_btns4');
-		delete_option('tadv_allbtns');
-	}
-
 	function enqueue_scripts( $page ) {
 		if ( 'settings_page_tinymce-advanced' == $page ) {
 			wp_enqueue_script( 'tadv-js', TADV_URL . 'js/tadv.js', array( 'jquery-ui-sortable' ), '4.0', true );
 			wp_enqueue_style( 'tadv-mce-skin', includes_url( 'js/tinymce/skins/lightgray/skin.min.css' ), array(), '4.0' );
 			wp_enqueue_style( 'tadv-css', TADV_URL . 'css/tadv-styles.css', array( 'editor-buttons' ), '4.0' );
 
-			if ( substr( get_locale(), 0, 2 ) !== 'en' ) {
-				add_action( 'admin_footer', array( &$this, 'load_mce_translation' ) );
-			}
+			add_action( 'admin_footer', array( &$this, 'load_mce_translation' ) );
 		}
 	}
 
@@ -136,15 +114,9 @@ class Tinymce_Advanced {
 			require( ABSPATH . WPINC . '/class-wp-editor.php' );
 		}
 
-		$strings = _WP_Editors::wp_mce_translation();
-		$strings = preg_replace( '/tinymce.addI18n[^{]+/', '', $strings );
-		$strings = preg_replace( '/[^}]*$/', '', $strings );
-
-		if ( $strings ) {
-			?>
-			<script type="text/javascript">var tadvTranslation = <?php echo $strings; ?>;</script>
-			<?php
-		}
+		?>
+		<script>var tadvTranslation = <?php echo _WP_Editors::wp_mce_translation( '', true ); ?>;</script>
+		<?php
 	}
 
 	function load_settings() {
@@ -177,9 +149,43 @@ class Tinymce_Advanced {
 		$this->get_all_buttons();
 	}
 
-	// Min version 4.1-RC1
+	public function show_version_warning() {
+		if ( is_admin() && current_user_can( 'update_plugins' ) && get_current_screen()->base === 'post' ) {
+			$this->warn_if_unsupported();
+		}
+	}
+
+	public function warn_if_unsupported() {
+		if ( ! $this->check_minimum_supported_version() ) {
+			$wp_ver = ! empty( $GLOBALS['wp_version'] ) ? $GLOBALS['wp_version'] : '(undefined)';
+
+			?>
+			<div class="error"><p>
+			<?php
+
+			printf( __( 'TinyMCE Advanced requires WordPress version %1$s or newer. It appears that you are running %2$s. This can make the editor unstable.', 'tinymce-advanced' ),
+				$this->required_version,
+				esc_html( $wp_ver )
+			);
+
+			echo '<br>';
+
+			printf( __( 'Please upgrade your WordPress installation or download an <a href="%s">older version of the plugin</a>.', 'tinymce-advanced' ),
+				'https://wordpress.org/plugins/tinymce-advanced/download/'
+			);
+
+			?>
+			</p></div>
+			<?php
+		}
+	}
+
+	// Min version
 	private function check_minimum_supported_version() {
-		return ( isset( $GLOBALS['wp_db_version'] ) && $GLOBALS['wp_db_version'] >= 30133 );
+		$wp_version = isset( $GLOBALS['wp_version'] ) ? $GLOBALS['wp_version'] : '0';
+		$wp_version = str_replace( '-src', '', $wp_version );
+
+		return ( version_compare( $wp_version, $this->required_version, '>=' ) );
 	}
 
 	private function check_plugin_version() {
@@ -197,7 +203,14 @@ class Tinymce_Advanced {
 
 		if ( $version < 4000 ) {
 			// Upgrade to TinyMCE 4.0, clean options
-			$this->remove_settings();
+			delete_option('tadv_options');
+			delete_option('tadv_toolbars');
+			delete_option('tadv_plugins');
+			delete_option('tadv_btns1');
+			delete_option('tadv_btns2');
+			delete_option('tadv_btns3');
+			delete_option('tadv_btns4');
+			delete_option('tadv_allbtns');
 		}
 	}
 
@@ -244,8 +257,9 @@ class Tinymce_Advanced {
 			'anchor' => 'Anchor',
 			'searchreplace' => 'Find and replace',
 			'visualblocks' => 'Show blocks',
-		//	'visualchars' => 'Hidden chars',
+			'visualchars' => 'Show invisible characters',
 			'code' => 'Source code',
+			'wp_code' => 'Code',
 			'fullscreen' => 'Fullscreen',
 			'insertdatetime' => 'Insert date/time',
 			'media' => 'Insert/edit video',
@@ -409,7 +423,7 @@ class Tinymce_Advanced {
 	function mce_options( $init ) {
 		if ( $this->check_admin_setting( 'no_autop' ) ) {
 			$init['wpautop'] = false;
-			$init['indent'] = true;
+	//		$init['indent'] = true;
 			$init['tadv_noautop'] = true;
 		}
 

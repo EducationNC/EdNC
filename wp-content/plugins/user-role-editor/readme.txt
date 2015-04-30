@@ -3,7 +3,7 @@ Contributors: shinephp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=vladimir%40shinephp%2ecom&lc=RU&item_name=ShinePHP%2ecom&item_number=User%20Role%20Editor%20WordPress%20plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: user, role, editor, security, access, permission, capability
 Requires at least: 4.0
-Tested up to: 4.1.1
+Tested up to: 4.2.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -85,6 +85,11 @@ Some translations may be outdated. If you have better translation for some phras
 
 
 == Changelog ==
+
+= 4.18.4 =
+* 30.04.2015
+* Calls to the functions add_query_arg(), remove_query_arg() are escaped with esc_url_raw() to exclude potential XSS vulnerabilities. Nothing critical: both calls of add_query_arg() are placed at the currently unused sections of the code.
+* Italian translation was updated. Thanks to Leo.
 
 = 4.18.3 =
 * 24.02.2015

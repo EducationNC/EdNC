@@ -230,7 +230,7 @@ class Garvs_WP_Lib {
   
   public function get_current_url() {
       global $wp;
-      $current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+      $current_url = esc_url_raw(add_query_arg($wp->query_string, '', home_url($wp->request )));
       
       return $current_url;
   }

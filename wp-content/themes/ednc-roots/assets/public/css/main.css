@@ -9393,6 +9393,9 @@ section {
 .single-format-chat .wrapper, .single-format-chat .oc-pusher, .single-format-chat .inner-wrapper {
   height: 100%;
 }
+.single-format-chat .friendraiser-wrap {
+  display: none;
+}
 .single-format-chat .content-info {
   position: relative;
   z-index: 200;

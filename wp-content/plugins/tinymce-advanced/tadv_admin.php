@@ -12,23 +12,6 @@ if ( ! current_user_can( 'manage_options' ) ) {
 load_plugin_textdomain( 'tinymce-advanced', false, 'tinymce-advanced/langs' );
 $message = '';
 
-// TODO admin || SA
-if ( ! $this->check_minimum_supported_version() ) {
-	?>
-	<div class="wrap">
-	<div class="error">
-	<p><?php printf(
-		__( 'This plugin requires WordPress version %1$s or newer. Please upgrade your WordPress installation or download an <a href="%2$s">older version of the plugin</a>.', 'tinymce-advanced' ),
-		'4.0',
-		'//wordpress.org/extend/plugins/tinymce-advanced/download/'
-	); ?></p>
-	</div>
-	</div>
-	<?php
-
-	return;
-}
-
 $imgpath = TADV_URL . 'images/';
 $tadv_options_updated = false;
 $settings = $admin_settings = array();
@@ -249,6 +232,9 @@ $all_buttons = $this->get_all_buttons();
 <div class="wrap" id="contain">
 <h2><?php _e( 'Editor Settings', 'tinymce-advanced' ); ?></h2>
 <?php
+
+// TODO admin || SA
+$this->warn_if_unsupported();
 
 if ( isset( $_POST['tadv-save'] ) && empty( $message ) ) {
 	?><div class="updated"><p><?php _e( 'Settings saved.', 'tinymce-advanced' ); ?></p></div><?php

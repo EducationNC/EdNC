@@ -452,3 +452,23 @@ $featured_ids = array();
     <p class="text-right"><a href="#" data-toggle="modal" data-target="#photoSubmissionModal">Submit your photos &raquo;</a></p>
   </div>
 </section>
+
+<section class="container-fluid timeline-wrap">
+  <script type="text/javascript" src="https://s3.amazonaws.com/cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
+  <script type="text/javascript">
+  jQuery(document).ready(function($) {
+    createStoryJS({
+      type:           'timeline',
+      width:          '100%',
+      height:         '450',
+      source:         'https://docs.google.com/spreadsheets/d/1bQ6PZPO_bRtRYmRygt8MqGxhZzsu-S2nHHGEjbzIwoI/pubhtml',
+      embed_id:       'timeline-100',
+      start_at_slide: 1
+    });
+  });
+  </script>
+
+  <div class="timeline-100 hidden-sm hidden-xs">
+    <div id="timeline-100"></div>
+  </div>
+</section>

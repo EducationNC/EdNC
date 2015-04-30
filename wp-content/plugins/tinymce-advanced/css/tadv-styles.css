@@ -176,6 +176,7 @@ ul.container,
 
 .tadvdropzone .tadvmodule .tadvitem:hover {
 	border-color: #999;
+	background-image: none;
 }
 
 .tadvdropzone ul {
