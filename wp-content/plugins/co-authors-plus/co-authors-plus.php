@@ -206,7 +206,7 @@ class coauthors_plus {
 	 *     add_filter( 'coauthors_guest_authors_enabled', '__return_false' )
 	 *
 	 * @since 3.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_guest_authors_enabled() {
@@ -423,7 +423,7 @@ class coauthors_plus {
 					);
 				if ( 'post' != $post->post_type )
 					$args['post_type'] = $post->post_type;
-				$author_filter_url = add_query_arg( $args, admin_url( 'edit.php' ) );
+				$author_filter_url = esc_url( add_query_arg( $args, admin_url( 'edit.php' ) ) );
 				?>
 				<a href="<?php echo esc_url( $author_filter_url ); ?>"
 				data-user_nicename="<?php echo esc_attr( $author->user_nicename ) ?>"
@@ -753,7 +753,7 @@ class coauthors_plus {
 
 	/**
 	 * Add one or more co-authors as bylines for a post
-	 * 
+	 *
 	 * @param int
 	 * @param array
 	 * @param bool
@@ -782,7 +782,7 @@ class coauthors_plus {
 		foreach( $coauthors as &$author_name ){
 
 			$author = $this->get_coauthor_by( 'user_nicename', $author_name );
-			$coauthor_objects[] = $author; 
+			$coauthor_objects[] = $author;
 			$term = $this->update_author_term( $author );
 			$author_name = $term->slug;
 		}
@@ -923,7 +923,7 @@ class coauthors_plus {
 	 *
 	 * If an author has no posts, we only want to force the queried object to be
 	 * the author if they're a member of the blog.
-	 * 
+	 *
 	 * If the author does have posts, it doesn't matter that they're not an author.
 	 *
 	 * Alternatively, on an author archive, if the first story has coauthors and
@@ -1129,7 +1129,7 @@ class coauthors_plus {
 			$class = ' class="current"';
 		else
 			$class = '';
-		$views['mine'] = $view_mine = '<a' . $class . ' href="' . add_query_arg( $mine_args, admin_url( 'edit.php' ) ) . '">' . __( 'Mine', 'co-authors-plus' ) . '</a>';
+		$views['mine'] = $view_mine = '<a' . $class . ' href="' . esc_url( add_query_arg( $mine_args, admin_url( 'edit.php' ) ) ) . '">' . __( 'Mine', 'co-authors-plus' ) . '</a>';
 
 		$views['all'] = str_replace( $class, '', $all_view );
 		$views = array_reverse( $views );
@@ -1147,20 +1147,20 @@ class coauthors_plus {
 		?>
 			<script type="text/javascript">
 				// AJAX link used for the autosuggest
-				var coAuthorsPlus_ajax_suggest_link = '<?php echo add_query_arg(
+				var coAuthorsPlus_ajax_suggest_link = '<?php echo esc_url_raw( add_query_arg(
 					array(
 						'action' => 'coauthors_ajax_suggest',
 						'post_type' => get_post_type(),
 					),
 					wp_nonce_url( 'admin-ajax.php', 'coauthors-search' )
-				); ?>';
+				) ); ?>';
 			</script>
 		<?php
 	}
 
 	/**
 	 * Helper to only add javascript to necessary pages. Avoids bloat in admin.
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_valid_page() {
@@ -1195,10 +1195,10 @@ class coauthors_plus {
 			return $allcaps;
 
 		$current_user = wp_get_current_user();
-		if ( 'publish' == get_post_status( $post_id ) && 
+		if ( 'publish' == get_post_status( $post_id ) &&
 			( isset( $obj->cap->edit_published_posts ) && ! empty( $current_user->allcaps[$obj->cap->edit_published_posts] ) ) )
 			$allcaps[$obj->cap->edit_published_posts] = true;
-		elseif ( 'private' == get_post_status( $post_id ) && 
+		elseif ( 'private' == get_post_status( $post_id ) &&
 			( isset( $obj->cap->edit_private_posts ) && ! empty( $current_user->allcaps[$obj->cap->edit_private_posts] ) ) )
 			$allcaps[$obj->cap->edit_private_posts] = true;
 
@@ -1274,7 +1274,7 @@ class coauthors_plus {
 	 * Filter Edit Flow's 'ef_calendar_item_information_fields' to add co-authors
 	 *
 	 * @see https://github.com/Automattic/Co-Authors-Plus/issues/2
-	 * 
+	 *
 	 * @param array $information_fields
 	 * @param int $post_id
 	 * @return array
@@ -1300,7 +1300,7 @@ class coauthors_plus {
 	 * Filter Edit Flow's 'ef_story_budget_term_column_value' to add co-authors to the story budget
 	 *
 	 * @see https://github.com/Automattic/Co-Authors-Plus/issues/2
-	 * 
+	 *
 	 * @param string $column_name
 	 * @param object $post
 	 * @param object $parent_term
@@ -1550,5 +1550,3 @@ function wp_notify_moderator( $comment_id ) {
 	return true;
 }
 endif;
-
-

@@ -194,13 +194,13 @@ class CoAuthors_WP_List_Table extends WP_List_Table {
 				'id'           => $item->ID,
 				'_wpnonce'     => wp_create_nonce( 'guest-author-delete' ),
 			);
-		$item_delete_link = add_query_arg( $args, menu_page_url( 'view-guest-authors', false ) );
+		$item_delete_link = esc_url( add_query_arg( $args, menu_page_url( 'view-guest-authors', false ) ) );
 		$item_view_link = get_author_posts_url( $item->ID, $item->user_nicename );
 
 		$output = '';
 
 		$output .= coauthors_get_avatar( $item, 32 );
-		
+
 		if ( current_user_can( 'edit_post', $item->ID ) ) {
 			$output .= '<a href="' . esc_url( $item_edit_link ) . '">' . esc_html( $item->display_name ) . '</a>';
 		} else {
