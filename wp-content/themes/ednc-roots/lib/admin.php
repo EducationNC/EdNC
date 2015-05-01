@@ -26,7 +26,11 @@ add_filter( 'request', 'ednc_bios_admin_orderby' );
 function posts_custom_column_heading($columns) {
 	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
-	$new_columns['author'] = 'Author';
+	if ( function_exists( 'coauthors' ) ) {
+		$new_columns['coauthors'] = 'Authors';
+	} else {
+		$new_columns['author'] = 'Author';
+	}
 	$new_columns['appearance'] = 'Appearance';
 	$new_columns['categories'] = 'Categories';
 	$new_columns['column'] = 'Column';
