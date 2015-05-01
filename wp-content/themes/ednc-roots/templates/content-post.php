@@ -207,33 +207,82 @@ $category = get_the_category();
       <?php if ($comments_open == 1) { ?>
         <div class="row">
           <div class="col-lg-7 col-md-9 col-centered">
-            <h3>About <?php the_author(); ?></h3>
+
             <?php
-            $args = array(
-              'post_type' => 'bio',
-              'meta_query' => array(
-                array(
-                  'key' => 'user',
-                  'value' => $author_id
+            if ( function_exists( 'get_coauthors' ) ) {
+              $coauthors = get_coauthors();
+              $coauthors_count = count($coauthors);
+
+              if ($coauthors_count > 1) {
+                echo '<h3>About the authors</h3>';
+              }
+
+              foreach ($coauthors as $author) {
+                if ($coauthors_count == 1) {
+                  echo '<h3>About ' . $author->display_name . '</h3>';
+                }
+
+                $args = array(
+                  'post_type' => 'bio',
+                  'meta_query' => array(
+                    array(
+                      'key' => 'user',
+                      'value' => $author->ID
+                    )
+                  )
+                );
+
+                $bio = new WP_Query($args);
+
+                if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+
+                  <div class="row bottom-margin">
+                    <div class="col-xs-5 col-sm-3">
+                      <?php the_post_thumbnail('bio-headshot'); ?>
+                    </div>
+
+                    <div class="col-xs-7 col-sm-9">
+                      <?php
+                      if ($coauthors_count > 1) {
+                        echo '<h4>' . $author->display_name . '</h4>';
+                      }
+                      get_template_part('templates/author', 'excerpt');
+                      ?>
+                    </div>
+                  </div>
+
+                <?php endwhile; endif; wp_reset_query();
+              }
+            } else { ?>
+              <h3>About <?php the_author(); ?></h3>
+              <?php
+              $args = array(
+                'post_type' => 'bio',
+                'meta_query' => array(
+                  array(
+                    'key' => 'user',
+                    'value' => $author_id
+                  )
                 )
-              )
-            );
+              );
 
-            $bio = new WP_Query($args);
+              $bio = new WP_Query($args);
 
-            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+              if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
 
-              <div class="row">
-                <div class="col-xs-5 col-sm-3">
-                  <?php the_post_thumbnail('bio-headshot'); ?>
+                <div class="row">
+                  <div class="col-xs-5 col-sm-3">
+                    <?php the_post_thumbnail('bio-headshot'); ?>
+                  </div>
+
+                  <div class="col-xs-7 col-sm-9">
+                    <?php get_template_part('templates/author', 'excerpt'); ?>
+                  </div>
                 </div>
 
-                <div class="col-xs-7 col-sm-9">
-                  <?php get_template_part('templates/author', 'excerpt'); ?>
-                </div>
-              </div>
+              <?php endwhile; endif; wp_reset_query(); ?>
+            <?php } ?>
 
-            <?php endwhile; endif; wp_reset_query(); ?>
           </div>
         </div>
       <?php } ?>
@@ -253,25 +302,65 @@ $category = get_the_category();
           <?php } ?>
 
           <div class="col-sm-12 col-md-4">
-            <h3>About <?php the_author(); ?></h3>
+
             <?php
-            $args = array(
-              'post_type' => 'bio',
-              'meta_query' => array(
-                array(
-                  'key' => 'user',
-                  'value' => $author_id
+            if ( function_exists( 'get_coauthors' ) ) {
+              $coauthors = get_coauthors();
+              $coauthors_count = count($coauthors);
+
+              if ($coauthors_count > 1) {
+                echo '<h3>About the authors</h3>';
+              }
+
+              foreach ($coauthors as $author) {
+                if ($coauthors_count == 1) {
+                  echo '<h3>About ' . $author->display_name . '</h3>';
+                }
+
+                $args = array(
+                  'post_type' => 'bio',
+                  'meta_query' => array(
+                    array(
+                      'key' => 'user',
+                      'value' => $author->ID
+                    )
+                  )
+                );
+
+                $bio = new WP_Query($args);
+
+                if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+                  <?php
+                  if ($coauthors_count > 1) {
+                    echo '<h4>' . $author->display_name . '</h4>';
+                  }
+                  the_post_thumbnail('bio-headshot', array('class' => 'author-photo'));
+                  get_template_part('templates/author', 'excerpt');
+                  ?>
+                <?php endwhile; endif; wp_reset_query();
+              }
+            } else { ?>
+              <h3>About <?php the_author(); ?></h3>
+              <?php
+              $args = array(
+                'post_type' => 'bio',
+                'meta_query' => array(
+                  array(
+                    'key' => 'user',
+                    'value' => $author_id
+                  )
                 )
-              )
-            );
+              );
 
-            $bio = new WP_Query($args);
+              $bio = new WP_Query($args);
 
-            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-              <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
-              <?php get_template_part('templates/author', 'excerpt'); ?>
-            <?php endwhile; endif; wp_reset_query(); ?>
+              if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+                <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
+                <?php get_template_part('templates/author', 'excerpt'); ?>
+              <?php endwhile; endif; wp_reset_query(); ?>
 
+            <?php } ?>
+            
           </div>
 
           <?php if (!in_category('109')) { // 1868 ?>

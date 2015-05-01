@@ -44,7 +44,13 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       <title><?php the_title_rss(); ?></title>
       <link><?php the_permalink_rss(); ?></link>
       <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
-      <dc:creator><?php the_author(); ?></dc:creator>
+      <dc:creator><?php
+      if ( function_exists( 'coauthors_posts_links' ) ) {
+        coauthors();
+      } else {
+        the_author();
+      }
+      ?></dc:creator>
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
       <description><![CDATA[<?php
       if (has_post_thumbnail()) {
