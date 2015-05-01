@@ -145,7 +145,7 @@
           $bills = new WP_Query( $args );
 
           if ($bills->have_posts()) :
-            echo '<h2>2015-16 bills did not meet crossover deadline</h2>';
+            echo '<h2>2015-16 bills that did not meet crossover deadline</h2>';
             while ( $bills->have_posts() ) : $bills->the_post();
               get_template_part('templates/content', 'bill');
             endwhile;
