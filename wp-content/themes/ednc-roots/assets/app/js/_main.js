@@ -193,7 +193,18 @@ var Roots = {
         }
       });
     }
-  }
+  },
+  // Flash cards
+  single_flash_cards: {
+    init: function() {
+      // $(".fc-carousel").owlCarousel({
+      //   items: 1,
+      //   nav: true,
+      //   loop: true,
+      //   autoHeight: true
+      // });
+    }
+  },
 };
 
 // The routing fires all common scripts, followed by the page specific scripts.

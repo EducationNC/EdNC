@@ -9393,9 +9393,6 @@ section {
 .single-format-chat .wrapper, .single-format-chat .oc-pusher, .single-format-chat .inner-wrapper {
   height: 100%;
 }
-.single-format-chat .friendraiser-wrap {
-  display: none;
-}
 .single-format-chat .content-info {
   position: relative;
   z-index: 200;
@@ -9739,6 +9736,121 @@ section {
             transition-delay: 0.45s;
   }
 }
+.single-flash-cards {
+  height: 100%;
+}
+.single-flash-cards .wrapper, .single-flash-cards .oc-pusher, .single-flash-cards .inner-wrapper {
+  height: 100%;
+}
+.single-flash-cards .content-info {
+  position: relative;
+  z-index: 200;
+}
+
+.flash-cards-bg {
+  position: absolute;
+  margin: -5em 0 0;
+  min-height: 600px;
+  height: calc(100% - 89px);
+  width: 100%;
+  z-index: 1;
+}
+.flash-cards-bg .bg-img {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.flash-cards-bg .bg-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: auto;
+  min-width: 100%;
+  max-width: none;
+  min-height: 100%;
+}
+.flash-cards-bg .bg-img:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 7, 28, 0.6);
+  position: absolute;
+  z-index: 100;
+}
+
+.flash-cards-content {
+  position: relative;
+  z-index: 2;
+}
+.flash-cards-content .entry-title {
+  color: #FFFFFF;
+  font-size: 3.5rem;
+  line-height: 1.2;
+  font-weight: 300;
+}
+.flash-cards-content .byline {
+  color: #FFFFFF;
+}
+.flash-cards-content .byline a {
+  color: #FFFFFF;
+}
+
+.fc {
+  border: 1px solid #D4D8D9;
+  padding: 20px;
+  background: #FFFFFF;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#d9eaf3), color-stop(8%, #fff)) 0 4px;
+  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  -webkit-background-size: 100% 25px;
+          background-size: 100% 25px;
+}
+.fc .fc-title {
+  position: relative;
+  margin: -20px -20px 6px -20px;
+  background: #FFFFFF;
+  padding: 20px 20px 0 20px;
+}
+.fc p, .fc li {
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  margin-top: 0;
+}
+.fc ol {
+  margin: 0;
+}
+
+.owl-controls {
+  background-color: #ECF0F1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFF3F3', endColorstr='#FFD4D8D9');
+  background-image: -o-linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: -webkit-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: -o-linear-gradient(0deg, #EFF3F3 0%, #D4D8D9 100%);
+  background-image: linear-gradient(90deg, #EFF3F3 0%, #D4D8D9 100%);
+  overflow: hidden;
+}
+.owl-controls .owl-prev {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+.owl-controls .owl-next {
+  float: right;
+  width: 50%;
+  text-align: right;
+  padding: 10px;
+}
+
+.fc-carousel {
+  height: 300px;
+  overflow: hidden;
+}
+
 .single-bio .entry-header, .single-legislator .entry-header {
   border-bottom: 1px solid #ECF0F1;
   margin-bottom: 1em;
