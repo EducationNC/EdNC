@@ -1145,6 +1145,90 @@ register_field_group(array (
 ));
 
 register_field_group(array (
+	'key' => 'group_554b98686c613',
+	'title' => 'Flash cards',
+	'fields' => array (
+		array (
+			'key' => 'field_554b986d8bc80',
+			'label' => 'Flash cards',
+			'name' => 'flash_cards',
+			'prefix' => '',
+			'type' => 'repeater',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'min' => '',
+			'max' => '',
+			'layout' => 'block',
+			'button_label' => 'Add flash card',
+			'sub_fields' => array (
+				array (
+					'key' => 'field_554b98778bc81',
+					'label' => 'Card title',
+					'name' => 'card_title',
+					'prefix' => '',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_554b988d8bc82',
+					'label' => 'Card content',
+					'name' => 'card_content',
+					'prefix' => '',
+					'type' => 'wysiwyg',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'tabs' => 'all',
+					'toolbar' => 'full',
+					'media_upload' => 1,
+				),
+			),
+		),
+	),
+	'location' => array (
+		array (
+			array (
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'flash-cards',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+));
+
+register_field_group(array (
 	'key' => 'group_5457c9a38f819',
 	'title' => 'Gallery Fields',
 	'fields' => array (
@@ -1761,6 +1845,7 @@ register_field_group(array (
 			'elements' => '',
 			'max' => 1,
 			'return_format' => 'object',
+			'min' => 0,
 		),
 	),
 	'location' => array (
@@ -1971,6 +2056,7 @@ register_field_group(array (
 			'elements' => '',
 			'max' => '',
 			'return_format' => 'object',
+			'min' => 0,
 		),
 	),
 	'location' => array (
