@@ -9,6 +9,35 @@
     position: relative;
     z-index: 200;
   }
+
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    .container {
+      width: 970px;
+    }
+  }
+
+  .entry-title {
+    color: $white;
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 300;
+
+    a {
+      color: $white;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 3.5rem;
+    }
+  }
+
+  .byline {
+    color: $white;
+
+    a {
+      color: $white;
+    }
+  }
 }
 
 // Fixed background image
@@ -53,20 +82,94 @@
   position: relative;
   z-index: 2;
 
-  .entry-title {
-    color: $white;
-    font-size: 3.5rem;
-    line-height: 1.2;
-    font-weight: 300;
-  }
+  .affix {
+    @media (max-width: $screen-sm-max) {
+      position: relative;
+    }
 
-  .byline {
-    color: $white;
+    @media (min-width: $screen-md-min) {
+      width: 304px;
+      top: 20px;
+      position: fixed;
+    }
 
-    a {
-      color: $white;
+    @media (min-width: $screen-lg-min) {
+      width: 295px;
     }
   }
+
+  .affix-bottom {
+    @media (min-width: $screen-md-min) {
+      position: absolute;
+      width: 304px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: 295px;
+    }
+  }
+
+  .toc {
+    font-family: $font-family-sans-serif;
+    padding-left: 15px;
+
+    li {
+      padding-bottom: .25em;
+      margin: 0;
+
+      &.active {
+        color: $purple-text;
+
+        a {
+          color: $purple-text;
+        }
+      }
+    }
+
+    a {
+      display: block;
+      color: $midnight;
+      text-decoration: none;
+
+      &:hover, &:active, &:focus {
+        color: $blue;
+      }
+    }
+  }
+}
+
+// Flash cards nav
+.fc-nav {
+  @include gray-gradient-right;
+  overflow: hidden;
+  position: relative;
+
+  .fc-prev, .fc-next {
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  .fc-prev {
+    float: left;
+  }
+
+  .fc-next {
+    float: right;
+  }
+
+  .disabled {
+    display: none;
+  }
+}
+
+.fc-index {
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  z-index: 0;
 }
 
 // Flash cards stlye
@@ -118,10 +221,4 @@
     text-align: right;
     padding: 10px;
   }
-}
-
-// TROUBLESHOOTING
-.fc-carousel {
-  height: 300px;
-  overflow: hidden;
 }
