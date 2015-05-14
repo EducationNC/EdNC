@@ -317,7 +317,7 @@ $featured_ids = array();
   <div class="row">
     <div class="col-md-4">
       <h3 class="content-section-title">Ed<span class="normal">News</span></h3>
-      <p class="content-section-subtitle">Today's top education news stories</p>
+      <p class="content-section-subtitle">Today's top news and opinion on education</p>
       <div class="content-listing extra-padding">
         <?php
         $args = array(
