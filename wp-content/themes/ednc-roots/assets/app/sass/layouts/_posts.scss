@@ -84,7 +84,9 @@
         top: 50%;
         transform: translateY(-50%) translateX(-50%);
       }
+    }
 
+    @media (min-width: $screen-sm-min) {
       .article-title-overlay {
         padding-bottom: 2.5em;
         color: $white;
@@ -94,11 +96,6 @@
         color: $white;
       }
     }
-
-    // @media (min-width: $screen-md-min) {
-    //   height: 600px;
-    //   margin-top: -5em;
-    // }
 
     @media (max-width: $screen-xs-max) {
       margin-bottom: 1em;

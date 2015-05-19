@@ -9320,6 +9320,8 @@ section {
          -o-transform: translateY(-50%) translateX(-50%);
             transform: translateY(-50%) translateX(-50%);
   }
+}
+@media (min-width: 768px) {
   .hentry .entry-header.photo-overlay .article-title-overlay {
     padding-bottom: 2.5em;
     color: #FFFFFF;
