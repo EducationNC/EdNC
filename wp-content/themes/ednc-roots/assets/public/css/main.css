@@ -9298,21 +9298,13 @@ section {
 .hentry .entry-header.photo-overlay + div {
   margin-top: 3em;
 }
-.hentry .entry-header.photo-overlay .article-title-overlay {
-  padding-bottom: 2.5em;
-  color: #FFFFFF;
-}
 .hentry .entry-header.photo-overlay img {
   position: relative;
-  width: auto;
 }
 .hentry .entry-header.photo-overlay h1 {
   margin-top: 0;
   padding-top: 28px;
   text-shadow: 0px 0px 20px #2B3E50;
-}
-.hentry .entry-header.photo-overlay a {
-  color: #FFFFFF;
 }
 @media (min-width: 992px) {
   .hentry .entry-header.photo-overlay {
@@ -9327,6 +9319,13 @@ section {
         -ms-transform: translateY(-50%) translateX(-50%);
          -o-transform: translateY(-50%) translateX(-50%);
             transform: translateY(-50%) translateX(-50%);
+  }
+  .hentry .entry-header.photo-overlay .article-title-overlay {
+    padding-bottom: 2.5em;
+    color: #FFFFFF;
+  }
+  .hentry .entry-header.photo-overlay a {
+    color: #FFFFFF;
   }
 }
 @media (max-width: 767px) {

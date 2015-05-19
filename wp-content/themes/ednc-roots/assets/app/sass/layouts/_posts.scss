@@ -64,24 +64,14 @@
       margin-top: 3em;
     }
 
-    .article-title-overlay {
-      padding-bottom: 2.5em;
-      color: $white;
-    }
-
     img {
       position: relative;
-      width: auto;
     }
 
     h1 {
       margin-top: 0;
       padding-top: 28px;
       text-shadow: 0px 0px 20px $midnight;
-    }
-
-    a {
-      color: $white;
     }
 
     @media (min-width: $screen-md-min) {
@@ -93,6 +83,15 @@
         left: 50%;
         top: 50%;
         transform: translateY(-50%) translateX(-50%);
+      }
+
+      .article-title-overlay {
+        padding-bottom: 2.5em;
+        color: $white;
+      }
+
+      a {
+        color: $white;
       }
     }
 
