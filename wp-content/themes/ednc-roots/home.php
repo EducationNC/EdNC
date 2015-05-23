@@ -1,7 +1,6 @@
 <?php
 // What day of the week is it?
 $whichday = current_time('w');
-$whichday = 1;
 
 // Set up variable to catch featured post ids -- we will exclude these ids from news query
 $featured_ids = array();
