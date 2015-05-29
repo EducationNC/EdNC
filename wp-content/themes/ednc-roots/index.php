@@ -7,7 +7,7 @@
       <div class="extra-bottom-margin">
         <?php echo $desc; ?>
       </div>
-      <?php } ?>
+    <?php } ?>
 
     <?php if (!have_posts()) : ?>
       <div class="alert alert-warning">

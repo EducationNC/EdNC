@@ -302,6 +302,7 @@ function add_custom_post_types() {
 				'not_found_in_trash' => 'Nothing found in Trash',
 				'parent_item_colon' => ''
 			), /* end of arrays */
+			'taxonomies' => array('category'),
 			'public' => true,
 			'exclude_from_search' => false,
 			'publicly_queryable' => true,
