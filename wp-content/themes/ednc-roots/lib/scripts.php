@@ -67,7 +67,7 @@ function roots_scripts() {
   }
 
   // Enqueue Antenna scripts on single posts only
-  if (is_single()) {
+  if (is_single('post')) {
     wp_enqueue_script('antenna', '//www.antenna.is/static/engage.js', array(), null, true);
   }
 }

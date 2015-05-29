@@ -257,7 +257,7 @@ function add_custom_post_types() {
 	);
 
 	register_post_type( 'bill',
-	array('labels' => array(
+		array('labels' => array(
 				'name' => 'Bills',
 				'singular_name' => 'Bill',
 				'add_new' => 'Add New',
@@ -285,7 +285,39 @@ function add_custom_post_types() {
 			'rewrite' => false,
 			'query_var' => true
 		)
-);
+	);
+
+	register_post_type( 'flash-cards',
+		array('labels' => array(
+				'name' => 'Flash Cards',
+				'singular_name' => 'Flash Cards',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New Flash Cards',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit Flash Cards',
+				'new_item' => 'New Flash Cards',
+				'view_item' => 'View Flash Cards',
+				'search_items' => 'Search Flash Cards',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'taxonomies' => array('category'),
+			'public' => true,
+			'exclude_from_search' => false,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array( 'title', 'revisions', 'thumbnail'),
+			'has_archive' => false,
+			'rewrite' => true,
+			'query_var' => true
+		)
+	);
 
 }
 add_action( 'init', 'add_custom_post_types');
