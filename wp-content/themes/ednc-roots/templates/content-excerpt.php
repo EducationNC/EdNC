@@ -1,3 +1,4 @@
+
 <?php
 $column = wp_get_post_terms(get_the_id(), 'column');
 
@@ -54,6 +55,10 @@ $post_type = get_post_type();
     }
 
     if ($image_src) { ?>
+      <div style="display: none;">
+        <?php print_r($image_sized); ?>
+      </div>
+
     <img src="<?php echo $image_sized['url']; ?>" />
     <?php } ?>
   </div>
