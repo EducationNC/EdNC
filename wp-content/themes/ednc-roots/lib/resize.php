@@ -86,6 +86,8 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 		// Get the destination file name
 		$dest_file_name = "{$dir}/{$name}-{$suffix}.{$ext}";
 
+    echo '<div style="display: none; ">' . $dest_file_name . '</div>';
+
 		if ( !file_exists( $dest_file_name ) ) {
 
 			/*
