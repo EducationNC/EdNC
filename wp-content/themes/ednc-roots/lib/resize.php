@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -94,12 +95,12 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
 			$get_attachment = $wpdb->get_results( $query );
 			if ( !$get_attachment )
-				return array( 'url' => $url, 'width' => $width, 'height' => $height );
+				return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '1' );
 
 			// Load Wordpress Image Editor
 			$editor = wp_get_image_editor( $file_path );
 			if ( is_wp_error( $editor ) )
-				return array( 'url' => $url, 'width' => $width, 'height' => $height );
+				return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '2' );
 
 			// Get the original image size
 			$size = $editor->get_size();
@@ -151,7 +152,8 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 				'url' => $resized_url,
 				'width' => $resized_width,
 				'height' => $resized_height,
-				'type' => $resized_type
+				'type' => $resized_type,
+        'debug' => '3'
 			);
 
 		}
@@ -160,7 +162,8 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 				'url' => str_replace( basename( $url ), basename( $dest_file_name ), $url ),
 				'width' => $dest_width,
 				'height' => $dest_height,
-				'type' => $ext
+				'type' => $ext,
+        'debug' => '4'
 			);
 		}
 
@@ -179,7 +182,7 @@ else {
 
 		// Bail if GD Library doesn't exist
 		if ( !extension_loaded('gd') || !function_exists('gd_info') )
-			return array( 'url' => $url, 'width' => $width, 'height' => $height );
+			return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '5' );
 
 		// Get default size from database
 		$width = ( $width ) ? $width : get_option( 'thumbnail_size_w' );
@@ -229,7 +232,7 @@ else {
 			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
 			$get_attachment = $wpdb->get_results( $query );
 			if ( !$get_attachment )
-				return array( 'url' => $url, 'width' => $width, 'height' => $height );
+				return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '6' );
 
 			$image = wp_load_image( $file_path );
 			if ( !is_resource( $image ) )
@@ -326,7 +329,8 @@ else {
 				'url' => $resized_url,
 				'width' => $resized_width,
 				'height' => $resized_height,
-				'type' => $resized_type
+				'type' => $resized_type,
+        'debug' => '7'
 			);
 
 		}
@@ -335,7 +339,8 @@ else {
 				'url' => str_replace( basename( $url ), basename( $dest_file_name ), $url ),
 				'width' => $dest_width,
 				'height' => $dest_height,
-				'type' => $ext
+				'type' => $ext,
+        'debug' => '8'
 			);
 		}
 
