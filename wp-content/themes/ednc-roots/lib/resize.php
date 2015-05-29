@@ -55,13 +55,13 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 		// Get the image file path
 		$file_path = parse_url( $url );
 
-    // Set https version of URL
-    if ($file_path['scheme'] == 'http') {
-      $secure_file_path = $file_path;
-      $secure_file_path['scheme'] = 'https';
+    // Set non-secure/http version of URL
+    if ($file_path['scheme'] == 'https') {
+      $http_file_path = $file_path;
+      $http_file_path['scheme'] = 'http';
 
       include 'http_build_url.php';
-      $secure_url = http_build_url('', $secure_file_path);
+      $http_url = http_build_url('', $http_file_path);
     }
 
     // Set the image file path
@@ -105,8 +105,8 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 			 *  Bail if this image isn't in the Media Library.
 			 *  We only want to resize Media Library images, so we can be sure they get deleted correctly when appropriate.
 			 */
-      if ($secure_url) {
-        $query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s' OR guid='%s'", $url, $secure_url );
+      if ($http_url) {
+        $query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s' OR guid='%s'", $url, $http_url );
       } else {
   			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
       }
