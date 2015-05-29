@@ -54,7 +54,18 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 
 		// Get the image file path
 		$file_path = parse_url( $url );
-		$file_path = $_SERVER['DOCUMENT_ROOT'] . $file_path['path'];
+
+    // Set https version of URL
+    if ($file_path['scheme'] == 'http') {
+      $secure_file_path = $file_path;
+      $secure_file_path['scheme'] = 'https';
+
+      include 'http_build_url.php';
+      $secure_url = http_build_url('', $secure_file_path);
+    }
+
+    // Set the image file path
+    $file_path = $_SERVER['DOCUMENT_ROOT'] . $file_path['path'];
 
 		// Check for Multisite
 		if ( is_multisite() ) {
@@ -94,10 +105,16 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 			 *  Bail if this image isn't in the Media Library.
 			 *  We only want to resize Media Library images, so we can be sure they get deleted correctly when appropriate.
 			 */
-			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
-      echo '<div style="display: none; ">' . $query . '</div>';
+      if ($secure_url) {
+        $query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s' OR guid='%s'", $url, $secure_url );
+      } else {
+  			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
+      }
+        echo '<div style="display: none; ">' . $query . '</div>';
 			$get_attachment = $wpdb->get_results( $query );
-      echo '<div style="display: none; ">' . $get_attachment . '</div>';
+        echo '<div style="display: none; ">';
+        print_r($get_attachment);
+        echo '</div>';
 			if ( !$get_attachment )
 				return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '1' );
 
