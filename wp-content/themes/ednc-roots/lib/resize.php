@@ -95,7 +95,9 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 			 *  We only want to resize Media Library images, so we can be sure they get deleted correctly when appropriate.
 			 */
 			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
+      echo '<div style="display: none; ">' . $query . '</div>';
 			$get_attachment = $wpdb->get_results( $query );
+      echo '<div style="display: none; ">' . $get_attachment . '</div>';
 			if ( !$get_attachment )
 				return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '1' );
 
