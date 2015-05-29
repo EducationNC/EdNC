@@ -97,24 +97,20 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 		// Get the destination file name
 		$dest_file_name = "{$dir}/{$name}-{$suffix}.{$ext}";
 
-    echo '<div style="display: none; ">' . $dest_file_name . '</div>';
-
 		if ( !file_exists( $dest_file_name ) ) {
 
 			/*
 			 *  Bail if this image isn't in the Media Library.
 			 *  We only want to resize Media Library images, so we can be sure they get deleted correctly when appropriate.
 			 */
+      // The guid might be stored with http:// instead of https:// so we may need to search for both
       if ($http_url) {
         $query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s' OR guid='%s'", $url, $http_url );
       } else {
   			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
       }
-        echo '<div style="display: none; ">' . $query . '</div>';
+
 			$get_attachment = $wpdb->get_results( $query );
-        echo '<div style="display: none; ">';
-        print_r($get_attachment);
-        echo '</div>';
 			if ( !$get_attachment )
 				return array( 'url' => $url, 'width' => $width, 'height' => $height, 'debug' => '1' );
 
