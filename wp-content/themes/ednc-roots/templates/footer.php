@@ -24,6 +24,14 @@
   </div>
 </footer>
 
+<div class="modal fade email-signup-modal hidden-print" id="emailSignupModal" tabindex="-2" role="dialog" aria-labelledby="emailSignupModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <?php get_template_part('templates/email-signup'); ?>
+    </div>
+  </div>
+</div>
+
 <?php if (is_home()) : ?>
   <div class="modal fade suggestion-modal hidden-print" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="suggestionModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -37,14 +45,6 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <?php gravity_form(5, false, false, false, null, true, '-2'); ?>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade email-signup-modal hidden-print" id="emailSignupModal" tabindex="-2" role="dialog" aria-labelledby="emailSignupModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <?php get_template_part('templates/email-signup'); ?>
       </div>
     </div>
   </div>
