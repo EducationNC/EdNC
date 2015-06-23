@@ -37,7 +37,7 @@
         <p><a href="/feed" class="btn btn-default btn-wide"><span class="icon-rss"></span> RSS feed</a></p>
       </div>
 
-      <iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://www.stemconnector.org/sdwidget?ajax=1" style="height: 700px; width: 100%; max-width: 320px; border: 1px solid #5681B3;"></iframe>
+      <!-- <iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://www.stemconnector.org/sdwidget?ajax=1" style="height: 700px; width: 100%; max-width: 320px; border: 1px solid #5681B3;"></iframe> -->
 
     </div>
   </div>
