@@ -13,6 +13,16 @@
   }
 }
 
+.mega-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 4;
+}
+
 .photo-overlay {
   position: relative;
   margin: 0 0 1em;
@@ -68,16 +78,6 @@
   .line {
     right: 30px;
     bottom: 1em;
-  }
-
-  .mega-link {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    cursor: pointer;
-    z-index: 4;
   }
 
   &:after {
@@ -248,6 +248,10 @@
     h2 {
       margin-top: 0;
       font-size: $font-size-h3;
+    }
+
+    .label {
+      display: none;
     }
 
     .entry-summary {

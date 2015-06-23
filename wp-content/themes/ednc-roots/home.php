@@ -377,7 +377,7 @@ $featured_ids = array();
 <section class="container-fluid banners">
   <div class="row no-padding">
     <div class="col-md-6">
-      <div class="feature-banner-title consider-it-mapped">Consider It Mapped</div>
+      <div class="feature-banner-title consider-it-mapped"><a href="/maps/" class="mega-link">Consider It Mapped</a></div>
       <div class="extra-padding">
         <?php
         $args = array(
@@ -393,13 +393,13 @@ $featured_ids = array();
         endwhile; endif; wp_reset_query(); ?>
         <div class="sep"></div>
         <p class="text-center">
-          <a href="/maps/" class="btn btn-default no-margin">See all EdMaps</a><br />
+          <a href="/maps/" class="btn btn-default no-margin">See more maps</a><br />
         </p>
       </div>
     </div>
 
     <div class="col-md-6">
-      <div class="feature-banner-title edevents">EdEvents</div>
+      <div class="feature-banner-title edevents"><a href="/events/" class="mega-link">EdEvents</a></div>
       <div class="extra-padding">
         <?php the_widget('TribeEventsAdvancedListWidget', array(
           'title' => '',

@@ -1,10 +1,10 @@
 .column-banner {
   display: none;
   position: relative;
-  margin-top: -3.25em;
+  margin-top: -32px;
   margin-bottom: 5em;
   width: 100%;
-  height: 162px;
+  height: 139px;
   background-size: cover;
   background-position: center;
 
@@ -28,6 +28,22 @@
     background-image: url('../imgs/tech-tuesday.jpg');
   }
 
+  &.sparking-stem {
+    background-image: url('../imgs/sparking-stem.jpg');
+
+    .column-name {
+      display: none;
+    }
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      height: 180px;
+    }
+
+    @media (max-width: 475px) {
+      height: 75px;
+    }
+  }
+
   &.the-wednesday-wire {
     background-image: url('../imgs/the-wednesday-wire.jpg');
   }
@@ -42,6 +58,14 @@
 
   &.consider-it-mapped {
     background-image: url('../imgs/consider-it-mapped.jpg');
+    
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      height: 180px;
+    }
+
+    @media (max-width: 475px) {
+      height: 75px;
+    }
   }
 
   &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel, &.consider-it-mapped {

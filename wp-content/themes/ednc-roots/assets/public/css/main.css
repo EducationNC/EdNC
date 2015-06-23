@@ -9070,6 +9070,16 @@ section {
   }
 }
 
+.mega-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 4;
+}
+
 .photo-overlay {
   position: relative;
   margin: 0 0 1em;
@@ -9121,15 +9131,6 @@ section {
 .photo-overlay .line {
   right: 30px;
   bottom: 1em;
-}
-.photo-overlay .mega-link {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  cursor: pointer;
-  z-index: 4;
 }
 .photo-overlay:after {
   content: '';
@@ -9295,6 +9296,9 @@ section {
 .banners .hentry h2 {
   margin-top: 0;
   font-size: 24px;
+}
+.banners .hentry .label {
+  display: none;
 }
 .banners .hentry .entry-summary {
   font-size: .9em;
@@ -9475,10 +9479,10 @@ section {
 .column-banner {
   display: none;
   position: relative;
-  margin-top: -3.25em;
+  margin-top: -32px;
   margin-bottom: 5em;
   width: 100%;
-  height: 162px;
+  height: 139px;
   -webkit-background-size: cover;
           background-size: cover;
   background-position: center;
@@ -9502,6 +9506,22 @@ section {
 .column-banner.tech-tuesday {
   background-image: url(../imgs/../imgs/tech-tuesday.jpg);
 }
+.column-banner.sparking-stem {
+  background-image: url(../imgs/../imgs/sparking-stem.jpg);
+}
+.column-banner.sparking-stem .column-name {
+  display: none;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .column-banner.sparking-stem {
+    height: 180px;
+  }
+}
+@media (max-width: 475px) {
+  .column-banner.sparking-stem {
+    height: 75px;
+  }
+}
 .column-banner.the-wednesday-wire {
   background-image: url(../imgs/../imgs/the-wednesday-wire.jpg);
 }
@@ -9513,6 +9533,16 @@ section {
 }
 .column-banner.consider-it-mapped {
   background-image: url(../imgs/../imgs/consider-it-mapped.jpg);
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .column-banner.consider-it-mapped {
+    height: 180px;
+  }
+}
+@media (max-width: 475px) {
+  .column-banner.consider-it-mapped {
+    height: 75px;
+  }
 }
 .column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.consider-it-mapped {
   display: block;
