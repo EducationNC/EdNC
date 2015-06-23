@@ -225,35 +225,34 @@
 }
 
 .banners {
-  .photo-overlay {
-    height: 300px;
-    overflow: hidden;
+  .feature-banner-title {
+    height: 138px;
+    background-size: cover;
+    background-position: center;
     position: relative;
+    text-indent: -100em;
+    overflow: hidden;
+  }
 
-    &:hover {
-      .banner-line {
-        margin-left: 25%;
-        margin-right: 25%;
-      }
+  .consider-it-mapped {
+    background-image: url('../imgs/consider-it-mapped.jpg');
+    margin-bottom: 10px;
+  }
+
+  .edevents {
+    height: 138px;
+    background-image: url('../imgs/edevents.jpg');
+  }
+
+  .hentry {
+    h2 {
+      margin-top: 0;
+      font-size: $font-size-h3;
     }
-  }
 
-  .banner-line {
-    background: $purple;
-    height: 3px;
-    margin: .5em 50% .75em;
-    transition: margin .3s;
-  }
-
-  img {
-    min-width: 100%;
-    max-width: none;
-    width: auto;
-    height: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    .entry-summary {
+      font-size: .9em;
+    }
   }
 }
 

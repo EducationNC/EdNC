@@ -9275,35 +9275,29 @@ section {
     visibility: hidden;
   }
 }
-.banners .photo-overlay {
-  height: 300px;
-  overflow: hidden;
+.banners .feature-banner-title {
+  height: 138px;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: center;
   position: relative;
+  text-indent: -100em;
+  overflow: hidden;
 }
-.banners .photo-overlay:hover .banner-line {
-  margin-left: 25%;
-  margin-right: 25%;
+.banners .consider-it-mapped {
+  background-image: url(../imgs/../imgs/consider-it-mapped.jpg);
+  margin-bottom: 10px;
 }
-.banners .banner-line {
-  background: #731454;
-  height: 3px;
-  margin: .5em 50% .75em;
-  -webkit-transition: margin .3s;
-       -o-transition: margin .3s;
-          transition: margin .3s;
+.banners .edevents {
+  height: 138px;
+  background-image: url(../imgs/../imgs/edevents.jpg);
 }
-.banners img {
-  min-width: 100%;
-  max-width: none;
-  width: auto;
-  height: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateY(-50%) translateX(-50%);
-      -ms-transform: translateY(-50%) translateX(-50%);
-       -o-transform: translateY(-50%) translateX(-50%);
-          transform: translateY(-50%) translateX(-50%);
+.banners .hentry h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+.banners .hentry .entry-summary {
+  font-size: .9em;
 }
 
 .content-listing ul, .content-listing ol {
@@ -9517,10 +9511,13 @@ section {
 .column-banner.friday-with-ferrel {
   background-image: url(../imgs/../imgs/friday-with-ferrel.jpg);
 }
-.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel {
+.column-banner.consider-it-mapped {
+  background-image: url(../imgs/../imgs/consider-it-mapped.jpg);
+}
+.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.consider-it-mapped {
   display: block;
 }
-.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label {
+.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label, .column-banner.consider-it-mapped + .entry-header .label {
   display: none;
 }
 

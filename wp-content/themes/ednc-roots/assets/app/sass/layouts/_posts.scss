@@ -40,7 +40,11 @@
     background-image: url('../imgs/friday-with-ferrel.jpg');
   }
 
-  &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel {
+  &.consider-it-mapped {
+    background-image: url('../imgs/consider-it-mapped.jpg');
+  }
+
+  &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel, &.consider-it-mapped {
     display: block;
 
     & + .entry-header .label {
