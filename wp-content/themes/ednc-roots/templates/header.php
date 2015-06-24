@@ -57,6 +57,7 @@ if ($alert) { ?>
       </div>
 
       <div class="btn-group">
+        <a href="https://support.ednc.org/donate-recurring" class="btn btn-primary btn-lg"><small>Donate now</small></a>
         <a href="#" class="btn btn-default btn-lg" data-toggle="modal" data-target="#emailSignupModal"><small>Free email subscription</small></a>
       </div>
     </div>
