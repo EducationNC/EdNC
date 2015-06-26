@@ -24,7 +24,9 @@ if (has_post_thumbnail()) {
   $image_sized['url'] = $image_url[0];
 } else {
   $image_src = catch_that_image();
-  $image_sized = mr_image_resize($image_src, 295, 295, true, false);
+  if ($image_src) {
+    $image_sized = mr_image_resize($image_src, 295, 295, true, false);
+  }
 }
 ?>
 
@@ -57,9 +59,14 @@ if (has_post_thumbnail()) {
 
     <a class="mega-link" href="<?php the_permalink(); ?>"></a>
 
-    <?php if ($image_sized['url']) { ?>
-      <img src="<?php echo $image_sized['url']; ?>" />
-    <?php } ?>
+    <?php
+    if ($image_sized) {
+      if ($image_sized['url']) { ?>
+        <img src="<?php echo $image_sized['url']; ?>" />
+      <?php
+      }
+    }
+    ?>
   </div>
 
   <div class="col-xs-9 col-sm-12 extra-padding">
