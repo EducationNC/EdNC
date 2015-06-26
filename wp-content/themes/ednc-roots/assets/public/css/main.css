@@ -9070,6 +9070,16 @@ section {
   }
 }
 
+.mega-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 4;
+}
+
 .photo-overlay {
   position: relative;
   margin: 0 0 1em;
@@ -9121,15 +9131,6 @@ section {
 .photo-overlay .line {
   right: 30px;
   bottom: 1em;
-}
-.photo-overlay .mega-link {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  cursor: pointer;
-  z-index: 4;
 }
 .photo-overlay:after {
   content: '';
@@ -9275,35 +9276,32 @@ section {
     visibility: hidden;
   }
 }
-.banners .photo-overlay {
-  height: 300px;
-  overflow: hidden;
+.banners .feature-banner-title {
+  height: 138px;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: center;
   position: relative;
+  text-indent: -100em;
+  overflow: hidden;
 }
-.banners .photo-overlay:hover .banner-line {
-  margin-left: 25%;
-  margin-right: 25%;
+.banners .consider-it-mapped {
+  background-image: url(../imgs/../imgs/consider-it-mapped.jpg);
+  margin-bottom: 10px;
 }
-.banners .banner-line {
-  background: #731454;
-  height: 3px;
-  margin: .5em 50% .75em;
-  -webkit-transition: margin .3s;
-       -o-transition: margin .3s;
-          transition: margin .3s;
+.banners .edevents {
+  height: 138px;
+  background-image: url(../imgs/../imgs/edevents.jpg);
 }
-.banners img {
-  min-width: 100%;
-  max-width: none;
-  width: auto;
-  height: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateY(-50%) translateX(-50%);
-      -ms-transform: translateY(-50%) translateX(-50%);
-       -o-transform: translateY(-50%) translateX(-50%);
-          transform: translateY(-50%) translateX(-50%);
+.banners .hentry h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+.banners .hentry .label {
+  display: none;
+}
+.banners .hentry .entry-summary {
+  font-size: .9em;
 }
 
 .content-listing ul, .content-listing ol {
@@ -9351,6 +9349,11 @@ section {
 }
 .tribe-events-adv-list-widget .vevent .location span.tribe-venue:after {
   content: ', ';
+}
+.tribe-events-adv-list-widget .tribe-mini-calendar-event {
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 .tribe-events-adv-list-widget .tribe-events-widget-link {
   display: none;
@@ -9533,10 +9536,23 @@ section {
 .column-banner.friday-with-ferrel {
   background-image: url(../imgs/../imgs/friday-with-ferrel.jpg);
 }
-.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel {
+.column-banner.consider-it-mapped {
+  background-image: url(../imgs/../imgs/consider-it-mapped.jpg);
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .column-banner.consider-it-mapped {
+    height: 180px;
+  }
+}
+@media (max-width: 475px) {
+  .column-banner.consider-it-mapped {
+    height: 75px;
+  }
+}
+.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.consider-it-mapped {
   display: block;
 }
-.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.sparking-stem + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label {
+.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.sparking-stem + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label, .column-banner.consider-it-mapped + .entry-header .label {
   display: none;
 }
 

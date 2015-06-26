@@ -57,7 +57,19 @@
     background-image: url('../imgs/friday-with-ferrel.jpg');
   }
 
-  &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.sparking-stem, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel {
+  &.consider-it-mapped {
+    background-image: url('../imgs/consider-it-mapped.jpg');
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      height: 180px;
+    }
+
+    @media (max-width: 475px) {
+      height: 75px;
+    }
+  }
+
+  &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.sparking-stem, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel, &.consider-it-mapped {
     display: block;
 
     & + .entry-header .label {

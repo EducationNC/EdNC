@@ -189,6 +189,42 @@ $featured_ids = array();
 
   <div class="row">
     <div class="col-xs-12">
+      <h2>Recent features</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <?php
+    // Show 4 most recent features (offset by 2)
+    $args = array(
+      'posts_per_page' => 4,
+      'post_type' => 'post',
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'featured'
+        )
+      ),
+      'meta_key' => 'updated_date',
+      'orderby' => 'meta_value_num',
+      'order' => 'DESC',
+      'offset' => 2
+    );
+
+    $perspectives = new WP_Query($args);
+
+    if ($perspectives->have_posts()) : while ($perspectives->have_posts()) : $perspectives->the_post(); ?>
+
+      <div class="col-sm-6 col-md-3">
+        <?php get_template_part('templates/thumb-overlay', 'small'); ?>
+      </div>
+
+    <?php endwhile; endif; wp_reset_query(); ?>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
       <h2>News</h2>
     </div>
   </div>
@@ -376,8 +412,9 @@ $featured_ids = array();
 
 <section class="container-fluid banners">
   <div class="row no-padding">
-    <div class="col-md-4 has-photo-overlay">
-      <div class="photo-overlay light">
+    <div class="col-md-6">
+      <div class="feature-banner-title consider-it-mapped"><a href="/maps/" class="mega-link">Consider It Mapped</a></div>
+      <div class="extra-padding">
         <?php
         $args = array(
           'post_type' => 'map',
@@ -386,42 +423,40 @@ $featured_ids = array();
         $map = new WP_Query($args);
 
         if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post();
-          // Show label "New" when map was posted today
-          if( date('Yz') == get_the_time('Yz') ) {
-            echo '<span class="label">New</span>';
-          } ?>
-          <a class="mega-link" href="/maps"></a>
-          <div class="vertical-center">
-            <h3 class="content-section-title">Ed<span class="normal">Maps</span></h3>
-            <div class="banner-line"></div>
-            <h4 class="content-section-subtitle">Visualize education data across the state</h4>
-          </div>
-          <?php the_post_thumbnail(); ?>
-        <?php endwhile; endif; wp_reset_query(); ?>
+
+          get_template_part('templates/content', 'excerpt');
+
+        endwhile; endif; wp_reset_query(); ?>
+        <div class="sep"></div>
+        <p class="text-center">
+          <a href="/maps/" class="btn btn-default no-margin">See more maps</a><br />
+        </p>
       </div>
     </div>
 
-    <div class="col-md-4 has-photo-overlay">
-      <div class="photo-overlay light">
-        <a class="mega-link" href="/events/"></a>
-        <div class="vertical-center">
-          <h3 class="content-section-title">Ed<span class="normal">Events</span></h3>
-          <div class="banner-line"></div>
-          <h4 class="content-section-subtitle">Upcoming education events</h4>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/544232_23915496_resized.jpg" alt="EdEvents" />
-      </div>
-    </div>
-
-    <div class="col-md-4 has-photo-overlay">
-      <div class="photo-overlay light">
-        <a class="mega-link" href="/research/edlitigation/"></a>
-        <div class="vertical-center">
-          <h3 class="content-section-title">Ed<span class="normal">Litigation</span></h3>
-          <div class="banner-line"></div>
-          <h4 class="content-section-subtitle">Track education litigation across NC</h4>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/1409595_99556189-2.jpg" alt="EdLawsuits" />
+    <div class="col-md-6">
+      <div class="feature-banner-title edevents"><a href="/events/" class="mega-link">EdEvents</a></div>
+      <div class="extra-padding">
+        <?php the_widget('Tribe__Events__Pro__Advanced_List_Widget', array(
+          'title' => '',
+          'limit' => '3',
+          'no_upcoming_events' => false,
+          'venue' => true,
+          'country' => false,
+          'address' => false,
+          'city' => true,
+          'region' => false,
+          'zip' => false,
+          'phone' => false,
+          'cost' => false,
+          'organizer' => false,
+          'operand' => 'OR',
+          'filters' => ''
+        )); ?>
+        <p class="text-center">
+          <a href="/events/" class="btn btn-default no-margin">See all upcoming EdEvents</a><br />
+          <a href="#" class="small" data-toggle="modal" data-target="#eventSubmissionModal">Submit your event &raquo;</a>
+        </p>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@
 
 $comments_open = comments_open();
 
+$author = get_the_author_meta('user_login');
 $author_id = get_the_author_meta('ID');
 $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
 $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
@@ -17,13 +18,15 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
   // Remove empty results
   $mcats_hide = array_filter($mcats_hide, 'strlen');
 
+if ($author == 'emily.antoszyk') {
+  echo '<div class="column-banner consider-it-mapped"></div>';
+}
 ?>
 
-<article <?php post_class('article'); ?>>
+<article <?php post_class('article container'); ?>>
   <header class="entry-header">
     <div class="row">
       <div class="col-md-9 col-centered">
-        <span class="label">EdMaps</span>
         <?php
         // Map categories
         if ($map_category) {
@@ -73,77 +76,75 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
 
   <footer class="entry-footer">
     <div class="row">
-      <div class="col-md-9 col-centered">
-        <div class="col-md-8 col-lg-7">
-          <h3>Related maps</h3>
-          <?php
-          foreach ($map_category as $mcat) {
-            $mcat_ids[] = $mcat['term_id'];
-          }
+      <div class="col-md-8 col-lg-7">
+        <h3>Recommended for you</h3>
+        <?php
+        foreach ($map_category as $mcat) {
+          $mcat_ids[] = $mcat['term_id'];
+        }
+        $args = array(
+          'post_type' => 'map',
+          'posts_per_page' => 1,
+          'post__not_in' => array(get_the_id()),
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'map-category',
+              'terms' => $mcat_ids,
+              'field' => 'id'
+            )
+          )
+        );
+
+        $related = new WP_Query($args);
+
+        if ($related->have_posts()) : while ($related->have_posts()) : $related->the_post();
+
+          get_template_part('templates/content', 'excerpt');
+
+        endwhile; else:
+
           $args = array(
             'post_type' => 'map',
-            'posts_per_page' => 4,
-            'post__not_in' => array(get_the_id()),
-            'tax_query' => array(
-              array(
-                'taxonomy' => 'map-category',
-                'terms' => $mcat_ids,
-                'field' => 'id'
-              )
-            )
+            'posts_per_page' => 1,
+            'post__not_in' => array(get_the_id())
           );
 
-          $related = new WP_Query($args);
+          $recent = new WP_Query($args);
 
-          if ($related->have_posts()) : while ($related->have_posts()) : $related->the_post();
+          if ($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post();
 
-            get_template_part('templates/content', 'excerpt-mini');
+            get_template_part('templates/content', 'excerpt');
 
-          endwhile; else:
+          endwhile; endif;
 
-            $args = array(
-              'post_type' => 'map',
-              'posts_per_page' => 4,
-              'post__not_in' => array(get_the_id())
-            );
+        endif; wp_reset_query();
+        ?>
 
-            $recent = new WP_Query($args);
+        <p><a href="/maps">View all maps &raquo;</a></p>
+      </div>
 
-            if ($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post();
-
-              get_template_part('templates/content', 'excerpt-mini');
-
-            endwhile; endif;
-
-          endif; wp_reset_query();
-          ?>
-
-          <p><a href="/maps">View all maps &raquo;</a></p>
-        </div>
-
-        <div class="col-md-4 col-lg-push-1">
-          <h3>About <?php the_author(); ?></h3>
-          <?php
-          $args = array(
-            'post_type' => 'bio',
-            'meta_query' => array(
-              array(
-                'key' => 'user',
-                'value' => $author_id
-              )
+      <div class="col-md-4 col-lg-push-1">
+        <h3>About <?php the_author(); ?></h3>
+        <?php
+        $args = array(
+          'post_type' => 'bio',
+          'meta_query' => array(
+            array(
+              'key' => 'user',
+              'value' => $author_id
             )
-          );
+          )
+        );
 
-          $bio = new WP_Query($args);
+        $bio = new WP_Query($args);
 
-          if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-            <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
-            <?php get_template_part('templates/author', 'excerpt'); ?>
-          <?php endwhile; endif; wp_reset_query(); ?>
+        if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+          <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
+          <?php get_template_part('templates/author', 'excerpt'); ?>
+        <?php endwhile; endif; wp_reset_query(); ?>
 
-          <h3>Stay connected</h3>
-          <?php get_template_part('templates/email-signup'); ?>
-        </div>
+        <h3>Stay connected</h3>
+        <?php get_template_part('templates/email-signup'); ?>
       </div>
     </div>
   </footer>
