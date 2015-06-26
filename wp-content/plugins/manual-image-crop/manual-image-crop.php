@@ -3,17 +3,16 @@
 Plugin Name: Manual Image Crop
 Plugin URI: http://www.rocketmill.co.uk/wordpress-plugin-manual-image-crop
 Description: Plugin allows you to manually crop all the image sizes registered in your WordPress theme (in particular featured image). Simply click on the "Crop" link next to any image in your media library and select the area of the image you want to crop.
-Version: 1.08
+Version: 1.10
 Author: Tomasz Sita
-Author URI: http://www.rocketmill.co.uk/author/tomasz
+Author URI: https://github.com/tomaszsita
 License: GPL2
+Text Domain: microp
+Domain Path: /languages/
 */
 
-define('mic_VERSION', '1.08');
+define('mic_VERSION', '1.10');
 
-
-include_once(dirname(__FILE__) . '/lib/ManualImageCrop.php');
-include_once(dirname(__FILE__) . '/lib/ManualImageCropEditorWindow.php');
 include_once(dirname(__FILE__) . '/lib/ManualImageCropSettingsPage.php');
 
 //mic - stands for Manual Image Crop
@@ -26,12 +25,12 @@ add_option('mic_make2x', 'true'); //Add option so we can persist make2x choice a
  * inits the plugin
  */
 function mic_init_plugin() {
-	if (! is_admin()) {
-		//we are gonna use our plugin in the admin area only, so ends here if it's a frontend
-		return;
-	}
+	// we are gonna use our plugin in the admin area only, so ends here if it's a frontend
+	if (!is_admin()) return;
 
-    load_plugin_textdomain('microp', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	include_once(dirname(__FILE__) . '/lib/ManualImageCrop.php');
+
+	load_plugin_textdomain('microp', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 	$ManualImageCrop = ManualImageCrop::getInstance();
 	add_action( 'admin_enqueue_scripts', array($ManualImageCrop, 'enqueueAssets') );
@@ -46,6 +45,7 @@ function mic_init_plugin() {
  * ajax call rendering the image cropping area
  */
 function mic_ajax_editor_window() {
+	include_once(dirname(__FILE__) . '/lib/ManualImageCropEditorWindow.php');
 	$ManualImageCropEditorWindow = ManualImageCropEditorWindow::getInstance();
 	$ManualImageCropEditorWindow->renderWindow();
 	exit;
@@ -59,4 +59,16 @@ function mic_ajax_crop_image() {
 	$ManualImageCrop->cropImage();
 	exit;
 }
-;
+
+
+/**
+ * add settings link on plugin page
+ */
+function mic_settings_link($links) {
+	$settings_link = '<a href="options-general.php?page=Mic-setting-admin">' . __('Settings') . '</a>';
+	array_unshift($links, $settings_link);
+	return $links;
+}
+
+$plugin = plugin_basename(__FILE__);
+add_filter("plugin_action_links_$plugin", 'mic_settings_link' );

@@ -9350,6 +9350,11 @@ section {
 .tribe-events-adv-list-widget .vevent .location span.tribe-venue:after {
   content: ', ';
 }
+.tribe-events-adv-list-widget .tribe-mini-calendar-event {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
 .tribe-events-adv-list-widget .tribe-events-widget-link {
   display: none;
 }

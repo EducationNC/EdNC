@@ -437,7 +437,7 @@ $featured_ids = array();
     <div class="col-md-6">
       <div class="feature-banner-title edevents"><a href="/events/" class="mega-link">EdEvents</a></div>
       <div class="extra-padding">
-        <?php the_widget('TribeEventsAdvancedListWidget', array(
+        <?php the_widget('Tribe__Events__Pro__Advanced_List_Widget', array(
           'title' => '',
           'limit' => '3',
           'no_upcoming_events' => false,
