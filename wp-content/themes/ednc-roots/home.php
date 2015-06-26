@@ -189,6 +189,42 @@ $featured_ids = array();
 
   <div class="row">
     <div class="col-xs-12">
+      <h2>Recent features</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <?php
+    // Show 4 most recent features (offset by 2)
+    $args = array(
+      'posts_per_page' => 4,
+      'post_type' => 'post',
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'featured'
+        )
+      ),
+      'meta_key' => 'updated_date',
+      'orderby' => 'meta_value_num',
+      'order' => 'DESC',
+      'offset' => 2
+    );
+
+    $perspectives = new WP_Query($args);
+
+    if ($perspectives->have_posts()) : while ($perspectives->have_posts()) : $perspectives->the_post(); ?>
+
+      <div class="col-sm-6 col-md-3">
+        <?php get_template_part('templates/thumb-overlay', 'small'); ?>
+      </div>
+
+    <?php endwhile; endif; wp_reset_query(); ?>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
       <h2>News</h2>
     </div>
   </div>
@@ -449,25 +485,5 @@ $featured_ids = array();
       </ul>
     </div>
     <p class="text-right"><a href="#" data-toggle="modal" data-target="#photoSubmissionModal">Submit your photos &raquo;</a></p>
-  </div>
-</section>
-
-<section class="container-fluid timeline-wrap">
-  <script type="text/javascript" src="https://s3.amazonaws.com/cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
-  <script type="text/javascript">
-  jQuery(document).ready(function($) {
-    createStoryJS({
-      type:           'timeline',
-      width:          '100%',
-      height:         '450',
-      source:         'https://docs.google.com/spreadsheets/d/1bQ6PZPO_bRtRYmRygt8MqGxhZzsu-S2nHHGEjbzIwoI/pubhtml',
-      embed_id:       'timeline-100',
-      start_at_slide: 1
-    });
-  });
-  </script>
-
-  <div class="timeline-100 hidden-sm hidden-xs">
-    <div id="timeline-100"></div>
   </div>
 </section>
