@@ -9481,10 +9481,10 @@ section {
 .column-banner {
   display: none;
   position: relative;
-  margin-top: -3.25em;
+  margin-top: -32px;
   margin-bottom: 5em;
   width: 100%;
-  height: 162px;
+  height: 139px;
   -webkit-background-size: cover;
           background-size: cover;
   background-position: center;
@@ -9508,6 +9508,22 @@ section {
 .column-banner.tech-tuesday {
   background-image: url(../imgs/../imgs/tech-tuesday.jpg);
 }
+.column-banner.sparking-stem {
+  background-image: url(../imgs/../imgs/sparking-stem.jpg);
+}
+.column-banner.sparking-stem .column-name {
+  display: none;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .column-banner.sparking-stem {
+    height: 180px;
+  }
+}
+@media (max-width: 475px) {
+  .column-banner.sparking-stem {
+    height: 75px;
+  }
+}
 .column-banner.the-wednesday-wire {
   background-image: url(../imgs/../imgs/the-wednesday-wire.jpg);
 }
@@ -9517,10 +9533,10 @@ section {
 .column-banner.friday-with-ferrel {
   background-image: url(../imgs/../imgs/friday-with-ferrel.jpg);
 }
-.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel {
+.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel {
   display: block;
 }
-.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label {
+.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.sparking-stem + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label {
   display: none;
 }
 

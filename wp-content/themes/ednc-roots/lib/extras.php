@@ -84,6 +84,18 @@ if( function_exists('acf_add_options_page') ) {
 }
 
 
+/**
+ * Filter the wrapper for custom taxonomy
+ */
+function ednc_wrap_base_tax($templates) {
+  if (is_tax()) {
+    array_unshift($templates, 'base-taxonomy.php'); // Shift the template to the front of the array
+  }
+  return $templates; // Return our modified array with base-taxonomy.php at the front of the queue
+}
+add_filter('roots_wrap_base', 'ednc_wrap_base_tax');
+
+
 
 // Load CSS to TinyMCE editor
 function add_mce_css( $mce_css ) {

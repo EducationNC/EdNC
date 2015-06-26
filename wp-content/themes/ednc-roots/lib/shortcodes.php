@@ -91,4 +91,17 @@
     return ob_get_clean();
   }
   add_shortcode('donate-share', 'donate_share_shortcode');
+
+  // NC STEM Center e-update iframe embed
+  function stem_update_shortcode($atts, $content = null) {
+    extract( shortcode_atts( array(
+      'height' => '8000',
+      'url' => ''
+    ), $atts) );
+
+    $output = '<iframe src="' . $url . '" width="700" height="' . $height . '"></iframe>';
+
+    return $output;
+  }
+  add_shortcode('stem-update', 'stem_update_shortcode');
 ?>
