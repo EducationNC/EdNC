@@ -15,9 +15,9 @@
       <?php
       $args = array(
         'post_type' => 'bio',
-        'post__in' => array(1647, 1654, 1663),   // Mebane, Alisa, Alex
+        'post__in' => array(1647, 1654, 4513, 1663),   // Mebane, Alisa, Todd, Alex
         'posts_per_page' => -1,
-        'orderby' => 'ID',
+        'orderby' => 'post__in',
         'order' => 'ASC'
       );
 
