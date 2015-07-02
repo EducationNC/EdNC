@@ -23,6 +23,8 @@ if (has_post_thumbnail()) {
   $image_src = catch_that_image();
   if ($image_src) {
     $image_sized = mr_image_resize($image_src, 295, 295, true, false);
+  } else {
+    $image_sized['url'] = get_template_directory_uri() . '/assets/public/imgs/logo-square.png';
   }
 }
 ?>
