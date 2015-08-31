@@ -30,6 +30,7 @@ wp-content/wp-cache-config.php
 wp-content/themes/ednc-roots/node_modules/*
 wp-content/themes/ednc-roots/assets/app/vendor/*
 wp-content/themes/ednc-roots/.sass-cache
+wp-content/themes/ednc-roots/lib/salsa-auth.php
 
 # ignorable plugin files
 wp-content/plugins/why-404/logs/*
