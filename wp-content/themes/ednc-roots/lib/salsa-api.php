@@ -2,13 +2,7 @@
 // See https://salsasupport.zendesk.com/entries/23514381-Definitions-for-common-terms
 // to find out to retrieve the API URL in $url.
 
-$url = "https://salsa4.salsalabs.com/api";
-$username = "aherr@ednc.org"; # Campaign Manager username goes here
-$password = "sals4NC!"; # Campaign Manager password goes here
-
-// Method #1 for building post objects to send to Salsa
-$authfields["email"] = $username;
-$authfields["password"] = $password;
+require('salsa-auth.php');
 
 // Initialize cURL connection
 // * See http://us3.php.net/manual/en/book.curl.php for more information
