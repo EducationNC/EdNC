@@ -61,6 +61,14 @@
     background-image: url('../imgs/healthy-ever-after.jpg');
   }
 
+  &.powered-schools {
+    background-image: url('../imgs/powered-schools.jpg');
+
+    .column-name {
+      display: none;
+    }
+  }
+
   &.consider-it-mapped {
     background-image: url('../imgs/consider-it-mapped.jpg');
 
@@ -73,7 +81,16 @@
     }
   }
 
-  &.meck-monday, &.the-monday-missive, &.tech-tuesday, &.sparking-stem, &.the-wednesday-wire, &.the-thursday-transcript, &.friday-with-ferrel, &.healthy-ever-after, &.consider-it-mapped {
+  &.meck-monday,
+  &.the-monday-missive,
+  &.tech-tuesday,
+  &.sparking-stem,
+  &.the-wednesday-wire,
+  &.the-thursday-transcript,
+  &.friday-with-ferrel,
+  &.healthy-ever-after,
+  &.powered-schools,
+  &.consider-it-mapped {
     display: block;
 
     & + .entry-header .label {
