@@ -1,6 +1,8 @@
 <?php
 // What day of the week is it?
 $whichday = current_time('w');
+// What time is it?
+$whattime = current_time('H');
 
 // Set up variable to catch featured post ids -- we will exclude these ids from news query
 $featured_ids = array();
@@ -8,8 +10,8 @@ $featured_ids = array();
 
 <section class="container">
   <?php
-  // Show Week in review if this is a weekend (day 0 or 6)
-  if ($whichday == 0 || $whichday == 6) { ?>
+  // Show Week in review if this is a weekend (day 0 or 6), and before 12 on Sunday
+  if (($whichday == 0 && $whattime < 12) || $whichday == 6) { ?>
     <div class="row">
       <div class="col-xs-12">
         <h2>Week in review</h2>
@@ -20,8 +22,8 @@ $featured_ids = array();
   <div class="row">
     <div class="col-md-9">
       <?php
-      // Show slideshow if this is a weekend
-      if ($whichday == 0 || $whichday == 6) {
+      // Show slideshow if this is a weekend (day 0 or 6), and before 12 on Sunday
+      if (($whichday == 0 && $whattime < 12) || $whichday == 6) {
         $args = array(
           'posts_per_page' => 10,
           'post_type' => 'post',
@@ -418,7 +420,8 @@ $featured_ids = array();
         <?php
         $args = array(
           'post_type' => 'map',
-          'posts_per_page' => 1
+          'posts_per_page' => 1,
+          'author_name' => 'emily.antoszyk'
         );
         $map = new WP_Query($args);
 
@@ -462,10 +465,15 @@ $featured_ids = array();
   </div>
 </section>
 
+
+<?php
+  $gallery_id = get_theme_mod('gallery_id');
+
+  if (!empty($gallery_id)) {
+?>
 <section class="container-fluid" id="gallery">
   <div class="row">
     <?php
-    $gallery_id = get_theme_mod('gallery_id');
     $gallery = get_post($gallery_id);
     $photos = get_field('gallery', $gallery_id);
     shuffle($photos);
@@ -487,3 +495,6 @@ $featured_ids = array();
     <p class="text-right"><a href="#" data-toggle="modal" data-target="#photoSubmissionModal">Submit your photos &raquo;</a></p>
   </div>
 </section>
+<?php
+  }
+?>
