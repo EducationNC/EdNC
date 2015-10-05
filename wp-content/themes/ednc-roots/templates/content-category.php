@@ -53,6 +53,18 @@ if ($term_image) { ?>
 
 <?php } ?>
 
+<?php if $term->slug == 'powered-schools' { ?>
+  <div class="column-banner <?php echo $term->slug; ?>">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-centered">
+          <div class="column-name"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-7 col-md-9 col-centered">
