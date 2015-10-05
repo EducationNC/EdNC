@@ -34,6 +34,18 @@ if ($term_image) { ?>
   </div>
 
 <?php } else { ?>
+  
+  <?php if ($term->slug == 'powered-schools') { ?>
+    <div class="column-banner <?php echo $term->slug; ?>">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-centered">
+            <div class="column-name"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
 
   <div class="container">
     <?php get_template_part('templates/page', 'header'); ?>
@@ -51,18 +63,6 @@ if ($term_image) { ?>
     </div>
   </div>
 
-<?php } ?>
-
-<?php if ($term->slug == 'powered-schools') { ?>
-  <div class="column-banner <?php echo $term->slug; ?>">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9 col-centered">
-          <div class="column-name"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 <?php } ?>
 
 <div class="container">
