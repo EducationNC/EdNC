@@ -39,7 +39,7 @@
           }
           ?>
 
-          <div class="col-md-4 col-sm-6 has-photo-overlay">
+          <div class="col-md-3 col-xs-6 has-photo-overlay">
             <div class="photo-overlay">
               <?php the_post_thumbnail('bio-headshot'); ?>
               <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
