@@ -34,7 +34,7 @@
         if ($staff->have_posts()) : while ($staff->have_posts()) : $staff->the_post();
           $user = get_field('user');
 
-          if ($i % 3 == 0 && $i != 0) {
+          if ($i % 4 == 0 && $i != 0) {
             echo '</div><div class="row">';
           }
           ?>
