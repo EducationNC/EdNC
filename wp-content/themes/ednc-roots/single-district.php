@@ -172,12 +172,16 @@
               get_template_part('templates/content', 'excerpt-mini');
             endwhile;
 
-            if ($related->found_posts > $related->post_count) {
-              echo '<a href="/district-posts/' . $post->post_name . '">See all related posts &raquo;</a>';
-            } ?>
+            wp_reset_query();
+
+            // This isn't working right now... what is the full URL?
+            // if ($related->found_posts > $related->post_count) {
+            //   echo '<a href="/district-posts/' . $post->post_name . '">See all related posts &raquo;</a>';
+            // }
+            ?>
           </div>
         </div>
-      <?php endif; wp_reset_query(); ?>
+      <?php endif;?>
 
       <?php if ($facebook) { ?>
         <div class="s-box">

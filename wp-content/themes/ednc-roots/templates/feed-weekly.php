@@ -48,8 +48,16 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         $image_sized['url'] = $image_url[0];
       } else {
         $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 150, 150, true, false);
+
+        // Set image_sized ONLY if the post has an image inside the content...
+        if (is_string($image_src)) {
+          $image_sized = mr_image_resize($image_src, 150, 150, true, false);
+        } else {
+          // If not, use the logo as a default...
+          $image_sized['url'] = 'https://www.ednc.org/wp-content/uploads/2015/01/logo-square-150x150.png';
+        }
       }
+
       if ($image_sized) {
         $image_post = get_post($image_id);
         echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';

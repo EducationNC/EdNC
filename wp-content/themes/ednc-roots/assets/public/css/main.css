@@ -9536,6 +9536,15 @@ section {
 .column-banner.friday-with-ferrel {
   background-image: url(../imgs/../imgs/friday-with-ferrel.jpg);
 }
+.column-banner.healthy-ever-after {
+  background-image: url(../imgs/../imgs/healthy-ever-after.jpg);
+}
+.column-banner.powered-schools {
+  background-image: url(../imgs/../imgs/powered-schools.jpg);
+}
+.column-banner.powered-schools .column-name {
+  display: none;
+}
 .column-banner.consider-it-mapped {
   background-image: url(../imgs/../imgs/consider-it-mapped.jpg);
 }
@@ -9549,10 +9558,10 @@ section {
     height: 75px;
   }
 }
-.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.consider-it-mapped {
+.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.healthy-ever-after, .column-banner.powered-schools, .column-banner.consider-it-mapped {
   display: block;
 }
-.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.sparking-stem + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label, .column-banner.consider-it-mapped + .entry-header .label {
+.column-banner.meck-monday + .entry-header .label, .column-banner.the-monday-missive + .entry-header .label, .column-banner.tech-tuesday + .entry-header .label, .column-banner.sparking-stem + .entry-header .label, .column-banner.the-wednesday-wire + .entry-header .label, .column-banner.the-thursday-transcript + .entry-header .label, .column-banner.friday-with-ferrel + .entry-header .label, .column-banner.healthy-ever-after + .entry-header .label, .column-banner.powered-schools + .entry-header .label, .column-banner.consider-it-mapped + .entry-header .label {
   display: none;
 }
 
