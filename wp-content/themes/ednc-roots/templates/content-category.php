@@ -53,7 +53,7 @@ if ($term_image) { ?>
 
 <?php } ?>
 
-<?php if $term->slug == 'powered-schools' { ?>
+<?php if ($term->slug == 'powered-schools') { ?>
   <div class="column-banner <?php echo $term->slug; ?>">
     <div class="container">
       <div class="row">
