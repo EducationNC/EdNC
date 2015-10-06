@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( class_exists( 'Tribe__Events__Main' ) ) {
 
-/**
+	/**
 	 * Start Time
 	 *
 	 * Returns the event start time
@@ -20,37 +20,35 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * @category Events
 	 * @param int    $event       (optional)
 	 * @param string $dateFormat  Allows date and time formating using standard php syntax (http://php.net/manual/en/function.date.php)
+	 * @param string $timezone    Timezone in which to present the date/time (or default behaviour if not set)
 	 *
 	 * @return string|null Time
 	 */
-	function tribe_get_start_time( $event = null, $dateFormat = '' ) {
+	function tribe_get_start_time( $event = null, $dateFormat = '', $timezone = null ) {
 		if ( is_null( $event ) ) {
 			global $post;
 			$event = $post;
 		}
+
 		if ( is_numeric( $event ) ) {
 			$event = get_post( $event );
 		}
 
-		if ( tribe_event_is_all_day( $event ) ) {
-			return ;
-		}
-
-		if ( empty( $event->EventStartDate ) && is_object( $event ) ) {
-			$event->EventStartDate = tribe_get_event_meta( $event->ID, '_EventStartDate', true );
-		}
-
-		if ( isset( $event->EventStartDate ) ) {
-			$date = strtotime( $event->EventStartDate );
-		} else {
+		if ( ! is_object( $event ) ) {
 			return;
 		}
+
+		if ( tribe_event_is_all_day( $event ) ) {
+			return;
+		}
+
+		$start_date = Tribe__Events__Timezones::event_start_timestamp( $event->ID, $timezone );
 
 		if ( '' == $dateFormat ) {
 			$dateFormat = tribe_get_time_format();
 		}
 
-		return tribe_event_format_date( $date, false, $dateFormat );
+		return tribe_event_format_date( $start_date, false, $dateFormat );
 	}
 
 	/**
@@ -61,37 +59,35 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * @category Events
 	 * @param int    $event       (optional)
 	 * @param string $dateFormat  Allows date and time formating using standard php syntax (http://php.net/manual/en/function.date.php)
+	 * @param string $timezone    Timezone in which to present the date/time (or default behaviour if not set)
 	 *
 	 * @return string|null Time
 	 */
-	function tribe_get_end_time( $event = null, $dateFormat = '' ) {
+	function tribe_get_end_time( $event = null, $dateFormat = '', $timezone = null ) {
 		if ( is_null( $event ) ) {
 			global $post;
 			$event = $post;
 		}
+
 		if ( is_numeric( $event ) ) {
 			$event = get_post( $event );
+		}
+
+		if ( ! is_object( $event ) ) {
+			return;
 		}
 
 		if ( tribe_event_is_all_day( $event ) ) {
 			return;
 		}
 
-		if ( empty( $event->EventEndDate ) && is_object( $event ) ) {
-			$event->EventEndDate = tribe_get_event_meta( $event->ID, '_EventEndDate', true );
-		}
-
-		if ( isset( $event->EventEndDate ) ) {
-			$date = strtotime( $event->EventEndDate );
-		} else {
-			return;
-		}
+		$end_date = Tribe__Events__Timezones::event_end_timestamp( $event->ID, $timezone );
 
 		if ( '' == $dateFormat ) {
 			$dateFormat = tribe_get_time_format();
 		}
 
-		return tribe_event_format_date( $date, false, $dateFormat );
+		return tribe_event_format_date( $end_date, false, $dateFormat );
 	}
 
 	/**
@@ -103,33 +99,29 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * @param int    $event       (optional)
 	 * @param bool   $displayTime If true shows date and time, if false only shows date
 	 * @param string $dateFormat  Allows date and time formating using standard php syntax (http://php.net/manual/en/function.date.php)
-	 *
+	 * @param string $timezone    Timezone in which to present the date/time (or default behaviour if not set)
 	 * @return string|null Date
 	 */
-	function tribe_get_start_date( $event = null, $displayTime = true, $dateFormat = '' ) {
+	function tribe_get_start_date( $event = null, $displayTime = true, $dateFormat = '', $timezone = null ) {
 		if ( is_null( $event ) ) {
 			global $post;
 			$event = $post;
 		}
+
 		if ( is_numeric( $event ) ) {
 			$event = get_post( $event );
+		}
+
+		if ( ! is_object( $event ) ) {
+			return '';
 		}
 
 		if ( tribe_event_is_all_day( $event ) ) {
 			$displayTime = false;
 		}
 
-		if ( empty( $event->EventStartDate ) && is_object( $event ) ) {
-			$event->EventStartDate = tribe_get_event_meta( $event->ID, '_EventStartDate', true );
-		}
-
-		if ( isset( $event->EventStartDate ) ) {
-			$date = strtotime( $event->EventStartDate );
-		} else {
-			return;
-		}
-
-		return tribe_event_format_date( $date, $displayTime, $dateFormat );
+		$start_date = Tribe__Events__Timezones::event_start_timestamp( $event->ID, $timezone );
+		return tribe_event_format_date( $start_date, $displayTime, $dateFormat );
 	}
 
 	/**
@@ -141,41 +133,30 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * @param int    $event       (optional)
 	 * @param bool   $displayTime If true shows date and time, if false only shows date
 	 * @param string $dateFormat  Allows date and time formating using standard php syntax (http://php.net/manual/en/function.date.php)
+	 * @param string $timezone    Timezone in which to present the date/time (or default behaviour if not set)
 	 *
 	 * @return string|null Date
 	 */
-	function tribe_get_end_date( $event = null, $displayTime = true, $dateFormat = '' ) {
+	function tribe_get_end_date( $event = null, $displayTime = true, $dateFormat = '', $timezone = null ) {
 		if ( is_null( $event ) ) {
 			global $post;
 			$event = $post;
 		}
+
 		if ( is_numeric( $event ) ) {
 			$event = get_post( $event );
+		}
+
+		if ( ! is_object( $event ) ) {
+			return '';
 		}
 
 		if ( tribe_event_is_all_day( $event ) ) {
 			$displayTime = false;
 		}
 
-		if ( empty( $event->EventEndDate ) && is_object( $event ) ) {
-			$event->EventEndDate = tribe_get_event_meta( $event->ID, '_EventEndDate', true );
-		}
-
-		if ( isset( $event->EventEndDate ) ) {
-			if ( tribe_event_is_all_day( $event ) && empty( $event->_end_date_fixed ) && Tribe__Events__Date_Utils::timeOnly( $event->EventEndDate ) != '23:59:59' && Tribe__Events__Date_Utils::timeOnly( tribe_event_end_of_day() ) != '23:59' ) {
-				// set the event end date to be one day earlier, if it's an all day event and the cutoff is past midnight
-				// @todo remove this once we can have all day events without a start / end time
-				$event->EventEndDate = date_create( $event->EventEndDate );
-				$event->EventEndDate->modify( '-1 day' );
-				$event->EventEndDate    = $event->EventEndDate->format( Tribe__Events__Date_Utils::DBDATEFORMAT );
-				$event->_end_date_fixed = true;
-			}
-			$date = strtotime( $event->EventEndDate );
-		} else {
-			return;
-		}
-
-		return tribe_event_format_date( $date, $displayTime, $dateFormat );
+		$end_date = Tribe__Events__Timezones::event_end_timestamp( $event->ID, $timezone );
+		return tribe_event_format_date( $end_date, $displayTime, $dateFormat );
 	}
 
 	/**
@@ -184,7 +165,7 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * Returns formatted date
 	 *
 	 * @category Events
-	 * @param string $date
+	 * @param string $date        String representing the datetime, assumed to be UTC (relevant if timezone conversion is used)
 	 * @param bool   $displayTime If true shows date and time, if false only shows date
 	 * @param string $dateFormat  Allows date and time formating using standard php syntax (http://php.net/manual/en/function.date.php)
 	 *
@@ -192,7 +173,7 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 */
 	function tribe_event_format_date( $date, $displayTime = true, $dateFormat = '' ) {
 
-		if ( ! Tribe__Events__Date_Utils::isTimestamp( $date ) ) {
+		if ( ! Tribe__Events__Date_Utils::is_timestamp( $date ) ) {
 			$date = strtotime( $date );
 		}
 
@@ -232,9 +213,9 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 		$hours_to_add    = $multiday_cutoff[0];
 		$minutes_to_add  = $multiday_cutoff[1];
 		if ( is_null( $date ) || empty( $date ) ) {
-			return apply_filters( 'tribe_event_beginning_of_day', Date( $format, strtotime( date( 'Y-m-d' ) . ' +' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) ) );
+			return apply_filters( 'tribe_event_beginning_of_day', date( $format, strtotime( date( 'Y-m-d' ) . ' +' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) ) );
 		} else {
-			return apply_filters( 'tribe_event_beginning_of_day', Date( $format, strtotime( date( 'Y-m-d', strtotime( $date ) ) . ' +' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) ) );
+			return apply_filters( 'tribe_event_beginning_of_day', date( $format, strtotime( date( 'Y-m-d', strtotime( $date ) ) . ' +' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) ) );
 		}
 	}
 
@@ -252,9 +233,9 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 		$hours_to_add    = $multiday_cutoff[0];
 		$minutes_to_add  = $multiday_cutoff[1];
 		if ( is_null( $date ) || empty( $date ) ) {
-			return apply_filters( 'tribe_event_end_of_day', Date( $format, strtotime( 'tomorrow ' . ' +' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) - 1 ) );
+			return apply_filters( 'tribe_event_end_of_day', date( $format, strtotime( 'tomorrow  +' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) - 1 ) );
 		} else {
-			return apply_filters( 'tribe_event_end_of_day', Date( $format, strtotime( date( 'Y-m-d', strtotime( $date ) ) . ' +1 day ' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) - 1 ) );
+			return apply_filters( 'tribe_event_end_of_day', date( $format, strtotime( date( 'Y-m-d', strtotime( $date ) ) . ' +1 day ' . $hours_to_add . ' hours ' . $minutes_to_add . ' minutes' ) - 1 ) );
 		}
 	}
 
@@ -269,20 +250,19 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 */
 	function tribe_event_is_on_date( $date = null, $event = null ) {
 
-		if ($date == null) {
+		if ( null === $date ) {
 			$date = current_time( 'mysql' );
 		}
 
-		if ($event == null) {
+		if ( null === $event ) {
 			global $post;
 			$event = $post;
 			if ( empty( $event ) ) {
-				_doing_it_wrong( __FUNCTION__, __( 'The function needs to be passed an $event or used in the loop.', 'tribe-events-calendar' ) );
+				_doing_it_wrong( __FUNCTION__, __( 'The function needs to be passed an $event or used in the loop.', 'the-events-calendar' ) );
 				return false;
 			}
 		}
 
-		$event_is_on_date = false;
 		$start_of_day     = tribe_event_beginning_of_day( $date, 'U' );
 		$end_of_day       = tribe_event_end_of_day( $date, 'U' );
 		$event_start      = tribe_get_start_date( $event, null, 'U' );
@@ -296,28 +276,35 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 			$event_end    = $event_end->format( 'U' );
 		}
 
-		/**
-		 * conditions:
-		 * event starts on this day (event start time is between start and end of day)
-		 * event ends on this day (event end time is between start and end of day)
-		 * event starts before start of day and ends after end of day (spans across this day)
-		 * note:
+		/* note:
 		 * events that start exactly on the EOD cutoff will count on the following day
 		 * events that end exactly on the EOD cutoff will count on the previous day
-
 		 */
 
-		$event_starts_today       = $event_start >= $start_of_day && $event_start < $end_of_day;
-		$event_ends_today         = $event_end > $start_of_day && $event_end <= $end_of_day;
-		$event_spans_across_today = $event_start < $start_of_day && $event_end > $end_of_day;
-
-		if ( $event_starts_today || $event_ends_today || $event_spans_across_today ) {
-			$event_is_on_date = true;
-		}
+		$event_is_on_date = Tribe__Events__Date_Utils::range_coincides( $start_of_day, $end_of_day, $event_start, $event_end );
 
 		return apply_filters( 'tribe_event_is_on_date', $event_is_on_date, $date, $event );
 
 	}
 
+
+	/**
+	 * Get the datetime saparator from the database option with escaped characters or not ;)
+	 *
+	 * @param string $default Default Separator if it's blank on the Database
+	 * @param bool $esc If it's going to be used on a `date` function or method it needs to be escaped
+	 *
+	 * @filter tribe_datetime_separator
+	 *
+	 * @return string
+	 */
+	function tribe_get_datetime_separator( $default = ' @ ', $esc = false ) {
+		$separator = (string) tribe_get_option( 'dateTimeSeparator', $default );
+		if ( $esc ) {
+			$separator = (array) str_split( $separator );
+			$separator = ( ! empty( $separator ) ? '\\' : '' ) . implode( '\\', $separator );
+		}
+		return apply_filters( 'tribe_datetime_separator', $separator );
+	}
+
 }
-?>

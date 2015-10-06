@@ -3,7 +3,7 @@ Contributors: fd
 Donate link: http://flagrantdisregard.com/footnotes-plugin/
 Tags: posts, writing, editing, footnotes, endnotes, formatting
 Requires at least: 2.0
-Tested up to: 4.1
+Tested up to: 4.3.1
 Stable tag: trunk
 
 Add elegant looking footnotes to your posts simply and naturally.
@@ -55,6 +55,15 @@ and incorrect footnotes on your post.
 1. Sample of post and resulting display on blog.
 
 == Changelog ==
+
+= 1.34 =
+* Fixed jQuery script dependency
+
+= 1.33 =
+* Added Greek translation by Dimitrios Kaisaris (http://www.foodblogstarter.com)
+
+= 1.32 =
+* Fixed issue when non-breaking space used between footnote number and footnote text
 
 = 1.31 =
 * Fixed issue when non-breaking space used between footnote number and footnote text

@@ -10,9 +10,7 @@ if ( ! function_exists( 'tribe_get_single_ical_link' ) ) {
 	 * @return string URL for ical for single event.
 	 */
 	function tribe_get_single_ical_link() {
-		$output = Tribe__Events__iCal::get_ical_link();
-
-		return apply_filters( 'tribe_get_ical_link', $output );
+		return tribe_get_ical_link();
 	}
 }
 
@@ -44,9 +42,15 @@ if ( ! function_exists( 'tribe_get_gcal_link' ) ) {
 	 */
 	function tribe_get_gcal_link( $postId = null ) {
 		$postId    = Tribe__Events__Main::postIdHelper( $postId );
-		$output    = esc_url( Tribe__Events__Main::instance()->googleCalendarLink( $postId ) );
+		$output    = Tribe__Events__Main::instance()->googleCalendarLink( $postId );
 
-		return apply_filters( 'tribe_get_gcal_link', $output );
+		/**
+		 * Filters the Google Calendar gcal link
+		 *
+		 * @param string $output Gcal link
+		 * @param int $postId WP Post ID of an event
+		 */
+		return apply_filters( 'tribe_get_gcal_link', $output, $postId );
 	}
 }
 

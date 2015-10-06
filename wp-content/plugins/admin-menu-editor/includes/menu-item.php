@@ -457,7 +457,8 @@ abstract class ameMenuItem {
 		}
 
 		if ( self::is_hook_or_plugin_page($menu_url, $parent_url) ) {
-			$base_file = self::is_wp_admin_file($parent_url) ? $parent_url : 'admin.php';
+			$parent_file = self::remove_query_from($parent_url);
+			$base_file = self::is_wp_admin_file($parent_file) ? $parent_url : 'admin.php';
 			$url = add_query_arg(array('page' => $menu_url), $base_file);
 		} else {
 			$url = $menu_url;

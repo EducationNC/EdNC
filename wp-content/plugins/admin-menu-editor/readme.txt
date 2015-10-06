@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 3.8
-Tested up to: 4.2
-Stable tag: 1.4.4
+Tested up to: 4.3
+Stable tag: 1.4.5
 
 Lets you edit the WordPress admin menu. You can re-order, hide or rename menus, add custom menus and more. 
 
@@ -62,6 +62,15 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 3. Re-ordering menu items via drag and drop
 
 == Changelog ==
+
+= 1.4.5 =
+* Fixed a `TypeError: invalid 'in' operand a` error that caused compatibility issues with WordPress 4.3.
+* Fixed a bug where the current menu item wouldn't get highlighted if its URL included %-encoded query parameters.
+* Fixed a bug in menu URL generation that could cause problems when moving a plugin menu from "Posts", "Pages" or a CPT to another menu. The URL of the menu item got changed in a way that could break some plugins.
+* Fixed a .htaccess compatiblility issue with with Apache 2.3+.
+* Fixed an incorrect directory name in an error message.
+* The "Links" menu will no longer show up in the editor unless explicitly enabled. As of WP 3.5, the "Links" menu still exists in WordPress core but is inaccessible because the Links Manager is disabled by default.
+* Tested with WordPress 4.3.
 
 = 1.4.4 =
 * Tested with WordPress 4.2.

@@ -58,15 +58,15 @@ class Tribe__Events__Amalgamator {
 					'_OrganizerEmail'   => get_post_meta( $id, '_OrganizerEmail', true ),
 				);
 				$hash = md5( serialize( $data ) );
-				if ( ! isset( $buckets[$hash] ) ) {
-					$buckets[$hash] = array();
+				if ( ! isset( $buckets[ $hash ] ) ) {
+					$buckets[ $hash ] = array();
 				}
 				// prioritize organizers with an eventbrite id
 				$eventbrite = get_post_meta( $id, '_OrganizerEventBriteID', true );
 				if ( empty( $eventbrite ) ) {
-					array_push( $buckets[$hash], $id );
+					array_push( $buckets[ $hash ], $id );
 				} else {
-					array_unshift( $buckets[$hash], $id );
+					array_unshift( $buckets[ $hash ], $id );
 				}
 			}
 		}
@@ -101,15 +101,15 @@ class Tribe__Events__Amalgamator {
 					'_VenueURL'      => get_post_meta( $id, '_VenueURL', true ),
 				);
 				$hash = md5( serialize( $data ) );
-				if ( ! isset( $buckets[$hash] ) ) {
-					$buckets[$hash] = array();
+				if ( ! isset( $buckets[ $hash ] ) ) {
+					$buckets[ $hash ] = array();
 				}
 				// prioritize venues with an eventbrite id
 				$eventbrite = get_post_meta( $id, '_VenueEventBriteId', true );
 				if ( empty( $eventbrite ) ) {
-					array_push( $buckets[$hash], $id );
+					array_push( $buckets[ $hash ], $id );
 				} else {
-					array_unshift( $buckets[$hash], $id );
+					array_unshift( $buckets[ $hash ], $id );
 				}
 			}
 		}
@@ -257,23 +257,23 @@ class Tribe__Events__Amalgamator {
 	 * @return string
 	 */
 	public static function migration_button( $text = '' ) {
-		$text     = $text ? $text : __( 'Merge Duplicates', 'tribe-events-calendar' );
-		$html     = '<a href="%s" class="button">%s</a>';
+		$text     = $text ? $text : __( 'Merge Duplicates', 'the-events-calendar' );
 		$settings = Tribe__Events__Settings::instance();
+
 		// get the base settings page url
 		$url  = apply_filters(
 			'tribe_settings_url', add_query_arg(
 				array(
 					'post_type' => Tribe__Events__Main::POSTTYPE,
-					'page'      => $settings->adminSlug
+					'page'      => $settings->adminSlug,
 				), admin_url( 'edit.php' )
 			)
 		);
-		$url  = esc_url( add_query_arg( array( 'amalgamate' => '1' ), $url ) );
-		$url  = wp_nonce_url( $url, 'amalgamate_duplicates' );
-		$html = sprintf( $html, $url, $text );
 
-		return $html;
+		$url  = add_query_arg( array( 'amalgamate' => '1' ), $url );
+		$url  = wp_nonce_url( $url, 'amalgamate_duplicates' );
+
+		return sprintf( '<a href="%s" class="button">%s</a>', $url, $text );
 	}
 
 	/**
@@ -295,7 +295,7 @@ class Tribe__Events__Amalgamator {
 			'tribe_settings_url', add_query_arg(
 				array(
 					'post_type' => Tribe__Events__Main::POSTTYPE,
-					'page'      => $settings->adminSlug
+					'page'      => $settings->adminSlug,
 				), admin_url( 'edit.php' )
 			)
 		);

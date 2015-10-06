@@ -325,7 +325,7 @@ if ( ! class_exists( 'Tribe__Events__Tickets__Tickets' ) ) {
 				$tickets = $this->get_event_tickets( $post_id );
 				$return  = Tribe__Events__Tickets__Tickets_Pro::instance()->get_ticket_list_markup( $tickets );
 
-				$return = $this->notice( __( 'Your ticket has been saved.', 'tribe-events-calendar' ) ) . $return;
+				$return = $this->notice( __( 'Your ticket has been saved.', 'the-events-calendar' ) ) . $return;
 
 				// Additionally ensure the event costs meta data is updated accordingly
 				Tribe__Events__API::update_event_cost( $post_id );
@@ -406,7 +406,7 @@ if ( ! class_exists( 'Tribe__Events__Tickets__Tickets' ) ) {
 				$tickets = $this->get_event_tickets( $post_id );
 				$return  = Tribe__Events__Tickets__Tickets_Pro::instance()->get_ticket_list_markup( $tickets );
 
-				$return = $this->notice( __( 'Your ticket has been deleted.', 'tribe-events-calendar' ) ) . $return;
+				$return = $this->notice( __( 'Your ticket has been deleted.', 'the-events-calendar' ) ) . $return;
 
 				// Additionally ensure the event costs meta data is updated accordingly
 				Tribe__Events__API::update_event_cost( $post_id );
@@ -701,8 +701,9 @@ if ( ! class_exists( 'Tribe__Events__Tickets__Tickets' ) ) {
 					continue;
 				}
 
+
 				// An empty price property can be ignored (but do add if the price is explicitly set to zero)
-				elseif ( ! empty( $ticket->price ) && is_numeric( $ticket->price ) ) {
+				elseif ( isset( $ticket->price ) && is_numeric( $ticket->price ) ) {
 					$prices[] = $ticket->price;
 				}
 			}

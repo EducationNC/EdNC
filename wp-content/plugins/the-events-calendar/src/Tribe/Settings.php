@@ -129,7 +129,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 		public function __construct() {
 
 			// set instance variables
-			$this->menuName    = apply_filters( 'tribe_settings_menu_name', __( 'The Events Calendar', 'tribe-events-calendar' ) );
+			$this->menuName    = apply_filters( 'tribe_settings_menu_name', __( 'The Events Calendar', 'the-events-calendar' ) );
 			$this->requiredCap = apply_filters( 'tribe_settings_req_cap', 'manage_options' );
 			$this->adminSlug   = apply_filters( 'tribe_settings_admin_slug', 'tribe-events-calendar' );
 			$this->errors      = get_option( 'tribe_settings_errors', array() );
@@ -157,8 +157,8 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 			if ( ! is_multisite() || ( is_multisite() && '0' == Tribe__Events__Main::instance()->getNetworkOption( 'allSettingsTabsHidden', '0' ) ) ) {
 				$this->admin_page = add_submenu_page(
 					'edit.php?post_type=' . Tribe__Events__Main::POSTTYPE,
-					__( 'The Events Calendar Settings', 'tribe-events-calendar' ),
-					__( 'Settings', 'tribe-events-calendar' ),
+					__( 'The Events Calendar Settings', 'the-events-calendar' ),
+					__( 'Settings', 'the-events-calendar' ),
 					$this->requiredCap,
 					$this->adminSlug,
 					array( $this, 'generatePage' )
@@ -173,9 +173,9 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 		 */
 		public function addNetworkPage() {
 			$this->admin_page = add_submenu_page(
-				'settings.php', __( 'The Events Calendar Settings', 'tribe-events-calendar' ), __( 'Events Settings', 'tribe-events-calendar' ), $this->requiredCap, $this->adminSlug, array(
+				'settings.php', __( 'The Events Calendar Settings', 'the-events-calendar' ), __( 'Events Settings', 'the-events-calendar' ), $this->requiredCap, $this->adminSlug, array(
 					$this,
-					'generatePage'
+					'generatePage',
 				)
 			);
 		}
@@ -198,7 +198,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 						'tribe_settings_url', add_query_arg(
 							array(
 								'page' => $this->adminSlug,
-								'tab'  => $this->currentTab
+								'tab'  => $this->currentTab,
 							), network_admin_url( 'settings.php' )
 						)
 					);
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 						'tribe_settings_url', add_query_arg(
 							array(
 								'page' => $this->adminSlug,
-								'tab'  => $this->currentTab
+								'tab'  => $this->currentTab,
 							), add_query_arg( array( 'post_type' => Tribe__Events__Main::POSTTYPE ), admin_url( 'edit.php' ) )
 						)
 					);
@@ -236,7 +236,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 			echo '<div class="tribe_settings wrap">';
 			screen_icon();
 			echo '<h2>';
-			printf( __( '%s Settings', 'tribe-events-calendar' ), $this->menuName );
+			printf( __( '%s Settings', 'the-events-calendar' ), $this->menuName );
 			echo '</h2>';
 			do_action( 'tribe_settings_above_tabs' );
 			$this->generateTabs( $this->currentTab );
@@ -250,15 +250,15 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 			do_action( 'tribe_settings_before_content_tab_' . $this->currentTab );
 			do_action( 'tribe_settings_content_tab_' . $this->currentTab );
 			if ( ! has_action( 'tribe_settings_content_tab_' . $this->currentTab ) ) {
-				echo '<p>' . __( "You've requested a non-existent tab.", 'tribe-events-calendar' ) . '</p>';
+				echo '<p>' . esc_html__( "You've requested a non-existent tab.", 'the-events-calendar' ) . '</p>';
 			}
 			do_action( 'tribe_settings_after_content_tab_' . $this->currentTab );
 			do_action( 'tribe_settings_after_content' );
 			if ( has_action( 'tribe_settings_content_tab_' . $this->currentTab ) && ! in_array( $this->currentTab, $this->noSaveTabs ) ) {
 				wp_nonce_field( 'saving', 'tribe-save-settings' );
 				echo '<div class="clear"></div>';
-				echo '<input type="hidden" name="current-settings-tab" id="current-settings-tab" value="' . $this->currentTab . '" />';
-				echo '<input id="tribeSaveSettings" class="button-primary" type="submit" name="tribeSaveSettings" value="' . __( ' Save Changes', 'tribe-events-calendar' ) . '" />';
+				echo '<input type="hidden" name="current-settings-tab" id="current-settings-tab" value="' . esc_attr( $this->currentTab ) . '" />';
+				echo '<input id="tribeSaveSettings" class="button-primary" type="submit" name="tribeSaveSettings" value="' . esc_attr__( 'Save Changes', 'the-events-calendar' ) . '" />';
 			}
 			echo apply_filters( 'tribe_settings_closing_form_element', '</form>' );
 			do_action( 'tribe_settings_after_form_element' );
@@ -284,10 +284,8 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 					if ( is_network_admin() ) {
 						$url = '?page=' . $this->adminSlug . '&tab=' . urlencode( $tab );
 					}
-					$tab   = esc_attr( $tab );
-					$name  = esc_attr( $name );
 					$class = ( $tab == $this->currentTab ) ? ' nav-tab-active' : '';
-					echo '<a id="' . $tab . '" class="nav-tab' . $class . '" href="' . $url . '">' . $name . '</a>';
+					echo '<a id="' . esc_attr( $tab ) . '" class="nav-tab' . esc_attr( $class ) . '" href="' . esc_url( $url ) . '">' . esc_html( $name ) . '</a>';
 				}
 				do_action( 'tribe_settings_after_tabs' );
 				echo '</h2>';
@@ -308,19 +306,19 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 			if ( isset( $_POST['tribeSaveSettings'] ) && isset( $_POST['current-settings-tab'] ) ) {
 				// check permissions
 				if ( ! current_user_can( 'manage_options' ) ) {
-					$this->errors[]    = __( "You don't have permission to do that.", 'tribe-events-calendar' );
+					$this->errors[]    = __( "You don't have permission to do that.", 'the-events-calendar' );
 					$this->major_error = true;
 				}
 
 				// check the nonce
 				if ( ! wp_verify_nonce( $_POST['tribe-save-settings'], 'saving' ) ) {
-					$this->errors[]    = __( 'The request was sent insecurely.', 'tribe-events-calendar' );
+					$this->errors[]    = __( 'The request was sent insecurely.', 'the-events-calendar' );
 					$this->major_error = true;
 				}
 
 				// check that the request originated from the current tab
 				if ( $_POST['current-settings-tab'] != $this->currentTab ) {
-					$this->errors[]    = __( "The request wasn't sent from this tab.", 'tribe-events-calendar' );
+					$this->errors[]    = __( "The request wasn't sent from this tab.", 'the-events-calendar' );
 					$this->major_error = true;
 				}
 
@@ -339,13 +337,13 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 
 				// set the current tab and current fields
 				$tab    = $this->currentTab;
-				$fields = $this->fields_for_save[$tab];
+				$fields = $this->fields_for_save[ $tab ];
 
 				if ( is_array( $fields ) ) {
 					// loop through the fields and validate them
 					foreach ( $fields as $field_id => $field ) {
 						// get the value
-						$value = ( isset( $_POST[$field_id] ) ) ? $_POST[$field_id] : null;
+						$value = ( isset( $_POST[ $field_id ] ) ) ? $_POST[ $field_id ] : null;
 						$value = apply_filters( 'tribe_settings_validate_field_value', $value, $field_id, $field );
 
 						// make sure it has validation set up for it, else do nothing
@@ -359,12 +357,12 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 
 							if ( isset( $validate->result->error ) ) {
 								// uh oh; validation failed
-								$this->errors[$field_id] = $validate->result->error;
+								$this->errors[ $field_id ] = $validate->result->error;
 							} elseif ( $validate->result->valid ) {
 								// validation passed
-								$this->validated[$field_id]        = new stdClass;
-								$this->validated[$field_id]->field = $validate->field;
-								$this->validated[$field_id]->value = $validate->value;
+								$this->validated[ $field_id ]        = new stdClass;
+								$this->validated[ $field_id ]->field = $validate->field;
+								$this->validated[ $field_id ]->value = $validate->value;
 							}
 						}
 					}
@@ -410,21 +408,22 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 						$parent_option = ( isset( $validated_field->field['parent_option'] ) ) ? $validated_field->field['parent_option'] : Tribe__Events__Main::OPTIONNAME;
 					}
 
-					$parent_option = apply_filters( 'tribe_settings_save_field_parent_option', $parent_option, $field_id );
+					$parent_option  = apply_filters( 'tribe_settings_save_field_parent_option', $parent_option, $field_id );
+					$network_option = isset( $validated_field->field['network_option'] ) ? (bool) $validated_field->field['network_option'] : false;
 
 					// some hooks
 					do_action( 'tribe_settings_save_field', $field_id, $value, $validated_field );
 					do_action( 'tribe_settings_save_field_' . $field_id, $value, $validated_field );
 
 					if ( ! $parent_option ) {
-						if ( is_network_admin() ) {
+						if ( $network_option || is_network_admin() ) {
 							update_site_option( $field_id, $value );
 						} else {
 							update_option( $field_id, $value );
 						}
 					} else {
 						// set the parent option
-						$parent_options[$parent_option][$field_id] = $value;
+						$parent_options[ $parent_option ][ $field_id ] = $value;
 					}
 				}
 			}
@@ -458,7 +457,6 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 					} else {
 						update_option( $option_id, $options );
 					}
-
 				}
 			}
 
@@ -488,7 +486,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 				// output a message if we have errors
 
 				$output = '<div id="message" class="error"><p><strong>';
-				$output .= __( 'Your form had the following errors:', 'tribe-events-calendar' );
+				$output .= __( 'Your form had the following errors:', 'the-events-calendar' );
 				$output .= '</strong></p><ul class="tribe-errors-list">';
 
 				// loop through each error
@@ -497,7 +495,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 				}
 
 				if ( count( $errors ) ) {
-					$message = ( isset( $this->major_error ) && $this->major_error ) ? __( 'None of your settings were saved. Please try again.' ) : _n( 'The above setting was not saved. Other settings were successfully saved.', 'The above settings were not saved. Other settings were successfully saved.', $count, 'tribe-events-calendar' );
+					$message = ( isset( $this->major_error ) && $this->major_error ) ? __( 'None of your settings were saved. Please try again.' ) : _n( 'The above setting was not saved. Other settings were successfully saved.', 'The above settings were not saved. Other settings were successfully saved.', $count, 'the-events-calendar' );
 				}
 
 				$output .= '</ul><p>' . $message . '</p></div>';
@@ -519,7 +517,7 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 			// are we coming from the saving place?
 			if ( isset( $_GET['saved'] ) && ! apply_filters( 'tribe_settings_display_errors_or_not', ( $count > 0 ) ) ) {
 				// output the filtered message
-				$message = __( 'Settings saved.', 'tribe-events-calendar' );
+				$message = __( 'Settings saved.', 'the-events-calendar' );
 				$output  = '<div id="message" class="updated"><p><strong>' . $message . '</strong></p></div>';
 				echo apply_filters( 'tribe_settings_success_message', $output, $this->currentTab );
 			}
@@ -534,6 +532,19 @@ if ( ! class_exists( 'Tribe__Events__Settings' ) ) {
 			delete_option( 'tribe_settings_errors' );
 			delete_option( 'tribe_settings_major_error' );
 			delete_option( 'tribe_settings_sent_data' );
+		}
+
+		/**
+		 * Returns the main admin settings URL.
+		 *
+		 * @return string
+		 */
+		public function get_url() {
+			return apply_filters( 'tribe_settings_url', add_query_arg( array(
+					'post_type' => Tribe__Events__Main::POSTTYPE,
+					'page'      => $this->adminSlug,
+				), admin_url( 'edit.php' )
+			) );
 		}
 
 	} // end class

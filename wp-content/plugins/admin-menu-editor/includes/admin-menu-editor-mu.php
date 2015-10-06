@@ -42,7 +42,7 @@ function ws_ame_installation_error(){
 		<strong>Admin Menu Editor is installed incorrectly!</strong>
 		</p>
 		<p>
-		Please copy the entire <code>admin-menu-directory</code> directory to your <code>mu-plugins</code> 
+		Please copy the entire <code>admin-menu-editor</code> directory to your <code>mu-plugins</code> 
 		directory, then move only the admin-menu-editor-mu.php file from
 		<code>admin-menu-editor/includes</code> to <code>mu-plugins</code>.
 		</p> 

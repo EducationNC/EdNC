@@ -12,9 +12,17 @@ jQuery(document).ready(function($) {
     });
   
   $('#glt-translate-trigger').on('toolbarHidden',function(event) {
-	  $('#glt-translate-trigger span').text('Translate » ');
+	  //$('#glt-translate-trigger span').text('Translate » ');
 	  $('.tool-rounded').css('position','absolute');
 	  
+  });
+
+  $('#glt-translate-trigger').on('toolbarItemClick',function(event) {
+          $('#glt-translate-trigger span').text('Translate » ');
+          
+          $(this).removeClass('pressed');
+
+          $('.tool-container').hide();
   });
   
     

@@ -4,8 +4,8 @@ Donate link: http://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id
 Plugin link: http://www.wp-studio.net/how-it-works
 Tags: language translator, google translator, language translate, google, google language translator, translation, translate, multi language
 Requires at least: 2.9
-Tested up to: 4.0
-stable tag: 4.0.9
+Tested up to: 4.3.1
+stable tag: 5.0.04
 
 Welcome to Google Language Translator! This plugin allows you to insert the Google Language Translator tool anywhere on your website using shortcode.
 
@@ -45,6 +45,24 @@ Q: Can I exclude certain areas of my website from being translated?
 A: Yes! Add the "notranslate" class to the HTML element containing your text. For example, the following text will be excluded from translation: <span class="notranslate">Hello World!</span>  
 
 == Changelog ==
+
+5.0.04
+- Corrected the text on the settings page to reflect 91 total flags, instead of 81 flags.
+
+5.0.03
+- Added 10 new languages and associated flags: Chichewa, Kazakh, Malagasy, Malayalam, Myanmar(Burmese), Sesotho, Sinhala, Sundanese, Tajik, and Uzbek.
+
+5.0.02
+- Updated the Tamil flag to use the Indian flag, instead of Tamil Tigers flag.
+
+5.0.01
+- Updated style.css to reflect the syntax error connecting to the Chinese flag.
+
+5.0.0
+- Wordpress security updates added to the settings page [wp_nonce_field()].
+- Removed 3 outside Javascript files - these files are now called upon directly from Wordpress CMS.
+- Unpacked flags.js p,a,c,k,e,r code. Unknowingly, this method of coding violated Wordpress plugin policy.
+- Updated pricing display for GLT Premium. It was displaying $15 previously, but the price had increased since the last update.
 
 4.0.9
 - Replaced: incorrect Catalonian flag image, with the correct image. I apologize for any inconvenience.

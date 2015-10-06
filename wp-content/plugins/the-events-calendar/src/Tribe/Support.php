@@ -15,6 +15,7 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 	class Tribe__Events__Support {
 
 		public static $support;
+		public $rewrite_rules_purged = false;
 
 		/**
 		 * Fields listed here contain HTML and should be escaped before being
@@ -24,12 +25,13 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 		 */
 		protected $must_escape = array(
 			'tribeEventsAfterHTML',
-			'tribeEventsBeforeHTML'
+			'tribeEventsBeforeHTML',
 		);
 
 		private function __construct() {
 			$this->must_escape = (array) apply_filters( 'tribe_help_must_escape_fields', $this->must_escape );
 			add_action( 'tribe_help_tab_sections', array( $this, 'displayHelpTabInfo' ), 10, 0 );
+			add_action( 'delete_option_rewrite_rules', array( $this, 'log_rewrite_rule_purge' ) );
 		}
 
 		/**
@@ -41,14 +43,14 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 				return;
 			}
 
-			$system_text[] = '<p>' . __( "Sometimes it's hard to tell what's going wrong without knowing more about your system steup. For your convenience, we've put together a little report on what's cooking under the hood.", 'tribe-events-calendar' ) . '</p>';
-			$system_text[] = '<p>' . __( "If you suspect that the problem you're having is related to another plugin, or we're just plain having trouble reproducing your bug report, please copy and send all of this to our support team.", 'tribe-events-calendar' ) . '</p>';
+			$system_text[] = '<p>' . __( "Sometimes it's hard to tell what's going wrong without knowing more about your system steup. For your convenience, we've put together a little report on what's cooking under the hood.", 'the-events-calendar' ) . '</p>';
+			$system_text[] = '<p>' . __( "If you suspect that the problem you're having is related to another plugin, or we're just plain having trouble reproducing your bug report, please copy and send all of this to our support team.", 'the-events-calendar' ) . '</p>';
 			$system_text   = implode( $system_text );
 			?>
 
-			<h3><?php _e( 'System Information', 'tribe-events-calendar' ); ?></h3>
+			<h3><?php esc_html_e( 'System Information', 'the-events-calendar' ); ?></h3>
 			<?php
-			echo( apply_filters( 'tribe_help_tab_system', $system_text ) );
+			echo apply_filters( 'tribe_help_tab_system', $system_text );
 			echo $this->formattedSupportStats();
 			$this->formattedSupportStatsStyle();
 		}
@@ -120,7 +122,7 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 			$keys = apply_filters( 'tribe-pue-install-keys', array() );
 
 			$systeminfo = array(
-				'url'                => 'http://' . $_SERVER["HTTP_HOST"],
+				'url'                => 'http://' . $_SERVER['HTTP_HOST'],
 				'name'               => $user->display_name,
 				'email'              => $user->user_email,
 				'install keys'       => $keys,
@@ -132,9 +134,14 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 				'theme'              => wp_get_theme()->get( 'Name' ),
 				'multisite'          => is_multisite(),
 				'settings'           => Tribe__Events__Main::getOptions(),
-				'WordPress timezone' => get_option( 'timezone_string', __( 'Unknown or not set', 'tribe-events-calendar' ) ),
-				'server timezone'    => date_default_timezone_get()
+				'WordPress timezone' => get_option( 'timezone_string', __( 'Unknown or not set', 'the-events-calendar' ) ),
+				'server timezone'    => date_default_timezone_get(),
 			);
+
+			if ( $this->rewrite_rules_purged ) {
+				$systeminfo['rewrite rules purged'] = __( 'Rewrite rules were purged on load of this help page. Chances are there is a rewrite rule flush occurring in a plugin or theme!', 'the-events-calendar' );
+			}
+
 			$systeminfo = apply_filters( 'tribe-events-pro-support', $systeminfo );
 
 			return $systeminfo;
@@ -227,6 +234,13 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 		<?php
 		}
 
+		/**
+		 * Logs the occurence of rewrite rule purging
+		 */
+		public function log_rewrite_rule_purge() {
+			$this->rewrite_rules_purged = true;
+		}//end log_rewrite_rule_purge
+
 		/****************** SINGLETON GUTS ******************/
 
 		/**
@@ -247,4 +261,3 @@ if ( ! class_exists( 'Tribe__Events__Support' ) ) {
 	}
 
 }
-?>

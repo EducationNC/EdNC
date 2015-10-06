@@ -23,7 +23,6 @@
 	width: 100%;
 	margin: 0;
 	padding-top: 2px;
-	padding-bottom: 2px;
 }
 
 .ws_basic_container {
@@ -38,15 +37,24 @@
 }
 
 .ws_dropzone {
-	margin: 0 5px 2px 5px;
-	border: none;
-	height: 25px;
+	display: block;
+	box-sizing: border-box;
+
+	margin: 2px 6px;
+	border: 3px none #b4b9be;
+
+	height: 31px;
 }
 
-.ws_dropzone_hover {
-	border: 1px dashed silver;
-	background: yellow;
-	height: 30px;
+.ws_dropzone_active,
+.ws_dropzone_hover,
+.ws_top_to_submenu_drop_hover .ws_dropzone {
+	border-style: dashed;
+}
+
+.ws_dropzone_hover,
+.ws_top_to_submenu_drop_hover .ws_dropzone {
+	border-width: 1px;
 }
 
 /*************************************************
@@ -695,10 +703,10 @@ select.ws_dropdown optgroup option {
 .ws_color_scheme_display {
     display: inline-block;
     height: 20px;
-    width: 190px;
+    width: 186px;
 
     margin-right: 5px;
-    padding: 2px 2px 2px 3px;
+    padding: 2px 3px;
 
     border: 1px solid #ddd;
     background: white;

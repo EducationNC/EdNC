@@ -2,6 +2,7 @@ jQuery(function($) {
 	// parseUri 1.2.2
 	// (c) Steven Levithan <stevenlevithan.com>
 	// MIT License
+	// Modified: Added partial URL-decoding support.
 
 	function parseUri (str) {
 		var	o   = parseUri.options,
@@ -13,7 +14,14 @@ jQuery(function($) {
 
 		uri[o.q.name] = {};
 		uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-			if ($1) uri[o.q.name][$1] = $2;
+			if ($1) {
+				//Decode percent-encoded query parameters.
+				if (o.q.name === 'queryKey') {
+					$1 = decodeURIComponent($1);
+					$2 = decodeURIComponent($2);
+				}
+				uri[o.q.name][$1] = $2;
+			}
 		});
 
 		return uri;

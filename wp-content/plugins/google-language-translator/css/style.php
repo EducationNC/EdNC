@@ -32,7 +32,7 @@ if (get_option('googlelanguagetranslator_flags') == 'show_flags') {
 	} 
 
 	if ( get_option ('googlelanguagetranslator_flags_alignment') == 'flags_right') {
-	  echo '#google_language_translator, #language { clear:both; width:auto !important; text-align:right; }';
+	  echo '#google_language_translator, #language { clear:both; width:160px; text-align:right; }';
 	  echo '#language { float:right; }';
 	  echo '#flags { text-align:right; width:165px; float:right; clear:right; }';
 	  echo '#flags ul { float:right !important; }';

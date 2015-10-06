@@ -20,6 +20,9 @@
 #screen-meta-links .custom-screen-meta-link-wrap a.custom-screen-meta-link
 {
     padding: 3px 16px 3px 16px;
+    text-decoration: none;
+    display: block;
+    min-height: 22px;
 }
 
 #screen-meta-links a.custom-screen-meta-link::after {

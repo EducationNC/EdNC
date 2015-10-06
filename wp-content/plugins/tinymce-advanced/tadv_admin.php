@@ -9,7 +9,6 @@ if ( ! current_user_can( 'manage_options' ) ) {
 	wp_die('Access denied');
 }
 
-load_plugin_textdomain( 'tinymce-advanced', false, 'tinymce-advanced/langs' );
 $message = '';
 
 $imgpath = TADV_URL . 'images/';
@@ -59,10 +58,6 @@ if ( isset( $_POST['tadv-save'] ) ) {
 		$admin_settings_array[] = 'importcss';
 	}
 
-	if ( ! empty( $_POST['textpattern'] ) ) {
-		$admin_settings_array[] = 'textpattern';
-	}
-
 	if ( ! empty( $_POST['no_autop'] ) ) {
 		$admin_settings_array[] = 'no_autop';
 	}
@@ -108,28 +103,33 @@ if ( isset( $_POST['tadv-save'] ) ) {
 	$this->settings = $settings;
 	$this->load_settings();
 
-	// Merge the submitted plugins and from the buttons
+	// Merge the submitted plugins buttons
 	$settings['plugins'] = implode( ',', $this->get_plugins( $plugins_array ) );
 	$this->settings = $settings;
 	$this->plugins = $settings['plugins'];
 
-	// Save the new settings
+	// Save the new settings. TODO: per user
 	update_option( 'tadv_settings', $settings );
 
 } elseif ( isset( $_POST['tadv-restore-defaults'] ) ) {
-	// TODO admin || SA
+	check_admin_referer( 'tadv-save-buttons-order' );
+
+	// TODO: only for admin || SA
 	$this->admin_settings = $this->default_admin_settings;
 	update_option( 'tadv_admin_settings', $this->default_admin_settings );
 
-	// can 'save_posts' ?
+	// TODO: all users that can have settings
 	$this->settings = $this->default_settings;
 	update_option( 'tadv_settings', $this->default_settings );
 
 	$message = '<div class="updated"><p>' .  __('Default settings restored.', 'tinymce-advanced') . '</p></div>';
 } elseif ( isset( $_POST['tadv-export-settings'] ) ) {
+	check_admin_referer( 'tadv-save-buttons-order' );
+
 	$this->load_settings();
 	$output = array( 'settings' => $this->settings );
-	// TODO admin || SA
+
+	// TODO: only admin || SA
 	$output['admin_settings'] = $this->admin_settings;
 
 	?>
@@ -154,7 +154,9 @@ if ( isset( $_POST['tadv-save'] ) ) {
 
 	return;
 } elseif ( isset( $_POST['tadv-import-settings'] ) ) {
-	// TODO ! admin && ! SA
+	check_admin_referer( 'tadv-save-buttons-order' );
+
+	// TODO: all users
 	?>
 	<div class="wrap">
 	<h2><?php _e( 'TinyMCE Advanced Settings Import', 'tinymce-advanced' ); ?></h2>
@@ -179,6 +181,8 @@ if ( isset( $_POST['tadv-save'] ) ) {
 	return;
 } elseif ( isset( $_POST['tadv-import-submit'] ) && ! empty( $_POST['tadv-import'] ) && is_string( $_POST['tadv-import'] ) ) {
 	check_admin_referer( 'tadv-import' );
+
+	// TODO: all users
 	$import = json_decode( trim( wp_unslash( $_POST['tadv-import'] ) ), true );
 	$settings = $admin_settings = array();
 
@@ -187,6 +191,7 @@ if ( isset( $_POST['tadv-save'] ) ) {
 			$settings = $this->sanitize_settings( $import['settings'] );
 		}
 
+		// only admin || SA
 		if ( ! empty( $import['admin_settings'] ) ) {
 			$admin_settings = $this->sanitize_settings( $import['admin_settings'] );
 		}
@@ -195,15 +200,16 @@ if ( isset( $_POST['tadv-save'] ) ) {
 	if ( empty( $settings ) ) {
 		$message = '<div class="error"><p>' .  __('Importing of settings failed.', 'tinymce-advanced') . '</p></div>';
 	} else {
+		// only admin || SA
 		$this->admin_settings = $admin_settings;
 		update_option( 'tadv_admin_settings', $admin_settings );
 
 		// User options
-		// TODO allow editors, authors and contributors some access
+		// TODO: allow editors, authors and contributors some access
 		$this->settings = $settings;
 		$this->load_settings();
 
-		// Merge the submitted plugins and from the buttons
+		// Merge the submitted plugins and buttons
 		if ( ! empty( $settings['plugins'] ) ) {
 			$settings['plugins'] = implode( ',', $this->get_plugins( explode( ',', $settings['plugins'] ) ) );
 		}
@@ -456,16 +462,6 @@ if ( ! is_multisite() || current_user_can( 'manage_sites' ) ) {
 	<div>
 		<label><input type="checkbox" name="importcss" id="importcss" <?php if ( $this->check_admin_setting( 'importcss' ) ) echo ' checked="checked"'; ?> />
 		<?php _e( 'Load the CSS classes used in editor-style.css and replace the Formats button and sub-menu.', 'tinymce-advanced' ); ?></label>
-	</div>
-
-	<div>
-		<label><input type="checkbox" name="textpattern" id="textpattern" <?php if ( $this->check_admin_setting('textpattern') ) echo ' checked="checked"'; ?> />
-		<?php _e( 'Markdown typing support (text pattern plugin)', 'tinymce-advanced' ); ?></label>
-		<p>
-			<?php _e( 'This plugin matches special patterns while you type and applies formats or executes commands on the matched text.', 'tinymce-advanced' ); ?>
-			<?php _e( 'The default patterns are the same as the markdown syntax so you can type <code># text</code> to create a header, <code>1. text</code> to create a list, <code>**text**</code> to make it bold, etc.', 'tinymce-advanced' ); ?>
-			<a href="http://www.tinymce.com/wiki.php/Configuration:textpattern_patterns" target="_blank"><?php _e( 'More information', 'tinymce-advanced' ); ?></a>
-		</p>
 	</div>
 
 	<div>

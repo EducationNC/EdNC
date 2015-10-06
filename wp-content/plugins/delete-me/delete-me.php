@@ -3,7 +3,7 @@
 Plugin Name: Delete Me
 Plugin URI: https://wordpress.org/plugins/delete-me/
 Description: Allow users with specific WordPress roles to delete themselves from the <code>Your Profile</code> page or anywhere Shortcodes can be used using the Shortcode <code>[plugin_delete_me /]</code>. Settings for this plugin are found on the <code>Settings &rarr; Delete Me</code> subpanel. Multisite and Network Activation supported.
-Version: 1.6
+Version: 1.8
 Author: Clinton Caldwell
 Author URI: https://profiles.wordpress.org/cmc3215/
 License: GPL2 http://www.gnu.org/licenses/gpl-2.0.html
@@ -62,7 +62,7 @@ class plugin_delete_me {
 			'name' => 'Delete Me',
 			'uri' => 'https://wordpress.org/plugins/delete-me/',
 			'donate_link' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L5VY6QDSAAZUL',
-			'version' => '1.6',
+			'version' => '1.8',
 			'wp_version_min' => '3.4',
 			'option' => 'plugin_delete_me',
 			'shortcode' => 'plugin_delete_me',

@@ -143,7 +143,7 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 		<h3>Your Profile</h3>
 		<table class="form-table">
 			<tr>
-				<th scope="row"><label for="your_profile_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in HTML (e.g. Delete Account &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;)">[?]</a></th>
+				<th scope="row"><label for="your_profile_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in HTML (e.g. Delete Account &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;).">[?]</a></th>
 				<td>
 					<code>
 						&lt;a
@@ -199,7 +199,7 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 		<h3>Shortcode</h3>
 		<table class="form-table">
 			<tr>
-				<th scope="row"><label for="shortcode_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in HTML (e.g. Delete Account &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;)">[?]</a></th>
+				<th scope="row"><label for="shortcode_anchor">Link</label> <a href="#" onclick="return false;" style="text-decoration: none;" title="Class &amp; Style are optional. The last box is the clickable content of the link in HTML (e.g. Delete Account &mdash; or &mdash; &lt;img alt=&quot;&quot; src=&quot;http://www.example.com/image.png&quot; width=&quot;100&quot; height=&quot;20&quot; /&gt;).">[?]</a></th>
 				<td>
 					<code>
 						&lt;a
@@ -231,7 +231,7 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 				</td>
 			</tr>
 			<tr>
-				<th scope="row">Usage <a href="#" onclick="return false;" style="text-decoration: none;" title="Text inside the Shortcode open and close tags is only served to those who cannot delete themselves, everyone else will be shown the delete link configured above.">[?]</a></th>
+				<th scope="row">Usage <a href="#" onclick="return false;" style="text-decoration: none;" title="Text inside the Shortcode open and close tags is only served to those who cannot delete themselves, everyone else will be shown the delete link. Attributes may be used to override settings, but are not required.">[?]</a></th>
 				<td>
 					<p>
 						<code>[<?php echo $this->info['shortcode']; ?> /]</code><br />
@@ -240,6 +240,9 @@ if ( isset( $this->POST[$form_nonce_name] ) && wp_verify_nonce( $this->POST[$for
 					<p>
 						<code>&lt;?php echo do_shortcode( '[<?php echo $this->info['shortcode']; ?> /]' ); ?&gt;</code><br />
 						<code>&lt;?php echo do_shortcode( '[<?php echo $this->info['shortcode']; ?>]Text inside Shortcode tags[/<?php echo $this->info['shortcode']; ?>]' ); ?&gt;</code>
+					</p>
+					<p>
+						<code>Attributes: class, style, html, js_confirm_warning, landing_url</code>
 					</p>
 				</td>
 			</tr>

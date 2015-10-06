@@ -287,6 +287,10 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$this->apply_woocommerce_compat_fix();
 		//Compatibility fix for WordPress Mu Domain Mapping.
 		$this->apply_wpmu_domain_mapping_fix();
+		//As of WP 3.5, the "Links" menu is hidden by default.
+		if ( !current_user_can('manage_links') ) {
+			$this->remove_link_manager_menus();
+		}
 
 		//Generate item templates from the default menu.
 		$this->item_templates = $this->build_templates($this->default_wp_menu, $this->default_wp_submenu);
@@ -2497,6 +2501,48 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		if ( ($priority !== false) && (has_filter('plugins_url', 'domain_mapping_post_content') !== false) ) {
 			remove_filter('plugins_url', 'domain_mapping_plugins_uri', $priority);
 		}
+	}
+
+	/**
+	 * As of WP 3.5, the Links Manager is hidden by default. It's only visible if the user has existing links
+	 * or they choose to enable it by installing the Links Manager plugin.
+	 *
+	 * However, the "Links" menu still exists. This can be confusing to users who will now see an apparently
+	 * useless menu item that can't be enabled (since they don't have the Links Manager plugin) and can't be
+	 * deleted either (since it's a default menu). To remedy that, hide the default "Links" menu.
+	 */
+	private function remove_link_manager_menus() {
+		//Find the "Links" menu.
+		$links_index = null;
+		$links_slug = null;
+		foreach($this->default_wp_menu as $index => $menu) {
+			if ( ($menu[1] === 'manage_links') && isset($menu[5]) && ($menu[5] === 'menu-links') ) {
+				$links_index = $index;
+				$links_slug = $menu[2];
+			}
+		}
+
+		//Remove the default "Links" submenus, but leave custom items created by other plugins.
+		if ( isset($this->default_wp_submenu[$links_slug]) ) {
+			$this->default_wp_submenu[$links_slug] = array_filter(
+				$this->default_wp_submenu[$links_slug],
+				array($this, 'filter_default_links_submenus')
+			);
+			if ( empty($this->default_wp_submenu[$links_slug]) ) {
+				unset($this->default_wp_submenu[$links_slug]);
+			}
+		}
+
+		//Remove the "Links" menu itself if it no longer has any children.
+		if ( !isset($this->default_wp_submenu[$links_slug]) ) {
+			unset($this->default_wp_menu[$links_index]);
+		}
+	}
+
+	private function filter_default_links_submenus($item) {
+		$default_items = array('link-manager.php', 'link-add.php', 'edit-tags.php?taxonomy=link_category');
+		$is_default = isset($item[2]) && in_array($item[2], $default_items);
+		return !$is_default;
 	}
 
 	/**

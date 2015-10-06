@@ -51,6 +51,7 @@ tinymce.PluginManager.add( 'wptadv', function( editor ) {
 		html = html.replace( new RegExp( '</(?:' + blocklist + ')>', 'gi' ), '$&\n' );
 		html = html.replace( new RegExp( '<br(?: [^>]*)?>', 'gi' ), '$&\n' );
 		html = html.replace( />\n\n</g, '>\n<' );
+		html = html.replace( /^<li/gm, '\t<li' );
 
 		return trim( html );
 	}
