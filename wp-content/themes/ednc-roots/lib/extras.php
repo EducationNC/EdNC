@@ -6,7 +6,7 @@
 add_image_size('medium-square', 400, 400, true);
 add_image_size('bio-headshot', 380, 425, true);
 add_image_size('featured-thumbnail', 295, 295, true);
-add_image_size('featured-thumbnail-squat', 295, 125, true);
+add_image_size('featured-thumbnail-squat', 264, 112, true);
 
 /**
  * Enable adding images with custom image sizes in posts through media library
