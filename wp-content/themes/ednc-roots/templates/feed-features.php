@@ -64,7 +64,7 @@ xmlns:media="http://search.yahoo.com/mrss/"
       }
       ?>
       <media:content url="<?php echo $image_sized['url']; ?>" medium="image" />
-      <description><![CDATA[<?php the_advanced_excerpt('length=20&length_type=words&add_link=0'); ?>]]></description>
+      <description><![CDATA[<?php the_advanced_excerpt('length=20&length_type=words&add_link=0&finish=exact'); ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
