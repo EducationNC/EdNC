@@ -64,29 +64,38 @@ xmlns:media="http://search.yahoo.com/mrss/"
       }
       ?>
       <media:content url="<?php echo $image_sized['url']; ?>" medium="image" />
-      <description><![CDATA[<?php the_advanced_excerpt('length=20&length_type=words&add_link=0&finish=exact'); ?>]]></description>
-      <content:encoded><![CDATA[<?php
-      if (has_post_thumbnail()) {
-        $image_id = get_post_thumbnail_id();
-        $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail');
-        $image_sized['url'] = $image_url[0];
-      } else {
-        $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
+      <description><![CDATA[<?php
+      $column = wp_get_post_terms(get_the_id(), 'column');
+      $category = get_the_category();
+      // Convert category results to array instead of object
+      foreach ($category as &$cat) {
+        $cat = (array) $cat;
       }
-      echo '<figure style="margin: 1em 0;">';
-      if ($image_sized['url']) {
-        echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
-      }
-      if (has_post_thumbnail()) {
-        $image_post = get_post($image_id);
 
-        echo '<figcaption style="font-style: italic;">';
-        echo $image_post->post_excerpt;
-        echo '</figcaption>';
+      if ($column) {
+        ?>
+        <span style="background:#ECF0F1;color:#666666;font-size:12px;padding:3px 7px;white-space:nowrap;vertical-align:baseline;"><?php echo $column[0]->name; ?></span>
+        <?php
+      } elseif ($category) {
+        $cats_hide = array();
+        // Determine array indexes for labels we don't want to show
+        $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
+        // Remove empty results
+        $cats_hide = array_filter($cats_hide, 'strlen');
+
+        // Only show label of category if it's not in above list
+        foreach ($category as $key=>$value) {
+          if (!in_array($key, $cats_hide)) {
+            echo '<span style="background:#ECF0F1;color:#666666;font-size:12px;padding:3px 7px;white-space:nowrap;vertical-align:baseline;">' . $value['cat_name'] . '</span>';
+          } else {
+            echo '&nbsp;';
+          }
+        }
+      } else {
+        echo '&nbsp;';
       }
-      echo '</figure>';
-      the_content(); ?>]]></content:encoded>
+      ?>]]></description>
+      <content:encoded><![CDATA[<?php the_advanced_excerpt('length=20&length_type=words&add_link=0&finish=exact'); ?>]]></content:encoded>
       <?php rss_enclosure(); ?>
       <?php do_action('rss2_item'); ?>
     </item>
