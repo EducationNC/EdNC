@@ -5,6 +5,7 @@
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/winston-salem-foundation.png" width="140" alt="Winston-Salem Foundation" /></li>
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/jw-pope-foundation.png" width="150" alt="John William Pope Foundation" /></li>
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/burroughs-wellcome-fund.png" width="100" alt="Burroughs Wellcome Fund" /></li>
+      <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/park-foundation.png" width="130" alt="Park Foundation" /></li>
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/sas_logo-white-transparent.png" width="100" alt="SAS Institute" /></li>
       <li><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/o2-energies-inc-white-transparent.png" width="78" alt="O2energies" /></li>
     </ul>

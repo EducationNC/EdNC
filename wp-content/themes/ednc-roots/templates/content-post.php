@@ -9,20 +9,6 @@ $author_avatar = get_field('avatar', $author_bio[0]->ID);
 $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 
 $column = wp_get_post_terms(get_the_id(), 'column');
-
-$category = get_the_category();
-  // Convert category results to array instead of object
-  foreach ($category as &$cat) {
-    $cat = (array) $cat;
-  }
-  $cats_hide = array();
-  // Determine array indexes for labels we don't want to show
-  $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-  $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
-  $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-  // Remove empty results
-  $cats_hide = array_filter($cats_hide, 'strlen');
-
 ?>
 
 <article <?php post_class('article'); ?>>
@@ -36,20 +22,7 @@ $category = get_the_category();
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-centered">
-              <?php
-              if ($column) {
-                ?>
-                <span class="label"><?php echo $column[0]->name; ?></span>
-                <?php
-              } else {
-                // Only show label of category if it's not in above list
-                foreach ($category as $key=>$value) {
-                  if (!in_array($key, $cats_hide)) {
-                    echo '<span class="label">' . $value['cat_name'] . '</span> ';
-                  }
-                }
-              }
-              ?>
+              <?php get_template_part('templates/labels'); ?>
 
               <h1 class="entry-title"><?php the_title(); ?></h1>
 
@@ -90,28 +63,7 @@ $category = get_the_category();
     <header class="entry-header container">
       <div class="row">
         <div class="col-md-9 col-centered">
-          <?php
-          if ($column) {
-            ?>
-            <span class="label"><?php echo $column[0]->name; ?></span>
-            <?php
-          } else {
-            $cats_hide = array();
-            // Determine array indexes for labels we don't want to show
-            $cats_hide[] = array_search('Uncategorized', array_column($category, 'cat_name'));
-            $cats_hide[] = array_search('Hide from home', array_column($category, 'cat_name'));
-            $cats_hide[] = array_search('Hide from archives', array_column($category, 'cat_name'));
-            // Remove empty results
-            $cats_hide = array_filter($cats_hide, 'strlen');
-
-            // Only show label of category if it's not in above list
-            foreach ($category as $key=>$value) {
-              if (!in_array($key, $cats_hide)) {
-                echo '<span class="label">' . $value['cat_name'] . '</span> ';
-              }
-            }
-          }
-          ?>
+          <?php get_template_part('templates/labels'); ?>
 
           <?php
           if (in_category('109')) {  // 1868 Constitutional Convention
@@ -360,7 +312,7 @@ $category = get_the_category();
               <?php endwhile; endif; wp_reset_query(); ?>
 
             <?php } ?>
-            
+
           </div>
 
           <?php if (!in_category('109')) { // 1868 ?>
