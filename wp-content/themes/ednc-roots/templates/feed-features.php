@@ -27,6 +27,7 @@ xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:atom="http://www.w3.org/2005/Atom"
 xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
 xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+xmlns:media="http://search.yahoo.com/mrss/"
 <?php do_action('rss2_ns'); ?>>
 
 <channel>
@@ -62,7 +63,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
         $image_sized = mr_image_resize($image_src, 295, 125, true, false);
       }
       ?>
-      <media:content url="<?php echo $image_sized['url']; ?>" medium="image">
+      <media:content url="<?php echo $image_sized['url']; ?>" medium="image" />
       <description><![CDATA[<?php the_excerpt(); ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
