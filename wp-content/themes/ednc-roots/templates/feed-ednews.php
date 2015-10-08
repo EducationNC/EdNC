@@ -58,26 +58,11 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
           					echo '<tr>';
           						echo '<td class="columnContent" style="padding:9px 10px 9px 0;">';
                         echo '<h2><a style="text-decoration:none;" href="' . $item['link'] . '" target="_blank">' . $item['title'] . '</a></h2>';
-                        echo '<p style="color:#999999;font-size:12px;">' . $item['source_name'] . ', ' . $item['original_date'] . '</p>';
+                        echo '<p style="color:#999999;font-size:12px;border-bottom:2px solid #eaeaea;padding-bottom:1em;">' . $item['source_name'] . ', ' . $item['original_date'] . '</p>';
                       echo '</td>';
           					echo '</tr>';
           				echo '</tbody>';
           			echo '</table>';
-                echo '<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">';
-                  echo '<tbody class="mcnDividerBlockOuter">';
-                    echo '<tr>';
-                      echo '<td class="mcnDividerBlockInner" style="min-width: 100%;padding: 5px 10px 0 0;;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">';
-                        echo '<table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top-width: 2px;border-top-style: solid;border-top-color: #EAEAEA;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">';
-                          echo '<tbody><tr>';
-                            echo '<td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">';
-                              echo '<span></span>';
-                            echo '</td>';
-                          echo '</tr>';
-                        echo '</tbody></table>';
-                      echo '</td>';
-                    echo '</tr>';
-                  echo '</tbody>';
-                echo '</table>';
               echo '</td>';
               $i++;
             }
