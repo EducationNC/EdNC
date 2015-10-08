@@ -52,28 +52,18 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       }
       ?></dc:creator>
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
-      <description><![CDATA[<?php
+      <?php
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
-        $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail');
+        $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat');
         $image_sized['url'] = $image_url[0];
       } else {
         $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 295, 295, true, false);
+        $image_sized = mr_image_resize($image_src, 295, 125, true, false);
       }
-      echo '<figure style="margin: 1em 0;">';
-      if ($image_sized['url']) {
-        echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
-      }
-      if (has_post_thumbnail()) {
-        $image_post = get_post($image_id);
-
-        echo '<figcaption style="font-style: italic;">';
-        echo $image_post->post_excerpt;
-        echo '</figcaption>';
-      }
-      echo '</figure>';
-      the_excerpt(); ?>]]></description>
+      ?>
+      <media:content url="<?php echo $image_sized['url']; ?>" medium="image">
+      <description><![CDATA[<?php the_excerpt(); ?>]]></description>
       <content:encoded><![CDATA[<?php
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
