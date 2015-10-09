@@ -57,7 +57,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
           				echo '<tbody>';
           					echo '<tr>';
           						echo '<td class="columnContent" style="padding:9px 10px 9px 0;">';
-                        echo '<h2><a style="text-decoration:none;" href="' . $item['link'] . '" target="_blank">' . $item['title'] . '</a></h2>';
+                        echo '<h2><a style="text-decoration:none;color:#8b185e;font-size:18px;font-weight:normal;" href="' . $item['link'] . '" target="_blank">' . $item['title'] . '</a></h2>';
                         echo '<p style="color:#999999;font-size:12px;border-bottom:2px solid #eaeaea;padding-bottom:1em;">' . $item['source_name'] . ', ' . $item['original_date'] . '</p>';
                       echo '</td>';
           					echo '</tr>';
