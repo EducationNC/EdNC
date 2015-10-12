@@ -9,6 +9,13 @@ $author_avatar = get_field('avatar', $author_bio[0]->ID);
 $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 
 $column = wp_get_post_terms(get_the_id(), 'column');
+$category = wp_get_post_terms(get_the_id(), 'category');
+
+if ($category[0]->slug == 'powered-schools') {
+  $banner = $category[0];
+} else {
+  $banner = $column[0];
+}
 ?>
 
 <article <?php post_class('article'); ?>>
@@ -41,13 +48,13 @@ $column = wp_get_post_terms(get_the_id(), 'column');
       </div>
     </header>
   <?php } else {
-    if ($column) {
+    if ($banner) {
       ?>
-      <div class="column-banner <?php echo $column[0]->slug; ?>">
+      <div class="column-banner <?php echo $banner->slug; ?>">
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-centered">
-              <div class="column-name"><?php echo $column[0]->name; ?></div>
+              <div class="column-name"><?php echo $banner->name; ?></div>
               <?php if ($author_avatar) { ?>
                 <div class="avatar hidden-xs">
                   <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
