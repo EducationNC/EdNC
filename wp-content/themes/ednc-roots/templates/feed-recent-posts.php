@@ -8,10 +8,30 @@ $whichday = current_time('w');
 // get today's date
 $today = getdate();
 
+// set up variable to hold excluded post ids
+$exclude = array();
+
 // if today is Monday, set "yesterday" to Friday and include Featured emails
 if ($whichday == 1) {
   $yesterday = getdate(strtotime('-3 days'));
   $terms = array('hide-from-home', 'hide-from-archives');
+
+  // get featured post ids to exclude
+  $args = array(
+    'posts_per_page' => 2,   // TODO: Change this to show only stories published since 12AM on this day
+    'post_type' => 'post',
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'appearance',
+        'field' => 'slug',
+        'terms' => 'featured'
+      )
+    )
+  );
+  $features = new WP_Query($args);
+  if ($features->have_posts()) : while ($features->have_posts()) : $features->the_post();
+    $exclude[] = get_the_id();
+  endwhile; endif; wp_reset_query();
 } else {
   $yesterday = getdate(strtotime('-1 days'));
   $terms = array('featured', 'hide-from-home', 'hide-from-archives');
@@ -20,6 +40,7 @@ if ($whichday == 1) {
 $args = array(
   'post_type' => array('post', 'map'),
   'posts_per_page' => -1,
+  'post__not_in' => $exclude,
   'tax_query' => array(
     array(
       'taxonomy' => 'appearance',
