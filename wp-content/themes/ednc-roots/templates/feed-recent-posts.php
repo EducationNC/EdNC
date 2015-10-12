@@ -3,8 +3,20 @@
 * Posts since last email RSS2 Template
 */
 
+// check day of week
+$whichday = current_time('w');
+// get today's date
 $today = getdate();
-$yesterday = getdate(strtotime('-1 days'));
+
+// if today is Monday, set "yesterday" to Friday and include Featured emails
+if ($whichday == 1) {
+  $yesterday = getdate(strtotime('-3 days'));
+  $terms = array('hide-from-home', 'hide-from-archives');
+} else {
+  $yesterday = getdate(strtotime('-1 days'));
+  $terms = array('featured', 'hide-from-home', 'hide-from-archives');
+}
+
 $args = array(
   'post_type' => array('post', 'map'),
   'posts_per_page' => -1,
@@ -12,7 +24,7 @@ $args = array(
     array(
       'taxonomy' => 'appearance',
       'field' => 'slug',
-      'terms' => array('featured', 'hide-from-home', 'hide-from-archives'),
+      'terms' => $terms,
       'operator' => 'NOT IN'
     )
   ),
