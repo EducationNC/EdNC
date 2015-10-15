@@ -1,4 +1,5 @@
 <?php
+$source = '';
 if (isset($_GET['utm_source'])) {
   $source = $_GET['utm_source'];
 }

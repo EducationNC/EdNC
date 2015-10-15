@@ -15,6 +15,7 @@ xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:atom="http://www.w3.org/2005/Atom"
 xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
 xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+xmlns:media="http://search.yahoo.com/mrss/"
 <?php do_action('rss2_ns'); ?>>
 
 <channel>
@@ -41,54 +42,32 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
       }
       ?></dc:creator>
       <guid isPermaLink="false"><?php the_guid(); ?></guid>
-      <description><![CDATA[<?php
+      <?php
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
-        $image_url = wp_get_attachment_image_src($image_id, 'thumbnail');
+        $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+
+        // check if returned image is actually the size we requested
+        if ($image_url[1] != 564) {
+          // if not, get the smaller one and we'll stretch it
+          $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat');
+        }
         $image_sized['url'] = $image_url[0];
       } else {
         $image_src = catch_that_image();
 
-        // Set image_sized ONLY if the post has an image inside the content...
-        if (is_string($image_src)) {
-          $image_sized = mr_image_resize($image_src, 150, 150, true, false);
+        // Set image_sized ONLY if the post has an image inside the content
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src, 564, 239, true, false);
         } else {
-          // If not, use the logo as a default...
-          $image_sized['url'] = 'https://www.ednc.org/wp-content/uploads/2015/01/logo-square-150x150.png';
+          // If not, use the logo as default
+          $image_sized['url'] = 'http://www.ednc.org/wp-content/uploads/2015/10/default.jpg';
         }
       }
-
-      if ($image_sized) {
-        $image_post = get_post($image_id);
-        echo '<table id="templateRows" border="0" cellspacing="0" cellpadding="0" width="600" style="font-family: Arial; sans-serif; color: #2b3e50;">';
-        echo '<tr>';
-        echo '<td style="width: 150px; max-width: 25%" class="templateColumnContainer" valign="top">';
-        if ($image_sized['url']) {
-          echo '<img src="' . $image_sized['url'] . '" style="max-width: 100%;" />';
-        }
-        echo '</td>';
-        echo '<td class="templateColumnContainer" valign="top">';
-        echo '<div style="padding-left: 15px;">';
-      }
-      the_advanced_excerpt('add_link=1&read_more=Full story >>');
-      if ($image_sized) {
-        echo '</div>';
-        echo '</td>';
-        echo '</tr>';
-        echo '</table>';
-      } ?>]]></description>
-      <content:encoded><![CDATA[<?php
-      if (has_post_thumbnail()) {
-        echo '<figure>';
-        the_post_thumbnail('post-thumbnail');
-        $thumb_id = get_post_thumbnail_id();
-        $thumb_post = get_post($thumb_id);
-        echo '<figcaption>';
-        echo $thumb_post->post_excerpt;
-        echo '</figcaption>';
-        echo '</figure>';
-      }
-      the_content() ?>]]></content:encoded>
+      ?>
+      <media:content url="<?php echo $image_sized['url']; ?>" width="564" height="239" medium="image" />
+      <description><![CDATA[<?php get_template_part('templates/labels', 'feed-recent'); ?>]]></description>
+      <content:encoded><![CDATA[<?php the_advanced_excerpt('length=40&length_type=words&finish=exact&add_link=0'); ?> <a href="<?php the_permalink(); ?>" style="color:#8b185e;">Full story &raquo;</a>]]></content:encoded>
       <?php rss_enclosure(); ?>
       <?php do_action('rss2_item'); ?>
     </item>
