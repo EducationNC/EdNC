@@ -63,7 +63,7 @@ xmlns:media="http://search.yahoo.com/mrss/"
         $image_sized = mr_image_resize($image_src, 295, 125, true, false);
       }
       ?>
-      <media:content url="<?php echo $image_sized['url']; ?>" width="295" height="125" medium="image" />
+      <media:content url="<?php echo $image_sized['url']; ?>" medium="image" />
       <description><![CDATA[<?php
       $column = wp_get_post_terms(get_the_id(), 'column');
       $category = get_the_category();

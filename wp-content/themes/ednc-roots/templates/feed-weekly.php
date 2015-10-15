@@ -50,7 +50,7 @@ xmlns:media="http://search.yahoo.com/mrss/"
 
         // check if returned image is actually the size we requested
         if ($image_url[1] != 564) {
-          // if not, get the smaller one and we'll stretch it
+          // if not, get the smaller one
           $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat');
         }
         $image_sized['url'] = $image_url[0];
@@ -66,7 +66,7 @@ xmlns:media="http://search.yahoo.com/mrss/"
         }
       }
       ?>
-      <media:content url="<?php echo $image_sized['url']; ?>" width="564" height="239" medium="image" />
+      <media:content url="<?php echo $image_sized['url']; ?>" medium="image" />
       <description><![CDATA[<?php get_template_part('templates/labels', 'feed-recent'); ?>]]></description>
       <content:encoded><![CDATA[<?php the_advanced_excerpt('length=40&length_type=words&finish=exact&add_link=0'); ?> <a href="<?php the_permalink(); ?>" style="color:#8b185e;">Full story &raquo;</a>]]></content:encoded>
       <?php rss_enclosure(); ?>
