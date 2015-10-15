@@ -4,6 +4,7 @@
 */
 
 $articles = get_field('posts_to_include', 'option');
+$thismonday = strtotime('Monday this week');
 
 header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('blog_charset'), true);
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
@@ -19,10 +20,10 @@ xmlns:media="http://search.yahoo.com/mrss/"
 <?php do_action('rss2_ns'); ?>>
 
 <channel>
-  <title><?php bloginfo_rss('name'); ?> - Today's Posts Feed</title>
+  <title><?php bloginfo_rss('name'); ?> - This Week's Posts Feed</title>
   <atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml" />
   <link><?php bloginfo_rss('url') ?></link>
-  <description><?php bloginfo_rss('description') ?></description>
+  <description>The best EdNC stories from the week of <?php echo date('m-j-y', $thismonday); ?></description>
   <lastBuildDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_lastpostmodified('GMT'), false); ?></lastBuildDate>
   <language>en-us</language>
   <sy:updatePeriod><?php echo apply_filters( 'rss_update_period', 'hourly' ); ?></sy:updatePeriod>
