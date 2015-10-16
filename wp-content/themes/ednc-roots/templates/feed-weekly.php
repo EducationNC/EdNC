@@ -23,7 +23,7 @@ xmlns:media="http://search.yahoo.com/mrss/"
   <title><?php bloginfo_rss('name'); ?> - This Week's Posts Feed</title>
   <atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml" />
   <link><?php bloginfo_rss('url') ?></link>
-  <description>The best EdNC stories from the week of <?php echo date('m-j-y', $thismonday); ?></description>
+  <description>Stories from the week of <?php echo date('m-j-y', $thismonday); ?></description>
   <lastBuildDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_lastpostmodified('GMT'), false); ?></lastBuildDate>
   <language>en-us</language>
   <sy:updatePeriod><?php echo apply_filters( 'rss_update_period', 'hourly' ); ?></sy:updatePeriod>
