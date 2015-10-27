@@ -1,8 +1,8 @@
 <?php
 // What day of the week is it?
-// $whichday = current_time('w');
-// Temporarily set it to Monday
-$whichday = 1;
+$whichday = current_time('w');
+// If needed, temporarily set it to Monday
+// $whichday = 1;
 
 // What time is it?
 $whattime = current_time('H');
