@@ -11,6 +11,7 @@ function ednc_custom_rss() {
   add_feed('features', 'feed_features');
   add_feed('recent', 'feed_recent');
   add_feed('weekly', 'feed_weekly');
+  add_feed('weekend', 'feed_weekend');
 }
 add_action('init', 'ednc_custom_rss');
 
@@ -32,6 +33,11 @@ function feed_recent() {
 // Function for Weekly Wrapup feed
 function feed_weekly() {
   get_template_part('templates/feed', 'weekly');
+}
+
+// Function for Weekend Reads feed
+function feed_weekend() {
+  get_template_part('templates/feed', 'weekend-features');
 }
 
 // Modify author feeds to include any custom post type

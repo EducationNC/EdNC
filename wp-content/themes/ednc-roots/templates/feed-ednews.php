@@ -3,10 +3,21 @@
 * EdNews RSS2 Template
 */
 
-$args = array(
-  'post_type' => 'ednews',
-  'posts_per_page' => 1
-);
+// check day of week
+$whichday = current_time('w');
+
+// if today is Sunday, include 2 days worth of EdNews
+if ($whichday == 0) {
+  $args = array(
+    'post_type' => 'ednews',
+    'posts_per_page' => 2
+  );
+} else {
+  $args = array(
+    'post_type' => 'ednews',
+    'posts_per_page' => 1
+  );
+}
 
 $ednews = new WP_Query($args);
 
