@@ -1,0 +1,23 @@
+@import "base.less";
+.aesop-document-component {
+    a {
+        font-size: @font-size-xsmall;
+        font-family: @font-family-sans-serif;
+        color:@aesop-flip-text;
+        line-height: 12px;
+        text-decoration: none;
+
+        span {
+            border-bottom:1px solid @baseContrast;
+            font-size: @font-size-xsmall;
+            color:lighten(@text-color,30);
+
+            &:before {
+                content:'\f498';
+                font-family: Dashicons;
+                position: absolute;
+                left:0;
+            }
+        }
+    }
+}
