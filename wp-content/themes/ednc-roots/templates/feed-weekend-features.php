@@ -31,6 +31,7 @@ $args = array(
   'meta_key' => 'updated_date',
   'orderby' => 'meta_value_num',
   'order' => 'DESC'
+);
 
 $features = new WP_Query($args);
 
