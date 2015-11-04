@@ -15,7 +15,7 @@ $args = array(
     array(
       'taxonomy' => 'appearance',
       'field' => 'slug',
-      'terms' => 'fetured',
+      'terms' => 'featured',
     )
   ),
   'meta_query' => array(
