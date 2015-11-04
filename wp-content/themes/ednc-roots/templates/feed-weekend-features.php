@@ -75,10 +75,23 @@ xmlns:media="http://search.yahoo.com/mrss/"
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
         $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+
+        // check if returned image is actually the size we requested
+        if ($image_url[1] != 564) {
+          // if not, get the smaller one and we'll stretch it
+          $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat');
+        }
         $image_sized['url'] = $image_url[0];
       } else {
         $image_src = catch_that_image();
-        $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+
+        // Set image_sized ONLY if the post has an image inside the content
+        if ($image_src) {
+          $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+        } else {
+          // If not, use the logo as default
+          $image_sized['url'] = 'http://www.ednc.org/wp-content/uploads/2015/10/default.jpg';
+        }
       }
       ?>
       <media:content url="<?php echo $image_sized['url']; ?>" width="564" height="239" medium="image" />
