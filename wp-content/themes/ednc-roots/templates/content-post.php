@@ -64,7 +64,7 @@ if ($category[0]->slug == 'powered-schools') {
       <div class="column-banner <?php echo $banner->slug; ?>">
         <div class="container">
           <div class="row">
-            <div class="col-md-9 col-centered">
+            <div class="col-md-8 col-centered">
               <div class="column-name"><?php echo $banner->name; ?></div>
               <?php if ($author_avatar) { ?>
                 <div class="avatar hidden-xs">
@@ -80,7 +80,7 @@ if ($category[0]->slug == 'powered-schools') {
     ?>
     <header class="entry-header container">
       <div class="row">
-        <div class="col-md-9 col-centered">
+        <div class="col-md-8 col-centered">
           <?php get_template_part('templates/labels'); ?>
 
           <?php
@@ -112,7 +112,7 @@ if ($category[0]->slug == 'powered-schools') {
     <div class="longform-intro">
       <div class="container">
         <div class="row">
-          <div class="col-md-9 col-centered intro">
+          <div class="col-md-8 col-centered intro">
             <?php the_field('longform_intro'); ?>
           </div>
         </div>
