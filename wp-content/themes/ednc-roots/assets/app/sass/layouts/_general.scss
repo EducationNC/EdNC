@@ -6,7 +6,7 @@ section {
   position: relative;
   background: $white;
   padding-top: 2em;
-  margin-bottom: 5em;
+  margin-bottom: 2.5em;
   z-index: 1;
   transition: transform .3s;
 
@@ -18,6 +18,12 @@ section {
 .col-centered {
   float: none;
   margin: 0 auto;
+}
+
+@media (min-width: $screen-md-min) {
+  .col-md-push-2point5 {
+    left: 20.833333%;
+  }
 }
 
 .main {
@@ -121,10 +127,13 @@ section {
 }
 
 .callout {
-  @include gray-gradient-right;
+  // @include gray-gradient-right;
+  background: $steel;
   padding: 30px;
   margin: 0 0 1.25rem;
   overflow: hidden;
+  font-family: $font-family-sans-serif;
+  color: $jet;
 
   .h1 {
     font-size: $font-size-h1;
@@ -143,8 +152,8 @@ section {
   }
 
   p {
-    font-size: 1rem;
-    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 1em;
   }
 
   .button {

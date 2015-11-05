@@ -1,11 +1,12 @@
 .btn {
   border: none;
   border-radius: 0;
-  font-family: $font-family-serif;
+  font-family: $font-family-sans-serif;
   font-weight: 400;
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  text-transform: uppercase;
 
   &:after {
     content: '';
@@ -29,27 +30,38 @@
   }
 }
 
-.btn-default, .button {
-  @include green-gradient-right;
-
-  &:hover, &:active, &:focus {
-    @include dark-green-gradient-right;
-  }
+.btn-gray {
+  color: $white;
+  background: $ash;
+  border: none;
+  padding: 6px 30px;
 }
 
-.btn-primary {
-  @include pink-gradient-right;
-
-  &:hover, &:active, &:focus {
-    @include dark-pink-gradient-right;
-  }
+.btn-default, .btn-primary {
+  padding: 6px 30px;
 }
+
+// .btn-default, .button {
+//   @include green-gradient-right;
+//
+//   &:hover, &:active, &:focus {
+//     @include dark-green-gradient-right;
+//   }
+// }
+//
+// .btn-primary {
+//   @include pink-gradient-right;
+//
+//   &:hover, &:active, &:focus {
+//     @include dark-pink-gradient-right;
+//   }
+// }
 
 .btn-group {
   .btn {
     height: 44px;
   }
-  
+
   .btn + .btn {
     margin-left: 0;
   }

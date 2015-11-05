@@ -129,6 +129,12 @@ var Roots = {
       // Add special class to .entry-content-wrapper divs for Instagram embeds (not fixed ratio)
       $('.instagram-media').parent('.entry-content-asset').addClass('instagram');
 
+      // Add watermark dropcap on pull quotes (left and right)
+      $('blockquote p[style*=left], blockquote p[style*=right]').each(function() {
+        var text = $(this).text();
+        $(this).attr('data-before', text.charAt(0));
+      });
+
       // Open Magnific for all image link types inside articles
       $('.entry-content a[href$=".gif"], .entry-content a[href$=".jpg"], .entry-content a[href$=".png"], .entry-content a[href$=".jpeg"]').not('.gallery a').magnificPopup({
         type: 'image',
@@ -192,6 +198,7 @@ var Roots = {
           }
         }
       });
+
     }
   },
   // Flash cards

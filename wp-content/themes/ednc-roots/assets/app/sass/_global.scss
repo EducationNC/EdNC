@@ -6,8 +6,8 @@ html {
 }
 
 p {
-  margin-bottom: 1em;
-  line-height: 1.55em;
+  margin-bottom: 1.88em;
+  line-height: 1.88em;
 }
 
 a {
@@ -15,7 +15,7 @@ a {
   text-decoration: underline;
 
   &:hover, &:active, &:focus {
-    color: $blue-dark;
+    // color: $plum;
     text-decoration: underline;
   }
 }
@@ -46,14 +46,14 @@ a {
 }
 
 h1, .h1, .article-title, .entry-title {
-  font-family: $font-family-sans-serif;
-  color: $midnight;
+  font-family: $font-family-serif;
+  color: $plum;
   font-size: $font-size-h1;
   font-weight: normal;
 
   .article-title-overlay & {
     color: $white;
-    font-size: 3.5rem;
+    font-size: 3rem;
     line-height: 1.2em;
     font-weight: 300;
   }
@@ -70,8 +70,8 @@ h1, .h1, .article-title, .entry-title {
 
 h2, .h2, .article-subtitle {
   font-family: $font-family-sans-serif;
-  font-weight: 300;
-  color: $purple-text;
+  font-weight: normal;
+  color: $gray;
   font-size: $font-size-h2;
   white-space: normal;
 }
@@ -79,12 +79,8 @@ h2, .h2, .article-subtitle {
 h3, .h3, .article-section-title {
   font-family: $font-family-sans-serif;
   font-weight: normal;
-  color: $midnight;
+  color: $jet;
   font-size: $font-size-h3;
-
-  .entry-content & {
-    margin-top: 2em;
-  }
 
   .entry-content li & {
     font-family: $font-family-serif;
@@ -96,10 +92,9 @@ h3, .h3, .article-section-title {
 
 h4, .h4, .article-section-subtitle {
   font-family: $font-family-sans-serif;
-  font-weight: normal;
-  color: $midnight;
-  font-size: $font-size-h4;
-  line-height: 1.2em;
+  font-weight: 300;
+  color: $jet;
+  font-size: $font-size-h3;
 
   li & {
     font-size: 1.125rem;
@@ -113,10 +108,26 @@ h4, .h4, .article-section-subtitle {
   }
 }
 
-.meta, .attr, .duration {
+h5, .h5 {
   font-family: $font-family-serif;
   font-weight: normal;
-  font-size: $font-size-h6;
+  color: $jet;
+  font-size: 20px;
+}
+
+h6, .h6 {
+  font-family: $font-family-sans-serif;
+  font-weight: bold;
+  color: $jet;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.meta, .attr, .duration {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: $gray;
 
   li & {
     color: $blue-dark;
@@ -125,10 +136,20 @@ h4, .h4, .article-section-subtitle {
       text-decoration: none;
     }
   }
+
+  img {
+    margin-bottom: 1em;
+  }
+
+  p {
+    line-height: 1.5em;
+    margin-bottom: 1.5em;
+  }
 }
 
 .label {
-  @include blue-gradient-right;
+  // @include blue-gradient-right;
+  background: $navy-darkest;
   color: $ice;
   padding: 5px 15px;
   font-size: 1rem;
@@ -176,7 +197,6 @@ h4, .h4, .article-section-subtitle {
   font-family: $font-family-sans-serif;
   font-weight: 300;
   font-size: 1rem;
-  font-style: italic;
   background: none;
 }
 
@@ -188,31 +208,46 @@ h4, .h4, .article-section-subtitle {
 }
 
 blockquote, .blockquote {
-  font-family: $font-family-serif;
-  font-weight: 300;
-  font-style: italic;
-  margin: 0 0 1em;
+  margin: 0 0 1.88em;
   padding: 0;
   border: none;
 
   p {
-    font-weight: inherit;
+    font-family: $font-family-sans-serif;
     padding: 10px 20px;
-    border-left: 3px solid $ice;
+    border-left: 20px solid $steel;
+    background: lighten($steel, 9%);
     margin: 0;
 
+    @media (min-width: $screen-md-min) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+    }
+
     &[style*=left], &[style*=right], &[style*=center] {
+      font-family: $font-family-serif;
+      font-size: $font-size-h3;
+      background: none;
       padding: 0;
       border-left: 0;
     }
 
     &[style*=left], &[style*=right] {
-      font-size: $font-size-h3;
       position: relative;
-      padding: 1.25rem 0;
-      border-top: 3px solid $ice;
-      border-bottom: 3px solid $ice;
+      // border-top: 3px solid $ice;
+      // border-bottom: 3px solid $ice;
       margin: 0 0 1.25rem;
+
+      &:before {
+        content: attr(data-before);
+        position: absolute;
+        top: -22px;
+        left: -24px;
+        z-index: -1;
+        color: $steel;
+        font-size: 144px;
+        line-height: 1em;
+      }
 
       @media (min-width: 545px) {
         width: 50%;
@@ -239,15 +274,14 @@ blockquote, .blockquote {
     }
 
     &[style*=center] {
-      font-size: $font-size-h3;
+      color: $gray;
       margin: 2.5rem 0;
 
       @media (min-width: $screen-md-min) {
-        margin: 2.5rem -14.7%;
+        margin: 4rem -14.7%;
       }
 
       @media (max-width: $screen-xs-max) {
-        font-weight: normal;
         font-size: 22px;
         text-align: left !important;
         margin: 0 0 10px 0;
@@ -256,7 +290,7 @@ blockquote, .blockquote {
   }
 
   cite {
-    line-height: 2em;
+    font-style: italic;
   }
 }
 

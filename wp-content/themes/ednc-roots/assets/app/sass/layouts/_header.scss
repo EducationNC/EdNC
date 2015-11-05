@@ -1,29 +1,14 @@
 .logo {
-  @include purple-gradient-right;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 15px;
+  left: 15px;
   z-index: 2;
 
   a {
     display: block;
-    width: 134px;
+    width: 80px;
+    height: 80px;
     position: relative;
-    text-align: center;
-    padding: 50px 0 50px;
-    transition: padding-bottom .3s;
-  }
-
-  &.stuck {
-    position: fixed;
-    backface-visibility: hidden;
-  }
-
-  &.fix-height {
-    a {
-      padding-top: 5px;
-      padding-bottom: 7px;
-    }
   }
 }
 
@@ -34,37 +19,37 @@
   font-family: $font-family-sans-serif;
 
   a {
-    color: $midnight;
+    color: $navbar-default-link-color;
     text-decoration: none;
 
     &:hover {
-      color: $blue;
+      color: $navbar-default-link-hover-color;
     }
   }
 
-  .caption {
-    position: absolute;
-    padding: .5rem 15px;
-    left: 154px;
-    color: $gray-text;
-    font-style: italic;
-    font-size: 1.125rem;
-    font-weight: 300;
-
-    @media (max-width: 1100px) {
-      font-size: 1rem;
-      line-height: 1.75em;
-    }
-  }
-
-  .beta-banner {
-    padding: .5rem 15px;
-  }
+  // .caption {
+  //   position: absolute;
+  //   padding: .5rem 15px;
+  //   left: 154px;
+  //   color: $gray-text;
+  //   font-style: italic;
+  //   font-size: 1.125rem;
+  //   font-weight: 300;
+  //
+  //   @media (max-width: 1100px) {
+  //     font-size: 1rem;
+  //     line-height: 1.75em;
+  //   }
+  // }
+  //
+  // .beta-banner {
+  //   padding: .5rem 15px;
+  // }
 
   .container-fluid {
     position: relative;
-    height: 45px;
-    @include gray-gradient-right;
+    height: 38px;
+    background: $steel;
   }
 
   .minor-links {
@@ -75,7 +60,7 @@
   .search {
     float: right;
     max-width: 240px;
-    margin-top: .5rem;
+    margin-top: 5px;
   }
 
   .navbar {
@@ -83,13 +68,15 @@
   }
 
   .navbar-nav {
-    padding-left: 154px;
+    padding-left: 110px;
 
     a {
       overflow: hidden;
     }
 
     & > li {
+      text-transform: uppercase;
+
       & > a:before {
         content: '';
         width: 100%;
@@ -179,10 +166,20 @@
   .btn-group {
     a {
       color: $white;
+      text-transform: none;
+      font-size: 16px;
+      padding: 10px 16px;
     }
   }
 }
 
-.dropdown:hover > ul.dropdown-menu {
-  display: block;
+.dropdown {
+  ul.dropdown-menu {
+    text-transform: none;
+  }
+
+  &:hover > ul.dropdown-menu {
+    display: block;
+    margin-top: -1px;
+  }
 }

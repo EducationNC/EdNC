@@ -1,3 +1,13 @@
 label {
   font-weight: normal;
 }
+
+.form-control {
+  height: 39px;
+}
+
+.search {
+  .form-control {
+    height: inherit;
+  }
+}

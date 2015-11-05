@@ -105,13 +105,13 @@
     width: 100%;
   }
 
-  &.photo-overlay {
-    margin-top: -52px;
+  .photo-overlay {
+    margin-top: -56px;
     margin-bottom: 0;
     overflow: hidden;
 
     & + div {
-      margin-top: 3em;
+      margin-top: 1.5em;
     }
 
     img {
@@ -122,6 +122,10 @@
       margin-top: 0;
       padding-top: 28px;
       text-shadow: 0px 0px 20px $midnight;
+    }
+
+    .label {
+      position: relative;
     }
 
     @media (min-width: $screen-md-min) {
@@ -138,7 +142,7 @@
 
     @media (min-width: $screen-sm-min) {
       .article-title-overlay {
-        padding-bottom: 2.5em;
+        padding-bottom: .5em;
         color: $white;
       }
 
@@ -172,7 +176,15 @@
   }
 }
 .hentry time { }
-.hentry .byline { }
+.hentry .byline {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  color: $gray;
+
+  a {
+    color: $gray;
+  }
+}
 .hentry .longform-intro {
   background: $deep-purple;
   color: $white;

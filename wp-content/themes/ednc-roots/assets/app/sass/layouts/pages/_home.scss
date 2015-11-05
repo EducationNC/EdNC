@@ -88,7 +88,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    @include trans-purple-gradient-bottom;
+    @include trans-stone-gradient-bottom;
     transition: transform .3s;
   }
 
@@ -535,12 +535,21 @@
 }
 
 .mc-field-group {
-  margin-bottom: .75em;
+  margin-bottom: 1em;
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 1em;
+  }
+
+  label {
+    font-weight: 300;
   }
 
   input[type="checkbox"] {

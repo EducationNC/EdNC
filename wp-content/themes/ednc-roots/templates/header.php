@@ -9,7 +9,7 @@ if ($alert) { ?>
 <header id="header" class="banner visible-md-block visible-lg-block" role="banner">
   <div class="container-fluid">
     <div class="logo">
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-ednc.svg" alt="EducationNC" /></a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-square.svg" alt="EducationNC" /></a>
     </div>
 
     <div class="caption"><?php // echo get_bloginfo('description'); ?></div>
@@ -57,8 +57,8 @@ if ($alert) { ?>
       </div>
 
       <div class="btn-group">
-        <a href="https://support.ednc.org/donate-recurring" class="btn btn-primary btn-lg"><small>Donate now</small></a>
-        <a href="#" class="btn btn-default btn-lg" data-toggle="modal" data-target="#emailSignupModal"><small>Free email subscription</small></a>
+        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Email Subscription</a>
+        <a href="https://support.ednc.org/donate-recurring" class="btn btn-primary">Support Us</a>
       </div>
     </div>
   </nav>

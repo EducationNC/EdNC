@@ -1,5 +1,12 @@
 .above-footer {
-  background: $midnight;
+  .callout {
+    padding: 60px 30px;
+    margin-bottom: 3em;
+  }
+}
+
+.ribbon {
+  background: $navy-darkest;
 
   li {
     padding: 1rem;
@@ -17,20 +24,30 @@
 }
 
 .content-info {
-  @include gray-gradient-right;
+  // @include gray-gradient-right;
+  background: $pearl;
   font-family: $font-family-sans-serif;
   font-weight: 300;
   font-ize: .9rem;
 
+  .h5 {
+    color: $plum;
+    margin: 0 0 1em;
+  }
+
+  a:not(.btn) {
+    color: $jet;
+  }
+
   .container {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
 
   .menu-footer-nav {
     a {
       text-decoration: none;
-      color: $midnight;
+      color: $jet;
 
       &:hover, &:active, &:focus {
         color: $blue;
@@ -52,13 +69,13 @@
 
     & > li {
       & > a {
-        color: $purple-text;
-        @extend .h4;
+        color: $plum !important;
+        @extend .h5;
         font-weight: normal;
         cursor: default;
 
         &:hover, &:active, &:focus {
-          color: $purple-text;
+          color: $plum;
           text-decoration: none;
         }
       }

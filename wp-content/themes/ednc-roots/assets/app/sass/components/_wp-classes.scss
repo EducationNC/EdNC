@@ -19,10 +19,17 @@ body:not(.page-template):not(.single-bio) .alignright {
     margin-right: -14.7%;
   }
 }
-figure.alignnone {
+.alignnone {
   margin-left: 0;
   margin-right: 0;
+  margin-bottom: 1.88em;
   max-width: 100%;
+
+  @media (min-width: $screen-md-min) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
 }
 
 @media (min-width: 545px) {
