@@ -120,9 +120,10 @@ if ($category[0]->slug == 'powered-schools') {
     </div>
   <?php } ?>
 
+  <div class="entry-content">
     <div class="container">
       <div class="row">
-        <div class="entry-content col-md-7 col-md-push-2point5">
+        <div class="col-md-7 col-md-push-2point5">
 
           <?php if (has_post_thumbnail() && $featured_image_align == 'contained') {
             echo '<div class="alignnone">';
@@ -217,60 +218,61 @@ if ($category[0]->slug == 'powered-schools') {
         </div>
       </div>
     </div>
+  </div>
 
-    <footer class="container hidden-print">
+  <footer class="container hidden-print">
+    <div class="row">
+      <div class="col-md-7 col-md-push-2point5">
+        <h2>Recommended for you</h2>
+        <?php
+        $recommended = get_field('recommended_articles');
+        if ($recommended) {
+          // set this to only display first one for now.
+          // TODO: add some way to have more than 1 recommended article
+          $post = $recommended[0];
+        } else {
+          // previous post by same author
+          $post = get_adjacent_author_post(true);
+          // TODO: check if this even exists and fallback to recent post from category?
+        }
+        setup_postdata($post);
+        $pid = $post->ID;
+
+        $author_id = get_the_author_meta('ID');
+        $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+
+        $category = get_the_category($pid);
+        if (has_post_thumbnail()) {
+          $image_id = get_post_thumbnail_id();
+          $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+          $image_sized['url'] = $image_url[0];
+        } else {
+          $image_src = catch_that_image();
+          $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+        }
+        ?>
+        <div class="has-photo-overlay">
+          <div class="photo-overlay">
+            <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
+            <h2 class="post-title"><?php echo $post->post_title; ?></h2>
+            <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <?php if ($image_sized['url']) { ?>
+            <img src="<?php echo $image_sized['url']; ?>" />
+            <?php } ?>
+          </div>
+        </div>
+        <?php wp_reset_postdata(); ?>
+      </div>
+    </div>
+
+    <?php if ($comments_open == 1) { ?>
       <div class="row">
         <div class="col-md-7 col-md-push-2point5">
-          <h2>Recommended for you</h2>
-          <?php
-          $recommended = get_field('recommended_articles');
-          if ($recommended) {
-            // set this to only display first one for now.
-            // TODO: add some way to have more than 1 recommended article
-            $post = $recommended[0];
-          } else {
-            // previous post by same author
-            $post = get_adjacent_author_post(true);
-            // TODO: check if this even exists and fallback to recent post from category?
-          }
-          setup_postdata($post);
-          $pid = $post->ID;
-
-          $author_id = get_the_author_meta('ID');
-          $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-
-          $category = get_the_category($pid);
-          if (has_post_thumbnail()) {
-            $image_id = get_post_thumbnail_id();
-            $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
-            $image_sized['url'] = $image_url[0];
-          } else {
-            $image_src = catch_that_image();
-            $image_sized = mr_image_resize($image_src, 564, 239, true, false);
-          }
-          ?>
-          <div class="has-photo-overlay">
-            <div class="photo-overlay">
-              <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
-              <h2 class="post-title"><?php echo $post->post_title; ?></h2>
-              <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
-              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-              <?php if ($image_sized['url']) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-              <?php } ?>
-            </div>
-          </div>
-          <?php wp_reset_postdata(); ?>
+          <h2>Join the conversation</h2>
+          <?php comments_template('templates/comments'); ?>
         </div>
       </div>
-
-      <?php if ($comments_open == 1) { ?>
-        <div class="row">
-          <div class="col-md-7 col-md-push-2point5">
-            <h2>Join the conversation</h2>
-            <?php comments_template('templates/comments'); ?>
-          </div>
-        </div>
-      <?php } ?>
-    </footer>
+    <?php } ?>
+  </footer>
 </article>
