@@ -29,15 +29,17 @@
     </div><!-- container -->
 
     <section class="container-fluid full-bleed-quote theme-<?php echo $bg_color; ?> <?php if ($parallax == true) { echo 'parallax'; } ?>">
-      <?php if ( ! empty($bg_image_id) ) { ?>
-        <img src="<?php echo $img[0]; ?>" />
-      <?php } ?>
-      <blockquote>
-        <span><?php echo esc_html( $content ); ?></span><br/>
-        <?php if ( ! empty( $cite ) ) { ?>
-            <cite><?php echo esc_html( $cite ); ?></cite>
+      <div class="row">
+        <?php if ( ! empty($bg_image_id) ) { ?>
+          <img src="<?php echo $img[0]; ?>" />
         <?php } ?>
-      </blockquote>
+        <blockquote>
+          <span><?php echo esc_html( $content ); ?></span><br/>
+          <?php if ( ! empty( $cite ) ) { ?>
+              <cite><?php echo esc_html( $cite ); ?></cite>
+          <?php } ?>
+        </blockquote>
+      </div>
     </section>
 
     <div class="container">
@@ -126,19 +128,21 @@
     </div><!-- container -->
 
     <section class="container-fluid parallax">
-      <?php if ( ! empty($image_id) ) { ?>
-        <img src="<?php echo $img[0]; ?>" />
-      <?php } ?>
-      <?php if ( ! empty( $floating_text ) ) { ?>
-        <div class="floating-text">
-          <?php echo esc_html( $floating_text ); ?>
-        </div>
-      <?php } ?>
-      <?php if ( ! empty( $caption ) ) { ?>
-        <div class="caption">
-          <?php echo esc_html( $caption ); ?>
-        </div>
-      <?php } ?>
+      <div class="row">
+        <?php if ( ! empty($image_id) ) { ?>
+          <img src="<?php echo $img[0]; ?>" />
+        <?php } ?>
+        <?php if ( ! empty( $floating_text ) ) { ?>
+          <div class="floating-text">
+            <?php echo esc_html( $floating_text ); ?>
+          </div>
+        <?php } ?>
+        <?php if ( ! empty( $caption ) ) { ?>
+          <div class="caption">
+            <?php echo esc_html( $caption ); ?>
+          </div>
+        <?php } ?>
+      </div>
     </section>
 
     <div class="container">

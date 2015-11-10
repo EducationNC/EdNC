@@ -37,7 +37,7 @@
         <hr />
 
         <p class="small">
-          &copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.<br />
+          <span class="copyright">&copy; <?php echo date('Y'); ?> EducationNC. All rights reserved.</span><br />
           <a href="<?php echo get_permalink('1528'); ?>">Terms of service</a> | <a href="<?php echo get_permalink('1530'); ?>">Privacy policy</a>
         </p>
       </div>

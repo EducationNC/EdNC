@@ -8,6 +8,11 @@ add_image_size('bio-headshot', 380, 425, true);
 add_image_size('featured-thumbnail', 295, 295, true);
 add_image_size('featured-thumbnail-squat', 264, 112, true);
 add_image_size('featured-thumbnail-squat-wide', 564, 239, true);
+remove_image_size('guest-author-32');
+remove_image_size('guest-author-64');
+remove_image_size('guest-author-96');
+remove_image_size('guest-author-128');
+
 
 /**
  * Improve quality of auto-generated thumbnails

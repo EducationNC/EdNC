@@ -8260,6 +8260,10 @@ section {
   .col-md-push-2point5 {
     left: 20.833333%;
   }
+
+  .col-md-push-point5 {
+    left: 4.166667%;
+  }
 }
 .sidebar-primary .main {
   position: relative;
