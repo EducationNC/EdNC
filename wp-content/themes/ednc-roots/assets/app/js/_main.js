@@ -82,10 +82,17 @@ var Roots = {
         },'google_translate_element');
       }
 
+      function getDomainName(hostName) {
+        return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
+      }
+
       // Set up translation on click
       $(document).on('click','a#gtranslate', function(e) {
         e.preventDefault();
-        document.cookie = "googtrans=/en/es;path=/;";
+        hostname = window.location.hostname;
+        domain = getDomainName(hostname);
+        document.cookie = "googtrans=/en/es;path=/;domain=" + hostname + ";";
+        document.cookie = "googtrans=/en/es;path=/;domain=" + domain + ";";
         location.reload();
       });
     }
