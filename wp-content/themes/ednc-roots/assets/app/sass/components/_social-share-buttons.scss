@@ -1,0 +1,85 @@
+.social-share-buttons {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  z-index: 100;
+  background: $white70;
+
+  a {
+    display: block;
+    text-indent: -100em;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    text-decoration: none;
+
+    &:before {
+      color: $white;
+      text-indent: 0;
+      position: absolute;
+      font-size: 32px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+  .count {
+    font-family: $font-family-sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+    text-align: center;
+    width: 100%;
+    line-height: 1.2;
+
+    .num {
+      display: block;
+      font-size: 28px;
+      font-family: 'Open Sans Condensed';
+    }
+  }
+}
+
+.social-share-link {
+  &.icon-facebook {
+    background: #3b5998;
+
+    &:hover {
+      background: darken(#3b5998, 10%);
+    }
+  }
+
+  &.icon-twitter {
+    background: #00aced;
+
+    &:hover {
+      background: darken(#00aced, 10%);
+    }
+  }
+
+  &.icon-linkedin {
+    background: #007bb6;
+
+    &:hover {
+      background: darken(#007bb6, 10%);
+    }
+  }
+
+  &.icon-email {
+    background: $scarlet;
+
+    &:hover {
+      background: darken($scarlet, 10%);
+    }
+  }
+}
+.print-share {
+  &.icon-fax {
+    background: $pear;
+
+    &:hover {
+      background: darken($pear, 10%);
+    }
+  }
+}

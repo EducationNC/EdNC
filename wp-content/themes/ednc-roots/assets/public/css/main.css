@@ -8231,6 +8231,80 @@ img.mfp-img {
   z-index: 1;
 }
 
+.social-share-buttons {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.8);
+}
+.social-share-buttons a {
+  display: block;
+  text-indent: -100em;
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  text-decoration: none;
+}
+.social-share-buttons a:before {
+  color: #FFFFFF;
+  text-indent: 0;
+  position: absolute;
+  font-size: 32px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+       -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.social-share-buttons .count {
+  font-family: Lato, sans-serif;
+  font-weight: 300;
+  font-size: 19px;
+  text-align: center;
+  width: 100%;
+  line-height: 1.2;
+}
+.social-share-buttons .count .num {
+  display: block;
+  font-size: 28px;
+  font-family: 'Open Sans Condensed';
+}
+
+.social-share-link.icon-facebook {
+  background: #3b5998;
+}
+.social-share-link.icon-facebook:hover {
+  background: #2d4373;
+}
+.social-share-link.icon-twitter {
+  background: #00aced;
+}
+.social-share-link.icon-twitter:hover {
+  background: #0087ba;
+}
+.social-share-link.icon-linkedin {
+  background: #007bb6;
+}
+.social-share-link.icon-linkedin:hover {
+  background: #005983;
+}
+.social-share-link.icon-email {
+  background: #9D0E2B;
+}
+.social-share-link.icon-email:hover {
+  background: #6e0a1e;
+}
+
+.print-share.icon-fax {
+  background: #98A942;
+}
+.print-share.icon-fax:hover {
+  background: #778434;
+}
+
 section {
   margin-bottom: 5em;
 }
