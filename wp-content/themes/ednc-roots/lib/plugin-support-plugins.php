@@ -12,10 +12,6 @@ function my_theme_dependencies( $plugins ){
     'name' => 'Advanced Excerpt'
   );
 
-  $plugins['google-language-translator'] = array(
-    'name' => 'Google Language Translator'
-  );
-
   $plugins['gravityforms'] = array(
     'name' => 'Gravity Forms',
     'plugin_url' => 'http://www.gravityforms.com/'

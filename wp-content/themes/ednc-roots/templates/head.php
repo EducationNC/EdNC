@@ -10,6 +10,8 @@
     <meta name="revised" content="<?php echo get_the_modified_date('l, F j, Y'); ?>">
   <?php } ?>
 
+  <!-- <meta name="google-translate-customization" content="312ca43e7efa7b08-229e4e63ddff1b36-g9d327a227f3d938e-f" /> -->
+
   <!--[if gte IE 9]>
     <style type="text/css">
     .gradient {

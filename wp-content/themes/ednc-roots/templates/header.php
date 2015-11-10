@@ -23,7 +23,7 @@ if ($alert) { ?>
           'items_wrap' => '%3$s'
         ));
         ?>
-        <li><a href="" onclick="doGoogleLanguageTranslator('en|es'); return false;" title="en Español">en Español</a></li>
+        <li><a href="#" id="gtranslate" title="en Español">en Español</a></li>
       </ul>
 
       <div class="search">

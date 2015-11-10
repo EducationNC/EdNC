@@ -1962,6 +1962,23 @@ var Roots = {
       $('#trigger-mobile-search').on(clickortap, function() {
         $('#oc-pusher').toggleClass('search-pushed');
       });
+
+      // Google translate
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'es',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
+        },'google_translate_element');
+      }
+
+      // Set up translation on click
+      $(document).on('click','a#gtranslate', function(e) {
+        e.preventDefault();
+        document.cookie = "googtrans=/en/es;path=/;";
+        location.reload();
+      });
     }
   },
   // Home page
