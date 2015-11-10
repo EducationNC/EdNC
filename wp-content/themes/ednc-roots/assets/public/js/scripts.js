@@ -1980,17 +1980,58 @@ var Roots = {
       // Set up translation on click
       $(document).on('click','a#gtranslate', function(e) {
         e.preventDefault();
-
         hostname = window.location.hostname;
         domain = getDomainName(hostname);
-
-        // set cookies
         document.cookie = "googtrans=/en/es;path=/;domain=" + hostname + ";";
         document.cookie = "googtrans=/en/es;path=/;domain=" + domain + ";";
-
-        // reload
         location.reload();
       });
+
+      // create popups for social share buttons
+      (function() {
+        jQuery(document).ready(function($) {
+        	// link selector and pop-up window size
+        	var Config = {
+        		Link: "a.social-share-link",
+        		Width: 500,
+        		Height: 500
+        	};
+
+        	// create popup
+        	function PopupHandler(e) {
+
+        		e = (e ? e : window.event);
+        		var t = (e.target ? e.target : e.srcElement);
+
+        		// popup position
+        		var
+        			px = Math.floor(((screen.availWidth || 1024) - Config.Width) / 2),
+        			py = Math.floor(((screen.availHeight || 700) - Config.Height) / 2);
+
+        		// open popup
+        		var popup = window.open(t.href, "social",
+        			"width="+Config.Width+",height="+Config.Height+
+        			",left="+px+",top="+py+
+        			",location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1");
+        		if (popup) {
+        			popup.focus();
+        			if (e.preventDefault) {
+                e.preventDefault();
+              }
+        			e.returnValue = false;
+        		}
+
+        		return !!popup;
+        	}
+
+        	// add handler links
+        	var slink = document.querySelectorAll(Config.Link);
+        	for (var a = 0; a < slink.length; a++) {
+        		slink[a].onclick = PopupHandler;
+        	}
+        });
+
+      }());
     }
   },
   // Home page
