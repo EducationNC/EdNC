@@ -89,15 +89,10 @@ var Roots = {
       // Set up translation on click
       $(document).on('click','a#gtranslate', function(e) {
         e.preventDefault();
-
         hostname = window.location.hostname;
         domain = getDomainName(hostname);
-
-        // set cookies
         document.cookie = "googtrans=/en/es;path=/;domain=" + hostname + ";";
         document.cookie = "googtrans=/en/es;path=/;domain=" + domain + ";";
-
-        // reload
         location.reload();
       });
     }
