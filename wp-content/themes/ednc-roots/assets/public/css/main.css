@@ -8923,6 +8923,9 @@ section {
   height: 38px;
   background: #DCDFE5;
 }
+.hero-image .banner .container-fluid {
+  background: none;
+}
 .banner .minor-links {
   float: left;
   margin: .75rem 10px 0;
@@ -8934,6 +8937,9 @@ section {
 }
 .banner .navbar {
   border: none;
+}
+.hero-image .banner .navbar {
+  background: none;
 }
 .banner .navbar-nav {
   padding-left: 110px;
@@ -9669,7 +9675,7 @@ section {
 @media (min-width: 992px) {
   .hentry .entry-header .photo-overlay {
     height: 600px;
-    margin-top: -5em;
+    margin-top: -172px;
   }
   .hentry .entry-header .photo-overlay img {
     position: absolute;

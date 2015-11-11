@@ -2081,6 +2081,11 @@ var Roots = {
   // Single posts
   single: {
     init: function() {
+      // Add body class for any posts with full width hero featured images
+      if ($('.entry-header').hasClass('hero-image')) {
+        $('body').addClass('hero-image');
+      }
+
       // Wrap any object embed with responsive wrapper (except for map embeds)
       $.expr[':'].childof = function(obj, index, meta, stack){
         return $(obj).parent().is(meta[3]);

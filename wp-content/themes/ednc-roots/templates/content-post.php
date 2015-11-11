@@ -28,7 +28,7 @@ if ($category[0]->slug == 'powered-schools') {
 
 <article <?php post_class('article'); ?>>
   <?php if (has_post_thumbnail() && $featured_image_align == 'hero') { ?>
-    <header class="entry-header">
+    <header class="entry-header hero-image">
       <div class="photo-overlay">
         <?php the_post_thumbnail(); ?>
         <div class="article-title-overlay">

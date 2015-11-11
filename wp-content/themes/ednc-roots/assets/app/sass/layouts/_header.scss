@@ -50,6 +50,10 @@
     position: relative;
     height: 38px;
     background: $steel;
+
+    .hero-image & {
+      background: none;
+    }
   }
 
   .minor-links {
@@ -65,6 +69,10 @@
 
   .navbar {
     border: none;
+
+    .hero-image & {
+      background: none;
+    }
   }
 
   .navbar-nav {
