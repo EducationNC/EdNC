@@ -28,19 +28,19 @@
     </div><!-- row -->
     </div><!-- container -->
 
-    <section class="container-fluid full-bleed-quote theme-<?php echo $bg_color; ?> <?php if ($parallax == true) { echo 'parallax'; } ?>">
+    <div class="container-fluid full-bleed-quote theme-<?php echo $bg_color; ?> <?php if (! empty($bg_image_id)) { echo 'bg-img'; } ?> <?php if ($parallax == true) { echo 'parallax'; } ?>">
       <div class="row">
         <?php if ( ! empty($bg_image_id) ) { ?>
           <img src="<?php echo $img[0]; ?>" />
         <?php } ?>
-        <blockquote>
+        <blockquote class="col-md-7 col-centered">
           <span><?php echo esc_html( $content ); ?></span><br/>
           <?php if ( ! empty( $cite ) ) { ?>
-              <cite><?php echo esc_html( $cite ); ?></cite>
+              <cite>&mdash;<?php echo esc_html( $cite ); ?></cite>
           <?php } ?>
         </blockquote>
       </div>
-    </section>
+    </div>
 
     <div class="container">
     <div class="row">
@@ -127,7 +127,7 @@
     </div><!-- row -->
     </div><!-- container -->
 
-    <section class="container-fluid parallax">
+    <div class="container-fluid full-bleed-image parallax">
       <div class="row">
         <?php if ( ! empty($image_id) ) { ?>
           <img src="<?php echo $img[0]; ?>" />
@@ -143,7 +143,7 @@
           </div>
         <?php } ?>
       </div>
-    </section>
+    </div>
 
     <div class="container">
     <div class="row">
@@ -211,7 +211,7 @@
     ob_start();
     ?>
 
-    <section class="audio-player">
+    <div class="audio-player">
       <?php if ( ! empty($image_id) ) { ?>
         <img src="<?php echo $img[0]; ?>" />
       <?php } ?>
@@ -223,7 +223,7 @@
           <?php echo esc_html( $caption ); ?>
         </div>
       <?php } ?>
-    </section>
+    </div>
 
     <?php
     return ob_get_clean();

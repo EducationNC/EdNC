@@ -111,7 +111,7 @@
     overflow: hidden;
 
     & + div {
-      margin-top: 1.5em;
+      margin-top: 1em;
     }
 
     img {
@@ -180,6 +180,7 @@
   font-family: $font-family-sans-serif;
   font-weight: 300;
   color: $gray;
+  margin-bottom: 1em;
 
   a {
     color: $gray;
@@ -222,4 +223,90 @@
   float: left;
   margin: 0 20px 20px 0;
   width: 33%;
+}
+
+.full-bleed-quote {
+  position: relative;
+  overflow: hidden;
+  margin: 1.88em 0;
+
+  &.theme-light {
+    background: $steel;
+    color: $jet;
+
+    &.bg-img:after {
+      background: $white70;
+    }
+  }
+
+  &.theme-dark {
+    background: $navy-darker;
+    color: $white;
+
+    &.bg-img:after {
+      background: $stone-70;
+    }
+  }
+
+  &.bg-img {
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  }
+
+  img {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  blockquote {
+    position: relative;
+    z-index: 5;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    font-family: $font-family-serif;
+    font-size: $font-size-h3;
+    line-height: 1.88em;
+  }
+}
+
+.full-bleed-image {
+  position: relative;
+  overflow: hidden;
+  margin: 1.88em 0;
+
+  img {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .floating-text {
+    position: absolute;
+    z-index: 5;
+    font-family: $font-family-serif;
+    font-size: $font-size-h1;
+    color: $white;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-shadow: 0 0 30px $jet;
+  }
+
+  .caption {
+    text-align: right;
+  }
 }
