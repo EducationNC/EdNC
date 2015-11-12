@@ -24,6 +24,7 @@ function alx_thumbnail_quality( $quality ) {
 add_filter( 'jpeg_quality', 'alx_thumbnail_quality' );
 add_filter( 'wp_editor_set_quality', 'alx_thumbnail_quality' );
 
+
 /**
  * Enable adding images with custom image sizes in posts through media library
  * http://kucrut.org/insert-image-with-custom-size-into-post/
@@ -106,3 +107,31 @@ function my_image_resize_dimensions( $nonsense, $orig_w, $orig_h, $dest_w, $dest
 
 }
 add_filter( 'image_resize_dimensions', 'my_image_resize_dimensions', 1, 6 );
+
+
+/**
+ * Add an HTML class to MediaElement.js container elements to aid styling.
+ *
+ * http://www.cedaro.com/blog/customizing-mediaelement-wordpress/
+ *
+ * Extends the core _wpmejsSettings object to add a new feature via the
+ * MediaElement.js plugin API.
+ */
+function example_mejs_add_container_class() {
+	if ( ! wp_script_is( 'mediaelement', 'done' ) ) {
+		return;
+	}
+	?>
+	<script>
+	(function() {
+		var settings = window._wpmejsSettings || {};
+		settings.features = settings.features || mejs.MepDefaults.features;
+		settings.features.push( 'exampleclass' );
+		MediaElementPlayer.prototype.buildexampleclass = function( player ) {
+			player.container.addClass( 'media-embed-container' );
+		};
+	})();
+	</script>
+	<?php
+}
+add_action( 'wp_print_footer_scripts', 'example_mejs_add_container_class' );

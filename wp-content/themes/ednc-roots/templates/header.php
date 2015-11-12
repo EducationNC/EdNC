@@ -7,13 +7,11 @@ if ($alert) { ?>
   </div>
 <?php } ?>
 <header id="header" class="banner visible-md-block visible-lg-block" role="banner">
+  <div class="logo">
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-square.svg" alt="EducationNC" /></a>
+  </div>
+
   <div class="container-fluid">
-    <div class="logo">
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/logo-square.svg" alt="EducationNC" /></a>
-    </div>
-
-    <div class="caption"><?php // echo get_bloginfo('description'); ?></div>
-
     <div class="pull-right text-right">
       <ul class="list-inline minor-links small">
         <?php

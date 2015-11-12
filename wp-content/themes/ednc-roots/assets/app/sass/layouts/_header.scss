@@ -27,6 +27,23 @@
     }
   }
 
+  .hero-image & {
+    a {
+      color: $white;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 125px;
+      @include trans-stone-gradient-top;
+    }
+  }
+
   // .caption {
   //   position: absolute;
   //   padding: .5rem 15px;
@@ -48,6 +65,7 @@
 
   .container-fluid {
     position: relative;
+    z-index: 1;
     height: 38px;
     background: $steel;
 
@@ -69,6 +87,8 @@
 
   .navbar {
     border: none;
+    position: relative;
+    z-index: 1;
 
     .hero-image & {
       background: none;
@@ -89,12 +109,16 @@
         content: '';
         width: 100%;
         height: 3px;
-        background: $purple-text;
+        background: $plum;
         position: absolute;
         left: 0;
         bottom: -3px;
         transform: translateY(0);
         transition: transform .3s;
+      }
+
+      .hero-image & > a {
+        color: $white;
       }
     }
 
@@ -189,5 +213,9 @@
   &:hover > ul.dropdown-menu {
     display: block;
     margin-top: -1px;
+  }
+
+  .hero-image & a {
+    color: $jet;
   }
 }

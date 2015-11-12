@@ -8918,8 +8918,26 @@ section {
 .banner a:hover {
   color: #24346D;
 }
+.hero-image .banner a {
+  color: #FFFFFF;
+}
+.hero-image .banner:after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 125px;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#B35D6066', endColorstr='#005D6066');
+  background-image: -o-linear-gradient(180deg, rgba(93, 96, 102, 0.7) 25%, rgba(93, 96, 102, 0) 100%);
+  background-image: -webkit-linear-gradient(270deg, rgba(93, 96, 102, 0.7) 25%, rgba(93, 96, 102, 0) 100%);
+  background-image: -o-linear-gradient(270deg, rgba(93, 96, 102, 0.7) 25%, rgba(93, 96, 102, 0) 100%);
+  background-image: linear-gradient(180deg, rgba(93, 96, 102, 0.7) 25%, rgba(93, 96, 102, 0) 100%);
+}
 .banner .container-fluid {
   position: relative;
+  z-index: 1;
   height: 38px;
   background: #DCDFE5;
 }
@@ -8937,6 +8955,8 @@ section {
 }
 .banner .navbar {
   border: none;
+  position: relative;
+  z-index: 1;
 }
 .hero-image .banner .navbar {
   background: none;
@@ -8954,7 +8974,7 @@ section {
   content: '';
   width: 100%;
   height: 3px;
-  background: #8B185E;
+  background: #731454;
   position: absolute;
   left: 0;
   bottom: -3px;
@@ -8965,6 +8985,9 @@ section {
   -webkit-transition: -webkit-transform .3s;
        -o-transition: -o-transform .3s;
           transition: transform .3s;
+}
+.hero-image .banner .navbar-nav > li > a {
+  color: #FFFFFF;
 }
 .banner .navbar-nav > li:not(.active):hover > a:before {
   -webkit-transform: translateY(-3px);
@@ -9052,6 +9075,9 @@ section {
 .dropdown:hover > ul.dropdown-menu {
   display: block;
   margin-top: -1px;
+}
+.hero-image .dropdown a {
+  color: #12151B;
 }
 
 .sidebar {

@@ -25,7 +25,6 @@ function num_format($val) {
 }
 
 $count_num = num_format($counts->total);
-$count_num = 682;
 
 // Get current page URL
 $crunchifyURL = urlencode(get_permalink());
