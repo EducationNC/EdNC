@@ -73,6 +73,7 @@ var Roots = {
       });
 
       // Google translate
+      *** TODO: THIS CANNOT BE MINIFIED FOR IT TO WORK!!!!
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({
           pageLanguage: 'en',
