@@ -20,11 +20,22 @@
     </style>
   <![endif]-->
 
+  <?php wp_head(); ?>
+
   <link rel="alternate" type="application/rss+xml" title="<?php echo get_bloginfo('name'); ?> Feed" href="<?php echo esc_url(get_feed_link()); ?>">
 
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/favicon.ico"/>
 
-  <?php wp_head(); ?>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      },'google_translate_element');
+    }
+  </script>
 
   <?php
   if (!is_user_logged_in()) {

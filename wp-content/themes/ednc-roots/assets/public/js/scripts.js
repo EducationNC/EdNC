@@ -1963,16 +1963,7 @@ var Roots = {
         $('#oc-pusher').toggleClass('search-pushed');
       });
 
-      // Google translate
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'es',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false
-        },'google_translate_element');
-      }
-
+      // Helper function for translation cookies
       function getDomainName(hostName) {
         return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
       }
