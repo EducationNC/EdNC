@@ -48,6 +48,7 @@ if (has_post_thumbnail()) {
       foreach ($category as $key=>$value) {
         if (!in_array($key, $cats_hide)) {
           echo '<span class="label">' . $value['cat_name'] . '</span>';
+          break;
         }
       }
       ?>
