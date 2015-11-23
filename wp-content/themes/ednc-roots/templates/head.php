@@ -26,6 +26,17 @@
 
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/favicon.ico"/>
 
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      },'google_translate_element');
+    }
+  </script>
+
   <?php
   if (!is_user_logged_in()) {
     get_template_part('templates/analytics');
