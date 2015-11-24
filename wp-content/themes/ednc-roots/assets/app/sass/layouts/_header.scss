@@ -17,6 +17,9 @@
   position: relative;
   z-index: 10;
   font-family: $font-family-sans-serif;
+  // TEMPORARY FOR DESIGN ROLLOUT
+  font-size: 18px;
+  // END TEMP
 
   a {
     color: $navbar-default-link-color;
