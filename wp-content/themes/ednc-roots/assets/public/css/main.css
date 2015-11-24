@@ -9041,6 +9041,7 @@ section {
   position: relative;
   z-index: 10;
   font-family: Lato, sans-serif;
+  font-size: 18px;
 }
 .banner a {
   color: #12151B;
@@ -9270,6 +9271,7 @@ section {
   font-family: Lato, sans-serif;
   font-weight: 300;
   font-ize: .9rem;
+  font-size: 18px;
 }
 .content-info .h5, .content-info .menu-footer-nav > li > a {
   color: #731454;
