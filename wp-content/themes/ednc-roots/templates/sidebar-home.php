@@ -1,12 +1,4 @@
 <div class="row">
-  <div class="col-md-12 col-sm-6">
-    <div class="callout">
-      <h4>Register for free email subscription</h4>
-      <p>Sign up now to receive EdNC straight to your inbox. Unsubscribe at any time.</p>
-      <a href="#" class="button btn-default" data-toggle="modal" data-target="#emailSignupModal">Subscribe now &raquo;</a>
-    </div>
-  </div>
-
   <div class="col-md-12 col-sm-6 text-center">
     <?php
     $args = array(
@@ -31,11 +23,10 @@
 
     endwhile; endif; wp_reset_query();
     ?>
+    <p><a href="<?php echo get_permalink('1497'); ?>">EdNC thanks our supporters &raquo;</a></p>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12 col-sm-6 col-sm-offset-6 col-md-offset-0">
-    <p class="text-center"><a href="<?php echo get_permalink('1497'); ?>">EdNC thanks our supporters &raquo;</a></p>
+  <div class="col-md-12 col-sm-6 text-center">
+    GOOGLE ADWORDS
   </div>
 </div>

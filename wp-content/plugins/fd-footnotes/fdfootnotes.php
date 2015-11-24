@@ -4,7 +4,7 @@ Plugin Name: FD Footnotes
 Plugin URI: http://flagrantdisregard.com/footnotes-plugin
 Description: Elegant and easy to use footnotes
 Author: John Watson
-Version: 1.34
+Version: 1.35
 Author URI: http://flagrantdisregard.com
 
 Copyright (C) 2008 John Watson

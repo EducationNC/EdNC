@@ -63,7 +63,7 @@ if ($author == 'emily.antoszyk') {
           <h3 class="post-title no-transform"><?php the_title(); ?></h3>
         </div>
 
-        <div>
+        <div class="meta">
           <?php get_template_part('templates/author', 'excerpt'); ?>
         </div>
       </div>

@@ -56,6 +56,9 @@ and incorrect footnotes on your post.
 
 == Changelog ==
 
+= 1.35 =
+* Added German translation by Mark Sargent
+
 = 1.34 =
 * Fixed jQuery script dependency
 

@@ -8664,7 +8664,7 @@ section {
 }
 
 .modal-content {
-  padding: 30px;
+  padding: 10px;
   border-radius: 0;
 }
 
@@ -9359,6 +9359,20 @@ section {
   }
 }
 
+body.home {
+  font-size: 16px;
+}
+body.home p.meta {
+  font-family: Merriweather, serif;
+  font-size: 12px;
+  margin-bottom: 1em;
+  line-height: 1.55em;
+}
+body.home .photo-overlay .post-title {
+  font-size: 18px;
+  line-height: 1.2em;
+}
+
 .twitter-timeline {
   width: 100% !important;
   max-width: 380px !important;
@@ -9789,6 +9803,13 @@ section {
 .archive .hentry h2 a, .search .hentry h2 a {
   color: #8B185E;
   text-decoration: none;
+}
+.archive .hentry h2 .label, .search .hentry h2 .label {
+  background: #DCDFE5;
+  color: #12151B;
+}
+.archive .hentry h2 .label a, .search .hentry h2 .label a {
+  color: #12151B;
 }
 
 .column-banner {

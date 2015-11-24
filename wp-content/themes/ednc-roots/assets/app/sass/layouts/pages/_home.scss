@@ -1,3 +1,20 @@
+// TEMPORARY for design transition
+body.home {
+  font-size: 16px;
+
+  p.meta {
+    font-family: $font-family-serif;
+    font-size: 12px;
+    margin-bottom: 1em;
+    line-height: 1.55em;
+  }
+
+  .photo-overlay .post-title {
+    font-size: 18px;
+    line-height: 1.2em;
+  }
+}
+// END TEMP
 
 .twitter-timeline {
   width: 100% !important;

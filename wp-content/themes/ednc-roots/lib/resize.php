@@ -103,7 +103,7 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
 			 *  We only want to resize Media Library images, so we can be sure they get deleted correctly when appropriate.
 			 */
       // The guid might be stored with http:// instead of https:// so we may need to search for both
-      if ($http_url) {
+      if (isset($http_url)) {
         $query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s' OR guid='%s'", $url, $http_url );
       } else {
   			$query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE guid='%s'", $url );
