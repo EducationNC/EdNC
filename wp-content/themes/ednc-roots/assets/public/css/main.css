@@ -9370,7 +9370,7 @@ body.home p.meta {
   margin-bottom: 1em;
   line-height: 1.55em;
 }
-body.home .photo-overlay .post-title {
+body.home .photo-overlay h4.post-title {
   font-size: 18px;
   line-height: 1.2em;
 }
