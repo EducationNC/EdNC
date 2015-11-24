@@ -82,3 +82,60 @@
     }
   }
 }
+
+.menu-stay-connected .sub-menu {
+  a {
+    padding-left: 22px;
+    position: relative;
+
+    &:before {
+      content: "v";
+      font-family: "ednc" !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-variant: normal !important;
+      text-transform: none !important;
+      speak: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      text-indent: 0;
+    }
+  }
+
+  .menu-facebook a:before {
+    content: "b";
+  }
+
+  .menu-twitter a:before {
+    content: "c";
+  }
+
+  .menu-youtube a:before {
+    content: "g";
+  }
+
+  .menu-instagram a:before {
+    content: "j";
+  }
+
+  .menu-rss a:before {
+    content: "p";
+  }
+
+  @media (max-width: $screen-xs-max) {
+    li {
+      display: inline-block;
+    }
+    a {
+      width: 36px;
+      text-indent: -100em;
+      overflow: hidden;
+      display: inline-block;
+      font-size: 28px;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 <?php
-// Get current counts of social media shares
-$socialCounts = new socialNetworkShareCount(array(
+// Get current counts of social media shares & store in transient
+$counts = get_transient('social-counts');
+if ($counts === false) {
+  $social_counts = new socialNetworkShareCount(array(
     'url' => get_permalink(),
     'facebook' => true,
     'twitter' => true,
@@ -8,8 +10,10 @@ $socialCounts = new socialNetworkShareCount(array(
     'pinterest' => true,
     'linkedin' => true,
     'google' => true
-));
-$counts = json_decode($socialCounts->getShareCounts());
+  ));
+  $counts = json_decode($social_counts->getShareCounts());
+  set_transient('social-counts', $counts, HOUR_IN_SECONDS);
+}
 
 // Translate share counts to K if number is in thousands
 function num_format($val) {
@@ -64,10 +68,33 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
   </a>
 </div>
 
-<!-- <div class="social-buttons hidden-print">
-  <span class='st_facebook_hcount' displayText='Facebook'></span>
-  <span class='st_twitter_hcount' displayText='Tweet'></span>
-  <span class='st_sharethis_hcount' displayText='ShareThis'></span>
-  <span class='st_email_hcount' displayText='Email'></span>
-  <span class='st_print_hcount' displayText='Print'></span>
-</div> -->
+<div class="social-share-modal hidden-print">
+    <a data-toggle="modal" data-target="#social-share-modal" class="icon-share" href="#"></a>
+
+    <div class="modal fade" id="social-share-modal" tabindex="-1" role="dialog" aria-labelledby="social-share-modal">
+      <div class="modal-dialog" role="document">
+            <div class="count" id="social-share-count">
+              <?php
+              if ($count_num != 0) {
+                echo '<span class="num">' . $count_num . '</span> shares';
+              }
+              ?>
+            </div>
+            <a rel="nofollow" class="icon-facebook social-share-link" href="<?php echo $facebookURL; ?>">
+              Share on facebook
+            </a>
+            <a rel="nofollow" class="icon-twitter social-share-link" href="<?php echo $twitterURL; ?>">
+              Tweet on Twitter
+            </a>
+            <a rel="nofollow" class="icon-linkedin social-share-link" href="<?php echo $linkedinURL; ?>">
+              Share on LinkedIn
+            </a>
+            <a rel="nofollow" class="icon-email social-share-link" href="<?php echo $emailURL; ?>">
+              Email this page
+            </a>
+            <a rel="nofollow" class="print-share icon-fax hidden-xs" href="http://www.printfriendly.com" onclick="window.print();return false;">
+              Print this page
+            </a>
+          </div>
+    </div>
+</div>

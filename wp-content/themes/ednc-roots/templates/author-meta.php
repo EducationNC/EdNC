@@ -17,10 +17,16 @@ if ( function_exists( 'get_coauthors' ) ) {
 
     $bio = new WP_Query($args);
 
-    if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
-      the_post_thumbnail('bio-headshot');
-      get_template_part('templates/author', 'excerpt');
-    endwhile; endif; wp_reset_query();
+    if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+      <div class="row">
+        <div class="col-xs-3 col-sm-4 col-md-12">
+          <?php the_post_thumbnail('bio-headshot'); ?>
+        </div>
+        <div class="col-xs-9 col-sm-8 col-md-12">
+          <?php get_template_part('templates/author', 'excerpt'); ?>
+        </div>
+      </div>
+    <?php endwhile; endif; wp_reset_query();
   }
 } else {
   // Fallback for no coauthors plugin
@@ -36,8 +42,14 @@ if ( function_exists( 'get_coauthors' ) ) {
 
   $bio = new WP_Query($args);
 
-  if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
-    the_post_thumbnail('bio-headshot');
-    get_template_part('templates/author', 'excerpt');
-  endwhile; endif; wp_reset_query();
+  if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+    <div class="row">
+      <div class="col-xs-3 col-sm-4 col-md-12">
+        <?php the_post_thumbnail('bio-headshot'); ?>
+      </div>
+      <div class="col-xs-9 col-sm-8 col-md-12">
+        <?php get_template_part('templates/author', 'excerpt'); ?>
+      </div>
+    </div>
+  <?php endwhile; endif; wp_reset_query();
 }

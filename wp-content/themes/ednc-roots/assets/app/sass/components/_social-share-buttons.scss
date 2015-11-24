@@ -1,47 +1,118 @@
-.social-share-buttons {
-  position: fixed;
-  left: 0;
-  top: 30%;
-  z-index: 100;
-  background: $white70;
-
-  a {
-    display: block;
-    text-indent: -100em;
-    overflow: hidden;
-    width: 60px;
-    height: 60px;
-    position: relative;
+.social-share-modal {
+  a.icon-share {
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: $white70;
     text-decoration: none;
+    color: $ash;
+    @include box-shadow(0 0 5px $raven);
 
     &:before {
-      color: $white;
-      text-indent: 0;
       position: absolute;
       font-size: 32px;
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
     }
+
+    @media (min-width: $screen-md-min) {
+      display: none;
+    }
   }
 
-  .count {
-    font-family: $font-family-sans-serif;
-    font-weight: 300;
-    font-size: 19px;
+  .modal-dialog {
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    width: 100%;
-    line-height: 1.2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
 
-    .num {
-      display: block;
-      font-size: 28px;
-      font-family: 'Open Sans Condensed';
+  @media screen and (orientation:portrait) {
+    .modal-dialog {
+      width: 100px;
+      margin-top: -240px;
+      margin-left: -50px;
+    }
+  }
+
+  @media screen and (orientation:landscape) {
+    .modal-dialog {
+      width: 480px;
+      margin-top: -50px;
+      margin-left: -240px;
+    }
+  }
+}
+
+.social-share-buttons {
+  display: none;
+
+  @media (min-width: $screen-md-min) {
+    display: block;
+    position: fixed;
+    right: 0;
+    top: 30%;
+    z-index: 100;
+    background: $white70;
+
+    .count {
+      font-family: $font-family-sans-serif;
+      font-weight: 300;
+      font-size: 19px;
+      text-align: center;
+      width: 100%;
+      line-height: 1.2;
+
+      .num {
+        display: block;
+        font-size: 28px;
+        font-family: 'Open Sans Condensed';
+      }
     }
   }
 }
 
 .social-share-link {
+  display: block;
+  text-indent: -100em;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  text-decoration: none;
+  margin: 16px auto;
+
+  &:before {
+    color: $white;
+    text-indent: 0;
+    position: absolute;
+    font-size: 48px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  @media screen and (max-width: $screen-sm-max) and (orientation: landscape) {
+    display: inline-block;
+    margin: 0 8px;
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+
+    &:before {
+      font-size: 32px;
+    }
+  }
+
   &.icon-facebook {
     background: #3b5998;
 
@@ -75,6 +146,8 @@
   }
 }
 .print-share {
+  @extend .social-share-link;
+
   &.icon-fax {
     background: $pear;
 

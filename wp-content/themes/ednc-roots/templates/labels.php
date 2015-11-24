@@ -39,8 +39,9 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
 
 // Column label
 if ($column) {
+  $link = get_term_link($column[0]);
   ?>
-  <span class="label"><?php echo $column[0]->name; ?></span>
+  <span class="label"><a href="<?php echo $link; ?>"><?php echo $column[0]->name; ?></a></span>
   <?php
 }
 
@@ -48,7 +49,8 @@ if ($column) {
 if ($category) {
   foreach ($category as $key=>$value) {
     if (!in_array($key, $cats_hide)) {
-      echo '<span class="label">' . $value['cat_name'] . '</span> ';
+      $link = get_category_link($value['term_id']);
+      echo '<span class="label"><a href="' . $link . '">' . $value['cat_name'] . '</a></span> ';
     }
   }
 }
@@ -57,7 +59,8 @@ if ($category) {
 if ($map_category) {
   foreach ($map_category as $key=>$value) {
     if (!in_array($key, $mcats_hide)) {
-      echo '<span class="label">' . $value['name'] . '</span> ';
+      $link = get_term_link($value['term_id'], 'map-category');
+      echo '<span class="label"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
     }
   }
 }
@@ -66,7 +69,8 @@ if ($map_category) {
 if ($appearances) {
   foreach ($appearances as $key=>$value) {
     if (!in_array($key, $app_hide)) {
-      echo '<span class="label">' . $value['name'] . '</span> ';
+      $link = get_term_link($value['term_id'], 'appearance');
+      echo '<span class="label"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
     }
   }
 }

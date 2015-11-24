@@ -105,7 +105,7 @@
     & > li {
       text-transform: uppercase;
 
-      & > a:before {
+      & > a:after {
         content: '';
         width: 100%;
         height: 3px;
@@ -123,17 +123,39 @@
     }
 
     & > li:not(.active):hover {
-      & > a:before {
+      & > a:after {
         transform: translateY(-3px);
       }
     }
 
     & > li.active {
       & > a {
-        &:before {
+        &:after {
           background: $purple;
           transform: translateY(-3px);
         }
+      }
+    }
+
+    .menu-home a {
+      text-indent: -100em;
+      overflow: hidden;
+      width: 44px;
+
+      &:before {
+        content: "v";
+        font-family: "ednc" !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        left: 12px;
+        text-indent: 0;
       }
     }
   }

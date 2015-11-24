@@ -1,7 +1,12 @@
 <div class="container above-footer hidden-print">
   <div class="row">
     <div class="col-md-8 col-md-push-2">
-      <?php get_template_part('templates/email-signup'); ?>
+      <div class="hidden-xs">
+        <?php get_template_part('templates/email-signup'); ?>
+      </div>
+      <div class="visible-xs-block text-center extra-bottom-margin">
+        <a class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Subscribe now</a>
+      </div>
     </div>
   </div>
 </div>

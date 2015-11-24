@@ -8,6 +8,10 @@ html {
 p {
   margin-bottom: 1.88em;
   line-height: 1.88em;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+  }
 }
 
 a {
@@ -48,8 +52,12 @@ a {
 h1, .h1, .article-title, .entry-title {
   font-family: $font-family-serif;
   color: $plum;
-  font-size: $font-size-h1;
+  font-size: 30px;
   font-weight: normal;
+
+  @media (min-width: $screen-md-min) {
+    font-size: 36px;
+  }
 
   .article-title-overlay & {
     color: $white;
@@ -72,15 +80,19 @@ h2, .h2, .article-subtitle {
   font-family: $font-family-sans-serif;
   font-weight: normal;
   color: $gray;
-  font-size: $font-size-h2;
+  font-size: 28px;
   white-space: normal;
+
+  @media (min-width: $screen-md-min) {
+    font-size: 30px;
+  }
 }
 
 h3, .h3, .article-section-title {
   font-family: $font-family-sans-serif;
   font-weight: normal;
   color: $jet;
-  font-size: $font-size-h3;
+  font-size: 24px;
 
   .entry-content li & {
     font-family: $font-family-serif;
@@ -88,13 +100,22 @@ h3, .h3, .article-section-title {
     font-style: italic;
     margin-top: 1em;
   }
+
+  &.post-title {
+    margin: 0;
+
+    a {
+      color: $jet;
+      text-decoration: none;
+    }
+  }
 }
 
 h4, .h4, .article-section-subtitle {
   font-family: $font-family-sans-serif;
   font-weight: 300;
   color: $jet;
-  font-size: $font-size-h3;
+  font-size: 24px;
 
   li & {
     font-size: 1.125rem;
@@ -120,7 +141,7 @@ h6, .h6 {
   font-weight: bold;
   color: $jet;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .meta, .attr, .duration {
@@ -183,6 +204,15 @@ h6, .h6 {
     font-size: 1.5em;
     vertical-align: -5px;
   }
+
+  .entry-content & {
+    background: $steel;
+    color: $jet;
+
+    a {
+      color: $jet;
+    }
+  }
 }
 
 .column-name {
@@ -214,12 +244,17 @@ blockquote, .blockquote {
 
   p {
     font-family: $font-family-sans-serif;
-    padding: 10px 20px;
-    border-left: 20px solid $steel;
+    padding: 10px 10px;
+    border-left: 10px solid $steel;
     background: lighten($steel, 9%);
     margin: 0;
 
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $screen-sm-min) {
+      border-left-width: 20px;
+      padding: 10px 20px;
+    }
+
+    @media (min-width: 893px) {
       margin-left: -7.35%;
       margin-right: -7.35%;
     }
@@ -258,8 +293,14 @@ blockquote, .blockquote {
       float: left;
       margin-right: 1.25rem;
 
-      @media (min-width: $screen-md-min) {
-        margin-left: -14.7%;
+      @media (min-width: 893px) {
+        margin-left: -7.35%;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        margin-left: 1.25rem;
+        margin-bottom: 10px;
+        font-size: 22px;
       }
     }
 
@@ -268,8 +309,14 @@ blockquote, .blockquote {
       text-align: left !important;
       margin-left: 1.25rem;
 
-      @media (min-width: $screen-md-min) {
-        margin-right: -14.7%;
+      @media (min-width: 893px) {
+        margin-right: -7.35%;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        margin-right: 1.25rem;
+        margin-bottom: 10px;
+        font-size: 22px;
       }
     }
 
@@ -277,7 +324,7 @@ blockquote, .blockquote {
       color: $gray;
       margin: 2.5rem 0;
 
-      @media (min-width: $screen-md-min) {
+      @media (min-width: 893px) {
         margin: 4rem -7.35%;
       }
 

@@ -443,8 +443,8 @@ register_taxonomy( 'appearance',
 		),
 		'show_ui' => true,
 		'query_var' => true,
-		'public' => false,
-		'rewrite' => false
+		'public' => true,
+		'rewrite' => true
 	)
 );
 

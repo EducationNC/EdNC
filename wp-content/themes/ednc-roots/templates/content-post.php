@@ -24,8 +24,6 @@ if ($category[0]->slug == 'powered-schools') {
 }
 ?>
 
-<?php get_template_part('templates/social-share'); ?>
-
 <article <?php post_class('article'); ?>>
   <?php if (has_post_thumbnail() && $featured_image_align == 'hero') { ?>
     <header class="entry-header hero-image">
@@ -130,7 +128,7 @@ if ($category[0]->slug == 'powered-schools') {
   <div class="entry-content">
     <div class="container">
       <div class="row">
-        <div class="col-md-2 meta hidden-xs hidden-print print-no">
+        <div class="col-md-2 meta hidden-xs hidden-sm hidden-print print-no">
           <?php get_template_part('templates/author', 'meta'); ?>
         </div>
         <div class="col-md-7 col-md-push-point5">
@@ -182,8 +180,23 @@ if ($category[0]->slug == 'powered-schools') {
       </div>
 
       <div class="row">
-        <div class="col-xs-12 meta visible-xs-block">
-          <?php get_template_part('templates/author', 'meta'); ?>
+        <div class="col-xs-12 meta visible-xs-block visible-sm-block extra-top-margin">
+          <?php
+          if ( function_exists( 'get_coauthors' ) ) {
+            $coauthors = get_coauthors();
+            $coauthors_count = count($coauthors);
+          } else {
+            $coauthors_count = 1;
+          }
+
+          if ($coauthors_count > 1) {
+            echo '<h2>About the authors</h2>';
+          } else {
+            echo '<h2>About the author</h2>';
+          }
+
+          get_template_part('templates/author', 'meta');
+          ?>
         </div>
       </div>
     </div>
@@ -212,7 +225,7 @@ if ($category[0]->slug == 'powered-schools') {
       $category = get_the_category($pid);
       ?>
       <div class="row">
-        <div class="col-md-7 col-md-push-2point5">
+        <div class="col-md-7 col-md-push-2point5 recommended">
           <h2>Recommended for you</h2>
           <?php
           if (has_post_thumbnail()) {
@@ -224,20 +237,29 @@ if ($category[0]->slug == 'powered-schools') {
             $image_sized = mr_image_resize($image_src, 564, 239, true, false);
           }
           ?>
-          <div class="has-photo-overlay">
-            <div class="photo-overlay">
-              <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
-              <h2 class="post-title"><?php echo $post->post_title; ?></h2>
-              <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
-              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-              <?php if ($image_sized['url']) { ?>
+          <div class="photo-overlay">
+            <?php if ($image_sized['url']) { ?>
               <img src="<?php echo $image_sized['url']; ?>" />
-              <?php } ?>
-            </div>
+            <?php } ?>
+            <?php get_template_part('templates/labels'); ?>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
           </div>
-          <?php wp_reset_postdata(); ?>
+          <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+          <p class="meta">
+            by
+            <?php
+            if ( function_exists( 'coauthors_posts_links' ) ) {
+              coauthors();
+            } else {
+              the_author();
+            }
+            ?>
+            on
+            <date><?php the_time(get_option('date_format')); ?></date>
+          </p>
         </div>
       </div>
+      <?php wp_reset_postdata(); ?>
     <?php } ?>
 
     <?php if ($comments_open == 1) { ?>

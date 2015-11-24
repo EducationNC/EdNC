@@ -42,6 +42,8 @@
     </div>
   </div>
 
+  <?php get_template_part('templates/social-share'); ?>
+
   <?php wp_footer(); ?>
 
   <?php get_template_part('templates/social-scripts', 'footer'); ?>
