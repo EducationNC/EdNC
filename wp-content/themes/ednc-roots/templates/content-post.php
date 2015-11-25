@@ -128,7 +128,7 @@ if ($category[0]->slug == 'powered-schools') {
   <div class="entry-content">
     <div class="container">
       <div class="row">
-        <div class="col-md-2 meta hidden-xs hidden-sm hidden-print print-no">
+        <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm hidden-print print-no">
           <?php get_template_part('templates/author', 'meta'); ?>
         </div>
         <div class="col-md-7 col-md-push-point5">
@@ -242,6 +242,9 @@ if ($category[0]->slug == 'powered-schools') {
               <img src="<?php echo $image_sized['url']; ?>" />
             <?php } ?>
             <?php get_template_part('templates/labels'); ?>
+
+TODO: MAKE ONLY ONE LABEL SHOW!
+
             <a class="mega-link" href="<?php the_permalink(); ?>"></a>
           </div>
           <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

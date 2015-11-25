@@ -7425,6 +7425,9 @@ object, embed {
   margin-bottom: 1.88em;
   max-width: 100%;
 }
+.alignnone img {
+  width: 100%;
+}
 @media (min-width: 992px) {
   .alignnone {
     margin-left: -7.35%;
@@ -8292,7 +8295,7 @@ img.mfp-img {
   position: fixed;
   width: 48px;
   height: 48px;
-  right: 0;
+  left: 0;
   bottom: 0;
   z-index: 100;
   background: rgba(255, 255, 255, 0.8);
@@ -8346,7 +8349,7 @@ img.mfp-img {
   .social-share-buttons {
     display: block;
     position: fixed;
-    right: 0;
+    left: 0;
     top: 30%;
     z-index: 100;
     background: rgba(255, 255, 255, 0.8);
