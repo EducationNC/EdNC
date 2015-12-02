@@ -131,7 +131,19 @@ if ($category[0]->slug == 'powered-schools') {
         <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm hidden-print print-no">
           <?php get_template_part('templates/author', 'meta'); ?>
         </div>
-        <div class="col-md-7 col-md-push-point5">
+        <div class="col-md-2 col-md-pull-2 hidden-print print-no">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Article sidebar -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-2642458473228537"
+               data-ad-slot="6263040202"
+               data-ad-format="auto"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <div class="col-md-7 col-md-pull-1point5">
 
           <?php if (has_post_thumbnail() && $featured_image_align == 'contained') {
             echo '<div class="alignnone">';

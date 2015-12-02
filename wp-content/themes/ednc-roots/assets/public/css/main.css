@@ -6808,6 +6808,10 @@ a:hover, a:active, a:focus {
   font-size: 1.125rem;
 }
 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .content-info .menu-footer-nav > li > a, h6, .h6 {
+  margin: 1em 0 .5em;
+}
+
 h1, .h1, .article-title, .entry-title {
   font-family: Merriweather, serif;
   color: #731454;
@@ -7382,19 +7386,87 @@ object, embed {
   max-width: 100%;
 }
 
-.entry-content-asset:not(.instagram) {
+.entry-content-asset.twitter {
+  max-width: 520px;
+  margin: 0 auto 34px;
+}
+.entry-content-asset.instagram {
+  max-width: 658px;
+  margin: 0 auto 34px;
+}
+.entry-content-asset.slideshare {
   position: relative;
-  padding-bottom: 56.25%;
+  padding-bottom: 100%;
   padding-top: 25px;
   height: 0;
-  margin-bottom: 1em;
+  margin-bottom: 34px;
 }
-.entry-content-asset:not(.instagram) iframe {
+.entry-content-asset.slideshare iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+.entry-content-asset:not(.instagram):not(.twitter):not(.slideshare) {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  margin-bottom: 34px;
+}
+.entry-content-asset:not(.instagram):not(.twitter):not(.slideshare) iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wp-video {
+  margin-bottom: 34px;
+}
+
+.media-embed-container.mejs-container {
+  margin-bottom: 34px;
+}
+.media-embed-container.mejs-container .mejs-controls {
+  background: #5D6066;
+}
+.media-embed-container.mejs-container .mejs-controls .mejs-time-current {
+  background: #ACBA67;
+}
+
+.entry-content .wp-playlist {
+  background: #DCDFE5;
+  border: none;
+  margin-bottom: 34px;
+}
+.entry-content .wp-playlist .wp-playlist-playing {
+  background: #C3C6CC;
+}
+.entry-content .wp-playlist-tracks .wp-playlist-caption {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  padding: 8px 0;
+}
+.entry-content .wp-playlist-tracks .wp-playlist-item-length {
+  padding: 8px 0;
+}
+.entry-content .wp-playlist-tracks .wp-playlist-item-title {
+  font-size: inherit;
+  line-height: inherit;
+}
+.entry-content .wp-playlist-item {
+  border-bottom-color: #C3C6CC;
+}
+.entry-content .wp-playlist-current-item {
+  min-height: 60px;
+  height: auto;
+}
+.entry-content .wp-playlist-current-item .wp-playlist-item-title {
+  font-family: Merriweather, serif;
+  font-size: 20px;
 }
 
 .aligncenter {
@@ -8469,6 +8541,10 @@ section {
     left: 20.833333%;
   }
 
+  .col-md-pull-1point5 {
+    right: 12.5%;
+  }
+
   .col-md-push-point5 {
     left: 4.166667%;
   }
@@ -9463,11 +9539,11 @@ body.home .photo-overlay h4.post-title {
   bottom: 0;
   left: 0;
   right: 0;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#005D6066', endColorstr='#B35D6066');
-  background-image: -o-linear-gradient(180deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
-  background-image: -webkit-linear-gradient(270deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
-  background-image: -o-linear-gradient(270deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
-  background-image: linear-gradient(180deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#002B2E34', endColorstr='#992B2E34');
+  background-image: -o-linear-gradient(180deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
+  background-image: -webkit-linear-gradient(270deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
+  background-image: -o-linear-gradient(270deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
+  background-image: linear-gradient(180deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
   -webkit-transition: -webkit-transform .3s;
        -o-transition: -o-transform .3s;
           transition: transform .3s;
@@ -9992,6 +10068,10 @@ body.home .photo-overlay h4.post-title {
   margin-top: 3em;
 }
 
+.hentry .entry-content p {
+  word-wrap: break-word;
+}
+
 .hentry footer {
   margin-bottom: 5em;
 }
@@ -10051,11 +10131,23 @@ body.home .photo-overlay h4.post-title {
   overflow: hidden;
   margin: 1.88em 0;
 }
+.full-bleed-image .image-holder {
+  position: relative;
+}
 .full-bleed-image img {
   width: 100%;
   height: auto;
   position: relative;
   z-index: 1;
+}
+.full-bleed-image .wash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(43, 46, 52, 0.6);
+  z-index: 2;
 }
 .full-bleed-image .floating-text {
   position: absolute;

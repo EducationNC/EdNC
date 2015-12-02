@@ -205,7 +205,11 @@
     margin-top: 3em;
   }
 }
-.hentry .entry-content { }
+.hentry .entry-content {
+  p {
+    word-wrap: break-word;
+  }
+}
 .hentry footer {
   margin-bottom: 5em;
 }
@@ -295,11 +299,25 @@
   overflow: hidden;
   margin: 1.88em 0;
 
+    .image-holder {
+      position: relative;
+    }
+
   img {
     width: 100%;
     height: auto;
     position: relative;
     z-index: 1;
+  }
+
+  .wash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $raven-60;
+    z-index: 2;
   }
 
   .floating-text {

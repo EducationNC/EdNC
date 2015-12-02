@@ -129,14 +129,17 @@
 
     <div class="container-fluid full-bleed-image parallax">
       <div class="row">
-        <?php if ( ! empty($image_id) ) { ?>
-          <img src="<?php echo $img[0]; ?>" />
-        <?php } ?>
-        <?php if ( ! empty( $floating_text ) ) { ?>
-          <div class="floating-text">
-            <?php echo esc_html( $floating_text ); ?>
-          </div>
-        <?php } ?>
+        <div class="image-holder">
+          <?php if ( ! empty($image_id) ) { ?>
+            <img src="<?php echo $img[0]; ?>" />
+          <?php } ?>
+          <?php if ( ! empty( $floating_text ) ) { ?>
+            <div class="wash"></div>
+            <div class="floating-text">
+              <?php echo esc_html( $floating_text ); ?>
+            </div>
+          <?php } ?>
+        </div>
         <?php if ( ! empty( $caption ) ) { ?>
           <div class="caption">
             <?php echo esc_html( $caption ); ?>

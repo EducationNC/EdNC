@@ -192,8 +192,15 @@ var Roots = {
       };
       $('object:not(childof(.tableauPlaceholder)').wrap('<div class="object-wrapper"></div>');
 
-      // Add special class to .entry-content-wrapper divs for Instagram embeds (not fixed ratio)
+      // Add special classes to .entry-content-wrapper divs for Instagram and Twitter embeds (not fixed ratio)
       $('.instagram-media').parent('.entry-content-asset').addClass('instagram');
+      $('.twitter-tweet').parent('.entry-content-asset').addClass('twitter');
+
+      // Add special class to .entry-content-wrapper for Slideshare (vertical fixed ratio)
+      $('iframe[src*="slideshare.net"]').parent('.entry-content-asset').addClass('slideshare');
+
+      // Wrap tables with Bootstrap responsive table wrapper
+      $('.entry-content table').addClass('table table-striped').wrap('<div class="table-responsive"></div>');
 
       // Add watermark dropcap on pull quotes (left and right)
       $('blockquote p[style*=left], blockquote p[style*=right]').each(function() {

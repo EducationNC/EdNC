@@ -135,3 +135,21 @@ function example_mejs_add_container_class() {
 	<?php
 }
 add_action( 'wp_print_footer_scripts', 'example_mejs_add_container_class' );
+
+// Fix bug where Instagram embeds don't work in core with 'www.'
+function ednc_add_oembed_support() {
+  wp_oembed_add_provider('#https?://(www\.)?instagr(\.am|am\.com)/p/.*#i', 'https://api.instagram.com/oembed', true );
+}
+add_action('init', 'ednc_add_oembed_support');
+
+// Google Maps embed
+function wpgm_embed_handler_googlemapsv1( $matches, $attr, $url, $rawattr ) {
+	if ( ! empty( $rawattr['width'] ) && ! empty( $rawattr['height'] ) ) {
+		$width  = (int) $rawattr['width'];
+		$height = (int) $rawattr['height'];
+	} else {
+		list( $width, $height ) = wp_expand_dimensions( 425, 326, $attr['width'], $attr['height'] );
+	}
+	return apply_filters( 'embed_googlemapsv1', "<div class='entry-content-asset'><iframe width='{$width}' height='{$height}' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps/embed/v1/place?q=" . esc_attr($matches[1]) . "&key=AIzaSyCI7Osh6uj1glo7DmUKY4lRJFVBey4pf1Y'></iframe></div>" );
+};
+wp_embed_register_handler( 'googlemapsv1', '#https?://www.google.com/maps/place/(.*?)/#i', 'wpgm_embed_handler_googlemapsv1' );
