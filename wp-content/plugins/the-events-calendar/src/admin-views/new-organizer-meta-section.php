@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+$organizer_pto = get_post_type_object( Tribe__Events__Main::ORGANIZER_POST_TYPE );
+
 ?>
 <script type="text/template" id="tmpl-tribe-create-organizer">
 <tbody class="new-organizer">

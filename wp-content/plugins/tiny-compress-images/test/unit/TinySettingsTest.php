@@ -14,6 +14,7 @@ class Tiny_Settings_Test extends TinyTestCase {
         $this->assertEquals(array(
             array('media', 'tinypng_api_key'),
             array('media', 'tinypng_sizes'),
+            array('media', 'tinypng_resize_original'),
             array('media', 'tinypng_status')
         ), $this->wp->getCalls('register_setting'));
     }
@@ -28,6 +29,7 @@ class Tiny_Settings_Test extends TinyTestCase {
         $this->assertEquals(array(
             array('tinypng_api_key', 'TinyPNG API key', array($this->subject, 'render_api_key'), 'media', 'tinypng_settings', array('label_for' => 'tinypng_api_key')),
             array('tinypng_sizes', 'File compression', array($this->subject, 'render_sizes'), 'media', 'tinypng_settings'),
+            array('tinypng_resize_original', 'Resize original', array($this->subject, 'render_resize'), 'media', 'tinypng_settings'),
             array('tinypng_status', 'Connection status', array($this->subject, 'render_pending_status'), 'media', 'tinypng_settings')
         ), $this->wp->getCalls('add_settings_field'));
     }
@@ -98,5 +100,50 @@ class Tiny_Settings_Test extends TinyTestCase {
         $this->assertEquals(
             array('width' => 0, 'height' => 888, 'tinify' => true),
             $sizes["additional_size_no_width"]);
+    }
+
+    public function testShouldReturnResizeEnabled() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on'));
+        $this->assertEquals(true, $this->subject->get_resize_enabled());
+    }
+
+    public function testShouldReturnResizeNotEnabledWithoutConfiguration() {
+        $this->wp->addOption("tinypng_resize_original", array());
+        $this->assertEquals(false, $this->subject->get_resize_enabled());
+    }
+
+    public function testShouldReturnResizeOptionsWithWidthAndHeight() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on', 'width' => '800', 'height' => '600'));
+        $this->assertEquals(array('method' => 'fit', 'width' => 800, 'height' => 600), $this->subject->get_resize_options());
+    }
+
+    public function testShouldReturnResizeOptionsWithoutWidth() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on', 'width' => '', 'height' => '600'));
+        $this->assertEquals(array('method' => 'scale', 'height' => 600), $this->subject->get_resize_options());
+    }
+
+    public function testShouldReturnResizeOptionsWithoutHeight() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on', 'width' => '800', 'height' => '',));
+        $this->assertEquals(array('method' => 'scale', 'width' => 800), $this->subject->get_resize_options());
+    }
+
+    public function testShouldReturnResizeOptionsWithInvaledWidth() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on', 'width' => '-1', 'height' => '600'));
+        $this->assertEquals(array('method' => 'scale', 'height' => 600), $this->subject->get_resize_options());
+    }
+
+    public function testShouldReturnResizeOptionsWithInvaledHeight() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on', 'width' => '800', 'height' => '-1'));
+        $this->assertEquals(array('method' => 'scale', 'width' => 800), $this->subject->get_resize_options());
+    }
+
+    public function testShouldNotReturnResizeOptionsWithoutWithAndHeight() {
+        $this->wp->addOption("tinypng_resize_original", array('enabled' => 'on', 'width' => '', 'height' => ''));
+        $this->assertEquals(false, $this->subject->get_resize_options());
+    }
+
+    public function testShouldNotReturnResizeOptionsWhenNotEnabled() {
+        $this->wp->addOption("tinypng_resize_original", array('width' => '800', 'height' => '600'));
+        $this->assertEquals(false, $this->subject->get_resize_options());
     }
 }

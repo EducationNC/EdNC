@@ -51,3 +51,15 @@
     box-shadow: 0px 1px 0px #DFDFDF;
     padding: 5px;
 }
+
+p.tiny-resize-resolution {
+    margin-left: 24px;
+}
+
+p.tiny-resize-resolution input {
+    margin-right: 6px;
+}
+
+input[type=number][name*="tinypng_resize_original"] {
+    width: 65px;
+}

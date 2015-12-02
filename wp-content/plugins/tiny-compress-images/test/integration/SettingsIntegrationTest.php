@@ -89,7 +89,7 @@ class SettingsIntegrationTest extends IntegrationTestCase {
     public function testShouldShowTotalImagesInfo() {
         $elements = self::$driver->findElement(WebDriverBy::id('tiny-image-sizes-notice'))->findElements(WebDriverBy::tagName('p'));
         $statuses = array_map('innerText', $elements);
-        $this->assertContains('With these settings you can compress 100 images for free each month.', $statuses);
+        $this->assertContains('Each selected size counts as a compression. With these settings you can compress at least 100 images for free each month.', $statuses);
     }
 
     public function testShouldUpdateTotalImagesInfo() {
@@ -97,11 +97,11 @@ class SettingsIntegrationTest extends IntegrationTestCase {
             WebDriverBy::xpath('//input[@type="checkbox" and @name="tinypng_sizes[0]" and @checked="checked"]'));
         $element->click();
         self::$driver->wait(2)->until(WebDriverExpectedCondition::textToBePresentInElement(
-            WebDriverBy::cssSelector('#tiny-image-sizes-notice'), 'With these settings you can compress 125 images for free each month.'));
+            WebDriverBy::cssSelector('#tiny-image-sizes-notice'), 'Each selected size counts as a compression. With these settings you can compress at least 125 images for free each month.'));
         // Not really necessary anymore to assert this.
         $elements = self::$driver->findElement(WebDriverBy::id('tiny-image-sizes-notice'))->findElements(WebDriverBy::tagName('p'));
         $statuses = array_map('innerText', $elements);
-        $this->assertContains('With these settings you can compress 125 images for free each month.', $statuses);
+        $this->assertContains('Each selected size counts as a compression. With these settings you can compress at least 125 images for free each month.', $statuses);
     }
 
     public function testShouldShowCorrectNoImageSizesInfo() {
@@ -111,11 +111,43 @@ class SettingsIntegrationTest extends IntegrationTestCase {
             $element->click();
         }
         self::$driver->wait(2)->until(WebDriverExpectedCondition::textToBePresentInElement(
-            WebDriverBy::cssSelector('#tiny-image-sizes-notice'), 'With these settings no images will be compressed.'));
+            WebDriverBy::cssSelector('#tiny-image-sizes-notice'), 'Each selected size counts as a compression. With these settings no images will be compressed.'));
         // Not really necessary anymore to assert this.
         $elements = self::$driver->findElement(WebDriverBy::id('tiny-image-sizes-notice'))->findElements(WebDriverBy::tagName('p'));
         $statuses = array_map('innerText', $elements);
-        $this->assertContains('With these settings no images will be compressed.', $statuses);
+        $this->assertContains('Each selected size counts as a compression. With these settings no images will be compressed.', $statuses);
+    }
+
+    public function testShouldShowResizingWhenOriginalEnabled() {
+        $element = self::$driver->findElement(WebDriverBy::id('tinypng_sizes_0'));
+        if (!$element->getAttribute('checked')) {
+            $element->click();
+        }
+        $labels = self::$driver->findElements(WebDriverBy::tagName('label'));
+        $texts = array_map('innerText', $labels);
+        $this->assertContains('Resize and compress orginal images to fit within:', $texts);
+        $paragraphs = self::$driver->findElements(WebDriverBy::tagName('p'));
+        $texts = array_map('innerText', $paragraphs);
+        $this->assertNotContains('Enable the compression of the original image size to configure resizing.', $texts);
+    }
+
+    public function testShouldNotShowResizingWhenOriginalDisabled() {
+        $element = self::$driver->findElement(WebDriverBy::id('tinypng_sizes_0'));
+        if ($element->getAttribute('checked')) {
+            $element->click();
+        }
+        $labels = self::$driver->findElements(WebDriverBy::tagName('label'));
+        $texts = array_map('innerText', $labels);
+        $this->assertNotContains('Resize and compress orginal images to fit within:', $texts);
+        $paragraphs = self::$driver->findElements(WebDriverBy::tagName('p'));
+        $texts = array_map('innerText', $paragraphs);
+        $this->assertContains('Enable the compression of the original image size to configure resizing.', $texts);
+    }
+
+    public function testShouldPersistResizingSettings() {
+        $this->enable_resize(123, 456);
+        $this->assertEquals('123', self::$driver->findElement(WebDriverBy::id('tinypng_resize_original_width'))->getAttribute('value'));
+        $this->assertEquals('456', self::$driver->findElement(WebDriverBy::id('tinypng_resize_original_height'))->getAttribute('value'));
     }
 
     public function testStatusPresenceOK() {

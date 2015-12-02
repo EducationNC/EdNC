@@ -62,4 +62,43 @@ abstract class IntegrationTestCase extends PHPUnit_Framework_TestCase {
         }
         self::$driver->findElement(WebDriverBy::tagName('form'))->submit();
     }
+
+    protected function enable_resize($width, $height) {
+        $url = wordpress('/wp-admin/options-media.php');
+        if (self::$driver->getCurrentUrl() != $url) {
+            self::$driver->get($url);
+        }
+        $element = self::$driver->findElement(WebDriverBy::id('tinypng_resize_original_enabled'));
+        if (!$element->getAttribute('checked')) {
+            $element->click();
+        }
+        self::$driver->findElement(WebDriverBy::id('tinypng_resize_original_width'))->clear()->sendKeys($width);
+        self::$driver->findElement(WebDriverBy::id('tinypng_resize_original_height'))->clear()->sendKeys($height);
+        self::$driver->findElement(WebDriverBy::tagName('form'))->submit();
+    }
+
+    protected function disable_resize() {
+        $url = wordpress('/wp-admin/options-media.php');
+        if (self::$driver->getCurrentUrl() != $url) {
+            self::$driver->get($url);
+        }
+        $element = self::$driver->findElement(WebDriverBy::id('tinypng_resize_original_enabled'));
+        if ($element->getAttribute('checked')) {
+            $element->click();
+        }
+        self::$driver->findElement(WebDriverBy::tagName('form'))->submit();
+    }
+
+    protected function view_edit_image($image_title = 'input-large') {
+        $url = wordpress('/wp-admin/upload.php');
+        if (self::$driver->getCurrentUrl() != $url) {
+            self::$driver->get($url);
+        }
+        if (wordpress_version() >= 43) {
+            $selector = "//span[text()='" . $image_title . "']";
+        } else {
+            $selector = "//a[contains(text(),'" . $image_title . "')]";
+        }
+        self::$driver->findElement(WebDriverBy::xpath($selector))->click();
+    }
 }

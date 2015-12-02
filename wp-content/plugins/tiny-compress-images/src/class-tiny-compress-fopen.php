@@ -51,6 +51,7 @@ class Tiny_Compress_Fopen extends Tiny_Compress {
 
         if (!$request) {
             $headers = self::parse_headers($http_response_header);
+
             return array(array(
                 'error' => 'FopenError',
                 'message' => 'Could not compress, enable cURL for detailed error',
@@ -66,8 +67,8 @@ class Tiny_Compress_Fopen extends Tiny_Compress {
         return array(self::decode($response), $headers, $status_code);
     }
 
-    protected function output_options() {
-        return array(
+    protected function output_options($resize) {
+        $options = array(
             'http' => array(
                 'method' => 'GET',
             ),
@@ -76,19 +77,29 @@ class Tiny_Compress_Fopen extends Tiny_Compress {
                 'verify_peer' => true
             )
         );
+        if ($resize) {
+            $options['http']['header'] = array(
+                'Authorization: Basic ' . base64_encode('api:' . $this->api_key),
+                'Content-Type: application/json'
+            );
+            $options['http']['content'] = json_encode(array('resize' => $resize));
+        }
+        return $options;
     }
 
-    protected function output($url) {
-        $context = stream_context_create($this->output_options());
+    protected function output($url, $resize) {
+        $context = stream_context_create($this->output_options($resize));
         $request = @fopen($url, 'rb', false, $context);
 
         if ($request) {
             $response = stream_get_contents($request);
+            $meta_data = stream_get_meta_data($request);
+            $headers = self::parse_headers($meta_data['wrapper_data']);
             fclose($request);
         } else {
             $response = '';
+            $headers = array();
         }
-
-        return $response;
+        return array($response, $headers);
     }
 }
