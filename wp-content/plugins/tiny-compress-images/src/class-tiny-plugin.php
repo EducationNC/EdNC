@@ -102,7 +102,7 @@ class Tiny_Plugin extends Tiny_WP_Base {
         $tiny_metadata = new Tiny_Metadata($attachment_id, $metadata);
 
         if ($this->settings->get_compressor() === null || strpos($mime_type, 'image/') !== 0) {
-            return $metadata;
+            return array($tiny_metadata, null);
         }
 
         $success = 0;
@@ -116,9 +116,8 @@ class Tiny_Plugin extends Tiny_WP_Base {
             try {
                 $tiny_metadata->add_request($uncompressed_size);
                 $tiny_metadata->update();
-                $response = $compressor->compress_file($tiny_metadata->get_filename($uncompressed_size));
-                $responses[$uncompressed_size] = $response;
-
+                $resize = $tiny_metadata->is_resizable($uncompressed_size) ? $this->settings->get_resize_options() : false;
+                $response = $compressor->compress_file($tiny_metadata->get_filename($uncompressed_size), $resize);
                 $tiny_metadata->add_response($response, $uncompressed_size);
                 $success++;
             } catch (Tiny_Exception $e) {
@@ -132,8 +131,8 @@ class Tiny_Plugin extends Tiny_WP_Base {
     }
 
     public function compress_attachment($metadata, $attachment_id) {
-        $this->compress($metadata, $attachment_id);
-        return $metadata;
+        list($tiny_metadata, $result) = $this->compress($metadata, $attachment_id);
+        return $tiny_metadata->update_wp_metadata($metadata);
     }
 
     public function compress_image() {
@@ -160,6 +159,8 @@ class Tiny_Plugin extends Tiny_WP_Base {
         }
 
         list($tiny_metadata, $result) = $this->compress($metadata, $id);
+        wp_update_attachment_metadata($id, $tiny_metadata->update_wp_metadata($metadata));
+
         if ($json) {
             $result['message'] = $tiny_metadata->get_latest_error();
             $result['status'] = $this->settings->get_status();
@@ -211,6 +212,11 @@ class Tiny_Plugin extends Tiny_WP_Base {
 
         if (count($missing) > 0) {
             printf(self::translate_escape('Compressed %d out of %d sizes'), $success, $total);
+            $original = $tiny_metadata->get_value();
+            if (isset($original['output']['resized'])) {
+                echo '<br/>';
+                printf(self::translate_escape('Resized original to %dx%d'), $original['output']['width'], $original['output']['height']);
+            }
             echo '<br/>';
             if (($error = $tiny_metadata->get_latest_error())) {
                 echo '<span class="error">' . self::translate_escape('Latest error') . ': '. self::translate_escape($error) .'</span><br/>';
@@ -222,6 +228,11 @@ class Tiny_Plugin extends Tiny_WP_Base {
             printf(self::translate_escape('Compressing %d sizes...'), count($this->settings->get_active_tinify_sizes()));
         } else {
             printf(self::translate_escape('Compressed %d out of %d sizes'), $success, $total);
+            $original = $tiny_metadata->get_value();
+            if (isset($original['output']['resized'])) {
+                echo '<br/>';
+                printf(self::translate_escape('Resized original to %dx%d'), $original['output']['width'], $original['output']['height']);
+            }
             $savings = $tiny_metadata->get_savings();
             if ($savings['count'] > 0) {
                 echo '<br/>';
@@ -238,12 +249,14 @@ class Tiny_Plugin extends Tiny_WP_Base {
         echo '<h2>' . self::translate('Compress JPEG & PNG Images') . '</h2>';
         if (empty($_POST['tiny-bulk-compress']) && empty($_REQUEST['ids'])) {
             $result = $wpdb->get_results("SELECT COUNT(*) AS `count` FROM $wpdb->posts WHERE post_type = 'attachment' AND post_mime_type LIKE 'image/%' ORDER BY ID DESC", ARRAY_A);
-            $count = $result[0]['count'];
+            $image_count = $result[0]['count'];
+            $sizes_count = count($this->settings->get_active_tinify_sizes());
 
             echo '<p>' . self::translate_escape("Use this tool to compress all images in your media library") . '. ';
             echo self::translate_escape("Only images that have not been compressed will be compressed") . '.</p>';
-            echo '<p>' . sprintf(self::translate_escape("We have found %d images in your media library"), $count) . '. ';
-            echo self::translate_escape("To begin, just press the button below") . '.</p>';
+            echo '<p>' . sprintf(self::translate_escape("We have found %d images in your media library and for each image %d sizes will be compressed"), $image_count, $sizes_count) . '. ';
+            echo sprintf(self::translate_escape('This results in %d compressions at most'), $image_count*$sizes_count) . '.</p>';
+            echo '<p>' . self::translate_escape("To begin, just press the button below") . '.</p>';
 
             echo '<form method="POST" action="?page=tiny-bulk-compress">';
             echo '<input type="hidden" name="_wpnonce" value="' . wp_create_nonce('tiny-bulk-compress') . '">';

@@ -5,7 +5,7 @@ Tags: events, calendar, event, venue, organizer, dates, date, google maps, confe
 Donate link: http://m.tri.be/29
 Requires at least: 3.9
 Tested up to: 4.3.1
-Stable tag: 3.12.3
+Stable tag: 3.12.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -315,6 +315,22 @@ At no point during the 3.0 lifecycle will the major version change. But you can 
 
 == Changelog ==
 
+= [3.12.6] 2015-11-12 =
+
+* Fix - Remove constraints on defining new venues and organizers that were added prematurely (our thanks to Jeramey for highlighting this)
+* Fix - Resolve error encountered by users of some ticketing addons when accessing the orders report (our thanks to Sean for highlighting this)
+* Fix - Restore live reload functionality which was failing to function in some cases (our thanks to cityofroundrock for highlighting this)
+* Tweak - Alter month view logic for better isolation of different month views (such as when the calendar widget and main calendar view co-exist)
+
+= [3.12.5] 2015-11-05 =
+
+* Fix - Restore styling and full mobile functionality to month view (our thanks to Rich Cottee for highlighting this)
+
+= [3.12.4] 2015-11-04 =
+
+* Feature - Added support for the new Events Community Tickets plugin
+* Tweak - Wrapping functions in conditionals to avoid fatals in our upcoming 4.0 release
+
 = [3.12.3] 2015-10-01 =
 
 * Fix - Ensure daily counts in month view are accurate (our thanks to @communityanswers in the support forums for highlighting this)
@@ -345,24 +361,23 @@ At no point during the 3.0 lifecycle will the major version change. But you can 
 * Feature - Added a filter (tribe_minutes_increment) that allows you to alter the minute incrementor used to generate the Minutes drop-down box (Thank you d4mation-!)
 * Feature - Added timezone support to allow different events to be set in different timezones
 * Feature - Added a warning when a page with the same slug as the events archive already exists
+* Fix - Resolved bug where executing wp_insert_post within a hook to publish_tribe_events prevented event meta from being saved appropriately
+* Fix - Fixed a fatal caused by attempting to use get_current_screen before it was available for use in some contexts (props to Enchiridion)
+* Fix - Fixed bug where Date_Utils::datetime_from_format converted dates with 1 character days/months incorrectly
+* Fix - Fixed issue with event title attributes not always escaping properly on List and Day views
+* Fix - Fixed issue with Event Costs not updating when a new ticket was only submitted via Ajax
+* Fix - Fixed an issue Twenty Fourteen and the event views being hidden in screen sizes smaller then 400px
+* Fix - Fixed an issue where the month view date selector became full window width when Skeleton styles were enabled
+* Fix - Fixed a notice on the plugin updater page
+* Fix - Fixed a localization issue in the settings environment (props to @tititou36 for highlighting the issue)
+* Fix - Fixed a problem which was resetting the "Show Google Map" option for events when they were re-imported via CSV (thanks to @jameswemyss for highlighting this)
+* Fix - Fixed default event, organizer and venue website targets pointing to 'self'
 * Tweak - Relocated event recurrence-specific JS to Events PRO where it belongs
 * Tweak - Style nowrap on ticket forms with CSS rather than HTML attributes (Thanks Mark!)
 * Tweak - Updated the attendees template to use divs to separate event data (Props to aaemnnosttv!)
 * Tweak - Display the order id with a proper link in the attendees report (Thank you aaemnnosttv!)
 * Tweak - Pointed the "Add-on Documentation" link on the Event > Settings > Help page to a better location.
-* Tweak - Pad SQL joins with spacing to avoid conflicts with other plugins that modify SQL (Props to jeremyfelt!)
-* Fix - Fixed a problem where Google Maps coordinates failed on Venues (thank you Matt for the help!)
-* Fix - Fixed bug where category could be dropped from month view for a specific category when searching (Cheers to omni for the report!)
-* Fix - Resolved bug where executing wp_insert_post within a hook to publish_tribe_events prevented event meta from being saved appropriately (Thank you 37designs for the report!)
-* Fix - Fixed a fatal caused by attempting to use get_current_screen before it was available for use in some contexts (props to Enchiridion!)
-* Fix - Fixed bug where Date_Utils::datetime_from_format converted dates with 1 character days/months incorrectly
-* Fix - Fixed issue with event title attributes not always escaping properly on List and Day views (Cheers to nobita for the report!)
-* Fix - Fixed issue with Event Costs not updating when a new ticket was only submitted via Ajax (Thanks Chris!)
-* Fix - Fixed an issue Twenty Fourteen and the event views being hidden in screen sizes smaller then 400px (Thank you for the help Hilary!)
-* Fix - Fixed an issue where the month view date selector became full window width when Skeleton styles were enabled
-* Fix - Fixed a notice on the plugin updater page
-* Fix - Fixed a localization issue in the settings environment (Props to @tititou36 for highlighting the issue!)
-* Fix - Fixed a problem which was resetting the "Show Google Map" option for events when they were re-imported via CSV (Thanks to @jameswemyss for highlighting this!)
+* Tweak - Pad SQL joins with spacing to avoid conflicts with other plugins that modify SQL (props to jeremyfelt)
 * Deprecated - The tribe_events_getLink is being deprecated in favor of tribe_events_get_link. Scheduled removal from source is v4.2
 * Deprecated - The Tribe__Events__Advanced_Functions__Register_Meta::gmap_link() has been deprecated since 3.6 and has now been removed from source
 * Deprecated - The tribe_events_single_event_meta() function has been deprecated since 3.6 and has now been removed from source

@@ -3,7 +3,7 @@
     position: fixed;
     width: 48px;
     height: 48px;
-    right: 0;
+    left: 0;
     bottom: 0;
     z-index: 100;
     background: $white70;
@@ -56,7 +56,7 @@
   @media (min-width: $screen-md-min) {
     display: block;
     position: fixed;
-    right: 0;
+    left: 0;
     top: 30%;
     z-index: 100;
     background: $white70;

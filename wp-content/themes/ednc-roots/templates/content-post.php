@@ -128,10 +128,24 @@ if ($category[0]->slug == 'powered-schools') {
   <div class="entry-content">
     <div class="container">
       <div class="row">
-        <div class="col-md-2 meta hidden-xs hidden-sm hidden-print print-no">
+        <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm hidden-print print-no">
           <?php get_template_part('templates/author', 'meta'); ?>
         </div>
-        <div class="col-md-7 col-md-push-point5">
+
+        <div class="col-md-2 col-md-pull-2 hidden-print print-no">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Article sidebar -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-2642458473228537"
+               data-ad-slot="6263040202"
+               data-ad-format="auto"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
+        <div class="col-md-7 col-md-pull-1point5">
 
           <?php if (has_post_thumbnail() && $featured_image_align == 'contained') {
             echo '<div class="alignnone">';
@@ -234,14 +248,19 @@ if ($category[0]->slug == 'powered-schools') {
             $image_sized['url'] = $image_url[0];
           } else {
             $image_src = catch_that_image();
-            $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+            if ($image_src) {
+              $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+            } else {
+              $image_sized['url'] = get_template_directory_uri() . '/assets/public/imgs/logo-squat-wide.png';
+            }
           }
           ?>
           <div class="photo-overlay">
             <?php if ($image_sized['url']) { ?>
               <img src="<?php echo $image_sized['url']; ?>" />
             <?php } ?>
-            <?php get_template_part('templates/labels'); ?>
+            <?php get_template_part('templates/labels', 'single'); ?>
+
             <a class="mega-link" href="<?php the_permalink(); ?>"></a>
           </div>
           <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

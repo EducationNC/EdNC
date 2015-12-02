@@ -1,3 +1,7 @@
+.map-container {
+  margin-bottom: 1.88em;
+}
+
 .map-mobile {
   margin: 0 auto;
   width: 320px;
@@ -56,6 +60,6 @@
 
 @media (min-width: 768px) and (max-width: 816px) {
   .map-tablet {
-    margin-left: -16px;
+    // margin-left: -16px;
   }
 }

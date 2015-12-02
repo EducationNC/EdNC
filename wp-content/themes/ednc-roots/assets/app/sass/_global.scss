@@ -49,6 +49,10 @@ a {
   font-size: 1.125rem;
 }
 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  margin: 1em 0 .5em;
+}
+
 h1, .h1, .article-title, .entry-title {
   font-family: $font-family-serif;
   color: $plum;
@@ -334,6 +338,10 @@ blockquote, .blockquote {
         margin: 0 0 10px 0;
       }
     }
+  }
+
+  &:before {
+    display: none;
   }
 
   cite {

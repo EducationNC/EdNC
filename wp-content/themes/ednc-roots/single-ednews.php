@@ -2,7 +2,8 @@
   <article <?php post_class(); ?>>
     <header class="row">
       <div class="col-lg-7 col-md-9 col-centered">
-        <h1 class="entry-title">EdNews: <?php the_title(); ?></h1>
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/public/imgs/news-around-web.jpg" />
+        <h1 class="entry-title"><?php the_title(); ?></h1>
         <div class="row bottom-margin">
           <div class="col-md-6">
             <?php previous_post_link('%link', '&laquo; Previous day') ?>

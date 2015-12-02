@@ -133,11 +133,14 @@ msgstr "Als je meer afbeeldingen wilt comprimeren kun je je %s aanpassen"
 msgid "Upgrade your %s if you like to compress more images"
 msgstr "Upgrade je %s als je meer afbeeldingen wilt comprimeren"
 
+msgid "Each selected size counts as a compression"
+msgstr "Elke geselecteerde afmeting telt als een compressie"
+
 msgid "With these settings you can compress"
 msgstr "Met deze instellingen kun je elke maand"
 
-msgid "%s images"
-msgstr "%s afbeeldingen"
+msgid "at least %s images"
+msgstr "minimaal %s afbeeldingen"
 
 msgid "for free each month"
 msgstr "gratis comprimeren"
@@ -184,8 +187,11 @@ msgstr "Deze tool comprimeert alle afbeeldingen in je media-bibliotheek"
 msgid "Only images that have not been compressed will be compressed"
 msgstr "Dit geldt alleen voor de afbeeldingen die nog niet zijn gecomprimeerd"
 
-msgid "We have found %d images in your media library"
-msgstr "We hebben %d afbeeldingen in de media-bibliotheek gevonden"
+msgid "We have found %d images in your media library and for each image %d sizes will be compressed"
+msgstr "We hebben %d afbeeldingen in de media-bibliotheek gevonden en voor elke afbeelding worden %d afmetingen gecomprimeerd"
+
+msgid "This results in %d compressions at most"
+msgstr "Dit resulteert in een maximaal verbruik van %d compressies"
 
 msgid "To begin, just press the button below"
 msgstr "Druk op de knop om te starten"
@@ -204,3 +210,27 @@ msgstr "Je wordt genotificeerd op deze pagina bij voltooing"
 
 msgid "Settings"
 msgstr "Instellingen"
+
+msgid "Resize original"
+msgstr "Orgineel verkleinen"
+
+msgid "Enable the compression of the original image size to configure resizing"
+msgstr "Schakel de compressie van het originele formaat in om het origineel te verkleinen"
+
+msgid "Resize and compress orginal images to fit within"
+msgstr "Verklein en comprimeer het origineel in"
+
+msgid "Resizing takes %s per image larger than the specified resolution"
+msgstr "Verkleinen gebruikt %s per afbeelding die groter is dan de opgegeven resolutie"
+
+msgid "1 additional compression"
+msgstr "1 extra compressie"
+
+msgid "Resized original to %dx%d"
+msgstr "Origineel verkleind tot %dx%d"
+
+msgid "Max Width"
+msgstr "Maximale breedte"
+
+msgid "Max Height"
+msgstr "Maximale hoogte"

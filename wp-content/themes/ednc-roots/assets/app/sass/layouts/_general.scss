@@ -25,6 +25,10 @@ section {
     left: 20.833333%;
   }
 
+  .col-md-pull-1point5 {
+    right: 12.5%;
+  }
+
   .col-md-push-point5 {
     left: 4.166667%;
   }
@@ -208,12 +212,12 @@ section {
   }
 }
 
-.full-width {
-  @media (min-width: $screen-lg-min) {
-    margin-left: -7.35%;
-    margin-right: -7.35%;
-  }
-}
+// .full-width {
+//   @media (min-width: $screen-lg-min) {
+//     margin-left: -7.35%;
+//     margin-right: -7.35%;
+//   }
+// }
 
 .page-header {
   border-bottom: none;

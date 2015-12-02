@@ -32,14 +32,25 @@ class Tiny_Settings extends Tiny_WP_Base {
         $this->notices = new Tiny_Notices();
     }
 
+    private function init_compressor() {
+        $this->compressor = Tiny_Compress::get_compressor($this->get_api_key(), $this->get_method('after_compress_callback'));
+    }
+
+    public function xmlrpc_init() {
+        try {
+            $this->init_compressor();
+        } catch (Tiny_Exception $e) {
+        }
+    }
+
     public function admin_init() {
         if (current_user_can('manage_options') && !$this->get_api_key()) {
             $link = sprintf('<a href="options-media.php#%s">%s</a>', self::NAME,
                 self::translate_escape('Please fill in an API key to start compressing images'));
             $this->notices->show('setting', $link, 'error', false);
         }
-        try {
-            $this->compressor = Tiny_Compress::get_compressor($this->get_api_key(), $this->get_method('after_compress_callback'));
+         try {
+            $this->init_compressor();
         } catch (Tiny_Exception $e) {
             $this->notices->show('compressor_exception', self::translate_escape($e->getMessage()), 'error', false);
         }
@@ -55,6 +66,10 @@ class Tiny_Settings extends Tiny_WP_Base {
         register_setting('media', $field);
         add_settings_field($field, self::translate('File compression'), $this->get_method('render_sizes'), 'media', $section);
 
+        $field = self::get_prefixed_name('resize_original');
+        register_setting('media', $field);
+        add_settings_field($field, self::translate('Resize original'), $this->get_method('render_resize'), 'media', $section);
+
         $field = self::get_prefixed_name('status');
         register_setting('media', $field);
         add_settings_field($field, self::translate('Connection status'), $this->get_method('render_pending_status'), 'media', $section);
@@ -64,7 +79,7 @@ class Tiny_Settings extends Tiny_WP_Base {
     }
 
     public function image_sizes_notice() {
-        $this->render_image_sizes_notice($_GET["image_sizes_selected"]);
+        $this->render_image_sizes_notice($_GET["image_sizes_selected"], isset($_GET["resize_original"]));
         exit();
     }
 
@@ -155,6 +170,32 @@ class Tiny_Settings extends Tiny_WP_Base {
         return $this->tinify_sizes;
     }
 
+    public function get_resize_enabled() {
+        $setting = get_option(self::get_prefixed_name('resize_original'));
+        return isset($setting['enabled']) && $setting['enabled'] === 'on';
+    }
+
+    public function get_resize_options() {
+        $setting = get_option(self::get_prefixed_name('resize_original'));
+        if (!$this->get_resize_enabled()) {
+            return false;
+        }
+
+        $width = intval($setting['width']);
+        $height = intval($setting['height']);
+        $method = $width > 0 && $height > 0 ? 'fit' : 'scale';
+
+        $options['method'] = $method;
+        if ($width > 0) {
+            $options['width'] = $width;
+        }
+        if ($height > 0) {
+            $options['height'] = $height;
+        }
+
+        return sizeof($options) >= 2 ? $options : false;
+    }
+
     public function render_section() {
         echo '<span id="' . self::NAME . '"></span>';
     }
@@ -187,7 +228,7 @@ class Tiny_Settings extends Tiny_WP_Base {
         }
 
         echo '<div id="tiny-image-sizes-notice">';
-        $this->render_image_sizes_notice(count(self::get_active_tinify_sizes()));
+        $this->render_image_sizes_notice(count(self::get_active_tinify_sizes()), self::get_resize_enabled());
         echo '</div>';
     }
 
@@ -204,22 +245,57 @@ class Tiny_Settings extends Tiny_WP_Base {
 <?php
     }
 
-    public function render_image_sizes_notice($active_image_sizes_count) {
-        echo '<br/>';
-        if ($active_image_sizes_count < 1) {
-            echo '<p>' . self::translate_escape('With these settings no images will be compressed') . '.</p>';
-        }
-        else {
-            $free_images_per_month = floor(self::MONTHLY_FREE_COMPRESSIONS / $active_image_sizes_count);
+    public function render_image_sizes_notice($active_image_sizes_count, $resize_original_enabled) {
+        echo '<br>';
+        echo '<p>' . self::translate_escape('Each selected size counts as a compression') . '. ';
 
-            echo '<p>';
+        if ($resize_original_enabled) {
+            $active_image_sizes_count++;
+        }
+        if ($active_image_sizes_count < 1) {
+            echo self::translate_escape('With these settings no images will be compressed') . '.';
+        } else {
+            $free_images_per_month = floor(self::MONTHLY_FREE_COMPRESSIONS / $active_image_sizes_count);
             echo self::translate_escape('With these settings you can compress');
             echo ' <strong>';
-            printf(self::translate_escape('%s images'), $free_images_per_month);
+            printf(self::translate_escape('at least %s images'), $free_images_per_month);
             echo '</strong> ';
             echo self::translate_escape('for free each month') . '.';
-            echo '</p>';
         }
+        echo '</p>';
+    }
+
+    public function render_resize() {
+        echo '<p class="tiny-resize-unavailable" style="display: none">' . self::translate_escape("Enable the compression of the original image size to configure resizing") . '.</p>';
+
+        $id = self::get_prefixed_name("resize_original_enabled");
+        $field = self::get_prefixed_name("resize_original[enabled]");
+        $label = self::translate_escape('Resize and compress orginal images to fit within');
+
+        echo '<p class="tiny-resize-available">';
+        ?>
+        <input  type="checkbox" id="<?php echo $id ?>" name="<?php echo $field ?>" value="on" <?php if ($this->get_resize_enabled()) { echo ' checked="checked"'; } ?>/>
+        <label for="<?php echo $id; ?>"><?php echo $label; ?>:</label><br>
+        <?php
+
+        echo '</p>';
+        echo '<p class="tiny-resize-available tiny-resize-resolution">';
+
+        printf("%s: ", self::translate_escape('Max Width'));
+        $this->render_resize_input('width');
+        printf("%s: ", self::translate_escape('Max Height'));
+        $this->render_resize_input('height');
+        echo '</p>';
+
+        echo '<p class="tiny-resize-available">' . sprintf(self::translate_escape("Resizing takes %s per image larger than the specified resolution"), '<strong>' . self::translate_escape('1 additional compression') . '</strong>') . '.</p>';
+    }
+
+    public function render_resize_input($name) {
+        $id = sprintf(self::get_prefixed_name('resize_original_%s'), $name);
+        $field = sprintf(self::get_prefixed_name('resize_original[%s]'), $name);
+        $settings = get_option(self::get_prefixed_name('resize_original'));
+        $value = isset($settings[$name]) ? $settings[$name] : "2048";
+        echo '<input type="number" id="'. $id .'" name="' . $field . '" value="' . $value . '" size="5" />';
     }
 
     public function get_compression_count() {

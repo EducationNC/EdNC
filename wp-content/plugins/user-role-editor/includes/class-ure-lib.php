@@ -16,7 +16,7 @@ class Ure_Lib extends Garvs_WP_Lib {
 	public $roles = null;     
 	public $notification = '';   // notification message to show on page
 	public $apply_to_all = 0; 
-	public $user_to_check = array();  // cached list of user IDs, who has Administrator role     	 
+
    
 	protected $capabilities_to_save = null; 
 	protected $current_role = '';
@@ -34,7 +34,15 @@ class Ure_Lib extends Garvs_WP_Lib {
 	protected $role_delete_html = '';
 	protected $capability_remove_html = '';
 	protected $advert = null;
+ protected $role_additional_options = null;
+ 
+ // when allow_edit_users_to_not_super_admin option is turned ON, we set this property to true 
+ // when we raise single site admin permissions up to the superadmin for the 'Add new user' new-user.php page
+ // User_Role_Editor::allow_add_user_as_superadmin()
+ public $raised_permissions = false; 
+ 
  public $debug = false;
+ 
   
   
     /** class constructor
@@ -302,13 +310,17 @@ class Ure_Lib extends Garvs_WP_Lib {
   </div>
 </div>
 
-
+<?php
+if ($this->multisite && !is_network_admin()) {
+?>
 <div id="ure_default_role_dialog" class="ure-modal-dialog">
   <div style="padding:10px;">
     <?php echo $this->role_default_html; ?>
   </div>  
 </div>
-
+<?php
+}
+?>
 
 <div id="ure_delete_capability_dialog" class="ure-modal-dialog">
   <div style="padding:10px;">
@@ -331,13 +343,14 @@ class Ure_Lib extends Garvs_WP_Lib {
     
 
     protected function show_editor() {
+    $container_width = ($this->ure_object == 'user') ? 1400 : 1200;
     
     $this->show_message($this->notification);
 ?>
 <div class="wrap">
 		  <div id="ure-icon" class="icon32"><br/></div>
     <h2><?php _e('User Role Editor', 'user-role-editor'); ?></h2>
-    <div id="poststuff">
+    <div id="ure_container" style="min-width: <?php echo $container_width;?>px;">
         <div class="ure-sidebar" >
             <?php
             $this->advertisement();
@@ -563,7 +576,7 @@ class Ure_Lib extends Garvs_WP_Lib {
                     $this->notification = $this->init_current_role_name();                    
                 }
                 $this->prepare_capabilities_to_save();
-                $this->notification = $this->permissions_object_update($this->notification);
+                $this->notification = $this->permissions_object_update($this->notification);                                  
             } else {
                 do_action('ure_process_user_request');
             } // if ($action
@@ -629,7 +642,10 @@ class Ure_Lib extends Garvs_WP_Lib {
         }
 
         $this->init_full_capabilities();
-
+        if (empty($this->role_additional_options)) {
+            $this->role_additional_options = URE_Role_Additional_Options::get_instance($this);
+        }
+        
         if (!$this->is_pro()) {
             require_once(URE_PLUGIN_DIR . 'includes/class-advertisement.php');
         }
@@ -1329,10 +1345,14 @@ class Ure_Lib extends Garvs_WP_Lib {
                    <button id="ure_delete_capability" class="ure_toolbar_button">Delete Capability</button>
 <?php
                 }
+                if ($this->multisite && !is_network_admin()) {  // Show for single site for WP multisite only
 ?>
                <hr />
                <button id="ure_default_role" class="ure_toolbar_button">Default Role</button>
                <hr />
+<?php
+                }
+?>
                <div id="ure_service_tools">
 <?php
                 do_action('ure_role_edit_toolbar_service');
@@ -1599,6 +1619,8 @@ class Ure_Lib extends Garvs_WP_Lib {
     
     protected function add_custom_post_type_caps() {
                
+        global $wp_roles;
+        
         $capabilities = array(
             'create_posts',
             'edit_posts',
@@ -1612,20 +1634,36 @@ class Ure_Lib extends Garvs_WP_Lib {
             'delete_published_posts',
             'delete_others_posts'
         );
-        $post_types = get_post_types(array('public'=>true, 'show_ui'=>true, '_builtin'=>false), 'objects');
-        foreach($post_types as $post_type) {
-            if ($post_type->capability_type=='post') {
-                continue;
-            }
+        $post_types = get_post_types(array('_builtin'=>false), 'objects');
+        foreach($post_types as $post_type) {            
             if (!isset($post_type->cap)) {
                 continue;
             }
             foreach($capabilities as $capability) {
                 if (isset($post_type->cap->$capability)) {
-                    $this->add_capability_to_full_caps_list($post_type->cap->$capability);
+                    $cap_to_check = $post_type->cap->$capability;
+                    $this->add_capability_to_full_caps_list($cap_to_check);
+                    if (!$this->multisite &&
+                        isset($wp_roles->role_objects['administrator']) && 
+                        !isset($wp_roles->role_objects['administrator']->capabilities[$cap_to_check])) {
+                        // admin should be capable to edit any posts
+                        $wp_roles->role_objects['administrator']->add_cap($cap_to_check, true);
+                    }
                 }
             }                        
         }
+        
+        if (!$this->multisite && isset($wp_roles->role_objects['administrator'])) {
+            foreach(array('post', 'page') as $post_type_name) {
+                $post_type = get_post_type_object($post_type_name);
+                if ($post_type->cap->create_posts!=='edit_'. $post_type->name .'s') {   // 'create' capability is active
+                    if (!isset($wp_roles->role_objects['administrator']->capabilities[$post_type->cap->create_posts])) {
+                        // admin should be capable to create posts and pages
+                        $wp_roles->role_objects['administrator']->add_cap($post_type->cap->create_posts, true);
+                    }
+                }
+            }   // foreach()
+        }   // if ()
         
     }
     // end of add_custom_post_type_caps()
@@ -1760,6 +1798,12 @@ class Ure_Lib extends Garvs_WP_Lib {
 
         update_option($option_name, $this->roles);
 
+        // save additional options for the current role
+        if (empty($this->role_additional_options)) {
+            $this->role_additional_options = URE_Role_Additional_Options::get_instance($this);
+        }
+        $this->role_additional_options->save($this->current_role);
+        
         return true;
     }
     // end of save_roles()
@@ -2144,6 +2188,9 @@ class Ure_Lib extends Garvs_WP_Lib {
     protected function change_default_role() {
         global $wp_roles;
 
+        if (!$this->multisite || is_network_admin()) {
+            return 'Try to misuse the plugin functionality';
+        }
         $mess = '';
         if (!isset($wp_roles)) {
             $wp_roles = new WP_Roles();
@@ -2541,7 +2588,12 @@ class Ure_Lib extends Garvs_WP_Lib {
     // end of show_admin_role()
     
     
-    private function role_default_prepare_html($select_width=200) {
+    public function role_default_prepare_html($select_width=200) {
+                        
+        if (!isset($this->roles) || !$this->roles) {
+            // get roles data from database
+            $this->roles = $this->get_user_roles();
+        }
         
         $caps_access_restrict_for_simple_admin = $this->get_option('caps_access_restrict_for_simple_admin', 0);
         $show_admin_role = $this->show_admin_role_allowed();
@@ -2613,7 +2665,9 @@ class Ure_Lib extends Garvs_WP_Lib {
     public function role_edit_prepare_html($select_width=200) {
         
         $this->role_select_copy_prepare_html($select_width);
-        $this->role_default_prepare_html($select_width);
+        if ($this->multisite && !is_network_admin()) {
+            $this->role_default_prepare_html($select_width);
+        }        
         $this->role_delete_prepare_html();                
         $this->caps_to_remove_prepare_html();
     }

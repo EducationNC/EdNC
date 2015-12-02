@@ -188,7 +188,7 @@ $featured_ids = array();
     </div>
 
     <div class="col-md-3">
-      <?php get_template_part('templates/sidebar', 'home'); ?>
+      <?php get_template_part('templates/sidebar', 'home-adsense'); ?>
     </div>
   </div>
 

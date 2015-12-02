@@ -25,6 +25,10 @@ body:not(.page-template):not(.single-bio) .alignright {
   margin-bottom: 1.88em;
   max-width: 100%;
 
+  img {
+    width: 100%;
+  }
+
   @media (min-width: $screen-md-min) {
     margin-left: -7.35%;
     margin-right: -7.35%;

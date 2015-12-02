@@ -127,16 +127,57 @@
     </div><!-- row -->
     </div><!-- container -->
 
-    <div class="container-fluid full-bleed-image parallax">
+    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/public/js/imagesloaded.pkgd.min.js"></script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        var ismobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+        // only do parallax if this is not mobile
+        if (!ismobile) {
+          var img = $('#parallax-<?php echo $image_id; ?> .parallax-img');
+
+          // Set up CSS for devices that support parallax
+          img.css({'top': '-50%', 'position':'absolute'});
+
+         	function parallax(){
+            var imgCont = img.parent(),
+                imgHeight = $(img).height(),
+            	  offsetTop = $(imgCont).offset().top,
+                windowHeight = $(window).height(),
+            		scrollTop = $(window).scrollTop(),
+                position = Math.round(((windowHeight + scrollTop) - offsetTop) * 0.5);
+
+            // only run parallax if in view
+         		if (offsetTop + imgHeight <= scrollTop || offsetTop >= scrollTop + windowHeight) {
+    					return;
+    				}
+
+            img.css({'transform':'translate3d(0px,' + position + 'px, 0px)'});
+          }
+        }
+
+// use this
+// scrollIntervalID = setInterval(animateStuff, 10);
+
+	      parallax();
+	    	$(window).scroll(function() { parallax(); });
+      });
+    </script>
+
+    <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?>">
       <div class="row">
-        <?php if ( ! empty($image_id) ) { ?>
-          <img src="<?php echo $img[0]; ?>" />
-        <?php } ?>
-        <?php if ( ! empty( $floating_text ) ) { ?>
-          <div class="floating-text">
-            <?php echo esc_html( $floating_text ); ?>
-          </div>
-        <?php } ?>
+        <div class="image-holder parallax">
+          <?php if ( ! empty($image_id) ) { ?>
+            <div class="parallax-img" style="background-image:url('<?php echo $img[0]; ?>')"></div>
+          <?php } ?>
+          <?php if ( ! empty( $floating_text ) ) { ?>
+            <div class="wash"></div>
+            <div class="floating-text">
+              <?php echo esc_html( $floating_text ); ?>
+            </div>
+          <?php } ?>
+        </div>
         <?php if ( ! empty( $caption ) ) { ?>
           <div class="caption">
             <?php echo esc_html( $caption ); ?>

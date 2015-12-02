@@ -6808,6 +6808,10 @@ a:hover, a:active, a:focus {
   font-size: 1.125rem;
 }
 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .content-info .menu-footer-nav > li > a, h6, .h6 {
+  margin: 1em 0 .5em;
+}
+
 h1, .h1, .article-title, .entry-title {
   font-family: Merriweather, serif;
   color: #731454;
@@ -7078,6 +7082,9 @@ blockquote p[style*=center], .blockquote p[style*=center] {
     margin: 0 0 10px 0;
   }
 }
+blockquote:before, .blockquote:before {
+  display: none;
+}
 blockquote cite, .blockquote cite {
   font-style: italic;
 }
@@ -7332,6 +7339,7 @@ label {
 
 .gallery {
   padding: 10px 0;
+  margin-bottom: 1.88em;
 }
 .gallery .gallery-item {
   float: left;
@@ -7339,6 +7347,11 @@ label {
   margin-bottom: 20px;
 }
 @media (min-width: 992px) {
+  .gallery {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
   .gallery.gallery-columns-5 .gallery-item {
     width: 20%;
   }
@@ -7382,19 +7395,83 @@ object, embed {
   max-width: 100%;
 }
 
-.entry-content-asset:not(.instagram) {
+.entry-content-asset.twitter {
+  max-width: 520px;
+  margin: 0 auto 34px;
+}
+.entry-content-asset.instagram {
+  max-width: 658px;
+  margin: 0 auto 34px;
+}
+.entry-content-asset:not(.instagram):not(.twitter) {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;
   height: 0;
-  margin-bottom: 1em;
+  margin-bottom: 34px;
 }
-.entry-content-asset:not(.instagram) iframe {
+@media (min-width: 992px) {
+  .entry-content-asset:not(.instagram):not(.twitter) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
+}
+.entry-content-asset:not(.instagram):not(.twitter) iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+.entry-content-asset.slideshare.slideshare {
+  padding-bottom: 100%;
+}
+
+.wp-video {
+  margin-bottom: 34px;
+}
+
+.media-embed-container.mejs-container {
+  margin-bottom: 34px;
+}
+.media-embed-container.mejs-container .mejs-controls {
+  background: #5D6066;
+}
+.media-embed-container.mejs-container .mejs-controls .mejs-time-current {
+  background: #ACBA67;
+}
+
+.entry-content .wp-playlist {
+  background: #DCDFE5;
+  border: none;
+  margin-bottom: 34px;
+}
+.entry-content .wp-playlist .wp-playlist-playing {
+  background: #C3C6CC;
+}
+.entry-content .wp-playlist-tracks .wp-playlist-caption {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  padding: 8px 0;
+}
+.entry-content .wp-playlist-tracks .wp-playlist-item-length {
+  padding: 8px 0;
+}
+.entry-content .wp-playlist-tracks .wp-playlist-item-title {
+  font-size: inherit;
+  line-height: inherit;
+}
+.entry-content .wp-playlist-item {
+  border-bottom-color: #C3C6CC;
+}
+.entry-content .wp-playlist-current-item {
+  min-height: 60px;
+  height: auto;
+}
+.entry-content .wp-playlist-current-item .wp-playlist-item-title {
+  font-family: Merriweather, serif;
+  font-size: 20px;
 }
 
 .aligncenter {
@@ -7424,6 +7501,9 @@ object, embed {
   margin-right: 0;
   margin-bottom: 1.88em;
   max-width: 100%;
+}
+.alignnone img {
+  width: 100%;
 }
 @media (min-width: 992px) {
   .alignnone {
@@ -8292,7 +8372,7 @@ img.mfp-img {
   position: fixed;
   width: 48px;
   height: 48px;
-  right: 0;
+  left: 0;
   bottom: 0;
   z-index: 100;
   background: rgba(255, 255, 255, 0.8);
@@ -8346,7 +8426,7 @@ img.mfp-img {
   .social-share-buttons {
     display: block;
     position: fixed;
-    right: 0;
+    left: 0;
     top: 30%;
     z-index: 100;
     background: rgba(255, 255, 255, 0.8);
@@ -8464,6 +8544,10 @@ section {
 @media (min-width: 992px) {
   .col-md-push-2point5 {
     left: 20.833333%;
+  }
+
+  .col-md-pull-1point5 {
+    right: 12.5%;
   }
 
   .col-md-push-point5 {
@@ -8641,13 +8725,6 @@ section {
 }
 .aside > h3:first-of-type {
   margin-top: 0;
-}
-
-@media (min-width: 1280px) {
-  .full-width {
-    margin-left: -7.35%;
-    margin-right: -7.35%;
-  }
 }
 
 .page-header {
@@ -9460,11 +9537,11 @@ body.home .photo-overlay h4.post-title {
   bottom: 0;
   left: 0;
   right: 0;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#005D6066', endColorstr='#B35D6066');
-  background-image: -o-linear-gradient(180deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
-  background-image: -webkit-linear-gradient(270deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
-  background-image: -o-linear-gradient(270deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
-  background-image: linear-gradient(180deg, rgba(93, 96, 102, 0) 50%, rgba(93, 96, 102, 0.7) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#002B2E34', endColorstr='#992B2E34');
+  background-image: -o-linear-gradient(180deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
+  background-image: -webkit-linear-gradient(270deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
+  background-image: -o-linear-gradient(270deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
+  background-image: linear-gradient(180deg, rgba(43, 46, 52, 0) 50%, rgba(43, 46, 52, 0.6) 100%);
   -webkit-transition: -webkit-transform .3s;
        -o-transition: -o-transform .3s;
           transition: transform .3s;
@@ -9989,6 +10066,10 @@ body.home .photo-overlay h4.post-title {
   margin-top: 3em;
 }
 
+.hentry .entry-content p {
+  word-wrap: break-word;
+}
+
 .hentry footer {
   margin-bottom: 5em;
 }
@@ -10048,11 +10129,29 @@ body.home .photo-overlay h4.post-title {
   overflow: hidden;
   margin: 1.88em 0;
 }
-.full-bleed-image img {
-  width: 100%;
-  height: auto;
+.full-bleed-image .parallax {
   position: relative;
-  z-index: 1;
+  overflow: hidden;
+  height: 100vh;
+}
+.full-bleed-image .parallax-img {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: 50% 50%;
+}
+.full-bleed-image .wash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(43, 46, 52, 0.6);
+  z-index: 2;
 }
 .full-bleed-image .floating-text {
   position: absolute;
@@ -10753,6 +10852,10 @@ body.home .photo-overlay h4.post-title {
   padding: 0;
 }
 
+.map-container {
+  margin-bottom: 1.88em;
+}
+
 .map-mobile {
   margin: 0 auto;
   width: 320px;
@@ -10804,11 +10907,6 @@ body.home .photo-overlay h4.post-title {
   .map-mobile,
   .map-mobile-scroll {
     display: none;
-  }
-}
-@media (min-width: 768px) and (max-width: 816px) {
-  .map-tablet {
-    margin-left: -16px;
   }
 }
 .timeline-wrap {

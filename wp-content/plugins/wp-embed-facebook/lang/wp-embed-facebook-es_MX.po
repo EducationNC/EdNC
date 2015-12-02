@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: WP Embed Facebook\n"
+"POT-Creation-Date: 2015-08-04 20:33-0500\n"
+"PO-Revision-Date: 2015-08-04 20:42-0500\n"
+"Language-Team: Miguel Sirvent <miguel.sirvent@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wp-embed-facebook.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: Miguel Sirvent <miguel.sirvent@gmail.com>\n"
+"Language: es\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: lib/admin.php:187
+msgid "Facebook application data"
+msgstr "Datos de la Aplicación de Facebook\t"
+
+#: lib/admin.php:188
+msgid "App ID"
+msgstr "ID de la App"
+
+#: lib/admin.php:189
+msgid "App Secret"
+msgstr "App Secret"
+
+#: lib/admin.php:192
+msgid "General Options"
+msgstr "Opciones Generales"
+
+#: lib/admin.php:194
+msgid "Template to use"
+msgstr "Plantilla a utilizar"
+
+#: lib/admin.php:210
+msgid "Embed Max-Width"
+msgstr "Anchura máxima del incrustado"
+
+#: lib/admin.php:211
+msgid "Number of Photos <br>on Embedded Albums"
+msgstr "Número de fotos<br>en álbumes incrustados"
+
+#: lib/admin.php:212
+msgid "Show follow button <br>on Embedded Profiles"
+msgstr "Mostrar botón de seguir<br>en los perfiles incrustados"
+
+#: lib/admin.php:214
+msgid "Embedded Fan Pages"
+msgstr "Páginas de fans incrustado"
+
+#: lib/admin.php:215
+msgid "Show like button"
+msgstr "Mostrar botón “ME GUSTA”"
+
+#: lib/admin.php:216
+msgid "Show latest posts"
+msgstr "Mostrar publicaciones recientes"
+
+#: lib/admin.php:217
+msgid "Number of posts"
+msgstr "Número de Posts"
+
+#: lib/admin.php:218
+msgid "Show events on local time"
+msgstr "Mostrar eventos en hora local"
+
+#: lib/admin.php:220
+msgid "Raw Embedded Options"
+msgstr "Opciones de Incrustado en crudo"
+
+#: lib/admin.php:221
+msgid "Embed Videos Raw"
+msgstr "Incrustar Videos en Crudo"
+
+#: lib/admin.php:222
+msgid "Embed Photos Raw"
+msgstr "Incrustar Fotos en Crudo"
+
+#: lib/admin.php:223
+msgid "Use Facebook embed code on raw videos"
+msgstr "Usar el código de Facebook para incrustar videos en crudo"
+
+#: lib/admin.php:230
+msgid "Advanced Options"
+msgstr "Opciones Avanzadas"
+
+#: lib/admin.php:231
+msgid "Enqueue Styles"
+msgstr "Registrar el css del plugin"
+
+#: lib/admin.php:232
+msgid "Add fb-root on top of content"
+msgstr "Añadir raíz de fb en la parte superior contenido"
+
+#: lib/admin.php:233
+msgid "Enqueue Lightbox script"
+msgstr "Registrar el script de Lightbox"
+
+#: lib/admin.php:234
+msgid "Enqueue WPEmbedFB script"
+msgstr "Registrar el script del plugin"
+
+#: lib/admin.php:235
+msgid "Enqueue Facebook SDK"
+msgstr "Registrar el script SDK de Facebook"
+
+#: lib/admin.php:240
+msgid "Save"
+msgstr "Guardar"
+
+#: lib/admin.php:245
+msgid "Premium Version Available"
+msgstr "Versión Premium disponible"
+
+#: lib/admin.php:247
+msgid "Only $6.99 USD"
+msgstr "Sólo $6,99 USD"
+
+#: lib/admin.php:250
+msgid "Check it out"
+msgstr "Échale un vistazo!"
+
+#: lib/admin.php:254
+msgid "Events with cover"
+msgstr "Eventos con cubierta"
+
+#: lib/admin.php:257
+msgid "Fan Page Full Embed"
+msgstr "Incrustado de Página Completa"
+
+#: lib/admin.php:260
+msgid "One Year Premium Support"
+msgstr "Soporte Premium por un año"
+
+#: lib/admin.php:265
+msgid "More information"
+msgstr "Más información"
+
+#: lib/admin.php:268
+msgid "Plugin Web Site"
+msgstr "Sitio Web del Plugin"
+
+#: lib/core.php:218
+msgid "Add Facebook App ID and Secret on admin to make this plugin work."
+msgstr ""
+"Agrega el Facebook App ID y Secret en admin para que este plugin funcione."
+
+#: lib/core.php:219
+msgid "WP Embed Facebook Settings"
+msgstr "Opciones de WP Embed Facebook"
+
+#: lib/core.php:220
+msgid "Your Facebook Apps"
+msgstr "Sus aplicaciones de Facebook"
+
+#: lib/core.php:292
+msgid "Error"
+msgstr "Error"
+
+#: lib/core.php:434
+#, php-format
+msgid "%d people like this."
+msgstr "a %d personas les gusta."
+
+#: templates/classic/event.php:33 templates/default/event.php:30
+#: templates/default/event.php:33
+msgid "@ "
+msgstr "en: "
+
+#: templates/classic/event.php:37 templates/default/event.php:37
+msgid "Creator: "
+msgstr "Creador: "
+
+#: templates/default/com-page.php:23 templates/default/com-page.php:24
+#: templates/default/page.php:37 templates/default/page.php:38
+msgid "Web Site"
+msgstr "Sitio Web"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Embed Facebook"
+msgstr "WP Embed Facebook"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.wpembedfb.com"
+msgstr "http://www.wpembedfb.com"
+
+#. Description of the plugin/theme
+msgid ""
+"Embed a Facebook video, photo, album, event, page, profile, or post. Copy "
+"any facebook url to a single line on your post, or use shortcode "
+"[facebook='url' width='' ] more info at <a href=\"http://www.wpembedfb.com\" "
+"title=\"plugin website\">www.wpembedfb.com</a>"
+msgstr ""
+"Incrustar un video, Foto, álbum, evento, página, perfil o publicación de "
+"Facebook. Copia cualquier url de Facebook en una sola línea en su Post, o "
+"utiliza el shortcode [facebook = ‘url’ width =‘’] más info en <a "
+"href=“http://www.wpembedfb.com” title=“plugin website”>www.wpembedfb.com</a>"
+
+#. Author of the plugin/theme
+msgid "Miguel Sirvent"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://profiles.wordpress.org/poxtron/"
+msgstr ""

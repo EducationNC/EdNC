@@ -155,6 +155,12 @@
 
 			data.has_events = $date.hasClass( 'tribe-events-has-events' );
 
+			// Backwards compatibility
+			// @todo "Check if we can remove this check"
+			if ( data.has_events ) {
+				data.date_name = '';
+			}
+
 			$triggers.removeClass( 'mobile-active' )
 				// If full_date_name is empty then default to highlighting the first day of the current month
 				.filter( _active ).addClass( 'mobile-active' );
@@ -358,11 +364,11 @@
 			tribe_events_bar_calendar_ajax_actions( e );
 		} );
 
-		$( te ).on( "tribe_ev_runAjax", function() {
+		$( te ).on( 'tribe_ev_runAjax', function() {
 			tribe_events_calendar_ajax_post();
 		} );
 
-		$( te ).on( "tribe_ev_updatingRecurrence", function() {
+		$( te ).on( 'tribe_ev_updatingRecurrence', function() {
 			ts.date = $( '#tribe-events-header' ).data( "date" );
 			if ( ts.filter_cats ) {
 				td.cur_url = $( '#tribe-events-header' ).data( 'baseurl' ) + ts.date + '/';
