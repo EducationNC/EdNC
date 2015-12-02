@@ -7082,6 +7082,9 @@ blockquote p[style*=center], .blockquote p[style*=center] {
     margin: 0 0 10px 0;
   }
 }
+blockquote:before, .blockquote:before {
+  display: none;
+}
 blockquote cite, .blockquote cite {
   font-style: italic;
 }
@@ -7336,6 +7339,7 @@ label {
 
 .gallery {
   padding: 10px 0;
+  margin-bottom: 1.88em;
 }
 .gallery .gallery-item {
   float: left;
@@ -7343,6 +7347,11 @@ label {
   margin-bottom: 20px;
 }
 @media (min-width: 992px) {
+  .gallery {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
   .gallery.gallery-columns-5 .gallery-item {
     width: 20%;
   }
@@ -7394,33 +7403,29 @@ object, embed {
   max-width: 658px;
   margin: 0 auto 34px;
 }
-.entry-content-asset.slideshare {
-  position: relative;
-  padding-bottom: 100%;
-  padding-top: 25px;
-  height: 0;
-  margin-bottom: 34px;
-}
-.entry-content-asset.slideshare iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.entry-content-asset:not(.instagram):not(.twitter):not(.slideshare) {
+.entry-content-asset:not(.instagram):not(.twitter) {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;
   height: 0;
   margin-bottom: 34px;
 }
-.entry-content-asset:not(.instagram):not(.twitter):not(.slideshare) iframe {
+@media (min-width: 992px) {
+  .entry-content-asset:not(.instagram):not(.twitter) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
+}
+.entry-content-asset:not(.instagram):not(.twitter) iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+.entry-content-asset.slideshare.slideshare {
+  padding-bottom: 100%;
 }
 
 .wp-video {
@@ -8720,13 +8725,6 @@ section {
 }
 .aside > h3:first-of-type {
   margin-top: 0;
-}
-
-@media (min-width: 1280px) {
-  .full-width {
-    margin-left: -7.35%;
-    margin-right: -7.35%;
-  }
 }
 
 .page-header {
@@ -10131,14 +10129,20 @@ body.home .photo-overlay h4.post-title {
   overflow: hidden;
   margin: 1.88em 0;
 }
-.full-bleed-image .image-holder {
+.full-bleed-image .parallax {
   position: relative;
+  overflow: hidden;
+  height: 100vh;
 }
-.full-bleed-image img {
-  width: 100%;
-  height: auto;
+.full-bleed-image .parallax-img {
   position: relative;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: 50% 50%;
 }
 .full-bleed-image .wash {
   position: absolute;
@@ -10848,6 +10852,10 @@ body.home .photo-overlay h4.post-title {
   padding: 0;
 }
 
+.map-container {
+  margin-bottom: 1.88em;
+}
+
 .map-mobile {
   margin: 0 auto;
   width: 320px;
@@ -10899,11 +10907,6 @@ body.home .photo-overlay h4.post-title {
   .map-mobile,
   .map-mobile-scroll {
     display: none;
-  }
-}
-@media (min-width: 768px) and (max-width: 816px) {
-  .map-tablet {
-    margin-left: -16px;
   }
 }
 .timeline-wrap {

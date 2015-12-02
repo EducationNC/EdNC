@@ -23,8 +23,8 @@ if ($author == 'emily.antoszyk') {
 }
 ?>
 
-<article <?php post_class('article container'); ?>>
-  <header class="entry-header">
+<article <?php post_class('article'); ?>>
+  <header class="entry-header container">
     <div class="row">
       <div class="col-md-9 col-centered">
         <?php
@@ -39,10 +39,10 @@ if ($author == 'emily.antoszyk') {
         ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php get_template_part('templates/entry-meta'); ?>
-        <?php get_template_part('templates/social', 'share'); ?>
       </div>
     </div>
   </header>
+
 
   <div class="map-container">
     <div class="map-desktop">
@@ -64,19 +64,36 @@ if ($author == 'emily.antoszyk') {
     <?php } ?>
   </div>
 
-  <div class="entry-content row">
-    <div class="col-lg-7 col-md-9 col-centered">
-      <?php the_content(); ?>
+  <div class="entry-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm hidden-print print-no">
+          <?php get_template_part('templates/author', 'meta'); ?>
+        </div>
 
-      <?php get_template_part('templates/social', 'share'); ?>
+        <div class="col-md-2 col-md-pull-2 hidden-print print-no">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Article sidebar -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-2642458473228537"
+               data-ad-slot="6263040202"
+               data-ad-format="auto"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
 
-      <div class="sep"></div>
+        <div class="col-md-7 col-md-pull-1point5">
+          <?php the_content(); ?>
+        </div>
+      </div>
     </div>
   </div>
 
-  <footer class="entry-footer">
+  <footer class="entry-footer container">
     <div class="row">
-      <div class="col-md-8 col-lg-7">
+      <div class="col-md-7 col-md-push-2point5 recommended">
         <h3>Recommended for you</h3>
         <?php
         foreach ($map_category as $mcat) {
@@ -99,9 +116,38 @@ if ($author == 'emily.antoszyk') {
 
         if ($related->have_posts()) : while ($related->have_posts()) : $related->the_post();
 
-          get_template_part('templates/content', 'excerpt');
+          if (has_post_thumbnail()) {
+            $image_id = get_post_thumbnail_id();
+            $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+            $image_sized['url'] = $image_url[0];
+          } else {
+            $image_src = catch_that_image();
+            $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+          }
+          ?>
+          <div class="photo-overlay">
+            <?php if ($image_sized['url']) { ?>
+              <img src="<?php echo $image_sized['url']; ?>" />
+            <?php } ?>
+            <?php get_template_part('templates/labels', 'single'); ?>
 
-        endwhile; else:
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+          </div>
+          <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+          <p class="meta">
+            by
+            <?php
+            if ( function_exists( 'coauthors_posts_links' ) ) {
+              coauthors();
+            } else {
+              the_author();
+            }
+            ?>
+            on
+            <date><?php the_time(get_option('date_format')); ?></date>
+          </p>
+
+        <?php endwhile; else:
 
           $args = array(
             'post_type' => 'map',
@@ -113,38 +159,43 @@ if ($author == 'emily.antoszyk') {
 
           if ($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post();
 
-            get_template_part('templates/content', 'excerpt');
+            if (has_post_thumbnail()) {
+              $image_id = get_post_thumbnail_id();
+              $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+              $image_sized['url'] = $image_url[0];
+            } else {
+              $image_src = catch_that_image();
+              $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+            }
+            ?>
+            <div class="photo-overlay">
+              <?php if ($image_sized['url']) { ?>
+                <img src="<?php echo $image_sized['url']; ?>" />
+              <?php } ?>
+              <?php get_template_part('templates/labels', 'single'); ?>
 
-          endwhile; endif;
+              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            </div>
+            <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+            <p class="meta">
+              by
+              <?php
+              if ( function_exists( 'coauthors_posts_links' ) ) {
+                coauthors();
+              } else {
+                the_author();
+              }
+              ?>
+              on
+              <date><?php the_time(get_option('date_format')); ?></date>
+            </p>
+
+          <?php endwhile; endif;
 
         endif; wp_reset_query();
         ?>
 
         <p><a href="/maps">View all maps &raquo;</a></p>
-      </div>
-
-      <div class="col-md-4 col-lg-push-1">
-        <h3>About <?php the_author(); ?></h3>
-        <?php
-        $args = array(
-          'post_type' => 'bio',
-          'meta_query' => array(
-            array(
-              'key' => 'user',
-              'value' => $author_id
-            )
-          )
-        );
-
-        $bio = new WP_Query($args);
-
-        if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-          <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
-          <?php get_template_part('templates/author', 'excerpt'); ?>
-        <?php endwhile; endif; wp_reset_query(); ?>
-
-        <h3>Stay connected</h3>
-        <?php get_template_part('templates/email-signup'); ?>
       </div>
     </div>
   </footer>

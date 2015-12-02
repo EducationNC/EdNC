@@ -38,7 +38,7 @@ $category = get_the_category();
   ?>
   <header class="entry-header container">
     <div class="row">
-      <div class="col-lg-7 col-md-9 col-centered">
+      <div class="col-md-8 col-centered">
         <?php
         if ($column) {
           ?>
@@ -63,288 +63,107 @@ $category = get_the_category();
         ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php get_template_part('templates/entry-meta'); ?>
-        <?php get_template_part('templates/social', 'share'); ?>
       </div>
     </div>
   </header>
 
   <div class="entry-content container">
     <div class="row">
-      <div class="col-lg-7 col-md-9 col-centered">
-        <?php the_content(); ?>
+      <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm hidden-print print-no">
+        <?php get_template_part('templates/author', 'meta'); ?>
+      </div>
 
-        <?php get_template_part('templates/social', 'share'); ?>
+      <div class="col-md-2 col-md-pull-2 hidden-print print-no">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Article sidebar -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2642458473228537"
+             data-ad-slot="6263040202"
+             data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+      <div class="col-md-7 col-md-pull-1point5">
+        <?php the_content(); ?>
       </div>
     </div>
   </div>
 
-  <footer class="container">
+  <footer class="container hidden-print">
+    <?php
+    $recommended = get_field('recommended_articles');
+    if ($recommended) {
+      // set this to only display first one for now.
+      // TODO: add some way to have more than 1 recommended article
+      $post = $recommended[0];
+    } else {
+      // previous post by same author
+      $post = get_adjacent_author_post(true);
+      // TODO: check if this even exists and fallback to recent post from category?
+    }
+
+    if ($post) {
+      setup_postdata($post);
+      $pid = $post->ID;
+
+      $author_id = get_the_author_meta('ID');
+      $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+
+      $category = get_the_category($pid);
+      ?>
+      <div class="row">
+        <div class="col-md-7 col-md-push-2point5 recommended">
+          <h2>Recommended for you</h2>
+          <?php
+          if (has_post_thumbnail()) {
+            $image_id = get_post_thumbnail_id();
+            $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+            $image_sized['url'] = $image_url[0];
+          } else {
+            $image_src = catch_that_image();
+            if ($image_src) {
+              $image_sized = mr_image_resize($image_src, 564, 239, true, false);
+            } else {
+              $image_sized['url'] = get_template_directory_uri() . '/assets/public/imgs/logo-squat-wide.png';
+            }
+          }
+          ?>
+          <div class="photo-overlay">
+            <?php if ($image_sized['url']) { ?>
+              <img src="<?php echo $image_sized['url']; ?>" />
+            <?php } ?>
+            <?php get_template_part('templates/labels', 'single'); ?>
+
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+          </div>
+          <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+          <p class="meta">
+            by
+            <?php
+            if ( function_exists( 'coauthors_posts_links' ) ) {
+              coauthors();
+            } else {
+              the_author();
+            }
+            ?>
+            on
+            <date><?php the_time(get_option('date_format')); ?></date>
+          </p>
+        </div>
+      </div>
+      <?php wp_reset_postdata(); ?>
+    <?php } ?>
+
     <?php if ($comments_open == 1) { ?>
       <div class="row">
-        <div class="col-lg-7 col-md-9 col-centered">
-
-          <?php
-          if ( function_exists( 'get_coauthors' ) ) {
-            $coauthors = get_coauthors();
-            $coauthors_count = count($coauthors);
-
-            if ($coauthors_count > 1) {
-              echo '<h3>About the authors</h3>';
-            }
-
-            foreach ($coauthors as $author) {
-              if ($coauthors_count == 1) {
-                echo '<h3>About ' . $author->display_name . '</h3>';
-              }
-
-              $args = array(
-                'post_type' => 'bio',
-                'meta_query' => array(
-                  array(
-                    'key' => 'user',
-                    'value' => $author->ID
-                  )
-                )
-              );
-
-              $bio = new WP_Query($args);
-
-              if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-
-                <div class="row bottom-margin">
-                  <div class="col-xs-5 col-sm-3">
-                    <?php the_post_thumbnail('bio-headshot'); ?>
-                  </div>
-
-                  <div class="col-xs-7 col-sm-9">
-                    <?php
-                    if ($coauthors_count > 1) {
-                      echo '<h4>' . $author->display_name . '</h4>';
-                    }
-                    get_template_part('templates/author', 'excerpt');
-                    ?>
-                  </div>
-                </div>
-
-              <?php endwhile; endif; wp_reset_query();
-            }
-          } else { ?>
-            <h3>About <?php the_author(); ?></h3>
-            <?php
-            $args = array(
-              'post_type' => 'bio',
-              'meta_query' => array(
-                array(
-                  'key' => 'user',
-                  'value' => $author_id
-                )
-              )
-            );
-
-            $bio = new WP_Query($args);
-
-            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-
-              <div class="row">
-                <div class="col-xs-5 col-sm-3">
-                  <?php the_post_thumbnail('bio-headshot'); ?>
-                </div>
-
-                <div class="col-xs-7 col-sm-9">
-                  <?php get_template_part('templates/author', 'excerpt'); ?>
-                </div>
-              </div>
-
-            <?php endwhile; endif; wp_reset_query(); ?>
-          <?php } ?>
-
+        <div class="col-md-7 col-md-push-2point5">
+          <h2>Join the conversation</h2>
+          <?php comments_template('templates/comments'); ?>
         </div>
       </div>
     <?php } ?>
-
-    <div class="row">
-      <?php if ($comments_open == 1) { ?>
-        <div class="col-md-8 col-lg-7 hidden-print">
-          <h3>Join the conversation</h3>
-          <?php comments_template('templates/comments'); ?>
-        </div>
-
-        <div class="col-md-4 col-lg-push-1">
-      <?php } else { ?>
-
-        <?php if (in_category('109')) { // 1868 ?>
-          <div class="hidden-sm hidden-xs col-md-2"></div>
-        <?php } ?>
-
-        <div class="col-sm-12 col-md-4">
-
-          <?php
-          if ( function_exists( 'get_coauthors' ) ) {
-            $coauthors = get_coauthors();
-            $coauthors_count = count($coauthors);
-
-            if ($coauthors_count > 1) {
-              echo '<h3>About the authors</h3>';
-            }
-
-            foreach ($coauthors as $author) {
-              if ($coauthors_count == 1) {
-                echo '<h3>About ' . $author->display_name . '</h3>';
-              }
-
-              $args = array(
-                'post_type' => 'bio',
-                'meta_query' => array(
-                  array(
-                    'key' => 'user',
-                    'value' => $author->ID
-                  )
-                )
-              );
-
-              $bio = new WP_Query($args);
-
-              if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-                <?php
-                if ($coauthors_count > 1) {
-                  echo '<h4>' . $author->display_name . '</h4>';
-                }
-                the_post_thumbnail('bio-headshot', array('class' => 'author-photo'));
-                get_template_part('templates/author', 'excerpt');
-                ?>
-              <?php endwhile; endif; wp_reset_query();
-            }
-          } else { ?>
-            <h3>About <?php the_author(); ?></h3>
-            <?php
-            $args = array(
-              'post_type' => 'bio',
-              'meta_query' => array(
-                array(
-                  'key' => 'user',
-                  'value' => $author_id
-                )
-              )
-            );
-
-            $bio = new WP_Query($args);
-
-            if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
-              <?php the_post_thumbnail('bio-headshot', array('class' => 'author-photo')); ?>
-              <?php get_template_part('templates/author', 'excerpt'); ?>
-            <?php endwhile; endif; wp_reset_query(); ?>
-
-          <?php } ?>
-
-        </div>
-
-        <?php if (!in_category('109')) { // 1868 ?>
-          <div class="col-sm-6 col-md-4 hidden-print">
-        <?php } ?>
-
-      <?php } ?>
-
-      <?php if (!in_category('109')) { // 1868 ?>
-
-        <?php if ($comments_open == 1) { ?>
-          <div class="col-sm-6 col-md-12 hidden-print">
-        <?php } ?>
-
-        <h3>Recommended for you</h3>
-        <?php
-        $recommended = get_field('recommended_articles');
-        if ($recommended) {
-          // set this to only display first one for now.
-          // TODO: add some way to have more than 1 recommended article
-          $post = $recommended[0];
-
-          $pid = $post->ID;
-
-          setup_postdata($post);
-
-          $author_id = get_the_author_meta('ID');
-          $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-
-          $category = get_the_category($pid);
-          if (has_post_thumbnail()) {
-            $image_id = get_post_thumbnail_id();
-            $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail');
-            $image_sized['url'] = $image_url[0];
-          } else {
-            $image_src = catch_that_image();
-            $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-          }
-          ?>
-          <div class="has-photo-overlay">
-            <div class="photo-overlay">
-              <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
-              <h2 class="post-title"><?php echo $post->post_title; ?></h2>
-              <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
-              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-              <?php if ($image_sized['url']) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-              <?php } ?>
-            </div>
-          </div>
-          <?php
-          wp_reset_postdata();
-        } else {
-          // previous post by same author
-          $post = get_adjacent_author_post(true);
-
-          $pid = $post->ID;
-
-          setup_postdata($post);
-
-          $author_id = get_the_author_meta('ID');
-          $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-          $author_type = wp_get_post_terms($author_bio[0]->ID, 'author-type');
-
-          $category = get_the_category($pid);
-          if (has_post_thumbnail()) {
-            $image_id = get_post_thumbnail_id();
-            $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail');
-            $image_sized['url'] = $image_url[0];
-          } else {
-            $image_src = catch_that_image();
-            $image_sized = mr_image_resize($image_src, 295, 295, true, false);
-          }
-          ?>
-          <div class="has-photo-overlay">
-            <div class="photo-overlay">
-              <span class="label"><?php if ($post->post_type == 'map') { echo 'Map'; } else { if (is_singular('feature')) { echo $author_type[0]->name; } elseif ($category[0]->cat_name != 'Uncategorized' && $category[0]->cat_name != 'Hide from home') { echo $category[0]->cat_name; }} ?></span>
-              <h2 class="post-title"><?php echo $post->post_title; ?></h2>
-              <p class="meta">by <?php echo get_the_author_meta('display_name', $post->post_author); ?> on <date><?php echo date(get_option('date_format'), strtotime($post->post_date)); ?></date></p>
-              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-              <?php if ($image_sized['url']) { ?>
-              <img src="<?php echo $image_sized['url']; ?>" />
-              <?php } ?>
-            </div>
-          </div>
-          <?php
-          wp_reset_postdata();
-        }
-        ?>
-
-        </div>
-
-      <?php } ?>
-
-      <?php if ($comments_open == 1) { ?>
-      <div class="col-sm-6 col-md-12 hidden-print">
-      <?php } else { ?>
-      <div class="col-sm-6 col-md-4 hidden-print">
-      <?php } ?>
-
-        <h3>Stay connected</h3>
-        <?php get_template_part('templates/email-signup'); ?>
-
-      </div>
-
-      <?php if (in_category('109')) { // 1868 ?>
-        <div class="hidden-sm hidden-xs col-md-2"></div>
-      <?php } ?>
-
-    </div>
   </footer>
 </article>

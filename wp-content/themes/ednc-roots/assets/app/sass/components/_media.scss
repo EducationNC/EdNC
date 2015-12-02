@@ -20,6 +20,7 @@
 
 .gallery {
   padding: ($line-height-computed / 2) 0;
+  margin-bottom: 1.88em;
 
   .gallery-item {
     float: left;
@@ -28,6 +29,10 @@
   }
 
   @media (min-width: $screen-md-min) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+
     &.gallery-columns-5 {
       .gallery-item {
         width: 20%;
@@ -101,12 +106,18 @@ object, embed {
     margin: 0 auto 34px;
   }
 
-  &.slideshare {
+  &:not(.instagram):not(.twitter) {
     position: relative;
-    padding-bottom: 100%;
+    padding-bottom: 56.25%;
     padding-top: 25px;
     height: 0;
     margin-bottom: 34px;
+
+    @media (min-width: $screen-md-min) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+      max-width: 114.7%;
+    }
 
     iframe {
       position: absolute;
@@ -117,20 +128,8 @@ object, embed {
     }
   }
 
-  &:not(.instagram):not(.twitter):not(.slideshare) {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 25px;
-    height: 0;
-    margin-bottom: 34px;
-
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+  &.slideshare.slideshare {
+    padding-bottom: 100%;
   }
 }
 

@@ -340,6 +340,10 @@ blockquote, .blockquote {
     }
   }
 
+  &:before {
+    display: none;
+  }
+
   cite {
     font-style: italic;
   }

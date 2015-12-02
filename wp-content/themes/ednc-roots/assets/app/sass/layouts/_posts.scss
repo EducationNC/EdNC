@@ -299,15 +299,20 @@
   overflow: hidden;
   margin: 1.88em 0;
 
-    .image-holder {
-      position: relative;
-    }
-
-  img {
-    width: 100%;
-    height: auto;
+  .parallax {
     position: relative;
-    z-index: 1;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .parallax-img {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: 50% 50%;
   }
 
   .wash {

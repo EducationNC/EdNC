@@ -212,12 +212,12 @@ section {
   }
 }
 
-.full-width {
-  @media (min-width: $screen-lg-min) {
-    margin-left: -7.35%;
-    margin-right: -7.35%;
-  }
-}
+// .full-width {
+//   @media (min-width: $screen-lg-min) {
+//     margin-left: -7.35%;
+//     margin-right: -7.35%;
+//   }
+// }
 
 .page-header {
   border-bottom: none;
