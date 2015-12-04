@@ -1,6 +1,10 @@
 // WordPress Generated Classes
 // http://codex.wordpress.org/CSS#WordPress_Generated_Classes
 
+.wp-caption {
+  max-width: 100%;
+}
+
 .aligncenter {
   display: block;
   margin: ($line-height-computed / 2) auto;

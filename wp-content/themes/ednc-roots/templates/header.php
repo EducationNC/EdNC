@@ -13,6 +13,17 @@ if ($alert) { ?>
 
   <div class="container-fluid">
     <div class="pull-right text-right">
+      <div class="social-media">
+        <ul class="list-inline">
+          <li><a class="icon-facebook" href="http://facebook.com/educationnc" target="_blank"></a></li>
+          <li><a class="icon-twitter" href="http://twitter.com/educationnc" target="_blank"></a></li>
+          <li><a class="icon-youtube" href="https://www.youtube.com/channel/UCJto5My-_AVw1Nx5AGq8TEQ" target="_blank"></a></li>
+          <!-- <li><a class="icon-gplus" href="https://plus.google.com/100573388543000216336/about" target="_blank"></a></li> -->
+          <!-- <li><a class="icon-instagram" href="#"></a></li> -->
+          <!-- <li><a class="icon-linkedin" href="#"></a></li> -->
+        </ul>
+      </div>
+
       <ul class="list-inline minor-links small">
         <?php
         wp_nav_menu(array(
@@ -43,17 +54,6 @@ if ($alert) { ?>
     </div>
 
     <div class="navbar-right">
-      <div class="social-media">
-        <ul class="list-inline">
-          <li><a class="icon-facebook" href="http://facebook.com/educationnc" target="_blank"></a></li>
-          <li><a class="icon-twitter" href="http://twitter.com/educationnc" target="_blank"></a></li>
-          <li><a class="icon-youtube" href="https://www.youtube.com/channel/UCJto5My-_AVw1Nx5AGq8TEQ" target="_blank"></a></li>
-          <!-- <li><a class="icon-gplus" href="https://plus.google.com/100573388543000216336/about" target="_blank"></a></li> -->
-          <!-- <li><a class="icon-instagram" href="#"></a></li> -->
-          <!-- <li><a class="icon-linkedin" href="#"></a></li> -->
-        </ul>
-      </div>
-
       <div class="btn-group">
         <a href="#" class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Email Subscription</a>
         <a href="https://support.ednc.org/donate-recurring" class="btn btn-primary">Support Us</a>

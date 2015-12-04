@@ -133,7 +133,7 @@
       position: relative;
     }
 
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $screen-sm-min) {
       height: 600px;
       margin-top: -172px;
 
@@ -222,10 +222,19 @@
       margin-left: -7.35%;
       margin-right: -7.35%;
     }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 22px;
+      padding: 1.88em 10px 1px;
+    }
   }
 
   p {
     word-wrap: break-word;
+  }
+
+  .adsbygoogle {
+    margin-bottom: 34px;
   }
 }
 .hentry footer {
@@ -255,6 +264,24 @@
 //   margin: 0 20px 20px 0;
 //   width: 33%;
 // }
+
+.mobile-ad {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: $white70;
+  z-index: 50;
+
+  .adsbygoogle {
+    margin: 0;
+  }
+
+  .close {
+    z-index: 50;
+  }
+}
 
 .full-bleed-quote {
   position: relative;
@@ -309,6 +336,10 @@
     font-family: $font-family-serif;
     font-size: $font-size-h3;
     line-height: 1.88em;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 22px;
+    }
   }
 }
 
@@ -330,7 +361,10 @@
   .parallax {
     position: relative;
     overflow: hidden;
-    height: 100vh;
+
+    @media (min-width: $screen-sm-min) {
+      height: 100vh;
+    }
   }
 
   .wash {

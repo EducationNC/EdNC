@@ -12,6 +12,7 @@ if ($author_bio) {
 
 $image_id = get_post_thumbnail_id();
 $featured_image_src = wp_get_attachment_image_src($image_id, 'full');
+$featured_image_lg = wp_get_attachment_image_src($image_id, 'large');
 $featured_image_align = get_field('featured_image_alignment');
 
 $column = wp_get_post_terms(get_the_id(), 'column');
@@ -30,7 +31,8 @@ if ($category[0]->slug == 'powered-schools') {
   <?php if (has_post_thumbnail() && $featured_image_align == 'hero') { ?>
     <header class="entry-header hero-image">
       <div class="photo-overlay">
-        <div class="parallax-img" style="background-image:url('<?php echo $featured_image_src[0]; ?>')"></div>
+        <div class="parallax-img hidden-xs" style="background-image:url('<?php echo $featured_image_src[0]; ?>')"></div>
+        <img class="visible-xs-block" src="<?php echo $featured_image_lg[0]; ?>" />
         <div class="article-title-overlay">
           <div class="container">
             <div class="row">
@@ -135,16 +137,18 @@ if ($category[0]->slug == 'powered-schools') {
         </div>
 
         <div class="col-md-2 col-md-pull-2 hidden-print print-no">
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- Article sidebar -->
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-2642458473228537"
-               data-ad-slot="6263040202"
-               data-ad-format="auto"></ins>
-          <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
+          <div class="hidden-xs">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Article sidebar -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2642458473228537"
+                 data-ad-slot="6263040202"
+                 data-ad-format="auto"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
         </div>
 
         <div class="col-md-7 col-md-pull-1point5">
