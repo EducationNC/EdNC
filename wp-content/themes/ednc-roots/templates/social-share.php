@@ -1,9 +1,13 @@
 <?php
+// Get post ID
+global $wp_query;
+$id = $wp_query->post->ID;
+
 // Get current counts of social media shares & store in transient
 $counts = get_transient('social-counts');
 if ($counts === false) {
   $social_counts = new socialNetworkShareCount(array(
-    'url' => get_permalink(),
+    'url' => get_permalink($id),
     'facebook' => true,
     'twitter' => true,
     'buffer' => true,
