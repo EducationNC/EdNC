@@ -10,6 +10,8 @@ if ($author_bio) {
   $author_avatar_sized = mr_image_resize($author_avatar, 140, null, false, '', false);
 }
 
+$image_id = get_post_thumbnail_id();
+$featured_image_src = wp_get_attachment_image_src($image_id, 'full');
 $featured_image_align = get_field('featured_image_alignment');
 
 $column = wp_get_post_terms(get_the_id(), 'column');
@@ -28,7 +30,7 @@ if ($category[0]->slug == 'powered-schools') {
   <?php if (has_post_thumbnail() && $featured_image_align == 'hero') { ?>
     <header class="entry-header hero-image">
       <div class="photo-overlay">
-        <?php the_post_thumbnail(); ?>
+        <div class="parallax-img" style="background-image:url('<?php echo $featured_image_src[0]; ?>')"></div>
         <div class="article-title-overlay">
           <div class="container">
             <div class="row">

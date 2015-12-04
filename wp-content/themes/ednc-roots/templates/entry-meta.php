@@ -7,7 +7,7 @@
     the_author_posts_link();
   }
   ?>
-  on
+  |
   <time class="published" datetime="<?php echo get_the_time('c'); ?>">
     <?php the_time(get_option('date_format')); ?>
   </time>

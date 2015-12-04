@@ -50,7 +50,8 @@ function ednc_gallery($attr) {
     'size'       => 'thumbnail',
     'include'    => '',
     'exclude'    => '',
-    'link'       => ''
+    'link'       => '',
+    'fullwidth'      => ''
   ), $attr, 'gallery' );
 
   $id = intval( $atts['id'] );
@@ -100,23 +101,24 @@ function ednc_gallery($attr) {
 
   $selector = "gallery-{$instance}";
 
-  $gallery_style = '';
+  if ($atts['fullwidth'] == true) {
+    $output = "</div><!-- col --></div><!-- row --></div><!-- container --><div class='container-fluid'><div class='row'>";
+    $fullwidth = 'fullwidth';
+  }
 
   $size_class = sanitize_html_class( $atts['size'] );
-  $gallery_div = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
-
-  $output = $gallery_div;
+  $output .= "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} {$fullwidth}'>";
 
   $i = 0;
   foreach ( $attachments as $id => $attachment ) {
 
     $attr = ( trim( $attachment->post_excerpt ) ) ? array( 'aria-describedby' => "$selector-$id" ) : '';
-    if ( ! empty( $atts['link'] ) && 'file' === $atts['link'] ) {
-      $image_output = wp_get_attachment_link( $id, $atts['size'], false, false, false, array('alt' => $attachment->post_excerpt) );
+    if ( ! empty( $atts['link'] ) && 'post' === $atts['link'] ) {
+      $image_output = wp_get_attachment_link( $id, $atts['size'], true, false, false, $attr );
     } elseif ( ! empty( $atts['link'] ) && 'none' === $atts['link'] ) {
       $image_output = wp_get_attachment_image( $id, $atts['size'], false, $attr );
     } else {
-      $image_output = wp_get_attachment_link( $id, $atts['size'], true, false, false, $attr );
+      $image_output = wp_get_attachment_link( $id, $atts['size'], false, false, false, array('alt' => $attachment->post_content) );
     }
     $image_meta  = wp_get_attachment_metadata( $id );
 
@@ -149,8 +151,59 @@ function ednc_gallery($attr) {
   $output .= "
     </div>\n";
 
+  if ($atts['fullwidth'] == true) {
+    $output .= "</div></div><div class='container'><div class='row'><div class='col-md-7 col-md-push-2point5'>";
+  }
+
   return $output;
 }
+
+
+/*
+ * Extend Media Manager Gallery settings
+ *
+ * Utilizes Backbone templates
+ */
+ function ednc_extend_media_manager_gallery_settings() {
+  // define your backbone template;
+  // the "tmpl-" prefix is required,
+  // and your input field should have a data-setting attribute
+  // matching the shortcode name
+  ?>
+  <script type="text/html" id="tmpl-ednc-custom-gallery-setting">
+    <label class="setting">
+      <span><?php _e('Full-width?'); ?></span>
+      <input type="checkbox" data-setting="fullwidth" />
+    </label>
+  </script>
+
+  <script>
+
+    jQuery(document).ready(function(){
+
+      // add your shortcode attribute and its default value to the
+      // gallery settings list; $.extend should work as well...
+      _.extend(wp.media.gallery.defaults, {
+        link: 'file',
+        fullwidth: false
+      });
+
+      // merge default gallery settings template with yours
+      wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend({
+        template: function(view){
+          return wp.media.template('gallery-settings')(view)
+               + wp.media.template('ednc-custom-gallery-setting')(view);
+        }
+      });
+
+    });
+
+  </script>
+  <?php
+}
+add_action('print_media_templates', 'ednc_extend_media_manager_gallery_settings');
+
+
 
 /**
  * Clean up gallery_shortcode()
