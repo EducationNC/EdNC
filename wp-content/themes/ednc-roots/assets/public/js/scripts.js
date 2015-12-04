@@ -2093,9 +2093,14 @@ var Roots = {
   // Single posts
   single: {
     init: function() {
+      // Check for mobile or IE
+      var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
+
       // Add body class for any posts with full width hero featured images
-      if ($('.entry-header').hasClass('hero-image')) {
-        $('body').addClass('hero-image');
+      if (!ismobileorIE) {
+        if ($('.entry-header').hasClass('hero-image')) {
+          $('body').addClass('hero-image');
+        }
       }
 
       // Wrap any object embed with responsive wrapper (except for map embeds)
@@ -2184,13 +2189,16 @@ var Roots = {
         }
       });
 
+      // Close mobile ad on button tap
+      $('#mobile-ad .close').click(function() {
+        $('#mobile-ad').detach();
+        $('.icon-share').css({'bottom': '0'});
+      });
+
       // Parallax featured image when hero
       if ($('.entry-header').hasClass('hero-image')) {
-        // Check for mobile
-        var ismobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        // only do parallax if this is not mobile
-        if (!ismobile) {
+        // only do parallax if this is not mobile or IE
+        if (!ismobileorIE) {
           var img = $('.entry-header.hero-image .parallax-img');
 
           // Set up CSS for devices that support parallax

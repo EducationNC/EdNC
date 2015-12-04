@@ -141,6 +141,7 @@
     // If background image is set, get the URL of full sized image
     if (isset($image_id)) {
       $img = wp_get_attachment_image_src($image_id, 'full');
+      $img_lg = wp_get_attachment_image_src($image_id, 'large');
     }
 
     ob_start();
@@ -154,10 +155,10 @@
 
     <script type="text/javascript">
       jQuery(document).ready(function($) {
-        var ismobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
 
         // only do parallax if this is not mobile
-        if (!ismobile) {
+        if (!ismobileorIE) {
           var img = $('#parallax-<?php echo $image_id; ?> .parallax-img');
 
           // Set up CSS for devices that support parallax
@@ -189,7 +190,8 @@
       <div class="row">
         <div class="image-holder parallax">
           <?php if ( ! empty($image_id) ) { ?>
-            <div class="parallax-img" style="background-image:url('<?php echo $img[0]; ?>')"></div>
+            <div class="parallax-img hidden-xs" style="background-image:url('<?php echo $img[0]; ?>')"></div>
+            <img class="visible-xs-block" src="<?php echo $img_lg[0]; ?>" />
           <?php } ?>
           <?php if ( ! empty( $floating_text ) ) { ?>
             <div class="wash"></div>
