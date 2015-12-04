@@ -29,9 +29,11 @@
   }
 
   @media (min-width: $screen-md-min) {
-    margin-left: -7.35%;
-    margin-right: -7.35%;
-    max-width: 114.7%;
+    &:not(.fullwidth) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+      max-width: 114.7%;
+    }
 
     &.gallery-columns-5 {
       .gallery-item {

@@ -272,6 +272,38 @@ var Roots = {
         }
       });
 
+      // Parallax featured image when hero
+      if ($('.entry-header').hasClass('hero-image')) {
+        // Check for mobile
+        var ismobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // only do parallax if this is not mobile
+        if (!ismobile) {
+          var img = $('.entry-header.hero-image .parallax-img');
+
+          // Set up CSS for devices that support parallax
+          img.css({'top': '-50%', 'position':'absolute'});
+
+          // Do it on init
+          parallax(img);
+
+          // Happy JS scroll pattern is jittery, so I'm >:(
+          // var scrollTimeout;  // global for any pending scrollTimeout
+          // $(window).scroll(function () {
+          // 	if (scrollTimeout) {
+          // 		// clear the timeout, if one is pending
+          // 		clearTimeout(scrollTimeout);
+          // 		scrollTimeout = null;
+          // 	}
+          // 	scrollTimeout = setTimeout(parallax, 10);
+          // });
+
+          // Not happy scroll pattern, but it works smoothly at least
+          $(window).scroll(function(){
+            parallax(img);
+          });
+        }
+      }
     }
   },
   // Flash cards

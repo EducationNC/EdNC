@@ -2,6 +2,52 @@
 // New
 
 /**
+ * Intro text shortcode
+ * UI by Shortcake plugin
+ */
+
+  // Register shortcode
+  function intro_text_shortcode($atts, $content = null) {
+    extract( shortcode_atts( array(
+      'content' => '',
+    ), $atts) );
+
+    ob_start();
+    ?>
+
+    <div class="intro-text">
+      <?php echo apply_filters( 'the_content', $content ); ?>
+    </div>
+
+    <?php
+    return ob_get_clean();
+  }
+  add_shortcode('intro-text', 'intro_text_shortcode');
+
+  // Register shortcake UI
+  shortcode_ui_register_for_shortcode(
+    'intro-text',
+    array(
+      // Display label. String. Required.
+      'label' => 'Intro Text',
+      // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
+      'listItemImage' => 'dashicons-text',
+      // Available shortcode attributes and default values. Required. Array.
+      // Attribute model expects 'attr', 'type' and 'label'
+      // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
+      'attrs' => array(
+        array(
+          'label' => 'Intro text',
+          'attr'  => 'content',
+          'type'  => 'textarea',
+          'description' => 'Note: Do not use quotation marks'
+        )
+      )
+    )
+  );
+
+
+/**
  * Full-bleed quote shortcode
  * UI by Shortcake plugin
  */
@@ -11,15 +57,8 @@
     extract( shortcode_atts( array(
       'content' => '',
       'cite' => '',
-      'bg_color' => 'dark',
-      'bg_image_id' => '',
-      'parallax' => false
+      'bg_color' => 'dark'
     ), $atts) );
-
-    // If background image is set, get the URL of full sized image
-    if ( ! empty($bg_image_id) ) {
-      $img = wp_get_attachment_image_src($bg_image_id, 'full');
-    }
 
     ob_start();
     ?>
@@ -28,11 +67,8 @@
     </div><!-- row -->
     </div><!-- container -->
 
-    <div class="container-fluid full-bleed-quote theme-<?php echo $bg_color; ?> <?php if (! empty($bg_image_id)) { echo 'bg-img'; } ?> <?php if ($parallax == true) { echo 'parallax'; } ?>">
+    <div class="container-fluid full-bleed-quote theme-<?php echo $bg_color; ?>">
       <div class="row">
-        <?php if ( ! empty($bg_image_id) ) { ?>
-          <img src="<?php echo $img[0]; ?>" />
-        <?php } ?>
         <blockquote class="col-md-7 col-centered">
           <span><?php echo esc_html( $content ); ?></span><br/>
           <?php if ( ! empty( $cite ) ) { ?>
@@ -84,19 +120,6 @@
             'dark' => 'Dark',
             'light' => 'Light'
           )
-        ),
-        array(
-    			'label'       => 'Background Image (Optional)',
-    			'attr'        => 'bg_image_id',
-    			'type'        => 'attachment',
-    			'libraryType' => array( 'image' ),
-    			'addButton'   => 'Select Image',
-    			'frameTitle'  => 'Select Image',
-    		),
-        array(
-          'label' => 'Enable quote parallax',
-          'attr'  => 'parallax',
-          'type'  => 'checkbox'
         )
       )
     )
@@ -131,7 +154,7 @@
 
     <script type="text/javascript">
       jQuery(document).ready(function($) {
-        var ismobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        var ismobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         // only do parallax if this is not mobile
         if (!ismobile) {
@@ -140,28 +163,25 @@
           // Set up CSS for devices that support parallax
           img.css({'top': '-50%', 'position':'absolute'});
 
-         	function parallax(){
-            var imgCont = img.parent(),
-                imgHeight = $(img).height(),
-            	  offsetTop = $(imgCont).offset().top,
-                windowHeight = $(window).height(),
-            		scrollTop = $(window).scrollTop(),
-                position = Math.round(((windowHeight + scrollTop) - offsetTop) * 0.5);
+          // Do it on init
+  	      parallax(img);
 
-            // only run parallax if in view
-         		if (offsetTop + imgHeight <= scrollTop || offsetTop >= scrollTop + windowHeight) {
-    					return;
-    				}
+          // Happy JS scroll pattern is jittery, so I'm >:(
+          // var scrollTimeout;  // global for any pending scrollTimeout
+    			// $(window).scroll(function () {
+    			// 	if (scrollTimeout) {
+    			// 		// clear the timeout, if one is pending
+    			// 		clearTimeout(scrollTimeout);
+    			// 		scrollTimeout = null;
+    			// 	}
+    			// 	scrollTimeout = setTimeout(parallax, 10);
+    			// });
 
-            img.css({'transform':'translate3d(0px,' + position + 'px, 0px)'});
-          }
+          // Not happy scroll pattern, but it works smoothly at least
+          $(window).scroll(function(){
+            parallax(img);
+          });
         }
-
-// use this
-// scrollIntervalID = setInterval(animateStuff, 10);
-
-	      parallax();
-	    	$(window).scroll(function() { parallax(); });
       });
     </script>
 
@@ -232,100 +252,11 @@
 
 
 /**
- * Audio player shortcode
- * UI by Shortcake plugin
- */
-
-  // Register shortcode
-  function audio_player_shortcode($atts, $content = null) {
-    extract( shortcode_atts( array(
-      'audio_id' => '',
-      'caption' => '',
-      'image_id' => ''
-    ), $atts) );
-
-    // If background image is set, get the URL of full sized image
-    if (isset($image_id)) {
-      $img = wp_get_attachment_image_src($image_id, 'full');
-    }
-
-    ob_start();
-    ?>
-
-    <div class="audio-player">
-      <?php if ( ! empty($image_id) ) { ?>
-        <img src="<?php echo $img[0]; ?>" />
-      <?php } ?>
-      <?php
-      // TODO: EMBED AUDIO PLAYER
-      ?>
-      <?php if ( ! empty( $caption ) ) { ?>
-        <div class="caption">
-          <?php echo esc_html( $caption ); ?>
-        </div>
-      <?php } ?>
-    </div>
-
-    <?php
-    return ob_get_clean();
-  }
-  add_shortcode('audio-player', 'audio_player_shortcode');
-
-  // Register shortcake UI
-  shortcode_ui_register_for_shortcode(
-    'audio-player',
-    array(
-      // Display label. String. Required.
-      'label' => 'Audio Player',
-      // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
-      'listItemImage' => 'dashicons-format-audio',
-      // Available shortcode attributes and default values. Required. Array.
-      // Attribute model expects 'attr', 'type' and 'label'
-      // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
-      'attrs' => array(
-        array(
-          'label'       => 'Audio File',
-          'attr'        => 'audio_id',
-          'type'        => 'attachment',
-          'libraryType' => array( 'audio' ),
-          'addButton'   => 'Select file',
-          'frameTitle'  => 'Select file',
-        ),
-        array(
-          'label' => 'Caption',
-          'attr'  => 'caption',
-          'type'  => 'text',
-        ),
-        array(
-          'label'       => 'Image (Optional)',
-          'attr'        => 'image_id',
-          'type'        => 'attachment',
-          'libraryType' => array( 'image' ),
-          'addButton'   => 'Select Image',
-          'frameTitle'  => 'Select Image',
-        )
-      )
-    )
-  );
-
-
-/**
- * B-roll video background shortcode
- * UI by Shortcake plugin
- */
-
-
-/**
-* Map shortcode
-* UI by Shortcake plugin
-*/
-
-
-
-/**
  * Columns shortcode
  * UI by Shortcake plugin
  */
+
+
 
 
 /**

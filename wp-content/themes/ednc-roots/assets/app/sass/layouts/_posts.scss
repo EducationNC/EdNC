@@ -206,6 +206,23 @@
   }
 }
 .hentry .entry-content {
+  .intro-text {
+    background: $steel;
+    color: $jet;
+    margin-bottom: 2em;
+    padding: 1.88em 1.88em 1px;
+    font-size: 20px;
+
+    a {
+      color: $white;
+    }
+
+    @media (min-width: 893px) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+    }
+  }
+
   p {
     word-wrap: break-word;
   }
@@ -294,6 +311,16 @@
   }
 }
 
+.parallax-img {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
 .full-bleed-image {
   position: relative;
   overflow: hidden;
@@ -303,16 +330,6 @@
     position: relative;
     overflow: hidden;
     height: 100vh;
-  }
-
-  .parallax-img {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    background-position: 50% 50%;
   }
 
   .wash {

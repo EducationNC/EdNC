@@ -7347,7 +7347,7 @@ label {
   margin-bottom: 20px;
 }
 @media (min-width: 992px) {
-  .gallery {
+  .gallery:not(.fullwidth) {
     margin-left: -7.35%;
     margin-right: -7.35%;
     max-width: 114.7%;
@@ -10066,6 +10066,22 @@ body.home .photo-overlay h4.post-title {
   margin-top: 3em;
 }
 
+.hentry .entry-content .intro-text {
+  background: #DCDFE5;
+  color: #12151B;
+  margin-bottom: 2em;
+  padding: 1.88em 1.88em 1px;
+  font-size: 20px;
+}
+.hentry .entry-content .intro-text a {
+  color: #FFFFFF;
+}
+@media (min-width: 893px) {
+  .hentry .entry-content .intro-text {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+  }
+}
 .hentry .entry-content p {
   word-wrap: break-word;
 }
@@ -10124,6 +10140,17 @@ body.home .photo-overlay h4.post-title {
   line-height: 1.88em;
 }
 
+.parallax-img {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: 50% 50%;
+}
+
 .full-bleed-image {
   position: relative;
   overflow: hidden;
@@ -10133,16 +10160,6 @@ body.home .photo-overlay h4.post-title {
   position: relative;
   overflow: hidden;
   height: 100vh;
-}
-.full-bleed-image .parallax-img {
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  -webkit-background-size: cover;
-          background-size: cover;
-  background-position: 50% 50%;
 }
 .full-bleed-image .wash {
   position: absolute;
