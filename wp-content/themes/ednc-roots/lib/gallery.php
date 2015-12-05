@@ -51,7 +51,8 @@ function ednc_gallery($attr) {
     'include'    => '',
     'exclude'    => '',
     'link'       => '',
-    'fullwidth'      => ''
+    'fullwidth'  => '',
+    'collage'    => ''
   ), $attr, 'gallery' );
 
   $id = intval( $atts['id'] );
@@ -101,13 +102,20 @@ function ednc_gallery($attr) {
 
   $selector = "gallery-{$instance}";
 
-  if ($atts['fullwidth'] == true) {
+  $fullwidth = $atts['fullwidth'];
+  if ($fullwidth == true) {
     $output = "</div><!-- col --></div><!-- row --></div><!-- container --><div class='container-fluid'><div class='row'>";
     $fullwidth = 'fullwidth';
   }
 
+  $collage = $atts['collage'];
+  if ($collage == true) {
+    $collage = 'collage';
+    $output .="<div class='collage-wrapper'>";
+  }
+
   $size_class = sanitize_html_class( $atts['size'] );
-  $output .= "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} {$fullwidth}'>";
+  $output .= "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} {$fullwidth} {$collage}'>";
 
   $i = 0;
   foreach ( $attachments as $id => $attachment ) {
@@ -126,24 +134,24 @@ function ednc_gallery($attr) {
     if ( isset( $image_meta['height'], $image_meta['width'] ) ) {
       $orientation = ( $image_meta['height'] > $image_meta['width'] ) ? 'portrait' : 'landscape';
     }
-    $output .= "<{$itemtag} class='gallery-item'>";
+    $output .= "<div class='gallery-item {$orientation}'>";
     $output .= "
-      <{$icontag} class='gallery-icon {$orientation}'>
+      <div class='gallery-icon'>
         $image_output
-      </{$icontag}>";
+      </div>";
     if ( $captiontag && trim($attachment->post_excerpt) ) {
       $output .= "
-        <{$captiontag} class='wp-caption-text gallery-caption' id='$selector-$id'>
+        <div class='wp-caption-text gallery-caption' id='$selector-$id'>
         " . wptexturize($attachment->post_excerpt) . "
-        </{$captiontag}>";
+        </div>";
     }
-    $output .= "</{$itemtag}>";
-		if ( $columns > 0 && ++$i % $columns == 0 ) {
+    $output .= "</div>";
+		if ( $columns > 0 && ++$i % $columns == 0 && $atts['collage'] == false ) {
 			$output .= '<br style="clear: both" />';
 		}
   }
 
-	if ( $columns > 0 && $i % $columns !== 0 ) {
+	if ( $columns > 0 && $i % $columns !== 0 && $atts['collage'] == false ) {
 		$output .= "
 			<br style='clear: both' />";
 	}
@@ -151,7 +159,11 @@ function ednc_gallery($attr) {
   $output .= "
     </div>\n";
 
-  if ($atts['fullwidth'] == true) {
+  if ($collage == true) {
+    $output .="</div>";
+  }
+
+  if ($fullwidth == true) {
     $output .= "</div></div><div class='container'><div class='row'><div class='col-md-7 col-md-push-2point5'>";
   }
 
@@ -175,6 +187,10 @@ function ednc_gallery($attr) {
       <span><?php _e('Full-width?'); ?></span>
       <input type="checkbox" data-setting="fullwidth" />
     </label>
+    <label class="setting">
+      <span><?php _e('Collage?'); ?></span>
+      <input type="checkbox" data-setting="collage" />
+    </label>
   </script>
 
   <script>
@@ -185,7 +201,8 @@ function ednc_gallery($attr) {
       // gallery settings list; $.extend should work as well...
       _.extend(wp.media.gallery.defaults, {
         link: 'file',
-        fullwidth: false
+        fullwidth: false,
+        collage: false
       });
 
       // merge default gallery settings template with yours
