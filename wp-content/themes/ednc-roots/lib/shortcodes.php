@@ -7,16 +7,16 @@
  */
 
   // Register shortcode
-  function intro_text_shortcode($atts, $content = null) {
+  function intro_text_shortcode($atts, $inner_content = null) {
     extract( shortcode_atts( array(
-      'content' => '',
+      // 'content' => '',
     ), $atts) );
 
     ob_start();
     ?>
 
     <div class="intro-text">
-      <?php echo apply_filters( 'the_content', $content ); ?>
+      <?php echo apply_filters( 'the_content', $inner_content ); ?>
     </div>
 
     <?php
@@ -32,30 +32,33 @@
       'label' => 'Intro Text',
       // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
       'listItemImage' => 'dashicons-text',
+      // Inner content. Optional.
+      'inner_content' => array(
+				'label'        => 'Intro text'
+			),
       // Available shortcode attributes and default values. Required. Array.
       // Attribute model expects 'attr', 'type' and 'label'
       // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
-      'attrs' => array(
-        array(
-          'label' => 'Intro text',
-          'attr'  => 'content',
-          'type'  => 'textarea',
-          'description' => 'Note: Do not use quotation marks'
-        )
-      )
+      // 'attrs' => array(
+      //   array(
+      //     'label' => 'Intro text',
+      //     'attr'  => 'content',
+      //     'type'  => 'textarea',
+      //   )
+      // )
     )
   );
 
 
 /**
- * Full-bleed quote shortcode
+ * Full-bleed text shortcode
  * UI by Shortcake plugin
  */
 
   // Register shortcode
-  function full_bleed_quote_shortcode($atts, $content = null) {
+  function full_bleed_text_shortcode($atts, $inner_content = null) {
     extract( shortcode_atts( array(
-      'content' => '',
+      // 'content' => '',
       'cite' => '',
       'bg_color' => 'dark'
     ), $atts) );
@@ -67,14 +70,14 @@
     </div><!-- row -->
     </div><!-- container -->
 
-    <div class="container-fluid full-bleed-quote theme-<?php echo $bg_color; ?>">
+    <div class="container-fluid full-bleed-text theme-<?php echo $bg_color; ?>">
       <div class="row">
-        <blockquote class="col-md-7 col-centered">
-          <span><?php echo esc_html( $content ); ?></span><br/>
+        <div class="col-md-7 col-centered content">
+          <?php echo apply_filters('the_content', $inner_content); ?>
           <?php if ( ! empty( $cite ) ) { ?>
               <cite>&mdash;<?php echo esc_html( $cite ); ?></cite>
           <?php } ?>
-        </blockquote>
+        </div>
       </div>
     </div>
 
@@ -85,28 +88,26 @@
     <?php
     return ob_get_clean();
   }
-  add_shortcode('full-bleed-quote', 'full_bleed_quote_shortcode');
+  add_shortcode('full-bleed-text', 'full_bleed_text_shortcode');
 
   // Register shortcake UI
   shortcode_ui_register_for_shortcode(
-    'full-bleed-quote',
+    'full-bleed-text',
     array(
       // Display label. String. Required.
-      'label' => 'Full Bleed Quote',
+      'label' => 'Full Bleed Text',
       // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
       'listItemImage' => 'dashicons-editor-quote',
+      // Inner content. Optional.
+      'inner_content' => array(
+				'label'        => 'Content'
+			),
       // Available shortcode attributes and default values. Required. Array.
       // Attribute model expects 'attr', 'type' and 'label'
       // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
       'attrs' => array(
         array(
-          'label' => 'Quote',
-          'attr'  => 'content',
-          'type'  => 'textarea',
-          'description' => 'Note: Do not use quotation marks'
-        ),
-        array(
-          'label'       => 'Cite',
+          'label'       => 'Quotation Citation',
           'attr'        => 'cite',
           'type'        => 'text',
           'placeholder' => 'Firstname Lastname',

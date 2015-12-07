@@ -283,7 +283,7 @@
   }
 }
 
-.full-bleed-quote {
+.full-bleed-text {
   position: relative;
   overflow: hidden;
   margin: 1.88em 0;
@@ -328,7 +328,7 @@
     transform: translate(0, -50%);
   }
 
-  blockquote {
+  .content {
     position: relative;
     z-index: 5;
     padding-top: 3em;
@@ -339,6 +339,14 @@
 
     @media (max-width: $screen-xs-max) {
       font-size: 22px;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    cite {
+      font-style: italic;
     }
   }
 }
