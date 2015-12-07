@@ -264,6 +264,11 @@ blockquote, .blockquote {
       margin-right: -7.35%;
     }
 
+    .mce-content-body & {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
     &[style*=left], &[style*=right], &[style*=center] {
       font-family: $font-family-serif;
       font-size: $font-size-h3;
@@ -307,6 +312,10 @@ blockquote, .blockquote {
         margin-bottom: 10px;
         font-size: 22px;
       }
+
+      .mce-content-body & {
+        margin-left: 0 !important;
+      }
     }
 
     &[style*=right] {
@@ -323,6 +332,10 @@ blockquote, .blockquote {
         margin-bottom: 10px;
         font-size: 22px;
       }
+
+      .mce-content-body & {
+        margin-right: 0 !important;
+      }
     }
 
     &[style*=center] {
@@ -337,6 +350,11 @@ blockquote, .blockquote {
         font-size: 22px;
         text-align: left !important;
         margin: 0 0 10px 0;
+      }
+
+      .mce-content-body & {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
       }
     }
   }
