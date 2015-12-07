@@ -7382,7 +7382,6 @@ label {
 }
 .gallery.collage .gallery-item {
   width: 50%;
-  border: 5px solid #FFFFFF;
   position: relative;
   overflow: hidden;
 }
@@ -7395,6 +7394,15 @@ label {
   -webkit-flex-basis: 50%;
       -ms-flex-preferred-size: 50%;
           flex-basis: 50%;
+}
+.gallery.collage .gallery-item .gallery-icon {
+  border: 5px solid #FFFFFF;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 .gallery.collage .gallery-item img {
   position: absolute;
@@ -10152,26 +10160,26 @@ body.home .photo-overlay h4.post-title {
   z-index: 50;
 }
 
-.full-bleed-quote {
+.full-bleed-text {
   position: relative;
   overflow: hidden;
   margin: 1.88em 0;
 }
-.full-bleed-quote.theme-light {
+.full-bleed-text.theme-light {
   background: #DCDFE5;
   color: #12151B;
 }
-.full-bleed-quote.theme-light.bg-img:after {
+.full-bleed-text.theme-light.bg-img:after {
   background: rgba(255, 255, 255, 0.8);
 }
-.full-bleed-quote.theme-dark {
+.full-bleed-text.theme-dark {
   background: #24315F;
   color: #FFFFFF;
 }
-.full-bleed-quote.theme-dark.bg-img:after {
+.full-bleed-text.theme-dark.bg-img:after {
   background: rgba(93, 96, 102, 0.7);
 }
-.full-bleed-quote.bg-img:after {
+.full-bleed-text.bg-img:after {
   content: '';
   position: absolute;
   display: block;
@@ -10181,7 +10189,7 @@ body.home .photo-overlay h4.post-title {
   height: 100%;
   z-index: 1;
 }
-.full-bleed-quote img {
+.full-bleed-text img {
   position: absolute;
   z-index: 0;
   width: 100%;
@@ -10192,7 +10200,7 @@ body.home .photo-overlay h4.post-title {
        -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
-.full-bleed-quote blockquote {
+.full-bleed-text .content {
   position: relative;
   z-index: 5;
   padding-top: 3em;
@@ -10202,9 +10210,15 @@ body.home .photo-overlay h4.post-title {
   line-height: 1.88em;
 }
 @media (max-width: 767px) {
-  .full-bleed-quote blockquote {
+  .full-bleed-text .content {
     font-size: 22px;
   }
+}
+.full-bleed-text .content p {
+  margin-bottom: 1em;
+}
+.full-bleed-text .content cite {
+  font-style: italic;
 }
 
 .parallax-img {
