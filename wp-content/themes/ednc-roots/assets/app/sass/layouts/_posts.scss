@@ -214,10 +214,6 @@
     padding: 1.88em 1.88em 1px;
     font-size: 20px;
 
-    a {
-      color: $white;
-    }
-
     @media (min-width: 893px) {
       margin-left: -7.35%;
       margin-right: -7.35%;
@@ -236,6 +232,7 @@
   .adsbygoogle {
     margin-bottom: 34px;
   }
+
 }
 .hentry footer {
   margin-bottom: 5em;
@@ -301,6 +298,10 @@
     background: $navy-darker;
     color: $white;
 
+    h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+
     &.bg-img:after {
       background: $stone-70;
     }
@@ -364,7 +365,7 @@
 .full-bleed-image {
   position: relative;
   overflow: hidden;
-  margin: 1.88em 0;
+  margin: 4rem 0;
 
   .parallax {
     position: relative;

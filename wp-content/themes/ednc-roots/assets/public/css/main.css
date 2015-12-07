@@ -6899,6 +6899,7 @@ h6, .h6 {
   color: #12151B;
   text-transform: uppercase;
   font-size: 16px;
+  margin-top: 2em;
 }
 
 .meta, .attr, .duration, .tribe-events-adv-list-widget .vevent .location {
@@ -7357,8 +7358,7 @@ label {
 }
 .gallery:not(.collage) .gallery-item {
   float: left;
-  padding: 0 10px;
-  margin-bottom: 20px;
+  padding: 5px;
 }
 .gallery.collage {
   position: absolute;
@@ -7568,6 +7568,7 @@ object, embed {
 .alignnone {
   margin-left: 0;
   margin-right: 0;
+  margin-top: 1.88em;
   margin-bottom: 1.88em;
   max-width: 100%;
 }
@@ -10118,9 +10119,6 @@ body.home .photo-overlay h4.post-title {
   padding: 1.88em 1.88em 1px;
   font-size: 20px;
 }
-.hentry .entry-content .intro-text a {
-  color: #FFFFFF;
-}
 @media (min-width: 893px) {
   .hentry .entry-content .intro-text {
     margin-left: -7.35%;
@@ -10174,6 +10172,9 @@ body.home .photo-overlay h4.post-title {
 }
 .full-bleed-text.theme-dark {
   background: #24315F;
+  color: #FFFFFF;
+}
+.full-bleed-text.theme-dark h2, .full-bleed-text.theme-dark h3, .full-bleed-text.theme-dark h4, .full-bleed-text.theme-dark h5, .full-bleed-text.theme-dark h6 {
   color: #FFFFFF;
 }
 .full-bleed-text.theme-dark.bg-img:after {
@@ -10235,7 +10236,7 @@ body.home .photo-overlay h4.post-title {
 .full-bleed-image {
   position: relative;
   overflow: hidden;
-  margin: 1.88em 0;
+  margin: 4rem 0;
 }
 .full-bleed-image .parallax {
   position: relative;
