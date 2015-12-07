@@ -15,7 +15,7 @@
     ob_start();
     ?>
 
-    <div class="intro-text">
+    <div class="article-intro-text">
       <?php echo apply_filters( 'the_content', $inner_content ); ?>
     </div>
 

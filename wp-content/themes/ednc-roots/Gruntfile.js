@@ -73,6 +73,9 @@ module.exports = function(grunt) {
         files: {
           'assets/public/css/main.css': [
             'assets/app/sass/main.scss'
+          ],
+          'assets/public/css/editor-style.css': [
+            'assets/app/sass/editor-style.scss'
           ]
         }
       },
@@ -88,6 +91,9 @@ module.exports = function(grunt) {
         files: {
           'assets/public/css/main.min.css': [
             'assets/app/sass/main.scss'
+          ],
+          'assets/public/css/editor-style.css': [
+            'assets/app/sass/editor-style.scss'
           ]
         }
       },

@@ -235,7 +235,7 @@ if ($category[0]->slug == 'powered-schools') {
       // TODO: check if this even exists and fallback to recent post from category?
     }
 
-    if ($post) {
+    if (!empty($post)) {
       setup_postdata($post);
       $pid = $post->ID;
 

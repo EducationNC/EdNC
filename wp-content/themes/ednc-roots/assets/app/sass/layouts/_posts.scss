@@ -207,28 +207,6 @@
   }
 }
 .hentry .entry-content {
-  .intro-text {
-    background: $steel;
-    color: $jet;
-    margin-bottom: 2em;
-    padding: 1.88em 1.88em 1px;
-    font-size: 20px;
-
-    a {
-      color: $white;
-    }
-
-    @media (min-width: 893px) {
-      margin-left: -7.35%;
-      margin-right: -7.35%;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 22px;
-      padding: 1.88em 10px 1px;
-    }
-  }
-
   p {
     word-wrap: break-word;
   }
@@ -236,6 +214,7 @@
   .adsbygoogle {
     margin-bottom: 34px;
   }
+
 }
 .hentry footer {
   margin-bottom: 5em;
@@ -283,6 +262,29 @@
   }
 }
 
+.article-intro-text {
+  background: $steel;
+  color: $jet;
+  margin-bottom: 2em;
+  padding: 1.88em 1.88em 1px;
+  font-size: 20px;
+
+  @media (min-width: 893px) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 22px;
+    padding: 1.88em 10px 1px;
+  }
+
+  .mce-content-body & {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
 .full-bleed-text {
   position: relative;
   overflow: hidden;
@@ -300,6 +302,10 @@
   &.theme-dark {
     background: $navy-darker;
     color: $white;
+
+    h2, h3, h4, h5, h6 {
+      color: $white;
+    }
 
     &.bg-img:after {
       background: $stone-70;
@@ -361,10 +367,14 @@
   background-position: 50% 50%;
 }
 
+.wpview-wrap[data-wpview-type="parallax-image"] {
+  margin-bottom: 4rem;
+}
+
 .full-bleed-image {
   position: relative;
   overflow: hidden;
-  margin: 1.88em 0;
+  margin: 4rem 0;
 
   .parallax {
     position: relative;
