@@ -2,8 +2,6 @@
 <body <?php body_class(); ?>>
   <?php get_template_part('templates/facebook-sdk'); ?>
 
-  <a id="trigger-offcanvas" class="nav-toggle hidden-md hidden-lg hidden-print" href="#"><span>Menu</span></a>
-
   <div class="wrapper">
     <div id="oc-pusher" class="oc-pusher">
 
@@ -12,10 +10,6 @@
           <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'roots'); ?>
         </div>
       <![endif]-->
-
-      <?php
-        get_template_part('templates/mobile-menu');
-      ?>
 
       <div class="inner-wrapper">
 
