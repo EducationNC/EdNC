@@ -10291,6 +10291,9 @@ body.home .photo-overlay h4.post-title {
 .hentry .entry-content .adsbygoogle {
   margin-bottom: 34px;
 }
+.hentry .entry-content .alignnone:first-child {
+  margin-top: 0;
+}
 
 .hentry footer {
   margin-bottom: 5em;
