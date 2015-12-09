@@ -15,3 +15,36 @@
     text-decoration: none;
   }
 }
+
+.dropdown {
+  .widgetized-menu {
+    width: 266px;
+
+    &.sidebars-2 {
+      width: 532px;
+    }
+
+    &.sidebars-3 {
+      width: 800px;
+    }
+
+    .menu {
+      list-style: none;
+      padding-left: 0;
+      font-size: .9em;
+
+      a {
+        line-height: 1.7em;
+        color: $raven;
+      }
+    }
+  }
+
+  .widgettitle-in-submenu {
+    @extend h6;
+    margin: .5em 0;
+    border-bottom: 1px solid $heather;
+    padding-bottom: 5px;
+    color: $raven;
+  }
+}

@@ -1,0 +1,207 @@
+/*----------------------------------------------------
+	ADMIN OPTIONS STYLING
+---------------------------------------------------- */
+#dd_contact-option-container input,
+#dd_facebook-option-container input,
+#dd_twitter-option-container input{
+	max-width:450px;
+}
+#dd_contact-option-container label,
+#dd_facebook-option-container label,
+#dd_twitter-option-container label{
+width: 100px;
+display: block;
+float: left;
+vertical-align: middle;
+padding-top: 5px;
+}
+.dd_allstyleoptions-container .wp-picker-holder{
+	position:relative;
+	z-index:5;
+}
+
+#select_reg_menu option.dd_select_currentOption{
+background: #b5e8ff;
+color: #1e8cbe;
+}
+/*--FOR CUSTOM DROPDOWNS PLUGIN OPTIONS PAGE (Appearance->Dropdown Menus)--*/
+.dd_alert-container{
+	display:none;
+	background: #1e8cbe;
+	color: white;
+	padding: 10px 15px;
+	font-weight: bold;
+	font-size: 13px;
+	width: 80%;
+}
+.dd_activate-container{
+	display:none;
+	background: #1e8cbe;
+	color: white;
+	padding: 10px 15px;
+	font-weight: bold;
+	font-size: 13px;
+	max-width:450px;
+	width:100%;
+}
+.dd_activate-container input{margin-top:5px;}
+.dd_allstyleoptions-container{
+background: #fcfcfc;
+padding: 15px;
+width:90%;
+display:inline-block;
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.dd_allstyleoptions-container hr{
+	max-width:550px;
+}
+.dd_registered_nav_menu-container{	
+	width:100%;
+}
+.dd_registered_nav_menu-container{
+	margin:20px 0;
+}
+.dd_hr{
+border: 0;
+border-top: 1px solid #ddd;
+border-bottom: 1px solid #fafafa;
+margin: 10px 0;
+}
+.dd_option-arrow{
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;	
+float:left;
+cursor:pointer;
+}
+.dd_option-arrow:before{
+right: 0;
+top: 0px;	
+font: 400 20px/1 dashicons;
+speak: none;
+display: inline-block;
+position: relative;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-decoration: none!important;
+content: '\f140';/*arrow down*/
+}
+.dd_option-arrow.dd_expanded:before{
+content: '\f142';/*arrow up*/
+}
+.appearance_page_menu_dd #wpfooter{display:none;}
+.registered_nav_menu_item{display:inline-block;width:100%;}
+.choose-widgetize-menu, .dd_option-container{
+padding: 0;
+margin: 10px 0;
+}
+#menu_dd__options-settings-form textarea{width:100%;max-width:450px;height:150px;}
+.dd_option-container .dd_option-header{
+width:100%;
+max-width:450px;
+display: inline-block;
+position:relative;
+}
+.dd_option-container{
+display: inline-block;
+width: 100%;
+margin:5px 0;	
+}
+.dd_option-container .dd_option-body{
+display:none;
+}
+#dd_instructions-option-container{
+	display:none;
+	width:100%;
+	max-width:480px;
+}
+#dd_instructions-option-container .dd_option-header{padding:15px 0 0 15px;}
+#dd_instructions-option-container .dd_option-arrow{top: 12px;}
+#dd_instructions-option-container .dd_option-body{
+	background:#fcfcfc;
+	margin-top: 5px;
+	padding:15px;
+	border: 1px solid #ddd;
+}
+#dd_import-nav-colors_container{
+	padding: 15px;
+	border: 1px solid #999;
+	margin: 15px 0;
+	max-width: 450px;
+	width: 100%;
+	background: #ddd;
+}
+#dd_color-option-container .dd_option-body #dd_option-allcolors > div{
+float: left;
+margin: 0 5%;
+width: 20%;
+height: 100px;
+}
+#dd_color-option-container .dd_option-body #dd_option-allcolors > div label{font-weight:bold;font-size:12px;}
+#dd_color-option-container .dd_option-body #dd_option-allcolors > div label em{font-weight:normal;}
+.registered_nav_menu_header{
+background: #fafafa;
+border: 1px solid #e5e5e5;
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+box-shadow: 0 1px 1px rgba(0,0,0,.04);
+padding: 10px;
+width:100%;
+max-width: 450px;
+display:inline-block;
+}
+.registered_nav_menu_title{
+line-height: 1.4em;
+font-size: 13px;
+float:left;
+color: #222;
+font-weight: 600;
+}
+.registered_nav_menu_checkbox{
+float:right;
+}
+.dd_column-container{
+width:100%;
+position: relative;
+display: inline-block;
+margin: 12px 0;
+}
+.dd_column-option{
+float: left;
+text-align:center;
+width:100px;
+margin: 5px 20px 5px 0;
+padding:0;
+}
+.dd_column-graphic{
+background:#ccc;
+width:100px;
+height:70px;
+overflow:hidden;
+position:relative;
+border-top: 1px solid #666;
+border-bottom: 1px solid #666;
+}
+.dd_column-option input{margin:0;}
+.dd_column{
+border-left:1px dashed #555;
+border-right:1px dashed #555;
+float:left;
+padding:0;
+margin:0;
+height:100%;
+}
+
+@media (max-width: 1000px) {
+#dd_color-option-container .dd_color-option-body > div{width:30%;}
+#dd_color-option-container .dd_option-body #dd_option-allcolors > div{
+width: 40%;
+}
+}
+@media (max-width: 768px) {
+#dd_color-option-container .dd_color-option-body > div{width:50%;}
+}

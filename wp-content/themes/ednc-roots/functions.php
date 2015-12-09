@@ -31,7 +31,8 @@ $roots_includes = array(
   'lib/custom-pub-date.php',  // Temporary functions for adding pub date to custom field
   'lib/plugin-support-plugins.php',  // Add notices of required plugins for this theme
   'lib/customizer.php',       // Customizer settings
-  'lib/social-share-count.php'// Social share count class
+  'lib/social-share-count.php',// Social share count class
+  'lib/widgetized-nav.php'    // Widgetized navigation menus
 );
 
 foreach ($roots_includes as $file) {

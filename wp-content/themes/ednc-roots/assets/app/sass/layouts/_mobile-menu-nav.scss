@@ -1,80 +1,78 @@
-
 .mobile-bar {
-  color: $gray-text;
-  height: 2.8125rem;
-  line-height: 2.8125rem;
+  background: $steel;
+  height: 55px;
   position: relative;
   z-index: 2;
-  @include gray-gradient-right;
 
-  a {
-    color: $gray-text;
-    text-decoration: none !important;
-    transition: color .3s;
-
-    &:hover, &:focus, &:active {
-      color: $gray-text;
-    }
-  }
-
-  .title {
-    width: 134px;
-    height: 55px;
-    padding: 10px 0;
-    margin: 0 auto;
-    text-align: center;
-    @include purple-gradient-right;
-
-    img {
-      vertical-align: top;
-    }
+  @media (min-width: $screen-sm-min) {
+    height: 80px;
   }
 }
 
-.mobile-bar-section {
-  padding: 0 .625rem;
+.mobile-logo {
+  width: 55px;
+  height: 55px;
   position: absolute;
-  text-align: center;
-  height: 2.8125rem;
   top: 0;
+  left: 0;
 
-  &.middle {
-    left: 2.8125rem;
-    right: 2.8125rem;
+  @media (min-width: $screen-sm-min) {
+    width: 80px;
+    height: 80px;
+    top: 15px;
+    left: 15px;
   }
 }
 
-.right-small {
-  border-left: none;
-  text-align: center;
-  font-size: 1.6rem;
-  line-height: 2em;
-  width: 2.8125rem;
-  height: 2.8125rem;
+.mobile-menu {
   position: absolute;
   top: 0;
   right: 0;
+  height: 55px;
+
+  @media (min-width: $screen-sm-min) {
+    height: 80px;
+  }
+
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
 }
 
 .nav-toggle {
   position: absolute;
-  top: 13px;
-  left: 10px;
+  top: 19px;
+  right: 10px;
   cursor: pointer;
   padding: 8px 30px 16px 0;
   color: transparent;
   z-index: 1000;
 
+  @media (min-width: $screen-sm-min) {
+    top: 30px;
+    right: 15px;
+
+    &:before {
+      content: 'MENU';
+      color: $jet;
+      font-family: $font-family-sans-serif;
+      position: absolute;
+      left: -53px;
+      top: -2px;
+    }
+  }
+
   span, span:before, span:after {
     cursor: pointer;
     border-radius: 1px;
-    height: 4px;
+    height: 2px;
     width: 30px;
-    background: $gray-text;
+    background: $jet;
     position: absolute;
     display: block;
     content: '';
-    transition: all 500ms ease-in-out;
+    transition: all 200ms ease-in-out;
     color: transparent;
   }
 
@@ -105,23 +103,147 @@
   }
 }
 
-.mobile-bar-search {
-  color: $midnight;
-  position: relative;
-  background-color: $ice;
-  padding: 15px 10px 10px;
+.mobile-nav {
   position: absolute;
-  top: 2.8125rem;
-  left: 0;
   right: 0;
-  visibility: hidden;
-  z-index: 0;
-  transition: all .3s;
+  top: 100%;
+  width: 320px;
+  background: $steel;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: none;
 
-  input {
+  .active + & {
+    display: block;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
   }
+
+  .menu {
+    a, .widgettitle-in-submenu {
+      text-decoration: none;
+      display: block;
+      font-family: $font-family-sans-serif;
+      text-transform: uppercase;
+      color: $jet;
+      padding: 10px 20px;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.4em;
+    }
+  }
+
+  .social-media {
+    padding: 10px 20px;
+
+    a {
+      color: $ash;
+      text-decoration: none;
+      font-size: 20px;
+    }
+  }
+
+  .btn {
+    text-transform: none;
+    font-size: .9em;
+    line-height: 2em;
+  }
 }
+
+.expandable-title, .widgettitle-in-submenu {
+  position: relative;
+
+  .caret {
+    display: block;
+    position: absolute;
+    right: 20px;;
+    top: 20px;
+    border-width: 7px;
+    transform: rotate(-90deg);
+    transition: transform 200ms ease-in-out;
+  }
+
+  &.open .caret {
+    transform: rotate(0deg);
+  }
+}
+
+.expandable {
+  background: $pearl;
+  overflow: hidden;
+  height: 0;
+  transition: height 200ms ease-in-out;
+
+  .open + & {
+    height: auto;
+  }
+}
+
+.widgettitle-in-submenu {
+  & + .menu {
+    background: $heather;
+    overflow: hidden;
+    height: 0;
+  }
+
+  &.open + .menu {
+    height: auto;
+  }
+}
+
+.widget_nav_menu .menu {
+  a {
+    text-transform: none;
+  }
+}
+
+.mobile-search {
+  padding: 10px 20px;
+  position: relative;
+
+  .form-control {
+    width: 100%;
+    height: 44px;
+    padding: 6px 12px;
+    font-size: 18px;
+  }
+
+  .btn {
+    display: none;
+  }
+
+  .icon-search {
+    position: absolute;
+    top: 21px;
+    right: 30px;
+    color: $ash;
+    text-decoration: none;
+    font-size: 20px;
+  }
+}
+
+// .mobile-bar-search {
+//   color: $midnight;
+//   position: relative;
+//   background-color: $ice;
+//   padding: 15px 10px 10px;
+//   position: absolute;
+//   top: 2.8125rem;
+//   left: 0;
+//   right: 0;
+//   visibility: hidden;
+//   z-index: 0;
+//   transition: all .3s;
+//
+//   input {
+//     margin: 0;
+//   }
+// }
 
 .search-pushed {
   .mobile-bar-search {
