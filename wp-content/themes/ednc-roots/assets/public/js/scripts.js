@@ -1965,7 +1965,14 @@ var Roots = {
 
       // Hide header search field when it loses focus
       $('#header-search .input-sm').on('blur', function() {
-        $('#header-search .input-sm').removeClass('visible');
+        window.setTimeout(function() {
+          $('#header-search .input-sm').removeClass('visible');
+        }, 200);
+      });
+
+      // Submit search form on mobile nav when search icon is clicked
+      $('#mobile-nav #icon-search').on(clickortap, function() {
+        $('#mobile-nav .mobile-search form').submit();
       });
 
       // Toggle menu button to x close state on click
