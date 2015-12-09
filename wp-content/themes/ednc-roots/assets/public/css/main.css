@@ -8972,6 +8972,7 @@ section {
     position: absolute;
     left: -53px;
     top: -2px;
+    font-size: 16px;
   }
 }
 .nav-toggle span, .nav-toggle span:before, .nav-toggle span:after {
