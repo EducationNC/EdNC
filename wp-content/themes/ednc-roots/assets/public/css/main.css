@@ -8958,7 +8958,6 @@ section {
   cursor: pointer;
   padding: 8px 30px 16px 0;
   color: transparent;
-  z-index: 1000;
 }
 @media (min-width: 768px) {
   .nav-toggle {
@@ -8973,6 +8972,7 @@ section {
     left: -53px;
     top: -2px;
     font-size: 16px;
+    padding-right: 7px;
   }
 }
 .nav-toggle span, .nav-toggle span:before, .nav-toggle span:after {
