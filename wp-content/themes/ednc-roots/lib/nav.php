@@ -196,7 +196,6 @@ class Mobile_Nav_Walker extends Walker_Nav_Menu {
  function end_lvl( &$output, $depth = 0, $args = array() ) {
    $indent = str_repeat("\t", $depth);
    $output .= "$indent</ul>\n";
-   $output .= "$indent</div>\n";
  }
 
  function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
