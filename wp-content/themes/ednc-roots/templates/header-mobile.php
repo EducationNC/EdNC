@@ -5,7 +5,7 @@
     <a id="nav-toggle" class="nav-toggle" href="#"><span>Menu</span></a>
 
     <ul id="mobile-nav" class="mobile-nav">
-      <l>
+      <li>
         <?php
         wp_nav_menu(array(
           'theme_location' => 'primary_navigation',
