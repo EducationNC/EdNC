@@ -42,8 +42,23 @@ var Roots = {
         return(false);
       }
 
+      // Toggle search button to show search field
+      $('#header-search #icon-search').on(clickortap, function() {
+        if ($('#header-search .input-sm').hasClass('visible')) {
+          $('#header-search form').submit();
+        } else {
+          $('#header-search .input-sm').addClass('visible').focus();
+        }
+      });
+
+      // Hide header search field when it loses focus
+      $('#header-search .input-sm').on('blur', function() {
+        $('#header-search .input-sm').removeClass('visible');
+      });
+
       // Toggle menu button to x close state on click
-      $('#trigger-offcanvas').on(clickortap, function() {
+      $('#nav-toggle').on(clickortap, function(e) {
+        e.preventDefault();
         if ($(this).hasClass('active')) {
           $(this).removeClass('active');
         } else {
@@ -51,34 +66,46 @@ var Roots = {
         }
       });
 
-      // Toggle menu button to normal state if clicking on page to close menu
-      $('#oc-pusher').on(clickortap, function(e) {
-        // Exclude clicks on menu
-        if($(e.target).is('#oc-menu')){
-          e.preventDefault();
-          return;
-        }
-
-        if (!$(this).hasClass('oc-pushed')) {
-          $('#trigger-offcanvas').removeClass('active');
+      // Expandable mobile nav menu
+      $('#mobile-nav .expandable-title, #mobile-nav .widgettitle-in-submenu').on(clickortap, function(e) {
+        e.preventDefault();
+        if ($(this).hasClass('open')) {
+          $(this).removeClass('open');
+        } else {
+          $(this).addClass('open');
         }
       });
 
-      // Initiate the off-canvas push menu
-      new MLPushMenu( document.getElementById( 'oc-menu' ), document.getElementById( 'trigger-offcanvas' ) );
+      $('#mobile-nav .widgettitle-in-submenu').append('<span class="caret"></span>');
 
-      // Toggle visibility of search bar on mobile
-      $('#trigger-mobile-search').on(clickortap, function() {
-        $('#oc-pusher').toggleClass('search-pushed');
-      });
-
-      // Helper function for translation cookies
-      function getDomainName(hostName) {
-        return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
-      }
+      // // Toggle menu button to normal state if clicking on page to close menu
+      // $('#oc-pusher').on(clickortap, function(e) {
+      //   // Exclude clicks on menu
+      //   if($(e.target).is('#oc-menu')){
+      //     e.preventDefault();
+      //     return;
+      //   }
+      //
+      //   if (!$(this).hasClass('oc-pushed')) {
+      //     $('#trigger-offcanvas').removeClass('active');
+      //   }
+      // });
+      //
+      // // Initiate the off-canvas push menu
+      // new MLPushMenu( document.getElementById( 'oc-menu' ), document.getElementById( 'trigger-offcanvas' ) );
+      //
+      // // Toggle visibility of search bar on mobile
+      // $('#trigger-mobile-search').on(clickortap, function() {
+      //   $('#oc-pusher').toggleClass('search-pushed');
+      // });
+      //
+      // // Helper function for translation cookies
+      // function getDomainName(hostName) {
+      //   return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
+      // }
 
       // Set up translation on click
-      $(document).on('click','a#gtranslate', function(e) {
+      $(document).on(clickortap,'a#gtranslate', function(e) {
         e.preventDefault();
         hostname = window.location.hostname;
         domain = getDomainName(hostname);
@@ -264,7 +291,7 @@ var Roots = {
       });
 
       // Smooth scroll to anchor on same page
-      $('a[href*=#]:not([href=#]):not(.collapsed)').click(function() {
+      $('a[href*=#]:not([href=#]):not(.collapsed)').on(clickortap, function() {
         if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
           var target = $(this.hash);
           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -278,7 +305,7 @@ var Roots = {
       });
 
       // Close mobile ad on button tap
-      $('#mobile-ad .close').click(function() {
+      $('#mobile-ad .close').on(clickortap, function() {
         $('#mobile-ad').detach();
         $('.icon-share').css({'bottom': '0'});
       });
@@ -376,11 +403,11 @@ var Roots = {
       });
 
       // Manual carousel nav
-      $('.fc-nav .fc-next').on('click', function() {
+      $('.fc-nav .fc-next').on(clickortap, function() {
         owl.trigger('next.owl.carousel');
       });
 
-      $('.fc-nav .fc-prev').on('click', function() {
+      $('.fc-nav .fc-prev').on(clickortap, function() {
         owl.trigger('prev.owl.carousel');
       });
 
