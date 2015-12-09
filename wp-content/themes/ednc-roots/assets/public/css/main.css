@@ -9043,6 +9043,14 @@ section {
   font-size: 18px;
   line-height: 1.4em;
 }
+.mobile-nav .widgettitle-in-submenu + .menu {
+  background: #AAADB3;
+  overflow: hidden;
+  height: 0;
+}
+.mobile-nav .widgettitle-in-submenu.open + .menu {
+  height: auto;
+}
 .mobile-nav .social-media {
   padding: 10px 20px;
 }
@@ -9090,15 +9098,6 @@ section {
           transition: height 200ms ease-in-out;
 }
 .open + .expandable {
-  height: auto;
-}
-
-.widgettitle-in-submenu + .menu {
-  background: #AAADB3;
-  overflow: hidden;
-  height: 0;
-}
-.widgettitle-in-submenu.open + .menu {
   height: auto;
 }
 

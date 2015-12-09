@@ -138,6 +138,18 @@
     }
   }
 
+  .widgettitle-in-submenu {
+    & + .menu {
+      background: $heather;
+      overflow: hidden;
+      height: 0;
+    }
+
+    &.open + .menu {
+      height: auto;
+    }
+  }
+
   .social-media {
     padding: 10px 20px;
 
@@ -180,18 +192,6 @@
   transition: height 200ms ease-in-out;
 
   .open + & {
-    height: auto;
-  }
-}
-
-.widgettitle-in-submenu {
-  & + .menu {
-    background: $heather;
-    overflow: hidden;
-    height: 0;
-  }
-
-  &.open + .menu {
     height: auto;
   }
 }
