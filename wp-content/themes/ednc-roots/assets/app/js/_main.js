@@ -105,11 +105,11 @@ var Roots = {
       // $('#trigger-mobile-search').on(clickortap, function() {
       //   $('#oc-pusher').toggleClass('search-pushed');
       // });
-      //
-      // // Helper function for translation cookies
-      // function getDomainName(hostName) {
-      //   return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
-      // }
+      
+      // Helper function for translation cookies
+      function getDomainName(hostName) {
+        return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
+      }
 
       // Set up translation on click
       $(document).on(clickortap,'a#gtranslate', function(e) {
