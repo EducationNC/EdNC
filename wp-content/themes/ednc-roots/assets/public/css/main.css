@@ -7145,8 +7145,8 @@ pre {
  */
 @font-face {
   font-family: "ednc";
-  src: url(../fonts/ednc.eot);
-  src: url(../fonts/ednc.eot?#iefix) format("embedded-opentype"), url(../fonts/ednc.woff) format("woff"), url(../fonts/ednc.ttf) format("truetype"), url(../fonts/ednc.svg#ednc) format("svg");
+  src: url(../fonts/ednc.eot?v=1);
+  src: url(../fonts/ednc.eot?#iefix?v=1) format("embedded-opentype"), url(../fonts/ednc.woff?v=1) format("woff"), url(../fonts/ednc.ttf?v=1) format("truetype"), url(../fonts/ednc.svg#ednc?v=1) format("svg");
   font-weight: normal;
   font-style: normal;
 }
