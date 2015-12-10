@@ -105,7 +105,7 @@ var Roots = {
       // $('#trigger-mobile-search').on(clickortap, function() {
       //   $('#oc-pusher').toggleClass('search-pushed');
       // });
-      
+
       // Helper function for translation cookies
       function getDomainName(hostName) {
         return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
@@ -116,7 +116,7 @@ var Roots = {
         e.preventDefault();
         hostname = window.location.hostname;
         domain = getDomainName(hostname);
-        document.cookie = "googtrans=/en/es;path=/;domain=" + hostname + ";";
+        // document.cookie = "googtrans=/en/es;path=/;domain=" + hostname + ";";
         document.cookie = "googtrans=/en/es;path=/;domain=" + domain + ";";
         location.reload();
       });
