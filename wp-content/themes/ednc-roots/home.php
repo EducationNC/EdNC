@@ -205,6 +205,19 @@ $featured_ids = array();
       'posts_per_page' => 4,
       'post_type' => 'post',
       'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'perspectives',
+          'operator' => 'NOT IN'
+        ),
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'news',
+          'operator' => 'NOT IN'
+        ),
         array(
           'taxonomy' => 'appearance',
           'field' => 'slug',
@@ -268,7 +281,7 @@ $featured_ids = array();
 
     $args = array(
       'posts_per_page' => $post_num,
-      'post__not_in' => $featured_ids,
+      // 'post__not_in' => $featured_ids,
       'tax_query' => array(
         'relation' => 'AND',
         array(
@@ -316,7 +329,7 @@ $featured_ids = array();
     // Show 4 most recent perspectives
     $args = array(
       'posts_per_page' => 4,
-      'post__not_in' => $featured_ids,
+      // 'post__not_in' => $featured_ids,
       'tax_query' => array(
         'relation' => 'AND',
         array(
