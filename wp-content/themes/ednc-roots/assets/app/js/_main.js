@@ -215,6 +215,14 @@ var Roots = {
   // Single posts
   single: {
     init: function() {
+      // Determine trigger for touch/click events
+      var clickortap;
+      if ($('html').hasClass('touch')) {
+        clickortap = 'touchend';
+      } else {
+        clickortap = 'click';
+      }
+
       // Check for mobile or IE
       var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
 
@@ -351,6 +359,14 @@ var Roots = {
   // Flash cards
   single_flash_cards: {
     init: function() {
+    
+      // Determine trigger for touch/click events
+      var clickortap;
+      if ($('html').hasClass('touch')) {
+        clickortap = 'touchend';
+      } else {
+        clickortap = 'click';
+      }
 
       /**
        * OWL CAROUSEL 2
