@@ -1,0 +1,373 @@
+p {
+  margin-bottom: 1.88em;
+  line-height: 1.88em;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+  }
+}
+
+a {
+  transition: all .3s;
+  text-decoration: underline;
+
+  &:hover, &:active, &:focus {
+    // color: $plum;
+    text-decoration: underline;
+  }
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  margin: 1em 0 .5em;
+}
+
+h1, .h1, .article-title, .entry-title {
+  font-family: $font-family-serif;
+  color: $plum;
+  font-size: 30px;
+  font-weight: normal;
+
+  @media (min-width: $screen-md-min) {
+    font-size: 36px;
+  }
+
+  .article-title-overlay & {
+    color: $white;
+    font-size: 3rem;
+    line-height: 1.2em;
+    font-weight: 300;
+  }
+
+  + h2, .h2, .article-subtitle {
+    margin-top: 0;
+  }
+
+  a {
+    color: $plum;
+    text-decoration: none;
+  }
+}
+
+h2, .h2, .article-subtitle {
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
+  color: $gray;
+  font-size: 28px;
+  white-space: normal;
+
+  @media (min-width: $screen-md-min) {
+    font-size: 30px;
+  }
+}
+
+h3, .h3 {
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
+  color: $jet;
+  font-size: 24px;
+
+  .entry-content li & {
+    font-family: $font-family-serif;
+    font-weight: 300;
+    font-style: italic;
+    margin-top: 1em;
+  }
+
+  &.post-title {
+    margin: 0;
+
+    a {
+      color: $jet;
+      text-decoration: none;
+    }
+  }
+}
+
+h4, .h4 {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  color: $jet;
+  font-size: 24px;
+
+  li & {
+    font-size: 1.125rem;
+    font-weight: 300;
+    margin: 0;
+
+    a {
+      color: $jet;
+      text-decoration: none;
+    }
+  }
+}
+
+h5, .h5 {
+  font-family: $font-family-serif;
+  font-weight: normal;
+  color: $jet;
+  font-size: 20px;
+}
+
+h6, .h6 {
+  font-family: $font-family-sans-serif;
+  font-weight: bold;
+  color: $jet;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-top: 2em;
+}
+
+.meta, .attr, .duration {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: $gray;
+
+  li & {
+    color: $navy;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  img {
+    margin-bottom: 1em;
+  }
+
+  p {
+    line-height: 1.5em;
+    margin-bottom: 1.5em;
+  }
+}
+
+.label {
+  background: $navy-darkest;
+  color: $white;
+  padding: 5px 15px;
+  font-size: 1rem;
+  min-width: 140px;
+  font-family: $font-family-serif;
+  font-weight: 300;
+  border-radius: 0;
+
+  &.big {
+    font-size: 1.25rem;
+    line-height: 1em;
+    padding: 1rem 1.5rem 1.0625rem;
+  }
+
+  &.small {
+    font-size: .7rem;
+    line-height: 1em;
+    vertical-align: middle;
+  }
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
+
+  [class^="icon-"],
+  [class*=" icon-"] {
+    line-height: 0;
+    font-size: 1.5em;
+    vertical-align: -5px;
+  }
+
+  .entry-content & {
+    background: $steel;
+    color: $jet;
+
+    a {
+      color: $jet;
+    }
+  }
+}
+
+.column-name {
+  font-family: $font-family-serif;
+  font-size: $font-size-h2;
+  font-style: italic;
+  color: $white;
+  margin: 1em 0 0;
+}
+
+.caption {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  background: none;
+}
+
+.intro {
+  font-family: $font-family-serif;
+  font-weight: 300;
+  font-size: $font-size-h4;
+  line-height: 1.7em;
+}
+
+blockquote, .blockquote {
+  margin: 0 0 1.88em;
+  padding: 0;
+  border: none;
+
+  p {
+    font-family: $font-family-sans-serif;
+    padding: 10px 10px;
+    border-left: 10px solid $steel;
+    background: lighten($steel, 9%);
+    margin: 0;
+
+    @media (min-width: $screen-sm-min) {
+      border-left-width: 20px;
+      padding: 10px 20px;
+    }
+
+    @media (min-width: 893px) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+    }
+
+    .mce-content-body & {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    &[style*=left], &[style*=right], &[style*=center] {
+      font-family: $font-family-serif;
+      font-size: $font-size-h3;
+      background: none;
+      padding: 0;
+      border-left: 0;
+    }
+
+    &[style*=left], &[style*=right] {
+      position: relative;
+      // border-top: 3px solid $ice;
+      // border-bottom: 3px solid $ice;
+      margin: 0 0 1.25rem;
+
+      &:before {
+        content: attr(data-before);
+        position: absolute;
+        top: -22px;
+        left: -24px;
+        z-index: -1;
+        color: $steel;
+        font-size: 144px;
+        line-height: 1em;
+      }
+
+      @media (min-width: 545px) {
+        width: 50%;
+      }
+    }
+
+    &[style*=left] {
+      float: left;
+      margin-right: 1.25rem;
+
+      @media (min-width: 893px) {
+        margin-left: -7.35%;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        margin-left: 1.25rem;
+        margin-bottom: 10px;
+        font-size: 22px;
+      }
+
+      .mce-content-body & {
+        margin-left: 0 !important;
+      }
+    }
+
+    &[style*=right] {
+      float: right;
+      text-align: left !important;
+      margin-left: 1.25rem;
+
+      @media (min-width: 893px) {
+        margin-right: -7.35%;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        margin-right: 1.25rem;
+        margin-bottom: 10px;
+        font-size: 22px;
+      }
+
+      .mce-content-body & {
+        margin-right: 0 !important;
+      }
+    }
+
+    &[style*=center] {
+      color: $gray;
+      margin: 2.5rem 0;
+
+      @media (min-width: 893px) {
+        margin: 4rem -7.35%;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 22px;
+        text-align: left !important;
+        margin: 0 0 10px 0;
+      }
+
+      .mce-content-body & {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  &:before {
+    display: none;
+  }
+
+  cite {
+    font-style: italic;
+  }
+}
+
+sup.footnote {
+  a:before {
+    content: '\005B';
+  }
+
+  a:after {
+    content: '\005D';
+  }
+}
+
+.big {
+  font-size: 1.25em;
+  line-height: 0;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.small, small {
+  font-size: 80%;
+}
+
+.normal {
+  font-weight: normal;
+}
+
+.normal-style {
+  font-style: normal !important;
+}
+
+pre {
+  margin-top: 10px;
+}
+
+.tight.tight {
+  li {
+    margin: 0;
+  }
+}

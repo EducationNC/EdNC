@@ -11,6 +11,13 @@
  * ======================================================================== */
 
 (function($) {
+  // Determine trigger for touch/click events
+  var clickortap;
+  if ($('html').hasClass('touch')) {
+    clickortap = 'touchend';
+  } else {
+    clickortap = 'click';
+  }
 
   // Use this variable to set up the common and page specific functions. If you
   // rename this variable, you will also need to rename the namespace below.
@@ -18,7 +25,50 @@
     // All pages
     'common': {
       init: function() {
-        // JavaScript to be fired on all pages
+          
+        // Toggle search button to show search field
+        $('#header-search #icon-search').on(clickortap, function() {
+          if ($('#header-search .input-sm').hasClass('visible')) {
+            $('#header-search form').submit();
+          } else {
+            $('#header-search .input-sm').addClass('visible').focus();
+          }
+        });
+
+        // Hide header search field when it loses focus
+        $('#header-search .input-sm').on('blur', function() {
+          window.setTimeout(function() {
+            $('#header-search .input-sm').removeClass('visible');
+          }, 200);
+        });
+
+        // Submit search form on mobile nav when search icon is clicked
+        $('#mobile-nav #icon-search').on(clickortap, function() {
+          $('#mobile-nav .mobile-search form').submit();
+        });
+
+        // Toggle menu button to x close state on click
+        $('#nav-toggle').on(clickortap, function(e) {
+          e.preventDefault();
+          if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+          } else {
+            $(this).addClass('active');
+          }
+        });
+
+        // Expandable mobile nav menu
+        $('#mobile-nav .expandable-title, #mobile-nav .widgettitle-in-submenu').on(clickortap, function(e) {
+          e.preventDefault();
+          if ($(this).hasClass('open')) {
+            $(this).removeClass('open');
+          } else {
+            $(this).addClass('open');
+          }
+        });
+
+        $('#mobile-nav .widgettitle-in-submenu').append('<span class="caret"></span>');
+
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired

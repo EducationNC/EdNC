@@ -1,0 +1,275 @@
+.brand {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.banner {
+  margin-bottom: 5em;
+  position: relative;
+  z-index: 10;
+  font-family: $font-family-sans-serif;
+
+  a {
+    color: $ash;
+    text-decoration: none;
+
+    &:hover {
+      color: $navbar-default-link-hover-color;
+    }
+  }
+
+  .gtranslate {
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .hero-image & {
+    a {
+      color: $white;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 125px;
+      @include trans-stone-gradient-top;
+    }
+  }
+
+  .container-fluid {
+    position: relative;
+    z-index: 1;
+    height: 38px;
+    background: $steel;
+
+    .hero-image & {
+      background: none;
+    }
+  }
+
+  .minor-links {
+    margin: 9px 0 0;
+
+    a {
+      vertical-align: top;
+    }
+  }
+
+  .search {
+    float: left;
+
+    .input-sm {
+      margin-right: 8px;
+      margin-top: -4px;
+      width: 0px;
+      opacity: 0;
+      transition: all .3s;
+      font-size: 12px;
+      height: 30px;
+
+      &.visible {
+        width: 180px;
+        opacity: 1;
+      }
+
+      &:focus {
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    .btn {
+      display: none;
+    }
+  }
+
+  .navbar {
+    border: none;
+    position: relative;
+    z-index: 1;
+
+    .hero-image & {
+      background: none;
+    }
+  }
+
+  .navbar-right {
+    margin-right: 0;
+  }
+
+  .navbar-nav {
+    padding-left: 110px;
+
+    a {
+      overflow: hidden;
+    }
+
+    & > li {
+      text-transform: uppercase;
+      font-size: 17px;
+
+      & > a {
+        padding-left: 10px;
+        padding-right: 10px;
+        line-height: 20px;
+
+        &:after {
+          content: '';
+          width: 100%;
+          height: 3px;
+          background: $plum;
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          transform: translateY(0);
+          transition: transform .3s;
+        }
+      }
+
+      .hero-image & > a {
+        color: $white;
+      }
+    }
+
+    & > li:not(.active):hover {
+      & > a:after {
+        transform: translateY(-3px);
+      }
+    }
+
+    & > li.active {
+      & > a {
+        &:after {
+          background: $plum;
+          transform: translateY(-3px);
+        }
+      }
+    }
+
+    .menu-home a {
+      text-indent: -100em;
+      overflow: hidden;
+      width: 44px;
+
+      &:before {
+        content: "v";
+        font-family: "ednc" !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        left: 12px;
+        text-indent: 0;
+      }
+    }
+  }
+
+  .social-media {
+    float: left;
+    margin: 0 10px;
+
+    ul {
+      margin: 0;
+    }
+
+    li {
+      height: 35px;
+      line-height: 35px;
+
+      a {
+        position: relative;
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        line-height: 44px;
+        font-size: 1.2em;
+        padding: 0;
+
+        &:before {
+          position: absolute;
+          z-index: 5;
+          text-align: center;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+      }
+    }
+  }
+
+  .btn-group {
+    a {
+      color: $white;
+      text-transform: none;
+      font-size: 16px;
+      padding: 10px 16px;
+      border-radius: 0;
+      height: 44px;
+    }
+  }
+}
+
+.dropdown {
+  ul.dropdown-menu {
+    text-transform: none;
+  }
+
+  &:hover > ul.dropdown-menu {
+    display: block;
+    margin-top: -1px;
+  }
+
+  .hero-image & a {
+    color: $jet;
+  }
+
+  .widgetized-menu {
+    width: 266px;
+
+    &.sidebars-2 {
+      width: 532px;
+    }
+
+    &.sidebars-3 {
+      width: 800px;
+    }
+
+    .menu {
+      list-style: none;
+      padding-left: 0;
+      font-size: .9em;
+
+      a {
+        line-height: 1.7em;
+        color: $raven;
+      }
+    }
+  }
+
+  .widgettitle-in-submenu {
+    @extend h6;
+    margin: .5em 0;
+    border-bottom: 1px solid $heather;
+    padding-bottom: 5px;
+    color: $raven;
+  }
+}

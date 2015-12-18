@@ -1,9 +1,247 @@
-// Glyphicons font path
-$icon-font-path:        "../fonts/";
-
 // Grid settings
+// -------------------------
+
 $main-sm-columns:       12;
 $sidebar-sm-columns:    4;
 
-// Colors
-$brand-primary:         #27ae60;
+$grid-gutter-width:     20px;
+
+$container-lg:          1260px;
+$container-md:          100%;
+
+
+// Media queries breakpoints
+// -------------------------
+
+$screen-lg-min:         1280px;
+$screen-md-max:         ($screen-lg-min - 1);
+
+
+// Brand colors
+// -------------------------
+$scarlet-darkest: #7D0B22;
+$scarlet-darker: #85132A;
+$scarlet: #9D0E2B;
+$scarlet-lighter: #B03E55;
+$scarlet-lightest: #EBCFD5;
+
+$fire-darkest: #9F320F;
+$fire-darker: #A73A17;
+$fire: #C73F13;
+$fire-lighter: #D26542;
+$fire-lightest: #F4D9D0;
+
+$ginger-darkest: #B15010;
+$ginger-darker: #B95818;
+$ginger: #DE6515;
+$ginger-lighter: #E48343;
+$ginger-lightest: #F8E0D1;
+
+$gold-darkest: #BD9624;
+$gold-darker: #C59E2C;
+$gold: #EDBC2D;
+$gold-lighter: #F0C957;
+$gold-lightest: #FBF1D5;
+
+$lime-darkest: #93932D;
+$lime-darker: #9B9B35;
+$lime: #B8B839;
+$lime-lighter: #C6C660;
+$lime-lightest: #F1F1D8;
+
+$pear-darkest: #798734;
+$pear-darker: #818F3C;
+$pear: #98A942;
+$pear-lighter: #ACBA67;
+$pear-lightest: #EAEED9;
+
+$jade-darkest: #4E784B;
+$jade-darker: #568053;
+$jade: #62975E;
+$jade-lighter: #81AB7E;
+$jade-lightest: #E0EADF;
+
+$sky-darkest: #44678F;
+$sky-darker: #4C6F97;
+$sky: #5681B3;
+$sky-lighter: #779AC2;
+$sky-lightest: #DDE6F0;
+
+$denim-darkest: #273C68;
+$denim-darker: #2F4470;
+$denim: #314C83;
+$denim-lighter: #5A6F9B;
+$denim-lightest: #D6DBE6;
+
+$navy-darkest: #1C2957;
+$navy-darker: #24315F;
+$navy: #24346D;
+$navy-lighter: #4F5C8A;
+$navy-lightest: #D4D7E2;
+
+$indigo-darkest: #312054;
+$indigo-darker: #39285C;
+$indigo: #3E296A;
+$indigo-lighter: #645387;
+$indigo-lightest: #D9D5E1;
+
+$plum-darkest: #5C1043;
+$plum-darker: #64184B;
+$plum: #731454;
+$plum-lighter: #8F4376;
+$plum-lightest: #E3D0DD;
+
+$steel: #DCDFE5;
+$pearl: #C3C6CC;
+$heather: #AAADB3;
+$sterling: #91949A;
+$gray: #777A80;
+$stone: #5D6066;
+$ash: #44474D;
+$raven: #2B2E34;
+$jet: #12151B;
+
+$white:                 #FFFFFF;
+$black:                 #000000;
+
+$white70:               rgba(255, 255, 255, .8);
+$stone-transparent: rgba(93, 96, 102, 0);
+$stone-70: rgba(93, 96, 102, .7);
+$raven-transparent: rgba(43, 46, 52, 0);
+$raven-60: rgba(43, 46, 52, .6);
+
+// Set standards
+$brand-primary:         $plum;
+$brand-success:         $pear;
+
+$text-color:            $ash;
+
+$link-color:            $sky;
+$link-hover-color:      $navy;
+
+
+// Gradients
+// -------------------------
+
+  // Utility mixin from Compass
+  @mixin filter-gradient($start-color, $end-color, $orientation: vertical) {
+    $gradient-type: if($orientation == vertical, 0, 1);
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=#{$gradient-type}, startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}');
+  }
+
+@mixin trans-stone-gradient-bottom() {
+  @include filter-gradient($stone-transparent, $stone-70, vertical);
+  background-image: -o-linear-gradient(180deg, $stone-transparent 50%, $stone-70 100%);
+  background-image: -moz-linear-gradient(180deg, $stone-transparent 50%, $stone-70 100%);
+  background-image: -ms-linear-gradient(180deg, $stone-transparent 50%, $stone-70 100%);
+  background-image: linear-gradient(180deg, $stone-transparent 50%, $stone-70 100%);
+}
+
+@mixin trans-raven-gradient-bottom() {
+  @include filter-gradient($raven-transparent, $raven-60, vertical);
+  background-image: -o-linear-gradient(180deg, $raven-transparent 50%, $raven-60 100%);
+  background-image: -moz-linear-gradient(180deg, $raven-transparent 50%, $raven-60 100%);
+  background-image: -ms-linear-gradient(180deg, $raven-transparent 50%, $raven-60 100%);
+  background-image: linear-gradient(180deg, $raven-transparent 50%, $raven-60 100%);
+}
+
+@mixin trans-stone-gradient-top() {
+  @include filter-gradient($stone-70, $stone-transparent, vertical);
+  background-image: -o-linear-gradient(180deg, $stone-70 25%, $stone-transparent 100%);
+  background-image: -moz-linear-gradient(180deg, $stone-70 25%, $stone-transparent 100%);
+  background-image: -ms-linear-gradient(180deg, $stone-70 25%, $stone-transparent 100%);
+  background-image: linear-gradient(180deg, $stone-70 25%, $stone-transparent 100%);
+}
+
+@mixin trans-white-gradient-bottom() {
+  @include filter-gradient($transparent, $white, vertical);
+  background-image: -o-linear-gradient(180deg, $transparent 0%, $white 70%);
+  background-image: -moz-linear-gradient(180deg, $transparent 0%, $white 70%);
+  background-image: -ms-linear-gradient(180deg, $transparent 0%, $white 70%);
+  background-image: linear-gradient(180deg, $transparent 0%, $white 70%);
+}
+
+
+// Typography
+// -------------------------
+
+$font-family-sans-serif:  Lato, sans-serif;
+$font-family-serif:       Merriweather, serif;
+
+$font-family-base:      $font-family-serif;
+
+$font-size-base:        18px;
+
+$headings-font-family:  $font-family-sans-serif;
+$headings-font-weight:  400;
+
+
+// Buttons
+// -------------------------
+
+$btn-default-color:     $white;
+$btn-default-bg:        $pear;
+$btn-default-border:    transparent;
+
+$btn-primary-color:     $white;
+$btn-primary-bg:        $plum;
+$btn-primary-border:    transparent;
+
+
+// Glyphicons path
+// -------------------------
+$icon-font-path:        "../fonts/";
+
+
+// Navbar
+// -------------------------
+
+$navbar-height:         44px;
+$navbar-margin-bottom:  0;
+$navbar-border-radius:  0;
+$navbar-padding-vertical: 12px;
+$navbar-padding-horizontal: 8px;
+
+$navbar-default-bg:     $steel;
+$navbar-default-color:  $jet;
+$navbar-default-border: none;
+
+$navbar-default-link-color:         $jet;
+$navbar-default-link-hover-color:   $navy;
+$navbar-default-link-active-color:  $jet;
+$navbar-default-link-active-bg:     transparent;
+
+
+// Dropdowns
+// -------------------------
+
+$dropdown-bg:                    $pearl;
+$dropdown-border:                transparent;
+$dropdown-fallback-border:       transparent;
+$dropdown-divider-bg:            transparent;
+
+$dropdown-link-color:            $jet;
+$dropdown-link-hover-color:      $navy;
+$dropdown-link-hover-bg:         $pearl;
+
+$dropdown-link-active-color:     $navy;
+$dropdown-link-active-bg:        $pearl;
+
+
+// Thumbnails
+// -------------------------
+
+$thumbnail-padding:       0;
+$thumbnail-border:        none;
+$thumbnail-border-radius: 0;
+
+
+// Alerts
+// -------------------------
+
+$alert-padding:               10px;
+$alert-border-radius:         0px;
+
+$alert-danger-bg:             $scarlet-lightest;
+$alert-danger-text:           $scarlet-darker;
+$alert-danger-border:         $scarlet-lighter;
