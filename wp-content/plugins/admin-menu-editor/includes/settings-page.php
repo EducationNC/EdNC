@@ -16,12 +16,11 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 ?>
 
 <div class="wrap">
-	<?php screen_icon(); ?>
-	<h2>
+	<<?php echo WPMenuEditor::$admin_heading_tag; ?>>
 		<?php echo apply_filters('admin_menu_editor-self_page_title', 'Menu Editor'); ?> Settings
 		<a href="<?php echo esc_attr($editor_page_url); ?>" class="add-new-h2"
 		   title="Back to Admin Menu Editor">Editor</a>
-	</h2>
+	</<?php echo WPMenuEditor::$admin_heading_tag; ?>>
 
 	<form method="post" action="<?php echo esc_attr($formActionUrl); ?>" id="ws_plugin_settings_form">
 
@@ -138,10 +137,10 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 						<label>
 							<input type="checkbox" name="show_deprecated_hide_button"
 								<?php checked($settings['show_deprecated_hide_button']); ?>>
-							Enable the "Show/Hide" toolbar button (not recommended)
+							Enable the "Hide (cosmetic)" toolbar button
 						</label>
 						<br><span class="description">
-							This feature is deprecated and is only kept for backwards compatibility purposes.
+							This button hides the selected menu item without making it inaccessible.
 						</span>
 						</p>
 					<?php endif; ?>
@@ -157,6 +156,14 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 								<input type="radio" name="ui_colour_scheme" value="classic"
 									<?php checked('classic', $settings['ui_colour_scheme']); ?>>
 								Blue and yellow
+							</label>
+						</p>
+
+						<p>
+							<label>
+								<input type="radio" name="ui_colour_scheme" value="modern-one"
+									<?php checked('modern-one', $settings['ui_colour_scheme']); ?>>
+								Modern
 							</label>
 						</p>
 
@@ -205,6 +212,50 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 			<?php endif; ?>
 
 			<tr>
+			<th scope="row">
+				New menu position
+				<a class="ws_tooltip_trigger"
+				   title="This setting controls the position of menu items that are not present in the last saved menu
+					configuration.
+					&lt;br&gt;&lt;br&gt;
+					This includes new menus added by plugins and themes.
+					In Multisite, it also applies to menus that exist only on certain sites but not on all sites.
+					It doesn't affect menu items that you add through the Admin Menu Editor interface.">
+					<div class="dashicons dashicons-info"></div>
+				</a>
+			</th>
+			<td>
+				<fieldset>
+					<p>
+						<label>
+							<input type="radio" name="unused_item_position" value="relative"
+								<?php checked('relative', $settings['unused_item_position']); ?>>
+							Maintain relative order
+
+							<br><span class="description">
+								Attempts to put new items in the same relative positions
+								as they would be in in the default admin menu.
+							</span>
+						</label>
+					</p>
+
+					<p>
+						<label>
+							<input type="radio" name="unused_item_position" value="bottom"
+								<?php checked('bottom', $settings['unused_item_position']); ?>>
+							Bottom
+
+							<br><span class="description">
+								Puts new items at the bottom of the admin menu.
+							</span>
+						</label>
+					</p>
+
+				</fieldset>
+			</td>
+			</tr>
+
+			<tr>
 				<th scope="row">Debugging</th>
 				<td>
 					<label>
@@ -232,3 +283,14 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 	</form>
 
 </div>
+
+<script type="text/javascript">
+	jQuery(function($) {
+		//Set up tooltips
+		$('.ws_tooltip_trigger').qtip({
+			style: {
+				classes: 'qtip qtip-rounded ws_tooltip_node ws_wide_tooltip'
+			}
+		});
+	});
+</script>

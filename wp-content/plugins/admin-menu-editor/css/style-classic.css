@@ -1,3 +1,7 @@
+.ws_main_container {
+	padding-bottom: 4px;
+}
+
 .ws_container {
 	border: 1px solid #a9badb;
 	background-color: #bdd3ff;
@@ -19,7 +23,7 @@
 .ws_edit_link {
 	background-image: url('../images/bullet_arrow_down2.png');
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center 3px;
 }
 
 a.ws_edit_link:hover {
@@ -29,11 +33,11 @@ a.ws_edit_link:hover {
 
 .ws_edit_link:active {
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center 3px;
 }
 
 .ws_edit_link_expanded {
-	background: #ffffd0 url('../images/bullet_arrow_down2.png') center 3px no-repeat;
+	background-color: #ffffd0;
 	border-bottom: none;
 	border-color: #ffffd0;
 
@@ -107,11 +111,30 @@ a.ws_button:hover {
 }
 
 .ui-dialog-titlebar-close {
-	background: #86A7E3 url(../images/x.png) no-repeat center;
-	color: white;
+	background-color: transparent;
+	border-style: none;
+
+	color: white; /* WP default: #666; */
+	cursor: pointer;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 36px;
+	height: 30px;
+	text-align: center;
+}
+
+.ui-dialog-titlebar-close::before {
+	font: normal 20px/30px 'dashicons';
+	content: '\f158';
+
+	vertical-align: top;
+	width: 36px;
+	height: 30px;
 }
 
 .ui-dialog-titlebar-close:hover {
-	/*background-image: url(../images/x-light.png);*/
-	background-color: #a6c2f5;
+	background: transparent none;
+	color: #004665;
 }

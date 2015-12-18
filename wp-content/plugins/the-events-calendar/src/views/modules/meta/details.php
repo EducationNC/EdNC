@@ -9,18 +9,18 @@
  */
 
 
-$time_format = get_option( 'time_format', Tribe__Events__Date_Utils::TIMEFORMAT );
+$time_format = get_option( 'time_format', Tribe__Date_Utils::TIMEFORMAT );
 $time_range_separator = tribe_get_option( 'timeRangeSeparator', ' - ' );
 
 $start_datetime = tribe_get_start_date();
 $start_date = tribe_get_start_date( null, false );
 $start_time = tribe_get_start_date( null, false, $time_format );
-$start_ts = tribe_get_start_date( null, false, Tribe__Events__Date_Utils::DBDATEFORMAT );
+$start_ts = tribe_get_start_date( null, false, Tribe__Date_Utils::DBDATEFORMAT );
 
 $end_datetime = tribe_get_end_date();
-$end_date = tribe_get_end_date( null, false );
+$end_date = tribe_get_display_end_date( null, false );
 $end_time = tribe_get_end_date( null, false, $time_format );
-$end_ts = tribe_get_end_date( null, false, Tribe__Events__Date_Utils::DBDATEFORMAT );
+$end_ts = tribe_get_end_date( null, false, Tribe__Date_Utils::DBDATEFORMAT );
 
 $cost = tribe_get_formatted_cost();
 $website = tribe_get_event_website_link();
@@ -116,7 +116,7 @@ $website = tribe_get_event_website_link();
 		);
 		?>
 
-		<?php echo tribe_meta_event_tags( sprintf( __( '%s Tags:', 'the-events-calendar' ), tribe_get_event_label_singular() ), ', ', false ) ?>
+		<?php echo tribe_meta_event_tags( sprintf( esc_html__( '%s Tags:', 'the-events-calendar' ), tribe_get_event_label_singular() ), ', ', false ) ?>
 
 		<?php
 		// Event Website

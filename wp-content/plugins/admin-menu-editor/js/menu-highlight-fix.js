@@ -183,7 +183,9 @@ jQuery(function($) {
 		var parentMenu = bestMatchLink.closest('li.menu-top');
 		//console.log('Best match is: ', bestMatchLink);
 
-		var otherHighlightedMenus = $('li.wp-has-current-submenu, li.menu-top.current', '#adminmenu').not(parentMenu);
+		var otherHighlightedMenus = $('li.wp-has-current-submenu, li.menu-top.current', '#adminmenu')
+			.not(parentMenu)
+			.not('.ws-ame-has-always-open-submenu');
 
 		var isWrongItemHighlighted = !bestMatchLink.hasClass('current');
 		var isWrongMenuHighlighted = !parentMenu.is('.wp-has-current-submenu, .current') ||

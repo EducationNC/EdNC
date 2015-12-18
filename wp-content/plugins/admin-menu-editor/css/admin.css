@@ -101,3 +101,25 @@ hr.ws-submenu-separator {
     opacity: 1;
     filter: alpha(opacity=100);
 }
+
+/*
+ * Third level menus.
+ */
+#adminmenu .ame-deep-submenu {
+
+}
+
+#adminmenu li.menu-top.opensub .ame-deep-submenu {
+	top: -1000em;
+}
+
+#adminmenu .wp-submenu li.opensub > ul.ame-deep-submenu {
+	top: -7px;
+}
+
+.folded #adminmenu li.opensub > ul.ame-deep-submenu,
+.folded #adminmenu .wp-has-current-submenu.opensub > ul.ame-deep-submenu,
+.no-js.folded #adminmenu .ame-has-deep-submenu:hover > ul.ame-deep-submenu {
+    top: 0;
+    left: 160px;
+}

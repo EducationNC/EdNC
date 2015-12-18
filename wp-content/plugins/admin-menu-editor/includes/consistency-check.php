@@ -66,7 +66,7 @@ $requiredFiles = array(
 	'images/spinner.gif',
 	'includes/editor-page.php',
 	'includes/menu-editor-core.php',
-	'includes/access-editor-dialog.php',
+	'modules/access-editor/access-editor-template.php',
 	'includes/menu-item.php',
 	'menu-editor.php',
 	'uninstall.php',
