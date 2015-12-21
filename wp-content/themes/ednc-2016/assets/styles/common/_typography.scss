@@ -1,6 +1,7 @@
 p {
   margin-bottom: 1.88em;
   line-height: 1.88em;
+  word-wrap: break-word;
 
   @media (max-width: $screen-xs-max) {
     font-size: 16px;
@@ -33,7 +34,7 @@ h1, .h1, .article-title, .entry-title {
 
   .article-title-overlay & {
     color: $white;
-    font-size: 3rem;
+    font-size: 48px;
     line-height: 1.2em;
     font-weight: 300;
   }
@@ -142,23 +143,23 @@ h6, .h6 {
 }
 
 .label {
-  background: $navy-darkest;
+  background: $plum-darkest;
   color: $white;
   padding: 5px 15px;
-  font-size: 1rem;
+  font-size: 16px;
   min-width: 140px;
   font-family: $font-family-serif;
   font-weight: 300;
   border-radius: 0;
 
   &.big {
-    font-size: 1.25rem;
+    font-size: 1.25em;
     line-height: 1em;
     padding: 1rem 1.5rem 1.0625rem;
   }
 
   &.small {
-    font-size: .7rem;
+    font-size: .7em;
     line-height: 1em;
     vertical-align: middle;
   }
@@ -196,7 +197,7 @@ h6, .h6 {
 .caption {
   font-family: $font-family-sans-serif;
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 16px;
   background: none;
 }
 

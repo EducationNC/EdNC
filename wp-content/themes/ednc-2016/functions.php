@@ -11,7 +11,10 @@
  */
 $sage_includes = [
   'lib/assets.php',       // Scripts and stylesheets
+  'lib/custom-post-types.php',  // Custom post types and custom taxonomies
   'lib/extras.php',       // Custom functions
+  'lib/media.php',        // Image and other media functions
+  'lib/resize.php',       // Magic image resizer
   'lib/setup.php',        // Theme setup
   'lib/titles.php',       // Page titles
   'lib/nav.php',          // Clean up nav menus

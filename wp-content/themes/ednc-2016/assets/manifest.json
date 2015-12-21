@@ -2,6 +2,7 @@
   "dependencies": {
     "main.js": {
       "files": [
+        "scripts/to-minify/*.js",
         "scripts/main.js"
       ],
       "main": true

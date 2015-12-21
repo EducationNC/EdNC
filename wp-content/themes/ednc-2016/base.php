@@ -21,7 +21,7 @@ use Roots\Sage\Wrapper;
       get_template_part('templates/header', 'md-up');
     ?>
     <div class="wrap" role="document">
-      <div class="content row">
+      <div class="content clearfix">
         <main class="main">
           <?php include Wrapper\template_path(); ?>
         </main><!-- /.main -->

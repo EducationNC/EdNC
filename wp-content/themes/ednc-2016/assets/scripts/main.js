@@ -19,13 +19,17 @@
     clickortap = 'click';
   }
 
+  // Check for mobile or IE
+  var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
+
+
   // Use this variable to set up the common and page specific functions. If you
   // rename this variable, you will also need to rename the namespace below.
   var Sage = {
     // All pages
     'common': {
       init: function() {
-          
+
         // Toggle search button to show search field
         $('#header-search #icon-search').on(clickortap, function() {
           if ($('#header-search .input-sm').hasClass('visible')) {
@@ -83,10 +87,45 @@
         // JavaScript to be fired on the home page, after the init JS
       }
     },
-    // About us page, note the change from about-us to about_us.
-    'about_us': {
+    // Single posts
+    'single': {
       init: function() {
-        // JavaScript to be fired on the about us page
+        // Add body class for any posts with full width hero featured images
+        if (!ismobileorIE) {
+          if ($('.entry-header').hasClass('hero-image')) {
+            $('body').addClass('hero-image');
+          }
+        }
+
+        // Parallax featured image when hero
+        if ($('.entry-header').hasClass('hero-image')) {
+          // only do parallax if this is not mobile or IE
+          if (!ismobileorIE) {
+            var img = $('.entry-header.hero-image .parallax-img');
+
+            // Set up CSS for devices that support parallax
+            img.css({'top': '-50%', 'position':'absolute'});
+
+            // Do it on init
+            parallax(img);
+
+            // Happy JS scroll pattern is jittery, so I'm >:(
+            // var scrollTimeout;  // global for any pending scrollTimeout
+            // $(window).scroll(function () {
+            // 	if (scrollTimeout) {
+            // 		// clear the timeout, if one is pending
+            // 		clearTimeout(scrollTimeout);
+            // 		scrollTimeout = null;
+            // 	}
+            // 	scrollTimeout = setTimeout(parallax, 10);
+            // });
+
+            // Not happy scroll pattern, but it works smoothly at least
+            $(window).scroll(function(){
+              parallax(img);
+            });
+          }
+        }
       }
     }
   };
