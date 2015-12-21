@@ -212,6 +212,7 @@ blockquote, .blockquote {
   margin: 0 0 1.88em;
   padding: 0;
   border: none;
+  font-size: 18px;
 
   p {
     font-family: $font-family-sans-serif;
@@ -237,7 +238,7 @@ blockquote, .blockquote {
 
     &[style*=left], &[style*=right], &[style*=center] {
       font-family: $font-family-serif;
-      font-size: $font-size-h3;
+      font-size: $font-size-h4;
       background: none;
       padding: 0;
       border-left: 0;

@@ -242,12 +242,10 @@ while (have_posts()) : the_post();
 
         if (!empty($post)) {
           setup_postdata($post);
-          $pid = $post->ID;
 
           $author_id = get_the_author_meta('ID');
           $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
 
-          $category = get_the_category($pid);
           ?>
           <div class="row">
             <div class="col-md-7 col-md-push-2point5 recommended">
@@ -275,18 +273,7 @@ while (have_posts()) : the_post();
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
               </div>
               <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-              <p class="meta">
-                by
-                <?php
-                if ( function_exists( 'coauthors_posts_links' ) ) {
-                  coauthors();
-                } else {
-                  the_author();
-                }
-                ?>
-                on
-                <date><?php the_time(get_option('date_format')); ?></date>
-              </p>
+              <?php get_template_part('templates/entry-meta'); ?>
             </div>
           </div>
           <?php wp_reset_postdata(); ?>
@@ -304,16 +291,4 @@ while (have_posts()) : the_post();
   </article>
 
   <?php get_template_part('templates/social-share'); ?>
-  <div class="visible-xs-block mobile-ad" id="mobile-ad">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Mobile article ad -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:320px;height:50px"
-         data-ad-client="ca-pub-2642458473228537"
-         data-ad-slot="9712374209"></ins>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  </div>
 <?php endwhile; ?>

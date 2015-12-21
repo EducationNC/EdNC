@@ -10,12 +10,14 @@
  * @link https://github.com/roots/sage/pull/1042
  */
 $sage_includes = [
+  'lib/setup.php',        // Theme setup
   'lib/assets.php',       // Scripts and stylesheets
   'lib/custom-post-types.php',  // Custom post types and custom taxonomies
+  'lib/acf-fields.php',   // ACF custom fields
   'lib/extras.php',       // Custom functions
   'lib/media.php',        // Image and other media functions
   'lib/resize.php',       // Magic image resizer
-  'lib/setup.php',        // Theme setup
+  'lib/shortcodes.php',   // Shortcodes and UI
   'lib/titles.php',       // Page titles
   'lib/nav.php',          // Clean up nav menus
   'lib/nav-widgets.php',  // Widgetize nav menus

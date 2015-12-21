@@ -73,6 +73,11 @@
 
         $('#mobile-nav .widgettitle-in-submenu').append('<span class="caret"></span>');
 
+        // Close mobile ad on button tap
+        $('#mobile-ad .close').on(clickortap, function() {
+          $('#mobile-ad').detach();
+          $('.icon-share').css({'bottom': '0'});
+        });
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
@@ -126,6 +131,29 @@
             });
           }
         }
+
+        // Wrap any object embed with responsive wrapper (except for map embeds)
+        $.expr[':'].childof = function(obj, index, meta, stack){
+          return $(obj).parent().is(meta[3]);
+        };
+        $('object:not(childof(.tableauPlaceholder)').wrap('<div class="object-wrapper"></div>');
+
+        // Add special classes to .entry-content-wrapper divs for Instagram and Twitter embeds (not fixed ratio)
+        $('.instagram-media').parent('.entry-content-asset').addClass('instagram');
+        $('.twitter-tweet').parent('.entry-content-asset').addClass('twitter');
+
+        // Add special class to .entry-content-wrapper for Slideshare (vertical fixed ratio)
+        $('iframe[src*="slideshare.net"]').parent('.entry-content-asset').addClass('slideshare');
+
+        // Wrap tables with Bootstrap responsive table wrapper
+        $('.entry-content table').addClass('table table-striped').wrap('<div class="table-responsive"></div>');
+
+        // Add watermark dropcap on pull quotes (left and right)
+        $('blockquote p[style*=left], blockquote p[style*=right]').each(function() {
+          var text = $(this).text();
+          $(this).attr('data-before', text.charAt(0));
+        });
+
       }
     }
   };

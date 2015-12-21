@@ -1,3 +1,4 @@
+// Grid
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -14,5 +15,278 @@
 
   .col-md-push-point5 {
     left: 4.166667%;
+  }
+}
+
+// Utilities
+.extra-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.no-padding {
+  & > [class*=col] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.top-padding {
+  padding-top: 10px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-top-margin {
+  margin-top: 0;
+}
+
+.top-margin {
+  margin-top: 1em;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+.bottom-margin {
+  margin-bottom: 1em;
+}
+
+.bottom-margin-important {
+  margin-bottom: 1em !important;
+}
+
+.extra-top-margin {
+  margin-top: 2em;
+}
+
+.extra-bottom-margin {
+  margin-bottom: 3em;
+}
+
+.vertical-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+
+  * {
+    margin: 0;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .text-col-sm-2 {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .text-col-md-3 {
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+  }
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+// Ads
+.mobile-ad {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: $white70;
+  z-index: 50;
+  width: 100%;
+
+  .adsbygoogle {
+    margin: 0;
+  }
+
+  .close {
+    z-index: 50;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+// Elements
+.callout {
+  background: $steel;
+  padding: 30px;
+  margin: 0 0 1.25rem;
+  overflow: hidden;
+  font-family: $font-family-sans-serif;
+  color: $jet;
+
+  .h1 {
+    font-size: $font-size-h1;
+    font-style: normal;
+    margin-top: 0;
+    color: inherit;
+
+    .big {
+      font-size: 1.5em;
+      line-height: 1;
+    }
+  }
+
+  h4 {
+    margin-top: 0;
+  }
+
+  p {
+    font-weight: 300;
+    margin-bottom: 1em;
+  }
+
+  .button {
+    margin: 0;
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    font-family: $font-family-sans-serif;
+
+    li {
+      padding-bottom: .25em;
+      margin: 0;
+
+      &.active {
+        & > a {
+          color: $plum-darker;
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $jet;
+
+      &:hover, &:active, &:focus {
+        color: $navy;
+      }
+    }
+  }
+
+  @media (max-width: $screen-md-max) {
+    padding: 15px;
+  }
+}
+
+.aside {
+  background: $steel;
+  padding: 10px 20px;
+
+  @media (min-width: 545px) {
+    width: 50%;
+  }
+
+  & > h3:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.mega-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.photo-overlay {
+  position: relative;
+  margin: 0 0 1em;
+  padding: 0;
+  overflow: hidden;
+
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  .avatar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+    width: 140px;
+  }
+
+  .post-title {
+    margin: 0;
+    position: absolute;
+    bottom: 1.5em;
+    left: 10px;
+    right: 10px;
+    font-family: $font-family-sans-serif;
+    font-weight: 300;
+    color: $white;
+    text-shadow: 0px 0px 20px $raven;
+    z-index: 2;
+    transition: transform .3s;
+  }
+
+  h2.post-title {
+    // line-height: rem-calc(36);
+  }
+
+  .meta, .line {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border-top: 3px solid $white;
+    color: $white;
+    z-index: 2;
+    margin: 0;
+    padding-top: .3em;
+    opacity: 1;
+    transition: all .3s;
+  }
+
+  .line {
+    right: 30px;
+    bottom: 1em;
+  }
+
+  img {
+    position: relative;
+    width: 100%;
+  }
+
+  @media (min-width: $screen-md-min) {
+    .post-title {
+      transform: translateY(1.25em);
+    }
+
+    .meta, .line {
+      opacity: 0;
+      transform: translateY(2em);
+    }
   }
 }

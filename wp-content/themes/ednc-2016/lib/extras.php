@@ -20,6 +20,18 @@ function body_class($classes) {
     $classes[] = 'sidebar-primary';
   }
 
+  // Add authors names to posts
+  if (is_single()) {
+    if ( function_exists( 'coauthors_posts_links' ) ) {
+      $authors = get_coauthors();
+      foreach ($authors as $a) {
+        $classes[] = $a->user_nicename;
+      }
+    } else {
+      $classes[] = get_the_author_meta('user_nicename');
+    }
+  }
+
   return $classes;
 }
 add_filter('body_class', __NAMESPACE__ . '\\body_class');

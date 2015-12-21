@@ -12,3 +12,250 @@ img {
   background-size: cover;
   background-position: 50% 50%;
 }
+
+// Gallery shortcode
+.gallery-row {
+  padding: ($line-height-computed / 2) 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+.collage-wrapper {
+  position: relative;
+  padding-bottom: 75%;
+  height: 0;
+  margin-bottom: 34px;
+
+  @media (min-width: $screen-md-min) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
+
+  .mce-content-body & {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+.gallery {
+  padding: ($line-height-computed / 2) 0;
+  margin-bottom: 1.88em;
+
+  &:not(.collage) {
+    .gallery-item {
+      float: left;
+      padding: 5px;
+    }
+  }
+
+  &.collage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .gallery-item {
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+
+      &.portrait {
+        flex-basis: 100%;
+      }
+
+      &.landscape {
+        flex-basis: 50%;
+      }
+
+      .gallery-icon {
+        border: 5px solid $white;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+      }
+
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
+  }
+
+  @media (min-width: $screen-md-min) {
+    &:not(.fullwidth):not(.collage) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+      max-width: 114.7%;
+    }
+
+    &:not(.collage) {
+      &.gallery-columns-5 {
+        .gallery-item {
+          width: 20%;
+        }
+      }
+
+      &.gallery-columns-4 {
+        .gallery-item {
+          width: 25%;
+        }
+      }
+
+      &.gallery-columns-3 {
+        .gallery-item {
+          width: 33.33333%;
+        }
+      }
+
+      &.gallery-columns-2 {
+        .gallery-item {
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  .thumbnail {
+    margin-bottom: 0;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+// Embeds
+.object-wrapper {
+  position: relative;
+  padding-bottom: 75%;
+  padding-top: 25px;
+  height: 0;
+
+  object, embed {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+object, embed {
+  max-width: 100%;
+}
+
+.entry-content-asset {
+  &.twitter, &.instagram {
+    max-width: 500px;
+    margin: 0 auto 34px;
+  }
+
+  &:not(.instagram):not(.twitter) {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+    margin-bottom: 34px;
+
+    @media (min-width: $screen-md-min) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+      max-width: 114.7%;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .mce-content-body & {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: 100% !important;
+    }
+  }
+
+  &.slideshare.slideshare {
+    padding-bottom: 100%;
+  }
+}
+
+// Video
+.wp-video {
+  margin-bottom: 34px;
+}
+
+// Audio player
+.media-embed-container.mejs-container {
+  margin-bottom: 34px;
+
+  .mejs-controls {
+    background: $stone;
+
+    .mejs-time-current {
+      background: $pear-lighter;
+    }
+  }
+}
+
+// Audio playlist
+.entry-content {
+  .wp-playlist {
+    background: $steel;
+    border: none;
+    margin-bottom: 34px;
+
+    .wp-playlist-playing {
+      background: $pearl;
+    }
+
+  }
+
+  .wp-playlist-tracks {
+    .wp-playlist-caption {
+      font-family: $font-family-sans-serif;
+      font-size: 16px;
+      padding: 8px 0;
+    }
+
+    .wp-playlist-item-length {
+      padding: 8px 0;
+    }
+
+    .wp-playlist-item-title {
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+
+  .wp-playlist-item {
+    border-bottom-color: $pearl;
+  }
+
+  .wp-playlist-current-item {
+    min-height: 60px;
+    height: auto;
+
+    .wp-playlist-item-title {
+      font-family: $font-family-serif;
+      font-size: 20px;
+    }
+  }
+}
