@@ -107,6 +107,7 @@ function assets() {
     wp_enqueue_script('comment-reply');
   }
 
+  wp_enqueue_script('translate', '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', array(), null, true);
   wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);

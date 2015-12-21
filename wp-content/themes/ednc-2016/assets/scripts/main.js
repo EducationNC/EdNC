@@ -78,6 +78,21 @@
           $('#mobile-ad').detach();
           $('.icon-share').css({'bottom': '0'});
         });
+
+        // Helper function for translation cookies
+        function getDomainName(hostName) {
+          return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
+        }
+
+        // Set up translation on click
+        $(document).on(clickortap,'a#gtranslate', function(e) {
+          e.preventDefault();
+          hostname = window.location.hostname;
+          domain = getDomainName(hostname);
+          document.cookie = "googtrans=/en/es;path=/;domain=" + domain + ";";
+          location.reload();
+        });
+
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
