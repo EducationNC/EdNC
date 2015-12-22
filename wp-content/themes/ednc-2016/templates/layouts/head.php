@@ -25,7 +25,7 @@
 
   <?php
   if (!is_user_logged_in()) {
-    get_template_part('templates/analytics');
+    get_template_part('templates/components/analytics');
   }
   ?>
 

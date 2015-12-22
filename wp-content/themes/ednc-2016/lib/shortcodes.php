@@ -347,7 +347,7 @@ namespace Roots\Sage\Shortcodes;
     ), $atts) );
 
     ob_start();
-    get_template_part('templates/email-signup');
+    get_template_part('templates/components/email-signup');
 
     return ob_get_clean();
   }

@@ -23,7 +23,7 @@ if ( function_exists( 'get_coauthors' ) ) {
           <?php the_post_thumbnail('bio-headshot'); ?>
         </div>
         <div class="col-xs-9 col-sm-8 col-md-12">
-          <?php get_template_part('templates/author', 'excerpt'); ?>
+          <?php get_template_part('templates/components/author', 'excerpt'); ?>
         </div>
       </div>
     <?php endwhile; endif; wp_reset_query();
@@ -48,7 +48,7 @@ if ( function_exists( 'get_coauthors' ) ) {
         <?php the_post_thumbnail('bio-headshot'); ?>
       </div>
       <div class="col-xs-9 col-sm-8 col-md-12">
-        <?php get_template_part('templates/author', 'excerpt'); ?>
+        <?php get_template_part('templates/components/author', 'excerpt'); ?>
       </div>
     </div>
   <?php endwhile; endif; wp_reset_query();

@@ -8,7 +8,7 @@ use Roots\Sage\Assets;
   <div class="row">
     <div class="col-md-8 col-md-push-2">
       <div class="hidden-xs">
-        <?php get_template_part('templates/email-signup'); ?>
+        <?php get_template_part('templates/components/email-signup'); ?>
       </div>
       <div class="visible-xs-block text-center extra-bottom-margin">
         <a class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Subscribe now</a>
@@ -59,7 +59,7 @@ use Roots\Sage\Assets;
 <div class="modal fade email-signup-modal print-no" id="emailSignupModal" tabindex="-2" role="dialog" aria-labelledby="emailSignupModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <?php get_template_part('templates/email-signup'); ?>
+      <?php get_template_part('templates/components/email-signup'); ?>
     </div>
   </div>
 </div>

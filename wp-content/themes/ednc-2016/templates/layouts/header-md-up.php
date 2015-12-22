@@ -13,7 +13,7 @@ use Roots\Sage\Nav;
       <ul class="list-inline minor-links">
         <li>
           <div id="header-search">
-            <?php get_template_part('templates/searchform'); ?>
+            <?php get_template_part('templates/components/searchform'); ?>
             <a class="icon-search" id="icon-search" href="javascript:void(0);"></a>
           </div>
         </li>

@@ -241,7 +241,7 @@
 * Add placeholder `lib/post-types.php` and `lib/metaboxes.php` files
 * Rename `loop-` files to `content-`
 * Remove all hooks
-* Use `templates/page-header.php` for page titles
+* Use `templates/components/page-header.php` for page titles
 * Use `head.php` for everything in `<head>`
 
 ### 5.2.0: August 18th, 2012

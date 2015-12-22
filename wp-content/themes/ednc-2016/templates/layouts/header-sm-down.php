@@ -23,7 +23,7 @@ use Roots\Sage\Nav;
       </li>
 
       <li class="mobile-search">
-        <?php get_template_part('templates/searchform'); ?>
+        <?php get_template_part('templates/components/searchform'); ?>
         <a class="icon-search" id="icon-search" href="javascript:void(0);"></a>
       </li>
 

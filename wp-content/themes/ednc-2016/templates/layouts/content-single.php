@@ -1,6 +1,7 @@
 <?php
 
 use Roots\Sage\Resize;
+use Roots\Sage\Extras;
 
 while (have_posts()) : the_post();
 
@@ -42,7 +43,7 @@ while (have_posts()) : the_post();
               <div class="container">
                 <div class="row">
                   <div class="col-md-8 col-centered">
-                    <?php get_template_part('templates/labels'); ?>
+                    <?php get_template_part('templates/components/labels'); ?>
 
                     <h1 class="entry-title"><?php the_title(); ?></h1>
 
@@ -67,7 +68,7 @@ while (have_posts()) : the_post();
           <div class="container">
             <div class="row">
               <div class="col-md-8 col-centered">
-                <?php get_template_part('templates/entry-meta'); ?>
+                <?php get_template_part('templates/components/entry-meta'); ?>
               </div>
             </div>
           </div>
@@ -95,7 +96,7 @@ while (have_posts()) : the_post();
         <header class="entry-header container">
           <div class="row">
             <div class="col-md-8 col-centered">
-              <?php get_template_part('templates/labels'); ?>
+              <?php get_template_part('templates/components/labels'); ?>
 
               <?php
               if (in_category('109')) {  // 1868 Constitutional Convention
@@ -116,7 +117,7 @@ while (have_posts()) : the_post();
               ?>
 
               <h1 class="entry-title"><?php the_title(); ?></h1>
-              <?php get_template_part('templates/entry-meta'); ?>
+              <?php get_template_part('templates/components/entry-meta'); ?>
             </div>
           </div>
         </header>
@@ -138,7 +139,7 @@ while (have_posts()) : the_post();
         <div class="container">
           <div class="row">
             <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm print-no">
-              <?php get_template_part('templates/author', 'meta'); ?>
+              <?php get_template_part('templates/components/author', 'meta'); ?>
             </div>
 
             <div class="col-md-2 col-md-pull-2 print-no">
@@ -200,7 +201,7 @@ while (have_posts()) : the_post();
               }
               ?>
 
-              <?php get_template_part('templates/labels'); ?>
+              <?php get_template_part('templates/components/labels'); ?>
             </div>
           </div>
 
@@ -220,7 +221,7 @@ while (have_posts()) : the_post();
                 echo '<h2>About the author</h2>';
               }
 
-              get_template_part('templates/author', 'meta');
+              get_template_part('templates/components/author', 'meta');
               ?>
             </div>
           </div>
@@ -236,7 +237,7 @@ while (have_posts()) : the_post();
           $post = $recommended[0];
         } else {
           // previous post by same author
-          $post = get_adjacent_author_post(true);
+          $post = Extras\get_adjacent_author_post(true);
           // TODO: check if this even exists and fallback to recent post from category?
         }
 
@@ -268,12 +269,12 @@ while (have_posts()) : the_post();
                 <?php if ($image_sized['url']) { ?>
                   <img src="<?php echo $image_sized['url']; ?>" />
                 <?php } ?>
-                <?php get_template_part('templates/labels', 'single'); ?>
+                <?php get_template_part('templates/components/labels', 'single'); ?>
 
                 <a class="mega-link" href="<?php the_permalink(); ?>"></a>
               </div>
               <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-              <?php get_template_part('templates/entry-meta'); ?>
+              <?php get_template_part('templates/components/entry-meta'); ?>
             </div>
           </div>
           <?php wp_reset_postdata(); ?>
@@ -283,12 +284,12 @@ while (have_posts()) : the_post();
           <div class="row">
             <div class="col-md-7 col-md-push-2point5">
               <h2>Join the conversation</h2>
-              <?php comments_template('templates/comments'); ?>
+              <?php comments_template('templates/components/comments'); ?>
             </div>
           </div>
         <?php } ?>
       </footer>
   </article>
 
-  <?php get_template_part('templates/social-share'); ?>
+  <?php get_template_part('templates/components/social-share'); ?>
 <?php endwhile; ?>
