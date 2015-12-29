@@ -11,7 +11,7 @@ use Roots\Sage\Assets;
         <?php get_template_part('templates/components/email-signup'); ?>
       </div>
       <div class="visible-xs-block text-center extra-bottom-margin">
-        <a class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Subscribe now</a>
+        <a class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Free Subscription</a>
       </div>
     </div>
   </div>
@@ -59,6 +59,7 @@ use Roots\Sage\Assets;
 <div class="modal fade email-signup-modal print-no" id="emailSignupModal" tabindex="-2" role="dialog" aria-labelledby="emailSignupModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <?php get_template_part('templates/components/email-signup'); ?>
     </div>
   </div>
@@ -68,6 +69,7 @@ use Roots\Sage\Assets;
   <div class="modal fade event-submission-modal print-no" id="eventSubmissionModal" tabindex="-3" role="dialog" aria-labelledby="eventSubmissionModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <?php gravity_form(6, false, false, false, null, true, '-2'); ?>
       </div>
     </div>
@@ -78,6 +80,7 @@ use Roots\Sage\Assets;
   <div class="modal fade edLibrary-submission-modal print-no" id="edLibrarySubmissionModal" tabindex="-3" role="dialog" aria-labelledby="edLibrarySubmissionModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <?php gravity_form(8, false, false, false, null, true, '-2'); ?>
       </div>
     </div>

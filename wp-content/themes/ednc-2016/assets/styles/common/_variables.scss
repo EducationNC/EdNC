@@ -105,6 +105,8 @@ $white:                 #FFFFFF;
 $black:                 #000000;
 
 $white70:               rgba(255, 255, 255, .8);
+$steel-transparent: rgba(220, 223, 229, 0);
+$steel-70: rgba(220, 223, 229, .7);
 $stone-transparent: rgba(93, 96, 102, 0);
 $stone-70: rgba(93, 96, 102, .7);
 $raven-transparent: rgba(43, 46, 52, 0);
@@ -128,6 +130,14 @@ $link-hover-color:      $navy;
     $gradient-type: if($orientation == vertical, 0, 1);
     filter: progid:DXImageTransform.Microsoft.gradient(gradientType=#{$gradient-type}, startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}');
   }
+
+@mixin trans-steel-gradient-bottom() {
+  @include filter-gradient($steel-transparent, $steel, vertical);
+  background-image: -o-linear-gradient(180deg, $steel-transparent 0%, $steel 100%);
+  background-image: -moz-linear-gradient(180deg, $steel-transparent 0%, $steel 100%);
+  background-image: -ms-linear-gradient(180deg, $steel-transparent 0%, $steel 100%);
+  background-image: linear-gradient(180deg, $steel-transparent 0%, $steel 100%);
+}
 
 @mixin trans-stone-gradient-bottom() {
   @include filter-gradient($stone-transparent, $stone-70, vertical);

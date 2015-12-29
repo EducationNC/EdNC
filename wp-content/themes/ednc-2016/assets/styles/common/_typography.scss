@@ -61,11 +61,15 @@ h2, .h2, .article-subtitle {
   }
 }
 
-h3, .h3 {
+@mixin h3 {
   font-family: $font-family-sans-serif;
   font-weight: normal;
   color: $jet;
   font-size: 24px;
+}
+
+h3, .h3 {
+  @include h3;
 
   .entry-content li & {
     font-family: $font-family-serif;
@@ -89,17 +93,6 @@ h4, .h4 {
   font-weight: 300;
   color: $jet;
   font-size: 24px;
-
-  li & {
-    font-size: 1.125rem;
-    font-weight: 300;
-    margin: 0;
-
-    a {
-      color: $jet;
-      text-decoration: none;
-    }
-  }
 }
 
 h5, .h5 {
@@ -118,10 +111,11 @@ h6, .h6 {
   margin-top: 2em;
 }
 
-.meta, .attr, .duration {
+.meta, .attr, .duration, .byline {
   font-family: $font-family-sans-serif;
   font-weight: 300;
   font-size: 16px;
+  line-height: 1.4em;
   color: $gray;
 
   li & {
@@ -142,14 +136,19 @@ h6, .h6 {
   }
 }
 
+.byline {
+  margin-bottom: 1em;
+}
+
 .label {
-  background: $plum-darkest;
+  background: $stone;
   color: $white;
-  padding: 5px 15px;
+  padding: 8px 15px;
+  height: 32px;
   font-size: 16px;
-  min-width: 140px;
-  font-family: $font-family-serif;
-  font-weight: 300;
+  min-width: 32px;
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
   border-radius: 0;
 
   &.big {
@@ -183,6 +182,39 @@ h6, .h6 {
     a {
       color: $jet;
     }
+  }
+
+  .agranados &,
+  .alisa &,
+  .nation-hahn &,
+  .mrash &,
+  .todd-brantley &,
+  .column-meck-monday &,
+  .column-sparking-stem &,
+  .column-healthy-ever-after &,
+  .column-friday-with-ferrel & {
+    background: $plum-darker;
+  }
+}
+
+.page-header {
+  h1 {
+    margin: 0;
+  }
+}
+
+.section-header {
+  text-transform: uppercase;
+  border-bottom: 1px solid $pearl;
+  margin: 2em 0 1em;
+
+  .more {
+    float: right;
+    text-transform: lowercase;
+    color: $jet;
+    text-decoration: none;
+    font-size: .7em;
+    line-height: 1.6em;
   }
 }
 

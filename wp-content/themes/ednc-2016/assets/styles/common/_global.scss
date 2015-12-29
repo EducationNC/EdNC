@@ -1,4 +1,10 @@
 // Grid
+.container.narrow {
+  @media (min-width: $screen-md-min) {
+    width: 925px;
+  }
+}
+
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -79,6 +85,28 @@
   }
 }
 
+.circle-image {
+  img {
+    border-radius: 50%;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .flex-sm {
+    display: flex;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .flex-md-up {
+    display: flex;
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   .text-col-sm-2 {
     -moz-column-count: 2;
@@ -107,6 +135,11 @@
 }
 
 // Ads
+.ad-wrap {
+  background: $pearl;
+  margin-bottom: 2em;
+}
+
 .mobile-ad {
   position: fixed;
   bottom: 0;
@@ -219,7 +252,7 @@
 
 .photo-overlay {
   position: relative;
-  margin: 0 0 1em;
+  margin: 0;
   padding: 0;
   overflow: hidden;
 
@@ -238,40 +271,30 @@
     width: 140px;
   }
 
-  .post-title {
-    margin: 0;
+  .entry-header {
     position: absolute;
-    bottom: 1.5em;
-    left: 10px;
-    right: 10px;
-    font-family: $font-family-sans-serif;
-    font-weight: 300;
-    color: $white;
+    bottom: .5em;
+    left: 1em;
+    right: 1em;
     text-shadow: 0px 0px 20px $raven;
     z-index: 2;
-    transition: transform .3s;
   }
 
-  h2.post-title {
-    // line-height: rem-calc(36);
-  }
-
-  .meta, .line {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    border-top: 3px solid $white;
-    color: $white;
-    z-index: 2;
+  .post-title {
     margin: 0;
-    padding-top: .3em;
-    opacity: 1;
-    transition: all .3s;
+    font-family: $font-family-serif;
+    color: $white;
   }
 
-  .line {
-    right: 30px;
-    bottom: 1em;
+  .byline.byline {
+    color: $white;
+    margin: .5em 0 0;
+    border-top: 1px solid $white;
+
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   img {
@@ -279,14 +302,15 @@
     width: 100%;
   }
 
-  @media (min-width: $screen-md-min) {
-    .post-title {
-      transform: translateY(1.25em);
-    }
-
-    .meta, .line {
-      opacity: 0;
-      transform: translateY(2em);
-    }
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include trans-raven-gradient-bottom;
+    transition: transform .3s;
   }
 }

@@ -1,0 +1,45 @@
+.block-author {
+  margin-bottom: 2em;
+
+  .post-title {
+    margin: .5em 0;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.staff, .columnists {
+  @media (max-width: $screen-xs-max) {
+    .block-author:nth-child(2n + 1) {
+      clear: left;
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+    .block-author:nth-child(4n + 1) {
+      clear: left;
+    }
+  }
+}
+
+.contributors {
+  .block-author {
+    text-align: center;
+
+    @media (max-width: $screen-xs-max) {
+      &:nth-child(2n + 1) {
+        clear: left;
+      }
+    }
+
+    @media (min-width: $screen-sm-min) {
+      text-align: left;
+
+      &:nth-child(3n + 1) {
+        clear: left;
+      }
+    }
+  }
+}

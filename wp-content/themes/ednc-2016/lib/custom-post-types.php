@@ -214,7 +214,7 @@ function register_post_types() {
 			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
 			'capability_type' => 'post',
 			'hierarchical' => false,
-			'supports' => array( 'title', 'editor', 'author', 'revisions', 'thumbnail'),
+			'supports' => array( 'title', 'editor', 'author', 'revisions', 'thumbnail', 'comments'),
 			'has_archive' => false,
 			'rewrite' => false,	// set to false and then create custom rewrite rules below
 			'query_var' => true
@@ -310,6 +310,38 @@ function register_post_types() {
 			'hierarchical' => false,
 			'supports' => array( 'title', 'revisions', 'thumbnail', 'author'),
 			'has_archive' => false,
+			'rewrite' => true,
+			'query_var' => true
+		)
+	);
+
+	register_post_type( 'edtalk',
+		array('labels' => array(
+				'name' => 'EdTalk',
+				'singular_name' => 'EdTalk Episode',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New EdTalk Episode',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit EdTalk Episode',
+				'new_item' => 'New EdTalk Episode',
+				'view_item' => 'View EdTalk Episode',
+				'search_items' => 'Search EdTalk Episode',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'taxonomies' => array('category'),
+			'public' => true,
+			'exclude_from_search' => false,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array( 'title', 'author'),
+			'has_archive' => true,
 			'rewrite' => true,
 			'query_var' => true
 		)
@@ -497,6 +529,26 @@ register_taxonomy( 'map-category',
 			'update_item' => __( 'Update Map Category' ),
 			'add_new_item' => __( 'Add New Map Category' ),
 			'new_item_name' => __( 'New Map Category Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
+);
+
+register_taxonomy( 'map-column',
+	array('map'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Map Columns' ),
+			'singular_name' => __( 'Map Column' ),
+			'search_items' =>  __( 'Search Map Column' ),
+			'all_items' => __( 'All Map Column' ),
+			'parent_item' => __( 'Parent Map Column' ),
+			'parent_item_colon' => __( 'Parent Map Column:' ),
+			'edit_item' => __( 'Edit Map Column' ),
+			'update_item' => __( 'Update Map Column' ),
+			'add_new_item' => __( 'Add New Map Column' ),
+			'new_item_name' => __( 'New Map Column Name' )
 		),
 		'show_ui' => true,
 		'query_var' => true

@@ -19,7 +19,7 @@
 
       @media (min-width: $screen-sm-min) {
         height: 600px;
-        margin-top: -172px;
+        margin-top: -136px;
         margin-bottom: 1em;
 
         .article-title-overlay {
@@ -61,17 +61,6 @@
           transition: transform .3s;
         }
       }
-    }
-  }
-
-  .byline {
-    font-family: $font-family-sans-serif;
-    font-weight: 300;
-    color: $gray;
-    margin-bottom: 1em;
-
-    a {
-      color: $gray;
     }
   }
 

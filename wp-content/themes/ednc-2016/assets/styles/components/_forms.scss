@@ -14,7 +14,37 @@
   @extend .btn-default;
 }
 
-//Mailchimp
+// Email signup form
+.email-signup-form {
+  background-image: url('../images/emails.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+
+  h2 {
+    background: $plum;
+    color: $white;
+    margin: 0 0 30px -30px;
+    padding: 10px 0 10px 30px;
+
+    span {
+      font-family: $font-family-serif;
+      font-style: italic;
+      font-weight: bold;
+    }
+  }
+
+  .mc_embed_signup {
+    background: $white70;
+    padding: 20px;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 30px;
+    }
+  }
+}
+
+// Mailchimp
 .mc-field-group {
   margin-bottom: 1em;
 
@@ -30,7 +60,10 @@
   }
 
   label {
-    font-weight: 300;
+    font-weight: normal;
+    vertical-align: middle;
+    margin: 0;
+    display: inline;
   }
 
   input[type="checkbox"] {

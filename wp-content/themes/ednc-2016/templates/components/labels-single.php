@@ -10,7 +10,9 @@ $appearances = wp_get_post_terms(get_the_id(), 'appearance');
   }
   $app_hide = array();
   // Determine array indexes for labels we don't want to show
-  $app_hide[] = array_search('Hide from home', array_column($appearances, 'name'));
+  $app_hide[] = array_search('Feature 1', array_column($appearances, 'name'));
+  $app_hide[] = array_search('Feature 2', array_column($appearances, 'name'));
+  $app_hide[] = array_search('Featured', array_column($appearances, 'name'));
   $app_hide[] = array_search('Hide from archives', array_column($appearances, 'name'));
   // Remove empty results
   $app_hide = array_filter($app_hide, 'strlen');
@@ -37,22 +39,20 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
   // Remove empty results
   $mcats_hide = array_filter($mcats_hide, 'strlen');
 
-// Category label
-if ($category) {
-  foreach ($category as $key=>$value) {
-    if (!in_array($key, $cats_hide)) {
-      $link = get_category_link($value['term_id']);
-      echo '<span class="label"><a href="' . $link . '">' . $value['cat_name'] . '</a></span> ';
-    }
-  }
+// Column label
+if ($column) {
+  $link = get_term_link($column[0]);
+  echo '<span class="label"><a href="' . $link . '">' . $column[0]->name. '</a></span> ';
 } else {
 
-  // Column label
-  if ($column) {
-    $link = get_term_link($column[0]);
-    ?>
-    <span class="label"><a href="<?php echo $link; ?>"><?php echo $column[0]->name; ?></a></span>
-    <?php
+  // Category label
+  if ($category && !has_term('uncategorized', 'category')) {
+    foreach ($category as $key=>$value) {
+      if (!in_array($key, $cats_hide)) {
+        $link = get_category_link($value['term_id']);
+        echo '<span class="label"><a href="' . $link . '">' . $value['cat_name'] . '</a></span> ';
+      }
+    }
   } else {
 
     // Map categories
@@ -70,7 +70,7 @@ if ($category) {
         foreach ($appearances as $key=>$value) {
           if (!in_array($key, $app_hide)) {
             $link = get_term_link($value['term_id'], 'appearance');
-            echo '<span class="label"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
+            echo '<span class="label ' . $value['slug'] . '"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
           }
         }
       } else {
@@ -83,6 +83,10 @@ if ($category) {
           // Video label
           if (has_post_format('video')) {
             echo '<span class="label"><span class="icon-video"></span></span>';
+          } else {
+
+            //Empty square
+            echo '<span class="label"></span>';
           }
         }
       }

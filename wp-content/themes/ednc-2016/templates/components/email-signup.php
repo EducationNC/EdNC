@@ -5,11 +5,10 @@ if (isset($_GET['utm_source'])) {
 }
 ?>
 
-<div class="callout">
-  <h2>Sign up for free email subscription</h2>
-  <p>Receive EdNC straight to your inbox.</p>
+<div class="email-signup-form">
+  <h2><span>Sign up</span> for a free email subscription.</h2>
   <!-- Begin MailChimp Signup Form -->
-  <div id="mc_embed_signup">
+  <div id="mc_embed_signup" class="mc_embed_signup">
     <form action="//ednc.us9.list-manage.com/subscribe/post?u=8ba11e9b3c5e00a64382db633&amp;id=2696365d99" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
       <div id="mc_embed_signup_scroll">
 
@@ -37,7 +36,7 @@ if (isset($_GET['utm_source'])) {
         <div class="form-inline">
           <div class="form-group">
             <input type="email" value="" name="EMAIL" placeholder="Email address" class="required email form-control" id="mce-EMAIL">
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
+            <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
           </div>
         </div>
 
