@@ -1,3 +1,38 @@
+.page-header {
+  &.photo-overlay {
+    position: relative;
+    margin-bottom: 2em;
+    background-position: center;
+    background-size: cover;
+    height: 139px;
+
+    .article-title-overlay {
+      position: absolute;
+      padding-bottom: .5em;
+      color: $white;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+
+      h1 {
+        border-bottom: none;
+      }
+    }
+
+    @media (min-width: $screen-sm-min) {
+      margin-top: -54px;
+      height: 262px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      .entry-title {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
 .block-author {
   margin-bottom: 2em;
 
