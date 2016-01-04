@@ -17,7 +17,7 @@
   }
 }
 
-.banner {
+.banner.banner {
   margin-bottom: 5em;
   position: relative;
   z-index: 10;
@@ -97,6 +97,7 @@
 
   .search {
     float: left;
+    padding: 0;
 
     .input-sm {
       margin-right: 8px;
