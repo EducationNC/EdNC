@@ -5,10 +5,9 @@ Template Name: Right Sidebar Navigation
 ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  <div class="page-header">
-    <h1>
-      <?php echo roots_title(); ?>
-    </h1>
+  <div class="container">
+    <?php get_template_part('templates/components/page', 'header'); ?>
+
+    <?php get_template_part('templates/layouts/content', 'page-right-aside'); ?>
   </div>
-  <?php get_template_part('templates/content', 'page-right-aside'); ?>
 <?php endwhile; ?>

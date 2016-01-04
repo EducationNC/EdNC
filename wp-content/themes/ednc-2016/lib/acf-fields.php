@@ -929,7 +929,7 @@ register_field_group(array (
 
 register_field_group(array (
 	'key' => 'group_5457e4bdb8742',
-	'title' => 'EdNews Fields',
+	'title' => 'Editor\'s Picks Fields',
 	'fields' => array (
 		array (
 			'key' => 'field_54b2d7a67ef35',

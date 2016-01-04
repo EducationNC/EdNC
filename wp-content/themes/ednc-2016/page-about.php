@@ -24,7 +24,7 @@
 
       if ($about->have_posts()) : while ($about->have_posts()) : $about->the_post(); ?>
 
-      <div class="col-md-6">
+      <div class="col-md-6 extra-bottom-margin">
         <div class="row">
           <div class="col-xs-5">
             <a href="<?php the_permalink(); ?>">
@@ -33,11 +33,11 @@
           </div>
           <div class="col-xs-7">
             <h3 class="no-top-margin"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-            <h4><?php the_field('title'); ?></h4>
+            <h5 class="no-margin"><?php the_field('title'); ?></h5>
             <p class="caption"><?php the_field('tagline'); ?></p>
             <div class="excerpt">
               <?php the_advanced_excerpt(); ?>
-              <a href="<?php the_permalink(); ?>" class="read-more">Read the rest &raquo;</a>
+              <a href="<?php the_permalink(); ?>" class="read-more">Read more &raquo;</a>
             </div>
           </div>
         </div>
