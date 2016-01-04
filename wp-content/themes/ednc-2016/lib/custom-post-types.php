@@ -3,17 +3,17 @@
 namespace Roots\Sage\CPT;
 
 function register_post_types() {
-	register_post_type( 'underwriter',
+	register_post_type( 'ad',
 		array('labels' => array(
-				'name' => 'Underwriters',
-				'singular_name' => 'Underwriter',
+				'name' => 'Ads',
+				'singular_name' => 'Ad',
 				'add_new' => 'Add New',
-				'add_new_item' => 'Add New Underwriter',
+				'add_new_item' => 'Add New Ad',
 				'edit' => 'Edit',
-				'edit_item' => 'Edit Underwriter',
-				'new_item' => 'New Underwriter',
-				'view_item' => 'View Underwriter',
-				'search_items' => 'Search Underwriter',
+				'edit_item' => 'Edit Ad',
+				'new_item' => 'New Ad',
+				'view_item' => 'View Ad',
+				'search_items' => 'Search Ads',
 				'not_found' =>  'Nothing found in the Database.',
 				'not_found_in_trash' => 'Nothing found in Trash',
 				'parent_item_colon' => ''
@@ -351,6 +351,27 @@ function register_post_types() {
 add_action( 'init', __NAMESPACE__ . '\\register_post_types');
 
 
+register_taxonomy( 'ad-type',
+	array('ad'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+	'labels' => array(
+		'name' => 'Ad Types', /* name of the custom taxonomy */
+		'singular_name' => 'Ad Type', /* single taxonomy name */
+		'search_items' =>  'Search Ad Types', /* search title for taxomony */
+		'all_items' => 'All Ad Types',  /*all title for taxonomies */
+		'parent_item' => 'Parent Ad Type', /* parent title for taxonomy */
+		'parent_item_colon' => 'Parent Ad Type:', /* parent taxonomy title */
+		'edit_item' => 'Edit Ad Type', /* edit custom taxonomy title */
+		'update_item' => 'Update Ad Type', /* update title for taxonomy */
+		'add_new_item' => 'Add New Ad Type', /* add new title for taxonomy */
+		'new_item_name' => 'New Ad Type Name' /* name title for taxonomy */
+	),
+	'show_ui' => true,
+	'query_var' => true,
+	'public' => false
+	)
+);
+
 register_taxonomy( 'district-type',
 	array('district'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
@@ -454,7 +475,7 @@ register_taxonomy( 'bill-status',
 );
 
 register_taxonomy( 'appearance',
-	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('post', 'map'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
 			'name' => __( 'Appearances' ),

@@ -13,7 +13,7 @@ $author_pic = get_the_post_thumbnail($author_bio[0]->ID, 'thumbnail');
   <?php } ?>
 
   <div class="flex">
-    <div class="author-image">
+    <div class="circle-image">
       <?php echo $author_pic; ?>
     </div>
 

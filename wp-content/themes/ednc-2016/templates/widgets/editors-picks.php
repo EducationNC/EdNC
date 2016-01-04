@@ -14,7 +14,8 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4 col-md-push-8">
+      <div class="col-md-4 col-md-push-8 featured-pick">
+        <h6>What we're reading</h6>
         <?php
         $feature = get_field('featured_read');
 

@@ -120,7 +120,7 @@ $featured_ids = array();
     </div>
     <div class="col-md-4">
       <div class="flex-sm">
-        <div class="ad-wrap text-center col-sm-6 col-md-12">
+        <div class="ad-wrap text-center col-md-12 hidden-xs hidden-sm">
           <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <!-- Home sidebar Google AdSense -->
           <ins class="adsbygoogle"
@@ -133,30 +133,40 @@ $featured_ids = array();
           </script>
         </div>
 
-        <div class="ad-wrap text-center col-sm-6 col-md-12">
+        <div class="ad-wrap text-center col-sm-12">
           <?php
           $args = array(
-            'post_type' => 'underwriter',
+            'post_type' => 'ad',
             'posts_per_page' => 1,
-            'orderby' => 'rand'
+            'orderby' => 'rand',
+            'tax_query' => array(
+              array(
+                'taxonomy' => 'ad-type',
+                'field' => 'slug',
+                'terms' => 'underwriter'
+              )
+            )
           );
 
           $ad = new WP_Query($args);
 
           if ($ad->have_posts()) : while ($ad->have_posts()) : $ad->the_post();
             $link = get_field('link_url');
-            $image = Resize\mr_image_resize(get_field('image'), 400, 225, true, false);
+            $image_rectangle = get_field('image_rectangle');
+            $image_banner = get_field('image_banner');
 
             if ($link) {
               echo '<a href="' . $link . '" target="_blank" onclick="ga(\'send\', \'event\', \'ad\', \'click\');">';
             }
-            echo '<img src="' . $image['url'] . '" alt="' . get_the_title() . '" />';
+            echo '<img src="' . $image_rectangle['url'] . '" alt="' . get_the_title() . '" class="hidden-xs hidden-sm" />';
+            echo '<img src="' . $image_banner['url'] . '" alt="' . get_the_title() . '" class="visible-xs-block visible-sm-block" />';
             if ($link) {
               echo '</a>';
             }
 
           endwhile; endif; wp_reset_query();
           ?>
+          <p><a href="/supporters">EdNC thanks our supporters</a></p>
         </div>
       </div>
 
@@ -166,7 +176,41 @@ $featured_ids = array();
         </div>
         <a class="mega-link" href="#" data-toggle="modal" data-target="#emailSignupModal"></a>
       </div>
-      Data dashboard callout
+      
+      <div class="ad-wrap text-center">
+        <?php
+        $args = array(
+          'post_type' => 'ad',
+          'posts_per_page' => 1,
+          'orderby' => 'rand',
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'ad-type',
+              'field' => 'slug',
+              'terms' => 'promo'
+            )
+          )
+        );
+
+        $ad = new WP_Query($args);
+
+        if ($ad->have_posts()) : while ($ad->have_posts()) : $ad->the_post();
+          $link = get_field('link_url');
+          $image_rectangle = get_field('image_rectangle');
+          $image_banner = get_field('image_banner');
+
+          if ($link) {
+            echo '<a href="' . $link . '" target="_blank" onclick="ga(\'send\', \'event\', \'ad\', \'click\');">';
+          }
+          echo '<img src="' . $image_rectangle['url'] . '" alt="' . get_the_title() . '" class="hidden-xs hidden-sm" />';
+          echo '<img src="' . $image_banner['url'] . '" alt="' . get_the_title() . '" class="visible-xs-block visible-sm-block" />';
+          if ($link) {
+            echo '</a>';
+          }
+
+        endwhile; endif; wp_reset_query();
+        ?>
+      </div>
     </div>
   </div>
 </div>

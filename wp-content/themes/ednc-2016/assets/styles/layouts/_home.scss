@@ -87,6 +87,7 @@
   background-size: cover;
   position: relative;
   padding-bottom: 56.25%;
+  margin-bottom: 2em;
   height: 0;
   overflow: hidden;
   clear: both;
@@ -141,6 +142,20 @@
       text-decoration: none;
       color: $ash;
     }
+  }
+}
+
+.featured-pick {
+  background: $pearl;
+
+  h3 {
+    a {
+      text-decoration: none;
+    }
+  }
+
+  a {
+    color: $ash;
   }
 }
 
