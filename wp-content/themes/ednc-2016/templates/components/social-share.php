@@ -1,4 +1,7 @@
 <?php
+
+use Roots\Sage\ShareCount;
+
 // Get post ID
 global $wp_query;
 $id = $wp_query->post->ID;
@@ -14,9 +17,44 @@ $twitterURL = 'https://twitter.com/intent/tweet?text='.$crunchifyTitle.'&amp;url
 $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$crunchifyURL;
 $linkedinURL = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$crunchifyURL.'&title='.$crunchifyTitle.'&source=EducationNC';
 $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
+
+// Get current counts of social media shares & store in transient
+$counts = get_transient('social-counts');
+if ($counts === false) {
+  $social_counts = new ShareCount\socialNetworkShareCount(array(
+    'url' => $crunchifyURL,
+    'facebook' => true,
+    'twitter' => true,
+    'buffer' => true,
+    'pinterest' => true,
+    'linkedin' => true,
+    'google' => true
+  ));
+  $counts = json_decode($social_counts->getShareCounts());
+  set_transient('social-counts', $counts, HOUR_IN_SECONDS);
+}
+
+// Translate share counts to K if number is in thousands
+function num_format($val) {
+  $letter = "";
+  while ($val >= 1000) {
+    $val /= 1000;
+    $val = round($val, 1);
+    $letter .= "K";
+  }
+  $letter = str_replace("KKK", "B", $letter);
+  $letter = str_replace("KK", "M", $letter);
+  return $val.$letter;
+}
+$count_num = num_format($counts->total);
 ?>
 
 <div class="social-share-buttons print-no">
+  <?php
+    if ($count_num != 0) {
+      echo '<span class="num">' . $count_num . '</span> shares';
+    }
+    ?>
   <a rel="nofollow" class="icon-facebook social-share-link" href="<?php echo $facebookURL; ?>">
     Share on facebook
   </a>
