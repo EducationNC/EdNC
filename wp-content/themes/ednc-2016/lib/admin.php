@@ -3,12 +3,20 @@
 namespace Roots\Sage\Admin;
 
 /**
- *Order bios and bills by menu order on admin page
+ * Order bios, bills, and legislators on admin page
  *
  */
-function bios_admin_orderby( $vars ) {
-	if ( isset( $vars['post_type']) && ($vars['post_type'] == 'bio' || $vars['post_type'] == 'bill' || $vars['post_type'] == 'legislator') && !isset( $vars['orderby'] ) ) {
+function admin_orderby( $vars ) {
 
+	if ( isset( $vars['post_type']) && $vars['post_type'] == 'bio' && !isset( $vars['orderby'] ) ) {
+		$vars = array_merge( $vars, array(
+			'orderby' => 'meta_value title',
+			'meta_key' => 'last_name_to_sort_by',
+			'order' => 'ASC'
+		));
+	}
+
+	if ( isset( $vars['post_type']) && ($vars['post_type'] == 'bill' || $vars['post_type'] == 'legislator') && !isset( $vars['orderby'] ) ) {
 		$vars = array_merge( $vars, array(
 			'orderby' => 'menu_order',
 			'order' => 'ASC'
@@ -17,7 +25,7 @@ function bios_admin_orderby( $vars ) {
 
 	return $vars;
 }
-add_filter( 'request', __NAMESPACE__ . '\\bios_admin_orderby' );
+add_filter( 'request', __NAMESPACE__ . '\\admin_orderby' );
 
 
 /**
@@ -135,6 +143,7 @@ function bios_custom_column_heading($columns) {
 	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
 	$new_columns['author-type'] = 'Author Type';
+	$new_columns['author-year'] = 'Contributing Year';
 	$new_columns['date'] = 'Date';
 
 	$columns = $new_columns;
@@ -144,6 +153,9 @@ function bios_custom_column_heading($columns) {
 function bios_custom_column_content($column_name, $id) {
 	if ( 'author-type' == $column_name ) {
 		echo get_the_term_list($id, 'author-type', '', ', ', '');
+	}
+	if ( 'author-year' == $column_name ) {
+		echo get_the_term_list($id, 'author-year', '', ', ', '');
 	}
 }
 

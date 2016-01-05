@@ -414,6 +414,27 @@ register_taxonomy( 'author-type',
 	)
 );
 
+register_taxonomy( 'author-year',
+	array('bio'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => 'Contributing Years', /* name of the custom taxonomy */
+			'singular_name' => 'Contributing Year', /* single taxonomy name */
+			'search_items' =>  'Search Contributing Years', /* search title for taxomony */
+			'all_items' => 'All Contributing Years',  /*all title for taxonomies */
+			'parent_item' => 'Parent Contributing Year', /* parent title for taxonomy */
+			'parent_item_colon' => 'Parent Contributing Year:', /* parent taxonomy title */
+			'edit_item' => 'Edit Contributing Year', /* edit custom taxonomy title */
+			'update_item' => 'Update Contributing Year', /* update title for taxonomy */
+			'add_new_item' => 'Add New Contributing Year', /* add new title for taxonomy */
+			'new_item_name' => 'New Contributing Year Name' /* name title for taxonomy */
+		),
+		'show_ui' => true,
+		'query_var' => true,
+		'public' => false
+	)
+);
+
 register_taxonomy( 'resource-type',
 	array('resource'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */

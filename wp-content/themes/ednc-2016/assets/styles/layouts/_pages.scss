@@ -37,9 +37,20 @@
   margin-bottom: 2em;
 
   .post-title {
-    margin: .5em 0;
+    margin: 0;
+    font-size: 20px;
+
+    .staff & {
+      background: $plum-darkest;
+      padding: .5em;
+
+      a {
+        color: $white;
+      }
+    }
 
     a {
+      color: $ash;
       text-decoration: none;
     }
   }
