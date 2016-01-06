@@ -204,6 +204,17 @@ object, embed {
   &.slideshare.slideshare {
     padding-bottom: 100%;
   }
+
+  &.alignleft.alignleft {
+    @media (min-width: 545px) {
+      width: 57.35%;
+      margin-right: ($line-height-computed / 2);
+      padding-bottom: 30%;
+    }
+    @media (min-width: $screen-md-min) {
+
+    }
+  }
 }
 
 // Video

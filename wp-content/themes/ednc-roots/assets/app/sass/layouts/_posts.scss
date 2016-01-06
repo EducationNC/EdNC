@@ -119,6 +119,15 @@
       position: relative;
     }
 
+    .title-image-overlay {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      width: auto;
+      max-width: 75%;
+    }
+
     .label {
       position: relative;
     }
@@ -306,7 +315,7 @@
     background: $navy-darker;
     color: $white;
 
-    h2, h3, h4, h5, h6 {
+    h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
       color: $white;
     }
 
@@ -409,6 +418,15 @@
     top: 50%;
     transform: translate(0, -50%);
     text-shadow: 0 0 30px $jet;
+  }
+
+  .floating-img {
+    position: absolute;
+    z-index: 5;
+    max-width: 75%;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
   }
 
   .caption {

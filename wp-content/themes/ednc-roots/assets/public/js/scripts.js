@@ -2249,16 +2249,16 @@ var Roots = {
           // Do it on init
           parallax(img);
 
-          // Happy JS scroll pattern is jittery, so I'm >:(
-          // var scrollTimeout;  // global for any pending scrollTimeout
-          // $(window).scroll(function () {
-          // 	if (scrollTimeout) {
-          // 		// clear the timeout, if one is pending
-          // 		clearTimeout(scrollTimeout);
-          // 		scrollTimeout = null;
-          // 	}
-          // 	scrollTimeout = setTimeout(parallax, 10);
-          // });
+          // Happy JS scroll pattern
+          var scrollTimeout;  // global for any pending scrollTimeout
+          $(window).scroll(function () {
+          	if (scrollTimeout) {
+          		// clear the timeout, if one is pending
+          		clearTimeout(scrollTimeout);
+          		scrollTimeout = null;
+          	}
+          	scrollTimeout = setTimeout(parallax(img), 10);
+          });
 
           // Not happy scroll pattern, but it works smoothly at least
           $(window).scroll(function(){
@@ -2271,7 +2271,7 @@ var Roots = {
   // Flash cards
   single_flash_cards: {
     init: function() {
-    
+
       // Determine trigger for touch/click events
       var clickortap;
       if ($('html').hasClass('touch')) {
