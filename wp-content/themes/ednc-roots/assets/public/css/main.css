@@ -10513,6 +10513,13 @@ body.home .photo-overlay h4.post-title {
   text-align: right;
 }
 
+.colophon.colophon {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  vertical-align: text-top;
+}
+
 .single-format-chat {
   height: 100%;
 }
