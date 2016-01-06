@@ -19,7 +19,7 @@ $linkedinURL = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$crunch
 $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
 
 // Get current counts of social media shares & store in transient
-$counts = get_transient('social-counts');
+$counts = get_transient('social-counts-' . $id);
 if ($counts === false) {
   $social_counts = new ShareCount\socialNetworkShareCount(array(
     'url' => $crunchifyURL,
@@ -31,7 +31,7 @@ if ($counts === false) {
     'google' => true
   ));
   $counts = json_decode($social_counts->getShareCounts());
-  set_transient('social-counts', $counts, HOUR_IN_SECONDS);
+  set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
 }
 
 // Translate share counts to K if number is in thousands
@@ -50,11 +50,9 @@ $count_num = num_format($counts->total);
 ?>
 
 <div class="social-share-buttons print-no">
-  <?php
-    if ($count_num != 0) {
-      echo '<span class="num">' . $count_num . '</span> shares';
-    }
-    ?>
+  <?php if ($count_num != 0) { ?>
+    <div class="count"><span class="num"><?php echo $count_num; ?></span> shares</div>
+  <?php } ?>
   <a rel="nofollow" class="icon-facebook social-share-link" href="<?php echo $facebookURL; ?>">
     Share on facebook
   </a>

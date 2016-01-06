@@ -1263,6 +1263,38 @@ register_field_group(array (
 			'disabled' => 0,
 			'readonly' => 0,
 		),
+		array (
+			'key' => 'field_568c37db93baf',
+			'label' => 'Title image overlay',
+			'name' => 'title_overlay',
+			'type' => 'image',
+			'instructions' => 'Title image will replace text title overlay on full-width hero featured images. Will also overlay featured image thumbnails across site and in emails.',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_546a3af5470a0',
+						'operator' => '==',
+						'value' => 'hero',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'preview_size' => 'thumbnail',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
 	),
 	'location' => array (
 		array (

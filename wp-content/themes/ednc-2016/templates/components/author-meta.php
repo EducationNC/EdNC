@@ -20,7 +20,19 @@ if ( function_exists( 'get_coauthors' ) ) {
     if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
       <div class="row">
         <div class="col-xs-3 col-sm-4 col-md-12">
-          <?php the_post_thumbnail('bio-headshot'); ?>
+          <?php
+          if (
+            $author->user_nicename != 'agranados' &&
+            $author->user_nicename != 'alisa' &&
+            $author->user_nicename != 'mrash' &&
+            $author->user_nicename != 'todd-brantley'
+          ) { ?>
+            <div class="circle-image">
+              <?php the_post_thumbnail('bio-headshot'); ?>
+            </div>
+          <?php } else {
+            the_post_thumbnail('bio-headshot');
+          } ?>
         </div>
         <div class="col-xs-9 col-sm-8 col-md-12">
           <?php get_template_part('templates/components/author', 'excerpt'); ?>

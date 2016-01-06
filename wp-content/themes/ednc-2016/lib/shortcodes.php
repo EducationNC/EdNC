@@ -137,7 +137,8 @@ namespace Roots\Sage\Shortcodes;
     extract( shortcode_atts( array(
       'image_id' => '',
       'caption' => '',
-      'floating_text' => ''
+      'floating_text' => '',
+      'floating_image_id' => ''
     ), $atts) );
 
     // If background image is set, get the URL of full sized image
@@ -146,14 +147,18 @@ namespace Roots\Sage\Shortcodes;
       $img_lg = wp_get_attachment_image_src($image_id, 'large');
     }
 
+    // If floating image is set, get the URL of full sized image
+    if (isset($floating_image_id)) {
+      $floating_img = wp_get_attachment_image_src($floating_image_id, 'full');
+      $floating_img_alt = get_post_meta($floating_image_id, '_wp_attachment_image_alt', true);
+    }
+
     ob_start();
     ?>
 
     </div><!-- col -->
     </div><!-- row -->
     </div><!-- container -->
-
-    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/public/js/imagesloaded.pkgd.min.js"></script>
 
     <script type="text/javascript">
       jQuery(document).ready(function($) {
@@ -169,21 +174,16 @@ namespace Roots\Sage\Shortcodes;
           // Do it on init
   	      parallax(img);
 
-          // Happy JS scroll pattern is jittery, so I'm >:(
-          // var scrollTimeout;  // global for any pending scrollTimeout
-    			// $(window).scroll(function () {
-    			// 	if (scrollTimeout) {
-    			// 		// clear the timeout, if one is pending
-    			// 		clearTimeout(scrollTimeout);
-    			// 		scrollTimeout = null;
-    			// 	}
-    			// 	scrollTimeout = setTimeout(parallax, 10);
-    			// });
-
-          // Not happy scroll pattern, but it works smoothly at least
-          $(window).scroll(function(){
-            parallax(img);
-          });
+          // Happy JS scroll pattern
+          var scrollTimeout;  // global for any pending scrollTimeout
+    			$(window).scroll(function () {
+    				if (scrollTimeout) {
+    					// clear the timeout, if one is pending
+    					clearTimeout(scrollTimeout);
+    					scrollTimeout = null;
+    				}
+    				scrollTimeout = setTimeout(parallax(img), 10);
+    			});
         }
       });
     </script>
@@ -195,7 +195,10 @@ namespace Roots\Sage\Shortcodes;
             <div class="parallax-img hidden-xs" style="background-image:url('<?php echo $img[0]; ?>')"></div>
             <img class="visible-xs-block" src="<?php echo $img_lg[0]; ?>" />
           <?php } ?>
-          <?php if ( ! empty( $floating_text ) ) { ?>
+          <?php if ( ! empty( $floating_image_id ) ) { ?>
+            <div class="wash"></div>
+            <img class="floating-img" src="<?php echo $floating_img[0]; ?>" alt="<?php echo $floating_img_alt; ?>" />
+          <?php } elseif ( ! empty( $floating_text ) ) { ?>
             <div class="wash"></div>
             <div class="floating-text">
               <?php echo esc_html( $floating_text ); ?>
@@ -245,10 +248,19 @@ namespace Roots\Sage\Shortcodes;
           'type'  => 'text',
         ),
         array(
+          'label'       => 'Floating Image Overlay',
+          'attr'        => 'floating_image_id',
+          'type'        => 'attachment',
+          'libraryType' => array( 'image' ),
+          'addButton'   => 'Select Image',
+          'frameTitle'  => 'Select Image',
+          'description' => 'Optional'
+        ),
+        array(
           'label'       => 'Floating Text',
           'attr'        => 'floating_text',
           'type'        => 'text',
-          'description' => 'Optional',
+          'description' => 'Optional (will only appear if no floating image overlay is set)',
         )
       )
     )
