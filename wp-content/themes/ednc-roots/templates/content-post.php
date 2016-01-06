@@ -14,6 +14,7 @@ $image_id = get_post_thumbnail_id();
 $featured_image_src = wp_get_attachment_image_src($image_id, 'full');
 $featured_image_lg = wp_get_attachment_image_src($image_id, 'large');
 $featured_image_align = get_field('featured_image_alignment');
+$title_overlay = get_field('title_overlay');
 
 $column = wp_get_post_terms(get_the_id(), 'column');
 $category = wp_get_post_terms(get_the_id(), 'category');
@@ -33,30 +34,45 @@ if ($category[0]->slug == 'powered-schools') {
       <div class="photo-overlay">
         <div class="parallax-img hidden-xs" style="background-image:url('<?php echo $featured_image_src[0]; ?>')"></div>
         <img class="visible-xs-block" src="<?php echo $featured_image_lg[0]; ?>" />
-        <div class="article-title-overlay">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 col-centered">
-                <?php get_template_part('templates/labels'); ?>
-
-                <h1 class="entry-title"><?php the_title(); ?></h1>
-
-                <?php
-                $thumb_id = get_post_thumbnail_id();
-                $thumb_post = get_post($thumb_id);
-                ?>
+        <?php if ( ! empty($title_overlay) ) { ?>
+          <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
+          <div class="article-title-overlay">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12 text-right caption hidden-xs no-bottom-margin">
+                  <?php
+                  $thumb_id = get_post_thumbnail_id();
+                  $thumb_post = get_post($thumb_id);
+                  echo $thumb_post->post_excerpt;
+                  ?>
+                </div>
               </div>
             </div>
           </div>
+        <?php } else { ?>
+          <div class="article-title-overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-centered">
+                  <?php get_template_part('templates/labels'); ?>
+                  <h1 class="entry-title"><?php the_title(); ?></h1>
+                </div>
+              </div>
+            </div>
 
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-xs-12 text-right caption hidden-xs no-bottom-margin">
-                <?php echo $thumb_post->post_excerpt; ?>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12 text-right caption hidden-xs no-bottom-margin">
+                  <?php
+                  $thumb_id = get_post_thumbnail_id();
+                  $thumb_post = get_post($thumb_id);
+                  echo $thumb_post->post_excerpt;
+                  ?>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <?php } ?>
       </div>
 
       <div class="container">
@@ -225,6 +241,7 @@ if ($category[0]->slug == 'powered-schools') {
   <footer class="container hidden-print">
     <?php
     $recommended = get_field('recommended_articles');
+    $original_post = $post;
     if ($recommended) {
       // set this to only display first one for now.
       // TODO: add some way to have more than 1 recommended article
@@ -284,8 +301,11 @@ if ($category[0]->slug == 'powered-schools') {
           </p>
         </div>
       </div>
-      <?php wp_reset_postdata(); ?>
-    <?php } ?>
+      <?php
+      wp_reset_postdata();
+    }
+    $post = $original_post;
+    ?>
 
     <?php if ($comments_open == 1) { ?>
       <div class="row">

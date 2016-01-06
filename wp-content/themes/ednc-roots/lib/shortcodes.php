@@ -136,13 +136,19 @@
     extract( shortcode_atts( array(
       'image_id' => '',
       'caption' => '',
-      'floating_text' => ''
+      'floating_text' => '',
+      'floating_image_id' => ''
     ), $atts) );
 
     // If background image is set, get the URL of full sized image
     if (isset($image_id)) {
       $img = wp_get_attachment_image_src($image_id, 'full');
       $img_lg = wp_get_attachment_image_src($image_id, 'large');
+    }
+
+    // If floating image is set, get the URL of full sized image
+    if (isset($floating_image_id)) {
+      $floating_img = wp_get_attachment_image_src($floating_image_id, 'full');
     }
 
     ob_start();
@@ -194,7 +200,10 @@
             <div class="parallax-img hidden-xs" style="background-image:url('<?php echo $img[0]; ?>')"></div>
             <img class="visible-xs-block" src="<?php echo $img_lg[0]; ?>" />
           <?php } ?>
-          <?php if ( ! empty( $floating_text ) ) { ?>
+          <?php if ( ! empty( $floating_image_id ) ) { ?>
+            <div class="wash"></div>
+            <img class="floating-img" src="<?php echo $floating_img[0]; ?>" />
+          <?php } elseif ( ! empty( $floating_text ) ) { ?>
             <div class="wash"></div>
             <div class="floating-text">
               <?php echo esc_html( $floating_text ); ?>
@@ -244,11 +253,20 @@
           'type'  => 'text',
         ),
         array(
+          'label'       => 'Floating Image Overlay',
+          'attr'        => 'floating_image_id',
+          'type'        => 'attachment',
+          'libraryType' => array( 'image' ),
+          'addButton'   => 'Select Image',
+          'frameTitle'  => 'Select Image',
+          'description' => 'Optional'
+        ),
+        array(
           'label'       => 'Floating Text',
           'attr'        => 'floating_text',
           'type'        => 'text',
-          'description' => 'Optional',
-        )
+          'description' => 'Optional (will only appear if no floating image overlay is set)',
+        ),
       )
     )
   );
