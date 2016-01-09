@@ -111,8 +111,10 @@
     'single': {
       init: function() {
         // Add body class for any posts with full width hero featured images
-        if (!ismobileorIE) {
-          if ($('.entry-header').hasClass('hero-image')) {
+        if ($('.entry-header').hasClass('hero-image')) {
+          if (!ismobileorIE) {
+            $('body').addClass('hero-image-full');
+          } else {
             $('body').addClass('hero-image');
           }
         }

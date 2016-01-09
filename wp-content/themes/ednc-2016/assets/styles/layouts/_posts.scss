@@ -1,6 +1,29 @@
 .hentry {
   .entry-header {
+
+    &:not(.hero-image) {
+      @media (max-width: $screen-sm-max) {
+        margin-top: 2em;
+      }
+    }
+
+    &.hero-image {
+      overflow: hidden;
+      width: 100%;
+
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 1em;
+        height: 400px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        height: 600px;
+      }
+    }
+
     .photo-overlay {
+      overflow: visible;
+      height: 100%;
 
       .title-image-overlay {
         position: absolute;
@@ -13,6 +36,8 @@
 
       .label {
         position: relative;
+        display: inline-block;
+        margin-bottom: 4px;
       }
 
       @media (max-width: $screen-xs-max) {
@@ -23,15 +48,16 @@
             color: $plum;
             font-size: 30px;
             font-weight: normal;
+            text-shadow: none;
           }
+        }
+
+        &:after {
+          display: none;
         }
       }
 
       @media (min-width: $screen-sm-min) {
-        height: 600px;
-        margin-top: -136px;
-        margin-bottom: 1em;
-
         .article-title-overlay {
           position: absolute;
           padding-bottom: .5em;

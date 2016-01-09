@@ -19,3 +19,7 @@
     background: $raven;
   }
 }
+
+.button {
+  @extend .btn;
+}

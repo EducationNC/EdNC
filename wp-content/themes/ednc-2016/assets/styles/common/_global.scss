@@ -26,8 +26,7 @@
 
 // Utilities
 .extra-padding {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px 20px;
 }
 
 .no-padding {
@@ -45,7 +44,7 @@
   margin: 0;
 }
 
-.no-top-margin {
+.no-top-margin.no-top-margin {
   margin-top: 0;
 }
 

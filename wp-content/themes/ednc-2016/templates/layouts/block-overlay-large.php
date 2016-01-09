@@ -1,6 +1,7 @@
 <?php
 
 use Roots\Sage\Assets;
+use Roots\Sage\Extras;
 use Roots\Sage\Resize;
 
 $video = has_post_format('video');
@@ -27,11 +28,11 @@ if (has_post_thumbnail()) {
   $image_url = wp_get_attachment_image_src($image_id, 'featured-large');
   $image_sized['url'] = $image_url[0];
 } else {
-  $image_src = catch_that_image();
+  $image_src = Extras\catch_that_image();
   if ($image_src) {
     $image_sized = Resize\mr_image_resize($image_src, 1240, 525, true, false);
   } else {
-    $image_sized['url'] = Assets\asset_path() . 'images/logo-featured-large.jpg';
+    $image_sized['url'] = Assets\asset_path('images/logo-featured-large.jpg');
   }
 }
 ?>

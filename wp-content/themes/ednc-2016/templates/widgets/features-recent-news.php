@@ -2,7 +2,8 @@
 
 use Roots\Sage\Resize;
 
-// Number of news posts to show
+// Number of posts to show
+$features_n = $instance['features_n'];
 $news_n = $instance['news_n'];
 
 // Set up variable to catch featured post ids -- we will exclude these ids from news query
@@ -19,41 +20,13 @@ $featured_ids = array();
        * Displays most recently updated post that is marked as "Feature 1"
        */
       $featured = new WP_Query([
-        'posts_per_page' => 1,
-        'post_type' => 'post',
+        'posts_per_page' => $features_n,
+        'post_type' => array('post', 'map'),
         'tax_query' => array(
           array(
             'taxonomy' => 'appearance',
             'field' => 'slug',
-            'terms' => 'feature-1'
-          )
-        ),
-        'meta_key' => 'updated_date',
-        'orderby' => 'meta_value_num',
-        'order' => 'DESC'
-      ]);
-
-      if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
-
-        $featured_ids[] = get_the_id();
-
-        get_template_part('templates/layouts/block', 'overlay');
-
-      endwhile; endif; wp_reset_query();
-
-      /*
-       * Second feature spot
-       *
-       * Displays most recently updated post that is marked as "Feature 2"
-       */
-      $featured = new WP_Query([
-        'posts_per_page' => 1,
-        'post_type' => 'post',
-        'tax_query' => array(
-          array(
-            'taxonomy' => 'appearance',
-            'field' => 'slug',
-            'terms' => 'feature-2'
+            'terms' => 'featured'
           )
         ),
         'meta_key' => 'updated_date',
@@ -83,17 +56,12 @@ $featured_ids = array();
         $news = new WP_Query([
           'posts_per_page' => $news_n,
           'post__not_in' => $featured_ids,
+          'post_type' => array('post', 'map'),
           'tax_query' => array(
-            'relation' => 'OR',
             array(
               'taxonomy' => 'appearance',
               'field' => 'slug',
               'terms' => 'news'
-            ),
-            array(
-              'taxonomy' => 'appearance',
-              'field' => 'slug',
-              'terms' => 'press-release'
             )
           ),
           'meta_key' => 'updated_date',
@@ -176,7 +144,7 @@ $featured_ids = array();
         </div>
         <a class="mega-link" href="#" data-toggle="modal" data-target="#emailSignupModal"></a>
       </div>
-      
+
       <div class="ad-wrap text-center">
         <?php
         $args = array(

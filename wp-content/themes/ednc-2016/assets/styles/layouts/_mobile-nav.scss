@@ -52,13 +52,14 @@
   @media (min-width: $screen-sm-min) {
     top: 30px;
     right: 15px;
+    padding-left: 55px;
 
     &:before {
       content: 'MENU';
       color: $jet;
       font-family: $font-family-sans-serif;
       position: absolute;
-      left: -53px;
+      left: 0px;
       top: -2px;
       font-size: 16px;
       padding-right: 7px;

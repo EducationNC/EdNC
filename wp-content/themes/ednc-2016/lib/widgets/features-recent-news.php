@@ -24,7 +24,7 @@ class Features_Recent_News extends \WP_Widget {
 	public function widget( $args, $instance ) {
 		$before_widget = $args['before_widget'];
 		$after_widget = $args['after_widget'];
-		
+
 		echo $before_widget;
     include(locate_template('templates/widgets/features-recent-news.php'));
 		echo $after_widget;
@@ -36,11 +36,16 @@ class Features_Recent_News extends \WP_Widget {
 	 * @param array $instance The widget options
 	 */
 	public function form( $instance ) {
+		$features_n = ! empty ( $instance['features_n'] ) ? $instance['features_n'] : 2;
     $news_n = ! empty( $instance['news_n'] ) ? $instance['news_n'] : 4;
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'news_n' ); ?>"><?php _e( 'Number of recent news to display:' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'news_n' ); ?>" name="<?php echo $this->get_field_name( 'news_n' ); ?>" type="text" value="<?php echo esc_attr( $news_n ); ?>">
+			<label for="<?php echo $this->get_field_id( 'features_n' ); ?>"><?php _e( 'Number of features to display:' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'features_n' ); ?>" name="<?php echo $this->get_field_name( 'features_n' ); ?>" type="text" value="<?php echo esc_attr( $features_n ); ?>">
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'news_n' ); ?>"><?php _e( 'Number of recent news to display:' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'news_n' ); ?>" name="<?php echo $this->get_field_name( 'news_n' ); ?>" type="text" value="<?php echo esc_attr( $news_n ); ?>">
 		</p>
 		<?php
 	}
@@ -53,6 +58,7 @@ class Features_Recent_News extends \WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
     $instance = array();
+		$instance['features_n'] = ( ! empty( $new_instance['features_n'] ) ) ? strip_tags( $new_instance['features_n'] ) : '';
 		$instance['news_n'] = ( ! empty( $new_instance['news_n'] ) ) ? strip_tags( $new_instance['news_n'] ) : '';
 
 		return $instance;

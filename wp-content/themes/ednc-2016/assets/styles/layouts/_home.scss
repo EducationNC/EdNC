@@ -119,29 +119,7 @@
   padding: 2em 0;
 
   ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    h3 {
-      margin: 0;
-
-      a {
-        text-decoration: none;
-        color: $jet;
-      }
-    }
-  }
-
-  li {
-    margin: 0 0 1em;
-  }
-
-  .meta {
-    a {
-      text-decoration: none;
-      color: $ash;
-    }
+    @extend .ednews-items;
   }
 }
 

@@ -10,9 +10,9 @@ $appearances = wp_get_post_terms(get_the_id(), 'appearance');
   }
   $app_hide = array();
   // Determine array indexes for labels we don't want to show
-  $app_hide[] = array_search('Feature 1', array_column($appearances, 'name'));
-  $app_hide[] = array_search('Feature 2', array_column($appearances, 'name'));
   $app_hide[] = array_search('Featured', array_column($appearances, 'name'));
+  $app_hide[] = array_search('Featured Perspective', array_column($appearances, 'name'));
+  $app_hide[] = array_search('Hide from home', array_column($appearances, 'name'));
   $app_hide[] = array_search('Hide from archives', array_column($appearances, 'name'));
   // Remove empty results
   $app_hide = array_filter($app_hide, 'strlen');
@@ -51,6 +51,7 @@ if ($column) {
       if (!in_array($key, $cats_hide)) {
         $link = get_category_link($value['term_id']);
         echo '<span class="label"><a href="' . $link . '">' . $value['cat_name'] . '</a></span> ';
+        break;
       }
     }
   } else {
@@ -61,6 +62,7 @@ if ($column) {
         if (!in_array($key, $mcats_hide)) {
           $link = get_term_link($value['term_id'], 'map-category');
           echo '<span class="label"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
+          break;
         }
       }
     } else {
@@ -71,6 +73,7 @@ if ($column) {
           if (!in_array($key, $app_hide)) {
             $link = get_term_link($value['term_id'], 'appearance');
             echo '<span class="label ' . $value['slug'] . '"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
+            break;
           }
         }
       } else {

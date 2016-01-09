@@ -134,3 +134,27 @@ function get_adjacent_author_post( $previous = true ) {
 
   return $result;
 }
+
+/**
+ * Get first image inside post content
+ */
+function catch_that_image() {
+  global $post, $posts;
+  $first_img = '';
+  ob_start();
+  ob_end_clean();
+  $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+  if (isset($matches[1][0])) {
+    $first_img = $matches[1][0];
+  }
+
+  return $first_img;
+}
+
+/**
+ * Extend plugin Taxonomy Term Image to multiple taxonomies
+ */
+function the_term_image_taxonomy( $taxonomy ) {
+  return array('column', 'category', 'map-column');
+}
+add_filter( 'taxonomy-term-image-taxonomy', __NAMESPACE__ . '\\the_term_image_taxonomy' );

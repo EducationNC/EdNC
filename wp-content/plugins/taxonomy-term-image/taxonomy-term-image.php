@@ -2,10 +2,9 @@
 /*
 Plugin Name: Taxonomy Term Image
 Plugin URI: https://github.com/daggerhart/taxonomy-term-image
-Description: Example plugin for adding an image upload field to a taxonomy term edit page.
-Author: daggerhart
-Version: 1.5
-Author URI: http://daggerhart.com
+Description: Example plugin for adding an image upload field to a taxonomy term edit page using WordPress 4.4 taxonomy term meta data
+Author: daggerhart, slack
+Version: 2.0.1
 */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -15,26 +14,26 @@ if ( ! class_exists( 'Taxonomy_Term_Image' ) ) :
 class Taxonomy_Term_Image {
 
 	// object version used for enqueuing scripts
-	private $version = '1.5';
+	private $version = '2.0.1';
 
 	// url for the directory where our js is located
 	private $js_dir_url;
 
-	// the slug for the taxonomy we are targeting
+	// array of slugs for the taxonomies we are targeting
 	// api: use filter 'taxonomy-term-image-taxonomy' to override
-	private $taxonomy = 'category';
+	private $taxonomies = array( 'category' );
 
 	// defined during __construct() for i18n reasons
 	// api: use filter 'taxonomy-term-image-labels' to override
 	private $labels = array();
 
-	// where we will store our term_data
-	// will dynamically be set to $this->taxonomy . '_term_images' by default
+	// @deprecated: option_name for pre-term-meta data storage
 	// api: use filter 'taxonomy-term-image-option-name' to override
 	private $option_name = '';
 
-	// array of key value pairs:  term_id => image_id
-	public $term_images = array();
+	// our term meta key
+	// api: use filter 'taxonomy-term-image-meta-key' to override
+	private $term_meta_key = 'term_image';
 
 	/**
 	 * Simple singleton to enforce once instance
@@ -63,23 +62,29 @@ class Taxonomy_Term_Image {
 			'modalButton'      => __( 'Attach' ),
 		);
 
-		// default option name keyed to the taxonomy
-		$this->option_name = $this->taxonomy . '_term_images';
-
-		// allow overriding of the target taxonomy
-		$this->taxonomy = apply_filters( 'taxonomy-term-image-taxonomy', $this->taxonomy );
-
 		// allow overriding of the html text
 		$this->labels = apply_filters( 'taxonomy-term-image-labels', $this->labels );
 
-		// allow overriding of option_name
+		// allow overriding of the target taxonomies
+		$this->taxonomies = apply_filters( 'taxonomy-term-image-taxonomy', $this->taxonomies );
+
+		if ( ! is_array( $this->taxonomies ) ) {
+			$this->taxonomies = array( $this->taxonomies );
+		}
+
+		// @deprecated: allow overriding of option_name
+		// default option name keyed to the taxonomy
+		$this->option_name = $this->taxonomies[0] . '_term_images';
 		$this->option_name = apply_filters( 'taxonomy-term-image-option-name', $this->option_name );
+
+		// allow overriding of term_meta
+		$this->term_meta_key = apply_filters( 'taxonomy-term-image-meta-key', $this->term_meta_key );
 
 		// get our js location for enqueing scripts
 		$this->js_dir_url = apply_filters( 'taxonomy-term-image-js-dir-url', plugin_dir_url( __FILE__ ) . '/js' );
 
-		// gather data
-		$this->term_images = get_option( $this->option_name, $this->term_images );
+		// check for updates
+		$this->upgrade();
 
 		// hook into WordPress
 		$this->hook_up();
@@ -92,26 +97,66 @@ class Taxonomy_Term_Image {
 	private function __wakeup(){}
 
 	/**
+	 * Check for plugin updates
+	 */
+	private function upgrade(){
+		$previous_version = get_option( 'taxonomy-term-image-version', '0.0.0' );
+
+		// if the previous version is less than the current version,
+		// we need to upgrade
+		if ( version_compare( $previous_version, $this->version, '<' ) ){
+
+			$old_option = get_option( $this->option_name, array() );
+
+			// if we have data in the old (1.x) option,
+			// move it to term meta and delete the old option
+			if ( ! empty( $old_option ) ) {
+				foreach( $old_option as $term_id => $image_id ) {
+					update_term_meta( $term_id, $this->term_meta_key, $image_id );
+				}
+
+				delete_option( $this->option_name );
+			}
+
+			// modify the stored version data for future checks
+			update_option( 'taxonomy-term-image-version', $this->version );
+		}
+	}
+
+	/**
 	 * Initialize the object
 	 * - hook into WordPress admin
 	 */
 	private function hook_up(){
+		// term meta data registration
+		add_action( 'init', array( $this, 'register_term_meta' ) );
+
 		// we only need to add most hooks on the admin side
 		if ( is_admin() ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ) );
 
-			// add our image field to the taxonomy term forms
-			add_action( $this->taxonomy . '_add_form_fields', array( $this, 'taxonomy_add_form' ) );
-			add_action( $this->taxonomy . '_edit_form_fields', array( $this, 'taxonomy_edit_form' ) );
+			foreach ( $this->taxonomies as $taxonomy ) {
+				// add our image field to the taxonomy term forms
+				add_action( $taxonomy . '_add_form_fields', array( $this, 'taxonomy_add_form' ) );
+				add_action( $taxonomy . '_edit_form_fields', array( $this, 'taxonomy_edit_form' ) );
 
-			// hook into term administration actions
-			add_action( 'created_term', array( $this, 'taxonomy_term_form_save' ), 10, 3 );
-			add_action( 'edited_term', array( $this, 'taxonomy_term_form_save' ), 10, 3 );
-			add_action( 'delete_term', array( $this, 'delete_term' ), 10, 4 );
+				// hook into term administration actions
+				add_action( 'create_' . $taxonomy, array( $this, 'taxonomy_term_form_save' ) );
+				add_action( 'edit_' . $taxonomy, array( $this, 'taxonomy_term_form_save' ) );
+			}
 		}
 
 		// add our data when term is retrieved
-		add_action( 'get_term', array( $this, 'get_term' ), 10, 2 );
+		add_filter( 'get_term', array( $this, 'get_term' ), 10, 2 );
+		add_filter( 'get_terms', array( $this, 'get_terms' ) );
+		add_filter( 'get_object_terms', array( $this, 'get_terms' ) );
+	}
+
+	/**
+	 * Register our term meta and sanitize as an integer
+	 */
+	function register_term_meta() {
+		register_meta( 'term', $this->term_meta_key, 'absint' );
 	}
 
 	/**
@@ -121,21 +166,24 @@ class Taxonomy_Term_Image {
 		// get the screen object to decide if we want to inject our scripts
 		$screen = get_current_screen();
 
-		// we're looking for "edit-category"
-		if ( $screen->id == 'edit-' . $this->taxonomy ){
-			// WP core stuff we need
-			wp_enqueue_media();
-			wp_enqueue_style( 'thickbox' );
-			$dependencies = array( 'jquery', 'thickbox', 'media-upload' );
+		// check if we are on any edit-{taxonomy} screen
+		foreach( $this->taxonomies as $taxonomy ) {
+			if ( $screen->id == 'edit-' . $taxonomy ){
+				// WP core stuff we need
+				wp_enqueue_media();
+				wp_enqueue_style( 'thickbox' );
+				$dependencies = array( 'jquery', 'thickbox', 'media-upload' );
 
-			// register our custom script
-			wp_register_script( 'taxonomy-term-image-js', $this->js_dir_url . '/taxonomy-term-image.js', $dependencies, $this->version, true );
+				// register our custom script
+				wp_register_script( 'taxonomy-term-image-js', $this->js_dir_url . '/taxonomy-term-image.js', $dependencies, $this->version, true );
 
-			// Localize the modal window text so that we can translate it
-			wp_localize_script( 'taxonomy-term-image-js', 'TaxonomyTermImageText', $this->labels );
+				// Localize the modal window text so that we can translate it
+				wp_localize_script( 'taxonomy-term-image-js', 'TaxonomyTermImageText', $this->labels );
 
-			// enqueue the registered and localized script
-			wp_enqueue_script( 'taxonomy-term-image-js' );
+				// enqueue the registered and localized script
+				wp_enqueue_script( 'taxonomy-term-image-js' );
+				break;
+			}
 		}
 	}
 
@@ -159,7 +207,7 @@ class Taxonomy_Term_Image {
 				<img class="taxonomy-term-image-attach" src="<?php print esc_attr( $image_src[0] ); ?>" />
 			<?php endif; ?>
 		</p>
-	<?php
+		<?php
 	}
 
 	/**
@@ -171,23 +219,24 @@ class Taxonomy_Term_Image {
 			<label><?php echo $this->labels['fieldTitle']; ?></label>
 			<?php $this->taxonomy_term_image_field(); ?>
 		</div>
-	<?php
-
+		<?php
 	}
 
 	/**
 	 * Add a new form field for the edit taxonomy term form
 	 *
-	 * @param $tag | object | the term object
+	 * @param $term | object | the term object
 	 */
-	function taxonomy_edit_form( $tag ){
+	function taxonomy_edit_form( $term ){
 		// default values
 		$image_ID = '';
 		$image_src = array();
 
+		$term_image_id = get_term_meta( $term->term_id, $this->term_meta_key, true );
+
 		// look for existing data for this term
-		if ( isset( $this->term_images[ $tag->term_id ] ) ) {
-			$image_ID  = $this->term_images[ $tag->term_id ];
+		if ( isset( $term_image_id ) ) {
+			$image_ID  = $term_image_id;
 			$image_src = wp_get_attachment_image_src( $image_ID, 'thumbnail' );
 		}
 		?>
@@ -197,18 +246,15 @@ class Taxonomy_Term_Image {
 				<?php $this->taxonomy_term_image_field( $image_ID, $image_src ); ?>
 			</td>
 		</tr>
-	<?php
-
+		<?php
 	}
 
 	/**
-	 * Handle saving our custom taxonomy data
+	 * Handle saving our custom taxonomy term meta
 	 *
 	 * @param $term_id
-	 * @param $tt_id
-	 * @param $taxonomy
 	 */
-	function taxonomy_term_form_save( $term_id, $tt_id, $taxonomy ) {
+	function taxonomy_term_form_save( $term_id ) {
 
 		// our requirements for saving:
 		if (
@@ -220,40 +266,24 @@ class Taxonomy_Term_Image {
 			isset( $_POST['taxonomy'] ) &&
 			isset( $_POST['taxonomy_term_image'] ) &&
 
-			// the taxonomy submitted is the taxonomy we are dealing with
-			$_POST['taxonomy'] == $this->taxonomy
+			// the taxonomy submitted is one of the taxonomies we are dealing with
+			in_array( $_POST['taxonomy'], $this->taxonomies )
 		)
 		{
+			// get the term_meta and assign it the old_image
+			$old_image = get_term_meta( $term_id, $this->term_meta_key, true );
 			// see if image data was submitted:
-			// sanitize the data and save it in the term_images array
-			if ( ! empty( $_POST['taxonomy_term_image'] ) ) {
-				$this->term_images[ $term_id ] = absint( $_POST['taxonomy_term_image'] );
+			// sanitize the data and save it as the new_image
+			$new_image = isset( $_POST['taxonomy_term_image'] ) ? absint( $_POST['taxonomy_term_image'] ) : '';
+
+			if ( $old_image && '' === $new_image ) {
+				delete_term_meta( $term_id, $this->term_meta_key );
 			}
-			// term was submitted with no image value:
-			// if the term previous had image data, remove it
-			else if ( isset( $this->term_images[ $term_id ] ) ) {
-				unset( $this->term_images[ $term_id ] );
+			// if the new image is not the same as the old update the term_meta
+			else if ( $old_image !== $new_image ) {
+				// save the term image data
+				update_term_meta( $term_id, $this->term_meta_key, $new_image );
 			}
-
-			// save the term image data
-			update_option( $this->option_name, $this->term_images );
-		}
-	}
-
-	/**
-	 * Delete a term's image data when the term is deleted
-	 *
-	 * @param $term_id
-	 * @param $tt_id
-	 * @param $taxonomy
-	 * @param $deleted_term
-	 */
-	function delete_term( $term_id, $tt_id, $taxonomy, $deleted_term ) {
-		if ( $taxonomy == $this->taxonomy && isset( $this->term_images[ $term_id ] ) ) {
-			unset( $this->term_images[ $term_id ]  );
-
-			// save the data
-			update_option( $this->option_name, $this->term_images );
 		}
 	}
 
@@ -267,15 +297,32 @@ class Taxonomy_Term_Image {
 	 */
 	function get_term( $_term, $taxonomy ) {
 		// only modify term when dealing with this taxonomy
-		if ( $taxonomy == $this->taxonomy ) {
-			// default to null if not found
-			$_term->term_image = isset( $this->term_images[ $_term->term_id ] ) ? $this->term_images[ $_term->term_id ] : null;
+		if ( in_array( $taxonomy, $this->taxonomies ) ) {
+			// (backwards compatibility) default to null if not found
+			$image_id = get_term_meta( $_term->term_id, $this->term_meta_key, true );
+			$_term->term_image = !empty( $image_id ) ? $image_id : null;
 		}
 		return $_term;
+	}
+
+	/**
+	 * Add term_image data to objects when get_terms() is called
+	 *
+	 * @param $terms
+	 */
+	function get_terms( $terms ) {
+		foreach( $terms as $i => $term ){
+			if ( is_object( $term ) && isset( $term->taxonomy ) ) {
+				$terms[ $i ] = $this->get_term( $term, $term->taxonomy );
+			}
+		}
+		return $terms;
 	}
 }
 
 endif;
 
+add_action( 'init', function(){
+	Taxonomy_Term_Image::instance();
+});
 
-Taxonomy_Term_Image::instance();

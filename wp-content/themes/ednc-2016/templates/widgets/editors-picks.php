@@ -53,7 +53,7 @@
       <div class="col-md-4 col-md-pull-4">
         <p class="hidden-xs hidden-sm"><a href="<?php the_permalink(); ?>" class="btn btn-default">Read EdNC's daily notes</a></p>
 
-        <ul>
+        <ul class="ednews-items">
           <?php
           $date = get_the_time('n/j/Y');
           $items = get_field('news_item');
@@ -65,7 +65,7 @@
 
           while ($i < $limit && $i < $count) {
             if ($i == $colbreak) {
-              echo '</ul></div><div class="col-md-4 col-md-pull-4"><ul>';
+              echo '</ul></div><div class="col-md-4 col-md-pull-4"><ul class="ednews-items">';
             }
             $item = $items[$i];
             ?>

@@ -1,6 +1,7 @@
 <?php
 
 use Roots\Sage\Assets;
+use Roots\Sage\Extras;
 use Roots\Sage\Resize;
 
 $video = has_post_format('video');
@@ -9,8 +10,6 @@ $column = wp_get_post_terms(get_the_id(), 'column');
 
 $author_id = get_the_author_meta('ID');
 $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
-$author_avatar = get_field('avatar', $author_bio[0]->ID);
-$author_avatar_sized = Resize\mr_image_resize($author_avatar, 140, null, false, '', false);
 
 if ( function_exists( 'coauthors_posts_links' ) ) {
   $authors = get_coauthors();
@@ -27,11 +26,11 @@ if (has_post_thumbnail()) {
   $image_url = wp_get_attachment_image_src($image_id, 'featured-medium');
   $image_sized['url'] = $image_url[0];
 } else {
-  $image_src = catch_that_image();
+  $image_src = Extras\catch_that_image();
   if ($image_src) {
     $image_sized = Resize\mr_image_resize($image_src, 820, 347, true, false);
   } else {
-    $image_sized['url'] = Assets\asset_path() . 'images/logo-featured-medium.jpg';
+    $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
   }
 }
 ?>

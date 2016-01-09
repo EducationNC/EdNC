@@ -3,13 +3,12 @@
     position: fixed;
     width: 48px;
     height: 48px;
-    left: 0;
+    right: 0;
     bottom: 57px;
     z-index: 100;
-    background: $white70;
+    background: $pear;
     text-decoration: none;
-    color: $ash;
-    @include box-shadow(0 0 5px $raven);
+    color: $white;
 
     &:before {
       position: absolute;
@@ -17,6 +16,10 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
+    }
+
+    @media (min-width: $screen-sm-min) {
+      bottom: 0;
     }
 
     @media (min-width: $screen-md-min) {

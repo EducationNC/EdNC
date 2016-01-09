@@ -637,6 +637,23 @@ function pre_get_posts($query) {
 	if ($query->is_category('1868-constitutional-convention')) {
 		$query->set('order' , 'ASC');
 	}
+
+	// additional date archive for taxonomy archives
+	if ($query->is_tax() || $query->is_category()) {
+		if (isset($_GET['date'])) {
+			if ($query->get('fields') != 'ids') {
+				$date_array = explode('/', $_GET['date']);
+				$date_query = array(
+					array(
+						'year' => $date_array[0],
+						'month' => $date_array[1],
+						'day' => $date_array[2]
+					)
+				);
+				$query->set('date_query', $date_query);
+			}
+		}
+	}
 }
 add_action('pre_get_posts', __NAMESPACE__ . '\\pre_get_posts');
 

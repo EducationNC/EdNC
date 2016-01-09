@@ -33,7 +33,12 @@
     font-weight: 300;
   }
 
-  .hero-image & {
+  .hero-image-full & {
+    @media (min-width: $screen-md-min) {
+      position: absolute;
+      width: 100%;
+    }
+
     a {
       color: $white;
     }
@@ -50,13 +55,19 @@
     }
   }
 
+  .hero-image & {
+    @media (min-width: $screen-md-min) {
+      margin-bottom: 0;
+    }
+  }
+
   .container-fluid {
     position: relative;
     z-index: 1;
     height: 38px;
     background: $steel;
 
-    .hero-image & {
+    .hero-image-full & {
       background: none;
     }
   }
@@ -102,7 +113,7 @@
     position: relative;
     z-index: 1;
 
-    .hero-image & {
+    .hero-image-full & {
       background: none;
     }
   }
@@ -140,7 +151,7 @@
         }
       }
 
-      .hero-image & > a {
+      .hero-image-full & > a {
         color: $white;
       }
     }
@@ -238,7 +249,7 @@
     margin-top: -1px;
   }
 
-  .hero-image & a {
+  .hero-image-full & a {
     color: $jet;
   }
 

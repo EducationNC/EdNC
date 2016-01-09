@@ -10,6 +10,8 @@ $appearances = wp_get_post_terms(get_the_id(), 'appearance');
   }
   $app_hide = array();
   // Determine array indexes for labels we don't want to show
+  $app_hide[] = array_search('Featured', array_column($appearances, 'name'));
+  $app_hide[] = array_search('Featured Perspective', array_column($appearances, 'name'));
   $app_hide[] = array_search('Hide from home', array_column($appearances, 'name'));
   $app_hide[] = array_search('Hide from archives', array_column($appearances, 'name'));
   // Remove empty results
@@ -41,7 +43,7 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
 if ($column) {
   $link = get_term_link($column[0]);
   ?>
-  <span class="label"><a href="<?php echo $link; ?>"><?php echo $column[0]->name; ?></a></span>
+  <span class="label column"><a href="<?php echo $link; ?>"><?php echo $column[0]->name; ?></a></span>
   <?php
 }
 
@@ -73,6 +75,11 @@ if ($appearances) {
       echo '<span class="label"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
     }
   }
+}
+
+// Map label
+if ($post_type == 'map') {
+  echo '<span class="label"><a href="/maps">Maps</a></span>';
 }
 
 // EdNews label

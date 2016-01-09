@@ -22,7 +22,7 @@
 </div>
 
 <div class="follow-buttons text-center">
-  <h2>Follow EdNC on:</h2>
+  <h3>See more and follow EdNC on:</h3>
   <a href="https://www.facebook.com/educationnc" target="_blank"><span class="icon-facebook"></span></a>
   <a href="https://www.twitter.com/educationnc" target="_blank"><span class="icon-twitter"></span></a>
   <a href="https://www.instagram.com/educationnc" target="_blank"><span class="icon-instagram"></span></a>
