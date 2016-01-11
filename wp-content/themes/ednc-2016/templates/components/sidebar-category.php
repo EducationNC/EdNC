@@ -9,6 +9,7 @@
   $new_array = array_merge($wp_query->query, ['fields' => 'ids', 'posts_per_page' => -1, 'post_type' => ['post', 'map']]);
 
   $results = get_posts($new_array);
+
   $year_prev = null;
   $month_prev = null;
 

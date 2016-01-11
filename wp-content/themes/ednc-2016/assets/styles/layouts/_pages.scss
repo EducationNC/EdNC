@@ -33,7 +33,7 @@
   }
 }
 
-.block-author {
+.block-person {
   margin-bottom: 2em;
 
   .post-title {
@@ -56,22 +56,22 @@
   }
 }
 
-.staff, .columnists {
+.staff, .ncga {
   @media (max-width: $screen-xs-max) {
-    .block-author:nth-child(2n + 1) {
+    .block-person:nth-child(2n + 1) {
       clear: left;
     }
   }
 
   @media (min-width: $screen-sm-min) {
-    .block-author:nth-child(4n + 1) {
+    .block-person:nth-child(4n + 1) {
       clear: left;
     }
   }
 }
 
 .contributors {
-  .block-author {
+  .block-person {
     text-align: center;
 
     @media (max-width: $screen-xs-max) {

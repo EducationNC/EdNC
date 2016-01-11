@@ -29,7 +29,7 @@
         $user = get_field('user');
         ?>
 
-        <div class="col-md-3 col-xs-6 block-author">
+        <div class="col-md-3 col-xs-6 block-person">
           <div class="row">
             <div class="col-sm-5 col-md-12"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
             <div class="col-sm-7 col-md-12"><h4 class="post-title"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_title(); ?></a></h4></div>
@@ -81,7 +81,7 @@
               $user = get_field('user');
               ?>
 
-              <div class="col-sm-4 col-xs-6 block-author">
+              <div class="col-sm-4 col-xs-6 block-person">
                 <div class="row">
                   <div class="col-sm-5">
                     <div class="circle-image"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
@@ -121,7 +121,7 @@
               $user = get_field('user');
               ?>
 
-              <div class="col-sm-4 col-xs-6 block-author">
+              <div class="col-sm-4 col-xs-6 block-person">
                 <div class="row">
                   <div class="col-sm-5">
                     <div class="circle-image"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a></div>

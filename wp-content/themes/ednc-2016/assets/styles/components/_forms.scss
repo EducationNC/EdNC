@@ -70,3 +70,45 @@
     width: 25px;
   }
 }
+
+// Gravity Forms
+.gform_wrapper {
+  .top_label {
+    li.gfield.gfield {
+      margin-bottom: 1.5em;
+    }
+
+    .gfield_label {
+      margin: 0;
+      font-family: $font-family-sans-serif;
+      font-weight: normal;
+      color: $stone;
+    }
+  }
+
+  .ginput_complex, .gfield_time_hour, .gfield_time_minute {
+    label {
+      font-family: $font-family-sans-serif;
+      font-weight: 300;
+      color: $stone;
+    }
+  }
+
+  .gfield_checkbox {
+    li label {
+      font-weight: normal;
+    }
+  }
+
+  textarea, input[type=text], input[type=email], input[type=password], input[type=number], input[type=password] {
+    border: 1px solid $pearl;
+    border-radius: 3px;
+    font-family: $font-family-sans-serif;
+  }
+
+  .gform_footer {
+    input.button {
+      @extend .btn-default;
+    }
+  }
+}

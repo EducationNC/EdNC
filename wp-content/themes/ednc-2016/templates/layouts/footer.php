@@ -64,25 +64,3 @@ use Roots\Sage\Assets;
     </div>
   </div>
 </div>
-
-<?php if (is_home() || get_post_type() == 'tribe_events') : ?>
-  <div class="modal fade event-submission-modal print-no" id="eventSubmissionModal" tabindex="-3" role="dialog" aria-labelledby="eventSubmissionModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <?php gravity_form(6, false, false, false, null, true, '-2'); ?>
-      </div>
-    </div>
-  </div>
-<?php endif; ?>
-
-<?php if (is_page('edlibrary') || is_tax('resource-type')) : ?>
-  <div class="modal fade edLibrary-submission-modal print-no" id="edLibrarySubmissionModal" tabindex="-3" role="dialog" aria-labelledby="edLibrarySubmissionModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <?php gravity_form(8, false, false, false, null, true, '-2'); ?>
-      </div>
-    </div>
-  </div>
-<?php endif; ?>

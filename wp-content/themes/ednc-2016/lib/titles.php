@@ -24,7 +24,7 @@ function title() {
 }
 
 /**
- * Remove Category: from title
+ * Remove prefixes from some titles
  */
 add_filter( 'get_the_archive_title', function ($title) {
   if ( is_category() ) {
@@ -32,6 +32,12 @@ add_filter( 'get_the_archive_title', function ($title) {
   }
   if ( is_tax() ) {
     $title = single_term_title( '', false );
+  }
+  if ( is_author() ) {
+    $title = get_the_author();
+  }
+  if ( is_post_type_archive('tribe_events') ) {
+    $title = 'Events';
   }
   return $title;
 });

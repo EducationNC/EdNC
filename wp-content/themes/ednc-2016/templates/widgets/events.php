@@ -22,7 +22,7 @@
     </div>
 
     <div class="col-md-6">
-      <p class="text-center"><a href="#" class="btn btn-default submit-event" data-toggle="modal" data-target="#eventSubmissionModal">Submit your event &raquo;</a></p>
+      <p class="text-center"><a href="/submit-an-event/" class="btn btn-default submit-event">Submit your event &raquo;</a></p>
     </div>
   </div>
 </div>

@@ -44,8 +44,13 @@ get_template_part('templates/components/category', 'header');
 
     </div>
 
-    <div class="col-md-3 col-lg-push-1">
-      <?php get_template_part('templates/components/sidebar', 'category'); ?>
+    <div class="col-md-3 col-lg-push-1 sidebar">
+      <?php
+      get_template_part('templates/components/sidebar', 'category');
+
+      if (is_tax('map-column')) {
+        echo '<a href="/maps-archive" class="btn btn-default">Click here for an archive of all maps</a>';
+      } ?>
     </div>
   </div>
 </div>

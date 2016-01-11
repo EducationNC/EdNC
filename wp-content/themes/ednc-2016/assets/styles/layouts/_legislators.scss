@@ -1,0 +1,27 @@
+.legislator {
+  .callout {
+    h6 {
+      margin: 0;
+    }
+
+    .h1 {
+      margin: 15px 0;
+    }
+
+    &.Democrat {
+      background: $denim;
+
+      h6, .h2 {
+        color: $white;
+      }
+    }
+
+    &.Republican {
+      background: $scarlet;
+
+      h6, .h2 {
+        color: $white;
+      }
+    }
+  }
+}
