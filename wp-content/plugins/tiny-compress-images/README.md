@@ -1,25 +1,29 @@
 [<img src="https://travis-ci.org/tinify/wordpress-plugin.svg?branch=master" alt="Build Status">](https://travis-ci.org/tinify/wordpress-plugin)
 
-# TinyPNG image compression for WordPress
+# Compress JPEG & PNG images for WordPress
+
 Make your website faster by compressing your JPEG and PNG images.
 
-This plugin automatically optimizes your images by integrating with the popular image compression services TinyJPG and TinyPNG. You can download the plugin from https://wordpress.org/plugins/tiny-compress-images/.
+This plugin automatically optimizes your images by integrating with the
+popular image compression services TinyJPG and TinyPNG. You can download the
+plugin from https://wordpress.org/plugins/tiny-compress-images/.
 
-Learn more about TinyPNG at https://tinypng.com.
+Learn more about TinyJPG and TinyPNG at https://tinypng.com/.
 
 ## Contact us
+
 Got questions or feedback? Let us know! Contact us at support@tinypng.com.
 
 ## Information for plugin contributors
 
 ### Prerequisites
-* A working docker installation (https://docs.docker.com/installation/).
+* A working Docker installation (https://docs.docker.com/installation/).
 * Composer (https://getcomposer.org/download/).
 * Selenium Server (http://www.seleniumhq.org/download/).
-* Mysql client and admin tools.
+* MySQL client and admin tools.
 * Java runtime.
 
-### Running the plugin in Wordpress
+### Running the plugin in WordPress
 1. Run `bin/run-wordpress <version>`. E.g. `bin/run-wordpress 41`.
 2. Use `docker ps` to check which port to use to connect to WordPress.
 
@@ -32,7 +36,18 @@ Got questions or feedback? Let us know! Contact us at support@tinypng.com.
 added, all versions between $version and $to_version are tested). E.g.
 `bin/integration-tests 41` or `bin/integration-tests 40 42`.
 
+### Create language files
+
+WordPress requires both .po and .mo files for each language. The .mo files
+can be generated with [gettext](https://www.gnu.org/software/gettext/) that
+needs to be installed first.
+
+1. Install gettext for example run `brew install gettext`.
+2. Add a link msgfmt `ln -s /usr/local/Cellar/gettext/0.19.6/bin/msgfmt ~/.bin`.
+3. Generate the .mo files `bin/format-language-files`.
+
 ## License
+
 Copyright (C) 2015 Voormedia B.V.
 
 This program is free software; you can redistribute it and/or modify

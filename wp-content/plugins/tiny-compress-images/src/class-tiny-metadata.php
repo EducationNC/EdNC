@@ -23,6 +23,7 @@ class Tiny_Metadata {
     const ORIGINAL = 0;
 
     private $id;
+    private $name;
     private $values;
     private $filenames;
     private $urls;
@@ -34,7 +35,7 @@ class Tiny_Metadata {
             $wp_metadata = wp_get_attachment_metadata($id);
         }
         $this->parse_wp_metadata($wp_metadata);
-        $this->values = get_post_meta($id, self::META_KEY, true);
+        $this->values = get_post_meta($this->id, self::META_KEY, true);
         if (!is_array($this->values)) {
             $this->values = array();
         }
@@ -55,6 +56,8 @@ class Tiny_Metadata {
             $path_prefix .= $path_info['dirname'] .'/';
             $url_prefix .= $path_info['dirname'] .'/';
         }
+
+        $this->name = $path_info['basename'];
 
         $this->filenames[self::ORIGINAL] = "$path_prefix${path_info['basename']}";
         $this->urls[self::ORIGINAL] = "$url_prefix${path_info['basename']}";
@@ -86,15 +89,15 @@ class Tiny_Metadata {
         update_post_meta($this->id, self::META_KEY, $this->values);
     }
 
-    public function add_response($response, $size=self::ORIGINAL) {
-        $response['end'] = time();
-        $this->values[$size] = array_merge($this->values[$size], $response);
-    }
-
     public function add_request($size=self::ORIGINAL) {
         $this->values[$size] = array(
             'start' => time()
         );
+    }
+
+    public function add_response($response, $size=self::ORIGINAL) {
+        $response['end'] = time();
+        $this->values[$size] = array_merge($this->values[$size], $response);
     }
 
     public function add_exception($exception, $size=self::ORIGINAL) {
@@ -109,6 +112,10 @@ class Tiny_Metadata {
         return $this->id;
     }
 
+    public function get_name() {
+        return $this->name;
+    }
+
     public function get_filename($size=self::ORIGINAL) {
         return isset($this->filenames[$size]) ? $this->filenames[$size] : null;
     }
@@ -121,10 +128,30 @@ class Tiny_Metadata {
         return isset($this->values[$size]) ? $this->values[$size] : null;
     }
 
+    public function get_end_time($size=self::ORIGINAL) {
+        $value = $this->get_value($size);
+        if (array_key_exists("end", $value)) {
+            return $value["end"];
+        } else if (array_key_exists("timestamp", $value)) {
+            return $value["timestamp"];
+        }
+    }
+
+    public function has_been_compressed($size=self::ORIGINAL) {
+        return isset($this->values[$size]) && isset($this->values[$size]['output']);
+    }
+
+    public function exists($size=self::ORIGINAL) {
+        return file_exists($this->get_filename($size));
+    }
+
+    public function still_exists($size=self::ORIGINAL) {
+        return $this->has_been_compressed($size) && file_exists($this->get_filename($size));
+    }
+
     public function is_compressed($size=self::ORIGINAL) {
-        $filename = $this->get_filename($size);
-        return isset($this->values[$size]) && isset($this->values[$size]['output'])
-            && file_exists($filename) && filesize($filename) == $this->values[$size]['output']['size'];
+        return $this->has_been_compressed($size) && $this->still_exists($size)
+            && filesize($this->get_filename($size)) == $this->values[$size]['output']['size'];
     }
 
     public function is_compressing($size=self::ORIGINAL) {
@@ -132,8 +159,18 @@ class Tiny_Metadata {
         return isset($meta) && isset($meta['start']) && !isset($meta['output']);
     }
 
+    public function is_resized($size=self::ORIGINAL) {
+        $meta = $this->values[$size];
+        return isset($meta) && isset($meta['output']) && isset($meta['output']['resized'])
+            && $meta['output']['resized'];
+    }
+
     public function get_sizes() {
         return array_keys($this->filenames);
+    }
+
+    public function get_compressed_sizes() {
+        return array_filter(array_keys($this->values), array($this, 'has_been_compressed'));
     }
 
     public function get_success_sizes() {
@@ -142,11 +179,38 @@ class Tiny_Metadata {
 
     public function get_uncompressed_sizes($active_tinify_sizes) {
         $sizes = array_intersect($this->get_sizes(), $active_tinify_sizes);
-        return array_diff($sizes, $this->get_success_sizes());
+        $uncompressed = array_diff($sizes, $this->get_success_sizes());
+        return array_filter($uncompressed, array($this, 'exists'));
+    }
+
+    public function get_not_compressed_active_sizes($active_tinify_sizes) {
+        $sizes = array_intersect($this->get_sizes(), $active_tinify_sizes);
+        return array_diff($sizes, $this->get_compressed_sizes());
     }
 
     public function get_in_progress_sizes() {
         return array_filter(array_keys($this->values), array($this, 'is_compressing'));
+    }
+
+    public function get_success_count() {
+        return count($this->get_success_sizes());
+    }
+
+    public function get_in_progress_count() {
+        return count($this->get_in_progress_sizes());
+    }
+
+    public function get_compressed_count() {
+        return count($this->get_compressed_sizes());
+    }
+
+    public function get_missing_count() {
+        return count($this->get_compressed_sizes()) -
+            count(array_filter($this->get_compressed_sizes(), array($this, 'still_exists')));
+    }
+
+    public function get_modified_count() {
+        return count($this->get_compressed_sizes()) - $this->get_success_count() - $this->get_missing_count();
     }
 
     public function get_latest_error() {

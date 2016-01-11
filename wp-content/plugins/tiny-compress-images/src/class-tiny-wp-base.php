@@ -55,7 +55,7 @@ abstract class Tiny_WP_Base {
     }
 
     public static function plugin_identification() {
-        return 'Wordpress/' . self::wp_version() . ' Tiny/' . self::plugin_version();
+        return 'WordPress/' . self::wp_version() . ' PHP/' . PHP_VERSION . ' Tiny/' . self::plugin_version();
     }
 
     protected static function get_prefixed_name($name) {
@@ -68,6 +68,10 @@ abstract class Tiny_WP_Base {
 
     protected static function translate_escape($phrase) {
         return htmlspecialchars(translate($phrase, self::NAME));
+    }
+
+    protected static function ntranslate_escape($single, $plural, $amount) {
+        return htmlspecialchars(_n($single, $plural, $amount, self::NAME));
     }
 
     public function __construct() {

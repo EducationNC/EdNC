@@ -54,6 +54,9 @@ class WP_Embed_FB_Plugin {
 	 * @return array plugin defaults
 	 */
 	static function getdefaults(){
+		$locale = get_locale();
+		if(strpos($locale,'es_') !== false)
+			$locale = 'es_LA';
 		return array(
 			'wpemfb_max_width' 		    => '450',
 			'wpemfb_max_photos' 	    => '24',
@@ -83,8 +86,9 @@ class WP_Embed_FB_Plugin {
 			'wpemfb_page_small_header'  => 'false',
 			'wpemfb_page_hide_cover'    => 'false',
 			'wpemfb_page_show_posts'    => 'false',
-			'wpemfb_sdk_lang'           => array_key_exists(get_locale(), self::get_fb_locales()) ? get_locale() : 'en_US',
+			'wpemfb_sdk_lang'           => array_key_exists( $locale, self::get_fb_locales()) ? $locale : 'en_US',
 			'wpemfb_close_warning'		=> 'false',
+			'wpemfb_force_app_token'	=> 'true',
 		);
 	}
 	//("uninstalled","deactivated","activated","reactivated")

@@ -20,7 +20,6 @@
 
 class Tiny_Settings extends Tiny_WP_Base {
     const DUMMY_SIZE = '_tiny_dummy';
-    const MONTHLY_FREE_COMPRESSIONS = 500;
 
     private $sizes;
     private $tinify_sizes;
@@ -74,8 +73,13 @@ class Tiny_Settings extends Tiny_WP_Base {
         register_setting('media', $field);
         add_settings_field($field, self::translate('Connection status'), $this->get_method('render_pending_status'), 'media', $section);
 
+        $field = self::get_prefixed_name('savings');
+        register_setting('media', $field);
+        add_settings_field($field, self::translate('Savings'), $this->get_method('render_pending_savings'), 'media', $section);
+
         add_action('wp_ajax_tiny_image_sizes_notice', $this->get_method('image_sizes_notice'));
         add_action('wp_ajax_tiny_compress_status', $this->get_method('connection_status'));
+        add_action('wp_ajax_tiny_compress_savings', $this->get_method('total_savings_status'));
     }
 
     public function image_sizes_notice() {
@@ -85,6 +89,11 @@ class Tiny_Settings extends Tiny_WP_Base {
 
     public function connection_status() {
         $this->render_status();
+        exit();
+    }
+
+    public function total_savings_status() {
+        $this->render_total_savings();
         exit();
     }
 
@@ -214,19 +223,21 @@ class Tiny_Settings extends Tiny_WP_Base {
         if (empty($key)) {
             printf(self::translate_escape('Visit %s to get an API key') . '.', $link);
         } else {
-            printf(self::translate_escape('Visit %s to view your usage or upgrade your account') . '.', $link);
+            printf(self::translate_escape('Visit %s to view or upgrade your account') . '.', $link);
         }
         echo '</p>';
     }
 
     public function render_sizes() {
-        echo '<p>' . self::translate_escape('Choose sizes to compress') . ':';?>
-<input type="hidden" name="<?php echo self::get_prefixed_name('sizes[' . self::DUMMY_SIZE .']'); ?>" value="on"/></p>
-<?php
+        echo '<p>';
+        echo self::translate_escape('Choose sizes to compress') . '. ';
+        echo self::translate_escape('Remember each selected size counts as a compression') . '. ';
+        echo '</p>';
+        echo '<input type="hidden" name="' . self::get_prefixed_name('sizes[' . self::DUMMY_SIZE . ']') . '" value="on"/>';
         foreach ($this->get_sizes() as $size => $option) {
             $this->render_size_checkbox($size, $option);
         }
-
+        echo '<br>';
         echo '<div id="tiny-image-sizes-notice">';
         $this->render_image_sizes_notice(count(self::get_active_tinify_sizes()), self::get_resize_enabled());
         echo '</div>';
@@ -234,28 +245,28 @@ class Tiny_Settings extends Tiny_WP_Base {
 
     private function render_size_checkbox($size, $option) {
         $id = self::get_prefixed_name("sizes_$size");
-        $field = self::get_prefixed_name("sizes[$size]");
+        $name = self::get_prefixed_name("sizes[$size]");
+        $checked = ( $option['tinify'] ? ' checked="checked"' : '' );
         if ($size === Tiny_Metadata::ORIGINAL) {
             $label = self::translate_escape("original") . ' (' . self::translate_escape('overwritten by compressed image') . ')';
         } else {
-            $label = $size . " - ${option['width']}x${option['height']}";
-        }?>
-<p><input type="checkbox" id="<?php echo $id; ?>" name="<?php echo $field ?>" value="on" <?php if ($option['tinify']) { echo ' checked="checked"'; } ?>/>
-<label for="<?php echo $id; ?>"><?php echo $label; ?></label></p>
-<?php
+            $label = $size . ' - ' . $option['width'] . 'x' . $option['height'];
+        }
+        echo '<p>';
+        echo '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="on" ' . $checked . '/>';
+        echo '<label for="' . $id . '">' . $label . '</label>';
+        echo '</p>';
     }
 
     public function render_image_sizes_notice($active_image_sizes_count, $resize_original_enabled) {
-        echo '<br>';
-        echo '<p>' . self::translate_escape('Each selected size counts as a compression') . '. ';
-
+        echo '<p>';
         if ($resize_original_enabled) {
             $active_image_sizes_count++;
         }
         if ($active_image_sizes_count < 1) {
             echo self::translate_escape('With these settings no images will be compressed') . '.';
         } else {
-            $free_images_per_month = floor(self::MONTHLY_FREE_COMPRESSIONS / $active_image_sizes_count);
+            $free_images_per_month = floor( Tiny_Config::MONTHLY_FREE_COMPRESSIONS / $active_image_sizes_count );
             echo self::translate_escape('With these settings you can compress');
             echo ' <strong>';
             printf(self::translate_escape('at least %s images'), $free_images_per_month);
@@ -265,29 +276,53 @@ class Tiny_Settings extends Tiny_WP_Base {
         echo '</p>';
     }
 
+    public function render_total_savings() {
+        global $wpdb;
+
+        $total_savings = 0;
+        $result = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_type = 'attachment' AND post_mime_type LIKE 'image/%' ORDER BY ID DESC", ARRAY_A);
+        for ($i = 0; $i < sizeof($result); $i++) {
+            $tiny_metadata = new Tiny_Metadata($result[$i]["ID"]);
+            $savings = $tiny_metadata->get_savings();
+            $total_savings += ($savings['input'] - $savings['output']);
+        }
+
+        echo '<p>';
+        if ($total_savings > 0) {
+            printf( self::translate_escape( "You have saved a total of %s on images") . '!', '<strong>' . size_format( $total_savings ) . '</strong>' );
+        } else {
+            $link = '<a href="upload.php?page=tiny-bulk-compress">' . self::translate_escape('Compress All Images') . '</a>';
+            printf(self::translate_escape('No images compressed yet. Use %s to compress existing images') . '.', $link);
+        }
+        echo '</p>';
+    }
+
     public function render_resize() {
-        echo '<p class="tiny-resize-unavailable" style="display: none">' . self::translate_escape("Enable the compression of the original image size to configure resizing") . '.</p>';
+        echo '<p class="tiny-resize-unavailable" style="display: none">';
+        echo self::translate_escape("Enable the compression of the original image size to configure resizing") . '.';
+        echo '</p>';
 
         $id = self::get_prefixed_name("resize_original_enabled");
-        $field = self::get_prefixed_name("resize_original[enabled]");
-        $label = self::translate_escape('Resize and compress orginal images to fit within');
+        $name = self::get_prefixed_name("resize_original[enabled]");
+        $checked = ( $this->get_resize_enabled() ? ' checked="checked"' : '' );
+        $label = self::translate_escape('Resize and compress the orginal image');
 
         echo '<p class="tiny-resize-available">';
-        ?>
-        <input  type="checkbox" id="<?php echo $id ?>" name="<?php echo $field ?>" value="on" <?php if ($this->get_resize_enabled()) { echo ' checked="checked"'; } ?>/>
-        <label for="<?php echo $id; ?>"><?php echo $label; ?>:</label><br>
-        <?php
-
+        echo '<input  type="checkbox" id="' . $id . '" name="' . $name . '" value="on" '. $checked . '/>';
+        echo '<label for="' . $id . '">' . $label . '</label>';
+        echo '<br>';
         echo '</p>';
-        echo '<p class="tiny-resize-available tiny-resize-resolution">';
 
+        echo '<p class="tiny-resize-available tiny-resize-resolution">';
         printf("%s: ", self::translate_escape('Max Width'));
         $this->render_resize_input('width');
         printf("%s: ", self::translate_escape('Max Height'));
         $this->render_resize_input('height');
         echo '</p>';
 
-        echo '<p class="tiny-resize-available">' . sprintf(self::translate_escape("Resizing takes %s per image larger than the specified resolution"), '<strong>' . self::translate_escape('1 additional compression') . '</strong>') . '.</p>';
+        echo '<p class="tiny-resize-available">';
+        echo sprintf(self::translate_escape("Resizing takes %s for each image that is larger"), self::translate_escape('1 additional compression')) . '.';
+        echo '</p>';
     }
 
     public function render_resize_input($name) {
@@ -328,35 +363,44 @@ class Tiny_Settings extends Tiny_WP_Base {
             $status = false;
             $details = array('message' => $e->getMessage());
         }
+
+        echo '<p>';
         if ($status) {
-            echo '<p><img src="images/yes.png"> ' . self::translate_escape('API connection successful') . '</p>';
+            echo '<img src="images/yes.png"> ';
+            echo self::translate_escape('API connection successful');
         } else {
+            echo '<img src="images/no.png"> ';
             if ($status === false) {
-                echo '<p><img src="images/no.png"> ' . self::translate_escape('API connection unsuccessful') . '</p>';
+                echo self::translate_escape('API connection unsuccessful') . '<br>';
                 if (isset($details['message'])) {
-                    echo '<p>'. self::translate_escape('Error') . ': ' . self::translate_escape($details['message']) . '</p>';
+                    echo self::translate_escape('Error') . ': ' . self::translate_escape($details['message']);
                 }
             } else {
-                echo '<p>' . self::translate_escape('API status could not be checked, enable cURL for more information') . '.</p>';
+                echo self::translate_escape('API status could not be checked, enable cURL for more information');
             }
-            return;
-        }
-
-        $compressions = self::get_compression_count();
-        echo '<p>';
-        // We currently have no way to check if a user is free or flexible.
-        if ($compressions == self::MONTHLY_FREE_COMPRESSIONS) {
-            $link = '<a href="https://tinypng.com/developers" target="_blank">' . self::translate_escape('TinyPNG API account') . '</a>';
-            printf(self::translate_escape('You have reached your limit of %s compressions this month') . '.', $compressions);
-            echo '<br>';
-            printf(self::translate_escape('If you need to compress more images you can change your %s') . '.', $link);
-        } else {
-           printf(self::translate_escape('You have made %s compressions this month') . '.', self::get_compression_count());
         }
         echo '</p>';
+        if ($status) {
+            $compressions = self::get_compression_count();
+            echo '<p>';
+            // It is not possible to check if a subscription is free or flexible.
+            if ( $compressions == Tiny_Config::MONTHLY_FREE_COMPRESSIONS ) {
+                $link = '<a href="https://tinypng.com/developers" target="_blank">' . self::translate_escape('TinyPNG API account') . '</a>';
+                printf(self::translate_escape('You have reached your limit of %s compressions this month') . '.', $compressions);
+                echo '<br>';
+                printf(self::translate_escape('If you need to compress more images you can change your %s') . '.', $link);
+            } else {
+               printf(self::translate_escape('You have made %s compressions this month') . '.', self::get_compression_count());
+            }
+            echo '</p>';
+        }
     }
 
     public function render_pending_status() {
         echo '<div id="tiny-compress-status"><div class="spinner"></div></div>';
+    }
+
+    public function render_pending_savings() {
+        echo '<div id="tiny-compress-savings"><div class="spinner"></div></div>';
     }
 }

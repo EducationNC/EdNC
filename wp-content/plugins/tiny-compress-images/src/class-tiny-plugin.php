@@ -21,8 +21,10 @@
 class Tiny_Plugin extends Tiny_WP_Base {
     const MEDIA_COLUMN = self::NAME;
     const MEDIA_COLUMN_HEADER = 'Compression';
+    const DATETIME_FORMAT = 'Y-m-d G:i:s';
 
     private $settings;
+    private $twig;
 
     public static function jpeg_quality() {
           return 95;
@@ -56,14 +58,14 @@ class Tiny_Plugin extends Tiny_WP_Base {
         add_action('admin_enqueue_scripts', $this->get_method('enqueue_scripts'));
         $plugin = plugin_basename(dirname(dirname(__FILE__)) . '/tiny-compress-images.php');
         add_filter("plugin_action_links_$plugin", $this->get_method('add_plugin_links'));
+        add_thickbox();
     }
 
     public function admin_menu() {
-        add_management_page(
+        add_media_page(
             self::translate('Compress JPEG & PNG Images'), self::translate('Compress All Images'),
             'upload_files', 'tiny-bulk-compress', $this->get_method('bulk_compress_page')
         );
-
     }
 
     public function add_plugin_links($current_links) {
@@ -80,7 +82,7 @@ class Tiny_Plugin extends Tiny_WP_Base {
         wp_register_script($handle, plugins_url('/scripts/admin.js', __FILE__),
             array(), self::plugin_version(), true);
 
-        // Wordpress < 3.3 does not handle multi dimensional arrays
+        // WordPress < 3.3 does not handle multidimensional arrays
         wp_localize_script($handle, 'tinyCompress', array(
             'nonce' => wp_create_nonce('tiny-compress'),
             'wpVersion' => self::wp_version(),
@@ -116,23 +118,28 @@ class Tiny_Plugin extends Tiny_WP_Base {
             try {
                 $tiny_metadata->add_request($uncompressed_size);
                 $tiny_metadata->update();
+
                 $resize = $tiny_metadata->is_resizable($uncompressed_size) ? $this->settings->get_resize_options() : false;
                 $response = $compressor->compress_file($tiny_metadata->get_filename($uncompressed_size), $resize);
+
                 $tiny_metadata->add_response($response, $uncompressed_size);
+                $tiny_metadata->update();
                 $success++;
             } catch (Tiny_Exception $e) {
                 $tiny_metadata->add_exception($e, $uncompressed_size);
+                $tiny_metadata->update();
                 $failed++;
             }
         }
-        $tiny_metadata->update();
 
         return array($tiny_metadata, array('success' => $success, 'failed' => $failed));
     }
 
     public function compress_attachment($metadata, $attachment_id) {
-        list($tiny_metadata, $result) = $this->compress($metadata, $attachment_id);
-        return $tiny_metadata->update_wp_metadata($metadata);
+        if (!empty($metadata)) {
+            list($tiny_metadata, $result) = $this->compress($metadata, $attachment_id);
+            return $tiny_metadata->update_wp_metadata($metadata);
+        }
     }
 
     public function compress_image() {
@@ -184,7 +191,7 @@ class Tiny_Plugin extends Tiny_WP_Base {
         wp_redirect(add_query_arg(
             '_wpnonce',
             wp_create_nonce('tiny-bulk-compress'),
-            admin_url("tools.php?page=tiny-bulk-compress&ids=$ids")
+            admin_url("upload.php?page=tiny-bulk-compress&ids=$ids")
         ));
         exit();
     }
@@ -201,44 +208,19 @@ class Tiny_Plugin extends Tiny_WP_Base {
     }
 
     private function render_compress_details($tiny_metadata) {
-        $missing = $tiny_metadata->get_uncompressed_sizes($this->settings->get_active_tinify_sizes());
-        $success = count($tiny_metadata->get_success_sizes());
-        $total = count($missing) + $success;
-        $progress = count($tiny_metadata->get_in_progress_sizes());
+        $active = $this->settings->get_active_tinify_sizes();
+        $uncompressed = $tiny_metadata->get_uncompressed_sizes($active);
+        $not_compressed_active = count($tiny_metadata->get_not_compressed_active_sizes($active));
+        $savings = $tiny_metadata->get_savings();
+        $error = $tiny_metadata->get_latest_error();
+        $missing = $tiny_metadata->get_missing_count();
+        $modified = $tiny_metadata->get_modified_count();
+        $compressing = (count($uncompressed) > 0) ? count($uncompressed) : count($active);
 
-        $duplicates = count($this->settings->get_active_tinify_sizes()) - $total;
-        $success += $duplicates;
-        $total += $duplicates;
-
-        if (count($missing) > 0) {
-            printf(self::translate_escape('Compressed %d out of %d sizes'), $success, $total);
-            $original = $tiny_metadata->get_value();
-            if (isset($original['output']['resized'])) {
-                echo '<br/>';
-                printf(self::translate_escape('Resized original to %dx%d'), $original['output']['width'], $original['output']['height']);
-            }
-            echo '<br/>';
-            if (($error = $tiny_metadata->get_latest_error())) {
-                echo '<span class="error">' . self::translate_escape('Latest error') . ': '. self::translate_escape($error) .'</span><br/>';
-            }
-            echo '<button type="button" class="tiny-compress" data-id="' . $tiny_metadata->get_id() . '">' .
-                self::translate_escape('Compress') . '</button>';
-            echo '<div class="spinner hidden"></div>';
-        } elseif ($progress > 0) {
-            printf(self::translate_escape('Compressing %d sizes...'), count($this->settings->get_active_tinify_sizes()));
+        if ($tiny_metadata->get_in_progress_count() > 0) {
+            include(dirname(__FILE__) . '/views/compress-details-processing.php');
         } else {
-            printf(self::translate_escape('Compressed %d out of %d sizes'), $success, $total);
-            $original = $tiny_metadata->get_value();
-            if (isset($original['output']['resized'])) {
-                echo '<br/>';
-                printf(self::translate_escape('Resized original to %dx%d'), $original['output']['width'], $original['output']['height']);
-            }
-            $savings = $tiny_metadata->get_savings();
-            if ($savings['count'] > 0) {
-                echo '<br/>';
-                echo self::translate_escape('Total size') . ': ' . size_format($savings['input']) . '<br/>';
-                echo self::translate_escape('Compressed size') . ': ' . size_format($savings['output']);
-            }
+            include(dirname(__FILE__) . '/views/compress-details.php');
         }
     }
 
@@ -252,17 +234,26 @@ class Tiny_Plugin extends Tiny_WP_Base {
             $image_count = $result[0]['count'];
             $sizes_count = count($this->settings->get_active_tinify_sizes());
 
-            echo '<p>' . self::translate_escape("Use this tool to compress all images in your media library") . '. ';
-            echo self::translate_escape("Only images that have not been compressed will be compressed") . '.</p>';
-            echo '<p>' . sprintf(self::translate_escape("We have found %d images in your media library and for each image %d sizes will be compressed"), $image_count, $sizes_count) . '. ';
-            echo sprintf(self::translate_escape('This results in %d compressions at most'), $image_count*$sizes_count) . '.</p>';
-            echo '<p>' . self::translate_escape("To begin, just press the button below") . '.</p>';
+            echo '<p>';
+            echo self::translate_escape("Use this tool to compress all images in your media library") . '. ';
+            echo self::translate_escape("Only images that have not been compressed will be compressed") . '. ';
+            echo '</p>';
+            echo '<p>';
+            echo sprintf(self::translate_escape("We have found %d images in your media library and for each image %d sizes will be compressed"), $image_count, $sizes_count) . '. ';
+            echo sprintf(self::translate_escape('This results in %d compressions at most'), $image_count*$sizes_count) . '. ';
+            echo '</p>';
+            echo '<p>';
+            echo self::translate_escape("To begin, just press the button below") . '. ';
+            echo '</p>';
 
             echo '<form method="POST" action="?page=tiny-bulk-compress">';
             echo '<input type="hidden" name="_wpnonce" value="' . wp_create_nonce('tiny-bulk-compress') . '">';
             echo '<input type="hidden" name="tiny-bulk-compress" value="1">';
-            echo '<p><button class="button button-primary button-large" type="submit">' .
-                self::translate_escape('Compress All Images') . '</p>';
+            echo '<p>';
+            echo '<button class="button button-primary button-large" type="submit">';
+            echo self::translate_escape('Compress All Images');
+            echo '</button>';
+            echo '</p>';
             echo '</form>';
         } else {
             check_admin_referer('tiny-bulk-compress');

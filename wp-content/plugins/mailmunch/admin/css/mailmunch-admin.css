@@ -1,0 +1,392 @@
+#loader {
+  display: none;
+}
+
+.warning {
+  font-weight: bold;
+  padding: 0px 10px 10px;
+}
+
+.integration-steps thead th {
+  text-align: center;
+  border-right: 1px solid #EEE;
+  vertical-align: middle;
+}
+
+.integration-steps thead th img {
+  height: 16px;
+  vertical-align: middle;
+}
+
+.integration-steps thead th a {
+  color: #000;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.integration-steps thead th.active {
+  background-color: #428bca;
+  color: #FFF;
+}
+
+.integration-steps thead th.active a {
+  color: #FFF;
+}
+
+.integration-steps thead th:last-child {
+  border-right: 0px;
+}
+
+.integration-steps thead .btn {
+  padding: 5px;
+}
+
+.integration-steps tbody td {
+  text-align: center;
+}
+
+.settings-table .inside-container p {
+  font-size: 11px;
+  padding: 0px 12px;
+  color: #999;
+}
+
+.settings-table .button {
+  margin: 0px 12px 12px;
+}
+
+.mailmunch-status {
+  margin-bottom: 15px;
+}
+
+.mailmunch-status div {
+  font-weight: bold;
+  color: green;
+  margin-top: -10px;
+}
+
+.inside-container {
+  padding: 20px;
+}
+
+.inside-container .skip-link-container {
+  margin-bottom: 25px;
+}
+
+.integrate-step .inside-container .skip-link-container {
+  margin-top: 25px;
+}
+
+.video-trigger img {
+  width: 100%;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+#mailmunch-demo-video {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  text-align: center;
+  padding-top: 100px;
+  display: none;
+}
+
+#mailmunch-demo-video a {
+  display: block;
+  text-align: center;
+  color: #FFF;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#signup-signin-box-overlay {
+  background-color: #000;
+  opacity: 0.8;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+}
+
+#signup-signin-close {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  line-height: 0px;
+}
+
+#signup-signin-close img {
+  width: 20px;
+  height: 20px;
+}
+
+#signup-signin-box {
+  position: fixed;
+  background-color: #FFF;
+  z-index: 100000;
+  padding: 20px;
+  max-width: 600px;
+}
+
+#signup-signin-box h2.modal-header {
+  margin-top: 0px;
+  border-bottom: 1px solid #DEDEDE;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+#sign-in-form, #sign-up-form {
+  display: none;
+}
+
+#sign-in-form .signin-alert, #sign-up-form .signup-alert {
+  display: none;
+}
+
+#sign-in-form.active, #sign-up-form.active {
+  display: block;
+}
+
+#show-sign-in, #show-sign-up {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#why-account-btn {
+  cursor: pointer;
+}
+
+#why-account h4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#why-account p {
+  margin-top: 0px;
+}
+
+.create-account-btn {
+  cursor: pointer;
+}
+
+
+
+
+/* Style Guide */
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.alert h4, .alert h3 {
+  margin-top: 0;
+  color: inherit;
+}
+.alert .alert-link {
+  font-weight: bold;
+}
+.alert > p,
+.alert > ul {
+  margin-bottom: 0;
+}
+.alert > p + p {
+  margin-top: 5px;
+}
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+.alert-warning .alert-link {
+  color: #66512c;
+}
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+.alert-danger .alert-link {
+  color: #843534;
+}
+
+label.mailmunch-form-label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.mailmunch-form-control {
+  display: block;
+  width: 400px;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.mailmunch-form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.mailmunch-form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.mailmunch-form-control:-ms-input-placeholder {
+  color: #999;
+}
+.mailmunch-form-control::-webkit-input-placeholder {
+  color: #999;
+}
+
+.mailmunch-form-group {
+  margin-bottom: 15px;
+}
+
+.mailmunch-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.mailmunch-btn:focus,
+.mailmunch-btn:active:focus,
+.mailmunch-btn.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.mailmunch-btn:hover,
+.mailmunch-btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+.mailmunch-btn:active,
+.mailmunch-btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.mailmunch-btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.mailmunch-btn-success:hover,
+.mailmunch-btn-success:focus,
+.mailmunch-btn-success:active,
+.mailmunch-btn-success.active {
+  color: #fff;
+  background-color: #47a447;
+  border-color: #398439;
+}
+.mailmunch-btn-success:active,
+.mailmunch-btn-success.active {
+  background-image: none;
+}
+.mailmunch-btn-success .badge {
+  color: #5cb85c;
+  background-color: #fff;
+}
+.mailmunch-btn-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.clearfix {
+  clear: both;
+}
+
+.mailmunch-review-logo {
+  float: left;
+  margin-right: 15px;
+}
+
+.mailmunch-review-logo img {
+  max-width: 80px;
+  max-height: 100%;
+}
+
+.mailmunch-review-notice {
+  border-left: 4px solid #11a1ec;
+  background: #fefefe;
+  padding: 10px 15px 1px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  margin: 15px 25px 20px 5px;
+  min-height: 100px;
+}
+
+.mailmunch-review-notice .mailmunch-buttons {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.mailmunch-review-notice .mailmunch-buttons .dashicons {
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.mailmunch-review-notice .mailmunch-buttons .dashicons-star-filled {
+  color: #e6bb00;
+}
+
+.mailmunch-review-notice .mailmunch-buttons .dashicons-no-alt {
+  color: rgb(220, 58, 58);
+  line-height: 2;
+}
+
+.mailmunch-review-notice .mailmunch-buttons a {
+  margin-right: 10px;
+}

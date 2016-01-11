@@ -28,7 +28,10 @@ class Tiny_Compress_Fopen extends Tiny_Compress {
                     'Authorization: Basic ' . base64_encode('api:' . $this->api_key),
                     'User-Agent: ' . Tiny_WP_Base::plugin_identification() . ' fopen',
                  ),
-                'content' => $input
+                'content' => $input,
+                'follow_location' => 0,
+                'max_redirects' => 1, // Necessary for PHP 5.2
+                'ignore_errors' => true // Apparently, a 201 is a failure
             ),
             'ssl' => array(
                 'cafile' => self::get_ca_file(),
@@ -80,7 +83,8 @@ class Tiny_Compress_Fopen extends Tiny_Compress {
         if ($resize) {
             $options['http']['header'] = array(
                 'Authorization: Basic ' . base64_encode('api:' . $this->api_key),
-                'Content-Type: application/json'
+                'Content-Type: application/json',
+                'User-Agent: ' . Tiny_WP_Base::plugin_identification() . ' fopen'
             );
             $options['http']['content'] = json_encode(array('resize' => $resize));
         }

@@ -321,6 +321,7 @@ class WP_Embed_FB_Admin {
 									self::field( 'checkbox', 'wpemfb_enq_lightbox', __( 'Enqueue Lightbox script', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_enq_wpemfb', __( 'Enqueue WPEmbedFB script', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_enq_fbjs', __( 'Enqueue Facebook SDK', 'wp-embed-facebook' ) );
+									self::field( 'checkbox', 'wpemfb_force_app_token', __( 'Force app token', 'wp-embed-facebook' ) );
 									self::section();
 									?>
 								</section>

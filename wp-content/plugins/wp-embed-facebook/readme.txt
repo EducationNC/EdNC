@@ -3,8 +3,8 @@ Contributors: poxtron
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26
 Tags: Facebook, facebook, Social Plugins, embed facebook, facebook video, facebook posts, facebook publication, facebook publications, facebook event, facebook events, facebook pages, facebook page, facebook profiles, facebook album, facebook albums, facebook photos, facebook photo, social,
 Requires at least: 3.8.1
-Tested up to: 4.3.2
-Stable tag: 2.0.3
+Tested up to: 4.4
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,74 +42,74 @@ Assuming all settings are in their default state.
 
 * From source using html5 video tag
 
-`[facebook=https://www.facebook.com/ArchanNair/videos/10152579879850694 ]`
+`[facebook https://www.facebook.com/ArchanNair/videos/10152579879850694 ]`
 
 * Use facebook [embedded video](https://developers.facebook.com/docs/plugins/embedded-video-player) plugin
 
-`[facebook=https://www.facebook.com/ArchanNair/videos/10152579879850694 social_plugin=true ]`
+`[facebook https://www.facebook.com/ArchanNair/videos/10152579879850694 social_plugin=true ]`
 
 **Pages**
 
 * Using default settings
 
-`[facebook=https://www.facebook.com/sydneyoperahouse ]`
+`[facebook https://www.facebook.com/sydneyoperahouse ]`
 
 * Changing the number of posts shown only for custom embeds
 
-`[facebook=https://www.facebook.com/sydneyoperahouse posts=2 ]`
+`[facebook https://www.facebook.com/sydneyoperahouse posts=2 ]`
 
 * Use facebook [page plugin](https://developers.facebook.com/docs/plugins/page-plugin)
 
-`[facebook=https://www.facebook.com/sydneyoperahouse social_plugin=true  ]`
+`[facebook https://www.facebook.com/sydneyoperahouse social_plugin=true  ]`
 
 All attributes are optional and if 'attributes' is not present it will use the default values
 
 **Albums**
 
-`[facebook=https://www.facebook.com/media/set/?set=a.10151932001713698.1073741831.10883823697 ]`
+`[facebook https://www.facebook.com/media/set/?set=a.10151932001713698.1073741831.10883823697 ]`
 
 **Events**
 
-`[facebook=https://www.facebook.com/events/507909879383103/ ]`
+`[facebook https://www.facebook.com/events/507909879383103/ ]`
 
 **Photos**
 
 * Embed the photo as a plain image on your site
 
-`[facebook=https://www.facebook.com/ArchanNair/photos/a.10151932001713698.1073741831.10883823697/10153545048758698/]`
+`[facebook https://www.facebook.com/ArchanNair/photos/a.10151932001713698.1073741831.10883823697/10153545048758698/]`
 
 * Use facebook [embedded post](https://developers.facebook.com/docs/plugins/embedded-posts) plugin
 
-`[facebook=https://www.facebook.com/ArchanNair/photos/a.10151932001713698.1073741831.10883823697/10153545048758698/ social_plugin=true ]`
+`[facebook https://www.facebook.com/ArchanNair/photos/a.10151932001713698.1073741831.10883823697/10153545048758698/ social_plugin=true ]`
 
 **Posts**
 
-`[facebook=https://www.facebook.com/radiohead/posts/10152688346467245 ]`
+`[facebook https://www.facebook.com/radiohead/posts/10152688346467245 ]`
 
 * Use facebook [embedded post](https://developers.facebook.com/docs/plugins/embedded-posts) plugin
 
-`[facebook=https://www.facebook.com/radiohead/posts/10152688346467245 social_plugin=true ]`
+`[facebook https://www.facebook.com/radiohead/posts/10152688346467245 social_plugin=true ]`
 
 
 **Profiles**
 
-`[facebook=https://www.facebook.com/4 ]`
+`[facebook https://www.facebook.com/4 ]`
 
 You will need the facebook id of the user to embed the profile.
 
 **Changing the width**
 
-`[facebook=https://www.facebook.com/sydneyoperahouse width=970 ]`
+`[facebook https://www.facebook.com/sydneyoperahouse width=970 ]`
 
 All shortcodes can be affected by the width attribute and it represents the *maximum width* in pixels the embed can be rendered, never the less all embeds are responsive.
 
 **Changing the theme**
 
-`[facebook=https://www.facebook.com/sydneyoperahouse theme=classic ]`
+`[facebook https://www.facebook.com/sydneyoperahouse theme=classic ]`
 
 **Embedding a Facebook object_id**
 
-`[facebook=507909879383103 ]`
+`[facebook 507909879383103 ]`
 
 == Installation ==
 
@@ -138,6 +138,10 @@ This is a facebook limitation, will try to work around it.
 
 == Changelog ==
 
+= 2.0.4 =
+* changed shortcode tag from [facebook=url] to [facebook url]
+* force app access token
+
 = 2.0.3 =
 * Fixed notice on pages and events with no cover
 * Moved admin scripts to footer
@@ -156,7 +160,7 @@ This is a facebook limitation, will try to work around it.
 * Fixed time on events
 * Update Facebook API to 2.4
 * Added a new parameters for shortcode 'social_plugin' and 'theme'
-* Fixed shortcode use [facebook=FB_Object_ID ]
+* Fixed shortcode use [facebook FB_Object_ID ]
 * Improved CSS and themes
 * New Embed Post Raw
 
@@ -177,7 +181,7 @@ This is a facebook limitation, will try to work around it.
 
 = 1.9.6.3 =
 * Fixed MultiSite error
-* New Shortcode use [facebook=FB_Object_ID ] solution for fb permalinks
+* New Shortcode use [facebook FB_Object_ID ] solution for fb permalinks
 * Fixed raw attribute on shortcode when url is video
 
 = 1.9.6.2 =
@@ -277,7 +281,7 @@ This is a facebook limitation, will try to work around it.
 * Documentation and screenshots.
 
 = 1.3 =
-* Shortcode [facebook=url width=600] width is optional
+* Shortcode [facebook url width=600] width is optional
 * Themes
 * Multilingual Like Buttons
 

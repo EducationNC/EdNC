@@ -45,13 +45,12 @@ class Tiny_Compress_Curl extends Tiny_Compress {
         $request = curl_init();
         curl_setopt_array($request, $this->shrink_options($input));
 
-        $output_url = null;
         $response = curl_exec($request);
         if ($response === false || $response === null) {
             return array(array(
                 'error' => 'CurlError',
                 'message' => sprintf("cURL: %s [%d]", curl_error($request), curl_errno($request))
-              ), null
+              ), null, null
             );
         }
 
@@ -69,7 +68,8 @@ class Tiny_Compress_Curl extends Tiny_Compress {
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => true,
             CURLOPT_CAINFO => self::get_ca_file(),
-            CURLOPT_SSL_VERIFYPEER => true
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_USERAGENT => Tiny_WP_Base::plugin_identification() . ' cURL'
         );
         if ($resize) {
             $options[CURLOPT_USERPWD] = 'api:' . $this->api_key;

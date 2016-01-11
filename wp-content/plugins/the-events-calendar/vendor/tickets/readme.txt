@@ -4,7 +4,7 @@ Contributors: ModernTribe, borkweb, zbtirrell, barry.hughes, bordoni, brianjesse
 Tags: events, add-on, ticket sales, tickets, calendar, community, registration, api, dates, date, posts, workshop, conference, meeting, seminar, concert, summit, The Events Calendar, Events Calendar PRO, ticket integration, event ticketing, RSVP, Event Tickets, Event Tickets Plus
 Requires at least: 3.9
 Tested up to: 4.4
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -178,6 +178,14 @@ Our Premium Plugins:
 * <a href="http://m.tri.be/18v2" target="_blank">The Events Calendar: Filter Bar</a>
 
 == Changelog ==
+
+= [4.0.4] 2015-12-23 =
+
+* Fix - Resolved issue with stock calculations on the Attendees report
+
+= [4.0.3] 2015-12-22 =
+
+* Tweak - Leverage the original_stock() method when rendering ticket availability to avoid funky math problems with different Event Tickets Plus commerce providers (Thank you liblogger for reporting this issue!)
 
 = [4.0.2] 2015-12-16 =
 
