@@ -55,12 +55,18 @@
 
 .block-perspective {
   .photo-overlay {
+    position: relative;
+    padding-bottom: 42.3%;
     margin-bottom: .5em;
+    height: 0;
+    overflow: hidden;
+    clear: both;
   }
 
   .attachment-featured-medium {
-    width: 100%;
-    clear: both;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
   }
 
   .circle-image {

@@ -28,14 +28,14 @@ if (!empty($post)) {
       <?php
       if (has_post_thumbnail()) {
         $image_id = get_post_thumbnail_id();
-        $image_url = wp_get_attachment_image_src($image_id, 'featured-thumbnail-squat-wide');
+        $image_url = wp_get_attachment_image_src($image_id, 'featured-medium');
         $image_sized['url'] = $image_url[0];
       } else {
         $image_src = Extras\catch_that_image();
         if ($image_src) {
-          $image_sized = Resize\mr_image_resize($image_src, 564, 239, true, false);
+          $image_sized = Resize\mr_image_resize($image_src, 747, 421, true, false);
         } else {
-          $image_sized['url'] = get_template_directory_uri() . '/assets/public/imgs/logo-squat-wide.png';
+          $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
         }
       }
 
@@ -46,7 +46,7 @@ if (!empty($post)) {
           <img src="<?php echo $image_sized['url']; ?>" />
         <?php } ?>
         <?php get_template_part('templates/components/labels', 'single'); ?>
-    
+
         <?php if ( ! empty($title_overlay) ) { ?>
           <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
         <?php } ?>

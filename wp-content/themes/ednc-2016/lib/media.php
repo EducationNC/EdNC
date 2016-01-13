@@ -9,8 +9,7 @@ namespace Roots\Sage\Media;
 add_image_size('medium-square', 400, 400, true);
 add_image_size('bio-headshot', 220, 220, true);
 add_image_size('featured-large', 1240, 525, true);
-add_image_size('featured-medium', 820, 347, true);
-add_image_size('featured-small', 610, 343, true);
+add_image_size('featured-medium', 747, 421, true);
 
 add_action('init', function() {
   remove_image_size('guest-author-32');

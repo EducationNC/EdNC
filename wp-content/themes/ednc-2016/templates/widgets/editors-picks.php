@@ -24,7 +24,7 @@
             <div class="col-sm-6 col-md-12">
               <div class="photo-overlay">
                 <span class="label">&nbsp;</span>
-                <?php echo wp_get_attachment_image($feature[0]['featured_image']['ID'], 'featured-small'); ?>
+                <?php echo wp_get_attachment_image($feature[0]['featured_image']['ID'], 'featured-medium'); ?>
                 <a class="mega-link" href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');"></a>
               </div>
             </div>

@@ -30,7 +30,7 @@ if (has_post_thumbnail()) {
 } else {
   $image_src = Extras\catch_that_image();
   if ($image_src) {
-    $image_sized = Resize\mr_image_resize($image_src, 820, 347, true, false);
+    $image_sized = Resize\mr_image_resize($image_src, 747, 421, true, false);
   } else {
     $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
   }

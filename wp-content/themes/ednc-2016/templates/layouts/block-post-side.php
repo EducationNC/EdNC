@@ -28,7 +28,7 @@ if (has_post_thumbnail()) {
 } else {
   $image_src = Extras\catch_that_image();
   if ($image_src) {
-    $image_sized = Resize\mr_image_resize($image_src, 820, 347, true, false);
+    $image_sized = Resize\mr_image_resize($image_src, 747, 421, true, false);
   } else {
     $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
   }
@@ -53,7 +53,7 @@ $title_overlay = get_field('title_overlay');
 
       get_template_part('templates/components/labels', 'single');
       ?>
-  
+
       <?php if ( ! empty($title_overlay) ) { ?>
         <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
       <?php } ?>

@@ -1099,7 +1099,7 @@ register_field_group(array (
 						'id' => '',
 					),
 					'return_format' => 'array',
-					'preview_size' => 'featured-small',
+					'preview_size' => 'featured-medium',
 					'library' => 'all',
 					'min_width' => 610,
 					'min_height' => 343,
