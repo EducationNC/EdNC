@@ -42,7 +42,6 @@
     @media (max-width: 475px) {
       height: 75px;
     }
-
   }
 
   &.the-wednesday-wire {
@@ -81,6 +80,18 @@
     }
   }
 
+  &.policy-points {
+    background-image: url('../imgs/policy-points.jpg');
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      height: 180px;
+    }
+
+    @media (max-width: 475px) {
+      height: 75px;
+    }
+  }
+
   &.meck-monday,
   &.the-monday-missive,
   &.tech-tuesday,
@@ -90,7 +101,8 @@
   &.friday-with-ferrel,
   &.healthy-ever-after,
   &.powered-schools,
-  &.consider-it-mapped {
+  &.consider-it-mapped,
+  &.policy-points {
     display: block;
 
     & + .entry-header .label {

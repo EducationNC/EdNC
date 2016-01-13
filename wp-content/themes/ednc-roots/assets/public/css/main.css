@@ -10221,7 +10221,20 @@ body.home .photo-overlay h4.post-title {
     height: 75px;
   }
 }
-.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.healthy-ever-after, .column-banner.powered-schools, .column-banner.consider-it-mapped {
+.column-banner.policy-points {
+  background-image: url(../imgs/../imgs/policy-points.jpg);
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .column-banner.policy-points {
+    height: 180px;
+  }
+}
+@media (max-width: 475px) {
+  .column-banner.policy-points {
+    height: 75px;
+  }
+}
+.column-banner.meck-monday, .column-banner.the-monday-missive, .column-banner.tech-tuesday, .column-banner.sparking-stem, .column-banner.the-wednesday-wire, .column-banner.the-thursday-transcript, .column-banner.friday-with-ferrel, .column-banner.healthy-ever-after, .column-banner.powered-schools, .column-banner.consider-it-mapped, .column-banner.policy-points {
   display: block;
 }
 
