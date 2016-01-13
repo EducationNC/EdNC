@@ -2,6 +2,15 @@
 
 namespace Roots\Sage\Admin;
 
+use Roots\Sage\Assets;
+
+// Add admin scripts and styles
+function admin_scripts() {
+  wp_enqueue_style('ednc_admin_css', Assets\asset_path('styles/admin.css'));
+  wp_enqueue_script('ednc_admin_js', Assets\asset_path('scripts/admin.js'));
+}
+add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\admin_scripts');
+
 /**
  * Order bios, bills, and legislators on admin page
  *
