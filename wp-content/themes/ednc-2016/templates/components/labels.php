@@ -77,6 +77,11 @@ if ($appearances) {
   }
 }
 
+// Flash Cards label
+if ($post_type == 'flash-cards') {
+  echo '<span class="label"><a href="/flash-cards">Flash Cards</a></span>';
+}
+
 // Map label
 if ($post_type == 'map') {
   echo '<span class="label"><a href="/maps">Maps</a></span>';

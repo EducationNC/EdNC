@@ -16,7 +16,7 @@ get_template_part('templates/components/category', 'header');
         </div>
       <?php } ?>
 
-      <div class="row hentry issue-flash-card">
+      <div class="row hentry">
         <?php
         $args = array(
           'post_type' => 'flash-cards',
@@ -28,13 +28,9 @@ get_template_part('templates/components/category', 'header');
 
         if ($fc->have_posts()) : while ($fc->have_posts()): $fc->the_post(); ?>
 
-          <div class="col-sm-6 col-xs-9 col-centered has-photo-overlay">
-            <div class="photo-overlay">
-              <?php the_post_thumbnail('featured-thumbnail'); ?>
-              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-              <h3 class="post-title"><?php the_title(); ?></h3>
-              <div class="line"></div>
-            </div>
+          <div class="col-sm-6">
+            <div class="paperclip"></div>
+            <?php get_template_part('templates/layouts/block', 'post'); ?>
           </div>
 
         <?php endwhile; endif; wp_reset_query(); ?>

@@ -1,0 +1,234 @@
+@mixin index-card-background {
+  background: $white;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background-size: 100% 29px;
+}
+
+.paperclip {
+  width: 25px;
+  height: 20px;
+  left: 8px;
+  border: groove 3px #ddd;
+  border-width: 3px 3px 0 0;
+  border-radius: 1000px 1000px 00;
+  position: relative;
+  box-sizing: border-box;
+  transform: rotate(9deg) translateZ(0);
+  z-index: 5;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    border: groove 3px #ddd;
+  }
+
+  &:before {
+    border-radius: 1000px 1000px 0 0;
+    border-width: 3px 0 0 3px;
+    top: -3px;
+    right: 0;
+    width: 100%;
+    height: 132%;
+  }
+
+  &:after {
+    border-radius: 0 0 1000px 1000px;
+    border-width: 0 3px 3px;
+    top: 100%;
+    right: -3px;
+    width: 80%;
+    height: 250%;
+  }
+}
+
+// Flash card listings in archives
+.archive {
+  .flash-cards {
+    @include index-card-background;
+    border: 1px solid $steel;
+    padding: 1em;
+    @include box-shadow(0 0 10px $heather);
+
+    .byline {
+      display: none;
+    }
+  }
+}
+
+// Single flash cards styles
+.single-flash-cards {
+  height: 100%;
+
+  // Position footer over background
+  .above-footer, .content-info {
+    position: relative;
+    z-index: 200;
+  }
+
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    .container {
+      width: 970px;
+    }
+  }
+
+  .entry-header {
+    margin-top: 7em;
+  }
+
+  .entry-title {
+    padding-top: 10px;
+  }
+
+  .byline {
+    color: $white;
+
+    a {
+      color: $white;
+    }
+  }
+}
+
+// Fixed background image
+.fc-background-image {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: $raven-60;
+    position: absolute;
+    z-index: 100;
+  }
+}
+
+// Flash cards stlye
+.fc {
+  @include index-card-background;
+  border: 1px solid $steel;
+  padding: 20px 20px 20px 30px;
+
+  .fc-title {
+    position: relative;
+    margin: -20px -20px 14px -20px;
+    background: $white;
+    padding: 20px 20px 0 20px;
+  }
+
+  p, li {
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    margin-top: 0;
+  }
+
+  ol {
+    margin: 0;
+  }
+}
+
+
+// Content alignment
+.flash-cards-content {
+  position: relative;
+  z-index: 2;
+
+  .affix {
+    @media (max-width: $screen-sm-max) {
+      position: relative;
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: 304px;
+      top: 20px;
+      position: fixed;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: 295px;
+    }
+  }
+
+  .affix-bottom {
+    @media (min-width: $screen-md-min) {
+      position: absolute;
+      width: 304px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: 295px;
+    }
+  }
+
+  .toc {
+    font-family: $font-family-sans-serif;
+    padding-left: 15px;
+
+    li {
+      padding-bottom: .25em;
+      margin: 0;
+
+      &.active {
+        color: $plum;
+
+        a {
+          color: $plum;
+        }
+      }
+    }
+
+    a {
+      display: block;
+      color: $ash;
+      text-decoration: none;
+
+      &:hover, &:active, &:focus {
+        color: $sky;
+      }
+    }
+  }
+}
+
+// Flash cards nav
+.fc-nav {
+  overflow: hidden;
+  position: relative;
+
+  .fc-prev, .fc-next {
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    color: $white;
+  }
+
+  .fc-prev {
+    float: left;
+  }
+
+  .fc-next {
+    float: right;
+  }
+
+  .disabled {
+    display: none;
+  }
+}
+
+.fc-index {
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  z-index: 0;
+}

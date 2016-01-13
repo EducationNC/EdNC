@@ -167,7 +167,106 @@
         });
 
       }
-    }
+    },
+    // Flash cards
+    'single_flash_cards': {
+      init: function() {
+
+        /**
+         * OWL CAROUSEL 2
+         */
+
+        // Function to set nav states based on slide position
+        function navState(type, prop) {
+
+          var prev = $('.fc-nav .fc-prev');
+          var next = $('.fc-nav .fc-next');
+          var size = owl.find('.owl-item').length;
+
+          // Determine current slide
+          if (type === 'changed') {
+            index = prop.item.index;
+            hash = $(prop.target).find(".owl-item").eq(index).find(".fc").data('hash');
+          } else {
+            index = owl.find('.owl-item.active').index();
+            hash = owl.find('.owl-item.active').find('.fc').data('hash');
+          }
+
+          // Set index number in top nav bar
+          if (index > 0) {
+            $('#fc-index').text(index + '/' + (size - 1));
+          } else {
+            $('#fc-index').text('');
+          }
+
+          // Prev state
+          if (index === 0) {
+            prev.addClass('disabled');
+          } else {
+            prev.removeClass('disabled');
+          }
+
+          // Next state
+          if (index + 1 === size) {
+            next.addClass('disabled');
+          } else {
+            next.removeClass('disabled');
+          }
+
+          // Active state for TOC
+          $('#fc-left-nav .toc li').removeClass('active');
+          $('#fc-left-nav .toc').find('a[href=#' + hash + ']').parent('li').addClass('active');
+        }
+
+        // Init Owl Carousel 2
+        var owl = $("#fc-carousel");
+        owl.owlCarousel({
+          items: 1,
+          // loop: true,
+          autoHeight: true,
+          URLhashListener: true,
+          startPosition: 'URLHash',
+          onInitialized: navState
+        });
+
+        // Manual carousel nav
+        $('.fc-nav .fc-next').on(clickortap, function() {
+          owl.trigger('next.owl.carousel');
+        });
+
+        $('.fc-nav .fc-prev').on(clickortap, function() {
+          owl.trigger('prev.owl.carousel');
+        });
+
+        // Functions to run when slides changed
+        owl.on('changed.owl.carousel', function(prop) {
+          // Set nav states
+          navState('changed', prop);
+
+          // Hash change on carousel nav
+          var current = prop.item.index;
+          var hash = $(prop.target).find(".owl-item").eq(current).find(".fc").data('hash');
+          window.location.hash = hash;
+        });
+
+
+        /**
+         * Bootstrap Affix
+         */
+        $(window).on('load', function() {
+          $('#fc-left-nav .toc').affix({
+            offset: {
+              top: function() {
+                return (this.top = $('#fc-left-nav .toc').offset().top - 20);
+              },
+              bottom: function () {
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+              }
+            }
+          });
+        });
+      }
+    },
   };
 
   // The routing fires all common scripts, followed by the page specific scripts.

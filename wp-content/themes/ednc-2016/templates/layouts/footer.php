@@ -4,14 +4,16 @@ use Roots\Sage\Assets;
 
 ?>
 
-<div class="container above-footer print-no">
-  <div class="row">
-    <div class="col-md-8 col-md-push-2">
-      <div class="hidden-xs">
-        <?php get_template_part('templates/components/email-signup'); ?>
-      </div>
-      <div class="visible-xs-block text-center extra-bottom-margin">
-        <a class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Free Subscription</a>
+<div class="above-footer print-no">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-push-2">
+        <div class="hidden-xs">
+          <?php get_template_part('templates/components/email-signup'); ?>
+        </div>
+        <div class="visible-xs-block text-center extra-bottom-margin">
+          <a class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Free Subscription</a>
+        </div>
       </div>
     </div>
   </div>
