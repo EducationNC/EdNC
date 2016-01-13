@@ -3,6 +3,7 @@
 namespace Roots\Sage\Resize;
 
 use WP_Error;
+use Roots\Sage\HTTP;
 
 /**
  *  Resizes an image and returns an array containing the resized URL, width, height and file type. Uses native Wordpress functionality.
@@ -64,7 +65,7 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
       $http_file_path['scheme'] = 'http';
 
       include 'http_build_url.php';
-      $http_url = http_build_url('', $http_file_path);
+      $http_url = HTTP\http_build_url('', $http_file_path);
     }
 
     // Set the image file path
