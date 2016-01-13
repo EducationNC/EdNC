@@ -19,6 +19,7 @@
         'operand' => 'OR',
         'filters' => ''
       )); ?>
+      <p class="extra-top-margin small"><a href="/events">See more upcoming events &raquo;</a></p>
     </div>
 
     <div class="col-md-6">

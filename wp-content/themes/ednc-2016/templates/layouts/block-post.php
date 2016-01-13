@@ -35,6 +35,8 @@ if (has_post_thumbnail()) {
     $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
   }
 }
+
+$title_overlay = get_field('title_overlay');
 ?>
 
 <article <?php post_class('block-post ' . implode($classes, ' ')); ?>>
@@ -60,6 +62,11 @@ if (has_post_thumbnail()) {
 
     get_template_part('templates/components/labels', 'single');
     ?>
+
+    <?php if ( ! empty($title_overlay) ) { ?>
+      <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
+    <?php } ?>
+
     <a class="mega-link" href="<?php the_permalink(); ?>"></a>
   </div>
 

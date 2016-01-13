@@ -308,6 +308,16 @@
   img {
     position: relative;
     width: 100%;
+
+    &.title-image-overlay {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      width: auto;
+      max-width: 75%;
+      z-index: 2;
+    }
   }
 
   &:after {

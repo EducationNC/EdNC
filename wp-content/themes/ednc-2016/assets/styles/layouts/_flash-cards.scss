@@ -55,7 +55,7 @@
     @include index-card-background;
     border: 1px solid $steel;
     padding: 1em;
-    @include box-shadow(0 0 10px $heather);
+    box-shadow: 0 0 10px $heather;
 
     .byline {
       display: none;
@@ -70,17 +70,11 @@
   // Position footer over background
   .above-footer, .content-info {
     position: relative;
-    z-index: 200;
-  }
-
-  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-    .container {
-      width: 970px;
-    }
+    z-index: 50;
   }
 
   .entry-header {
-    margin-top: 7em;
+    margin-top: 3em;
   }
 
   .entry-title {
@@ -94,6 +88,24 @@
       color: $white;
     }
   }
+
+  @media (min-width: $screen-md-min) {
+    .entry-header {
+      margin-top: 7em;
+    }
+  }
+
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    .container {
+      width: 874px;
+    }
+  }
+
+  @media (min-width: $screen-lg-min) {
+    .container {
+      width: 1160px;
+    }
+  }
 }
 
 // Fixed background image
@@ -101,7 +113,10 @@
   position: fixed;
   width: 100%;
   height: 100%;
+  top: 0;
   z-index: 1;
+  background-position: center;
+  background-size: cover;
 
   &:before {
     content: '';
@@ -149,24 +164,24 @@
     }
 
     @media (min-width: $screen-md-min) {
-      width: 304px;
+      width: 271px;
       top: 20px;
       position: fixed;
     }
 
     @media (min-width: $screen-lg-min) {
-      width: 295px;
+      width: 270px;
     }
   }
 
   .affix-bottom {
     @media (min-width: $screen-md-min) {
       position: absolute;
-      width: 304px;
+      width: 271px;
     }
 
     @media (min-width: $screen-lg-min) {
-      width: 295px;
+      width: 270px;
     }
   }
 
@@ -205,7 +220,8 @@
   position: relative;
 
   .fc-prev, .fc-next {
-    padding: 10px;
+    @extend .h6;
+    margin: 0;
     cursor: pointer;
     position: relative;
     z-index: 1;
@@ -231,4 +247,13 @@
   padding: 10px;
   text-align: center;
   z-index: 0;
+}
+
+// Email signup form
+.single-flash-cards {
+  .above-footer {
+    .email-signup-form {
+      background: $pearl;
+    }
+  }
 }

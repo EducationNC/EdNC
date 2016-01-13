@@ -35,6 +35,8 @@ if (has_post_thumbnail()) {
     $image_sized['url'] = Assets\asset_path('images/logo-featured-large.jpg');
   }
 }
+
+$title_overlay = get_field('title_overlay');
 ?>
 
 <article <?php post_class('block-overlay large photo-overlay hidden-xs ' . implode($classes, ' ')); ?>>
@@ -60,10 +62,18 @@ if (has_post_thumbnail()) {
   get_template_part('templates/components/labels', 'single');
   ?>
 
-  <header class="entry-header">
-    <h2 class="post-title"><?php the_title(); ?></h2>
-    <?php get_template_part('templates/components/entry-meta'); ?>
-  </header>
+  <?php if ( ! empty($title_overlay) ) { ?>
+    <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
+    <header class="entry-header">
+      <h2 class="post-title hidden"><?php the_title(); ?></h2>
+      <?php get_template_part('templates/components/entry-meta'); ?>
+    </header>
+  <?php } else { ?>
+    <header class="entry-header">
+      <h2 class="post-title"><?php the_title(); ?></h2>
+      <?php get_template_part('templates/components/entry-meta'); ?>
+    </header>
+  <?php } ?>
 
   <a class="mega-link" href="<?php the_permalink(); ?>"></a>
 </article>

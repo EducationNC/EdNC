@@ -1,4 +1,4 @@
-.hentry {
+.single .hentry {
   .entry-header {
 
     &:not(.hero-image) {
@@ -24,15 +24,6 @@
     .photo-overlay {
       overflow: visible;
       height: 100%;
-
-      .title-image-overlay {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        width: auto;
-        max-width: 75%;
-      }
 
       .label {
         position: relative;
@@ -276,8 +267,9 @@
 }
 
 .colophon.colophon {
-  margin: 0;
-  width: 20px;
-  height: 20px;
-  vertical-align: text-top;
+  display: inline-block;
+  margin: 0 0 0 3px;
+  width: 15px;
+  height: 16px;
+  background: $plum-lighter;
 }

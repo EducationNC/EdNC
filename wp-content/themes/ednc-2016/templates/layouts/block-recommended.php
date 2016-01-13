@@ -38,12 +38,18 @@ if (!empty($post)) {
           $image_sized['url'] = get_template_directory_uri() . '/assets/public/imgs/logo-squat-wide.png';
         }
       }
+
+      $title_overlay = get_field('title_overlay');
       ?>
       <div class="photo-overlay">
         <?php if ($image_sized['url']) { ?>
           <img src="<?php echo $image_sized['url']; ?>" />
         <?php } ?>
         <?php get_template_part('templates/components/labels', 'single'); ?>
+    
+        <?php if ( ! empty($title_overlay) ) { ?>
+          <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
+        <?php } ?>
 
         <a class="mega-link" href="<?php the_permalink(); ?>"></a>
       </div>

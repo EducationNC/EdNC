@@ -2,8 +2,10 @@ p {
   margin-bottom: 1.88em;
   line-height: 1.88em;
   word-wrap: break-word;
+}
 
-  @media (max-width: $screen-xs-max) {
+@media (max-width: $screen-xs-max) {
+  p, li {
     font-size: 16px;
   }
 }
@@ -270,7 +272,7 @@ blockquote, .blockquote {
       margin-right: -7.35%;
     }
 
-    .mce-content-body & {
+    .single-flash-cards &, .mce-content-body & {
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
@@ -319,7 +321,7 @@ blockquote, .blockquote {
         font-size: 22px;
       }
 
-      .mce-content-body & {
+      .single-flash-cards &, .mce-content-body & {
         margin-left: 0 !important;
       }
     }
@@ -339,7 +341,7 @@ blockquote, .blockquote {
         font-size: 22px;
       }
 
-      .mce-content-body & {
+      .single-flash-cards &, .mce-content-body & {
         margin-right: 0 !important;
       }
     }
@@ -358,7 +360,7 @@ blockquote, .blockquote {
         margin: 0 0 10px 0;
       }
 
-      .mce-content-body & {
+      .single-flash-cards &, .mce-content-body & {
         margin-left: 0 !important;
         margin-right: 0 !important;
       }

@@ -14,10 +14,9 @@ if (isset($_GET['utm_source'])) {
 
         <div class="mc-field-group input-group">
           <ul>
-            <li><input type="checkbox" value="1" name="group[13145][1]" id="mce-group[13145]-13145-0"><label for="mce-group[13145]-13145-0">Daily digest</label></li>
-            <li><input type="checkbox" value="2" name="group[13145][2]" id="mce-group[13145]-13145-1"><label for="mce-group[13145]-13145-1">Weekly wrapup</label></li>
-            <li><input type="checkbox" value="4" name="group[13145][4]" id="mce-group[13145]-13145-2"><label for="mce-group[13145]-13145-2">Breaking news alerts</label></li>
-            <!-- <li><input type="checkbox" value="8" name="group[13145][8]" id="mce-group[13145]-13145-3"><label for="mce-group[13145]-13145-3">General updates from EdNC</label></li> -->
+            <li><input type="checkbox" value="0" name="group[13145][0]" id="mce-group[13145]-13145-0"><label for="mce-group[13145]-13145-0">Daily digest</label></li>
+            <li><input type="checkbox" value="1" name="group[13145][1]" id="mce-group[13145]-13145-1"><label for="mce-group[13145]-13145-1">Weekly wrapup</label></li>
+            <li><input type="checkbox" value="2" name="group[13145][2]" id="mce-group[13145]-13145-2"><label for="mce-group[13145]-13145-2">Breaking news alerts</label></li>
           </ul>
         </div>
 

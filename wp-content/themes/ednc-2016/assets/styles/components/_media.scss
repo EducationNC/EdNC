@@ -171,7 +171,7 @@ object, embed {
     height: 0;
     margin-bottom: 34px;
 
-    body:not(.page) & {
+    body:not(.page):not(.single-flash-cards) & {
       @media (min-width: $screen-md-min) {
         margin-left: -7.35%;
         margin-right: -7.35%;

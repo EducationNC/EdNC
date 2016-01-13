@@ -389,4 +389,15 @@ namespace Roots\Sage\Shortcodes;
     return $output;
   }
   add_shortcode('stem-update', __NAMESPACE__ . '\\stem_update_shortcode');
+
+  // Colophon
+  function colophon_shortcode($atts, $content = null) {
+    extract( shortcode_atts( array(
+    ), $atts) );
+
+    $output = '<span class="colophon"></span>';
+
+    return $output;
+  }
+  add_shortcode('colophon', __NAMESPACE__ . '\\colophon_shortcode');
 ?>
