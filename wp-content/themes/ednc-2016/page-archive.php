@@ -4,7 +4,7 @@
   <?php
   $paged = get_query_var('paged') ? get_query_var('paged') : 1;
   $args = array(
-    'post_type' => array('post', 'map', 'ednews'),
+    'post_type' => array('post', 'map', 'ednews', 'edtalk'),
     'tax_query' => array(
       array(
         'taxonomy' => 'appearance',

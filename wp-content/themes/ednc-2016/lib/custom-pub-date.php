@@ -95,7 +95,7 @@ function cpd_copy_pub_date( $post_id, $post, $update ) {
   }
 
   // Only do this on posts, maps, and ednews
-  if ($post->post_type != 'post' && $post->post_type != 'map' && $post->post_type != 'ednews') {
+  if ($post->post_type != 'post' && $post->post_type != 'map' && $post->post_type != 'ednews' && $post->post_type != 'edtalk') {
     return;
   }
 
@@ -185,3 +185,7 @@ add_action( "manage_edit-map_sortable_columns", 'cpd_custom_column_sort', 10, 2 
 add_filter( "manage_ednews_posts_columns", 'cpd_custom_column_heading', 10, 1 );
 add_action( "manage_ednews_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
 add_action( "manage_edit-ednews_sortable_columns", 'cpd_custom_column_sort', 10, 2 );
+// edtalk
+add_filter( "manage_edtalk_posts_columns", 'cpd_custom_column_heading', 10, 1 );
+add_action( "manage_edtalk_posts_custom_column", 'cpd_custom_column_content', 10, 2 );
+add_action( "manage_edit-edtalk_sortable_columns", 'cpd_custom_column_sort', 10, 2 );

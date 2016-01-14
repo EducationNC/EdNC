@@ -11,7 +11,7 @@
     $args1 = array_merge(
       $wp_query->query_vars,
       array(
-        'post_type' => array('post', 'map', 'ednews'),
+        'post_type' => array('post', 'map', 'ednews', 'edtalk'),
         'tax_query' => array(
     			array(
     				'taxonomy' => 'appearance',
@@ -29,7 +29,7 @@
     // Add another query to get all posts updated on this day
     $args2 = array(
       'posts_per_page' => -1,
-      'post_type' => array('post', 'map', 'ednews'),
+      'post_type' => array('post', 'map', 'ednews', 'edtalk'),
       'tax_query' => array(
         array(
           'taxonomy' => 'appearance',
@@ -61,7 +61,7 @@
 
     // Query posts from first 2 queries and order by updated date
     $final_args = array(
-      'post_type' => array('post', 'map', 'ednews'),
+      'post_type' => array('post', 'map', 'ednews', 'edtalk'),
       'tax_query' => array(
         array(
           'taxonomy' => 'appearance',

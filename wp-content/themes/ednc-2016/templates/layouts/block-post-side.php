@@ -30,14 +30,18 @@ if (has_post_thumbnail()) {
   if ($image_src) {
     $image_sized = Resize\mr_image_resize($image_src, 747, 421, true, false);
   } else {
-    $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
+    if ($post->post_type == 'edtalk') {
+      $image_sized['url'] = Assets\asset_path('images/edtalk-featured-medium.jpg');
+    } else {
+      $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
+    }
   }
 }
 
 $title_overlay = get_field('title_overlay');
 ?>
 
-<article <?php post_class('block-post row hidden-xs hidden-sm ' . implode($classes, ' ')); ?>>
+<article <?php post_class('block-post row hidden-xs ' . implode($classes, ' ')); ?>>
   <div class="col-xs-5">
     <div class="photo-overlay">
       <?php
@@ -68,6 +72,6 @@ $title_overlay = get_field('title_overlay');
   </header>
 </article>
 
-<div class="visible-xs-block visible-sm-block">
+<div class="visible-xs-block">
   <?php get_template_part('templates/layouts/block-post'); ?>
 </div>

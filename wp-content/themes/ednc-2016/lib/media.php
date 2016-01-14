@@ -146,6 +146,16 @@ add_action('init', function() {
   wp_oembed_add_provider('#https?://(www\.)?instagr(\.am|am\.com)/p/.*#i', 'https://api.instagram.com/oembed', true );
 });
 
+// Remove visual=true from returned iframe from SoundCloud oembed
+function filter_result($return, $url) {
+  if (stristr($url, 'soundcloud')) {
+    $return = str_replace('visual=true', 'visual=false&color=DE6515', $return);
+  }
+
+  return $return;
+}
+add_filter('embed_oembed_html', __NAMESPACE__ . '\\filter_result', 10, 3);
+
 // Google Maps embed
 function wpgm_embed_handler_googlemapsv1( $matches, $attr, $url, $rawattr ) {
 	if ( ! empty( $rawattr['width'] ) && ! empty( $rawattr['height'] ) ) {

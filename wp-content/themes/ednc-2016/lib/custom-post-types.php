@@ -340,7 +340,7 @@ function register_post_types() {
 			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
 			'capability_type' => 'post',
 			'hierarchical' => false,
-			'supports' => array( 'title', 'author'),
+			'supports' => array( 'title', 'author', 'revisions', 'editor', 'comments'),
 			'has_archive' => true,
 			'rewrite' => true,
 			'query_var' => true
@@ -496,7 +496,7 @@ register_taxonomy( 'bill-status',
 );
 
 register_taxonomy( 'appearance',
-	array('post', 'map'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('post', 'map', 'edtalk'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
 			'name' => __( 'Appearances' ),
@@ -630,12 +630,33 @@ function pre_get_posts($query) {
 
 	// author archives should query posts and maps
 	if ($query->is_author()) {
-		$query->set('post_type', array('post', 'map'));
+		$query->set('post_type', array('post', 'map', 'edtalk'));
 	}
 
 	// 1868 category archives should show in asc order
 	if ($query->is_category('1868-constitutional-convention')) {
 		$query->set('order' , 'ASC');
+	}
+
+	// include ednews podcasts in category archives
+	if ($query->is_category() && $query->is_main_query()) {
+		$query->set('post_type', ['post', 'edtalk']);
+	}
+
+	// date archives should show extra post types
+	if ($query->is_day()) {
+		$query->set('post_type', ['post', 'map', 'ednews', 'edtalk']);
+		$tax_query = array(
+			array(
+				'taxonomy' => 'appearance',
+				'field' => 'slug',
+				'terms' => 'hide-from-archives',
+				'operator' => 'NOT IN'
+			)
+		);
+		$query->set('tax_query', $tax_query);
+		$query->set('posts_per_page', '-1');
+		$query->set('nopaging', true);
 	}
 
 	// additional date archive for taxonomy archives
@@ -660,19 +681,22 @@ add_action('pre_get_posts', __NAMESPACE__ . '\\pre_get_posts');
 
 
 /**
- * Add rewrite rules for map permalinks
+ * Add rewrite rules for map and edtalk permalinks
  * http://shibashake.com/wordpress-theme/custom-post-type-permalinks-part-2
  *
  */
-function map_rewrite_rules() {
+function rewrite_rules() {
 	global $wp_rewrite;
 
-	$permalink_structure = '/map/%year%/%monthnum%/%map%';
+	$map_permalink_structure = '/map/%year%/%monthnum%/%map%';
 	$wp_rewrite->add_rewrite_tag("%map%", '([^/]+)', "map=");
-	$wp_rewrite->add_permastruct('map', $permalink_structure, false);
+	$wp_rewrite->add_permastruct('map', $map_permalink_structure, false);
 
+	$edtalk_permalink_structure = '/edtalk/%year%/%monthnum%/%day%/%edtalk%';
+	$wp_rewrite->add_rewrite_tag("%edtalk%", '([^/]+)', "edtalk=");
+	$wp_rewrite->add_permastruct('edtalk', $edtalk_permalink_structure, false);
 }
-add_action('init', __NAMESPACE__ . '\\map_rewrite_rules');
+add_action('init', __NAMESPACE__ . '\\rewrite_rules');
 
 // Translate custom post type permalink tokens (%year% and %monthnum%)
 // Adapted from get_permalink function in wp-includes/link-template.php

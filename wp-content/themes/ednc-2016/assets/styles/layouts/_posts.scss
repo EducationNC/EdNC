@@ -266,6 +266,15 @@
   }
 }
 
+.meta {
+  .attachment-bio-headshot {
+    @media (min-width: 500px) and (max-width: $screen-xs-max) {
+      float: left;
+      margin: 0 20px 20px 0;
+    }
+  }
+}
+
 .colophon.colophon {
   display: inline-block;
   margin: 0 0 0 3px;

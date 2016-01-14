@@ -45,10 +45,17 @@ img {
   padding: ($line-height-computed / 2) 0;
   margin-bottom: 1.88em;
 
+  .gallery-caption {
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+  }
+
   &:not(.collage) {
     .gallery-item {
       float: left;
       padding: 5px;
+      position: relative;
     }
   }
 
@@ -171,7 +178,7 @@ object, embed {
     height: 0;
     margin-bottom: 34px;
 
-    body:not(.page):not(.single-flash-cards) & {
+    body:not(.page):not(.single-flash-cards):not(.single-edtalk) & {
       @media (min-width: $screen-md-min) {
         margin-left: -7.35%;
         margin-right: -7.35%;
@@ -200,6 +207,11 @@ object, embed {
       margin-right: 0 !important;
       max-width: 100% !important;
     }
+  }
+
+  &.soundcloud.soundcloud {
+    padding-top: 0;
+    padding-bottom: 166px;
   }
 
   &.slideshare.slideshare {

@@ -132,6 +132,89 @@
   }
 }
 
+.featured-pick,
+.ednews-items li {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  &[data-source*="charlotteobserver.com"]:after {
+    width: 150px;
+    height: 52px;
+    background-image: url('../images/charlotte-observer.png');
+  }
+
+  &[data-source*="educationnext.org"]:after {
+    width: 151px;
+    height: 21px;
+    background-image: url('../images/ednext.png');
+    opacity: 0.15;
+  }
+
+  &[data-source*="edweek.org"]:after {
+    width: 100px;
+    height: 100px;
+    background-image: url('../images/edweek.png');
+  }
+
+  &[data-source*="governing.com"]:after {
+    width: 151px;
+    height: 24px;
+    background-image: url('../images/governing.png');
+  }
+
+  &[data-source*="hechingerreport.org"]:after {
+    width: 97px;
+    height: 101px;
+    background-image: url('../images/hechinger-report.png');
+  }
+
+  &[data-source*="insidehighered.com"]:after {
+    width: 150px;
+    height: 76px;
+    background-image: url('../images/inside-higher-ed.png');
+  }
+
+  &[data-source*="newsobserver.com"]:after {
+    width: 150px;
+    height: 29px;
+    background-image: url('../images/nando.png');
+  }
+
+  &[data-source*="npr.org/sections/ed/"]:after {
+    width: 148px;
+    height: 48px;
+    background-image: url('../images/npred.png');
+    opacity: 0.15;
+  }
+
+  &[data-source*="nytimes.com"]:after {
+    width: 79px;
+    height: 101px;
+    background-image: url('../images/nyt.png');
+  }
+
+  &[data-source*="vox.com"]:after {
+    width: 150px;
+    height: 74px;
+    background-image: url('../images/vox.png');
+  }
+
+  &[data-source*="washingtonpost.com"]:after {
+    width: 119px;
+    height: 100px;
+    background-image: url('../images/washington-post.png');
+  }
+}
+
 .featured-pick {
   background: $pearl;
 
@@ -143,6 +226,13 @@
 
   a {
     color: $ash;
+  }
+
+  &:after {
+    opacity: 0.2;
+    bottom: 5px;
+    top: auto;
+    transform: translateY(0);
   }
 }
 
@@ -172,6 +262,12 @@
       .byline {
         font-size: 14px;
       }
+    }
+  }
+
+  .edtalk, .map {
+    img {
+      margin-bottom: .5em;
     }
   }
 }

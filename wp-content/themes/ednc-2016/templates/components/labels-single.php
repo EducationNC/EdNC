@@ -78,18 +78,24 @@ if ($column) {
         }
       } else {
 
-        // EdNews label
-        if ($post_type == 'ednews') {
-          echo '<span class="label">EdNews</span>';
+        // EdTalk label
+        if ($post_type == 'edtalk') {
+          echo '<span class="label">Podcast</span>';
         } else {
 
-          // Video label
-          if (has_post_format('video')) {
-            echo '<span class="label"><span class="icon-video"></span></span>';
+          // EdNews label
+          if ($post_type == 'ednews') {
+            echo '<span class="label">EdNews</span>';
           } else {
 
-            //Empty square
-            echo '<span class="label"></span>';
+            // Video label
+            if (has_post_format('video')) {
+              echo '<span class="label"><span class="icon-video"></span></span>';
+            } else {
+
+              //Empty square
+              echo '<span class="label"></span>';
+            }
           }
         }
       }

@@ -10,7 +10,7 @@
   $month_prev = null;
 
   // Get unique dates of each post in the database
-  $days = $wpdb->get_results("SELECT DISTINCT DAY (post_date) AS day, MONTH( post_date ) AS month ,	YEAR( post_date ) AS year, COUNT( id ) as post_count FROM $wpdb->posts WHERE post_status = 'publish' and post_date <= now( ) and (post_type = 'post' OR post_type = 'ednews' OR post_type = 'map') GROUP BY day, month , year ORDER BY post_date DESC");
+  $days = $wpdb->get_results("SELECT DISTINCT DAY (post_date) AS day, MONTH( post_date ) AS month ,	YEAR( post_date ) AS year, COUNT( id ) as post_count FROM $wpdb->posts WHERE post_status = 'publish' and post_date <= now( ) and (post_type = 'post' OR post_type = 'ednews' OR post_type = 'map' OR post_type = 'edtalk') GROUP BY day, month , year ORDER BY post_date DESC");
 
   // Determine which years and months need to be expanded on page load
   parse_str($query_string);

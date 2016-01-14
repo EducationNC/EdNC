@@ -157,6 +157,9 @@
         // Add special class to .entry-content-wrapper for Slideshare (vertical fixed ratio)
         $('iframe[src*="slideshare.net"]').parent('.entry-content-asset').addClass('slideshare');
 
+        // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
+        $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
+
         // Wrap tables with Bootstrap responsive table wrapper
         $('.entry-content table').addClass('table table-striped').wrap('<div class="table-responsive"></div>');
 

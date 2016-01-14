@@ -20,7 +20,7 @@ body:not(.page-template):not(.single-bio) .alignright {
     margin-right: -7.35%;
   }
 }
-.alignnone {
+.alignnone.alignnone {
   margin-left: 0;
   margin-right: 0;
   margin-top: 1.88em;
@@ -63,13 +63,19 @@ body:not(.page-template):not(.single-bio) .alignright {
 .wp-caption {
   @extend .thumbnail;
   max-width: 100%;
+  position: relative;
 }
 .wp-caption-text {
   padding: $thumbnail-caption-padding;
   font-family: $font-family-sans-serif;
   font-weight: 300;
   font-size: 16px;
-  background: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $raven-60;
+  color: $white;
 }
 
 // Text meant only for screen readers

@@ -1,11 +1,16 @@
-<div class="container">
-  <?php
-  $ednews = new WP_Query([
-    'post_type' => 'ednews',
-    'posts_per_page' => 1
-  ]);
+<?php
 
-  if ($ednews->have_posts()) : while ($ednews->have_posts()) : $ednews->the_post(); ?>
+$ednews = new WP_Query([
+  'post_type' => 'ednews',
+  'posts_per_page' => 1
+]);
+
+if ($ednews->have_posts()) : while ($ednews->have_posts()) : $ednews->the_post();
+
+$feature = get_field('featured_read');
+
+?>
+  <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <h3 class="section-header">Editor's Picks <a class="more" href="<?php the_permalink(); ?>">More &raquo;</a></h3>
@@ -14,12 +19,9 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4 col-md-push-8 featured-pick">
+      <div class="col-md-4 col-md-push-8 featured-pick" data-source="<?php echo $feature[0]['link']; ?>">
         <h6>What we're reading</h6>
-        <?php
-        $feature = get_field('featured_read');
-
-        if (!empty($feature[0]['featured_image'])) { ?>
+        <?php if (!empty($feature[0]['featured_image'])) { ?>
           <div class="row">
             <div class="col-sm-6 col-md-12">
               <div class="photo-overlay">
@@ -30,9 +32,7 @@
             </div>
 
             <div class="col-sm-6 col-md-12">
-
         <?php } ?>
-
         <h3>
           <a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">
             <?php echo $feature[0]['title']; ?>
@@ -43,8 +43,8 @@
         <?php echo $feature[0]['intro_text']; ?>... <a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">Read the rest <span class="icon-external-link"></span></a></p></a>
 
         <?php if (!empty($feature[0]['featured_image'])) { ?>
-          </div>
-          </div>
+          </div><!-- .col -->
+          </div><!-- .row -->
         <?php } ?>
 
         <hr class="visible-xs-block" />
@@ -59,9 +59,15 @@
           $items = get_field('news_item');
 
           $i = 0;
-          $colbreak = 4;
           $limit = 8;
           $count = count($items);
+
+          // If count is less than limit, determine where to break the column. Otherwise, set column break at 4
+          if ($count < $limit) {
+            $colbreak = floor($count/2);
+          } else {
+            $colbreak = 4;
+          }
 
           while ($i < $limit && $i < $count) {
             if ($i == $colbreak) {
@@ -86,5 +92,5 @@
         <p class="visible-sm-block"><a href="<?php the_permalink(); ?>" class="btn btn-default">Read EdNC's daily notes</a></p>
       </div>
     </div>
-  <?php endwhile; endif; wp_reset_query(); ?>
-</div>
+  </div>
+<?php endwhile; endif; wp_reset_query(); ?>

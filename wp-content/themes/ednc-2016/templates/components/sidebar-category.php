@@ -6,7 +6,7 @@
    */
   global $wpdb, $wp_query, $query_string;
 
-  $new_array = array_merge($wp_query->query, ['fields' => 'ids', 'posts_per_page' => -1, 'post_type' => ['post', 'map']]);
+  $new_array = array_merge($wp_query->query, ['fields' => 'ids', 'posts_per_page' => -1, 'post_type' => ['post', 'map', 'edtalk']]);
 
   $results = get_posts($new_array);
 

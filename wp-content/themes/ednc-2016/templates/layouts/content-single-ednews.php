@@ -20,7 +20,7 @@ while (have_posts()) : the_post(); ?>
       <div class="row">
         <div class="col-lg-8 col-md-9">
           <header class="entry-header">
-            <h1 class="entry-title"><?php the_title(); ?></h1>
+            <h2 class="h1 entry-title"><?php the_title(); ?></h2>
           </header>
 
           <div class="entry-content">
@@ -31,35 +31,37 @@ while (have_posts()) : the_post(); ?>
             <?php
             $feature = get_field('featured_read');
             if (! empty($feature) ) { ?>
-              <h6>What we're reading</h6>
-              <?php
-              if (!empty($feature[0]['featured_image'])) { ?>
-                <div class="row">
-                  <div class="col-sm-6 col-md-12">
-                    <div class="photo-overlay">
-                      <span class="label">&nbsp;</span>
-                      <?php echo wp_get_attachment_image($feature[0]['featured_image']['ID'], 'featured-medium'); ?>
-                      <a class="mega-link" href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');"></a>
+              <div class="featured-pick extra-padding" data-source="<?php echo $feature[0]['link']; ?>">
+                <h6>What we're reading</h6>
+                <?php
+                if (!empty($feature[0]['featured_image'])) { ?>
+                  <div class="row">
+                    <div class="col-sm-6 col-md-12">
+                      <div class="photo-overlay">
+                        <span class="label">&nbsp;</span>
+                        <?php echo wp_get_attachment_image($feature[0]['featured_image']['ID'], 'featured-medium'); ?>
+                        <a class="mega-link" href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');"></a>
+                      </div>
                     </div>
+
+                    <div class="col-sm-6 col-md-12">
+
+                <?php } ?>
+
+                <h3>
+                  <a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">
+                    <?php echo $feature[0]['title']; ?>
+                  </a>
+                </h3>
+
+                <p class="meta byline"><a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');"><?php echo $feature[0]['source_name']; ?> | <?php echo $feature[0]['original_date']; ?></a></p>
+                <?php echo $feature[0]['intro_text']; ?>... <a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">Read the rest <span class="icon-external-link"></span></a></p></a>
+
+                <?php if (!empty($feature[0]['featured_image'])) { ?>
                   </div>
-
-                  <div class="col-sm-6 col-md-12">
-
-              <?php } ?>
-
-              <h3>
-                <a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">
-                  <?php echo $feature[0]['title']; ?>
-                </a>
-              </h3>
-
-              <p class="meta byline"><a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');"><?php echo $feature[0]['source_name']; ?> | <?php echo $feature[0]['original_date']; ?></a></p>
-              <?php echo $feature[0]['intro_text']; ?>... <a href="<?php echo $feature[0]['link']; ?>" target="_blank" onclick="ga('send', 'event', 'ednews', 'click');">Read the rest <span class="icon-external-link"></span></a></p></a>
-
-              <?php if (!empty($feature[0]['featured_image'])) { ?>
-                </div>
-                </div>
-              <?php } ?>
+                  </div>
+                <?php } ?>
+              </div>
 
               <hr />
             <?php } ?>

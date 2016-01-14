@@ -39,6 +39,11 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
   // Remove empty results
   $mcats_hide = array_filter($mcats_hide, 'strlen');
 
+// EdTalk label
+if ($post_type == 'edtalk') {
+  echo '<span class="label">Podcast</span>';
+}
+
 // Column label
 if ($column) {
   $link = get_term_link($column[0]);

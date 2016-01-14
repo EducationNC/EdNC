@@ -32,7 +32,11 @@ if (has_post_thumbnail()) {
   if ($image_src) {
     $image_sized = Resize\mr_image_resize($image_src, 1240, 525, true, false);
   } else {
-    $image_sized['url'] = Assets\asset_path('images/logo-featured-large.jpg');
+    if ($post->post_type == 'edtalk') {
+      $image_sized['url'] = Assets\asset_path('images/edtalk-featured-medium.jpg');
+    } else {
+      $image_sized['url'] = Assets\asset_path('images/logo-featured-large.jpg');
+    }
   }
 }
 

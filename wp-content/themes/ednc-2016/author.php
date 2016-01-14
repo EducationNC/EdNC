@@ -2,11 +2,7 @@
   <?php get_template_part('templates/components/page', 'header-wide'); ?>
 
   <div class="row">
-    <div class="col-lg-8 col-md-9">
-      <?php get_template_part('templates/layouts/archive', 'loop'); ?>
-    </div>
-
-    <div class="col-md-3 col-lg-push-1 meta sidebar">
+    <div class="col-md-3 col-md-push-9 meta sidebar">
       <?php
       $author = get_user_by( 'slug', get_query_var( 'author_name' ) );
       $author_id = $author->ID;
@@ -22,23 +18,29 @@
 
       $bio = new WP_Query($args);
 
-      if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post();
-        if (
-          $author->user_nicename != 'agranados' &&
-          $author->user_nicename != 'alisa' &&
-          $author->user_nicename != 'mrash' &&
-          $author->user_nicename != 'todd-brantley'
-        ) { ?>
-          <div class="circle-image">
-            <?php the_post_thumbnail('bio-headshot'); ?>
+      if ($bio->have_posts()) : while ($bio->have_posts()) : $bio->the_post(); ?>
+        <div class="row">
+          <div class="col-sm-4 col-md-12">
+            <?php if (
+              $author->user_nicename != 'agranados' &&
+              $author->user_nicename != 'alisa' &&
+              $author->user_nicename != 'mrash' &&
+              $author->user_nicename != 'todd-brantley'
+            ) { ?>
+              <div class="circle-image">
+                <?php the_post_thumbnail('bio-headshot'); ?>
+              </div>
+            <?php } else {
+              the_post_thumbnail('bio-headshot');
+            } ?>
           </div>
-        <?php } else {
-          the_post_thumbnail('bio-headshot');
-        } ?>
 
-        <?php get_template_part('templates/components/author', 'excerpt'); ?>
+          <div class="col-sm-8 col-md-12">
+            <?php get_template_part('templates/components/author', 'excerpt'); ?>
+          </div>
+        </div>
 
-        <div>
+        <div class="clearfix">
           <h3>Links</h3>
           <p><a class="btn btn-default" href="<?php echo get_author_feed_link($author_id); ?>"><span class="icon-rss"></span> RSS Feed</a></p>
           <?php
@@ -59,6 +61,10 @@
           ?>
         </div>
       <?php endwhile; endif; wp_reset_query(); ?>
+    </div>
+
+    <div class="col-lg-8 col-md-9 col-md-pull-3">
+      <?php get_template_part('templates/layouts/archive', 'loop'); ?>
     </div>
   </div>
 </div>
