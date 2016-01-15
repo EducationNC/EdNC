@@ -1,7 +1,7 @@
 <?php
 
 use Roots\Sage\Assets;
-use Roots\Sage\Extras;
+use Roots\Sage\Media;
 use Roots\Sage\Resize;
 
 $video = has_post_format('video');
@@ -22,33 +22,14 @@ if ( function_exists( 'coauthors_posts_links' ) ) {
   $classes[] = get_the_author_meta('user_nicename');
 }
 
-// Use featured image if set, but fallback to first image in content if there is no featured image and EdNC logo if no image at all
-if (has_post_thumbnail()) {
-  $image_id = get_post_thumbnail_id();
-  $image_url = wp_get_attachment_image_src($image_id, 'featured-large');
-  $image_sized['url'] = $image_url[0];
-} else {
-  $image_src = Extras\catch_that_image();
-  if ($image_src) {
-    $image_sized = Resize\mr_image_resize($image_src, 1240, 525, true, false);
-  } else {
-    if ($post->post_type == 'edtalk') {
-      $image_sized['url'] = Assets\asset_path('images/edtalk-featured-medium.jpg');
-    } else {
-      $image_sized['url'] = Assets\asset_path('images/logo-featured-large.jpg');
-    }
-  }
-}
-
+$featured_image = Media\get_featured_image('large');
 $title_overlay = get_field('title_overlay');
 ?>
 
 <article <?php post_class('block-overlay large photo-overlay hidden-xs ' . implode($classes, ' ')); ?>>
   <?php
-  if ($image_sized) {
-    if ($image_sized['url']) {
-      echo '<img class="post-thumbnail" src="' . $image_sized['url'] . '" />';
-    }
+  if (!empty($featured_image)) {
+    echo '<img class="post-thumbnail" src="' . $featured_image . '" />';
   }
 
   if ($author_avatar) {

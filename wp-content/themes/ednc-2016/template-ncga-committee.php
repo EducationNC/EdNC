@@ -3,10 +3,7 @@
 Template Name: NCGA Committee Template
 */
 
-use Roots\Sage\Resize;
-
 // Determine which page, so we can query correct meta values
-
 if (is_page('senate-appropriations-on-education-higher-education-committee')) {
   $meta_key = 'appropriations_ed_higher_ed';
   $leader_values = array('Co-Chairman');
@@ -53,14 +50,7 @@ if (is_page('senate-appropriations-on-education-higher-education-committee')) {
             if ($leaders->have_posts()) : while ($leaders->have_posts()) : $leaders->the_post(); ?>
 
               <div class="col-md-3 block-person">
-                <?php
-                $image_id = get_post_thumbnail_id();
-                $image_src = wp_get_attachment_image_src($image_id, 'full');
-                if ($image_src) {
-                  $image_sized = Resize\mr_image_resize($image_src[0], 295, 330, true, false);
-                }
-                ?>
-                <a href="<?php the_permalink(); ?>"><img src="<?php echo $image_sized['url']; ?>" /></a>
+                <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a>
                 <h4 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?>,<br /><?php the_field($meta_key); ?></a></h4>
               </div>
 
@@ -89,14 +79,7 @@ if (is_page('senate-appropriations-on-education-higher-education-committee')) {
           if ($members->have_posts()) : while ($members->have_posts()) : $members->the_post(); ?>
 
             <div class="col-md-3 block-person">
-              <?php
-              $image_id = get_post_thumbnail_id();
-              $image_src = wp_get_attachment_image_src($image_id, 'full');
-              if ($image_src) {
-                $image_sized = Resize\mr_image_resize($image_src[0], 295, 330, true, false);
-              }
-              ?>
-              <a href="<?php the_permalink(); ?>"><img src="<?php echo $image_sized['url']; ?>" /></a>
+              <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a>
               <h4 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
             </div>
 

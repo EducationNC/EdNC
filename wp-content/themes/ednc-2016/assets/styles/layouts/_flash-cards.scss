@@ -1,11 +1,11 @@
 @mixin index-card-background {
   background: $white;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
-  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -webkit-linear-gradient(180deg, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -moz-linear-gradient(180deg, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -ms-linear-gradient(180deg, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -o-linear-gradient(180deg, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: linear-gradient(180deg, #d9eaf3 0%, #fff 8%) 0 4px;
   background-size: 100% 29px;
 }
 

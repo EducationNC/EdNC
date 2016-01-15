@@ -89,36 +89,37 @@ use Roots\Sage\Assets;
   <div class="row">
     <div class="col-sm-6">
       <?php
-        /*$edtalk = new WP_Query([
+        $edtalk = new WP_Query([
           'post_type' => 'edtalk',
           'posts_per_page' => 1
         ]);
 
         if ($edtalk->have_posts()) : while ($edtalk->have_posts()) : $edtalk->the_post();
           ?>
-          <article <?php post_class('block-post'); ?>>
-            <a href="<?php the_permalink(); ?>">
+          <article <?php post_class(); ?>>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <div class="photo-overlay">
               <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
-            </a>
+            </div>
             <header class="entry-header">
-              <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+              <h3 class="post-title"><?php the_title(); ?></h3>
               <?php echo get_template_part('templates/components/entry-meta'); ?>
             </header>
-            <div class="excerpt"><?php the_advanced_excerpt(); ?> <a href="">Listen now &raquo;</a></div>
+            <div class="excerpt"><?php the_advanced_excerpt(); ?> <a class="more" href="<?php the_permalink(); ?>">Listen now &raquo;</a></div>
           </article>
-        <?php endwhile; endif; wp_reset_query(); */ ?>
+        <?php endwhile; endif; wp_reset_query(); ?>
 
-        <div class="block-post edtalk">
+        <!-- <div class="block-post edtalk">
           <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
           <div class="h3 no-top-margin bottom-margin">Coming this Friday: A new podcast from EdNC</div>
           <div class="excerpt">EdTalk will take a look at North Carolina education issues and policy and will be available on iTunes. Check back on Friday morning to listen to host Alex Granados talking with NC House Speaker Pro Tempore Paul Stam.</div>
-        </div>
+        </div> -->
 
         <hr />
 
-        <!-- <p class="text-center">
+        <p class="text-center">
           <a href="#" class="btn btn-default no-margin">Subscribe on iTunes</a><br />
-        </p> -->
+        </p>
       </article>
     </div>
     <div class="col-sm-6">
@@ -137,15 +138,16 @@ use Roots\Sage\Assets;
 
         if ($map->have_posts()) : while ($map->have_posts()) : $map->the_post();
         ?>
-          <article <?php post_class('block-post'); ?>>
-            <a href="<?php the_permalink(); ?>">
+          <article <?php post_class(); ?>>
+            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+            <div class="photo-overlay">
               <img src="<?php echo Assets\asset_path('images/consider-it-mapped-home.jpg'); ?>" alt="Consider It Mapped" />
-            </a>
+            </div>
             <header class="entry-header">
-              <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+              <h3 class="post-title"><?php the_title(); ?></h3>
               <?php echo get_template_part('templates/components/entry-meta'); ?>
             </header>
-            <div class="excerpt"><?php the_advanced_excerpt(); ?> <a href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a></div>
+            <div class="excerpt"><?php the_advanced_excerpt(); ?> <a class="more" href="<?php the_permalink(); ?>" class="read-more">Full story &raquo;</a></div>
           </article>
         <?php endwhile; endif; wp_reset_query(); ?>
 

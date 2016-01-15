@@ -14,6 +14,10 @@ a {
   transition: all .3s;
   text-decoration: underline;
 
+  &.more {
+    font-family: $font-family-sans-serif;
+  }
+
   &:hover, &:active, &:focus {
     // color: $plum;
     text-decoration: underline;
@@ -116,8 +120,6 @@ h6, .h6 {
   color: $gray;
 
   li & {
-    color: $navy;
-
     a {
       text-decoration: none;
     }
@@ -179,7 +181,8 @@ h6, .h6 {
   .agranados &,
   .alisa &,
   .mrash &,
-  .todd-brantley & {
+  .todd-brantley &,
+  .staff & {
     background: $plum-darker;
   }
 }

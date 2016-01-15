@@ -1,7 +1,7 @@
 <?php
 
 use Roots\Sage\Assets;
-use Roots\Sage\Extras;
+use Roots\Sage\Media;
 use Roots\Sage\Resize;
 
 $video = has_post_format('video');
@@ -22,34 +22,15 @@ if ( function_exists( 'coauthors_posts_links' ) ) {
   $classes[] = get_the_author_meta('user_nicename');
 }
 
-// Use featured image if set, but fallback to first image in content if there is no featured image and EdNC logo if no image at all
-if (has_post_thumbnail()) {
-  $image_id = get_post_thumbnail_id();
-  $image_url = wp_get_attachment_image_src($image_id, 'featured-medium');
-  $image_sized['url'] = $image_url[0];
-} else {
-  $image_src = Extras\catch_that_image();
-  if ($image_src) {
-    $image_sized = Resize\mr_image_resize($image_src, 747, 421, true, false);
-  } else {
-    if ($post->post_type == 'edtalk') {
-      $image_sized['url'] = Assets\asset_path('images/edtalk-featured-medium.jpg');
-    } else {
-      $image_sized['url'] = Assets\asset_path('images/logo-featured-medium.jpg');
-    }
-  }
-}
-
+$featured_image = Media\get_featured_image('medium');
 $title_overlay = get_field('title_overlay');
 ?>
 
 <article <?php post_class('block-post ' . implode($classes, ' ')); ?>>
   <div class="photo-overlay">
     <?php
-    if ($image_sized) {
-      if ($image_sized['url']) {
-        echo '<img class="post-thumbnail" src="' . $image_sized['url'] . '" />';
-      }
+    if (!empty($featured_image)) {
+      echo '<img class="post-thumbnail" src="' . $featured_image . '" />';
     }
 
     if ($author_avatar) {
@@ -70,12 +51,12 @@ $title_overlay = get_field('title_overlay');
     <?php if ( ! empty($title_overlay) ) { ?>
       <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
     <?php } ?>
-
-    <a class="mega-link" href="<?php the_permalink(); ?>"></a>
   </div>
 
   <header class="entry-header">
-    <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+    <h3 class="post-title"><?php the_title(); ?></h3>
     <?php get_template_part('templates/components/entry-meta'); ?>
   </header>
+
+  <a class="mega-link" href="<?php the_permalink(); ?>"></a>
 </article>
