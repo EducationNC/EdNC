@@ -204,10 +204,17 @@ h6, .h6 {
 
 .page-header {
   border-bottom: none;
+  margin-top: 2em;
+  margin-bottom: .5em;
 
   h1 {
     margin: 0;
     border-bottom: 1px solid $pearl;
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-top: 4em;
+    margin-bottom: 1em;
   }
 }
 

@@ -66,16 +66,16 @@ body:not(.page-template):not(.single-bio) .alignright {
   position: relative;
 }
 .wp-caption-text {
-  padding: $thumbnail-caption-padding;
+  padding: .5em 0;
   font-family: $font-family-sans-serif;
   font-weight: 300;
   font-size: 16px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: $raven-60;
-  color: $white;
+  // position: absolute;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  // background: $raven-60;
+  // color: $white;
 }
 
 // Text meant only for screen readers

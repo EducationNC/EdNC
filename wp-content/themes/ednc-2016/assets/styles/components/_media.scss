@@ -45,11 +45,11 @@ img {
   padding: ($line-height-computed / 2) 0;
   margin-bottom: 1.88em;
 
-  .gallery-caption {
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-  }
+  // .gallery-caption {
+  //   bottom: 5px;
+  //   left: 5px;
+  //   right: 5px;
+  // }
 
   &:not(.collage) {
     .gallery-item {

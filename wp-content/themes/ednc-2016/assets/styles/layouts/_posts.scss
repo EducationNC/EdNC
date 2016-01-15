@@ -282,3 +282,17 @@
   height: 16px;
   background: $plum-lighter;
 }
+
+.single-edtalk {
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    .container {
+      width: 874px;
+    }
+  }
+
+  @media (min-width: $screen-lg-min) {
+    .container {
+      width: 1160px;
+    }
+  }
+}
