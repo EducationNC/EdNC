@@ -151,7 +151,8 @@
         }
       }
 
-      .hero-image-full & > a, .single-flash-cards & > a {
+      .hero-image-full & > a, .hero-image-full &.open > a,
+      .single-flash-cards & > a, .single-flash-cards &.open > a {
         color: $white;
       }
     }

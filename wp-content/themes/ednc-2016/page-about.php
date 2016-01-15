@@ -37,7 +37,7 @@
             <p class="caption"><?php the_field('tagline'); ?></p>
             <div class="excerpt">
               <?php the_advanced_excerpt(); ?>
-              <a href="<?php the_permalink(); ?>" class="read-more">Read more &raquo;</a>
+              <a href="<?php the_permalink(); ?>" class="more">Read more &raquo;</a>
             </div>
           </div>
         </div>

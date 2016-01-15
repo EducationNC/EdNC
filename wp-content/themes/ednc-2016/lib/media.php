@@ -2,6 +2,7 @@
 
 namespace Roots\Sage\Media;
 
+use Roots\Sage\Assets;
 use Roots\Sage\Resize;
 
 /**
@@ -58,8 +59,8 @@ function catch_that_image() {
  * Get featured image for post blocks
  */
 function get_featured_image($size) {
-  global $large_width, $large_height, $medium_width, $medium_height;
-  
+  global $post, $large_width, $large_height, $medium_width, $medium_height;
+
   if ($size == 'large') {
     $width = $large_width;
     $height = $large_height;

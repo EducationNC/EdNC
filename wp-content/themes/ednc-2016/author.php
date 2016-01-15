@@ -64,6 +64,7 @@
     </div>
 
     <div class="col-lg-8 col-md-9 col-md-pull-3">
+      <h3 class="visible-xs-block">Latest posts</h3>
       <?php get_template_part('templates/layouts/archive', 'loop'); ?>
     </div>
   </div>

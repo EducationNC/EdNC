@@ -432,3 +432,9 @@ pre {
     margin: 0;
   }
 }
+
+.entry-content {
+  > :first-child {
+    margin-top: 0;
+  }
+}

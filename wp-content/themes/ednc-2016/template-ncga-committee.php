@@ -49,9 +49,12 @@ if (is_page('senate-appropriations-on-education-higher-education-committee')) {
 
             if ($leaders->have_posts()) : while ($leaders->have_posts()) : $leaders->the_post(); ?>
 
-              <div class="col-md-3 block-person">
-                <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a>
-                <h4 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?>,<br /><?php the_field($meta_key); ?></a></h4>
+              <div class="col-xs-6 col-sm-3 block-person">
+                <div class="position-relative">
+                  <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+                  <div class="overflow-hidden"><?php the_post_thumbnail('bio-headshot'); ?></div>
+                  <h4 class="post-title"><?php the_title(); ?>,<br /><?php the_field($meta_key); ?></h4>
+                </div>
               </div>
 
             <?php endwhile; endif; wp_reset_query(); ?>
@@ -78,9 +81,12 @@ if (is_page('senate-appropriations-on-education-higher-education-committee')) {
 
           if ($members->have_posts()) : while ($members->have_posts()) : $members->the_post(); ?>
 
-            <div class="col-md-3 block-person">
-              <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a>
-              <h4 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+            <div class="col-xs-6 col-sm-3 block-person">
+              <div class="position-relative">
+                <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+                <div class="overflow-hidden"><?php the_post_thumbnail('bio-headshot'); ?></div>
+                <h4 class="post-title"><?php the_title(); ?>,<br /><?php the_field($meta_key); ?></h4>
+              </div>
             </div>
 
           <?php endwhile; endif; wp_reset_query(); ?>

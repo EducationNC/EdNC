@@ -36,23 +36,39 @@
 .block-person {
   margin-bottom: 2em;
 
+  .staff & > div {
+    background: $steel;
+    text-align: center;
+  }
+
+  .attachment-bio-headshot {
+    transition: transform .3s;
+  }
+
   .post-title {
     margin: 0;
     font-size: 20px;
 
     .staff & {
+      color: $white;
       background: $plum-darkest;
       padding: .5em;
-
-      a {
-        color: $white;
-      }
     }
 
     a {
       color: $ash;
       text-decoration: none;
     }
+  }
+
+  & > div:hover {
+    .attachment-bio-headshot {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+    text-align: left;
   }
 }
 
@@ -70,31 +86,62 @@
   }
 }
 
-.contributors {
+.ncga {
   .block-person {
-    text-align: center;
+    img {
+      width: 100%;
+    }
+  }
+}
 
-    @media (max-width: $screen-xs-max) {
-      &:nth-child(2n + 1) {
-        clear: left;
-      }
+.contributors {
+  .post-title {
+    border-bottom: 1px solid transparent;
+    transition: all .3s;
+  }
+
+  .block-person > div:hover {
+    .post-title {
+      border-bottom: 1px solid $heather;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    .block-person {
+      text-align: center;
     }
 
-    @media (min-width: $screen-sm-min) {
-      text-align: left;
+    .block-person:nth-child(2n + 1) {
+      clear: left;
+    }
+  }
 
-      &:nth-child(3n + 1) {
-        clear: left;
-      }
+  @media (min-width: $screen-sm-min) {
+    .block-person:nth-child(3n + 1) {
+      clear: left;
     }
   }
 }
 
 .board-of-directors {
   table {
+    max-width: 100%;
+
+    td:first-child {
+      max-width: 50%;
+    }
+
     img {
       margin-right: 5px;
-      max-width: 200px;
+      max-width: 100px;
+
+      @media (min-width: $screen-sm-min) {
+        max-width: 200px;
+      }
+    }
+
+    h3 {
+      margin-top: 0;
     }
   }
 }

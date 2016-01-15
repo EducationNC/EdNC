@@ -1,5 +1,6 @@
 <?php
 
+use Roots\Sage\Extras;
 use Roots\Sage\Media;
 
 $recommended = get_field('recommended_articles');
@@ -22,28 +23,30 @@ if (!empty($post)) {
 
   ?>
   <div class="row">
-    <div class="col-md-7 col-md-push-2point5 recommended">
+    <div class="col-md-7 col-md-push-2point5">
       <h2>Recommended for you</h2>
       <?php
       $featured_image = Media\get_featured_image('medium');
       $title_overlay = get_field('title_overlay');
       ?>
-      <div class="photo-overlay">
-        <?php
-        if (!empty($featured_image)) {
-          echo '<img class="post-thumbnail" src="' . $featured_image . '" />';
-        }
-
-        get_template_part('templates/components/labels', 'single');
-
-        if ( ! empty($title_overlay) ) {
-          echo '<img class="title-image-overlay" src="' . $title_overlay['url'] . '" alt="' . the_title() . '" />';
-        }
-        ?>
+      <div class="recommended block-post">
         <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+        <div class="photo-overlay">
+          <?php
+          if (!empty($featured_image)) {
+            echo '<img class="post-thumbnail" src="' . $featured_image . '" />';
+          }
+
+          get_template_part('templates/components/labels', 'single');
+
+          if ( ! empty($title_overlay) ) {
+            echo '<img class="title-image-overlay" src="' . $title_overlay['url'] . '" alt="' . the_title() . '" />';
+          }
+          ?>
+        </div>
+        <h3 class="post-title"><?php the_title(); ?></h3>
+        <?php get_template_part('templates/components/entry-meta'); ?>
       </div>
-      <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-      <?php get_template_part('templates/components/entry-meta'); ?>
     </div>
   </div>
   <?php

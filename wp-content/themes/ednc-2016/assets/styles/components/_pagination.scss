@@ -1,5 +1,6 @@
 .wp-pagenavi {
   font-family: $font-family-sans-serif;
+  margin-bottom: 2em;
 
   a, span {
     border: 1px solid $steel;
@@ -30,5 +31,9 @@
     border: none;
     color: $ash;
     font-weight: 300;
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-bottom: 0;
   }
 }

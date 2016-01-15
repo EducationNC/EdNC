@@ -18,7 +18,9 @@
 
     <div class="row">
       <div class="col-sm-4 col-md-3">
-        <?php the_post_thumbnail('medium'); ?>
+        <div class="background-steel text-center">
+          <?php the_post_thumbnail('medium'); ?>
+        </div>
       </div>
       <div class="col-sm-8 col-md-9">
         <div class="entry-content row">

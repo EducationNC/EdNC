@@ -29,10 +29,13 @@
         $user = get_field('user');
         ?>
 
-        <div class="col-md-3 col-xs-6 block-person">
-          <div class="row">
-            <div class="col-sm-5 col-md-12"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
-            <div class="col-sm-7 col-md-12"><h4 class="post-title"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_title(); ?></a></h4></div>
+        <div class="col-sm-3 col-xs-6 block-person">
+          <div class="position-relative">
+            <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
+            <div class="overflow-hidden">
+              <?php the_post_thumbnail('bio-headshot'); ?>
+            </div>
+            <h4 class="post-title"><?php the_title(); ?></h4>
           </div>
         </div>
 
@@ -82,11 +85,14 @@
               ?>
 
               <div class="col-sm-4 col-xs-6 block-person">
-                <div class="row">
-                  <div class="col-sm-5">
-                    <div class="circle-image"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
+                <div class="position-relative">
+                  <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <div class="circle-image"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
+                    </div>
+                    <div class="col-sm-7"><h4 class="post-title"><?php the_title(); ?></h4></div>
                   </div>
-                  <div class="col-sm-7"><h4 class="post-title"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_title(); ?></a></h4></div>
                 </div>
               </div>
 
@@ -122,11 +128,14 @@
               ?>
 
               <div class="col-sm-4 col-xs-6 block-person">
-                <div class="row">
-                  <div class="col-sm-5">
-                    <div class="circle-image"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
+                <div class="position-relative">
+                  <a class="mega-link" href="<?php echo get_author_posts_url($user['ID']); ?>"></a>
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <div class="circle-image"><?php the_post_thumbnail('bio-headshot'); ?></a></div>
+                    </div>
+                    <div class="col-sm-7"><h4 class="post-title"><?php the_title(); ?></h4></div>
                   </div>
-                  <div class="col-sm-7"><h4 class="post-title"><a href="<?php echo get_author_posts_url($user['ID']); ?>"><?php the_title(); ?></a></h4></div>
                 </div>
               </div>
 

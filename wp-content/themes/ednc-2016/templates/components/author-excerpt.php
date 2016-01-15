@@ -1,4 +1,4 @@
-<div class="extra-bottom-margin">
+<div class="bottom-margin">
   <?php
   $twitter = get_field('twitter');
   $email = get_field('email');
