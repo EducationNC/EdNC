@@ -99,7 +99,7 @@ use Roots\Sage\Assets;
           'posts_per_page' => 1
         ]);
 
-        if ($edtalk->have_posts()) : while ($edtalk->have_posts()) : $edtalk->the_post();
+        /*if ($edtalk->have_posts()) : while ($edtalk->have_posts()) : $edtalk->the_post();
           ?>
           <article <?php post_class(); ?>>
             <a class="mega-link" href="<?php the_permalink(); ?>"></a>
@@ -112,19 +112,19 @@ use Roots\Sage\Assets;
             </header>
             <div class="excerpt"><?php the_advanced_excerpt(); ?> <a class="more" href="<?php the_permalink(); ?>">Listen now &raquo;</a></div>
           </article>
-        <?php endwhile; endif; wp_reset_query(); ?>
+        <?php endwhile; endif; wp_reset_query();*/ ?>
 
-        <!-- <div class="block-post edtalk">
+        <div class="block-post edtalk">
           <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
-          <div class="h3 no-top-margin bottom-margin">Coming this Friday: A new podcast from EdNC</div>
-          <div class="excerpt">EdTalk will take a look at North Carolina education issues and policy and will be available on iTunes. Check back on Friday morning to listen to host Alex Granados talking with NC House Speaker Pro Tempore Paul Stam.</div>
-        </div> -->
+          <h3 class="post-title">Coming this Friday: A new podcast from EdNC</h3>
+          <div class="excerpt top-margin">EdTalk will take a look at North Carolina education issues and policy and will be available on iTunes. Check back on Friday morning to listen to host Alex Granados talking with NC House Speaker Pro Tempore Paul Stam.</div>
+        </div>
 
         <hr class="hidden-xs" />
 
-        <p class="text-center">
+        <!-- <p class="text-center">
           <a href="#" class="btn btn-default">Subscribe on iTunes</a><br />
-        </p>
+        </p> -->
       </article>
     </div>
     <div class="col-sm-6">
