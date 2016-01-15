@@ -73,9 +73,14 @@
           get_template_part('templates/layouts/block-overlay');
         } elseif ($number == 4) {
           get_template_part('templates/layouts/block-post');
-        } else {
-          get_template_part('templates/layouts/block-post', 'side');
-        }
+        } else { ?>
+          <div class="hidden-sm">
+            <?php get_template_part('templates/layouts/block-post', 'side'); ?>
+          </div>
+          <div class="visible-sm-block">
+            <?php get_template_part('templates/layouts/block-post'); ?>
+          </div>
+        <?php }
 
         echo '</div>';
 

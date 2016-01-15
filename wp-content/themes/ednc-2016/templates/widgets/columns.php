@@ -57,19 +57,22 @@ use Roots\Sage\Assets;
 
         if ($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post();
 
-          if ($i < 2) {
-            echo '<div class="col-sm-6">';
-            get_template_part('templates/layouts/block', 'overlay');
-            echo '</div>';
-          } else {
-            echo '<div class="col-sm-4 three-across">';
-            get_template_part('templates/layouts/block', 'post');
-            echo '</div>';
-          }
+          if ($i < 2) { ?>
+            <div class="col-sm-6 hidden-sm <?php if ($i == 0) echo 'hidden-xs'; ?>">
+              <?php get_template_part('templates/layouts/block', 'overlay'); ?>
+            </div>
+            <div class="col-sm-6 visible-sm-block">
+              <?php get_template_part('templates/layouts/block', 'post'); ?>
+            </div>
+          <?php } else { ?>
+            <div class="col-sm-4 three-across">
+              <?php get_template_part('templates/layouts/block', 'post'); ?>
+            </div>
+          <?php } ?>
 
-          if ($i == 1) {
-            echo '</div><div class="row">';
-          }
+          <?php if ($i == 1) { ?>
+            </div><div class="row">
+          <?php }
 
         endwhile; endif; wp_reset_query();
         $i++;
@@ -85,6 +88,8 @@ use Roots\Sage\Assets;
       }
     } ?>
   </div>
+
+  <hr class="visible-xs-block" />
 
   <div class="row">
     <div class="col-sm-6">
@@ -115,10 +120,10 @@ use Roots\Sage\Assets;
           <div class="excerpt">EdTalk will take a look at North Carolina education issues and policy and will be available on iTunes. Check back on Friday morning to listen to host Alex Granados talking with NC House Speaker Pro Tempore Paul Stam.</div>
         </div> -->
 
-        <hr />
+        <hr class="hidden-xs" />
 
         <p class="text-center">
-          <a href="#" class="btn btn-default no-margin">Subscribe on iTunes</a><br />
+          <a href="#" class="btn btn-default">Subscribe on iTunes</a><br />
         </p>
       </article>
     </div>
@@ -151,7 +156,7 @@ use Roots\Sage\Assets;
           </article>
         <?php endwhile; endif; wp_reset_query(); ?>
 
-        <hr />
+        <hr class="hidden-xs" />
 
         <p class="text-center">
           <a href="/maps/" class="btn btn-default no-margin">See more maps</a><br />

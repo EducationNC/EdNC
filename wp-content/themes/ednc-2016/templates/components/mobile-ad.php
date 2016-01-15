@@ -1,4 +1,4 @@
-<div class="visible-xs-block mobile-ad" id="mobile-ad">
+<div class="visible-xs-block visible-sm-block mobile-ad" id="mobile-ad">
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- Mobile article ad -->
   <ins class="adsbygoogle"
