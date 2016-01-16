@@ -118,6 +118,8 @@ if ($column) {
           // EdNews label
           if ($post_type == 'ednews') {
             echo '<span ' . $style . '>EdNews</span>';
+          } else {
+            echo '&nbsp;';
           }
         }
       }
