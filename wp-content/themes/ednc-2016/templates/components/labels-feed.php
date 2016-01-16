@@ -8,9 +8,9 @@ if (
   $author == 'mrash' &&
   $author == 'todd-brantley'
 ) {
-  $bg_color = '#5D6066'; // $stone
-} else {
   $bg_color = '#64184B'; // $plum-darker;
+} else {
+  $bg_color = '#5D6066'; // $stone
 }
 
 $style = 'style="background:' . $bg_color . ';color:#ffffff;font-size:12px;padding:3px 7px;white-space:nowrap;vertical-align:baseline;"';
