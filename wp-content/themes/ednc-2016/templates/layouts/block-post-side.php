@@ -9,6 +9,7 @@ $column = wp_get_post_terms(get_the_id(), 'column');
 
 $author_id = get_the_author_meta('ID');
 $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
+$author_pic = get_the_post_thumbnail($author_bio[0]->ID, 'bio-headshot', ['class' => 'post-thumbnail bio-headshot']);
 
 if ( function_exists( 'coauthors_posts_links' ) ) {
   $authors = get_coauthors();
@@ -27,19 +28,22 @@ $title_overlay = get_field('title_overlay');
   <a class="mega-link" href="<?php the_permalink(); ?>"></a>
   <div class="col-sm-5">
     <div class="photo-overlay">
-      <?php
-      if (!empty($featured_image)) {
-        echo '<img class="post-thumbnail" src="' . $featured_image . '" />';
-      }
+      <?php if (!empty($featured_image)) { ?>
+        <img class="post-thumbnail" src="<?php echo $featured_image; ?>" />
+      <?php } else { ?>
+        <div class="circle-image">
+          <?php echo $author_pic; ?>
+        </div>
+      <?php } ?>
 
+      <?php
       if ($video) {
         echo '<div class="video-play"></div>';
       }
 
       get_template_part('templates/components/labels', 'single');
-      ?>
 
-      <?php if ( ! empty($title_overlay) ) { ?>
+      if ( ! empty($title_overlay) ) { ?>
         <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
       <?php } ?>
     </div>

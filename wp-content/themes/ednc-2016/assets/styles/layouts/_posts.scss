@@ -1,13 +1,15 @@
 .single .hentry {
   .entry-header {
-
     &:not(.hero-image) {
-      @media (max-width: $screen-sm-max) {
-        margin-top: 2em;
+      margin-top: 2em;
+
+      @media (min-width: $screen-md-min) {
+        margin-top: 4em;
       }
     }
 
     &.hero-image {
+      margin-top: 0;
       overflow: hidden;
       width: 100%;
 
@@ -293,6 +295,14 @@
   @media (min-width: $screen-lg-min) {
     .container {
       width: 1160px;
+    }
+  }
+}
+
+.single-ednews.single-ednews {
+  .hentry {
+    .entry-header, .entry-title {
+      margin-top: 0;
     }
   }
 }

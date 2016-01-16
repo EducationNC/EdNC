@@ -17,6 +17,7 @@ $sage_includes = [
   'lib/acf-fields.php',         // ACF custom fields
   'lib/custom-pub-date.php',    // Add custom field for updated date
   'lib/extras.php',             // Custom functions
+  'lib/feeds.php',              // Custom RSS feeds
   'lib/media.php',              // Image and other media functions
   'lib/resize.php',             // Magic image resizer
   'lib/shortcodes.php',         // Shortcodes and UI

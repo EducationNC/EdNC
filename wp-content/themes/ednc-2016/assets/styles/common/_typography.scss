@@ -181,6 +181,10 @@ h6, .h6 {
     vertical-align: middle;
   }
 
+  &:empty {
+    display: inline;
+  }
+
   a {
     text-decoration: none;
     color: $white;
@@ -444,4 +448,10 @@ pre {
   > :first-child {
     margin-top: 0;
   }
+}
+
+.alert-warning {
+  background: $gold-lightest;
+  border-color: $gold-lighter;
+  color: $ginger-darkest;
 }

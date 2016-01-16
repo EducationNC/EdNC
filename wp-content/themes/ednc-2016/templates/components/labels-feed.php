@@ -1,6 +1,20 @@
 <?php
 $post_type = get_post_type();
 
+$author = get_the_author_meta('user_nicename');
+if (
+  $author == 'agranados' &&
+  $author == 'alisa' &&
+  $author == 'mrash' &&
+  $author == 'todd-brantley'
+) {
+  $bg_color = '#5D6066'; // $stone
+} else {
+  $bg_color = '#64184B'; // $plum-darker;
+}
+
+$style = 'style="background:' . $bg_color . ';color:#ffffff;font-size:12px;padding:3px 7px;white-space:nowrap;vertical-align:baseline;"';
+
 $column = wp_get_post_terms(get_the_id(), 'column');
 
 $appearances = wp_get_post_terms(get_the_id(), 'appearance');
@@ -60,7 +74,7 @@ $map_category = wp_get_post_terms(get_the_id(), 'map-category');
 // Column label
 if ($column) {
   $link = get_term_link($column[0]);
-  echo '<span class="label"><a href="' . $link . '">' . $column[0]->name. '</a></span> ';
+  echo '<span ' . $style . '>' . $column[0]->name. '</span> ';
 } else {
 
   // Category label
@@ -68,7 +82,7 @@ if ($column) {
     foreach ($category as $key=>$value) {
       if (!in_array($key, $cats_hide)) {
         $link = get_category_link($value['term_id']);
-        echo '<span class="label"><a href="' . $link . '">' . $value['cat_name'] . '</a></span> ';
+        echo '<span ' . $style . '>' . $value['cat_name'] . '</span> ';
         break;
       }
     }
@@ -79,7 +93,7 @@ if ($column) {
       foreach ($map_category as $key=>$value) {
         if (!in_array($key, $mcats_hide)) {
           $link = get_term_link($value['term_id'], 'map-category');
-          echo '<span class="label"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
+          echo '<span ' . $style . '>' . $value['name'] . '</span> ';
           break;
         }
       }
@@ -90,7 +104,7 @@ if ($column) {
         foreach ($appearances as $key=>$value) {
           if (!in_array($key, $app_hide)) {
             $link = get_term_link($value['term_id'], 'appearance');
-            echo '<span class="label ' . $value['slug'] . '"><a href="' . $link . '">' . $value['name'] . '</a></span> ';
+            echo '<span ' . $style . '>' . $value['name'] . '</span> ';
             break;
           }
         }
@@ -98,22 +112,12 @@ if ($column) {
 
         // EdTalk label
         if ($post_type == 'edtalk') {
-          echo '<span class="label">Podcast</span>';
+          echo '<span ' . $style . '>Podcast</span>';
         } else {
 
           // EdNews label
           if ($post_type == 'ednews') {
-            echo '<span class="label">EdNews</span>';
-          } else {
-
-            // Video label
-            if (has_post_format('video')) {
-              echo '<span class="label"><span class="icon-video"></span></span>';
-            } else {
-
-              //Empty square
-              echo '<span class="label"></span>';
-            }
+            echo '<span ' . $style . '>EdNews</span>';
           }
         }
       }

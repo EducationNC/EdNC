@@ -13,11 +13,14 @@ $large_width = 1240;
 $large_height = 525;
 $medium_width = 747;
 $medium_height = 421;
+$small_width = 564;
+$small_height = 239;
 
 add_image_size('medium-square', 400, 400, true);
 add_image_size('bio-headshot', 220, 220, true);
 add_image_size('featured-large', $large_width, $large_height, true);
 add_image_size('featured-medium', $medium_width, $medium_height, true);
+add_image_size('featured-small', $small_width, $small_height, true);
 
 add_action('init', function() {
   remove_image_size('guest-author-32');
@@ -59,7 +62,7 @@ function catch_that_image() {
  * Get featured image for post blocks
  */
 function get_featured_image($size) {
-  global $post, $large_width, $large_height, $medium_width, $medium_height;
+  global $post, $large_width, $large_height, $medium_width, $medium_height, $small_width, $small_height;
 
   if ($size == 'large') {
     $width = $large_width;
@@ -67,6 +70,9 @@ function get_featured_image($size) {
   } elseif ($size == 'medium') {
     $width = $medium_width;
     $height = $medium_height;
+  } elseif ($size == 'small') {
+    $width = $small_width;
+    $height = $small_height;
   }
 
   // Use featured image if set, but fallback to first image in content if there is no featured image and EdNC logo if no image at all
@@ -79,7 +85,9 @@ function get_featured_image($size) {
     if ($image_src) {
       $image_sized = Resize\mr_image_resize($image_src, $width, $height, true, false);
     } else {
-      if ($post->post_type == 'edtalk') {
+      if (has_term('perspectives', 'appearance')) {
+        $image_sized['url'] = false;
+      } elseif ($post->post_type == 'edtalk') {
         $image_sized['url'] = Assets\asset_path("images/edtalk-featured-$size.jpg");
       } else {
         $image_sized['url'] = Assets\asset_path("images/logo-featured-$size.jpg");

@@ -64,6 +64,13 @@
       transition: transform .5s;
     }
 
+    &.bio-headshot {
+      width: auto;
+      max-width: 220px;
+      left: 50%;
+      transform: translate3d(-50%, -50% ,0);
+    }
+
     &.title-image-overlay {
       position: absolute;
       left: 50%;
@@ -73,6 +80,15 @@
       max-width: 75%;
       z-index: 2;
     }
+  }
+
+  .circle-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $steel;
   }
 
   &:after {
@@ -110,17 +126,9 @@
   margin-bottom: 2em;
 
   .photo-overlay {
-    position: relative;
     padding-bottom: 56.25%;
     margin-bottom: .5em;
     height: 0;
-    overflow: hidden;
-
-    .post-thumbnail {
-      position: absolute;
-      top: 50%;
-      transform: translate3d(0, -50%, 0);
-    }
   }
 
   .post-title {
@@ -139,6 +147,10 @@
       transform: translate3d(0, -50%, 0) scale(1.05);
     }
 
+    img.bio-headshot {
+      transform: translate3d(-50%, -50%, 0) scale(1.05);
+    }
+
     .photo-overlay:after {
       transform: translate3d(0, 10%, 0);
     }
@@ -153,11 +165,9 @@
   position: relative;
 
   .photo-overlay {
-    position: relative;
     padding-bottom: 42.3%;
     margin-bottom: .5em;
     height: 0;
-    overflow: hidden;
     clear: both;
   }
 

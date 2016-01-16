@@ -28,27 +28,27 @@ $title_overlay = get_field('title_overlay');
 
 <article <?php post_class('block-post ' . implode($classes, ' ')); ?>>
   <div class="photo-overlay">
-    <?php
-    if (!empty($featured_image)) {
-      echo '<img class="post-thumbnail" src="' . $featured_image . '" />';
-    }
+    <?php if (!empty($featured_image)) { ?>
+      <img class="post-thumbnail" src="<?php echo $featured_image; ?>" />
+    <?php } else { ?>
+      <div class="circle-image">
+        <?php echo $author_pic; ?>
+      </div>
+    <?php }
 
-    if ($author_avatar) {
-      ?>
+    if ($author_avatar) { ?>
       <div class="avatar">
         <img src="<?php echo $author_avatar_sized['url']; ?>" alt="<?php the_author(); ?>" />
       </div>
-      <?php
-    }
+    <?php }
 
     if ($video) {
       echo '<div class="video-play"></div>';
     }
 
     get_template_part('templates/components/labels', 'single');
-    ?>
 
-    <?php if ( ! empty($title_overlay) ) { ?>
+    if ( ! empty($title_overlay) ) { ?>
       <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
     <?php } ?>
   </div>

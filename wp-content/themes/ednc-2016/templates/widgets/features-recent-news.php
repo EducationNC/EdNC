@@ -15,23 +15,18 @@ $featured_ids = array();
     <div class="col-md-8">
       <?php
       /*
-       * First feature spot
-       *
-       * Displays most recently updated post that is marked as "Feature 1"
+       * Displays most recently updated posts that are marked as "Featured"
        */
       $featured = new WP_Query([
         'posts_per_page' => $features_n,
-        'post_type' => array('post', 'map'),
+        'post_type' => array('post', 'map', 'edtalk'),
         'tax_query' => array(
           array(
             'taxonomy' => 'appearance',
             'field' => 'slug',
             'terms' => 'featured'
           )
-        ),
-        'meta_key' => 'updated_date',
-        'orderby' => 'meta_value_num',
-        'order' => 'DESC'
+        )
       ]);
 
       if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
