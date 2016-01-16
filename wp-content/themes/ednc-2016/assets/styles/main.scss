@@ -22,15 +22,19 @@
 @import "components/social-share-buttons";
 @import "components/tabs";
 @import "components/wp-classes";
+
 @import "layouts/header";
+@import "layouts/mobile-nav";
 @import "layouts/sidebar";
 @import "layouts/footer";
-@import "layouts/mobile-nav";
+
 @import "layouts/pages";
 @import "layouts/posts";
-@import "layouts/maps";
-@import "layouts/legislators";
 @import "layouts/home";
+
 @import "layouts/districts";
 @import "layouts/flash-cards";
+@import "layouts/legislators";
+@import "layouts/maps";
+
 @import "layouts/tinymce";
