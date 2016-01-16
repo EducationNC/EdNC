@@ -56,6 +56,9 @@ and incorrect footnotes on your post.
 
 == Changelog ==
 
+= 1.36 =
+* Fixed "Notice: Undefined variable" https://wordpress.org/support/topic/line-130-error
+
 = 1.35 =
 * Added German translation by Mark Sargent
 
