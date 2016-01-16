@@ -60,8 +60,9 @@ function asset_path($filename) {
 // add async and defer to javascripts
 // http://wpcodesnippet.com/add-async-and-defer-attributes-javascript-elements/
 function defer_javascripts ( $url ) {
-    if ( FALSE === strpos( $url, '.js' ) ) return $url;
-    if ( strpos( $url, 'jquery.js' ) ) return $url;
-    return "$url' async='async";
+  if ( is_admin() ) return $url;
+  if ( FALSE === strpos( $url, '.js' ) ) return $url;
+  if ( strpos( $url, 'jquery.js' ) ) return $url;
+  return "$url' async='async";
 }
 add_filter( 'clean_url', __NAMESPACE__ . '\\defer_javascripts', 11, 1 );
