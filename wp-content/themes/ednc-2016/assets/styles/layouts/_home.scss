@@ -1,0 +1,365 @@
+.home {
+  .mobile-bar {
+    margin-bottom: 2em;
+  }
+
+  .content {
+    .widget {
+      padding: 2em 0;
+
+      &:first-child {
+        padding-top: 3em;
+      }
+    }
+  }
+}
+
+.center-bar {
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  background: $plum-darker;
+  width: 100%;
+  color: $white;
+  text-align: center;
+  padding: 14px 0;
+
+  h3 {
+    margin: 0;
+    color: $white;
+    font-family: $font-family-serif;
+  }
+}
+
+.widget_editors_picks, .widget_perspectives {
+  background: $steel;
+
+  ul {
+    @extend .ednews-items;
+  }
+}
+
+.featured-pick,
+.ednews-items li {
+  position: relative;
+
+  h3 {
+    color: $ash;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+    transition: all .3s;
+  }
+
+  &:hover {
+    h3 {
+      border-bottom: 1px solid $heather;
+      color: $jet;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  &[data-source*="charlotteobserver.com"]:after {
+    width: 150px;
+    height: 52px;
+    background-image: url('../images/charlotte-observer.png');
+  }
+
+  &[data-source*="educationnext.org"]:after {
+    width: 151px;
+    height: 21px;
+    background-image: url('../images/ednext.png');
+    opacity: 0.15;
+  }
+
+  &[data-source*="edweek.org"]:after {
+    width: 100px;
+    height: 100px;
+    background-image: url('../images/edweek.png');
+  }
+
+  &[data-source*="governing.com"]:after {
+    width: 151px;
+    height: 24px;
+    background-image: url('../images/governing.png');
+  }
+
+  &[data-source*="hechingerreport.org"]:after {
+    width: 97px;
+    height: 101px;
+    background-image: url('../images/hechinger-report.png');
+  }
+
+  &[data-source*="insidehighered.com"]:after {
+    width: 150px;
+    height: 76px;
+    background-image: url('../images/inside-higher-ed.png');
+  }
+
+  &[data-source*="newsobserver.com"]:after {
+    width: 150px;
+    height: 29px;
+    background-image: url('../images/nando.png');
+  }
+
+  &[data-source*="npr.org/sections/ed/"]:after {
+    width: 148px;
+    height: 48px;
+    background-image: url('../images/npred.png');
+    opacity: 0.15;
+  }
+
+  &[data-source*="nytimes.com"]:after {
+    width: 79px;
+    height: 101px;
+    background-image: url('../images/nyt.png');
+  }
+
+  &[data-source*="vox.com"]:after {
+    width: 150px;
+    height: 74px;
+    background-image: url('../images/vox.png');
+  }
+
+  &[data-source*="washingtonpost.com"]:after {
+    width: 119px;
+    height: 100px;
+    background-image: url('../images/washington-post.png');
+  }
+}
+
+.featured-pick {
+  background: $pearl;
+  overflow: hidden;
+  margin-bottom: 1em;
+
+  a {
+    color: $ash;
+  }
+
+  &:after {
+    opacity: 0.2;
+    bottom: 5px;
+    top: auto;
+    transform: translateY(0);
+  }
+}
+
+.widget_ednc_columns {
+  .three-across {
+    @media (min-width: $screen-sm-min) {
+      .label {
+        position: absolute;
+        top: 50%;
+        transform: translate3d(0, -50%, 0);
+        background: $plum-darker;
+        width: 100%;
+        color: $white;
+        text-align: center;
+        padding: 14px 0;
+        font-size: 1.2em;
+        height: auto;
+      }
+    }
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      font-size: 80%;
+
+      .post-title {
+        font-size: 18px;
+      }
+
+      .byline {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .edtalk, .map {
+    position: relative;
+
+    h3 {
+      color: $stone;
+      margin-top: .5em;
+    }
+
+    .author a {
+      text-decoration: none;
+    }
+
+    .photo-overlay img {
+      transition: transform .5s;
+    }
+
+    &:hover {
+      h3 {
+        color: $jet;
+      }
+
+      .photo-overlay img {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.widget_social_media {
+  background: $pearl;
+
+  .container.juicer {
+    height: 700px;
+    overflow: hidden;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      @include trans-pearl-gradient-bottom;
+    }
+  }
+
+  .follow-buttons a {
+    display: inline-block;
+    color: $white;
+    text-decoration: none;
+
+    span {
+      width: 60px;
+      height: 60px;
+      font-size: 32px;
+      line-height: 60px;
+      display: inline-block;
+      position: relative;
+      transition: all .3s;
+
+      &:before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+    }
+
+    .icon-facebook {
+      background: #3b5998;
+
+      &:hover {
+        background: darken(#3b5998, 10%);
+      }
+    }
+
+    .icon-twitter {
+      background: #00aced;
+
+      &:hover {
+        background: darken(#00aced, 10%);
+      }
+    }
+
+    .icon-instagram {
+      background: #517fa4;
+
+      &:hover {
+        background: darken(#517fa4, 10%);
+      }
+    }
+
+  }
+}
+
+.widget_events {
+  padding-bottom: 0 !important;
+
+  .map-background {
+    background-image: url('../images/line-map-background.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+
+    @media (min-width: $screen-sm-min) {
+      background-position: center;
+    }
+  }
+
+  .submit-event {
+    margin-top: 2em;
+    margin-bottom: 4em;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: $screen-md-min) {
+      margin-top: 0;
+      margin-bottom: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -100%, 0);
+    }
+  }
+}
+
+.tribe-events-adv-list-widget.tribe-events-adv-list-widget {
+  padding-top: 0 !important;
+  margin-bottom: 0;
+
+  .list-date {
+    display: none;
+  }
+
+  .list-info {
+    h2.tribe-events-title {
+      @include h3;
+      margin-bottom: 0;
+
+      a {
+        display: block;
+        color: $ash;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        margin-bottom: 1px;
+        transition: all .3s;
+
+        &:hover {
+          border-bottom: 1px solid $heather;
+          color: $jet;
+        }
+      }
+    }
+
+    .tribe-events-location, .tribe-events-duration {
+      font-family: $font-family-sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      color: $gray;
+
+      a {
+        color: $gray;
+        text-decoration: none;
+      }
+
+      .tribe-events-locality {
+        &:before {
+          content: "| ";
+        }
+      }
+    }
+  }
+
+  .tribe-events-widget-link {
+    display: none;
+  }
+}

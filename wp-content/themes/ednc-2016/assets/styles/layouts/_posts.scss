@@ -1,0 +1,308 @@
+.single .hentry {
+  .entry-header {
+    &:not(.hero-image) {
+      margin-top: 2em;
+
+      @media (min-width: $screen-md-min) {
+        margin-top: 4em;
+      }
+    }
+
+    &.hero-image {
+      margin-top: 0;
+      overflow: hidden;
+      width: 100%;
+
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 1em;
+        height: 400px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        height: 600px;
+      }
+    }
+
+    .photo-overlay {
+      overflow: visible;
+      height: 100%;
+
+      .label {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        .article-title-overlay {
+          padding-top: 15px;
+
+          h1 {
+            color: $plum;
+            font-size: 30px;
+            font-weight: normal;
+            text-shadow: none;
+          }
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+
+      @media (min-width: $screen-sm-min) {
+        .article-title-overlay {
+          position: absolute;
+          padding-bottom: .5em;
+          color: $white;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          z-index: 2;
+        }
+
+        h1 {
+          margin-top: 0;
+          padding-top: 28px;
+        }
+
+        a {
+          color: $white;
+        }
+
+        img {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translateY(-50%) translateX(-50%);
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          @include trans-raven-gradient-bottom;
+          transition: transform .3s;
+        }
+      }
+    }
+  }
+
+  .longform-intro {
+    background: $navy-darker;
+    color: $white;
+    margin-top: 0 !important;
+    padding: 3em 0;
+
+    & + div {
+      margin-top: 3em;
+    }
+  }
+
+  li {
+    margin: .75em 0;
+  }
+}
+
+.article-intro-text {
+  background: $steel;
+  color: $jet;
+  margin-bottom: 2em;
+  padding: 1.88em 1.88em 1px;
+  font-size: 20px;
+
+  @media (min-width: 893px) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 22px;
+    padding: 1.88em 10px 1px;
+  }
+
+  .mce-content-body & {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.full-bleed-text {
+  position: relative;
+  overflow: hidden;
+  margin: 1.88em 0;
+
+  &.theme-light {
+    background: $steel;
+    color: $jet;
+
+    &.bg-img:after {
+      background: $white70;
+    }
+  }
+
+  &.theme-dark {
+    background: $navy-darker;
+    color: $white;
+
+    h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+
+    &.bg-img:after {
+      background: $stone-70;
+    }
+  }
+
+  &.bg-img {
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  }
+
+  img {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  .content {
+    position: relative;
+    z-index: 5;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    font-family: $font-family-serif;
+    font-size: $font-size-h4;
+    line-height: 1.88em;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 22px;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    cite {
+      font-style: italic;
+    }
+  }
+}
+
+.parallax-img {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.wpview-wrap[data-wpview-type="parallax-image"] {
+  margin-bottom: 4rem;
+}
+
+.full-bleed-image {
+  position: relative;
+  overflow: hidden;
+  margin: 4rem 0;
+
+  .parallax {
+    position: relative;
+    overflow: hidden;
+
+    @media (min-width: $screen-sm-min) {
+      height: 100vh;
+    }
+  }
+
+  .wash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $raven-60;
+    z-index: 2;
+  }
+
+  .floating-text {
+    position: absolute;
+    z-index: 5;
+    font-family: $font-family-serif;
+    font-size: $font-size-h1;
+    color: $white;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-shadow: 0 0 30px $jet;
+  }
+
+  .floating-img {
+    position: absolute;
+    z-index: 5;
+    max-width: 75%;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .caption {
+    text-align: right;
+  }
+}
+
+.meta {
+  .attachment-bio-headshot {
+    @media (min-width: 500px) and (max-width: $screen-xs-max) {
+      float: left;
+      margin: 0 20px 20px 0;
+    }
+  }
+}
+
+.colophon.colophon {
+  display: inline-block;
+  margin: 0 0 0 3px;
+  width: 15px;
+  height: 16px;
+  background: $plum-lighter;
+}
+
+.single-edtalk {
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    .container {
+      width: 874px;
+    }
+  }
+
+  @media (min-width: $screen-lg-min) {
+    .container {
+      width: 1160px;
+    }
+  }
+}
+
+.single-ednews.single-ednews {
+  .hentry {
+    .entry-header, .entry-title {
+      margin-top: 0;
+    }
+  }
+}

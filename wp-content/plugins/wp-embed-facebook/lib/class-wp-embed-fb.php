@@ -49,6 +49,8 @@ class  WP_Embed_FB {
 	}
 	static function get_fbsdk(){
 		if( self::$fbsdk && self::$fbsdk instanceof Sigami_Facebook){
+			if( get_option('wpemfb_force_app_token','true') == 'true' )
+				self::$fbsdk->setAccessToken(get_option('wpemfb_app_id').'|'.get_option('wpemfb_app_secret'));
 			return self::$fbsdk;
 		} else {
 			if(!class_exists('FacebookApiException'))
@@ -61,6 +63,8 @@ class  WP_Embed_FB {
 			}
 			//$config['fileUpload'] = false; // optional
 			self::$fbsdk = new Sigami_Facebook($config);
+			if( get_option('wpemfb_force_app_token','true') == 'true' )
+				self::$fbsdk->setAccessToken(get_option('wpemfb_app_id').'|'.get_option('wpemfb_app_secret'));
 			return self::$fbsdk;
 		}
 	}
@@ -375,7 +379,7 @@ class  WP_Embed_FB {
 	static function shortcode($atts){
 		if(!empty($atts) && isset($atts[0])){
 			$clean = trim($atts[0],'=');
-			$juice = str_replace('https://www.facebook.com/','',$clean);
+			$juice = str_replace(array('https','http','://facebook.com/','://m.facebook.com/','://facebook.com/','://www.facebook.com/'),'',$clean);
 			if(isset($atts['width'])){
 				self::$width = $atts['width'];
 			}
@@ -422,6 +426,10 @@ class  WP_Embed_FB {
 	}
 }
 
+/**
+ * Class FaceInit
+ * @deprecated
+ */
 class FaceInit {
 	static $fbsdk = null;
 	static function init(){

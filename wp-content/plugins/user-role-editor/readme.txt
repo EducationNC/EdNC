@@ -3,8 +3,8 @@ Contributors: shinephp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=vladimir%40shinephp%2ecom&lc=RU&item_name=ShinePHP%2ecom&item_number=User%20Role%20Editor%20WordPress%20plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: user, role, editor, security, access, permission, capability
 Requires at least: 4.0
-Tested up to: 4.4
-Stable tag: 4.20.1
+Tested up to: 4.4.1
+Stable tag: 4.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,12 +26,13 @@ To read more about 'User Role Editor' visit [this page](http://www.shinephp.com/
 Short demo about 1st steps with User Role Editor:
 https://youtu.be/UmMtOmWGGxY
 
-Do you need more functionality with quality support in real time? Do you wish to remove advertisements from User Role Editor pages? 
+Do you need more functionality with quality support in the real time? Do you wish to remove advertisements from User Role Editor pages? 
 [Buy Pro version](https://www.role-editor.com). 
-Pro version includes extra modules:
+[User Role Editor Pro](https://www.role-editor.com) includes extra modules:
 <ul>
 <li>Block selected admin menu items for role.</li>
 <li>Block selected widgets under "Appearance" menu for role.</li>
+<li>Block selected meta boxes (dashboard, posts, pages, custom post types) for role.</li>
 <li>"Export/Import" module. You can export user roles to the local file and import them then to any WordPress site or other sites of the multi-site WordPress network.</li> 
 <li>Roles and Users permissions management via Network Admin  for multisite configuration. One click Synchronization to the whole network.</li>
 <li>"Other roles access" module allows to define which other roles user with current role may see at WordPress: dropdown menus, e.g assign role to user editing user profile, etc.</li>
@@ -41,7 +42,7 @@ Pro version includes extra modules:
 <li>Shortcode to show enclosed content to the users with selected roles only.</li>
 <li>Posts and pages view restrictions for selected roles.</li>
 </ul>
-Pro version is advertisement free. Premium support is included. It is provided by User Role Editor plugin developer Vladimir Garagulya. You will get an answer on your question not once a week, but in 24 hours or quicker.
+Pro version is advertisement free. Premium support is included.
 
 == Installation ==
 
@@ -71,11 +72,26 @@ To read more about 'User Role Editor' visit [this page](http://www.shinephp.com/
 
 = Translations =
 
-Dear plugin User!
-If you wish to check available translations or help with translation visit this link
+If you wish to check available translations or help with plugin translation to your language visit this link
 https://translate.wordpress.org/projects/wp-plugins/user-role-editor/
 
 == Changelog ==
+= [4.22] 15.01.2016 =
+* Unused 'add_users' capability was removed from the list of core capabilities as it was removed from WordPress starting from version 4.4
+* bbPress user capabilities are supported for use in the non-bbPress roles. You can not edit roles created by bbPress, as bbPress re-creates them dynamically for every request to the server. Full support for bbPress roles editing will be included into User Role Editor Pro version 4.22.
+* Self-added "Other Roles" column removed from "Users" list, as WordPress started to show all roles assigned to the user in its own "Role" column.
+* 'ure_show_additional_capabilities_section' filter allows to  hide 'Other Roles' section at the 'Add new user', 'Edit user' pages.
+
+= [4.21.1] 16.12.2015 =
+* Fix: 'Update' button did not work at User's Capabilities page due to confirmation dialog call error.
+
+
+= [4.21] 11.12.2015 =
+* It's possible to switch off the update role confirmation (Settings - User Role Editor - General tab).
+* Standard JavaScript confirm box before role update was replaced with custom one to exclude 'Prevent this page from creating additional dialogs' option in the Google Chrome browser.
+* Fix: Removed hard coded folder name (user-role-editor) from the used paths.
+
+
 = [4.20.1] 15.11.2015 =
 * Fix: "Primary default role" drop-down menu was not shown at "Settings - User Role Editor - Default Roles" tab for WordPress single site installation.
 

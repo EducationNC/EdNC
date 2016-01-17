@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "main.js": {
+      "files": [
+        "scripts/to-minify/*.js",
+        "scripts/main.js"
+      ],
+      "main": true
+    },
+    "main.css": {
+      "files": [
+        "styles/main.scss"
+      ],
+      "main": true
+    },
+    "customizer.js": {
+      "files": [
+        "scripts/customizer.js"
+      ]
+    },
+    "jquery.js": {
+      "bower": ["jquery"]
+    }
+  },
+  "config": {
+    "devUrl": "http://local.wordpress.dev"
+  }
+}

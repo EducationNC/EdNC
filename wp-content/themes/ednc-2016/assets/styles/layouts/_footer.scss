@@ -1,0 +1,126 @@
+.above-footer {
+  padding: 4em 0;
+}
+
+.ribbon {
+  background: $navy-darkest;
+
+  li {
+    padding: 1rem;
+  }
+}
+.content-info {
+  background: $pearl;
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  // font-size: .9rem;
+
+  .h5 {
+    color: $plum;
+    margin: 0 0 1em;
+  }
+
+  a:not(.btn) {
+    color: $jet;
+  }
+
+  .container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .menu-footer-nav {
+    a {
+      text-decoration: none;
+      color: $jet;
+
+      &:hover, &:active, &:focus {
+        color: $navy;
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      list-style: none;
+    }
+
+    ul {
+      padding: 0 0 1em;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 1em 0 0 0;
+      }
+    }
+
+    & > li {
+      & > a {
+        color: $plum !important;
+        @extend .h5;
+        font-weight: normal;
+        cursor: default;
+
+        &:hover, &:active, &:focus {
+          color: $plum;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.menu-stay-connected .sub-menu {
+  a {
+    padding-left: 22px;
+    position: relative;
+
+    &:before {
+      content: "v";
+      font-family: "ednc" !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-variant: normal !important;
+      text-transform: none !important;
+      speak: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      text-indent: 0;
+    }
+  }
+
+  .menu-facebook a:before {
+    content: "b";
+  }
+
+  .menu-twitter a:before {
+    content: "c";
+  }
+
+  .menu-youtube a:before {
+    content: "g";
+  }
+
+  .menu-instagram a:before {
+    content: "j";
+  }
+
+  .menu-rss a:before {
+    content: "p";
+  }
+
+  @media (max-width: $screen-xs-max) {
+    li {
+      display: inline-block;
+    }
+    a {
+      width: 36px;
+      text-indent: -100em;
+      overflow: hidden;
+      display: inline-block;
+      font-size: 28px;
+    }
+  }
+}

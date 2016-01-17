@@ -1,0 +1,34 @@
+.accordion {
+  .panel {
+    background: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+
+    .panel {
+      margin-bottom: 10px;
+    }
+  }
+
+  h3 {
+    margin-top: 0;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  h4 {
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  ul {
+    li {
+      margin: 0 !important;
+    }
+  }
+}

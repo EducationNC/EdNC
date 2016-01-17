@@ -1,0 +1,52 @@
+.ad-wrap {
+  background: $pearl;
+  margin-bottom: 2em;
+
+  p {
+    margin: 0;
+    font-family: $font-family-sans-serif;
+  }
+
+  a {
+    color: $jet;
+  }
+}
+
+.mobile-ad {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: $white70;
+  z-index: 50;
+  width: 100%;
+
+  .adsbygoogle {
+    margin: 0;
+  }
+
+  .close {
+    z-index: 50;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.email-signup-callout {
+  background-image: url('../images/emails.jpg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+  position: relative;
+  padding-bottom: 56.25%;
+  margin-bottom: 2em;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    padding-bottom: 25%;
+  }
+}

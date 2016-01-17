@@ -1,0 +1,77 @@
+.column-banner {
+  position: relative;
+  margin-bottom: 2em;
+  background-position: center;
+  background-size: cover;
+  height: 139px;
+
+  @media (min-width: $screen-md-min) {
+    height: 262px;
+  }
+
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    height: 180px;
+  }
+
+  @media (max-width: 475px) {
+    height: 75px;
+  }
+
+  .column-name-overlay {
+    position: absolute;
+    padding-bottom: .5em;
+    color: $white;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include trans-raven-gradient-bottom;
+    transition: transform .3s;
+  }
+
+  .avatar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.meck-monday,
+  &.the-monday-missive,
+  &.tech-tuesday,
+  &.sparking-stem,
+  &.the-wednesday-wire,
+  &.the-thursday-transcript,
+  &.policy-points,
+  &.friday-with-ferrel,
+  &.healthy-ever-after,
+  &.powered-schools,
+  &.consider-it-mapped {
+    & + .entry-header .label.column {
+      @media (min-width: $screen-sm-min) {
+        display: none;
+      }
+    }
+  }
+}
+
+.term-consider-it-mapped {
+  .page-header {
+    .entry-title {
+      display: none;
+    }
+  }
+}

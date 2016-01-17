@@ -1,0 +1,30 @@
+.nav-tabs {
+  border-bottom: 0;
+  margin-bottom: 2em;
+
+  & > li {
+    &.active {
+      a, a:focus, a:hover {
+        background: $stone;
+        color: $white;
+        border: none;
+        border-radius: 0;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      background: $steel;
+      color: $jet;
+      border: none;
+      border-radius: 0;
+      margin: 0;
+
+      &:hover {
+        border: none;
+        background: $sterling;
+        color: $white;
+      }
+    }
+  }
+}

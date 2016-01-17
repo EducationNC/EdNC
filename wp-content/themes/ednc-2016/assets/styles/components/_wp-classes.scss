@@ -1,0 +1,85 @@
+// WordPress Generated Classes
+// http://codex.wordpress.org/CSS#WordPress_Generated_Classes
+
+// Media alignment
+.aligncenter {
+  display: block;
+  margin: ($line-height-computed / 2) auto;
+}
+.alignleft,
+.alignright {
+  margin-bottom: ($line-height-computed / 2);
+}
+body:not(.page-template):not(.single-bio) .alignleft {
+  @media (min-width: $screen-md-min) {
+    margin-left: -7.35%;
+  }
+}
+body:not(.page-template):not(.single-bio) .alignright {
+  @media (min-width: $screen-md-min) {
+    margin-right: -7.35%;
+  }
+}
+.alignnone.alignnone {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1.88em;
+  margin-bottom: 1.88em;
+  max-width: 100%;
+
+  img {
+    width: 100%;
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-left: -7.35%;
+    margin-right: -7.35%;
+    max-width: 114.7%;
+  }
+}
+
+@media (min-width: 545px) {
+  // Only float images if not on an extra small device like smartphones
+  .alignleft {
+    max-width: 50%;
+    float: left;
+    margin-right: ($line-height-computed / 2);
+  }
+  .alignright {
+    max-width: 50%;
+    float: right;
+    margin-left: ($line-height-computed / 2);
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  // Otherwise, display block so they're on their own line
+  .alignleft, .alignright {
+    display: block;
+  }
+}
+
+// Captions
+.wp-caption {
+  @extend .thumbnail;
+  max-width: 100%;
+  position: relative;
+}
+.wp-caption-text {
+  padding: .5em 0;
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  // position: absolute;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  // background: $raven-60;
+  // color: $white;
+}
+
+// Text meant only for screen readers
+.screen-reader-text {
+  @extend .sr-only;
+  @extend .sr-only-focusable;
+}

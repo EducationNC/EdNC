@@ -1,0 +1,19 @@
+#updatediv {
+  padding-top: 5px;
+  line-height: 23px;
+}
+
+#updatediv select {
+  height: 21px;
+  line-height: 14px;
+  padding: 0;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+#updatediv input {
+  border-width: 1px;
+  border-style: solid;
+  padding: 1px;
+  font-size: 12px;
+}

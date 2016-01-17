@@ -47,7 +47,7 @@ class ameRoleUtils {
 	}
 
 	/**
-	 * Get all defined WordPress roles.
+	 * Get the global WP_Roles instance.
 	 *
 	 * @global WP_Roles $wp_roles
 	 * @return WP_Roles
@@ -57,7 +57,6 @@ class ameRoleUtils {
 		if ( !isset($wp_roles) ) {
 			$wp_roles = new WP_Roles();
 		}
-		//TODO: Do something about Super Admin
 		return $wp_roles;
 	}
 }
