@@ -64,7 +64,7 @@ if ( isset( $wp_version ) && version_compare( $wp_version, '3.5' ) >= 0 ) {
       $http_file_path = $file_path;
       $http_file_path['scheme'] = 'http';
 
-      include 'http_build_url.php';
+      include_once 'http_build_url.php';
       $http_url = HTTP\http_build_url('', $http_file_path);
     }
 
