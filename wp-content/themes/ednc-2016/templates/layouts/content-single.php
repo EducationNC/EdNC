@@ -50,8 +50,10 @@ while (have_posts()) : the_post();
           <?php if ( ! empty($title_overlay) ) { ?>
             <img class="title-image-overlay" src="<?php echo $title_overlay['url']; ?>" alt="<?php the_title(); ?>" />
             <h1 class="entry-title hidden"><?php the_title(); ?></h1>
-          <?php } else { ?>
-            <div class="article-title-overlay">
+          <?php } ?>
+
+          <div class="article-title-overlay">
+            <?php if ( empty($title_overlay) ) { ?>
               <div class="container">
                 <div class="row">
                   <div class="col-md-8 col-centered">
@@ -61,7 +63,7 @@ while (have_posts()) : the_post();
                 </div>
               </div>
             <?php } ?>
-
+            
             <div class="container-fluid">
               <div class="row">
                 <div class="col-xs-12 text-right caption hidden-xs no-bottom-margin">
@@ -75,15 +77,15 @@ while (have_posts()) : the_post();
             </div>
           </div>
         </div>
+      </header>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-centered">
-              <?php get_template_part('templates/components/entry-meta'); ?>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-centered">
+            <?php get_template_part('templates/components/entry-meta'); ?>
           </div>
         </div>
-      </header>
+      </div>
     <?php } else {
       if (isset($banner)) {
         ?>
