@@ -116,6 +116,7 @@ function insert_custom_image_sizes( $sizes ) {
 
   // I just want to do this with medium-square size for now
   $sizes['medium-square'] = 'Medium Square';
+  $sizes['bio-headshot'] = 'Author Headshot';
 
   return $sizes;
 }
