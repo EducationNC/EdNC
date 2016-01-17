@@ -11,7 +11,11 @@
       <?php endif; ?>
 
       <?php while (have_posts()) : the_post(); ?>
-        <?php get_template_part('templates/layouts/content', 'search'); ?>
+        <?php if ($post->ID == 0) {
+          get_template_part('templates/layouts/content', 'search');
+        } else {
+          get_template_part('templates/layouts/block', 'post-side'); 
+        }?>
       <?php endwhile; ?>
 
       <nav class="post-nav">

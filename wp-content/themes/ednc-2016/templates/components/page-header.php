@@ -6,7 +6,7 @@ $image_id = get_post_thumbnail_id();
 $featured_image_lg = wp_get_attachment_image_src($image_id, 'large');
 ?>
 
-<?php if (has_post_thumbnail()) { ?>
+<?php if (has_post_thumbnail() && !is_search()) { ?>
   <header class="page-header photo-overlay" style="background-image: url('<?php echo $featured_image_lg[0]; ?>')">
     <div class="article-title-overlay">
       <div class="container">
