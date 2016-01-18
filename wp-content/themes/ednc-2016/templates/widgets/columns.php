@@ -16,7 +16,8 @@ use Roots\Sage\Assets;
     $whichday = current_time('w');
 
     // Put columns in array by day of week
-    $columns = [null, 'meck-monday', 'sparking-stem', 'healthy-ever-after', 'policy-points', 'friday-with-ferrel', null];
+    // Offset by -1 day so iterator shows yesterday's column first and today's column from last week last
+    $columns = [null, null, 'meck-monday', 'sparking-stem', 'healthy-ever-after', 'policy-points', 'friday-with-ferrel'];
 
     // Set array iterator to match most recent column
     end($columns);
@@ -39,9 +40,17 @@ use Roots\Sage\Assets;
         break;
       }
 
+      // If it's time to show today's column, set offset to 1 so we get last week's article instead
+      if ($whichday == key($columns) -1) {
+        $offset = 1;
+      } else {
+        $offset = 0;
+      }
+
       if ( !is_null($current = current($columns)) ) {
         $recent = new WP_Query([
           'posts_per_page' => 1,
+          'offset' => $offset,
           'post_type' => 'post',
           'tax_query' => array(
             array(
