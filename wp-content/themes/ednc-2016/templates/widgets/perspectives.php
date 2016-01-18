@@ -6,7 +6,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 featured-perspective">
       <?php
       // Show 1 most recent featured perspective
       $args = array(
@@ -41,7 +41,7 @@
       <hr class="visible-xs-block visible-sm-block" />
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 recent-perspectives">
       <?php
       // Show 4 most recent perspectives
       $args = array(
