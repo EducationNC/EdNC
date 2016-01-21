@@ -43,6 +43,10 @@
   ul {
     @extend .ednews-items;
   }
+
+  .btn {
+    text-transform: none;
+  }
 }
 
 .featured-pick,
