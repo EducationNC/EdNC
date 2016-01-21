@@ -169,6 +169,70 @@
           $(this).attr('data-before', text.charAt(0));
         });
 
+        // Open Magnific for all image link types inside articles
+        $('.entry-content a[href$=".gif"], .entry-content a[href$=".jpg"], .entry-content a[href$=".png"], .entry-content a[href$=".jpeg"]').not('.gallery a').magnificPopup({
+          type: 'image',
+          midClick: true,
+          mainClass: 'mfp-with-zoom',
+          zoom: {
+            enabled: true,
+            duration: 300,
+            easing: 'ease-in-out',
+            opener: function(openerElement) {
+              return openerElement.is('img') ? openerElement : openerElement.find('img');
+            }
+          },
+          image: {
+            cursor: 'mfp-zoom-out-cur',
+            verticalFit: true,
+            titleSrc: function(item) {
+              return $(item.el).children('img').attr('alt');
+            }
+          }
+        });
+
+        // Gallery lightboxes in articles
+        $('.gallery').each(function() { // the containers for all your galleries
+          $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+              enabled:true
+            },
+            midClick: true,
+            mainClass: 'mfp-with-zoom',
+            zoom: {
+              enabled: true,
+              duration: 300,
+              easing: 'ease-in-out',
+              opener: function(openerElement) {
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+              }
+            },
+            image: {
+              cursor: 'mfp-zoom-out-cur',
+              verticalFit: true,
+              titleSrc: function(item) {
+                return $(item.el).children('img').attr('alt');
+              }
+            }
+          });
+        });
+
+        // Smooth scroll to anchor on same page
+        $('a[href*=#]:not([href=#]):not(.collapsed)').on(clickortap, function() {
+          if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+              $('html,body').animate({
+                scrollTop: target.offset().top
+              }, 1000);
+              return false;
+            }
+          }
+        });
+
       }
     },
     // Flash cards

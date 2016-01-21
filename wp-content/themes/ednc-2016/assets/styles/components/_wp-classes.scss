@@ -10,16 +10,6 @@
 .alignright {
   margin-bottom: ($line-height-computed / 2);
 }
-body:not(.page-template):not(.single-bio) .alignleft {
-  @media (min-width: $screen-md-min) {
-    margin-left: -7.35%;
-  }
-}
-body:not(.page-template):not(.single-bio) .alignright {
-  @media (min-width: $screen-md-min) {
-    margin-right: -7.35%;
-  }
-}
 .alignnone.alignnone {
   margin-left: 0;
   margin-right: 0;
@@ -30,11 +20,21 @@ body:not(.page-template):not(.single-bio) .alignright {
   img {
     width: 100%;
   }
+}
 
+body:not(.page-template):not(.single-bio):not(.single-flash-cards) {
   @media (min-width: $screen-md-min) {
-    margin-left: -7.35%;
-    margin-right: -7.35%;
-    max-width: 114.7%;
+    .alignleft {
+      margin-left: -7.35%;
+    }
+    .alignright {
+      margin-right: -7.35%;
+    }
+    .alignnone {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+      max-width: 114.7%;
+    }
   }
 }
 
