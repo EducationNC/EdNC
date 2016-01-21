@@ -496,7 +496,7 @@ register_taxonomy( 'bill-status',
 );
 
 register_taxonomy( 'appearance',
-	array('post', 'map', 'edtalk'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('post', 'map', 'edtalk', 'flash-cards'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
 			'name' => __( 'Appearances' ),
@@ -518,7 +518,7 @@ register_taxonomy( 'appearance',
 );
 
 register_taxonomy( 'column',
-	array('post'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('post', 'map', 'edtalk', 'flash-cards'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
 		'labels' => array(
 			'name' => __( 'Columns' ),
@@ -645,7 +645,7 @@ function pre_get_posts($query) {
 
 	// date archives should show extra post types
 	if ($query->is_day()) {
-		$query->set('post_type', ['post', 'map', 'ednews', 'edtalk']);
+		$query->set('post_type', ['post', 'map', 'ednews', 'edtalk', 'flash-cards']);
 		$tax_query = array(
 			array(
 				'taxonomy' => 'appearance',

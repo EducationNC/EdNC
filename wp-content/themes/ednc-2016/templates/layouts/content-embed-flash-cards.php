@@ -9,42 +9,17 @@ $fcs = get_field('flash_cards');
 
 <div class="flash-cards-content container">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-md-8 col-centered">
       <div class="entry-header">
-        <?php get_template_part('templates/components/labels'); ?>
+        <a data-toggle="modal" data-target="#flash-cards-index-modal" class="nav-toggle" href="#"><span>Index</span></a>
         <h1 class="entry-title"><?php the_title(); ?></h1>
-        <?php get_template_part('templates/components/entry-meta'); ?>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-4 col-lg-3">
-      <div id="fc-left-nav">
-        <div class="toc callout">
-          <ol>
-            <?php
-            if ($fcs) {
-              foreach ($fcs as $fc) {
-                //Lower case everything
-                $hash = strtolower($fc['card_title']);
-                //Make alphanumeric (removes all other characters), Clean up multiple dashes or whitespaces, Convert whitespaces and underscore to dash
-                $hash = preg_replace(array("/[^a-z0-9_\s-]/", "/[\s-]+/", "/[\s_]/"), array("", " ", "-"), $hash);
-                ?>
-                <li>
-                  <a href="#<?php echo $hash; ?>">
-                    <?php echo $fc['card_title']; ?>
-                  </a>
-                </li>
-                <?php
-              }
-            }
-            ?>
-          </ol>
-        </div>
-      </div>
-    </div>
 
-    <div <?php post_class('col-md-8 col-lg-push-1'); ?>>
+
+  <div class="row">
+    <div <?php post_class('col-md-8 col-centered'); ?>>
       <div class="entry-content">
         <div class="fc-nav clearfix">
           <div class="fc-prev">&laquo; Prev</div>
@@ -76,7 +51,7 @@ $fcs = get_field('flash_cards');
           ?>
         </div>
 
-        <div class="fc-nav">
+        <div class="fc-nav clearfix">
           <div class="fc-prev">&laquo; Prev</div>
           <div class="fc-next">Next &raquo;</div>
         </div>
@@ -85,4 +60,35 @@ $fcs = get_field('flash_cards');
   </div>
 </div>
 
-<?php get_template_part('templates/components/social-share'); ?>
+<div class="modal fade" id="flash-cards-index-modal" tabindex="-1" role="dialog" aria-labelledby="flash-cards-index-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="h3"><?php the_title(); ?></h2>
+      </div>
+
+      <div id="fc-left-nav" class="modal-body">
+        <ol>
+          <?php
+          if ($fcs) {
+            foreach ($fcs as $fc) {
+              //Lower case everything
+              $hash = strtolower($fc['card_title']);
+              //Make alphanumeric (removes all other characters), Clean up multiple dashes or whitespaces, Convert whitespaces and underscore to dash
+              $hash = preg_replace(array("/[^a-z0-9_\s-]/", "/[\s-]+/", "/[\s_]/"), array("", " ", "-"), $hash);
+              ?>
+              <li>
+                <a href="#<?php echo $hash; ?>">
+                  <?php echo $fc['card_title']; ?>
+                </a>
+              </li>
+              <?php
+            }
+          }
+          ?>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>

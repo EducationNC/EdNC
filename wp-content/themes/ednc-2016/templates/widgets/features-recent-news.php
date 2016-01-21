@@ -19,7 +19,7 @@ $featured_ids = array();
        */
       $featured = new WP_Query([
         'posts_per_page' => $features_n,
-        'post_type' => array('post', 'map', 'edtalk'),
+        'post_type' => array('post', 'map', 'edtalk', 'flash-cards'),
         'tax_query' => array(
           array(
             'taxonomy' => 'appearance',

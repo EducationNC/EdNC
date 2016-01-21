@@ -211,6 +211,16 @@ function mejs_add_container_class() {
 }
 add_action( 'wp_print_footer_scripts', __NAMESPACE__ . '\\mejs_add_container_class' );
 
+// Add template path for customizing WP Embeds
+add_filter( 'embed_template', function() {
+  global $post;
+  if ($post->post_type == 'flash-cards') {
+    return get_template_directory() . '/embed-flash-cards.php';
+  } else {
+    return 'embed-template.php';
+  }
+});
+
 // Fix bug where Instagram embeds don't work in core with 'www.'
 add_action('init', function() {
   wp_oembed_add_provider('#https?://(www\.)?instagr(\.am|am\.com)/p/.*#i', 'https://api.instagram.com/oembed', true );

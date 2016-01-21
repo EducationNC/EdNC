@@ -1,0 +1,67 @@
+.wp-embed {
+  font-family: $font-family-serif;
+  font-size: 18px;
+
+  .single-flash-cards & {
+    padding: 0;
+
+    .entry-header {
+      margin-top: 0;
+      margin-bottom: 10px;
+      display: table;
+      width: 100%;
+    }
+
+    .entry-title {
+      font-size: $font-size-h3;
+      padding-top: 22px;
+      padding-right: 35px;
+    }
+
+    .nav-toggle {
+      color: transparent;
+      padding-left: 0;
+      float: right;
+
+      &:before {
+        display: none !important;
+      }
+
+      span, span:after, span:before {
+        background-color: $white;
+      }
+    }
+  }
+}
+
+.wp-embed-excerpt {
+  margin-bottom: 30px;
+}
+
+.wp-embed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: $steel;
+  padding: 10px;
+  margin-top: 0;
+}
+
+.wp-embed-site-title {
+  font-weight: normal;
+  font-size: 16px;
+
+  span {
+    vertical-align: -5px;
+  }
+}
+
+.wp-embed-share-dialog {
+  z-index: 50;
+}
+
+.wp-embed-share-input {
+  color: $jet;
+}

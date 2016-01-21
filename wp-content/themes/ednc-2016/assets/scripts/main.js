@@ -260,11 +260,7 @@
           }
 
           // Set index number in top nav bar
-          if (index > 0) {
-            $('#fc-index').text(index + '/' + (size - 1));
-          } else {
-            $('#fc-index').text('');
-          }
+          $('#fc-index').text('Flash card ' + (index + 1) + '/' + size);
 
           // Prev state
           if (index === 0) {

@@ -94,8 +94,8 @@ function cpd_copy_pub_date( $post_id, $post, $update ) {
     return;
   }
 
-  // Only do this on posts, maps, and ednews
-  if ($post->post_type != 'post' && $post->post_type != 'map' && $post->post_type != 'ednews' && $post->post_type != 'edtalk') {
+  // Only do this on posts, maps, ednews, and flash cards
+  if ($post->post_type != 'post' && $post->post_type != 'map' && $post->post_type != 'ednews' && $post->post_type != 'edtalk' && $post->post_type != 'flash-cards') {
     return;
   }
 
