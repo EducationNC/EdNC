@@ -286,6 +286,10 @@
 }
 
 .single-edtalk {
+  .entry-header {
+    margin-top: 0 !important;
+  }
+  
   @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
     .container {
       width: 874px;
