@@ -7,8 +7,8 @@ global $wp_query;
 $id = $wp_query->post->ID;
 
 // Get current page URL
-// $crunchifyURL = urlencode(get_permalink($id));
-$crunchifyURL = urlencode('https://www.ednc.org/2016/01/17/katherine-gill-learning-land/');
+$crunchifyURL = urlencode(get_permalink($id));
+// $crunchifyURL = urlencode('https://www.ednc.org/2016/01/17/katherine-gill-learning-land/');
 
 // Get current page title
 $crunchifyTitle = urlencode(get_the_title($id));

@@ -2,6 +2,8 @@
 
 namespace Roots\Sage\ShareCount;
 
+use Roots\Sage\Facebook;
+
 /**
  *  Get Social Share Counts for a URL from the major Social Networks
  * @var Mixed String or Array $options['url'] = URL that we want to get the social share counts for
@@ -93,10 +95,9 @@ class socialNetworkShareCount{
 
 
     public function getFacebookShares(){
-        $api = file_get_contents( 'http://graph.facebook.com/?id=' . $this->shareUrl );
-        echo '<div style="display:none;">';
-        var_dump($api);
-        echo '</div>';
+        $auth = Facebook\get_facebook_auth();
+        $access_token = urlencode($auth['app_id'] . '|' . $auth['app_secret']);
+        $api = file_get_contents( 'http://graph.facebook.com/?id=' . $this->shareUrl . '&amp;access_token=' . $access_token );
         $count = json_decode( $api );
         if(isset($count->shares) && $count->shares != '0'){
             $this->facebookShareCount = $count->shares;
