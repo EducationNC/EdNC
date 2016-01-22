@@ -8,6 +8,7 @@ $id = $wp_query->post->ID;
 
 // Get current page URL
 $crunchifyURL = urlencode(get_permalink($id));
+// $crunchifyURL = urlencode('https://www.ednc.org/2016/01/17/katherine-gill-learning-land/');
 
 // Get current page title
 $crunchifyTitle = urlencode(get_the_title($id));
@@ -30,6 +31,9 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
     'linkedin' => true,
     'google' => true
   ));
+  echo '<div style="display:none;">';
+  print_r($social_counts);
+  echo '</div>';
   $counts = json_decode($social_counts->getShareCounts());
 //   set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
 // }
