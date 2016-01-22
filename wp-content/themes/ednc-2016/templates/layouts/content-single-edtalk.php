@@ -1,23 +1,11 @@
 <?php
 
-use Roots\Sage\Assets;
-
 while (have_posts()) : the_post();
 
 $comments_open = comments_open();
 ?>
   <article <?php post_class('article'); ?>>
-    <div class="page-header photo-overlay" style="background-image: url('<?php echo Assets\asset_path('images/edtalk.jpg'); ?>')">
-      <div class="article-title-overlay">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <h1 class="entry-title">EdTalk</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php get_template_part('templates/components/edtalk', 'header'); ?>
 
     <div class="container">
       <div class="row">

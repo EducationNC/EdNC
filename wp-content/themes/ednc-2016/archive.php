@@ -18,22 +18,24 @@ get_template_part('templates/components/category', 'header');
 
       <div class="row hentry">
         <?php
-        $args = array(
-          'post_type' => 'flash-cards',
-          'posts_per_page' => -1,
-          'cat' => $cat_id
-        );
+        if (! empty($cat_id)) {
+          $args = array(
+            'post_type' => 'flash-cards',
+            'posts_per_page' => -1,
+            'cat' => $cat_id
+          );
 
-        $fc = new WP_Query($args);
+          $fc = new WP_Query($args);
 
-        if ($fc->have_posts()) : while ($fc->have_posts()): $fc->the_post(); ?>
+          if ($fc->have_posts()) : while ($fc->have_posts()): $fc->the_post(); ?>
 
-          <div class="col-sm-6">
-            <div class="paperclip"></div>
-            <?php get_template_part('templates/layouts/block', 'post'); ?>
-          </div>
+            <div class="col-sm-6">
+              <div class="paperclip"></div>
+              <?php get_template_part('templates/layouts/block', 'post'); ?>
+            </div>
 
-        <?php endwhile; endif; wp_reset_query(); ?>
+          <?php endwhile; endif; wp_reset_query();
+        } ?>
       </div>
 
       <?php get_template_part('templates/layouts/archive', 'loop'); ?>
