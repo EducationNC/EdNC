@@ -97,16 +97,17 @@ class socialNetworkShareCount{
     public function getFacebookShares(){
         $auth = Facebook\get_facebook_auth();
         $access_token = urlencode($auth['app_id'] . '|' . $auth['app_secret']);
-        $query = http_build_query(array('id'=>$this->shareUrl, 'access_token'=>$access_token));
         $url = 'https://graph.facebook.com/?id=' . $this->shareUrl . '&access_token=' . $access_token;
         $api = file_get_contents( $url );
-        echo '<div style="display:none;">';
-        echo $url;
-        var_dump($api);
-        echo '</div>';
         $count = json_decode( $api );
-        if(isset($count->shares) && $count->shares != '0'){
-            $this->facebookShareCount = $count->shares;
+        if(isset($count->share->share_count) && $count->share->share_count != '0'){
+            $this->facebookShareCount = $count->share->share_count;
+        }
+        if(isset($count->share->comment_count) && $count->share->comment_count != '0'){
+            $this->facebookShareCount += $count->share->comment_count;
+        }
+        if (isset($count->og_object->engagement->count) && $count->og_object->engagement->count != '0') {
+            $this->facebookShareCount += $count->og_object->engagement->count;
         }
         $this->socialCounts['facebookshares'] = $this->facebookShareCount;
         return $this->facebookShareCount;
