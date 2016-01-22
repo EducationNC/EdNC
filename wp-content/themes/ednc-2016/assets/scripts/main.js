@@ -160,6 +160,9 @@
         // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
 
+        // Make sure iframes for flash-cards embeds scroll
+        $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes');
+
         // Wrap tables with Bootstrap responsive table wrapper
         $('.entry-content table').addClass('table table-striped').wrap('<div class="table-responsive"></div>');
 
@@ -238,7 +241,23 @@
     // Flash cards
     'single_flash_cards': {
       init: function() {
-
+        /**
+         * Bootstrap Affix
+         */
+        $(window).on('load', function() {
+          $('#fc-left-nav .toc').affix({
+            offset: {
+              top: function() {
+                return (this.top = $('#fc-left-nav .toc').offset().top - 20);
+              },
+              bottom: function () {
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+              }
+            }
+          });
+        });
+      },
+      finalize: function() {
         /**
          * OWL CAROUSEL 2
          */
@@ -283,13 +302,16 @@
 
         // Init Owl Carousel 2
         var owl = $("#fc-carousel");
-        owl.owlCarousel({
-          items: 1,
-          // loop: true,
-          autoHeight: true,
-          URLhashListener: true,
-          startPosition: 'URLHash',
-          onInitialized: navState
+
+        $(window).on('load', function() {
+          owl.owlCarousel({
+            items: 1,
+            // loop: true,
+            autoHeight: true,
+            URLhashListener: true,
+            startPosition: 'URLHash',
+            onInitialized: navState
+          });
         });
 
         // Manual carousel nav
@@ -310,23 +332,6 @@
           var current = prop.item.index;
           var hash = $(prop.target).find(".owl-item").eq(current).find(".fc").data('hash');
           window.location.hash = hash;
-        });
-
-
-        /**
-         * Bootstrap Affix
-         */
-        $(window).on('load', function() {
-          $('#fc-left-nav .toc').affix({
-            offset: {
-              top: function() {
-                return (this.top = $('#fc-left-nav .toc').offset().top - 20);
-              },
-              bottom: function () {
-                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
-              }
-            }
-          });
         });
       }
     },

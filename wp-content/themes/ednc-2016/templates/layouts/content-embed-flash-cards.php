@@ -11,7 +11,7 @@ $fcs = get_field('flash_cards');
   <div class="row">
     <div class="col-md-8 col-centered">
       <div class="entry-header">
-        <a data-toggle="modal" data-target="#flash-cards-index-modal" class="nav-toggle" href="#"><span>Index</span></a>
+        <a data-toggle="modal" data-target="#flash-cards-index-modal" class="nav-toggle" href="javascript:void()"><span>Index</span></a>
         <h1 class="entry-title"><?php the_title(); ?></h1>
       </div>
     </div>
@@ -51,7 +51,7 @@ $fcs = get_field('flash_cards');
           ?>
         </div>
 
-        <div class="fc-nav clearfix">
+        <div class="fc-nav clearfix extra-bottom-margin">
           <div class="fc-prev">&laquo; Prev</div>
           <div class="fc-next">Next &raquo;</div>
         </div>
@@ -79,7 +79,7 @@ $fcs = get_field('flash_cards');
               $hash = preg_replace(array("/[^a-z0-9_\s-]/", "/[\s-]+/", "/[\s_]/"), array("", " ", "-"), $hash);
               ?>
               <li>
-                <a href="#<?php echo $hash; ?>">
+                <a href="#<?php echo $hash; ?>" target="_self">
                   <?php echo $fc['card_title']; ?>
                 </a>
               </li>
