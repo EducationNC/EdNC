@@ -97,7 +97,8 @@ class socialNetworkShareCount{
     public function getFacebookShares(){
         $auth = Facebook\get_facebook_auth();
         $access_token = urlencode($auth['app_id'] . '|' . $auth['app_secret']);
-        $url = 'https://graph.facebook.com/?id=' . $this->shareUrl . '&amp;access_token=' . $access_token;
+        $query = http_build_query(array('id'=>$this->shareUrl, 'access_token'=>$access_token));
+        $url = 'https://graph.facebook.com/?' . $query;
         $api = file_get_contents( $url );
         echo '<div style="display:none;">';
         echo $url;
