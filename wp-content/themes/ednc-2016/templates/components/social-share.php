@@ -8,7 +8,6 @@ $id = $wp_query->post->ID;
 
 // Get current page URL
 $crunchifyURL = urlencode(get_permalink($id));
-// $crunchifyURL = urlencode('https://www.ednc.org/2016/01/17/katherine-gill-learning-land/');
 
 // Get current page title
 $crunchifyTitle = urlencode(get_the_title($id));
@@ -20,8 +19,8 @@ $linkedinURL = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$crunch
 $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
 
 // Get current counts of social media shares & store in transient
-// $counts = get_transient('social-counts-' . $id);
-// if ($counts === false) {
+$counts = get_transient('social-counts-' . $id);
+if ($counts === false) {
   $social_counts = new ShareCount\socialNetworkShareCount(array(
     'url' => $crunchifyURL,
     'facebook' => true,
@@ -31,14 +30,9 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
     'linkedin' => true,
     'google' => true
   ));
-
-  echo '<div style="display:none;">';
-    print_r($social_counts);
-  echo '</div>';
-
   $counts = json_decode($social_counts->getShareCounts());
-//   set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
-// }
+  set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
+}
 
 // Translate share counts to K if number is in thousands
 function num_format($val) {
