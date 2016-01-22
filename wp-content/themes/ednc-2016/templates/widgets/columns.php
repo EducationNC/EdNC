@@ -108,26 +108,30 @@ use Roots\Sage\Assets;
           'posts_per_page' => 1
         ]);
 
-        /*if ($edtalk->have_posts()) : while ($edtalk->have_posts()) : $edtalk->the_post();
+        if ($edtalk->have_posts()) :
+          while ($edtalk->have_posts()) : $edtalk->the_post();
+            ?>
+            <article <?php post_class(); ?>>
+              <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+              <div class="photo-overlay">
+                <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
+              </div>
+              <header class="entry-header">
+                <h3 class="post-title"><?php the_title(); ?></h3>
+                <?php echo get_template_part('templates/components/entry-meta'); ?>
+              </header>
+              <div class="excerpt"><?php the_advanced_excerpt(); ?> <a class="more" href="<?php the_permalink(); ?>">Listen now &raquo;</a></div>
+            </article>
+            <?php
+          endwhile;
+        else :
           ?>
-          <article <?php post_class(); ?>>
-            <a class="mega-link" href="<?php the_permalink(); ?>"></a>
-            <div class="photo-overlay">
-              <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
-            </div>
-            <header class="entry-header">
-              <h3 class="post-title"><?php the_title(); ?></h3>
-              <?php echo get_template_part('templates/components/entry-meta'); ?>
-            </header>
-            <div class="excerpt"><?php the_advanced_excerpt(); ?> <a class="more" href="<?php the_permalink(); ?>">Listen now &raquo;</a></div>
-          </article>
-        <?php endwhile; endif; wp_reset_query();*/ ?>
-
-        <div class="block-post edtalk">
-          <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
-          <h3 class="post-title">Coming this Friday: A new podcast from EdNC</h3>
-          <div class="excerpt top-margin">EdTalk will take a look at North Carolina education issues and policy and will be available on iTunes. Check back on Friday morning to listen to host Alex Granados talking with NC House Speaker Pro Tempore Paul Stam.</div>
-        </div>
+          <div class="block-post edtalk">
+            <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
+            <h3 class="post-title">Coming this Friday: A new podcast from EdNC</h3>
+            <div class="excerpt top-margin">EdTalk will take a look at North Carolina education issues and policy and will be available on iTunes. Check back on Friday morning to listen to host Alex Granados talking with NC House Speaker Pro Tempore Paul Stam.</div>
+          </div>
+        <?php endif; wp_reset_query(); ?>
 
         <hr class="hidden-xs" />
 
