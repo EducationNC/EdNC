@@ -31,9 +31,11 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
     'linkedin' => true,
     'google' => true
   ));
+
   echo '<div style="display:none;">';
-  print_r($social_counts);
+    print_r($social_counts);
   echo '</div>';
+
   $counts = json_decode($social_counts->getShareCounts());
 //   set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
 // }
