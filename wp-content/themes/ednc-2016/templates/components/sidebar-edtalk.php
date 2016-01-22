@@ -8,7 +8,7 @@ use Roots\Sage\Assets;
   <img class="alignleft" src="<?php echo Assets\asset_path('images/edtalk-100x100.jpg'); ?>" alt="EdTalk Podcast" />
   <p class="meta">A weekly look at North Carolina education issues and policy.</p>
   <div class="clearfix">
-    <!-- <a href="#" target="_blank" class="btn btn-default">Subscribe on iTunes</a> -->
+    <a href="https://itunes.apple.com/us/podcast/edtalk/id1077457198" target="_blank" class="btn btn-default">Subscribe on iTunes</a>
   </div>
 </div>
 
