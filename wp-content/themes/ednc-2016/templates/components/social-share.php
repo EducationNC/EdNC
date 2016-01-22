@@ -19,8 +19,8 @@ $linkedinURL = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$crunch
 $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
 
 // Get current counts of social media shares & store in transient
-$counts = get_transient('social-counts-' . $id);
-if ($counts === false) {
+// $counts = get_transient('social-counts-' . $id);
+// if ($counts === false) {
   $social_counts = new ShareCount\socialNetworkShareCount(array(
     'url' => $crunchifyURL,
     'facebook' => true,
@@ -31,8 +31,8 @@ if ($counts === false) {
     'google' => true
   ));
   $counts = json_decode($social_counts->getShareCounts());
-  set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
-}
+//   set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
+// }
 
 // Translate share counts to K if number is in thousands
 function num_format($val) {
