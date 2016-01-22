@@ -105,6 +105,7 @@ class socialNetworkShareCount{
 
     public function getFacebookShares(){
         $api = file_get_contents( 'http://graph.facebook.com/?id=' . $this->shareUrl );
+        var_dump($api);
         $count = json_decode( $api );
         if(isset($count->shares) && $count->shares != '0'){
             $this->facebookShareCount = $count->shares;
@@ -115,6 +116,7 @@ class socialNetworkShareCount{
 
     public function getFacebookLikes(){
         $api = file_get_contents( 'http://graph.facebook.com/?id=' . $this->shareUrl );
+        var_dump($api);
         $count = json_decode( $api );
         if(isset($count->likes) && $count->likes != '0'){
             $this->facebookLikeCount = $count->likes;

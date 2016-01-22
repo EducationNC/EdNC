@@ -39,7 +39,6 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
   $counts = json_decode($social_counts->getShareCounts());
 //   set_transient('social-counts-' . $id, $counts, HOUR_IN_SECONDS);
 // }
-echo $counts->total;
 
 // Translate share counts to K if number is in thousands
 function num_format($val) {
