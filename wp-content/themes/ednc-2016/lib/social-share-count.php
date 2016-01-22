@@ -10,7 +10,6 @@ namespace Roots\Sage\ShareCount;
  * @var $options['buffer'] = if Array Key set, then return share count from this social network
  * @var $options['pinterest'] = if Array Key set, then return share count from this social network
  * @var $options['linkedin'] = if Array Key set, then return share count from this social network
- * @var $options['google'] = if Array Key set, then return share count from this social network
  *
  * http://www.codedevelopr.com/articles/get-social-network-share-counts-for-a-url-with-my-php-class/
  *
@@ -22,12 +21,10 @@ class socialNetworkShareCount{
     public $shareUrl;
     public $socialCounts = array();
     public $facebookShareCount = 0;
-    public $facebookLikeCount = 0;
     public $twitterShareCount = 0;
     public $bufferShareCount = 0;
     public $pinterestShareCount = 0;
     public $linkedInShareCount = 0;
-    public $googlePlusOnesCount = 0;
 
 
     public function __construct($options){
@@ -39,10 +36,9 @@ class socialNetworkShareCount{
                 die('URL must be set in constructor parameter array!');
             }
 
-            // Get Facebook Shares and Likes
+            // Get Facebook Shares
             if(array_key_exists('facebook', $options)){
                 $this->getFacebookShares();
-                $this->getFacebookLikes();
             }
 
             // Get Twitter Shares
@@ -50,19 +46,14 @@ class socialNetworkShareCount{
                 $this->getTwitterShares();
             }
 
-            // Get Twitter Shares
+            // Get Pinterest Shares
             if(array_key_exists('pinterest', $options)){
                 $this->getPinterestShares();
             }
 
-            // Get Twitter Shares
+            // Get LinkedIn Shares
             if(array_key_exists('linkedin', $options)){
                 $this->getLinkedInShares();
-            }
-
-            // Get Twitter Shares
-            if(array_key_exists('google', $options)){
-                $this->getGooglePlusOnes();
             }
 
             // Get Buffer Shares
@@ -75,11 +66,9 @@ class socialNetworkShareCount{
 
             // Get all Social Network share counts if they are not set individually in the options
             $this->getFacebookShares();
-            $this->getFacebookLikes();
             $this->getTwitterShares();
             $this->getPinterestShares();
             $this->getLinkedInShares();
-            $this->getGooglePlusOnes();
             $this->getBufferShares();
 
         }else{
@@ -105,24 +94,15 @@ class socialNetworkShareCount{
 
     public function getFacebookShares(){
         $api = file_get_contents( 'http://graph.facebook.com/?id=' . $this->shareUrl );
+        echo '<div style="display:none;">';
         var_dump($api);
+        echo '</div>';
         $count = json_decode( $api );
         if(isset($count->shares) && $count->shares != '0'){
             $this->facebookShareCount = $count->shares;
         }
         $this->socialCounts['facebookshares'] = $this->facebookShareCount;
         return $this->facebookShareCount;
-    }
-
-    public function getFacebookLikes(){
-        $api = file_get_contents( 'http://graph.facebook.com/?id=' . $this->shareUrl );
-        var_dump($api);
-        $count = json_decode( $api );
-        if(isset($count->likes) && $count->likes != '0'){
-            $this->facebookLikeCount = $count->likes;
-        }
-        $this->socialCounts['facebooklikes'] = $this->facebookLikeCount;
-        return $this->facebookLikeCount;
     }
 
     public function getTwitterShares(){
@@ -167,39 +147,6 @@ class socialNetworkShareCount{
         }
         $this->socialCounts['linkedinshares'] = $this->linkedInShareCount;
         return $this->linkedInShareCount;
-    }
-
-    public function getGooglePlusOnes(){
-
-        if(function_exists('curl_version')){
-
-            $curl = curl_init();
-            curl_setopt( $curl, CURLOPT_URL, "https://clients6.google.com/rpc" );
-            curl_setopt( $curl, CURLOPT_POST, 1 );
-            curl_setopt( $curl, CURLOPT_POSTFIELDS, '[{"method":"pos.plusones.get","id":"p","params":{"nolog":true,"id":"' . $this->shareUrl . '","source":"widget","userId":"@viewer","groupId":"@self"},"jsonrpc":"2.0","key":"p","apiVersion":"v1"}]' );
-            curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-            curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'Content-type: application/json' ) );
-            $curl_results = curl_exec( $curl );
-            curl_close( $curl );
-            $json = json_decode( $curl_results, true );
-            $this->googlePlusOnesCount = intval( $json[0]['result']['metadata']['globalCounts']['count'] );
-
-        }else{
-
-            $content = file_get_contents("https://plusone.google.com/u/0/_/+1/fastbutton?url=".urlencode($_GET['url'])."&count=true");
-            $doc = new DOMdocument();
-            libxml_use_internal_errors(true);
-            $doc->loadHTML($content);
-            $doc->saveHTML();
-            $num = $doc->getElementById('aggregateCount')->textContent;
-
-            if($num){
-                $this->googlePlusOnesCount = intval($num);
-            }
-        }
-
-        $this->socialCounts['googleplusones'] = $this->googlePlusOnesCount;
-        return $this->googlePlusOnesCount;
     }
 
 }
