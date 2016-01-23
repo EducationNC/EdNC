@@ -160,8 +160,9 @@
         // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
 
-        // Make sure iframes for flash-cards embeds scroll
+        // Make sure iframes for flash-cards embeds scroll and add special class
         $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes');
+        $('iframe.wp-embedded-content[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('flash-cards');
 
         // Wrap tables with Bootstrap responsive table wrapper
         $('.entry-content table').addClass('table table-striped').wrap('<div class="table-responsive"></div>');
