@@ -211,6 +211,14 @@ object, embed {
     }
   }
 
+  &.flash-cards.flash-cards {
+    padding-top: 50px;
+
+    @media (max-width: $screen-xs-max) {
+      padding-bottom: 75%;
+    }
+  }
+
   &.soundcloud.soundcloud {
     padding-top: 0;
     padding-bottom: 166px;

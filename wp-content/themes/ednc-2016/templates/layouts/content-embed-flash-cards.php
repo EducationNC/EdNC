@@ -51,7 +51,7 @@ $fcs = get_field('flash_cards');
           ?>
         </div>
 
-        <div class="fc-nav clearfix extra-bottom-margin">
+        <div class="fc-nav clearfix">
           <div class="fc-prev">&laquo; Prev</div>
           <div class="fc-next">Next &raquo;</div>
         </div>
