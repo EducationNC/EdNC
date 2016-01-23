@@ -42,7 +42,7 @@ if ( have_posts() ) :
 				<div class="wp-embed-site-title">
 					<?php
 					$site_title = sprintf(
-						'<a href="%s" target="_top"><img src="%s" srcset="%s 2x" width="32" height="32" alt="" class="wp-embed-site-icon"/><span>%s</span></a>',
+						'<a href="%s" target="_blank"><img src="%s" srcset="%s 2x" width="32" height="32" alt="" class="wp-embed-site-icon"/><span>%s</span></a>',
 						esc_url( home_url() ),
 						esc_url( get_site_icon_url( 32, admin_url( 'images/w-logo-blue.png' ) ) ),
 						esc_url( get_site_icon_url( 64, admin_url( 'images/w-logo-blue.png' ) ) ),
@@ -61,14 +61,7 @@ if ( have_posts() ) :
 				</div>
 
 				<div class="wp-embed-meta">
-					<?php
-					/**
-					 * Print additional meta content in the embed template.
-					 *
-					 * @since 4.4.0
-					 */
-					do_action( 'embed_content_meta');
-					?>
+					<a href="<?php the_permalink(); ?>" target="_blank">Open <span class="icon-external-link"></span></a>
 				</div>
 			</div>
 		</div>

@@ -261,6 +261,11 @@
         /**
          * OWL CAROUSEL 2
          */
+        // Function to set hash based on navigation link clicks
+        $('#fc-left-nav a').on('click', function(e) {
+          e.preventDefault();
+          window.location.hash = $(this).data('hash');
+        });
 
         // Function to set nav states based on slide position
         function navState(type, prop) {

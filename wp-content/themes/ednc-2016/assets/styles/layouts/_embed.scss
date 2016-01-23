@@ -1,6 +1,7 @@
 .wp-embed {
   font-family: $font-family-serif;
   font-size: 18px;
+  color: $ash;
 
   .single-flash-cards & {
     padding: 0;
@@ -47,6 +48,10 @@
   background: $steel;
   padding: 10px;
   margin-top: 0;
+
+  a {
+    color: $jet;
+  }
 }
 
 .wp-embed-site-title {
@@ -55,6 +60,12 @@
 
   span {
     vertical-align: -5px;
+  }
+}
+
+.wp-embed-meta {
+  a {
+    @extend h6;
   }
 }
 
