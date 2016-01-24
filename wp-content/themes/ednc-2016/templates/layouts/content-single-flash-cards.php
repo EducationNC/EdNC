@@ -31,7 +31,7 @@ $fcs = get_field('flash_cards');
                 $hash = preg_replace(array("/[^a-z0-9_\s-]/", "/[\s-]+/", "/[\s_]/"), array("", " ", "-"), $hash);
                 ?>
                 <li>
-                  <a href="#<?php echo $hash; ?>">
+                  <a href="javascript:void();" data-hash="<?php echo $hash; ?>">
                     <?php echo $fc['card_title']; ?>
                   </a>
                 </li>
