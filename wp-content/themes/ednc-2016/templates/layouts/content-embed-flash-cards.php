@@ -61,7 +61,7 @@ $fcs = get_field('flash_cards');
 </div>
 
 <div class="modal fade" id="flash-cards-index-modal" tabindex="-1" role="dialog" aria-labelledby="flash-cards-index-modal">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
