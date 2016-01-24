@@ -110,16 +110,22 @@ if ($column) {
         }
       } else {
 
-        // EdTalk label
-        if ($post_type == 'edtalk') {
-          echo '<span ' . $style . '>Podcast</span>';
+        // Flash cards label
+        if ($post_type == 'flash-cards') {
+          echo '<span ' . $style . '>Flash cards</span>';
         } else {
 
-          // EdNews label
-          if ($post_type == 'ednews') {
-            echo '<span ' . $style . '>EdNews</span>';
+          // EdTalk label
+          if ($post_type == 'edtalk') {
+            echo '<span ' . $style . '>Podcast</span>';
           } else {
-            echo '&nbsp;';
+
+            // EdNews label
+            if ($post_type == 'ednews') {
+              echo '<span ' . $style . '>EdNews</span>';
+            } else {
+              echo '&nbsp;';
+            }
           }
         }
       }
