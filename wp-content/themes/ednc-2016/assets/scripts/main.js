@@ -162,7 +162,7 @@
 
         // Make sure iframes for flash-cards embeds scroll and add special class
         if (!ismobileorIE) {
-          $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes');
+          $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes').attr('sandbox', 'allow-scripts allow-popups');
         }
         $('iframe.wp-embedded-content[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('flash-cards');
 
