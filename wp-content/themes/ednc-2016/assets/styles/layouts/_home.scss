@@ -9,6 +9,10 @@
 
       &:first-child {
         padding-top: 3em;
+
+        .section-header {
+          margin-top: 0;
+        }
       }
     }
   }
