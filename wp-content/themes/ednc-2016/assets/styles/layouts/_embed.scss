@@ -7,7 +7,7 @@
     padding: 0;
 
     .entry-header {
-      margin-top: 0;
+      margin-top: 0 !important;
       margin-bottom: 10px;
       display: table;
       width: 100%;
@@ -39,7 +39,7 @@
   }
 }
 
-.wp-embed-xs {
+.wp-embed-card {
   padding: 10px;
 }
 

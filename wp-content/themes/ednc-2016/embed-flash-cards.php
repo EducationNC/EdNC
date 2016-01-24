@@ -35,11 +35,11 @@ if ( ! headers_sent() ) {
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
 		?>
-		<div class="wp-embed-xs visible-xs-block">
+		<div class="wp-embed-card">
 			<div class="paperclip"></div>
 			<?php get_template_part('templates/layouts/block', 'post'); ?>
 		</div>
-		<div <?php post_class( 'wp-embed hidden-xs' ); ?>>
+		<div <?php post_class( 'wp-embed' ); ?> style="display: none;">
       <?php get_template_part('templates/layouts/content-embed', 'flash-cards'); ?>
 
 			<div class="wp-embed-footer">
