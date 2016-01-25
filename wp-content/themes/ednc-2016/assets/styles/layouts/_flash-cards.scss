@@ -229,7 +229,10 @@
 .fc-nav {
   width: 100%;
   position: relative;
-  padding-top: 15px;
+
+  &:not(:first-child) {
+    padding-top: 15px;
+  }
 
   .fc-prev, .fc-next {
     @extend .h6;

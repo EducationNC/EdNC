@@ -21,6 +21,7 @@
 
   // Check for mobile or IE
   var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
+  var isSafari = /Safari/i.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
 
 
   // Use this variable to set up the common and page specific functions. If you
@@ -161,8 +162,8 @@
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
 
         // Make sure iframes for flash-cards embeds scroll and add special class
-        if (!ismobileorIE) {
-          $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes');
+        if (!ismobileorIE && !isSafari) {
+          $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes').attr('sandbox', 'allow-scripts allow-same-origin');
         }
         $('iframe.wp-embedded-content[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('flash-cards');
 
@@ -247,7 +248,7 @@
         /**
          * For embeds on non-mobile devices
          */
-        if (!ismobileorIE) {
+       if (!ismobileorIE && !isSafari) {
           // Hide default card
           $('.wp-embed-card').hide();
           // Show full flash cards
