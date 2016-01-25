@@ -3,10 +3,11 @@ $post_type = get_post_type();
 
 $author = get_the_author_meta('user_nicename');
 if (
-  $author == 'agranados' &&
-  $author == 'alisa' &&
-  $author == 'mrash' &&
-  $author == 'todd-brantley'
+  $author == 'agranados' ||
+  $author == 'alisa' ||
+  $author == 'mrash' ||
+  $author == 'todd-brantley' ||
+  $author == 'staff'
 ) {
   $bg_color = '#64184B'; // $plum-darker;
 } else {
