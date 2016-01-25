@@ -158,10 +158,10 @@ while (have_posts()) : the_post();
           </div>
 
           <div class="col-md-2 col-md-pull-2 print-no">
-            <!-- <div class="hidden-xs">
+            <div class="hidden-xs">
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
               <!-- Article sidebar -->
-              <!-- <ins class="adsbygoogle"
+              <ins class="adsbygoogle"
                    style="display:block"
                    data-ad-client="ca-pub-2642458473228537"
                    data-ad-slot="6263040202"
@@ -169,7 +169,7 @@ while (have_posts()) : the_post();
               <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
               </script>
-            </div> -->
+            </div>
           </div>
 
           <div class="col-md-7 col-md-pull-1point5">

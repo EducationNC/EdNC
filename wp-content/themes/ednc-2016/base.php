@@ -36,7 +36,7 @@ use Roots\Sage\Wrapper;
     <?php
       do_action('get_footer');
       get_template_part('templates/layouts/footer');
-      // get_template_part('templates/components/mobile-ad');
+      get_template_part('templates/components/mobile-ad');
       wp_footer();
     ?>
   </body>
