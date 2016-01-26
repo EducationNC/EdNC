@@ -1,4 +1,3 @@
-
 <div class="container">
   <?php
   get_template_part('templates/components/page', 'header-wide');

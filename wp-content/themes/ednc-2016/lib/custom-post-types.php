@@ -349,7 +349,7 @@ function register_post_types() {
 
 	register_post_type( 'data',
 		array('labels' => array(
-				'name' => 'All Sections',
+				'name' => 'Data Dashboard',
 				'singular_name' => 'Data Dashboard',
 				'add_new' => 'Add New Section',
 				'add_new_item' => 'Add New Dashboard Section',
