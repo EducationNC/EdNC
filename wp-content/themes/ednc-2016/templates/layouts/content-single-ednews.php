@@ -40,7 +40,7 @@ while (have_posts()) : the_post(); ?>
                     <div class="col-sm-6 col-md-12">
                       <div class="photo-overlay">
                         <span class="label">&nbsp;</span>
-                        <?php echo wp_get_attachment_image($feature[0]['featured_image']['ID'], 'featured-medium'); ?>
+                        <?php echo wp_get_attachment_image($feature[0]['featured_image']['ID'], 'featured-small'); ?>
                       </div>
                     </div>
 
