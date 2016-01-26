@@ -347,6 +347,37 @@ function register_post_types() {
 		)
 	);
 
+	register_post_type( 'data',
+		array('labels' => array(
+				'name' => 'All Sections',
+				'singular_name' => 'Data Dashboard',
+				'add_new' => 'Add New Section',
+				'add_new_item' => 'Add New Dashboard Section',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit Dashboard Section',
+				'new_item' => 'New Dashboard Section',
+				'view_item' => 'View Dashboard Section',
+				'search_items' => 'Search Dashboard Sections',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
+			), /* end of arrays */
+			'public' => true,
+			'exclude_from_search' => true,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 8,
+			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
+			'capability_type' => 'post',
+			'hierarchical' => true,
+			'supports' => array( 'title', 'revisions', 'page-attributes'),
+			'has_archive' => true,
+			'rewrite' => true,
+			'query_var' => true
+		)
+	);
+
 }
 add_action( 'init', __NAMESPACE__ . '\\register_post_types');
 
