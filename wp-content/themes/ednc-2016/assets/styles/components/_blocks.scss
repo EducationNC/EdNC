@@ -221,7 +221,8 @@
     }
 
     img.post-thumbnail {
-      transform: translate3d(0, -50%, 0) scale(1.05);
+      // transform: translate3d(0, -50%, 0) scale(1.05);
+      transform: scale(1.05);
     }
 
     .photo-overlay:after {
