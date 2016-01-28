@@ -33,7 +33,7 @@ use Roots\Sage\Assets;
       if ($sections->have_posts()) : ?>
 
         <script type="text/javascript">
-          google.charts.load('current', {packages: ['corechart']});
+          google.charts.load('current', {packages: ['corechart', 'table', 'scatter']});
           google.charts.setOnLoadCallback(drawCharts);
 
           function drawCharts() {
@@ -68,39 +68,67 @@ use Roots\Sage\Assets;
             if (!empty($data)) {
               $i = 1;
               foreach ($data as $d) { ?>
-                <h4 class="h3"><?php echo $d['headline']; ?></h4>
+                <div class="row">
+                  <div class="col-md-2">
+                    <h4 class="h3"><?php echo $d['headline']; ?></h4>
+                  </div>
 
-                <?php if ($d['type'] == 'bar_chart' || $d['type'] == 'line_chart' || $d['type'] == 'pie_chart') {
-                  if (!empty($d['data_source'])) { ?>
-                    <div id="<?php echo $post->post_name; ?>_data_<?php echo $i; ?>"></div>
+                  <div class="col-md-10">
+                    <?php if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 'pie_chart' || $d['type'] == 'table') {
+                      if (!empty($d['data_source'])) {
 
-                    <script type="text/javascript">
-                      function queryData_<?php echo str_replace('-', '_', $post->post_name); ?>_<?php echo $i; ?>() {
-                        // Get data from Google Sheet
-                        // var queryString = encodeURIComponent('SELECT A, H, O, Q, R, U LIMIT 5 OFFSET 8');
-                        var query = new google.visualization.Query('<?php echo $d['data_source']; ?>&range=B2:B7&headers=1');
-                        query.send(handleQueryResponse);
-                      }
-
-                      function handleQueryResponse(response) {
-                        if (response.isError()) {
-                          alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-                          return;
+                        // Set chart type
+                        switch ($d['type']) {
+                          case 'bar_chart':
+                            $type = 'ColumnChart';
+                            break;
+                          case 'pie_chart':
+                            $type = 'PieChart';
+                            break;
+                          case 'scatter_chart':
+                            $type = 'ScatterChart';
+                            break;
+                          case 'table';
+                            $type = 'Table';
                         }
+                        ?>
+                        <div id="<?php echo $post->post_name; ?>_data_<?php echo $i; ?>"></div>
 
-                        var data = response.getDataTable();
+                        <script type="text/javascript">
+                          function queryData_<?php echo str_replace('-', '_', $post->post_name); ?>_<?php echo $i; ?>() {
+                            // Get data from Google Spreadsheet
+                            var query = new google.visualization.Query('<?php echo $d['data_source']; ?>/gviz/tq?');
 
-                        var options = {
-                          height: 400
-                        }
+                            // Call function that handles response
+                            query.send(handleQueryResponse_<?php echo str_replace('-', '_', $post->post_name); ?>_<?php echo $i; ?>);
+                          }
 
-                        var chart = new google.visualization.ScatterChart(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
-                        chart.draw(data, options);
-                      }
-                    </script>
-                  <?php }
-                }
-                $i++;
+                          function handleQueryResponse_<?php echo str_replace('-', '_', $post->post_name); ?>_<?php echo $i; ?>(response) {
+                            // Throw alert if there is an error
+                            if (response.isError()) {
+                              alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                              return;
+                            }
+
+                            // Set up data and options for Charts API
+                            var data = response.getDataTable();
+                            var options = {<?php echo $d['options']; ?>}
+
+                            // Get chart visualization from Google
+                            var chart = new google.visualization.<?php echo $type; ?>(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
+                            chart.draw(data, options);
+
+                            // New Material Design charts look AMAZING, but don't support trendlines yet :(
+                            // var chart = new google.charts.Scatter(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
+                            // chart.draw(data, google.charts.Scatter.convertOptions(options));
+                          }
+                        </script>
+                      <?php }
+                    } ?>
+                    <?php echo $d['description']; ?>
+                  </div>
+                </div>
+                <?php $i++;
               }
             } ?>
           </div>
