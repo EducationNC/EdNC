@@ -353,6 +353,50 @@
         });
       }
     },
+    'post_type_archive_data': {
+      init: function() {
+        /**
+         * Bootstrap Affix
+         */
+        $(window).on('load', function() {
+          $('#data-dash-nav').affix({
+            offset: {
+              top: function() {
+                return (this.top = $('#data-dash-nav').offset().top - 20);
+              },
+              bottom: function () {
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+              }
+            }
+          });
+          $('body').scrollspy({
+            target: '#data-dash-nav',
+            offset: 40
+          });
+        });
+
+        /**
+         * Google Chart API
+         */
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+          // // Define the chart to be drawn.
+          // var data = new google.visualization.DataTable();
+          // data.addColumn('string', 'Element');
+          // data.addColumn('number', 'Percentage');
+          // data.addRows([
+          //   ['Nitrogen', 0.78],
+          //   ['Oxygen', 0.21],
+          //   ['Other', 0.01]
+          // ]);
+          //
+          // // Instantiate and draw the chart.
+          // var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+          // chart.draw(data, null);
+        }
+      }
+    }
   };
 
   // The routing fires all common scripts, followed by the page specific scripts.

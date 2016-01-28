@@ -24,6 +24,7 @@ $sage_includes = [
   'lib/shortcodes.php',         // Shortcodes and UI
   'lib/titles.php',             // Page titles
   'lib/nav.php',                // Clean up nav menus
+  'lib/nav-data-dashboard.php', // Data dashboard nav walker
   'lib/nav-widgets.php',        // Widgetize nav menus
   'lib/wrapper.php',            // Theme wrapper class
   'lib/customizer.php',         // Theme customizer

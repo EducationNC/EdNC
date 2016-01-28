@@ -1,0 +1,68 @@
+.data-dashboard {
+  .h1 {
+    border-bottom: 1px solid $pearl;
+  }
+
+  // Sidebar
+  .nav {
+    li {
+      @extend h3;
+      margin: 0;
+
+      li {
+        @extend h4;
+        margin: 0;
+      }
+
+      &.active {
+        & > a {
+          color: $plum;
+          background: $pearl;
+        }
+      }
+    }
+    a {
+      padding: 10px 5px 7px;
+      text-decoration: none;
+      color: $ash;
+      position: relative;
+
+      &:hover, &:focus {
+        background: $pearl;
+        // color: $plum;
+      }
+    }
+
+    .children {
+      a {
+        padding-left: 20px;
+      }
+    }
+  }
+  .affix {
+    @media (max-width: $screen-sm-max) {
+      position: relative;
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: 271px;
+      top: 20px;
+      position: fixed;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: 295px;
+    }
+  }
+
+  .affix-bottom {
+    @media (min-width: $screen-md-min) {
+      position: absolute;
+      width: 271px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: 295px;
+    }
+  }
+}
