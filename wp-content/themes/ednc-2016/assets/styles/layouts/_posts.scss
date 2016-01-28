@@ -105,6 +105,11 @@
 
   li {
     margin: .75em 0;
+    line-height: 1.88em;
+  }
+
+  ol, ul {
+    margin-bottom: 1.88em;
   }
 }
 
@@ -289,7 +294,7 @@
   .entry-header {
     margin-top: 0 !important;
   }
-  
+
   @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
     .container {
       width: 874px;
