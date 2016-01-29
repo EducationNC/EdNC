@@ -59,8 +59,8 @@
     &.post-thumbnail {
       width: 100%;
       position: absolute;
-      // top: 50%;
-      // transform: translate3d(0, -50%, 0);
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
       transition: transform .5s;
     }
 
@@ -106,8 +106,7 @@
 
   &:hover {
     img.post-thumbnail {
-      // transform: translate3d(0, -50%, 0) scale(1.05);
-      transform: scale(1.05);
+      transform: translate3d(0, -50%, 0) scale(1.05);
     }
 
     &:after {
@@ -146,8 +145,7 @@
 
   &:hover {
     img.post-thumbnail {
-      // transform: translate3d(0, -50%, 0) scale(1.05);
-      transform: scale(1.05);
+      transform: translate3d(0, -50%, 0) scale(1.05);
     }
 
     img.bio-headshot {
@@ -221,8 +219,7 @@
     }
 
     img.post-thumbnail {
-      // transform: translate3d(0, -50%, 0) scale(1.05);
-      transform: scale(1.05);
+      transform: translate3d(0, -50%, 0) scale(1.05);
     }
 
     .photo-overlay:after {

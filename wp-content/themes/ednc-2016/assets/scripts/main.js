@@ -161,6 +161,9 @@
         // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
 
+        // Add special class to default WP embeds
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
+
         // Make sure iframes for flash-cards embeds scroll and add special class
         if (!ismobileorIE && !isSafari) {
           $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes').attr('sandbox', 'allow-scripts allow-same-origin');

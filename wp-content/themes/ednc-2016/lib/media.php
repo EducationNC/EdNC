@@ -220,7 +220,7 @@ add_filter( 'embed_template', function() {
   if ($post->post_type == 'flash-cards') {
     return get_template_directory() . '/embed-flash-cards.php';
   } else {
-    return 'embed-template.php';
+    return get_template_directory() . '/embed.php';
   }
 });
 

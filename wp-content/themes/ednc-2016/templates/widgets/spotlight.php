@@ -24,7 +24,7 @@
 
       if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
 
-        get_template_part('templates/layouts/block-overlay', 'large');
+        get_template_part('templates/layouts/block-overlay');
 
       endwhile; endif; wp_reset_query();
       ?>

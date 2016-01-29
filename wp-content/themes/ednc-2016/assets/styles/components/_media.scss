@@ -177,7 +177,7 @@ object, embed {
     margin: 0 auto 34px;
   }
 
-  &:not(.instagram):not(.twitter) {
+  &:not(.instagram):not(.twitter):not(.wp-embed) {
     position: relative;
     padding-bottom: 56.25%;
     padding-top: 25px;
@@ -227,6 +227,18 @@ object, embed {
 
   &.slideshare.slideshare {
     padding-bottom: 100%;
+  }
+
+  &.wp-embed {
+    @media (min-width: $screen-md-min) {
+      margin-left: -7.35%;
+      margin-right: -7.35%;
+      max-width: 114.7%;
+    }
+
+    iframe {
+      width: 100%;
+    }
   }
 }
 
