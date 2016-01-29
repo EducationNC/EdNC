@@ -22,7 +22,7 @@ if ( function_exists( 'coauthors_posts_links' ) ) {
   $classes[] = get_the_author_meta('user_nicename');
 }
 
-$featured_image = Media\get_featured_image('medium');
+$featured_image = Media\get_featured_image('large');
 $title_overlay = get_field('title_overlay');
 ?>
 
