@@ -21,6 +21,14 @@ if (!empty($post)) {
   $author_id = get_the_author_meta('ID');
   $author_bio = get_posts(array('post_type' => 'bio', 'meta_key' => 'user', 'meta_value' => $author_id));
 
+  if ( function_exists( 'coauthors_posts_links' ) ) {
+    $authors = get_coauthors();
+    foreach ($authors as $a) {
+      $classes[] = $a->user_nicename;
+    }
+  } else {
+    $classes[] = get_the_author_meta('user_nicename');
+  }
   ?>
   <div class="row">
     <div class="col-md-7 col-md-push-2point5">
@@ -29,7 +37,7 @@ if (!empty($post)) {
       $featured_image = Media\get_featured_image('medium');
       $title_overlay = get_field('title_overlay');
       ?>
-      <div class="recommended block-post">
+      <div class="recommended block-post <?php echo implode($classes, ' '); ?>">
         <a class="mega-link" href="<?php the_permalink(); ?>"></a>
         <div class="photo-overlay">
           <?php
