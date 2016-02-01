@@ -33,7 +33,7 @@ use Roots\Sage\Assets;
       if ($sections->have_posts()) : ?>
 
         <script type="text/javascript">
-          google.charts.load('current', {packages: ['corechart', 'table', 'scatter']});
+          google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
           google.charts.setOnLoadCallback(drawCharts);
 
           function drawCharts() {
@@ -115,17 +115,24 @@ use Roots\Sage\Assets;
                             var options = {<?php echo $d['options']; ?>}
 
                             // Get chart visualization from Google
-                            var chart = new google.visualization.<?php echo $type; ?>(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
-                            chart.draw(data, options);
-
-                            // New Material Design charts look AMAZING, but don't support trendlines yet :(
-                            // var chart = new google.charts.Scatter(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
-                            // chart.draw(data, google.charts.Scatter.convertOptions(options));
+                            <?php if ($d['type'] == 'bar_chart') { ?>
+                              // Material Design Chart for Bar Charts
+                              // These don't support trendlines yet
+                              var chart = new google.charts.Bar(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
+                              chart.draw(data, google.charts.Bar.convertOptions(options));
+                            <?php } else { ?>
+                              var chart = new google.visualization.<?php echo $type; ?>(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
+                              chart.draw(data, options);
+                            <?php } ?>
                           }
                         </script>
                       <?php }
+                    } elseif ($d['type'] == 'text') {
+                      echo '<div class="text-data">' . $d['text-based_data'] . '</div>';
                     } ?>
-                    <?php echo $d['description']; ?>
+                    <div class="meta">
+                      <?php echo $d['description']; ?>
+                    </div>
                   </div>
                 </div>
                 <?php $i++;
