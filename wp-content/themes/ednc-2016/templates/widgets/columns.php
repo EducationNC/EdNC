@@ -112,7 +112,7 @@ use Roots\Sage\Assets;
         <article <?php post_class(); ?>>
           <a class="mega-link" href="<?php the_permalink(); ?>"></a>
           <div class="photo-overlay">
-            <img src="<?php echo Assets\asset_path('images/edtalk-wide.jpg'); ?>" alt="EdTalk Podcast" />
+            <img src="<?php echo Assets\asset_path('images/edtalk-featured-large.jpg'); ?>" alt="EdTalk Podcast" />
           </div>
           <header class="entry-header">
             <h3 class="post-title"><?php the_title(); ?></h3>

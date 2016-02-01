@@ -40,7 +40,13 @@
 }
 
 .wp-embed-card {
-  padding: 10px;
+  .single-flash-cards & {
+    padding: 10px;
+  }
+
+  .block-overlay {
+    margin-bottom: 0;
+  }
 
   .entry-header {
     margin-top: 0;
@@ -52,14 +58,17 @@
 }
 
 .wp-embed-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
   background: $steel;
   padding: 10px;
   margin-top: 0;
+
+  .single-flash-cards & {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
 
   a {
     color: $jet;
