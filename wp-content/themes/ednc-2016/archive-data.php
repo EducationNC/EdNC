@@ -3,7 +3,7 @@
 use Roots\Sage\Assets;
 
 ?>
-<div class="page-header photo-overlay" style="background-image: url('<?php echo Assets\asset_path('images/edtalk.jpg'); ?>')">
+<div class="page-header photo-overlay" style="background-image: url('<?php echo Assets\asset_path('images/data-dashboard.jpg'); ?>')">
   <div class="article-title-overlay">
     <div class="container">
       <div class="row">
@@ -115,15 +115,15 @@ use Roots\Sage\Assets;
                             var options = {<?php echo $d['options']; ?>}
 
                             // Get chart visualization from Google
-                            <?php if ($d['type'] == 'bar_chart') { ?>
+                            <?php // if ($d['type'] == 'bar_chart') { ?>
                               // Material Design Chart for Bar Charts
                               // These don't support trendlines yet
-                              var chart = new google.charts.Bar(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
-                              chart.draw(data, google.charts.Bar.convertOptions(options));
-                            <?php } else { ?>
+                              // var chart = new google.charts.Bar(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
+                              // chart.draw(data, google.charts.Bar.convertOptions(options));
+                            <?php // } else { ?>
                               var chart = new google.visualization.<?php echo $type; ?>(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
                               chart.draw(data, options);
-                            <?php } ?>
+                            <?php // } ?>
                           }
                         </script>
                       <?php }
