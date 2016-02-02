@@ -3,19 +3,17 @@
 use Roots\Sage\Assets;
 
 ?>
-<div class="page-header photo-overlay" style="background-image: url('<?php echo Assets\asset_path('images/data-dashboard.jpg'); ?>')">
-  <div class="article-title-overlay">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-centered">
-          <h1 class="entry-title">EdData Dashboard</h1>
-        </div>
+<div class="fixed-background-image" style="background-image:url('<?php echo Assets\asset_path('images/data-dashboard.jpg'); ?>')"></div>
+
+<div class="container data-dashboard">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="entry-header">
+        <h1 class="entry-title">EdData Dashboard</h1>
       </div>
     </div>
   </div>
-</div>
 
-<div class="container data-dashboard">
   <div class="row archive">
     <div class="col-md-3">
       <?php get_template_part('templates/components/sidebar', 'data-dashboard'); ?>
@@ -63,9 +61,9 @@ use Roots\Sage\Assets;
         <?php while ($sections->have_posts()) : $sections->the_post(); ?>
           <div id="<?php echo $post->post_name; ?>" class="dashboard-section">
             <?php if ($post->post_parent == 0) { ?>
-              <h2 class="h1"><?php the_title(); ?></h2>
+              <h2><?php the_title(); ?></h2>
             <?php } else { ?>
-              <h3 class="h2"><?php the_title(); ?></h3>
+              <h3><?php the_title(); ?></h3>
             <?php } ?>
 
             <?php
@@ -83,11 +81,11 @@ use Roots\Sage\Assets;
                 ?>
 
                 <div class="row data-section" <?php echo $data_fn; ?>>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <p><?php echo $d['headline']; ?></p>
                   </div>
 
-                  <div class="col-md-10">
+                  <div class="col-md-9">
                     <?php if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 'pie_chart' || $d['type'] == 'table') {
                       if (!empty($d['data_source'])) {
 
@@ -174,3 +172,5 @@ use Roots\Sage\Assets;
     </div>
   </div>
 </div>
+
+<?php get_template_part('templates/components/social-share'); ?>
