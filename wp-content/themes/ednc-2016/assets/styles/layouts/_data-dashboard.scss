@@ -1,12 +1,16 @@
 .post-type-archive-data {
-  .entry-header {
-    margin-top: 2em;
-  }
-
-  // Position footer over background
+    // Position footer over background
   .above-footer, .content-info {
     position: relative;
     z-index: 50;
+  }
+
+  .entry-header {
+    margin-bottom: 1em;
+
+    @media (min-width: $screen-md-min) {
+      margin-top: 7em;
+    }
   }
 
   @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
