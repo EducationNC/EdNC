@@ -356,6 +356,7 @@
         });
       }
     },
+    // Data dashboard
     'post_type_archive_data': {
       init: function() {
         /**
@@ -381,22 +382,33 @@
         /**
          * Google Chart API
          */
-        google.charts.setOnLoadCallback(drawCharts);
+        google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
+        google.charts.setOnLoadCallback(initCharts);
 
-        function drawCharts() {
-          // // Define the chart to be drawn.
-          // var data = new google.visualization.DataTable();
-          // data.addColumn('string', 'Element');
-          // data.addColumn('number', 'Percentage');
-          // data.addRows([
-          //   ['Nitrogen', 0.78],
-          //   ['Oxygen', 0.21],
-          //   ['Other', 0.01]
-          // ]);
-          //
-          // // Instantiate and draw the chart.
-          // var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-          // chart.draw(data, null);
+        function initCharts() {
+          // Kick scroll event
+          $(window).scroll();
+
+          $('.data-section').each(function() {
+
+            // Check that there's a function to call
+            if ($(this)[0].hasAttribute('data-function')) {
+
+              // Load charts as they scroll into view
+              // $(this).scrolledIntoView().on('scrolledin', function() {
+
+                // function we want to run
+                var fnstring = $(this).attr('data-function');
+                // find object
+                var fn = window[fnstring];
+                // is object a function? if so, run
+                if (typeof fn === "function") fn();
+
+              // });
+
+            }
+
+          });
         }
       }
     }

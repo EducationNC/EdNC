@@ -33,30 +33,35 @@ use Roots\Sage\Assets;
       if ($sections->have_posts()) : ?>
 
         <script type="text/javascript">
-          google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
-          google.charts.setOnLoadCallback(drawCharts);
-
-          function drawCharts() {
-            <?php
-              while ($sections->have_posts()) : $sections->the_post();
-                $data = get_field('data');
-                if (!empty($data)) {
-                  $i = 1;
-                  foreach ($data as $d) {
-                    if (!empty($d['data_source'])) {
-                      echo 'queryData_' . str_replace('-', '_', $post->post_name) . '_' . $i . '();' . "\n";
-                    }
-                    $i++;
-                  }
-                }
-              endwhile;
-            ?>
+          // google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
+          // google.charts.setOnLoadCallback(drawCharts);
+          //
+          // function drawCharts() {
+          //   <?php
+          //     while ($sections->have_posts()) : $sections->the_post();
+          //       $data = get_field('data');
+          //       if (!empty($data)) {
+          //         $i = 1;
+          //         foreach ($data as $d) {
+          //           if ( ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 'pie_chart' || $d['type'] == 'table') && !empty($d['data_source']) ) {
+          //             echo 'queryData_' . str_replace('-', '_', $post->post_name) . '_' . $i . '();' . "\n";
+          //           }
+          //           $i++;
+          //         }
+          //       }
+          //     endwhile;
+          //   ?>
+          // }
+          function extend(obj, src) {
+            for (var key in src) {
+              if (src.hasOwnProperty(key)) obj[key] = src[key];
+            }
+            return obj;
           }
         </script>
 
         <?php while ($sections->have_posts()) : $sections->the_post(); ?>
-
-          <div id="<?php echo $post->post_name; ?>">
+          <div id="<?php echo $post->post_name; ?>" class="dashboard-section">
             <?php if ($post->post_parent == 0) { ?>
               <h2 class="h1"><?php the_title(); ?></h2>
             <?php } else { ?>
@@ -67,10 +72,19 @@ use Roots\Sage\Assets;
             $data = get_field('data');
             if (!empty($data)) {
               $i = 1;
-              foreach ($data as $d) { ?>
-                <div class="row">
+              foreach ($data as $d) {
+
+                // Set data-function for sections that use Google Charts API
+                if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 'pie_chart' || $d['type'] == 'table') {
+                  $data_fn = 'data-function="queryData_' . str_replace('-', '_', $post->post_name) . '_' . $i . '"';
+                } else {
+                  $data_fn = '';
+                }
+                ?>
+
+                <div class="row data-section" <?php echo $data_fn; ?>>
                   <div class="col-md-2">
-                    <h4 class="h3"><?php echo $d['headline']; ?></h4>
+                    <p><?php echo $d['headline']; ?></p>
                   </div>
 
                   <div class="col-md-10">
@@ -97,7 +111,7 @@ use Roots\Sage\Assets;
                         <script type="text/javascript">
                           function queryData_<?php echo str_replace('-', '_', $post->post_name); ?>_<?php echo $i; ?>() {
                             // Get data from Google Spreadsheet
-                            var query = new google.visualization.Query('<?php echo $d['data_source']; ?>/gviz/tq?');
+                            var query = new google.visualization.Query('<?php echo $d['data_source']; ?>/gviz/tq?<?php echo $d['query_string']; ?>');
 
                             // Call function that handles response
                             query.send(handleQueryResponse_<?php echo str_replace('-', '_', $post->post_name); ?>_<?php echo $i; ?>);
@@ -112,7 +126,21 @@ use Roots\Sage\Assets;
 
                             // Set up data and options for Charts API
                             var data = response.getDataTable();
-                            var options = {<?php echo $d['options']; ?>}
+
+                            var defaults = {
+                              chartArea: {left: 'auto', width: '85%', top: 10, height: '85%'},
+                              legend: {position: 'in'},
+                              titlePosition: 'in',
+                              axisTitlesPosition: 'in',
+                              vAxis: {textPosition: 'in'},
+                              hAxis: {textPosition: 'out'},
+                              colors: ['#731454', '#9D0E2B', '#C73F13', '#DE6515', '#EDBC2D', '#B8B839', '#98A942', '#62975E', '#5681B3', '#314C83', '#24346D', '#3E296A']
+                            };
+                            var custom = {<?php echo $d['options']; ?>}
+                            var options = extend(defaults, custom);
+
+                            // Extra functions specific to this visualization
+                            <?php echo $d['extra_js']; ?>
 
                             // Get chart visualization from Google
                             <?php // if ($d['type'] == 'bar_chart') { ?>
@@ -133,6 +161,7 @@ use Roots\Sage\Assets;
                     <div class="meta">
                       <?php echo $d['description']; ?>
                     </div>
+                    <a class="btn btn-default" href="#" target="_blank">Explore this data &raquo;</a>
                   </div>
                 </div>
                 <?php $i++;

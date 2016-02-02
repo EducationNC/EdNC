@@ -1,9 +1,46 @@
-.data-dashboard {
-  .h1 {
-    border-bottom: 1px solid $pearl;
+.post-type-archive-data {
+  background: $stone;
+  color: $white;
+
+  .h1, .h2 {
+    margin-top: .5em;
+    padding-top: 20px;
+    color: $white;
+  }
+}
+
+.dashboard-section {
+  h4 {
+    margin: 0;
+  }
+}
+
+.data-section {
+  background: $steel;
+  color: $jet;
+  margin-bottom: 2em;
+
+  & > div {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
+  .col-md-10 {
+    background: $white;
+  }
+}
+
+.google-visualization-tooltip {
+  color: $jet;
+  font-family: $font-family-sans-serif;
+}
+
+.data-dashboard {
   // Sidebar
+  .callout {
+    background: $gray;
+  }
+
   .nav {
     li {
       @extend h3;
@@ -16,20 +53,21 @@
 
       &.active {
         & > a {
-          color: $plum;
-          background: $pearl;
+          color: $white;
+          background: $sterling;
         }
       }
     }
+
     a {
       padding: 10px 5px 7px;
       text-decoration: none;
-      color: $ash;
+      color: $steel;
       position: relative;
 
       &:hover, &:focus {
-        background: $pearl;
-        // color: $plum;
+        background: $sterling;
+        // color: $white;
       }
     }
 
@@ -39,6 +77,7 @@
       }
     }
   }
+
   .affix {
     @media (max-width: $screen-sm-max) {
       position: relative;

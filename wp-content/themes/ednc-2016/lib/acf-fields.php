@@ -2268,8 +2268,6 @@ register_field_group(array (
 	'hide_on_screen' => '',
 ));
 endif;
-
-// New function to add ACF fields:
 if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array (
@@ -2394,11 +2392,111 @@ acf_add_local_field_group(array (
 					'placeholder' => '',
 				),
 				array (
+					'key' => 'field_56b0c79a74af3',
+					'label' => 'Query string',
+					'name' => 'query_string',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'bar_chart',
+							),
+						),
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'pie_chart',
+							),
+						),
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'scatter_chart',
+							),
+						),
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'table',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
 					'key' => 'field_56aa685f9a513',
 					'label' => 'Options',
 					'name' => 'options',
 					'type' => 'textarea',
 					'instructions' => 'Options for the chart in JavaScript format.',
+					'required' => 0,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'bar_chart',
+							),
+						),
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'pie_chart',
+							),
+						),
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'scatter_chart',
+							),
+						),
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'table',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'maxlength' => '',
+					'rows' => '',
+					'new_lines' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_56b0117dd4c43',
+					'label' => 'Extra JS',
+					'name' => 'extra_js',
+					'type' => 'textarea',
+					'instructions' => 'In case of extra needed JavaScript',
 					'required' => 0,
 					'conditional_logic' => array (
 						array (
@@ -2493,6 +2591,43 @@ acf_add_local_field_group(array (
 					'tabs' => 'visual',
 					'toolbar' => 'basic',
 					'media_upload' => 0,
+				),
+				array (
+					'key' => 'field_56b0ec3c6afc2',
+					'label' => 'Button text',
+					'name' => 'button_text',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => 'Explore this data',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_56b0ec6a6afc3',
+					'label' => 'Button link',
+					'name' => 'button_link',
+					'type' => 'url',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
 				),
 			),
 		),
