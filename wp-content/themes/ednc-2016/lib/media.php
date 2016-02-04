@@ -246,6 +246,10 @@ function wpgm_embed_handler_googlemapsv1( $matches, $attr, $url, $rawattr ) {
 };
 wp_embed_register_handler( 'googlemapsv1', '#https?://www.google.com/maps/place/(.*?)/#i', __NAMESPACE__ . '\\wpgm_embed_handler_googlemapsv1' );
 
+// CartoDB embed
+wp_oembed_add_provider( '#https?://(?:www\.)?[^/^\.]+\.cartodb\.com/\S+#i', 'https://services.cartodb.com/oembed', true );
+
+
 
 /**
  * Custom gallery shortcode

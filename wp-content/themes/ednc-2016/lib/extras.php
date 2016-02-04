@@ -37,6 +37,20 @@ function body_class($classes) {
 add_filter('body_class', __NAMESPACE__ . '\\body_class');
 
 /**
+ * Utility function to test if page has children
+ */
+ function has_children($type = 'page') {
+   global $post;
+
+   $children = get_pages(['child_of' => $post->ID, 'post_type' => $type]);
+   if( count( $children ) == 0 ) {
+     return false;
+   } else {
+     return true;
+   }
+}
+
+/**
  * Clean up the_excerpt()
  */
 function excerpt_more() {

@@ -2268,6 +2268,7 @@ register_field_group(array (
 	'hide_on_screen' => '',
 ));
 endif;
+
 if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array (
@@ -2333,6 +2334,7 @@ acf_add_local_field_group(array (
 						'pie_chart' => 'Pie Chart',
 						'scatter_chart' => 'Scatter Chart',
 						'table' => 'Table',
+						'map' => 'Map',
 						'text' => 'Text',
 						'image' => 'Image',
 					),
@@ -2573,6 +2575,30 @@ acf_add_local_field_group(array (
 					'tabs' => 'all',
 					'toolbar' => 'full',
 					'media_upload' => 1,
+				),
+				array (
+					'key' => 'field_56b39afda0c9e',
+					'label' => 'CartoDB URL',
+					'name' => 'cartodb_url',
+					'type' => 'oembed',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_56a7e31134e69',
+								'operator' => '==',
+								'value' => 'map',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'width' => '',
+					'height' => '',
 				),
 				array (
 					'key' => 'field_56a7a585deca8',
