@@ -126,22 +126,15 @@ use Roots\Sage\Extras;
                                 colors: ['#731454', '#9D0E2B', '#C73F13', '#DE6515', '#EDBC2D', '#B8B839', '#98A942', '#62975E', '#5681B3', '#314C83', '#24346D', '#3E296A'],
                                 fontName: 'Lato'
                               };
-                              var custom = {<?php echo $d['options']; ?>}
+                              var custom = {<?php echo $d['options']; ?>};
                               var options = extend(defaults, custom);
 
                               // Extra functions specific to this visualization
                               <?php echo $d['extra_js']; ?>
 
                               // Get chart visualization from Google
-                              <?php // if ($d['type'] == 'bar_chart') { ?>
-                                // Material Design Chart for Bar Charts
-                                // These don't support trendlines yet
-                                // var chart = new google.charts.Bar(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
-                                // chart.draw(data, google.charts.Bar.convertOptions(options));
-                              <?php // } else { ?>
-                                var chart = new google.visualization.<?php echo $type; ?>(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
-                                chart.draw(view, options);
-                              <?php // } ?>
+                              var chart = new google.visualization.<?php echo $type; ?>(document.getElementById('<?php echo $post->post_name; ?>_data_<?php echo $i; ?>'));
+                              chart.draw(view, options);
                             }
                           </script>
                         <?php }
@@ -153,7 +146,9 @@ use Roots\Sage\Extras;
                       <div class="meta">
                         <?php echo $d['description']; ?>
                       </div>
-                      <a class="btn btn-default" href="#" target="_blank">Explore this data &raquo;</a>
+                      <?php if (!empty($d['button_link'])) { ?>
+                        <a class="btn btn-default" href="<?php echo $d['button_link']; ?>" target="_blank"><?php echo $d['button_text']; ?></a>
+                      <?php } ?>
                     </div>
                   </div>
                   <?php $i++;

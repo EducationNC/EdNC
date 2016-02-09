@@ -54,6 +54,15 @@
   .col-md-9 {
     background: $white;
   }
+
+  .fancy-number {
+    display: block;
+    line-height: 1em;
+    font-size: $font-size-h1;
+    color: $plum-lighter;
+    font-family: $font-family-serif;
+    transition: font-size .3s ease-in-out;
+  }
 }
 
 .google-visualization-tooltip.google-visualization-tooltip {

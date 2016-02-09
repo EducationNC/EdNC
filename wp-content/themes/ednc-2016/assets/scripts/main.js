@@ -359,6 +359,16 @@
     // Data dashboard
     'post_type_archive_data': {
       init: function() {
+        // Add special class to default WP embeds
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
+
+        /**
+         * FitText for big fancy numbers
+         */
+        $('.fancy-number').each(function() {
+          $(this).fitText();
+        });
+
         /**
          * Bootstrap Affix
          */

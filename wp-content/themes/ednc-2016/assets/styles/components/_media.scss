@@ -230,10 +230,12 @@ object, embed {
   }
 
   &.wp-embed {
-    @media (min-width: $screen-md-min) {
-      margin-left: -7.35%;
-      margin-right: -7.35%;
-      max-width: 114.7%;
+    body:not(.page):not(.single-flash-cards):not(.single-edtalk):not(.post-type-archive-data) & {
+      @media (min-width: $screen-md-min) {
+        margin-left: -7.35%;
+        margin-right: -7.35%;
+        max-width: 114.7%;
+      }
     }
 
     iframe {
