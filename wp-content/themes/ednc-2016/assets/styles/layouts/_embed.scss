@@ -3,6 +3,10 @@
   font-size: 18px;
   color: $ash;
 
+  .hidden-embed {
+    display: none;
+  }
+
   .single-flash-cards & {
     padding: 0;
 
@@ -35,6 +39,63 @@
 
     .flash-cards-content {
       margin-bottom: 5em;
+    }
+  }
+
+  .single-data-viz & {
+    padding: 0;
+    border: 0;
+
+    .data-section {
+      margin-bottom: 0;
+    }
+  }
+
+  .navbar {
+    height: 64px;
+    padding: 0;
+    border: 0;
+    background: $stone;
+    color: $steel;
+
+    .eddata-title {
+      font-family: $font-family-sans-serif;
+      font-weight: 300;
+      line-height: 64px;
+      padding: 0 10px;
+    }
+
+    .navbar-right {
+      margin-right: -10px;
+    }
+  }
+
+  .modal-toggle {
+    margin-bottom: -64px;
+  }
+
+  .navbar-brand.navbar-brand {
+    margin-left: -10px;
+    padding: 0;
+    height: auto;
+  }
+
+  a {
+    color: $sky;
+    text-decoration: underline;
+
+    &:hover {
+      color: $denim;
+    }
+  }
+
+  .btn-default {
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+      color: $white;
+      text-decoration: none;
     }
   }
 }

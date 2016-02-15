@@ -184,7 +184,7 @@ object, embed {
     height: 0;
     margin-bottom: 34px;
 
-    body:not(.page):not(.single-flash-cards):not(.single-edtalk):not(.post-type-archive-data) & {
+    body:not(.page):not(.single-flash-cards):not(.single-edtalk):not(.post-type-archive-data):not(.single-data-viz) & {
       @media (min-width: $screen-md-min) {
         margin-left: -7.35%;
         margin-right: -7.35%;
@@ -230,7 +230,7 @@ object, embed {
   }
 
   &.wp-embed {
-    body:not(.page):not(.single-flash-cards):not(.single-edtalk):not(.post-type-archive-data) & {
+    body:not(.page):not(.single-flash-cards):not(.single-edtalk):not(.post-type-archive-data):not(.single-data-viz) & {
       @media (min-width: $screen-md-min) {
         margin-left: -7.35%;
         margin-right: -7.35%;

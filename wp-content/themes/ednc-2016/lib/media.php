@@ -217,7 +217,9 @@ add_action( 'wp_print_footer_scripts', __NAMESPACE__ . '\\mejs_add_container_cla
 // Add template path for customizing WP Embeds
 add_filter( 'embed_template', function() {
   global $post;
-  if ($post->post_type == 'flash-cards') {
+  if ($post->post_type == 'data-viz') {
+    return get_template_directory() . '/embed-data-viz.php';
+  } elseif ($post->post_type == 'flash-cards') {
     return get_template_directory() . '/embed-flash-cards.php';
   } else {
     return get_template_directory() . '/embed.php';

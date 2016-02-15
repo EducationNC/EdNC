@@ -34,6 +34,43 @@
     position: absolute;
     top: 50%;
     left: 50%;
+
+    .social-share-link {
+      display: inline-block;
+    }
+
+    .social-share-embed {
+      text-align: left;
+      background: $stone;
+      padding: 1px 10px 10px;
+
+      h6 {
+        color: $white;
+      }
+    }
+
+    .wp-embed-share-input {
+      width: 100%;
+      border: none;
+      height: 28px;
+      margin: 0 0 10px;
+      padding: 0 5px;
+      font: 400 14px/1.5 $font-family-sans-serif;
+      resize: none;
+      cursor: text;
+    }
+
+    textarea.wp-embed-share-input {
+      height: 74px;
+    }
+
+    .wp-embed-share-description {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1;
+      font-style: italic;
+      color: $pearl;
+    }
   }
 
   @media screen and (orientation:portrait) {

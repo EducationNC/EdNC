@@ -63,6 +63,60 @@
     font-family: $font-family-serif;
     transition: font-size .3s ease-in-out;
   }
+
+  .meta {
+    margin-right: 75px;
+  }
+
+  .btn {
+    margin-bottom: 20px;
+  }
+
+  .popover-content {
+    p {
+      margin: 0;
+    }
+  }
+
+  .popover-title {
+    background: $steel;
+    color: $ash;
+    border: 0;
+  }
+
+  .modal-toggle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: block;
+    background: $sterling;
+    color: $white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 30px;
+    line-height: 54px;
+    width: 64px;
+    padding: 10px 10px 0;
+    z-index: 100;
+
+    span {
+      display: block;
+    }
+
+    &:hover {
+      background: $gray;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+
+  .modal-dialog {
+    margin-top: -175px;
+  }
+}
+
+.data-viz-chart {
+  overflow: hidden;
 }
 
 .google-visualization-tooltip.google-visualization-tooltip {

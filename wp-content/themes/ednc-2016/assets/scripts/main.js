@@ -19,6 +19,9 @@
     clickortap = 'click';
   }
 
+  // Init popovers
+  $('[data-toggle="popover"]').popover();
+
   // Check for mobile or IE
   var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
   var isSafari = /Safari/i.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
@@ -356,10 +359,22 @@
         });
       }
     },
-    // Data dashboard
-    'post_type_archive_data': {
+    // Data viz embeds
+    'single_data_viz': {
       init: function() {
-        // Add special class to default WP embeds
+        /**
+         * For embeds on non-mobile devices
+         */
+       if (!ismobileorIE && !isSafari) {
+          // Hide default card
+          $('.wp-embed-card').hide();
+          // Show full flash cards
+          $('.wp-embed').show();
+        }
+
+        /*
+         * Add special class to default WP embeds
+         */
         $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         /**
@@ -368,6 +383,26 @@
         $('.fancy-number').each(function() {
           $(this).fitText();
         });
+
+        /**
+         * Google Chart API
+         */
+        google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
+        google.charts.setOnLoadCallback(initCharts);
+
+        function initCharts() {
+          $('.data-section').each(function() {
+            // Check that there's a function to call
+            if ($(this)[0].hasAttribute('data-function')) {
+              // function we want to run
+              var fnstring = $(this).attr('data-function');
+              // find object
+              var fn = window[fnstring];
+              // is object a function? if so, run
+              if (typeof fn === "function") fn();
+            }
+          });
+        }
 
         /**
          * Bootstrap Affix
@@ -387,6 +422,21 @@
             target: '#data-dash-nav',
             offset: 40
           });
+        });
+
+      }
+    },
+    // Data Dashboard
+    'post_type_archive_data': {
+      init: function() {
+        // Add special class to default WP embeds
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
+
+        /**
+         * FitText for big fancy numbers
+         */
+        $('.fancy-number').each(function() {
+          $(this).fitText();
         });
 
         /**
@@ -420,6 +470,27 @@
 
           });
         }
+
+        /**
+         * Bootstrap Affix
+         */
+        $(window).on('load', function() {
+          $('#data-dash-nav').affix({
+            offset: {
+              top: function() {
+                return (this.top = $('#data-dash-nav').offset().top - 20);
+              },
+              bottom: function () {
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+              }
+            }
+          });
+          $('body').scrollspy({
+            target: '#data-dash-nav',
+            offset: 40
+          });
+        });
+
       }
     }
   };
