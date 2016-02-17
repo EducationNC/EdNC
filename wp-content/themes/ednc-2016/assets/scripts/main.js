@@ -164,12 +164,15 @@
         // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
 
+        // Make sure WordPress embeds have correct permissions
+        $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+
         // Add special class to default WP embeds
         $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         // Make sure iframes for flash-cards embeds scroll and add special class
         if (!ismobileorIE && !isSafari) {
-          $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes').attr('sandbox', 'allow-scripts allow-same-origin');
+          $('iframe.wp-embedded-content[src*="/flash-cards/"]').attr('scrolling', 'yes');
         }
         $('iframe.wp-embedded-content[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('flash-cards');
 
@@ -362,20 +365,10 @@
     // Data viz embeds
     'single_data_viz': {
       init: function() {
-        /**
-         * For embeds on non-mobile devices
-         */
-       if (!ismobileorIE && !isSafari) {
-          // Hide default card
-          $('.wp-embed-card').hide();
-          // Show full flash cards
-          $('.wp-embed').show();
-        }
-
         /*
          * Add special class to default WP embeds
          */
-        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"], [src*="/data-viz/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         /**
          * FitText for big fancy numbers
@@ -383,54 +376,13 @@
         $('.fancy-number').each(function() {
           $(this).fitText();
         });
-
-        /**
-         * Google Chart API
-         */
-        google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
-        google.charts.setOnLoadCallback(initCharts);
-
-        function initCharts() {
-          $('.data-section').each(function() {
-            // Check that there's a function to call
-            if ($(this)[0].hasAttribute('data-function')) {
-              // function we want to run
-              var fnstring = $(this).attr('data-function');
-              // find object
-              var fn = window[fnstring];
-              // is object a function? if so, run
-              if (typeof fn === "function") fn();
-            }
-          });
-        }
-
-        /**
-         * Bootstrap Affix
-         */
-        $(window).on('load', function() {
-          $('#data-dash-nav').affix({
-            offset: {
-              top: function() {
-                return (this.top = $('#data-dash-nav').offset().top - 20);
-              },
-              bottom: function () {
-                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
-              }
-            }
-          });
-          $('body').scrollspy({
-            target: '#data-dash-nav',
-            offset: 40
-          });
-        });
-
       }
     },
     // Data Dashboard
     'post_type_archive_data': {
       init: function() {
         // Add special class to default WP embeds
-        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"], [src*="/data-viz/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         /**
          * FitText for big fancy numbers
@@ -438,38 +390,6 @@
         $('.fancy-number').each(function() {
           $(this).fitText();
         });
-
-        /**
-         * Google Chart API
-         */
-        google.charts.load('current', {packages: ['corechart', 'table', 'scatter', 'bar']});
-        google.charts.setOnLoadCallback(initCharts);
-
-        function initCharts() {
-          // Kick scroll event
-          $(window).scroll();
-
-          $('.data-section').each(function() {
-
-            // Check that there's a function to call
-            if ($(this)[0].hasAttribute('data-function')) {
-
-              // Load charts as they scroll into view
-              // $(this).scrolledIntoView().on('scrolledin', function() {
-
-                // function we want to run
-                var fnstring = $(this).attr('data-function');
-                // find object
-                var fn = window[fnstring];
-                // is object a function? if so, run
-                if (typeof fn === "function") fn();
-
-              // });
-
-            }
-
-          });
-        }
 
         /**
          * Bootstrap Affix

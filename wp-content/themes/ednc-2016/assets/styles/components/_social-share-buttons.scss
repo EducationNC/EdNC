@@ -74,10 +74,12 @@
   }
 
   @media screen and (orientation:portrait) {
-    .modal-dialog {
-      width: 100px;
-      margin-top: -240px;
-      margin-left: -50px;
+    body:not(.embed) & {
+      .modal-dialog {
+        width: 100px;
+        margin-top: -240px;
+        margin-left: -50px;
+      }
     }
   }
 
@@ -85,6 +87,14 @@
     .modal-dialog {
       width: 480px;
       margin-top: -50px;
+      margin-left: -240px;
+    }
+  }
+
+  .embed & {
+    .modal-dialog {
+      max-width: 480px;
+      margin-top: -175px;
       margin-left: -240px;
     }
   }
@@ -153,6 +163,16 @@
     }
   }
 
+  .embed & {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+
+    &:before {
+      font-size: 32px;
+    }
+  }
+
   &.icon-facebook {
     background: #3b5998;
 
@@ -194,5 +214,9 @@
     &:hover {
       background: darken($pear, 10%);
     }
+  }
+
+  .embed & {
+    display: inline-block !important;
   }
 }

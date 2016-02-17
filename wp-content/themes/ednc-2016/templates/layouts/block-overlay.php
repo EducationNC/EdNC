@@ -24,6 +24,11 @@ if ( function_exists( 'coauthors_posts_links' ) ) {
 
 $featured_image = Media\get_featured_image('large');
 $title_overlay = get_field('title_overlay');
+
+$target = '';
+if (is_embed()) {
+  $target = 'target="_blank"';
+}
 ?>
 
 <article <?php post_class('block-overlay photo-overlay hidden-xs ' . implode($classes, ' ')); ?>>
@@ -60,7 +65,7 @@ $title_overlay = get_field('title_overlay');
     </header>
   <?php } ?>
 
-  <a class="mega-link" href="<?php the_permalink(); ?>"></a>
+  <a class="mega-link" href="<?php the_permalink(); ?>" <?php echo $target; ?>></a>
 </article>
 
 <div class="visible-xs-block">

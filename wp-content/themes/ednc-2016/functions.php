@@ -28,8 +28,9 @@ $sage_includes = [
   'lib/nav-widgets.php',        // Widgetize nav menus
   'lib/wrapper.php',            // Theme wrapper class
   'lib/customizer.php',         // Theme customizer
-  'lib/widgets/register.php',    // Register widgets
-  'lib/social-share-count.php'  // Social share counts
+  'lib/widgets/register.php',   // Register widgets
+  'lib/social-share-count.php', // Social share counts
+  'lib/ajax-data-viz.php'       // AJAX functions for data-viz
 ];
 
 foreach ($sage_includes as $file) {

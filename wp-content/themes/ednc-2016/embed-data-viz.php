@@ -31,7 +31,7 @@ if ( ! headers_sent() ) {
 	do_action( 'embed_head' );
 	?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class('embed'); ?>>
 <?php
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();

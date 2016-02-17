@@ -1,5 +1,6 @@
 <?php
 
+use Roots\Sage\Extras;
 use Roots\Sage\ShareCount;
 
 // Get post ID
@@ -23,19 +24,19 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
 
     <div class="modal fade" id="social-share-modal_<?php echo $post->post_name; ?>" tabindex="-1" role="dialog" aria-labelledby="social-share-modal">
       <div class="modal-dialog" role="document">
-        <a rel="nofollow" class="icon-facebook social-share-link" href="<?php echo $facebookURL; ?>">
+        <a rel="nofollow" class="icon-facebook social-share-link" href="<?php echo $facebookURL; ?>" target="_blank">
           Share on facebook
         </a>
-        <a rel="nofollow" class="icon-twitter social-share-link" href="<?php echo $twitterURL; ?>">
+        <a rel="nofollow" class="icon-twitter social-share-link" href="<?php echo $twitterURL; ?>" target="_blank">
           Tweet on Twitter
         </a>
-        <a rel="nofollow" class="icon-linkedin social-share-link" href="<?php echo $linkedinURL; ?>">
+        <a rel="nofollow" class="icon-linkedin social-share-link" href="<?php echo $linkedinURL; ?>" target="_blank">
           Share on LinkedIn
         </a>
-        <a rel="nofollow" class="icon-email social-share-link" href="<?php echo $emailURL; ?>">
+        <a rel="nofollow" class="icon-email social-share-link" href="<?php echo $emailURL; ?>" target="_blank">
           Email this page
         </a>
-        <a rel="nofollow" class="print-share icon-fax hidden-xs hidden-sm" href="http://www.printfriendly.com/print?<?php echo $crunchifyURL; ?>">
+        <a rel="nofollow" class="print-share icon-fax hidden-xs hidden-sm" href="http://www.printfriendly.com/print?<?php echo $crunchifyURL; ?>" target="_blank">
           Print this page
         </a>
 
@@ -47,7 +48,7 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
           </p>
 
           <h6>HTML Embed</h6>
-          <textarea class="wp-embed-share-input" aria-describedby="wp-embed-share-description-html" tabindex="0" readonly><?php echo esc_textarea( get_post_embed_html( 600, 400 ) ); ?></textarea>
+          <textarea class="wp-embed-share-input" aria-describedby="wp-embed-share-description-html" tabindex="0" readonly><?php echo esc_textarea( Extras\get_post_embed_html( 600, 400 ) ); ?></textarea>
           <p class="wp-embed-share-description" id="wp-embed-share-description-html">
             <?php _e( 'Copy and paste this code into your site to embed.' ); ?>
           </p>
