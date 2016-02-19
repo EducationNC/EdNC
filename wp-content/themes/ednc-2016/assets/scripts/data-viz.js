@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
 
           // Make sure columns are properly included since toJSON() drops calculated columns for some unknown reason
           var columns = eval(json.d.columns);
-          viz.setView({'columns' : columns})
+          viz.setView({'columns' : columns});
           viz_lg.setView({'columns' : columns});
 
           drawCharts(viz, viz_lg);
@@ -123,7 +123,7 @@ jQuery(document).ready(function($) {
 
         google.visualization.events.addListener(viz_lg, 'ready', function () {
           // Get PNG image of large chart
-          if (json.type != 'Table') {
+          if (json.type !== 'Table') {
             var chart_image = viz_lg.getChart().getImageURI();
             $('#viz_lg_' + id).hide().promise().done(setHeight());
 
@@ -192,7 +192,7 @@ jQuery(document).ready(function($) {
 
         var viz = new google.visualization.ChartWrapper({
           chartType: json.type,
-          dataSourceUrl: json.d.data_source + '/gviz/tq?' + json.d.query_string,
+          dataSourceUrl: json.d.data_source + '/gviz/tq?',
           options: options,
           view: {'columns' : columns},
           containerId: 'viz_' + id
@@ -200,7 +200,7 @@ jQuery(document).ready(function($) {
 
         var viz_lg = new google.visualization.ChartWrapper({
           chartType: json.type,
-          dataSourceUrl: json.d.data_source + '/gviz/tq?' + json.d.query_string,
+          dataSourceUrl: json.d.data_source + '/gviz/tq?',
           options: options_lg,
           view: {'columns' : columns},
           containerId: 'viz_lg_' + id

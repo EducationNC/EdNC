@@ -3,7 +3,6 @@
 $d = [
   'type' => get_field('type'),
   'data_source' => get_field('data_source'),
-  'query_string' => get_field('query_string'),
   'options' => preg_replace('/\s+/', ' ', get_field('options')),
   'columns' => preg_replace('/\s+/', ' ', get_field('columns')),
   'cartodb_url' => get_field('cartodb_url'),
