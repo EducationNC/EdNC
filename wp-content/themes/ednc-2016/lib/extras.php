@@ -229,7 +229,7 @@ JS;
 		esc_url( $embed_url ),
 		absint( $width ),
 		absint( $height ),
-		esc_attr__( 'Embedded WordPress Post' )
+		esc_attr__( 'Embedded EdNC.org Post' )
 	);
 
 	/**

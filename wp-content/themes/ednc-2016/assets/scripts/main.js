@@ -376,6 +376,33 @@
         $('.fancy-number').each(function() {
           $(this).fitText();
         });
+      },
+      finalize: function() {
+        /**
+         * Owl Carousel 2
+         */
+        $(window).on('load', function() {
+          $('.g-carousel').each(function() {
+            $(this).owlCarousel({
+              items: 1,
+              loop: true,
+              autoHeight: true,
+              animateOut: 'fadeOut',
+              autoplay: true,
+              autoplayTimeout: 3000,
+              autoplayHoverPause: true
+            });
+          });
+        });
+
+        // Manual carousel nav
+        $('.fc-nav .fc-next').on(clickortap, function() {
+          owl.trigger('next.owl.carousel');
+        });
+
+        $('.fc-nav .fc-prev').on(clickortap, function() {
+          owl.trigger('prev.owl.carousel');
+        });
       }
     },
     // Data Dashboard
@@ -411,6 +438,61 @@
           });
         });
 
+        // Gallery lightboxes
+        $('.gallery').each(function() { // the containers for all your galleries
+          $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+              enabled:true
+            },
+            midClick: true,
+            mainClass: 'mfp-with-zoom',
+            zoom: {
+              enabled: true,
+              duration: 300,
+              easing: 'ease-in-out',
+              opener: function(openerElement) {
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+              }
+            },
+            image: {
+              cursor: 'mfp-zoom-out-cur',
+              verticalFit: true,
+              titleSrc: function(item) {
+                return $(item.el).children('img').attr('alt');
+              }
+            }
+          });
+        });
+
+      },
+      finalize: function() {
+        /**
+         * Owl Carousel 2
+         */
+        $(window).on('load', function() {
+          $('.g-carousel').each(function() {
+            $(this).owlCarousel({
+              items: 1,
+              loop: true,
+              autoHeight: true,
+              animateOut: 'fadeOut',
+              autoplay: true,
+              autoplayTimeout: 3000,
+              autoplayHoverPause: true
+            });
+          });
+        });
+
+        // Manual carousel nav
+        $('.fc-nav .fc-next').on(clickortap, function() {
+          owl.trigger('next.owl.carousel');
+        });
+
+        $('.fc-nav .fc-prev').on(clickortap, function() {
+          owl.trigger('prev.owl.carousel');
+        });
       }
     }
   };
