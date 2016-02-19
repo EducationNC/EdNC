@@ -30,7 +30,7 @@ $sage_includes = [
   'lib/customizer.php',         // Theme customizer
   'lib/widgets/register.php',   // Register widgets
   'lib/social-share-count.php', // Social share counts
-  'lib/ajax-data-viz.php'       // AJAX functions for data-viz
+  'lib/data-viz.php'            // Functions for data-viz -- including AJAX and transients
 ];
 
 foreach ($sage_includes as $file) {

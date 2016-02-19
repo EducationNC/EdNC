@@ -5,7 +5,7 @@ $d = [
   'data_source' => get_field('data_source'),
   'query_string' => get_field('query_string'),
   'options' => preg_replace('/\s+/', ' ', get_field('options')),
-  'extra_js' => get_field('extra_js'),
+  'columns' => preg_replace('/\s+/', ' ', get_field('columns')),
   'cartodb_url' => get_field('cartodb_url'),
   'text-based_data' => get_field('text-based_data'),
   'notes' => get_field('description'),
@@ -59,9 +59,17 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
       if (!empty($d['data_source'])) {
         ?>
 
-        <div class="hidden" id="dataviz_png_<?php echo $vars['post_name']; ?>"></div>
-        <div class="print-no" id="dataviz_lg_<?php echo $vars['post_name']; ?>"></div>
-        <div class="print-no data-viz-chart" id="dataviz_<?php echo $vars['post_name']; ?>"></div>
+        <div class="hidden" id="viz_png_<?php echo $vars['post_name']; ?>">
+          <?php
+          $upload_dir = wp_upload_dir();
+          $filename = '/data-viz/' . $post_name . '.png';
+          if (file_exists($upload_dir['basedir'] . $filename)) {
+            echo '<img src="' . $upload_dir['baseurl'] . $filename . '" />';
+          }
+          ?>
+        </div>
+        <div class="print-no" id="viz_lg_<?php echo $vars['post_name']; ?>"></div>
+        <div class="print-no data-viz-chart" id="viz_<?php echo $vars['post_name']; ?>"></div>
 
         <script type="text/javascript">
           // <![CDATA[

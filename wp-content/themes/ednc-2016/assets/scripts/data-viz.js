@@ -1,86 +1,171 @@
-// Merges two arrays
-function extend(obj, src) {
-  for (var key in src) {
-    if (src.hasOwnProperty(key)) {
-      obj[key] = src[key];
-    }
-  }
-  return obj;
-}
-
-/**
- * For embeds: Send this document's height to the parent (embedding) site.
- * This code was taken from the wp-embed-template.js file
- */
-var message, secret, secretTimeout;
-
-function sendEmbedMessage( message, value ) {
-	window.parent.postMessage( {
-		message: message,
-		value: value,
-		secret: secret
-	}, '*' );
-}
-
-function getSecret() {
-  if ( window.self === window.top || !!secret ) {
-   return;
-  }
-
-  secret = window.location.hash.replace( /.*secret=([\d\w]{10}).*/, '$1' );
-
-  clearTimeout( secretTimeout );
-
-  secretTimeout = setTimeout( function () {
-   getSecret();
-  }, 100 );
-}
-
-function setHeight() {
-  if ( window.self === window.top ) {
-  	return;
-  }
-  getSecret();
-
-  sendEmbedMessage( 'height', Math.ceil( document.body.getBoundingClientRect().height ) );
-}
-
-/**
- * Using jQuery for most of the data viz functionality
- */
 jQuery(document).ready(function($) {
 
-  // Load Google Charts API
+  /**
+   * Load Google Charts API
+   */
   google.charts.load('current', {packages: ['corechart', 'table']});
-  google.charts.setOnLoadCallback(getData);
+  google.charts.setOnLoadCallback(initCharts);
 
-  function getData() {
 
+  /**
+   * Merges two arrays
+   */
+  function extend(obj, src) {
+    for (var key in src) {
+      if (src.hasOwnProperty(key)) {
+        obj[key] = src[key];
+      }
+    }
+    return obj;
+  }
+
+
+  /**
+   * For embeds: Send this document's height to the parent (embedding) site.
+   * The code for the next 3 functions were adapted from the default wp-embed-template.js file
+   */
+  var message, secret, secretTimeout;
+  function sendEmbedMessage( message, value ) {
+  	window.parent.postMessage( {
+  		message: message,
+  		value: value,
+  		secret: secret
+  	}, '*' );
+  }
+  function getSecret() {
+    if ( window.self === window.top || !!secret ) {
+     return;
+    }
+
+    secret = window.location.hash.replace( /.*secret=([\d\w]{10}).*/, '$1' );
+
+    clearTimeout( secretTimeout );
+
+    secretTimeout = setTimeout( function () {
+     getSecret();
+    }, 100 );
+  }
+  function setHeight() {
+    if ( window.self === window.top ) {
+    	return;
+    }
+    getSecret();
+
+    sendEmbedMessage( 'height', Math.ceil( document.body.getBoundingClientRect().height ) );
+  }
+
+
+  /**
+   * This function handles loading the charts
+   */
+  function initCharts() {
+
+    // Loop through each data-viz on page
     $('.data-section.has-data-viz').each(function() {
-      // Unique ID for this data viz
-      var id = $(this).attr('id');
+      var chart, chart_lg,
+          id = $(this).attr('id'),  // Unique ID for this data viz
+          json = window[id];  // Data for chart passed from PHP
 
-      // Get JSON data passed from PHP
-      var json = window[id];
+      /**
+       * Use AJAX to check WP Transients for cached charts data
+       */
+      var settings = {
+        action: 'check_dataviz_transients',
+        security: Ajax.security,
+        id: id
+      };
 
-      // Get data from Google Spreadsheet
-      var query = new google.visualization.Query(json.d.data_source + '/gviz/tq?' + json.d.query_string);
-      query.send(handleQueryResponse);
+      $.post(Ajax.ajaxurl, settings, function(response) {
+        response = JSON.parse(response);
+        if (response.viz) {
+          // Get data from transients and draw
+          viz = new google.visualization.ChartWrapper(response.viz.replace(/\\"/g, '"').replace(/\\'/g, '\''));
+          viz_lg = new google.visualization.ChartWrapper(response.viz_lg.replace(/\\"/g, '"').replace(/\\'/g, '\''));
 
-      // This function takes the data from the query and draws charts
-      function handleQueryResponse(response) {
-        // Throw alert if there is an error
-        if (response.isError()) {
-          alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-          return;
+          // Make sure columns are properly included since toJSON() drops calculated columns for some unknown reason
+          var columns = eval(json.d.columns);
+          viz.setView({'columns' : columns})
+          viz_lg.setView({'columns' : columns});
+
+          drawCharts(viz, viz_lg);
+        } else {
+          // If no transient, use JS to get data and build chart
+          getViz();
         }
+      });
 
-        // Set up data and options for Charts API
-        var data = response.getDataTable();
-        var view = new google.visualization.DataView(data);
 
-        // Defaults
+      /**
+       * Use AJAX to set chart data in WP Transients
+       */
+      function setTransients(viz, viz_lg) {
+        var settings = {
+          action: 'set_dataviz_transients',
+          security: Ajax.security,
+          id: id,
+          viz: viz.toJSON(),
+          viz_lg: viz_lg.toJSON()
+        };
+
+        $.post(Ajax.ajaxurl, settings, function(response) {});
+      }
+
+
+      /**
+       * Draw charts
+       */
+      function drawCharts(viz, viz_lg) {
+        // Draw main chart
+        viz.draw();
+
+        // Draw large chart that image is generated from
+        viz_lg.draw();
+
+        google.visualization.events.addListener(viz_lg, 'ready', function () {
+          // Get PNG image of large chart
+          if (json.type != 'Table') {
+            var chart_image = viz_lg.getChart().getImageURI();
+            $('#viz_lg_' + id).hide().promise().done(setHeight());
+
+            // Save PNG to server with AJAX
+            var data = {
+              action: 'save_png',
+              security: Ajax.security,
+              png: chart_image,
+              id: id
+            };
+
+            $.post(Ajax.ajaxurl, data, function(response) {
+              // Display image that was just saved to server
+              $('#viz_png_' + id).html('<img src="' + response + '">');
+            });
+          } else {
+            $('#viz_lg_' + id).hide();
+          }
+
+          // For embeds: Fix iframe height after charts load
+          google.visualization.events.addListener(viz, 'ready', function(response) {
+            setHeight();
+          });
+
+          // Make sure charts and iframes they're embedded in are responsive
+          $(window).resize(function() {
+            // Redraw chart to correct width on resize
+            viz.draw();
+            // Fix height of iframe on resize
+            setHeight();
+          });
+        });
+      }
+
+
+      /**
+       * Get chart visualization
+       */
+      function getViz() {
+        // Default options
         var options = {
+          height: 400,
           chartArea: {left: 'auto', width: '85%', top: 10, height: '85%'},
           legend: {position: 'in'},
           titlePosition: 'in',
@@ -98,67 +183,34 @@ jQuery(document).ready(function($) {
         // Merge option defaults with custom options
         extend(options, custom[0]);
 
-        // Create new options var for chart image
-        var options_png = JSON.parse(JSON.stringify(options));
+        // Create new options var for large chart that image is generated from
+        var options_lg = JSON.parse(JSON.stringify(options));
 
-        // Make dimensions for chart image larger
-        extend(options_png, {width: 1200, height: 630});
+        extend(options_lg, {width: 1200, height: 630});
 
-        // Pull in extra functions specific to this visualization
-        eval(json.d.extra_js);
+        var columns = eval(json.d.columns);
 
-        // Get chart visualizations from Google
-        var chart, chart_png;
-        if (json.d.type === 'bar_chart') {
-          chart = new google.visualization.ColumnChart($('#dataviz_' + id)[0]);
-          chart_png = new google.visualization.ColumnChart($('#dataviz_lg_' + id)[0]);
-        } else if (json.d.type === 'pie_chart') {
-          chart = new google.visualization.PieChart($('#dataviz_' + id)[0]);
-          chart_png = new google.visualization.PieChart($('#dataviz_lg_' + id)[0]);
-        } else if (json.d.type === 'scatter_chart') {
-          chart = new google.visualization.ScatterChart($('#dataviz_' + id)[0]);
-          chart_png = new google.visualization.ScatterChart($('#dataviz_lg_' + id)[0]);
-        } else if (json.d.type === 'table') {
-          chart = new google.visualization.Table($('#dataviz_' + id)[0]);
-          chart_png = new google.visualization.Table($('#dataviz_lg_' + id)[0]);
-        }
-
-        // Draw main chart
-        chart.draw(view, options);
-
-        // Draw large PNG chart for printing and sharing
-        chart_png.draw(view, options_png);
-
-        // Get PNG image of chart
-        google.visualization.events.addListener(chart_png, 'ready', function () {
-          var chart_image = chart_png.getImageURI();
-          $('#dataviz_lg_' + id).hide().promise().done(setHeight());
-
-          // Save PNG to server with AJAX
-          var save_png_data = {
-            action: 'save_png',
-            security: Ajax.security,
-            png: chart_image,
-            id: id
-          };
-
-          $.post(Ajax.ajaxurl, save_png_data, function(response) {
-            // Display image that was just saved to server
-            $('#dataviz_png_' + id).html('<img src="' + response + '">');
-          });
+        var viz = new google.visualization.ChartWrapper({
+          chartType: json.type,
+          dataSourceUrl: json.d.data_source + '/gviz/tq?' + json.d.query_string,
+          options: options,
+          view: {'columns' : columns},
+          containerId: 'viz_' + id
         });
 
-        // For embeds: Fix iframe height
-        google.visualization.events.addListener(chart, 'ready', function(response) {
-          setHeight();
+        var viz_lg = new google.visualization.ChartWrapper({
+          chartType: json.type,
+          dataSourceUrl: json.d.data_source + '/gviz/tq?' + json.d.query_string,
+          options: options_lg,
+          view: {'columns' : columns},
+          containerId: 'viz_lg_' + id
         });
 
-        jQuery(window).resize(function() {
-          // Redraw chart to correct width on resize
-          chart.draw(view, options);
-          // Fix height of iframe on resize
-          // setHeight();
-        });
+        // Draw the charts
+        drawCharts(viz, viz_lg);
+
+        // Set the transients
+        setTransients(viz, viz_lg);
       }
 
     });

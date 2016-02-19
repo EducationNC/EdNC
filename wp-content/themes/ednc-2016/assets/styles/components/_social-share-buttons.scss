@@ -74,7 +74,7 @@
   }
 
   @media screen and (orientation:portrait) {
-    body:not(.embed) & {
+    body:not(.embed):not(.post-type-archive-data) & {
       .modal-dialog {
         width: 100px;
         margin-top: -240px;
@@ -91,7 +91,7 @@
     }
   }
 
-  .embed & {
+  .embed &, .post-type-archive-data & {
     .modal-dialog {
       max-width: 480px;
       margin-top: -175px;
@@ -163,7 +163,7 @@
     }
   }
 
-  .embed & {
+  .embed &, .post-type-archive-data & {
     margin: 0;
     width: 60px;
     height: 60px;
@@ -216,7 +216,7 @@
     }
   }
 
-  .embed & {
+  .embed &, .post-type-archive-data & {
     display: inline-block !important;
   }
 }
