@@ -408,7 +408,7 @@ function register_post_types() {
 			  'edit_others_posts'  => 'edit_others_data_vizs',
 			  'publish_posts'      => 'publish_data_vizs',
 			  'read_private_posts' => 'read_private_data_vizs',
-			  'create_posts'       => 'edit_data_vizs',
+			  'create_posts'       => 'create_data_vizs',
 			),
 			'map_meta_cap' => true,
 			'hierarchical' => true,
