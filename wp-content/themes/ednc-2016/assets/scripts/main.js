@@ -365,10 +365,18 @@
     // Data viz embeds
     'single_data_viz': {
       init: function() {
-        /*
-         * Add special class to default WP embeds
-         */
+        // Add special class to default WP embeds
         $('iframe.wp-embedded-content').not('[src*="/flash-cards/"], [src*="/data-viz/"]').closest('.entry-content-asset').addClass('wp-embed');
+
+        /**
+         * Load Google Charts API
+         */
+        google.charts.load('current', {packages: ['corechart', 'table']});
+        google.charts.setOnLoadCallback(initDashboard);
+
+        function initDashboard() {
+          $('.data-viz').initCharts();
+        }
 
         /**
          * FitText for big fancy numbers
@@ -411,6 +419,24 @@
         // Add special class to default WP embeds
         $('iframe.wp-embedded-content').not('[src*="/flash-cards/"], [src*="/data-viz/"]').closest('.entry-content-asset').addClass('wp-embed');
 
+        // Make sure WordPress embeds have correct permissions
+        $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+
+        /**
+         * Load Google Charts API
+         */
+        google.charts.load('current', {packages: ['corechart', 'table']});
+        google.charts.setOnLoadCallback(initDashboard);
+
+        function initDashboard() {
+          // Kick scroll event
+          $(window).scroll();
+          // Load each dashboard section one at a time
+          $('.dashboard-section').scrolledIntoView().on('scrolledin', function() {
+            $(this).initCharts();
+          });
+        }
+
         /**
          * FitText for big fancy numbers
          */
@@ -428,9 +454,19 @@
                 return (this.top = $('#data-dash-nav').offset().top - 20);
               },
               bottom: function () {
-                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 36);
               }
             }
+          }).on('affix.bs.affix', function() {
+            // Set width of element on affix
+            width = $(this).width();
+            $(this).width(width);
+          }).on('affix-top.bs.affix', function() {
+            // Remove width of element when at top
+            $(this).removeAttr('style');
+          }).on('affix-bottom.bs.affix', function() {
+            // Set width of element when at bottom
+            $(this).width('auto');
           });
           $('body').scrollspy({
             target: '#data-dash-nav',

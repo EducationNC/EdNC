@@ -14,4 +14,17 @@ use Roots\Sage\NavData;
     ])
     ?>
   </ul>
+
+  <div class="text-center">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- Data Dashboard Sidebar -->
+      <ins class="adsbygoogle top-margin"
+           style="display:block"
+           data-ad-client="ca-pub-2642458473228537"
+           data-ad-slot="8816525007"
+           data-ad-format="horizontal"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
 </div>

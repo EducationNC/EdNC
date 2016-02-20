@@ -13,8 +13,7 @@
           elemTop = $el.offset().top,
           elemBottom = elemTop + $el.height();
 
-      return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom)
-                && (elemBottom <= docViewBottom) &&  (elemTop >= docViewTop) );
+      return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom));
    }
 
    $window.on('scroll', function ( e ) {

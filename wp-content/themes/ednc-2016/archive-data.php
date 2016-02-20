@@ -16,7 +16,7 @@ use Roots\Sage\Extras;
   </div>
 
   <div class="row archive">
-    <div class="col-md-3">
+    <div class="col-md-3 hidden-xs hidden-sm">
       <?php get_template_part('templates/components/sidebar', 'data-dashboard'); ?>
     </div>
 
@@ -73,4 +73,4 @@ use Roots\Sage\Extras;
   </div>
 </div>
 
-<?php get_template_part('templates/components/social-share'); ?>
+<?php // get_template_part('templates/components/social-share'); ?>

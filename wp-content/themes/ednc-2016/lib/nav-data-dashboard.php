@@ -84,7 +84,7 @@ class Walker_Data_Nav extends Walker_Page {
 
 		/** This filter is documented in wp-includes/post-template.php */
 		$output .= $indent . sprintf(
-			'<li class="%s"><a href="#%s">%s%s%s</a>',
+			'<li class="%s"><a href="#%s"><span>%s%s%s</span></a>',
 			$css_classes,
 			$page->post_name,
 			$args['link_before'],

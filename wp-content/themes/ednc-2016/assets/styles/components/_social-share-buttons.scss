@@ -217,6 +217,8 @@
   }
 
   .single-data-viz &, .post-type-archive-data & {
-    display: inline-block !important;
+    @media screen and (max-width: $screen-sm-max) {
+      display: inline-block !important;
+    }
   }
 }

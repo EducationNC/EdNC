@@ -6,24 +6,24 @@
   }
 
   .entry-header {
-    margin-bottom: 1em;
+    margin: 1em 0;
 
     @media (min-width: $screen-md-min) {
       margin-top: 7em;
     }
   }
 
-  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-    .container {
-      width: 874px;
-    }
-  }
-
-  @media (min-width: $screen-lg-min) {
-    .container {
-      width: 1160px;
-    }
-  }
+  // @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  //   .container {
+  //     width: 874px;
+  //   }
+  // }
+  //
+  // @media (min-width: $screen-lg-min) {
+  //   .container {
+  //     width: 1160px;
+  //   }
+  // }
 }
 
 .dashboard-section {
@@ -64,12 +64,8 @@
     transition: font-size .3s ease-in-out;
   }
 
-  .meta {
-    margin-right: 75px;
-  }
-
   .btn {
-    margin-bottom: 20px;
+    margin-bottom: 4px;
   }
 
   .popover-content {
@@ -89,7 +85,7 @@
     bottom: 0;
     right: 0;
     display: block;
-    background: $sterling;
+    background: $denim;
     color: $white;
     text-decoration: none;
     text-align: center;
@@ -104,7 +100,7 @@
     }
 
     &:hover {
-      background: $gray;
+      background: $denim-darker;
       color: $white;
       text-decoration: none;
     }
@@ -149,16 +145,24 @@
       li {
         // @extend h4;
         margin: 0;
-        list-style-type: square;
-        list-style-position: inside;
         color: $pearl;
-        display: list-item;
+        display: block;
+
+        a {
+          list-style-type: square;
+          list-style-position: inside;
+          display: list-item;
+        }
       }
 
       &.active {
         & > a {
           color: $white;
           background: $gray;
+
+          span {
+            color: $white;
+          }
         }
       }
     }
@@ -166,12 +170,16 @@
     a {
       padding: 10px 5px 7px;
       text-decoration: none;
-      color: $ash;
+      color: $pearl;
       position: relative;
+
+      span {
+        color: $ash;
+      }
 
       &:hover, &:focus {
         background: $pearl;
-        // color: $plum;
+        color: $steel;
       }
     }
 
@@ -183,29 +191,15 @@
   }
 
   .affix {
-    @media (max-width: $screen-sm-max) {
-      position: relative;
-    }
-
     @media (min-width: $screen-md-min) {
-      width: 271px;
-      top: 20px;
+      top: 10px;
       position: fixed;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      width: 270px;
     }
   }
 
   .affix-bottom {
     @media (min-width: $screen-md-min) {
       position: absolute;
-      width: 271px;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      width: 270px;
     }
   }
 }

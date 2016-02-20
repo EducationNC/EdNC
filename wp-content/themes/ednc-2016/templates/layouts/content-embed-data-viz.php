@@ -50,7 +50,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
 
 <div class="row data-section <?php if (!empty($vars)) echo 'has-data-viz'; ?>" id="<?php echo $post_name; ?>">
   <div class="col-md-3">
-    <p><?php the_title(); ?></p>
+    <p class="no-bottom-margin"><?php the_title(); ?></p>
   </div>
 
   <div class="col-md-9">
@@ -58,7 +58,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
       if (!empty($d['data_source'])) {
         ?>
 
-        <div class="hidden" id="viz_png_<?php echo $vars['post_name']; ?>">
+        <div class="loading" id="viz_png_<?php echo $vars['post_name']; ?>">
           <?php
           $upload_dir = wp_upload_dir();
           $filename = '/data-viz/' . $post_name . '.png';
@@ -66,6 +66,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
             echo '<img src="' . $upload_dir['baseurl'] . $filename . '" />';
           }
           ?>
+          <div class="loader"></div>
         </div>
         <div class="print-no" id="viz_lg_<?php echo $vars['post_name']; ?>"></div>
         <div class="print-no data-viz-chart" id="viz_<?php echo $vars['post_name']; ?>"></div>
@@ -90,8 +91,6 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
       <button class="btn btn-default" data-toggle="popover" data-placement="top" data-trigger="focus" title="Source" data-html="true" data-content="<?php echo str_replace('"', '\'', $d['source']); ?>">Explore this data</button>
     <?php } ?>
 
-    <div class="share">
-      <?php get_template_part('templates/components/social-share', 'embed'); ?>
-    </div>
+    <?php get_template_part('templates/components/social-share', 'embed'); ?>
   </div>
 </div>

@@ -1,15 +1,9 @@
-jQuery(document).ready(function($) {
+/**
+ * Everything we need to load data visualizations
+ */
+(function ($) {
 
-  /**
-   * Load Google Charts API
-   */
-  google.charts.load('current', {packages: ['corechart', 'table']});
-  google.charts.setOnLoadCallback(initCharts);
-
-
-  /**
-   * Merges two arrays
-   */
+  // Merges two arrays
   function extend(obj, src) {
     for (var key in src) {
       if (src.hasOwnProperty(key)) {
@@ -18,7 +12,6 @@ jQuery(document).ready(function($) {
     }
     return obj;
   }
-
 
   /**
    * For embeds: Send this document's height to the parent (embedding) site.
@@ -58,10 +51,10 @@ jQuery(document).ready(function($) {
   /**
    * This function handles loading the charts
    */
-  function initCharts() {
-
+  $.fn.initCharts = function() {
+    
     // Loop through each data-viz on page
-    $('.data-section.has-data-viz').each(function() {
+    this.find('.data-section.has-data-viz').each(function() {
       var chart, chart_lg,
           id = $(this).attr('id'),  // Unique ID for this data viz
           json = window[id];  // Data for chart passed from PHP
@@ -125,7 +118,8 @@ jQuery(document).ready(function($) {
           // Get PNG image of large chart
           if (json.type !== 'Table') {
             var chart_image = viz_lg.getChart().getImageURI();
-            $('#viz_lg_' + id).hide().promise().done(setHeight());
+            $('#viz_lg_' + id + ', #viz_png_' + id).hide().promise().done(setHeight());
+            $('#viz_png_' + id).removeClass('loading');
 
             // Save PNG to server with AJAX
             var data = {
@@ -214,5 +208,8 @@ jQuery(document).ready(function($) {
       }
 
     });
-  }
-});
+
+    return this;
+  };
+
+})(jQuery);
