@@ -2321,291 +2321,323 @@ acf_add_local_field_group(array (
 	'description' => '',
 ));
 
-// acf_add_local_field_group(array (
-// 	'key' => 'group_56bf752148f92',
-// 	'title' => 'Data Viz',
-// 	'fields' => array (
-// 		array (
-// 			'key' => 'field_56bf752ed63b7',
-// 			'label' => 'Type',
-// 			'name' => 'type',
-// 			'type' => 'select',
-// 			'instructions' => '',
-// 			'required' => 0,
-// 			'conditional_logic' => 0,
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'choices' => array (
-// 				'false' => '(Select one)',
-// 				'bar_chart' => 'Bar Chart',
-// 				'pie_chart' => 'Pie Chart',
-// 				'scatter_chart' => 'Scatter Chart',
-// 				'table' => 'Table',
-// 				'map' => 'CartoDB Map',
-// 				'text' => 'Text / Image / EdNC link',
-// 			),
-// 			'default_value' => array (
-// 			),
-// 			'allow_null' => 0,
-// 			'multiple' => 0,
-// 			'ui' => 0,
-// 			'ajax' => 0,
-// 			'placeholder' => '',
-// 			'disabled' => 0,
-// 			'readonly' => 0,
-// 		),
-// 		array (
-// 			'key' => 'field_56bf7584d63b8',
-// 			'label' => 'Data Source',
-// 			'name' => 'data_source',
-// 			'type' => 'url',
-// 			'instructions' => '',
-// 			'required' => 0,
-// 			'conditional_logic' => array (
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'bar_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'pie_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'scatter_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'table',
-// 					),
-// 				),
-// 			),
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'default_value' => '',
-// 			'placeholder' => '',
-// 		),
-// 		array (
-// 			'key' => 'field_56bf75e7d63c1',
-// 			'label' => 'Options',
-// 			'name' => 'options',
-// 			'type' => 'textarea',
-// 			'instructions' => 'Options for the chart in JavaScript object format.',
-// 			'required' => 0,
-// 			'conditional_logic' => array (
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'bar_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'pie_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'scatter_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'table',
-// 					),
-// 				),
-// 			),
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'default_value' => '',
-// 			'placeholder' => '',
-// 			'maxlength' => '',
-// 			'rows' => '',
-// 			'new_lines' => '',
-// 			'readonly' => 0,
-// 			'disabled' => 0,
-// 		),
-// 		array (
-// 			'key' => 'field_56c627dfd5b71',
-// 			'label' => 'Columns',
-// 			'name' => 'columns',
-// 			'type' => 'textarea',
-// 			'instructions' => 'Configurations for the view\'s columns in JavaScript object format.',
-// 			'required' => 0,
-// 			'conditional_logic' => array (
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'bar_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'pie_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'scatter_chart',
-// 					),
-// 				),
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'table',
-// 					),
-// 				),
-// 			),
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'default_value' => '',
-// 			'placeholder' => '',
-// 			'maxlength' => '',
-// 			'rows' => '',
-// 			'new_lines' => '',
-// 			'readonly' => 0,
-// 			'disabled' => 0,
-// 		),
-// 		array (
-// 			'key' => 'field_56bf7678d63ca',
-// 			'label' => 'CartoDB URL',
-// 			'name' => 'cartodb_url',
-// 			'type' => 'oembed',
-// 			'instructions' => '',
-// 			'required' => 0,
-// 			'conditional_logic' => array (
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'map',
-// 					),
-// 				),
-// 			),
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'width' => '',
-// 			'height' => '',
-// 		),
-// 		array (
-// 			'key' => 'field_56bf7647d63c9',
-// 			'label' => 'Data',
-// 			'name' => 'text-based_data',
-// 			'type' => 'wysiwyg',
-// 			'instructions' => '',
-// 			'required' => 0,
-// 			'conditional_logic' => array (
-// 				array (
-// 					array (
-// 						'field' => 'field_56bf752ed63b7',
-// 						'operator' => '==',
-// 						'value' => 'text',
-// 					),
-// 				),
-// 			),
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'default_value' => '',
-// 			'tabs' => 'all',
-// 			'toolbar' => 'full',
-// 			'media_upload' => 1,
-// 		),
-// 		array (
-// 			'key' => 'field_56bf769bd63cb',
-// 			'label' => 'Notes',
-// 			'name' => 'description',
-// 			'type' => 'wysiwyg',
-// 			'instructions' => '',
-// 			'required' => 0,
-// 			'conditional_logic' => 0,
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'default_value' => '',
-// 			'tabs' => 'visual',
-// 			'toolbar' => 'basic',
-// 			'media_upload' => 0,
-// 		),
-// 		array (
-// 			'key' => 'field_56bfe13be53a5',
-// 			'label' => 'Source',
-// 			'name' => 'source',
-// 			'type' => 'wysiwyg',
-// 			'instructions' => '',
-// 			'required' => 0,
-// 			'conditional_logic' => 0,
-// 			'wrapper' => array (
-// 				'width' => '',
-// 				'class' => '',
-// 				'id' => '',
-// 			),
-// 			'default_value' => '',
-// 			'tabs' => 'visual',
-// 			'toolbar' => 'basic',
-// 			'media_upload' => 0,
-// 		),
-// 	),
-// 	'location' => array (
-// 		array (
-// 			array (
-// 				'param' => 'post_type',
-// 				'operator' => '==',
-// 				'value' => 'data-viz',
-// 			),
-// 		),
-// 	),
-// 	'menu_order' => 0,
-// 	'position' => 'normal',
-// 	'style' => 'default',
-// 	'label_placement' => 'top',
-// 	'instruction_placement' => 'label',
-// 	'hide_on_screen' => '',
-// 	'active' => 1,
-// 	'description' => '',
-// ));
-//
+acf_add_local_field_group(array (
+	'key' => 'group_56bf752148f92',
+	'title' => 'Data Viz',
+	'fields' => array (
+		array (
+			'key' => 'field_56bf752ed63b7',
+			'label' => 'Type',
+			'name' => 'type',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array (
+				'false' => '(Select one)',
+				'bar_chart' => 'Bar Chart',
+				'pie_chart' => 'Pie Chart',
+				'scatter_chart' => 'Scatter Chart',
+				'table' => 'Table',
+				'map' => 'CartoDB Map',
+				'text' => 'Text / Image / EdNC link',
+			),
+			'default_value' => array (
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 0,
+			'ajax' => 0,
+			'placeholder' => '',
+			'disabled' => 0,
+			'readonly' => 0,
+		),
+		array (
+			'key' => 'field_56bf7584d63b8',
+			'label' => 'Data Source',
+			'name' => 'data_source',
+			'type' => 'url',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'bar_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'pie_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'scatter_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'table',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+		),
+		array (
+			'key' => 'field_56bf75e7d63c1',
+			'label' => 'Options',
+			'name' => 'options',
+			'type' => 'textarea',
+			'instructions' => 'Options for the chart in JavaScript object format.',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'bar_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'pie_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'scatter_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'table',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => '',
+			'rows' => '',
+			'new_lines' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
+			'key' => 'field_56c627dfd5b71',
+			'label' => 'Columns',
+			'name' => 'columns',
+			'type' => 'textarea',
+			'instructions' => 'Configurations for the view\'s columns in JavaScript object format.',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'bar_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'pie_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'scatter_chart',
+					),
+				),
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'table',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => '',
+			'rows' => '',
+			'new_lines' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
+			'key' => 'field_56bf7678d63ca',
+			'label' => 'CartoDB URL',
+			'name' => 'cartodb_url',
+			'type' => 'oembed',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'map',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'width' => '',
+			'height' => '',
+		),
+		array (
+			'key' => 'field_56ca24c83a9d0',
+			'label' => 'Static map image',
+			'name' => 'static_map',
+			'type' => 'image',
+			'instructions' => 'Export image from CartoDB',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'map',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array (
+			'key' => 'field_56bf7647d63c9',
+			'label' => 'Data',
+			'name' => 'text-based_data',
+			'type' => 'wysiwyg',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_56bf752ed63b7',
+						'operator' => '==',
+						'value' => 'text',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 1,
+		),
+		array (
+			'key' => 'field_56bf769bd63cb',
+			'label' => 'Notes',
+			'name' => 'description',
+			'type' => 'wysiwyg',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'visual',
+			'toolbar' => 'basic',
+			'media_upload' => 0,
+		),
+		array (
+			'key' => 'field_56bfe13be53a5',
+			'label' => 'Source',
+			'name' => 'source',
+			'type' => 'wysiwyg',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'visual',
+			'toolbar' => 'basic',
+			'media_upload' => 0,
+		),
+	),
+	'location' => array (
+		array (
+			array (
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'data-viz',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => 1,
+	'description' => '',
+));
+
 endif;
