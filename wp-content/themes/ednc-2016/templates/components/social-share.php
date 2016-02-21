@@ -65,7 +65,7 @@ $count_num = num_format($counts->total);
   <a rel="nofollow" class="icon-email social-share-link" href="<?php echo $emailURL; ?>">
     Email this page
   </a>
-  <a rel="nofollow" class="print-share icon-fax hidden-xs hidden-sm" href="http://www.printfriendly.com/print?<?php echo $crunchifyURL; ?>">
+  <a rel="nofollow" class="other-share icon-fax hidden-xs hidden-sm" href="http://www.printfriendly.com/print?<?php echo $crunchifyURL; ?>">
     Print this page
   </a>
 </div>
@@ -87,7 +87,7 @@ $count_num = num_format($counts->total);
             <a rel="nofollow" class="icon-email social-share-link" href="<?php echo $emailURL; ?>">
               Email this page
             </a>
-            <a rel="nofollow" class="print-share icon-fax hidden-xs hidden-sm" href="http://www.printfriendly.com" onclick="window.print();return false;">
+            <a rel="nofollow" class="other-share icon-fax hidden-xs hidden-sm" href="http://www.printfriendly.com" onclick="window.print();return false;">
               Print this page
             </a>
           </div>

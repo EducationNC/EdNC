@@ -19,8 +19,11 @@ if ( ! headers_sent() ) {
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<title><?php echo wp_get_document_title(); ?></title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<?php get_template_part('templates/components/social-meta', 'data-viz'); ?>
+
 	<link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Merriweather:300,300italic,400,400italic,700,700italic|Open+Sans+Condensed:300" rel="stylesheet" type="text/css" />
 	<?php
 	/**

@@ -6,15 +6,18 @@ use Roots\Sage\Extras;
 ?>
 <div class="fixed-background-image" style="background-image:url('<?php echo Assets\asset_path('images/data-dashboard.jpg'); ?>')"></div>
 
-<div class="container data-dashboard">
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="entry-header">
-        <h1 class="entry-title">EdData Dashboard</h1>
+<div class="dashboard-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="entry-title">EdNC Data Dashboard</h1>
+        <div class="subtitle">Your portal to North Carolina's education data</div>
       </div>
     </div>
   </div>
+</div>
 
+<div class="container data-dashboard">
   <div class="row archive">
     <div class="col-md-3 hidden-xs hidden-sm">
       <?php get_template_part('templates/components/sidebar', 'data-dashboard'); ?>

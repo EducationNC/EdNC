@@ -96,6 +96,11 @@
       max-width: 480px;
       margin-top: -175px;
       margin-left: -240px;
+
+      @media (max-width: 480px) {
+        width: 100%;
+        margin-left: -50%;
+      }
     }
   }
 }
@@ -205,8 +210,16 @@
     }
   }
 }
-.print-share {
+.other-share {
   @extend .social-share-link;
+
+  &.icon-download {
+    background: $indigo;
+
+    &:hover {
+      background: darken($indigo, 10%);
+    }
+  }
 
   &.icon-fax {
     background: $pear;

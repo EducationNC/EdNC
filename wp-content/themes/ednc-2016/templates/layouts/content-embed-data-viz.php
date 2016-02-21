@@ -6,6 +6,7 @@ $d = [
   'options' => preg_replace('/\s+/', ' ', get_field('options')),
   'columns' => preg_replace('/\s+/', ' ', get_field('columns')),
   'cartodb_url' => get_field('cartodb_url'),
+  'static_map' => get_field('static_map'),
   'text-based_data' => get_field('text-based_data'),
   'notes' => get_field('description'),
   'source' => get_field('source'),
@@ -13,15 +14,32 @@ $d = [
   'button_text' => get_field('button_text')
 ];
 
-// Post name
+$title = get_the_title();
+$content = $d['text-based_data'];
+$permalink = get_the_permalink();
 $post_name = str_replace('-', '_', $post->post_name);
+
+// Clean up source HTML and add link URLs to end of each link text inside square brackets
+$source_html = $d['source'];
+preg_match_all('/https?\:\/\/[^\"\' \n]+/i', $source_html, $matches);
+// Loop through resulting matches
+foreach ($matches[0] as $match) {
+  // Get location of URL
+  $url_pos = strpos($source_html, $match);
+  // Find first occurance of </a> after URL
+  $end_a_pos = strpos($source_html, '</a>', $url_pos);
+  $source_html = substr($source_html, 0, $end_a_pos) . ' [' . $match . '] ' . substr($source_html, $end_a_pos);
+}
+$source_plain = trim(strip_tags($source_html));
 
 // For sections that use Google Charts API
 if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 'pie_chart' || $d['type'] == 'table') {
 
   // Create array to hold everything that will be passed to JS
   $vars = [
+    'title' => $title,
     'post_name' => $post_name,
+    'source' => $source_plain,
     'd' => $d
   ];
 
@@ -68,8 +86,8 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
           ?>
           <div class="loader"></div>
         </div>
-        <div class="print-no" id="viz_lg_<?php echo $vars['post_name']; ?>"></div>
-        <div class="print-no data-viz-chart" id="viz_<?php echo $vars['post_name']; ?>"></div>
+        <div class="hidden-print print-no" id="viz_lg_<?php echo $vars['post_name']; ?>"></div>
+        <div class="hidden-print print-no data-viz-chart" id="viz_<?php echo $vars['post_name']; ?>"></div>
 
         <script type="text/javascript">
           // <![CDATA[
@@ -78,19 +96,36 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
         </script>
 
       <?php }
+      $tweet = 'Explore ' . $title . ' & more #EdNCData -> ';
     } elseif ($d['type'] == 'map') {
-      echo '<div class="entry-content-asset">' . $d['cartodb_url'] . '</div>';
+      echo '<div class="entry-content-asset hidden-print print-no">' . $d['cartodb_url'] . '</div>';
+      echo '<img class="visible-print-block" src="' . $d['static_map']['url'] . '" />';
+      $tweet = 'Explore ' . $title . ' & more #EdNCData -> ';
     } elseif ($d['type'] == 'text') {
-      echo '<div class="text-data">' . $d['text-based_data'] . '</div>';
+      echo $d['text-based_data'];
+
+      if (!stristr($content, 'wp-embedded-content') && !stristr($content, '<img')) {
+        $tweet = $title . ': ' . trim(strip_tags($content)) . '. More #EdNCData -> ';
+      } else {
+        $tweet = $title . ' & more #EdNCData -> ';
+      }
     } ?>
     <div class="meta">
       <?php echo $d['notes']; ?>
     </div>
 
     <?php if (!empty($d['source'])) { ?>
-      <button class="btn btn-default" data-toggle="popover" data-placement="top" data-trigger="focus" title="Source" data-html="true" data-content="<?php echo str_replace('"', '\'', $d['source']); ?>">Explore this data</button>
+      <button class="btn btn-default hidden-print print-no" data-toggle="popover" data-placement="top" data-trigger="focus" title="Source" data-html="true" data-content="<?php echo str_replace('"', '\'', $d['source']); ?>">Explore this data</button>
     <?php } ?>
 
-    <?php get_template_part('templates/components/social-share', 'embed'); ?>
+    <p class="meta visible-print-block">Source: <?php echo $source_plain; ?></p>
+
+    <?php
+    $crunchifyURL = urlencode(get_permalink());
+    $crunchifyTweet = urlencode($tweet);
+    $twitterURL = 'https://twitter.com/intent/tweet?text='.$crunchifyTweet.'&amp;url='.$crunchifyURL.'&amp;via=EducationNC';
+    $crunchifyEmailMsg = urlencode('Explore this and more North Carolina education data on the EdNC Data Dashboard: ');
+
+    include( locate_template('templates/components/social-share-embed.php') ); ?>
   </div>
 </div>

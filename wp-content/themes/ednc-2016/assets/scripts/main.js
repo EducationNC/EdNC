@@ -369,14 +369,12 @@
         $('iframe.wp-embedded-content').not('[src*="/flash-cards/"], [src*="/data-viz/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         /**
-         * Load Google Charts API
+         * Load Google Charts
          */
-        google.charts.load('current', {packages: ['corechart', 'table']});
-        google.charts.setOnLoadCallback(initDashboard);
-
         function initDashboard() {
           $('.data-viz').initCharts();
         }
+        google.charts.setOnLoadCallback(initDashboard);
 
         /**
          * FitText for big fancy numbers
@@ -422,12 +420,15 @@
         // Make sure WordPress embeds have correct permissions
         $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
 
-        /**
-         * Load Google Charts API
-         */
-        google.charts.load('current', {packages: ['corechart', 'table']});
-        google.charts.setOnLoadCallback(initDashboard);
+        // Add external-link icon to EdNC map embeds
+        $('iframe[src*="//www.ednc.org"]').each(function() {
+          var href = $(this).attr('src');
+          $(this).after('<a class="icon-external-link" href="' + href + '" target="_blank"></a>');
+        });
 
+        /**
+         * Load Google Charts
+         */
         function initDashboard() {
           // Kick scroll event
           $(window).scroll();
@@ -436,6 +437,7 @@
             $(this).initCharts();
           });
         }
+        google.charts.setOnLoadCallback(initDashboard);
 
         /**
          * FitText for big fancy numbers

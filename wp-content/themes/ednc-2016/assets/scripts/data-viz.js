@@ -1,3 +1,5 @@
+google.charts.load('current', {packages: ['corechart', 'table']});
+
 /**
  * Everything we need to load data visualizations
  */
@@ -52,7 +54,7 @@
    * This function handles loading the charts
    */
   $.fn.initCharts = function() {
-    
+
     // Loop through each data-viz on page
     this.find('.data-section.has-data-viz').each(function() {
       var chart, chart_lg,
@@ -126,7 +128,9 @@
               action: 'save_png',
               security: Ajax.security,
               png: chart_image,
-              id: id
+              id: id,
+              title: json.title,
+              source: json.source
             };
 
             $.post(Ajax.ajaxurl, data, function(response) {
@@ -180,7 +184,7 @@
         // Create new options var for large chart that image is generated from
         var options_lg = JSON.parse(JSON.stringify(options));
 
-        extend(options_lg, {width: 1200, height: 630});
+        extend(options_lg, {width: 1200, height: 630, fontSize: 24});
 
         var columns = eval(json.d.columns);
 
