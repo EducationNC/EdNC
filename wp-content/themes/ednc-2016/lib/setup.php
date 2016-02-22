@@ -98,7 +98,7 @@ function assets() {
     wp_enqueue_script('comment-reply');
   }
 
-  if (is_archive('data') || is_singular('data-viz')) {
+  if (is_post_type_archive('data') || is_singular('data-viz')) {
     wp_enqueue_script('google/charts', '//www.gstatic.com/charts/loader.js', [], null, false);
     wp_enqueue_script('data-viz', Assets\asset_path('scripts/data-viz.js'), ['jquery', 'google/charts'], null, false);
     wp_localize_script( 'data-viz', 'Ajax', array(
@@ -113,6 +113,20 @@ function assets() {
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);
 
 /**
+ * Make sure WP SEO isn't adding meta tags to the head of data dashboard
+ */
+function remove_yoast_data_dashboard() {
+  if (is_post_type_archive('data') || is_singular('data-viz')) {
+    if (defined('WPSEO_VERSION')) { // Yoast SEO
+      global $wpseo_og;
+      remove_action( 'wpseo_head', array( $wpseo_og, 'opengraph' ), 30 );
+      remove_action( 'wpseo_head', array( 'WPSEO_Twitter', 'get_instance' ), 40 );
+    }
+  }
+}
+add_filter('wp_enqueue_scripts', __NAMESPACE__ . '\\remove_yoast_data_dashboard', 10);
+
+/**
  * Assets for embeds
  */
 function embed_assets() {
@@ -122,7 +136,7 @@ function embed_assets() {
   if (is_singular('data-viz')) {
     wp_enqueue_script('google/charts', '//www.gstatic.com/charts/loader.js', [], null, false);
     wp_enqueue_script('data-viz', Assets\asset_path('scripts/data-viz.js'), ['jquery', 'google/charts'], null, false);
-    wp_localize_script( 'data-viz', 'Ajax', array(
+    wp_localize_script('data-viz', 'Ajax', array(
       'ajaxurl' => admin_url('admin-ajax.php'),
       'security' => wp_create_nonce('data-viz-ajax-nonce')
     ));
