@@ -39,7 +39,11 @@ if (file_exists($upload_dir['basedir'] . $filename)) {
 <meta property="og:site_name" content="EducationNC" />
 <meta property="og:title" content="<?php the_title(); ?>" />
 <meta property="og:description" content="Discover and explore North Carolina's education data." />
-<meta property="og:url" content="<?php the_permalink(); ?>" />
+<?php if (is_post_type_archive('data')) { ?>
+	<meta property="og:url" content="<?php echo get_post_type_archive_link('data'); ?>" />
+<?php } else { ?>
+	<meta property="og:url" content="<?php the_permalink(); ?>" />
+<?php } ?>
 <meta name="fb:app_id" content="880236482017135" />
 <meta name="twitter:site" content="@EducationNC" />
 <meta name="twitter:title" content="<?php the_title(); ?>" />
