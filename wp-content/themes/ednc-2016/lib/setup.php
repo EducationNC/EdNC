@@ -100,7 +100,7 @@ function assets() {
 
   if (is_post_type_archive('data') || is_singular('data-viz')) {
     wp_enqueue_script('google/charts', '//www.gstatic.com/charts/loader.js', [], null, false);
-    wp_enqueue_script('data-viz', Assets\asset_path('scripts/data-viz.js'), ['jquery', 'google/charts'], null, false);
+    wp_enqueue_script('data-viz', Assets\asset_path('scripts/data-viz/data-viz.js'), ['jquery', 'google/charts'], null, false);
     wp_localize_script( 'data-viz', 'Ajax', array(
       'ajaxurl' => admin_url('admin-ajax.php'),
       'security' => wp_create_nonce('data-viz-ajax-nonce')
@@ -135,7 +135,7 @@ function embed_assets() {
 
   if (is_singular('data-viz')) {
     wp_enqueue_script('google/charts', '//www.gstatic.com/charts/loader.js', [], null, false);
-    wp_enqueue_script('data-viz', Assets\asset_path('scripts/data-viz.js'), ['jquery', 'google/charts'], null, false);
+    wp_enqueue_script('data-viz', Assets\asset_path('scripts/data-viz/data-viz.js'), ['jquery', 'google/charts'], null, false);
     wp_localize_script('data-viz', 'Ajax', array(
       'ajaxurl' => admin_url('admin-ajax.php'),
       'security' => wp_create_nonce('data-viz-ajax-nonce')

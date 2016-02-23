@@ -411,8 +411,8 @@
         });
 
         // If 'print' URL parameter exists, open print dialog on page load
-        if (window.location.search == '?print') {
-          window.onload = function() { window.print(); }
+        if (window.location.search === '?print') {
+          window.onload = function() { window.print(); };
         }
       }
     },
