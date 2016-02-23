@@ -32,7 +32,7 @@
     font-weight: 300;
   }
 
-  .hero-image-full &, .single-flash-cards & {
+  .hero-image-full &, .single-flash-cards &, .post-type-archive-data & {
     @media (min-width: $screen-md-min) {
       position: absolute;
       width: 100%;
@@ -66,7 +66,7 @@
     height: 38px;
     background: $steel;
 
-    .hero-image-full &, .single-flash-cards & {
+    .hero-image-full &, .single-flash-cards &, .post-type-archive-data & {
       background: none;
     }
   }
@@ -112,7 +112,7 @@
     position: relative;
     z-index: 1;
 
-    .hero-image-full &, .single-flash-cards & {
+    .hero-image-full &, .single-flash-cards &, .post-type-archive-data & {
       background: none;
     }
   }
@@ -151,7 +151,8 @@
       }
 
       .hero-image-full & > a, .hero-image-full &.open > a,
-      .single-flash-cards & > a, .single-flash-cards &.open > a {
+      .single-flash-cards & > a, .single-flash-cards &.open > a,
+      .post-type-archive-data & > a, .post-type-archive-data &.open > a {
         color: $white;
       }
     }
@@ -249,7 +250,7 @@
     margin-top: -1px;
   }
 
-  .hero-image-full & a, .single-flash-cards & {
+  .hero-image-full & a, .single-flash-cards &, .post-type-archive-data & {
     color: $jet;
   }
 

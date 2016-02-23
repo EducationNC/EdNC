@@ -1,4 +1,4 @@
-<div class="callout accordion" id="accordion-map-categories" told="tablist" aria-multiselectable="true">
+<div class="callout accordion" id="accordion-map-categories" role="tablist" aria-multiselectable="true">
   <h3>Map categories</h3>
   <?php
   $map_cats = get_terms('map-category');

@@ -217,7 +217,9 @@ add_action( 'wp_print_footer_scripts', __NAMESPACE__ . '\\mejs_add_container_cla
 // Add template path for customizing WP Embeds
 add_filter( 'embed_template', function() {
   global $post;
-  if ($post->post_type == 'flash-cards') {
+  if ($post->post_type == 'data-viz') {
+    return get_template_directory() . '/embed-data-viz.php';
+  } elseif ($post->post_type == 'flash-cards') {
     return get_template_directory() . '/embed-flash-cards.php';
   } else {
     return get_template_directory() . '/embed.php';
@@ -245,6 +247,10 @@ function wpgm_embed_handler_googlemapsv1( $matches, $attr, $url, $rawattr ) {
 	return apply_filters( 'embed_googlemapsv1', "<div class='entry-content-asset'><iframe width='{$width}' height='{$height}' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps/embed/v1/place?q=" . esc_attr($matches[1]) . "&key=AIzaSyCI7Osh6uj1glo7DmUKY4lRJFVBey4pf1Y'></iframe></div>" );
 };
 wp_embed_register_handler( 'googlemapsv1', '#https?://www.google.com/maps/place/(.*?)/#i', __NAMESPACE__ . '\\wpgm_embed_handler_googlemapsv1' );
+
+// CartoDB embed
+wp_oembed_add_provider( '#https?://(?:www\.)?[^/^\.]+\.cartodb\.com/\S+#i', 'https://services.cartodb.com/oembed', true );
+
 
 
 /**
@@ -299,7 +305,7 @@ function ednc_gallery($attr) {
     'exclude'    => '',
     'link'       => '',
     'fullwidth'  => '',
-    'collage'    => ''
+    'type'       => ''
   ), $attr, 'gallery' );
 
   $id = intval( $atts['id'] );
@@ -355,14 +361,17 @@ function ednc_gallery($attr) {
     $fullwidth = 'fullwidth';
   }
 
-  $collage = $atts['collage'];
-  if ($collage == true) {
-    $collage = 'collage';
-    $output .="<div class='collage-wrapper'>";
+  $type = $atts['type'];
+  $type_class = false;
+  if ($type == 'collage') {
+    $type_class = 'collage';
+    $output .= "<div class='collage-wrapper'>";
+  } elseif ($type == 'slides') {
+    $type_class = "g-carousel";
   }
 
   $size_class = sanitize_html_class( $atts['size'] );
-  $output .= "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} {$fullwidth} {$collage}'>";
+  $output .= "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} {$fullwidth} {$type_class}'>";
 
   $i = 0;
   foreach ( $attachments as $id => $attachment ) {
@@ -393,7 +402,7 @@ function ednc_gallery($attr) {
         </div>";
     }
     $output .= "</div>";
-		if ( $columns > 0 && ++$i % $columns == 0 && $atts['collage'] == false ) {
+		if ( $columns > 0 && ++$i % $columns == 0 && $type !== 'collage' && $type !== 'slides' ) {
 			$output .= '<br style="clear: both" />';
 		}
   }
@@ -406,7 +415,7 @@ function ednc_gallery($attr) {
   $output .= "
     </div>\n";
 
-  if ($collage == true) {
+  if ($type == 'collage') {
     $output .="</div>";
   }
 
@@ -431,12 +440,16 @@ function ednc_gallery($attr) {
   ?>
   <script type="text/html" id="tmpl-ednc-custom-gallery-setting">
     <label class="setting">
-      <span><?php _e('Full-width?'); ?></span>
-      <input type="checkbox" data-setting="fullwidth" />
+      <span><?php _e('Type'); ?></span>
+      <select class="type" name="type" data-setting="type">
+        <option value="default">Default</option>
+        <option value="slides">Slideshow</option>
+        <option value="collage">Collage</option>
+      </select>
     </label>
     <label class="setting">
-      <span><?php _e('Collage?'); ?></span>
-      <input type="checkbox" data-setting="collage" />
+      <span><?php _e('Full-width?'); ?></span>
+      <input type="checkbox" data-setting="fullwidth" />
     </label>
   </script>
 
@@ -448,8 +461,8 @@ function ednc_gallery($attr) {
       // gallery settings list; $.extend should work as well...
       _.extend(wp.media.gallery.defaults, {
         link: 'file',
-        fullwidth: false,
-        collage: false
+        type: 'default',
+        fullwidth: false
       });
 
       // merge default gallery settings template with yours

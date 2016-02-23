@@ -18,6 +18,16 @@
         "styles/embed.scss"
       ]
     },
+    "wp-embed-template.js": {
+      "files": [
+        "scripts/wp-embed-template.js"
+      ]
+    },
+    "data-viz.js": {
+      "files": [
+        "scripts/data-viz/data-viz.js"
+      ]
+    },
     "customizer.js": {
       "files": [
         "scripts/customizer.js"

@@ -24,11 +24,13 @@ $sage_includes = [
   'lib/shortcodes.php',         // Shortcodes and UI
   'lib/titles.php',             // Page titles
   'lib/nav.php',                // Clean up nav menus
+  'lib/nav-data-dashboard.php', // Data dashboard nav walker
   'lib/nav-widgets.php',        // Widgetize nav menus
   'lib/wrapper.php',            // Theme wrapper class
   'lib/customizer.php',         // Theme customizer
-  'lib/widgets/register.php',    // Register widgets
-  'lib/social-share-count.php'  // Social share counts
+  'lib/widgets/register.php',   // Register widgets
+  'lib/social-share-count.php', // Social share counts
+  'lib/data-viz.php'            // Functions for data-viz -- including AJAX and transients
 ];
 
 foreach ($sage_includes as $file) {

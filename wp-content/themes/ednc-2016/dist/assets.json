@@ -2,8 +2,10 @@
   "admin.css": "admin-5c966513c4.css",
   "admin.js": "admin-e3d938f8c9.js",
   "customizer.js": "customizer-2d71a5cf56.js",
-  "embed.css": "embed-914e094409.css",
+  "data-viz.js": "data-viz-cf99adcd7e.js",
+  "embed.css": "embed-cec62130dd.css",
   "jquery.js": "jquery-51908e88d3.js",
-  "main.css": "main-e20861202a.css",
-  "main.js": "main-a6f9d79ecc.js"
+  "main.css": "main-3310b5ca02.css",
+  "main.js": "main-25e7d2b185.js",
+  "wp-embed-template.js": "wp-embed-template-4f435d1d17.js"
 }

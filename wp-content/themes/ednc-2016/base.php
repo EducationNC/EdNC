@@ -4,7 +4,6 @@ use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
 ?>
-
 <!doctype html>
 <html <?php language_attributes(); ?>>
   <?php get_template_part('templates/layouts/head'); ?>

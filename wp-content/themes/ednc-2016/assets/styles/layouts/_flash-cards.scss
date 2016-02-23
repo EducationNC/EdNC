@@ -116,26 +116,6 @@
   }
 }
 
-// Fixed background image
-.fc-background-image {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  z-index: 1;
-  background-position: center;
-  background-size: cover;
-
-  &:before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    background-color: $raven-60;
-    position: absolute;
-    z-index: 100;
-  }
-}
-
 // Flash cards stlye
 .fc {
   @include index-card-background;

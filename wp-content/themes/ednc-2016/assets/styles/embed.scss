@@ -9,15 +9,19 @@
 @import "common/typography";
 
 @import "components/blocks";
+@import "components/buttons";
 @import "components/icons";
+@import "components/loading";
 @import "components/magnific-popup";
 @import "components/media";
 @import "components/owl-carousel";
+@import "components/social-share-buttons";
 @import "components/wp-classes";
 
 @import "layouts/mobile-nav";
 @import "layouts/sidebar";
 
+@import "layouts/data-dashboard";
 @import "layouts/flash-cards";
 
 @import "layouts/embed.scss";

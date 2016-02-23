@@ -5,7 +5,7 @@ $featured_image_src = wp_get_attachment_image_src($image_id, 'full');
 $fcs = get_field('flash_cards');
 ?>
 
-<div class="fc-background-image" style="background-image:url('<?php echo $featured_image_src[0]; ?>')"></div>
+<div class="fixed-background-image" style="background-image:url('<?php echo $featured_image_src[0]; ?>')"></div>
 
 <div class="flash-cards-content container">
   <div class="row">

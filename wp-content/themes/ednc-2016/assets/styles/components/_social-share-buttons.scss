@@ -34,13 +34,52 @@
     position: absolute;
     top: 50%;
     left: 50%;
+
+    .social-share-link {
+      display: inline-block;
+    }
+
+    .social-share-embed {
+      text-align: left;
+      background: $stone;
+      padding: 1px 10px 10px;
+
+      h6 {
+        color: $white;
+      }
+    }
+
+    .wp-embed-share-input {
+      width: 100%;
+      border: none;
+      height: 28px;
+      margin: 0 0 10px;
+      padding: 0 5px;
+      font: 400 14px/1.5 $font-family-sans-serif;
+      resize: none;
+      cursor: text;
+    }
+
+    textarea.wp-embed-share-input {
+      height: 74px;
+    }
+
+    .wp-embed-share-description {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1;
+      font-style: italic;
+      color: $pearl;
+    }
   }
 
   @media screen and (orientation:portrait) {
-    .modal-dialog {
-      width: 100px;
-      margin-top: -240px;
-      margin-left: -50px;
+    body:not(.single-data-viz):not(.post-type-archive-data) & {
+      .modal-dialog {
+        width: 100px;
+        margin-top: -240px;
+        margin-left: -50px;
+      }
     }
   }
 
@@ -49,6 +88,19 @@
       width: 480px;
       margin-top: -50px;
       margin-left: -240px;
+    }
+  }
+
+  .single-data-viz &, .post-type-archive-data & {
+    .modal-dialog {
+      max-width: 480px;
+      margin-top: -175px;
+      margin-left: -240px;
+
+      @media (max-width: 480px) {
+        width: 100%;
+        margin-left: -50%;
+      }
     }
   }
 }
@@ -116,6 +168,16 @@
     }
   }
 
+  .single-data-viz &, .post-type-archive-data & {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+
+    &:before {
+      font-size: 32px;
+    }
+  }
+
   &.icon-facebook {
     background: #3b5998;
 
@@ -148,14 +210,28 @@
     }
   }
 }
-.print-share {
+.other-share {
   @extend .social-share-link;
+
+  &.icon-download {
+    background: $indigo;
+
+    &:hover {
+      background: darken($indigo, 10%);
+    }
+  }
 
   &.icon-fax {
     background: $pear;
 
     &:hover {
       background: darken($pear, 10%);
+    }
+  }
+
+  .single-data-viz &, .post-type-archive-data & {
+    @media screen and (max-width: $screen-sm-max) {
+      display: inline-block !important;
     }
   }
 }

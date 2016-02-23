@@ -214,3 +214,22 @@
   position: relative;
   z-index: 1;
 }
+
+// Print styles
+@media print {
+  .owl-stage {
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .owl-item {
+    position: relative;
+    float: none;
+    max-width: 100%;
+    display: block !important;
+
+    &.clone {
+      display: none !important;
+    }
+  }
+}
