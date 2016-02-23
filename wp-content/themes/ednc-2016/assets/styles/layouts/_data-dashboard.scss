@@ -50,6 +50,32 @@
       color: $steel;
     }
   }
+
+  .intro-section {
+    padding-top: 1em;
+    position: relative;
+    overflow: hidden;
+    color: $raven;
+    background: $white;
+
+    & > div {
+      z-index: 1;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      background: url('../images/data-dashboard-light.jpg') no-repeat;
+      background-size: 100%;
+      opacity: .5;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+  }
 }
 
 .data-section {

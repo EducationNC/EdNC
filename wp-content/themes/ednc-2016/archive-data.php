@@ -54,6 +54,17 @@ use Roots\Sage\Extras;
               </h2>
 
               <?php
+              $intro = get_field('intro');
+              if (!empty($intro)) {
+                ?>
+                <div class="row intro-section">
+                  <div class="col-lg-11">
+                    <?php echo $intro; ?>
+                  </div>
+                </div>
+                <?php
+              }
+
               $data = get_field('data_visualizations');
               if (!empty($data)) {
                 foreach ($data as $d) {
@@ -67,7 +78,8 @@ use Roots\Sage\Extras;
                   $post = $original_post;
                   wp_reset_postdata();
                 }
-              } ?>
+              }
+              ?>
             </div>
           <?php endif;
         endwhile;
