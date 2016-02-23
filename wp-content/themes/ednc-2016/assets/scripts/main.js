@@ -461,7 +461,7 @@
                 return (this.top = $('#data-dash-nav').offset().top - 20);
               },
               bottom: function () {
-                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 36);
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 96);
               }
             }
           }).on('affix.bs.affix', function() {

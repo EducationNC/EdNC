@@ -161,6 +161,19 @@
   // Sidebar
   .callout {
     background: $steel;
+    overflow: visible;
+
+    .append-on-affix {
+      display: none;
+      position: absolute;
+      bottom: -40px;
+      left: 30px;
+
+      a {
+        color: $pearl;
+        text-decoration: none;
+      }
+    }
   }
 
   .nav {
@@ -227,12 +240,20 @@
     @media (min-width: $screen-md-min) {
       top: 10px;
       position: fixed;
+
+      .append-on-affix {
+        display: block;
+      }
     }
   }
 
   .affix-bottom {
     @media (min-width: $screen-md-min) {
       position: absolute;
+
+      .append-on-affix {
+        display: block;
+      }
     }
   }
 }

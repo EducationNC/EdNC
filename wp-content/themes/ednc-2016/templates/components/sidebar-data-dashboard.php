@@ -27,4 +27,8 @@ use Roots\Sage\NavData;
       (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
   </div>
+
+  <div class="append-on-affix">
+    <a href="#">Back to top</a>
+  </div>
 </div>
