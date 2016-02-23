@@ -84,7 +84,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
             echo '<img src="' . $upload_dir['baseurl'] . $filename . '" />';
           }
           ?>
-          <div class="loader"></div>
+          <div class="loader hidden-print"></div>
         </div>
         <div class="hidden-print print-no" id="viz_lg_<?php echo $vars['post_name']; ?>"></div>
         <div class="hidden-print print-no data-viz-chart" id="viz_<?php echo $vars['post_name']; ?>"></div>
@@ -102,6 +102,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
       echo '<img class="visible-print-block" src="' . $d['static_map']['url'] . '" />';
       $tweet = 'Explore ' . $title . ' & more #EdNCData -> ';
     } elseif ($d['type'] == 'text') {
+
       echo $d['text-based_data'];
 
       if (!stristr($content, 'wp-embedded-content') && !stristr($content, '<img')) {
@@ -115,7 +116,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
     </div>
 
     <?php if (!empty($d['source'])) { ?>
-      <button class="btn btn-default hidden-print print-no" data-toggle="popover" data-placement="top" data-trigger="focus" title="Source" data-html="true" data-content="<?php echo str_replace('"', '\'', $d['source']); ?>">Explore this data</button>
+      <button class="btn btn-default hidden-print print-no" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Source" data-html="true" data-content="<?php echo str_replace('"', '\'', $d['source']); ?>">Explore this data</button>
     <?php } ?>
 
     <p class="meta visible-print-block">Source: <?php echo $source_plain; ?></p>

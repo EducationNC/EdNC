@@ -1,6 +1,7 @@
 <?php
 
 use Roots\Sage\Assets;
+use Roots\Sage\Extras;
 
 ?>
 <!-- Social Media Metadata -->
@@ -27,8 +28,16 @@ if (file_exists($upload_dir['basedir'] . $filename)) {
 	<meta name="twitter:image" content="<?php echo $static_map['url']; ?>" />
   <?php
 } else {
+	if ( !empty($text = get_field('text-based_data')) && preg_match('/https?\:\/\/[^\"\' \n]+/i', $text, $match) && !empty($postid = Extras\full_url_to_postid($match[0])) ) {
+    ?>
+		<meta property="og:image" content="<?php echo get_the_post_thumbnail($postid, 'full'); ?>" />
+    <?
+  } else {
+		?>
+		<meta property="og:image" content="<?php echo Assets\asset_path('images/dashboard-icon.png'); ?>" />
+		<?php
+	}
 	?>
-	<meta property="og:image" content="<?php echo Assets\asset_path('images/dashboard-icon.png'); ?>" />
 	<meta property="og:image:width" content="400" />
 	<meta property="og:image:height" content="400" />
 	<meta name="twitter:card" content="summary" />

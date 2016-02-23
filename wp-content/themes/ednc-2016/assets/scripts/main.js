@@ -409,6 +409,11 @@
         $('.fc-nav .fc-prev').on(clickortap, function() {
           owl.trigger('prev.owl.carousel');
         });
+
+        // If 'print' URL parameter exists, open print dialog on page load
+        if (window.location.search == '?print') {
+          window.onload = function() { window.print(); }
+        }
       }
     },
     // Data Dashboard

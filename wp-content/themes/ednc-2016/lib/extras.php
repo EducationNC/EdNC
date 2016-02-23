@@ -51,6 +51,18 @@ add_filter('body_class', __NAMESPACE__ . '\\body_class');
 }
 
 /**
+ * Get post ID by full post URL
+ */
+function full_url_to_postid($url) {
+  global $wpdb;
+  $postid = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ));
+  $postid = array_filter($postid);
+  if (!empty($postid)) {
+    return $postid[0];
+  }
+}
+
+/**
  * Clean up the_excerpt()
  */
 function excerpt_more() {

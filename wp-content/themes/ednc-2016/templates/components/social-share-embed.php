@@ -58,8 +58,8 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyEmailMsg.$
           <a rel="nofollow" class="other-share icon-fax" href="<?php echo $d['data_source']; ?>" target="_blank" title="Print">
             Print data table
           </a>
-        <?php } else { ?>
-          <a rel="nofollow" class="other-share icon-fax" href="http://www.printfriendly.com/print?<?php echo $crunchifyURL; ?>/embed/" target="_blank" title="Print">
+        <?php } elseif (!stristr($d['text-based_data'], 'https://www.ednc.org/')) { ?>
+          <a rel="nofollow" class="other-share icon-fax" href="<?php the_permalink(); ?>embed/?print" target="_blank" title="Print">
             Print this
           </a>
         <?php } ?>
