@@ -2301,6 +2301,24 @@ acf_add_local_field_group(array (
 			'max' => '',
 			'return_format' => 'object',
 		),
+		array (
+			'key' => 'field_56cc6fd37a092',
+			'label' => 'Intro',
+			'name' => 'intro',
+			'type' => 'wysiwyg',
+			'instructions' => 'Use this field for the introduction text.',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 1,
+		),
 	),
 	'location' => array (
 		array (
