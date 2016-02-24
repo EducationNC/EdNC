@@ -13,11 +13,11 @@ $post_name = str_replace('-', '_', $post->post_name);
 $filename = '/data-viz/' . $post_name . '.png';
 if (file_exists($upload_dir['basedir'] . $filename)) {
 	?>
-	<meta property="og:image" content="<?php echo $upload_dir['baseurl'] . $filename; ?>" />
+	<meta property="og:image" content="<?php echo str_replace('http://www.ednc.org', 'https://www.ednc.org', $upload_dir['baseurl']) . $filename; ?>" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="<?php echo $upload_dir['baseurl'] . $filename; ?>" />
+	<meta name="twitter:image" content="<?php echo str_replace('http://www.ednc.org', 'https://www.ednc.org', $upload_dir['baseurl']) . $filename; ?>" />
 	<?php
 } elseif (!empty($static_map['url'])) {
   ?>

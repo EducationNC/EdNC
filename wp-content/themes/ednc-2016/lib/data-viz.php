@@ -72,7 +72,7 @@ function save_png_callback() {
     rename($temp_upload['file'], $upload_dir['basedir'] . $filename);
 
     // Echo path to saved image
-    $saved_png = $upload_dir['baseurl'] . $filename;
+    $saved_png = str_replace('http://www.ednc.org', 'https://www.ednc.org', $upload_dir['baseurl']) . $filename;
     set_transient( 'png_' . $post_id, $saved_png, 1 * MINUTE_IN_SECONDS );
 
     /**
@@ -134,7 +134,7 @@ function save_png_callback() {
     $filename_ednc = '/data-viz/' . $post_id . '-ednc.png';
     $success = $image->writeImage($upload_dir['basedir'] . $filename_ednc);
   }
-  
+
   echo $saved_png;
   die();
 }

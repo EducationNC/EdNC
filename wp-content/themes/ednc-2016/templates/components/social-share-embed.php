@@ -42,7 +42,7 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyEmailMsg.$
         $upload_dir = wp_upload_dir();
         $filename = '/data-viz/' . $post_name . '-ednc.png';
         if (file_exists($upload_dir['basedir'] . $filename)) { ?>
-          <a rel="nofollow" class="icon-download other-share" href="<?php echo $upload_dir['baseurl'] . $filename; ?>" target="_blank" title="Save Image">
+          <a rel="nofollow" class="icon-download other-share" href="<?php echo str_replace('http://www.ednc.org', 'https://www.ednc.org', $upload_dir['baseurl']) . $filename; ?>" target="_blank" title="Save Image">
             Download this chart
           </a>
         <?php } elseif (!empty($d['static_map']['url'])) { ?>
