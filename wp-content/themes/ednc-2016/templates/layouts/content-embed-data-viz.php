@@ -81,7 +81,7 @@ if ($d['type'] == 'bar_chart' || $d['type'] == 'scatter_chart' || $d['type'] == 
           $upload_dir = wp_upload_dir();
           $filename = '/data-viz/' . $post_name . '.png';
           if (file_exists($upload_dir['basedir'] . $filename)) {
-            echo '<img src="' . $upload_dir['baseurl'] . $filename . '" />';
+            echo '<img src="' . str_replace('http://www.ednc.org', 'https://www.ednc.org', $upload_dir['baseurl']) . $filename . '" />';
           }
           ?>
           <div class="loader hidden-print"></div>
