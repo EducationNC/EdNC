@@ -95,6 +95,7 @@ function save_png_callback() {
     $source->setFillColor('#44474D');
     $source->setFont('../wp-content/themes/ednc-2016/dist/fonts/Lato.ttf');
     $source->setFontSize(15);
+    $logo->adaptiveResizeImage(64, 64);
 
     // Make sure source text line wraps
     function wordWrapAnnotation($image, $draw, $text, $maxWidth) {
