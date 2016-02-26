@@ -149,8 +149,6 @@ remove_action( 'embed_head', 'print_emoji_styles' );
 /**
  * Replace default inline embed scripts to remove default share fn code and allow links to open in new tabs
  */
-remove_action( 'embed_footer', 'print_embed_scripts' );
-add_action( 'embed_footer', __NAMESPACE__ . '\\print_embed_scripts' );
 function print_embed_scripts() {
 	?>
 	<script type="text/javascript">
@@ -158,6 +156,8 @@ function print_embed_scripts() {
 	</script>
 	<?php
 }
+remove_action( 'embed_footer', 'print_embed_scripts' );
+add_action( 'embed_footer', __NAMESPACE__ . '\\print_embed_scripts' );
 
 /**
  * Required script for PrintFriendly.com
