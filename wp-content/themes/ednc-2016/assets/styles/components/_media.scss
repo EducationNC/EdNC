@@ -256,17 +256,17 @@ object, embed {
   }
 
   &.flash-cards.flash-cards {
-    padding-top: 50px;
-    padding-bottom: 75%;
+    padding-top: 50px !important;
+    padding-bottom: 75% !important;
   }
 
   &.soundcloud.soundcloud {
     padding-top: 0;
-    padding-bottom: 166px;
+    padding-bottom: 166px !important;
   }
 
   &.slideshare.slideshare {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
 
   &.wp-embed {
