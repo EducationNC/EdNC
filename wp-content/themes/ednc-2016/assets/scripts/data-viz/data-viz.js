@@ -57,43 +57,51 @@ google.charts.load('current', {packages: ['corechart', 'table']});
 
     // Loop through each data-viz on page
     this.find('.data-section.has-data-viz').each(function() {
-      var chart, chart_lg,
-          id = $(this).attr('id'),  // Unique ID for this data viz
-          json = window[id];  // Data for chart passed from PHP
 
-      /**
-       * Use AJAX to check WP Transients for cached charts data
-       */
-      var settings = {
-        action: 'check_dataviz_transients',
-        security: Ajax.security,
-        id: id
-      };
+      // Check if this viz is already loaded, and if not, get it
+      console.log($(this).data('loaded'));
+      if ($(this).data('loaded') !== true) {
 
-      $.post(Ajax.ajaxurl, settings, function(response) {
-        response = JSON.parse(response);
-        if (response.viz) {
-          // Get data from transients and draw
-          viz = new google.visualization.ChartWrapper(response.viz.replace(/\\"/g, '"').replace(/\\'/g, '\''));
-          viz_lg = new google.visualization.ChartWrapper(response.viz_lg.replace(/\\"/g, '"').replace(/\\'/g, '\''));
+        var chart, chart_lg,
+            id = $(this).attr('id'),  // Unique ID for this data viz
+            json = window[id];  // Data for chart passed from PHP
 
-          // Make sure columns are properly included since toJSON() drops calculated columns for some unknown reason
-          var columns = eval(json.d.columns);
-          viz.setView({'columns' : columns});
-          viz_lg.setView({'columns' : columns});
+        /**
+         * Use AJAX to check WP Transients for cached charts data
+         */
+        var settings = {
+          action: 'check_dataviz_transients',
+          security: Ajax.security,
+          id: id
+        };
 
-          var chart_queue = new Queue;
-          chart_queue.add(function() {
-            drawCharts(viz, viz_lg);
-          });
-        } else {
-          // If no transient, use JS to get data and build chart
-          var viz_queue = new Queue;
-          viz_queue.add(function() {
-            getViz();
-          });
-        }
-      });
+        $.post(Ajax.ajaxurl, settings, function(response) {
+          response = JSON.parse(response);
+          if (response.viz) {
+            // Get data from transients and draw
+            viz = new google.visualization.ChartWrapper(response.viz.replace(/\\"/g, '"').replace(/\\'/g, '\''));
+            viz_lg = new google.visualization.ChartWrapper(response.viz_lg.replace(/\\"/g, '"').replace(/\\'/g, '\''));
+
+            // Make sure columns are properly included since toJSON() drops calculated columns for some unknown reason
+            var columns = eval(json.d.columns);
+            viz.setView({'columns' : columns});
+            viz_lg.setView({'columns' : columns});
+
+            var chart_queue = new Queue;
+            chart_queue.add(function() {
+              console.log('drawcharts');
+              drawCharts(viz, viz_lg);
+            });
+          } else {
+            // If no transient, use JS to get data and build chart
+            var viz_queue = new Queue;
+            viz_queue.add(function() {
+              console.log('getviz');
+              getViz();
+            });
+          }
+        });
+      }
 
 
       /**
@@ -159,6 +167,9 @@ google.charts.load('current', {packages: ['corechart', 'table']});
             // Fix height of iframe on resize
             setHeight();
           });
+
+          // Set data of loaded to true
+          $('#' + id).data('loaded', true);
         });
       }
 
