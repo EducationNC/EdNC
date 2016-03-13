@@ -59,7 +59,6 @@ google.charts.load('current', {packages: ['corechart', 'table']});
     this.find('.data-section.has-data-viz').each(function() {
 
       // Check if this viz is already loaded, and if not, get it
-      console.log($(this).data('loaded'));
       if ($(this).data('loaded') !== true) {
 
         var chart, chart_lg,
@@ -89,14 +88,12 @@ google.charts.load('current', {packages: ['corechart', 'table']});
 
             var chart_queue = new Queue;
             chart_queue.add(function() {
-              console.log('drawcharts');
               drawCharts(viz, viz_lg);
             });
           } else {
             // If no transient, use JS to get data and build chart
             var viz_queue = new Queue;
             viz_queue.add(function() {
-              console.log('getviz');
               getViz();
             });
           }
