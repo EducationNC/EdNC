@@ -84,14 +84,12 @@ google.charts.load('current', {packages: ['corechart', 'table']});
 
           var chart_queue = new Queue;
           chart_queue.add(function() {
-            console.log('drawcharts');
             drawCharts(viz, viz_lg);
           });
         } else {
           // If no transient, use JS to get data and build chart
           var viz_queue = new Queue;
           viz_queue.add(function() {
-            console.log('getviz');
             getViz();
           });
         }
