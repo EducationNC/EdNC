@@ -10,7 +10,7 @@ use Roots\Sage\Extras;
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="entry-title">EdNC Data Dashboard</h1>
+        <h1 class="entry-title">EdData Dashboard</h1>
         <div class="subtitle">Your portal to North Carolina's education data</div>
       </div>
     </div>
