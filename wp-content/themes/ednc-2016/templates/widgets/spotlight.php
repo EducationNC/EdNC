@@ -50,37 +50,72 @@
       ]);
 
       $i = 0;
-      if ($spotlight->have_posts()) : while ($spotlight->have_posts()) : $spotlight->the_post();
-        if ($number == 4) {
-          $div = 3;
-        } else {
+      $o = 0;
+
+      // Set up the number of posts per row
+      if ($number == 6 || $number == 9) {
+        if ($i < 2) {
           $div = 2;
+        } else {
+          $i = 0;
+          $div = 3;
+        }
+      }
+      elseif ($number == 8) {
+        if ($i < 4) {
+          $div = 2;
+        } else {
+          $i = 0;
+          $div = 4;
+        }
+      }
+      elseif ($number == 4 || $number == 7 || $number == 10) {
+        $div = 3;
+      } else {
+        $div = 2;
+      }
+
+      // Loop through posts
+      if ($spotlight->have_posts()) : while ($spotlight->have_posts()) : $spotlight->the_post();
+        // Reset iterator for numbers that change number of posts per row
+        if ($number == 6 || $number == 9) {
+          if ($i == 2 && $o == 0) {
+            echo '</div><div class="row">';
+            $i = 0;
+            $o = 1;
+            $div = 3;
+          }
+        }
+        elseif ($number == 8) {
+          if ($i == 4 && $o == 0) {
+            echo '</div><div class="row">';
+            $i = 0;
+            $o = 1;
+            $div = 3;
+          }
         }
 
-        if ($i % $div == 0) {
+        // Row divs
+        if (($i % $div == 0) && $i != 0) {
           echo '</div><div class="row">';
         }
 
+        // Set width and layout of blocks inside rows
         if ($number == 2) {
           echo '<div class="col-sm-12">';
-        } elseif ($number == 3 || $number == 5) {
+            echo '<div class="hidden-sm">';
+              get_template_part('templates/layouts/block-post', 'side');
+            echo '</div>';
+            echo '<div class="visible-sm-block">';
+              get_template_part('templates/layouts/block-post');
+            echo '</div>';
+        } elseif ($div == 2) {
           echo '<div class="col-sm-6">';
-        } elseif ($number == 4) {
+            get_template_part('templates/layouts/block-overlay');
+        } elseif ($div == 3) {
           echo '<div class="col-sm-4">';
+            get_template_part('templates/layouts/block-post');
         }
-
-        if ($number == 3) {
-          get_template_part('templates/layouts/block-overlay');
-        } elseif ($number == 4) {
-          get_template_part('templates/layouts/block-post');
-        } else { ?>
-          <div class="hidden-sm">
-            <?php get_template_part('templates/layouts/block-post', 'side'); ?>
-          </div>
-          <div class="visible-sm-block">
-            <?php get_template_part('templates/layouts/block-post'); ?>
-          </div>
-        <?php }
 
         echo '</div>';
 
