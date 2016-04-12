@@ -47,7 +47,7 @@ use Roots\Sage\Nav;
     <div class="navbar-right">
       <div class="btn-group">
         <a href="#" class="btn btn-default" data-toggle="modal" data-target="#emailSignupModal">Email Subscription</a>
-        <a href="https://support.ednc.org/donate-recurring" class="btn btn-primary">Support Us</a>
+        <a href="https://support.ednc.org/donate" class="btn btn-primary">Support Us</a>
       </div>
     </div>
   </nav>
