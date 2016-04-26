@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-8 col-centered">
       <div class="alert alert-warning">
-        <?php _e('Sorry, but the page you were trying to view does not exist.', 'sage'); ?>
+        This is not the page you're looking for.
       </div>
       <?php get_search_form(); ?>
     </div>

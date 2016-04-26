@@ -13,11 +13,11 @@ date_default_timezone_set( $old_time_zone );
 ?>
 <div class="wef-default wef-measure" style="max-width: <?php echo $width ?>px">
 	<?php if(isset($fb_data['cover'])) : ?>
-	<div class="cover" style="height:<?php echo $height ?>px; background-image: url('<?php echo $fb_data['cover']['source'] ?>'); background-position: 0% <?php echo $fb_data['cover']['offset_y'] ?>%;" onclick="window.open('http://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')" ></div>
+	<div class="cover" style="height:<?php echo $height ?>px; background-image: url('<?php echo $fb_data['cover']['source'] ?>'); background-position: 0% <?php echo $fb_data['cover']['offset_y'] ?>%;" onclick="window.open('https://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')" ></div>
 	<?php endif; ?>
 	<div class="row pad-top">
 		<div class="col-12">
-			<a href="http://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
+			<a href="https://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
 				<span class="title"><?php echo $fb_data['name'] ?></span>
 			</a>
 			<p><?php echo $start_time ?></p>
@@ -25,13 +25,13 @@ date_default_timezone_set( $old_time_zone );
 				<?php
 				if ( isset( $fb_data['place']['id'] ) ) {
 					_e( '@ ', 'wp-embed-facebook' );
-					echo '<a href="http://www.facebook.com/' . $fb_data['place']['id'] . '" target="_blank">' . $fb_data['place']['name'] . '</a>';
+					echo '<a href="https://www.facebook.com/' . $fb_data['place']['id'] . '" target="_blank">' . $fb_data['place']['name'] . '</a>';
 				} else {
 					echo isset( $fb_data['place']['name'] ) ? __( '@ ', 'wp-embed-facebook' ) . $fb_data['place']['name'] : '';
 				}
 				?>
 			</p>
-			<p><?php echo __( 'Creator: ', 'wp-embed-facebook' ) . '<a href="http://www.facebook.com/' . $fb_data['owner']['id'] . '" target="_blank">' . $fb_data['owner']['name'] . '</a>' ?></p>
+			<p><?php echo __( 'Creator: ', 'wp-embed-facebook' ) . '<a href="https://www.facebook.com/' . $fb_data['owner']['id'] . '" target="_blank">' . $fb_data['owner']['name'] . '</a>' ?></p>
 		</div>
 	</div>
 </div>

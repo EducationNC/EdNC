@@ -526,6 +526,26 @@ register_taxonomy( 'resource-type',
 	)
 );
 
+register_taxonomy( 'session',
+	array('bill'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
+	array('hierarchical' => true,     /* if this is true it acts like categories */
+		'labels' => array(
+			'name' => __( 'Sessions' ),
+			'singular_name' => __( 'Session' ),
+			'search_items' =>  __( 'Search Sessions' ),
+			'all_items' => __( 'All Sessions' ),
+			'parent_item' => __( 'Parent Session' ),
+			'parent_item_colon' => __( 'Parent Session:' ),
+			'edit_item' => __( 'Edit Session' ),
+			'update_item' => __( 'Update Session' ),
+			'add_new_item' => __( 'Add New Session' ),
+			'new_item_name' => __( 'New Session Name' )
+		),
+		'show_ui' => true,
+		'query_var' => true
+	)
+);
+
 register_taxonomy( 'bill-type',
 	array('bill'), /* if you change the name of register_post_type( 'custom_type', then you have to change this */
 	array('hierarchical' => true,     /* if this is true it acts like categories */
@@ -691,8 +711,8 @@ function pre_get_posts($query) {
 		$query->set('post_type', 'resource');
 	}
 
-	// bill-type taxonomy should query bills and show them in menu order
-	if ($query->is_tax('bill-type')) {
+	// bill-type and session taxonomies should query bills and show them in menu order
+	if ($query->is_tax('bill-type') || $query->is_tax('session')) {
 		$query->set('post_type', 'bill');
 		$query->set('orderby', 'menu_order');
 		$query->set('order', 'ASC');

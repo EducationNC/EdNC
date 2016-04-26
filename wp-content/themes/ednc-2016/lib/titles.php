@@ -12,6 +12,8 @@ function title() {
     } else {
       return __('Latest Posts', 'sage');
     }
+  } elseif (is_tax('session') || is_tax('bill-type')) {
+    return '<a href="/legislation-tracker/">Legislation Tracker</a>: ' . get_the_archive_title();
   } elseif (is_archive()) {
     return get_the_archive_title();
   } elseif (is_search()) {

@@ -2,8 +2,8 @@
 Contributors: eoigal, alternatekev, mdawaffe, donncha, johnny5
 Tags: polls, poll, polldaddy, wppolls, vote, polling, surveys, rate, rating, ratings
 Requires at least: 3.3
-Tested up to: 4.3
-Stable tag: 2.0.28
+Tested up to: 4.4.2
+Stable tag: 2.0.30
 
 Create and manage Polldaddy polls and ratings from within WordPress.
 
@@ -98,6 +98,10 @@ Check that footer.php in your theme calls the wp_footer action. The rating javas
 
 More info [here](http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks)
 
+= My ratings are gone after I reinstalled the plugin. How do I get them back? =
+
+Login to your Polldaddy.com account and [view the ratings](https://polldaddy.com/dashboard/?content=rating) in your dashboard. You should see ratings named "blog name - " comments/posts/pages. You need the rating ID of each of those which is visible when you edit them. It's the number in the URL of your browser that looks like https://polldaddy.com/ratings/1234567/edit/. After you connect the plugin to your Polldaddy account go to Settings->Ratings and make sure the ratings are displayed on your posts/pages/comments as desired. You'll see a link at the bottom of the page saying, "Advanced Settings" that will toggle new configuration settings. One of those settings is "rating ID" which you should replace with the number you got from your Polldaddy account. Now save the changes and the ratings on your site will be updated.
+
 = I cannot access my ratings settings, I am getting a "Sorry! There was an error creating your rating widget. Please contact Polldaddy support to fix this." message. =
 
 You need to select the synchronize ratings account in the WordPress options page at Settings->Polls & Ratings to make sure the ratings API key is valid.
@@ -112,12 +116,22 @@ Your theme is getting the post content, without necessarily showing it. If the p
 
 
 == Upgrade Notice ==
-Don't show "Connect to Polldaddy" notice everywhere. Only on plugins and polls pages
+Fixed warning when submitting comments and ratings display clobbering embed shortcuts.
 
 == Changelog ==
 
+= 2.0.30 =
+* When ratings are displayed at the top of a post separate it with a linebreak, not BR so YT URLs embed properly.
+* Fix "parameter missing" when submitting comments when comment ratings are enabled.
+
+= 2.0.29 =
+* Whitelist the polldaddy api key blog option so it can be updated by Jetpack.
+* Fix label on the poll settings page
+* Added a "How to I get my ratings back?" FAQ
+* Show ratings in edit-comments.php in WordPress 4.4
+
 = 2.0.28 =
-Don't show "Connect to Polldaddy" notice everywhere. Only on plugins and polls pages
+* Don't show "Connect to Polldaddy" notice everywhere. Only on plugins and polls pages
 
 = 2.0.27 =
 * Fixed WP_Widget warning.

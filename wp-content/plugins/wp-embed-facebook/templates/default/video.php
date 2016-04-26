@@ -11,7 +11,7 @@ $use_ratio = (get_option('wpemfb_video_ratio') == 'true');
     $type = end($type_array);
     $clean_type = strtolower($type);
 
-    if( get_option('wpemfb_raw_video_fb') == 'false' && $clean_type == 'mp4' ) : ?>
+    if( WP_Embed_FB::is_raw('video') && $clean_type == 'mp4' ) : ?>
         <?php $end = isset($fb_data['format']) ? end($fb_data['format']) : $fb_data;  ?>
 
         <video controls poster="<?php echo $end['picture'] ?>" >

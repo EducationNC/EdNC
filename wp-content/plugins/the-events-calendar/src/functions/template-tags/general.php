@@ -59,6 +59,17 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	}
 
 	/**
+	 * Get Event Label Singular lowercase
+	 *
+	 * Returns the singular version of the Event Label
+	 *
+	 * @return string
+	 */
+	function tribe_get_event_label_singular_lowercase() {
+		return apply_filters( 'tribe_event_label_singular_lowercase', esc_html__( 'event', 'the-events-calendar' ) );
+	}
+
+	/**
 	 * Get Event Label Plural
 	 *
 	 * Returns the plural version of the Event Label
@@ -67,6 +78,17 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 */
 	function tribe_get_event_label_plural() {
 		return apply_filters( 'tribe_event_label_plural', esc_html__( 'Events', 'the-events-calendar' ) );
+	}
+
+	/**
+	 * Get Event Label Plural lowercase
+	 *
+	 * Returns the plural version of the Event Label
+	 *
+	 * @return string
+	 */
+	function tribe_get_event_label_plural_lowercase() {
+		return apply_filters( 'tribe_event_label_plural_lowercase', esc_html__( 'events', 'the-events-calendar' ) );
 	}
 
 	/**
@@ -1022,7 +1044,7 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 				$category_classes = tribe_events_event_classes( $event->ID, false );
 
 				$json['eventId'] = $event->ID;
-				$json['title'] = $event->post_title;
+				$json['title'] = wp_kses_post( $event->post_title );
 				$json['permalink'] = tribe_get_event_link( $event->ID );
 				$json['imageSrc'] = $image_src;
 				$json['dateDisplay'] = $date_display;
@@ -1320,6 +1342,24 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 			$excerpt = $post->post_excerpt;
 		} else {
 			$excerpt = $post->post_content;
+			// We will only trim Excerpt if it comes from Post Content
+
+			/**
+			 * Filter the number of words in an excerpt.
+			 *
+			 * @param int $number The number of words. Default 55.
+			 */
+			$excerpt_length = apply_filters( 'excerpt_length', 55 );
+
+			/**
+			 * Filter the string in the "more" link displayed after a trimmed excerpt.
+			 *
+			 * @param string $more_string The string shown within the more link.
+			 */
+			$excerpt_more = apply_filters( 'excerpt_more', ' [&hellip;]' );
+
+			// Now we actually trim it
+			$excerpt = wp_trim_words( $excerpt, $excerpt_length, $excerpt_more );
 		}
 
 		// Remove all shortcode Content before removing HTML
@@ -1329,23 +1369,6 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 
 		// Remove "all" HTML based on what is allowed
 		$excerpt = wp_kses( $excerpt, $allowed_html );
-
-		/**
-		 * Filter the number of words in an excerpt.
-		 *
-		 * @param int $number The number of words. Default 55.
-		 */
-		$excerpt_length = apply_filters( 'excerpt_length', 55 );
-
-		/**
-		 * Filter the string in the "more" link displayed after a trimmed excerpt.
-		 *
-		 * @param string $more_string The string shown within the more link.
-		 */
-		$excerpt_more = apply_filters( 'excerpt_more', ' [&hellip;]' );
-
-		// Now we actually trim it
-		$excerpt = wp_trim_words( $excerpt, $excerpt_length, $excerpt_more );
 
 		return wpautop( $excerpt );
 	}
@@ -1370,7 +1393,7 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 		}
 
 		// If not, try to determine now
-		Tribe__Events__Main::instance()->rebuild_known_range();
+		Tribe__Events__Dates__Known_Range::instance()->rebuild_known_range();
 		$latest = tribe_get_option( 'latest_date', false );
 		if ( false !== $latest ) {
 			return Tribe__Date_Utils::reformat( $latest, $format );
@@ -1399,7 +1422,7 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 		}
 
 		// If not, try to determine now
-		Tribe__Events__Main::instance()->rebuild_known_range();
+		Tribe__Events__Dates__Known_Range::instance()->rebuild_known_range();
 		$earliest = tribe_get_option( 'earliest_date', false );
 		if ( false !== $earliest ) {
 			return Tribe__Date_Utils::reformat( $earliest, $format );

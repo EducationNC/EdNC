@@ -57,40 +57,14 @@
                 endwhile;
               echo '</ul>';
             else :
-              echo '<h3>No resources found</h3>';
+              echo '<h3>No bills found</h3>';
             endif; wp_reset_query();
 
           } else {
             // If not a search result, lay out in sections
             the_content();
 
-            $args = array(
-              'post_type' => 'bill',
-              'posts_per_page' => -1,
-              'orderby' => 'menu_order',
-              'order' => 'ASC',
-              'tax_query' => array(
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'ratified'
-                )
-              )
-            );
-
-            $bills = new WP_Query( $args );
-
-            if ($bills->have_posts()) :
-              echo '<h2>2015-16 ratified bills</h2>';
-              echo '<ul>';
-                while ( $bills->have_posts() ) : $bills->the_post();
-                  get_template_part('templates/layouts/block', 'bill');
-                endwhile;
-              echo '</ul>';
-            endif; wp_reset_query();
-
-            echo '<hr />';
-
+            // 2016 short session bills in play
             $args = array(
               'post_type' => 'bill',
               'posts_per_page' => -1,
@@ -98,40 +72,12 @@
               'order' => 'ASC',
               'tax_query' => array(
                 'relation' => 'AND',
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'ratified',
-                  'operator' => 'NOT IN'
-                ),
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'met-crossover-deadline'
-                )
-              )
-            );
-
-            $bills = new WP_Query( $args );
-
-            if ($bills->have_posts()) :
-              echo '<h2>2015-16 bills in play</h2>';
-              echo '<ul>';
-                while ( $bills->have_posts() ) : $bills->the_post();
-                  get_template_part('templates/layouts/block', 'bill');
-                endwhile;
-              echo '</ul>';
-            endif; wp_reset_query();
-
-            echo '<hr />';
-
-            $args = array(
-              'post_type' => 'bill',
-              'posts_per_page' => -1,
-              'orderby' => 'menu_order',
-              'order' => 'ASC',
-              'tax_query' => array(
-                'relation' => 'AND',
+                  array(
+                    'taxonomy' => 'session',
+                    'field' => 'slug',
+                    'terms' => '2016-short-session',
+                    'operator' => 'IN'
+                  ),
                 array(
                   'taxonomy' => 'bill-status',
                   'field' => 'slug',
@@ -150,7 +96,89 @@
             $bills = new WP_Query( $args );
 
             if ($bills->have_posts()) :
-              echo '<h2>2015-16 bills that did not meet crossover deadline</h2>';
+              echo '<h2>2016 Short Session: Bills in play</h2>';
+              echo '<ul>';
+                while ( $bills->have_posts() ) : $bills->the_post();
+                  get_template_part('templates/layouts/block', 'bill');
+                endwhile;
+              echo '</ul>';
+              echo '<hr />';
+            endif; wp_reset_query();
+
+            // loop through bill years and statuses
+            $sessions = array_reverse(get_terms('session', ['hide_empty' => false]));
+            $statuses = get_terms('bill-status');
+
+            foreach ($sessions as $session) {
+              foreach ( $statuses as $status ) {
+                $args = array(
+                  'post_type' => 'bill',
+                  'posts_per_page' => -1,
+                  'orderby' => 'menu_order',
+                  'order' => 'ASC',
+                  'tax_query' => array(
+                    array(
+                      'taxonomy' => 'session',
+                      'field' => 'slug',
+                      'terms' => $session,
+                      'operator' => 'IN'
+                    ),
+                    array(
+                      'taxonomy' => 'bill-status',
+                      'field' => 'slug',
+                      'terms' => $status,
+                      'operator' => 'IN'
+                    )
+                  )
+                );
+
+                $bills = new WP_Query( $args );
+
+                if ($bills->have_posts()) :
+                  echo '<h2>' . $session->name . ': ' . $status->name . '</h2>';
+                  echo '<ul>';
+                    while ( $bills->have_posts() ) : $bills->the_post();
+                      get_template_part('templates/layouts/block', 'bill');
+                    endwhile;
+                  echo '</ul>';
+                  echo '<hr />';
+                endif; wp_reset_query();
+              }
+            }
+
+            // 2015 bills that did not meet crossover deadline
+            $args = array(
+              'post_type' => 'bill',
+              'posts_per_page' => -1,
+              'orderby' => 'menu_order',
+              'order' => 'ASC',
+              'tax_query' => array(
+                'relation' => 'AND',
+                  array(
+                    'taxonomy' => 'session',
+                    'field' => 'slug',
+                    'terms' => '2015-long-session',
+                    'operator' => 'IN'
+                  ),
+                array(
+                  'taxonomy' => 'bill-status',
+                  'field' => 'slug',
+                  'terms' => 'ratified',
+                  'operator' => 'NOT IN'
+                ),
+                array(
+                  'taxonomy' => 'bill-status',
+                  'field' => 'slug',
+                  'terms' => 'met-crossover-deadline',
+                  'operator' => 'NOT IN'
+                )
+              )
+            );
+
+            $bills = new WP_Query( $args );
+
+            if ($bills->have_posts()) :
+              echo '<h2>2015 Long Session: Bills that did not meet crossover deadline</h2>';
               echo '<ul>';
                 while ( $bills->have_posts() ) : $bills->the_post();
                   get_template_part('templates/layouts/block', 'bill');

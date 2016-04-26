@@ -1,13 +1,13 @@
 <div class="wef-default" style="max-width: <?php echo $width ?>px">
 	<div class="row">
 			<div class="col-3 text-center">
-				<a href="http://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
-					<img src="http://graph.facebook.com/<?php echo $fb_data['id'] ?>/picture" />
+				<a href="https://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
+					<img src="https://graph.facebook.com/<?php echo $fb_data['id'] ?>/picture" />
 				</a>		
 			</div>
 			<div class="col-9 pl-none">
 				<p>
-					<a href="http://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
+					<a href="https://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
 						<span class="title"><?php echo $fb_data['name'] ?></span>
 					</a>
 				</p>

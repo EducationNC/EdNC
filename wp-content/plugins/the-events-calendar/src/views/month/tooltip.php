@@ -10,7 +10,7 @@
 
 <script type="text/html" id="tribe_tmpl_tooltip">
 	<div id="tribe-events-tooltip-[[=eventId]]" class="tribe-events-tooltip">
-		<h4 class="entry-title summary">[[=title]]</h4>
+		<h4 class="entry-title summary">[[=raw title]]</h4>
 
 		<div class="tribe-events-event-body">
 			<div class="tribe-event-duration">
@@ -22,7 +22,7 @@
 			</div>
 			[[ } ]]
 			[[ if(excerpt.length) { ]]
-			<p class="tribe-event-description">[[=raw excerpt]]</p>
+			<div class="tribe-event-description">[[=raw excerpt]]</div>
 			[[ } ]]
 			<span class="tribe-events-arrow"></span>
 		</div>

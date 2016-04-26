@@ -3,16 +3,16 @@ Contributors: poxtron
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26
 Tags: Facebook, facebook, Social Plugins, embed facebook, facebook video, facebook posts, facebook publication, facebook publications, facebook event, facebook events, facebook pages, facebook page, facebook profiles, facebook album, facebook albums, facebook photos, facebook photo, social,
 Requires at least: 3.8.1
-Tested up to: 4.4
-Stable tag: 2.0.4
+Tested up to: 4.4.1
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Embed a Facebook video, page, event, album, photo, profile or post to any WordPress post or page.
+Embed a Facebook video, page, event, album, photo, profile or post.
 
 == Description ==
 
-Embed any public facebook video, page, post, profile, photo or event directly into a WordPress post, without having to write a single line of code. Simply put the facebook url on a separate line on the content of any post, and this plugin will fetch data associated with that url and display it. If the data is not public, like “invite only” events or private profiles it will return a link.
+Embed any **public** facebook video, page, post, profile, photo or event directly into a WordPress post, without having to write a single line of code.
 
 = Supported Embeds =
 * Facebook Videos
@@ -27,89 +27,29 @@ Embed any public facebook video, page, post, profile, photo or event directly in
 **[Live Demo](http://www.wpembedfb.com/demo/)**
 
 = Requirements =
-* Facebook App Id and Secret you can get them [here](https://developers.facebook.com/apps/)
+* Nothing for posts, pages and videos
+* For custom embeds a Facebook App Id and Secret are required.
+    * To get them first login to facebook then go [here](https://developers.facebook.com/apps/) register as a developer and/or create a new App.
 
 = How to use it =
-Copy the facebook url on a single line.
+Copy the facebook url on a single line or use the WordPress native [embed] shortcode [example](https://codex.wordpress.org/Embeds).
 
-You can *override* the general setting for each embed using a shortcode.
+You should see the embed right on the editor, try switching from text to visual if it does not.
 
-= Shortcode Examples =
+Alternatively you can use the [facebook] shortcode.
 
-Assuming all settings are in their default state.
+Read more about the shortcode attributes on [this](http://wpembedfb.com/documentation/) page.
 
-**Videos**
-
-* From source using html5 video tag
-
-`[facebook https://www.facebook.com/ArchanNair/videos/10152579879850694 ]`
-
-* Use facebook [embedded video](https://developers.facebook.com/docs/plugins/embedded-video-player) plugin
-
-`[facebook https://www.facebook.com/ArchanNair/videos/10152579879850694 social_plugin=true ]`
-
-**Pages**
-
-* Using default settings
-
-`[facebook https://www.facebook.com/sydneyoperahouse ]`
-
-* Changing the number of posts shown only for custom embeds
-
-`[facebook https://www.facebook.com/sydneyoperahouse posts=2 ]`
-
-* Use facebook [page plugin](https://developers.facebook.com/docs/plugins/page-plugin)
-
-`[facebook https://www.facebook.com/sydneyoperahouse social_plugin=true  ]`
-
-All attributes are optional and if 'attributes' is not present it will use the default values
-
-**Albums**
-
-`[facebook https://www.facebook.com/media/set/?set=a.10151932001713698.1073741831.10883823697 ]`
-
-**Events**
-
-`[facebook https://www.facebook.com/events/507909879383103/ ]`
-
-**Photos**
-
-* Embed the photo as a plain image on your site
-
-`[facebook https://www.facebook.com/ArchanNair/photos/a.10151932001713698.1073741831.10883823697/10153545048758698/]`
-
-* Use facebook [embedded post](https://developers.facebook.com/docs/plugins/embedded-posts) plugin
-
-`[facebook https://www.facebook.com/ArchanNair/photos/a.10151932001713698.1073741831.10883823697/10153545048758698/ social_plugin=true ]`
-
-**Posts**
-
-`[facebook https://www.facebook.com/radiohead/posts/10152688346467245 ]`
-
-* Use facebook [embedded post](https://developers.facebook.com/docs/plugins/embedded-posts) plugin
-
-`[facebook https://www.facebook.com/radiohead/posts/10152688346467245 social_plugin=true ]`
-
-
-**Profiles**
-
-`[facebook https://www.facebook.com/4 ]`
-
-You will need the facebook id of the user to embed the profile.
-
-**Changing the width**
-
-`[facebook https://www.facebook.com/sydneyoperahouse width=970 ]`
-
-All shortcodes can be affected by the width attribute and it represents the *maximum width* in pixels the embed can be rendered, never the less all embeds are responsive.
-
-**Changing the theme**
-
-`[facebook https://www.facebook.com/sydneyoperahouse theme=classic ]`
-
-**Embedding a Facebook object_id**
-
-`[facebook 507909879383103 ]`
+= Premium extension =
+* Embed full event shortcode
+* Embed full fan page shortcode
+* Embed events with address and admins
+* Embed albums with more that 100 photos
+* Features cooking
+    * Embed personal data
+    * Shortcode creator
+    * Special templates for albums and pages
+    * Embed all upcoming events of a fan page
 
 == Installation ==
 
@@ -121,13 +61,14 @@ All shortcodes can be affected by the width attribute and it represents the *max
 
 == Frequently Asked Questions ==
 
-= Why is a facebook app needed?
+= How can I change the way an embed looks? =
 
-All facebook queries to the api need to come from someone so an app is required to tell facebook who did the query
+You can override the embed template with a custom one on your theme read more about it here
 
 = Is there a way to embed an album with more than 100 photos ? =
 
-This is a facebook limitation, will try to work around it.
+This can only be achieved using the premium version
+
 
 == Screenshots ==
 
@@ -137,6 +78,32 @@ This is a facebook limitation, will try to work around it.
 4. Event
 
 == Changelog ==
+
+= 2.0.8 =
+* Fix Event title css
+
+= 2.0.7 =
+* Settings translation link
+* Improved object id identification for fan pages and posts
+* Video download option
+
+= 2.0.6 =
+* Added new filter "wpemfb_embed_fb_id"
+* Added Download Video option
+* Added Settings link on plugin description
+* Improved type and fb_id recognition
+
+= 2.0.5 =
+* Improved [embed] shortcode compatibility !
+* Added new 'photos' attribute for shortcode used only on albums
+* Added 'type' parameter to wpemfb_template filter
+* Fixed https on all templates
+* Fixed like and comment links on single post raw
+* Fixed forced app token only if it has app
+* Fixed admin shortcode references
+* Fixed removed unused options on uninstall
+* Fixed translations strings
+* Fixed notice on installations with no FB App
 
 = 2.0.4 =
 * changed shortcode tag from [facebook=url] to [facebook url]
@@ -308,5 +275,5 @@ This is a facebook limitation, will try to work around it.
 
 == Upgrade Notice ==
 
-= 2.0.2 =
-* More human friendly.
+= 2.0.8 =
+* Titles css

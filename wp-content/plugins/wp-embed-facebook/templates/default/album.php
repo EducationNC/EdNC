@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-3 text-center">
 			<a href="https://facebook.com/<?php echo $fb_data['from']['id'] ?>" target="_blank" rel="nofollow">
-				<img src="http://graph.facebook.com/<?php echo $fb_data['from']['id'] ?>/picture" />
+				<img src="https://graph.facebook.com/<?php echo $fb_data['from']['id'] ?>/picture" />
 			</a>
 		</div>
 		<div class="col-9 pl-none">

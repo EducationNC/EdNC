@@ -1,13 +1,13 @@
 <?php $fb_post = $fb_data ?>
 <div class="wef-classic" style="max-width: <?php echo $width ?>px" >
 	<div class="col-3 text-center">
-		<a href="http://www.facebook.com/<?php echo $fb_post['from']['id'] ?>" target="_blank" rel="nofollow">
-			<img src="http://graph.facebook.com/<?php echo $fb_post['from']['id'] ?>/picture" width="50px" height="50px" />
+		<a href="https://www.facebook.com/<?php echo $fb_post['from']['id'] ?>" target="_blank" rel="nofollow">
+			<img src="https://graph.facebook.com/<?php echo $fb_post['from']['id'] ?>/picture" width="50px" height="50px" />
 		</a>
 	</div>
 	<div class="col-9 pl-none">
 		<p>
-			<a href="http://www.facebook.com/<?php echo $fb_post['from']['id'] ?>" target="_blank" rel="nofollow">
+			<a href="https://www.facebook.com/<?php echo $fb_post['from']['id'] ?>" target="_blank" rel="nofollow">
 				<span class="title"><?php echo $fb_post['from']['name'] ?></span>
 			</a>
 		</p>
