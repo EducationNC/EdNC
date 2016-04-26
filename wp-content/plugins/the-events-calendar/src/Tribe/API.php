@@ -133,6 +133,11 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 			$event_cost = isset( $data['EventCost'] ) ? (array) $data['EventCost'] : array();
 			$data['EventCost'] = (array) apply_filters( 'tribe_events_event_costs', $event_cost, $event_id );
 
+			if ( isset( $data['FeaturedImage'] ) && ! empty( $data['FeaturedImage'] ) ) {
+				update_post_meta( $event_id, '_thumbnail_id', $data['FeaturedImage'] );
+				unset( $data['FeaturedImage'] );
+			}
+
 			do_action( 'tribe_events_event_save', $event_id );
 
 			//update meta fields
@@ -239,9 +244,17 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 			}
 
 			// Additionally store datetimes in UTC
-			$data['EventStartDateUTC'] = Tribe__Events__Timezones::to_utc( $data['EventStartDate'], $data['EventTimezone'] );
-			$data['EventEndDateUTC']   = Tribe__Events__Timezones::to_utc( $data['EventEndDate'], $data['EventTimezone'] );
-			$data['EventTimezoneAbbr'] = Tribe__Events__Timezones::abbr( $data['EventStartDate'], $data['EventTimezone'] );
+			if ( empty( $data['EventStartDateUTC'] ) ) {
+				$data['EventStartDateUTC'] = Tribe__Events__Timezones::to_utc( $data['EventStartDate'], $data['EventTimezone'] );
+			}
+
+			if ( empty( $data['EventEndDateUTC'] ) ) {
+				$data['EventEndDateUTC']   = Tribe__Events__Timezones::to_utc( $data['EventEndDate'], $data['EventTimezone'] );
+			}
+
+			if ( empty( $data['EventTimezoneAbbr'] ) ) {
+				$data['EventTimezoneAbbr'] = Tribe__Events__Timezones::abbr( $data['EventStartDate'], $data['EventTimezone'] );
+			}
 
 			// sanity check that start date < end date
 			$start_timestamp = strtotime( $data['EventStartDate'] );
@@ -349,8 +362,12 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 
 				$organizer_label = tribe_get_organizer_label_singular();
 
+				$title = $data['Organizer'] ? $data['Organizer'] : sprintf( __( 'Unnamed %s', 'the-events-calendar' ), ucfirst( $organizer_label ) );
+				$slug  = sanitize_title( $title );
+
 				$postdata = array(
-					'post_title'  => $data['Organizer'] ? $data['Organizer'] : sprintf( __( 'Unnamed %s', 'the-events-calendar' ), ucfirst( $organizer_label ) ),
+					'post_title'  => $title,
+					'post_name'   => $slug,
 					'post_type'   => Tribe__Events__Main::ORGANIZER_POST_TYPE,
 					'post_status' => $post_status,
 				);
@@ -417,6 +434,11 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 		 *
 		 */
 		private static function saveOrganizerMeta( $organizerId, $data ) {
+			if ( isset( $data['FeaturedImage'] ) && ! empty( $data['FeaturedImage'] ) ) {
+				update_post_meta( $organizerId, '_thumbnail_id', $data['FeaturedImage'] );
+				unset( $data['FeaturedImage'] );
+			}
+
 			foreach ( $data as $key => $var ) {
 				update_post_meta( $organizerId, '_Organizer' . $key, $var );
 			}
@@ -433,8 +455,12 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 		public static function createVenue( $data, $post_status = 'publish' ) {
 
 			if ( ( isset( $data['Venue'] ) && $data['Venue'] ) || self::someVenueDataSet( $data ) ) {
+				$title = $data['Venue'] ? $data['Venue'] : esc_html__( 'Unnamed Venue', 'the-events-calendar' );
+				$slug  = sanitize_title( $title );
+
 				$postdata = array(
-					'post_title'  => $data['Venue'] ? $data['Venue'] : esc_html__( 'Unnamed Venue', 'the-events-calendar' ),
+					'post_title'  => $title,
+					'post_name'   => $slug,
 					'post_type'   => Tribe__Events__Main::VENUE_POST_TYPE,
 					'post_status' => $post_status,
 				);
@@ -527,6 +553,11 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 			update_post_meta( $venueId, '_EventShowMap', isset( $data['EventShowMap'] ) );
 			unset( $data['EventShowMapLink'] );
 			unset( $data['EventShowMap'] );
+
+			if ( isset( $data['FeaturedImage'] ) && ! empty( $data['FeaturedImage'] ) ) {
+				update_post_meta( $venueId, '_thumbnail_id', $data['FeaturedImage'] );
+				unset( $data['FeaturedImage'] );
+			}
 
 			foreach ( $data as $key => $var ) {
 				update_post_meta( $venueId, '_Venue' . $key, $var );

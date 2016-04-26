@@ -81,10 +81,14 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 				add_filter( 'generate_rewrite_rules', array( $this, 'filter_generate' ) );
 				add_filter( 'post_type_link', array( $this, 'filter_post_type_link' ), 15, 2 );
 
+				// Remove percent Placeholders on all items
+				add_filter( 'rewrite_rules_array', array( $this, 'remove_percent_placeholders' ), 25 );
+
 			} elseif ( true === $remove ) {
 				// Remove the Hooks
 				remove_filter( 'generate_rewrite_rules', array( $this, 'filter_generate' ) );
 				remove_filter( 'post_type_link', array( $this, 'filter_post_type_link' ), 15 );
+				remove_filter( 'rewrite_rules_array', array( $this, 'remove_percent_placeholders' ), 25 );
 			}
 		}
 
@@ -190,11 +194,16 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 		 * @return string      Permalink with the language
 		 */
 		public function filter_post_type_link( $permalink, $post ) {
+			// When creating the link we need to re-do the Percent Placeholder
+			$permalink = str_replace( self::PERCENT_PLACEHOLDER, '%', $permalink );
+
 			if ( ! $this->is_wpml_active() || empty( $_GET['lang'] ) ) {
 				return $permalink;
 			}
 
-			return add_query_arg( array( 'lang' => $_GET['lang'] ), $permalink );
+			$lang = wp_strip_all_tags( $_GET['lang'] );
+
+			return add_query_arg( array( 'lang' => $lang ), $permalink );
 		}
 
 		/**
@@ -213,7 +222,7 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 		 * @return Tribe__Events__Rewrite       The modified version of the class with the required variables in place
 		 */
 		public function setup( $wp_rewrite = null ) {
-			if ( ! $wp_rewrite instanceof WP_Rewrite ){
+			if ( ! $wp_rewrite instanceof WP_Rewrite ) {
 				global $wp_rewrite;
 			}
 			$this->rewrite = $wp_rewrite;
@@ -266,7 +275,7 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 			// By default we load the Default and our plugin domains
 			$domains = apply_filters( 'tribe_events_rewrite_i18n_domains', array(
 				'default' => true, // Default doesn't need file path
-				'the-events-calendar' => Tribe__Events__Main::instance()->pluginDir . 'lang/',
+				'the-events-calendar' => $tec->pluginDir . 'lang/',
 			) );
 
 			// If WPML exists we treat the multiple languages
@@ -287,14 +296,19 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 				$current_locale = $sitepress->get_locale( $sitepress->get_current_language() );
 
 				// Get the strings on multiple Domains and Languages
-				$bases = Tribe__Events__Main::instance()->get_i18n_strings( $bases, $languages, $domains, $current_locale );
+				$bases = $tec->get_i18n_strings( $bases, $languages, $domains, $current_locale );
 			}
 
-			if ( 'regex' === $method ){
+			if ( 'regex' === $method ) {
 				foreach ( $bases as $type => $base ) {
+					// Escape all the Bases
+					$base = array_map( 'preg_quote', $base );
+
+					// Create the Regular Expression
 					$bases[ $type ] = '(?:' . implode( '|', $base ) . ')';
 				}
 			}
+
 
 			/**
 			 * Use `tribe_events_rewrite_i18n_slugs` to modify the final version of the l10n slugs bases
@@ -424,9 +438,10 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 		 *
 		 * @param  string $slug
 		 * @param  string $permastruct_name
+		 * @param  string $is_regular_exp
 		 * @return string
 		 */
-		public function prepare_slug( $slug, $permastruct_name ) {
+		public function prepare_slug( $slug, $permastruct_name, $is_regular_exp = true ) {
 			$needs_handling = false;
 			$sanitized_slug = sanitize_title( $slug );
 
@@ -440,12 +455,12 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 				 * handling is required.
 				 *
 				 * @var string $permastruct_name
-				 * @var string $possible_slug_name
+				 * @var string $slug
 				 */
 				$needs_handling = apply_filters( 'tribe_events_rewrite_utf8_handling',
 					true,
 					$permastruct_name,
-					$possible_slug_name
+					$slug
 				);
 			}
 
@@ -456,9 +471,6 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 				// UTF8 encoding results in lots of "%" chars in our string which play havoc
 				// with WP_Rewrite::generate_rewrite_rules(), so we swap them out temporarily
 				$sanitized_slug = str_replace( '%', self::PERCENT_PLACEHOLDER, $sanitized_slug );
-
-				// Restore the % chars later on
-				add_filter( $permastruct_name . '_rewrite_rules', array( $this, 'remove_percent_placeholders' ) );
 			}
 
 			/**
@@ -470,7 +482,7 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 			 * @var string $original_slug
 			 */
 			return apply_filters( 'tribe_events_rewrite_prepared_slug',
-				preg_quote( $sanitized_slug ),
+				$is_regular_exp ? preg_quote( $sanitized_slug ) : $sanitized_slug,
 				$permastruct_name,
 				$slug
 			);
@@ -483,15 +495,37 @@ if ( ! class_exists( 'Tribe__Events__Rewrite' ) ) {
 		 * @return array
 		 */
 		public function remove_percent_placeholders( array $rules ) {
-			$new_rules = array();
-
 			foreach ( $rules as $key => $value ) {
-				$key = str_replace( self::PERCENT_PLACEHOLDER, '%', $key );
-				$new_rules[$key] = $value;
+				$this->replace_array_key( $rules, $key, str_replace( self::PERCENT_PLACEHOLDER, '%', $key ) );
 			}
 
-			return $new_rules;
+			return $rules;
 		}
+
+		/**
+		 * A way to replace an Array key without destroying the array ordering
+		 *
+		 * @since  4.0.6
+		 *
+		 * @param  array &$array   The Rules Array should be used here
+		 * @param  string $search  Search for this Key
+		 * @param  string $replace Replace with this key]
+		 * @return bool            Did we replace anything?
+		 */
+		private function replace_array_key( &$array, $search, $replace ) {
+			$keys = array_keys( $array );
+			$index = array_search( $search, $keys );
+
+			if ( false !== $index ) {
+				$keys[ $index ] = $replace;
+				$array = array_combine( $keys, $array );
+
+				return true;
+			}
+
+			return false;
+		}
+
 	} // end Tribe__Events__Rewrite class
 
 } // end if !class_exists Tribe__Events__Rewrite

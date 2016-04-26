@@ -71,7 +71,7 @@ date_default_timezone_set($old_time_zone);
 					<a href="<?php echo $fb_post['link'] ?>" rel="nofollow" target="_blank">
 						<img src="<?php echo $fb_post['full_picture'] ?>" width="100%" height="auto"  /><br>
 					</a>
-					<?php if($type == 'music') : ?>
+					<?php if($fb_post["type"] == 'music') : ?>
 						<p>
 							<audio controls>
 								<source src="<?php echo $fb_post['source'] ?>" type="audio/mpeg">

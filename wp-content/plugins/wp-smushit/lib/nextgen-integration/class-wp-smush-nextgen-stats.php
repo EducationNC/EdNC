@@ -9,7 +9,7 @@
  *
  * @author Umesh Kumar <umesh@incsub.com>
  *
- * @copyright (c) 2015, Incsub (http://incsub.com)
+ * @copyright (c) 2016, Incsub (http://incsub.com)
  */
 if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 
@@ -120,6 +120,14 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 						} else {
 							$meta = unserialize( $attachment->meta_data );
 						}
+
+						//Store pid in image meta
+						if ( is_array( $meta ) && empty( $meta['pid'] ) ) {
+							$meta['pid'] = $attachment->pid;
+						} elseif ( is_object( $meta ) && empty( $meta->pid ) ) {
+							$meta->pid = $attachment->pid;
+						}
+
 						//Check meta for wp_smush
 						if ( ! is_array( $meta ) || empty( $meta['wp_smush'] ) ) {
 							$unsmushed_images[ $attachment->pid ] = $meta;
@@ -129,7 +137,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 					}
 					//Set the offset
 					$offset += $limit;
-				};
+				}
 				if ( ! empty( $smushed_images ) ) {
 					wp_cache_set( 'wp_smush_images_smushed', $smushed_images, 'nextgen', 300 );
 				}
@@ -166,6 +174,8 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		 * @param bool $text_only Return only text instead of button (Useful for Ajax)
 		 * @param bool $echo Whether to echo the stats or not
 		 *
+		 * @uses WpSmushNextGenAdmin::column_html(), WpSmush::get_restore_link(), WpSmush::get_resmush_link()
+		 *
 		 * @return bool|null|string|void
 		 */
 		function show_stats( $pid, $wp_smush_data = false, $image_type = '', $text_only = false, $echo = true ) {
@@ -173,8 +183,8 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			if ( empty( $wp_smush_data ) ) {
 				return false;
 			}
-			$button_txt  = '';
-			$show_button = false;
+			$button_txt  = $stats = '';
+			$show_button = $show_resmush = $show_restore = false;
 
 			$bytes          = isset( $wp_smush_data['stats']['bytes'] ) ? $wp_smush_data['stats']['bytes'] : 0;
 			$bytes_readable = ! empty( $bytes ) ? $WpSmush->format_bytes( $bytes ) : '';
@@ -182,17 +192,50 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			$percent        = $percent < 0 ? 0 : $percent;
 
 			if ( isset( $wp_smush_data['stats']['size_before'] ) && $wp_smush_data['stats']['size_before'] == 0 && ! empty( $wp_smush_data['sizes'] ) ) {
-				$status_txt  = __( 'Error processing request', 'wp-smushit' );
-				$show_button = true;
+				$status_txt  = __( 'Already Optimized', 'wp-smushit' );
 			} else {
 				if ( $bytes == 0 || $percent == 0 ) {
 					$status_txt = __( 'Already Optimized', 'wp-smushit' );
+
+					//Add resmush option if needed
+					$show_resmush = $this->show_resmush( $show_resmush, $wp_smush_data );
+					if ( $show_resmush ) {
+						$status_txt .= '<br />' . $WpSmush->get_resmsuh_link( $pid, 'nextgen' );
+					}
+
 				} elseif ( ! empty( $percent ) && ! empty( $bytes_readable ) ) {
 					$status_txt = sprintf( __( "Reduced by %s (  %01.1f%% )", 'wp-smushit' ), $bytes_readable, number_format_i18n( $percent, 2, '.', '' ) );
+
+					$show_resmush = $this->show_resmush( $show_resmush, $wp_smush_data );
+
+					if ( $show_resmush ) {
+						$status_txt .= '<br />' . $WpSmush->get_resmsuh_link( $pid, 'nextgen' );
+					}
+
+					//Restore Image: Check if we need to show the restore image option
+					$show_restore = $this->show_restore_option( $pid, $wp_smush_data );
+
+					if ( $show_restore ) {
+						if ( $show_resmush ) {
+							//Show Separator
+							$status_txt .= ' | ';
+						} else {
+							//Show the link in next line
+							$status_txt .= '<br />';
+						}
+						$status_txt .= $WpSmush->get_restore_link( $pid, 'nextgen' );
+					}
 					//Show detailed stats if available
 					if ( ! empty( $wp_smush_data['sizes'] ) ) {
+						if ( $show_resmush || $show_restore ) {
+							//Show Separator
+							$status_txt .= ' | ';
+						} else {
+							//Show the link in next line
+							$status_txt .= '<br />';
+						}
 						//Detailed Stats Link
-						$status_txt .= '<br /><a href="#" class="smush-stats-details">' . esc_html__( "Smush stats", 'wp-smushit' ) . ' [<span class="stats-toggle">+</span>]</a>';
+						$status_txt .= '<a href="#" class="smush-stats-details">' . esc_html__( "Smush stats", 'wp-smushit' ) . ' [<span class="stats-toggle">+</span>]</a>';
 
 						//Get metadata For the image
 						// Registry Object for NextGen Gallery
@@ -209,7 +252,11 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 						$full_image = $storage->get_image_abspath( $image, 'full' );
 
 						//Stats
-						$status_txt .= $this->get_detailed_stats( $pid, $wp_smush_data, array( 'sizes' => $sizes ), $full_image );
+						$stats = $this->get_detailed_stats( $pid, $wp_smush_data, array( 'sizes' => $sizes ), $full_image );
+
+						if ( ! $text_only ) {
+							$status_txt .= $stats;
+						}
 					}
 				}
 			}
@@ -225,13 +272,17 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			$opt_lossy_val = get_option( $opt_lossy, false );
 
 			//Check if premium user, compression was lossless, and lossy compression is enabled
-			if ( $this->is_pro_user && ! $is_lossy && $opt_lossy_val && $image_type != 'image/gif' && ! empty( $image_type ) ) {
+			if ( !$show_resmush && $this->is_pro_user && ! $is_lossy && $opt_lossy_val && ! empty( $image_type ) && $image_type != 'image/gif' ) {
 				// the button text
 				$button_txt  = __( 'Super-Smush', 'wp-smushit' );
 				$show_button = true;
 			}
 			if ( $text_only ) {
-				return $status_txt;
+				//For ajax response
+				return array(
+					'status' => $status_txt,
+					'stats'  => $stats
+				);
 			}
 
 			//If show button is true for some reason, column html can print out the button for us
@@ -255,8 +306,6 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			$smush_stats = get_option( 'wp_smush_stats_nextgen', array() );
 
 			if ( ! empty( $stats ) ) {
-				//Compression Percentage
-				$smush_stats['percent'] = ! empty( $smush_stats['percent'] ) ? ( $smush_stats['percent'] + $stats['percent'] ) : $stats['percent'];
 
 				//Compression Bytes
 				$smush_stats['bytes'] = ! empty( $smush_stats['bytes'] ) ? ( $smush_stats['bytes'] + $stats['bytes'] ) : $stats['bytes'];
@@ -269,6 +318,9 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 
 				//Size of image after compression
 				$smush_stats['size_after'] = ! empty( $smush_stats['size_after'] ) ? ( $smush_stats['size_after'] + $stats['size_after'] ) : $stats['size_after'];
+
+				//Compression Percentage
+				$smush_stats['percent'] = ! empty( $smush_stats['size_before'] ) && !empty( $smush_stats['size_after'] ) && $smush_stats['size_before'] > 0 ? ( $smush_stats['bytes'] / $smush_stats['size_before'] ) * 100 : $stats['percent'];
 			}
 			update_option( 'wp_smush_stats_nextgen', $smush_stats );
 
@@ -282,6 +334,12 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		 */
 		function get_smush_stats() {
 			global $WpSmush;
+
+			//Clear up the stats
+			if( 0 == $this->total_count() ) {
+				delete_option('wp_smush_stats_nextgen');
+				wp_cache_delete( 'wp_smush_stats_nextgen', 'nextgen' );
+			}
 
 			// Check for the  wp_smush_images_smushed in the 'nextgen' group.
 			$smushed_stats = wp_cache_get( 'wp_smush_stats_nextgen', 'nextgen' );
@@ -319,6 +377,15 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			$this->get_ngg_images( 'smushed', '', true );
 		}
 
+		/**
+		 * Returns the Stats for a image formatted into a nice table
+		 * @param $image_id
+		 * @param $wp_smush_data
+		 * @param $attachment_metadata
+		 * @param $full_image
+		 *
+		 * @return string
+		 */
 		function get_detailed_stats( $image_id, $wp_smush_data, $attachment_metadata, $full_image ) {
 			global $WpSmush;
 
@@ -378,8 +445,13 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		 */
 		function cmp( $a, $b ) {
 			if ( is_object( $a ) ) {
+				//Check and typecast $b if required
+				$b = is_object( $b ) ? $b : (object) $b;
+
 				return $a->bytes < $b->bytes;
 			} else if ( is_array( $a ) ) {
+				$b = is_array( $b ) ? $b : (array) $b;
+
 				return $a['bytes'] < $b['bytes'];
 			}
 		}
@@ -426,6 +498,31 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			}
 
 			return $skipped;
+		}
+
+		/**
+		 * Check if image can be resmushed
+		 * @param $status_txt
+		 *
+		 * @return string
+		 */
+		function show_resmush( $show_resmush, $wp_smush_data ) {
+			global $WpSmush;
+			//Resmush: Show resmush link, Check if user have enabled smushing the original and full image was skipped
+			if ( $WpSmush->smush_original ) {
+				//IF full image was not smushed
+				if ( ! empty( $wp_smush_data ) && empty( $wp_smush_data['sizes']['full'] ) ) {
+					$show_resmush = true;
+				}
+			}
+			if ( ! $WpSmush->keep_exif ) {
+				//If Keep Exif was set to tru initially, and since it is set to false now
+				if ( ! empty( $wp_smush_data['stats']['keep_exif'] ) && $wp_smush_data['stats']['keep_exif'] == 1 ) {
+					$show_resmush = true;
+				}
+			}
+
+			return $show_resmush;
 		}
 
 	}//End of Class

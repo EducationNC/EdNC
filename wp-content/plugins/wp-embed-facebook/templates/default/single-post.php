@@ -71,7 +71,7 @@ date_default_timezone_set($old_time_zone);
 					<a href="<?php echo $fb_post['link'] ?>" rel="nofollow" target="_blank">
 						<img src="<?php echo $fb_post['full_picture'] ?>" width="100%" height="auto"  /><br>
 					</a>
-					<?php if($type == 'music') : ?>
+					<?php if($fb_post["type"] == 'music') : ?>
 						<p>
 							<audio controls>
 								<source src="<?php echo $fb_post['source'] ?>" type="audio/mpeg">
@@ -94,7 +94,7 @@ date_default_timezone_set($old_time_zone);
 				<?php
 				break;
 		endswitch;
-		?>
+		?><br>
 		<a class="post-likes" href="<?php echo "https://www.facebook.com/".$link[0]."/posts/".$link[1] ?> " target="_blank" rel="nofollow">
 			<?php echo isset($fb_post['likes']) ? '<img src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/y6/r/l9Fe9Ugss0S.gif" />'.$fb_post['likes']['summary']['total_count'].' ' : ""  ?>
 			<?php echo isset($fb_post['comments']) ? '<img src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yg/r/V8Yrm0eKZpi.gif" />'.$fb_post['comments']['summary']['total_count'].' ' : ""  ?>

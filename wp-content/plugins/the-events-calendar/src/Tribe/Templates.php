@@ -279,7 +279,6 @@ if ( ! class_exists( 'Tribe__Events__Templates' ) ) {
 			do_action( 'tribe_events_filter_the_page_title' );
 
 			if ( self::is_main_loop( $query ) && self::$wpHeadComplete ) {
-
 				// on loop start, unset the global post so that template tags don't work before the_content()
 				add_action( 'the_post', array( __CLASS__, 'spoof_the_post' ) );
 
@@ -449,7 +448,7 @@ if ( ! class_exists( 'Tribe__Events__Templates' ) ) {
 		 *
 		 * @return string Page content
 		 */
-		public static function load_ecp_into_page_template() {
+		public static function load_ecp_into_page_template( $contents = '' ) {
 			// only run once!!!
 			remove_filter( 'the_content', array( __CLASS__, 'load_ecp_into_page_template' ) );
 
@@ -463,9 +462,7 @@ if ( ! class_exists( 'Tribe__Events__Templates' ) ) {
 
 			echo tribe_events_after_html();
 
-			$contents = ob_get_contents();
-
-			ob_end_clean();
+			$contents = ob_get_clean();
 
 			// make sure the loop ends after our template is included
 			if ( ! is_404() ) {

@@ -41,9 +41,25 @@ class URE_Role_Additional_Options {
 
     public static function get_active_items() {
         
-        $items = get_option(self::STORAGE_ID, array());
-        
-        return $items;
+        $data = get_option(self::STORAGE_ID, array());
+
+/*      
+        // It's enough to update the role via URE to achieve this, that why this code is commented:
+        // remove deactivated options
+        $modified = false;
+        foreach($data as $role=>$items) {
+            foreach($items as $item_id) {
+                if (!isset($this->items[$item_id])) {
+                    $modified = true;
+                    unset($data[$role][$item_id]);
+                }
+            }
+        }
+        if ($modified) {
+            put_option(self::STORAGE_ID, $data);
+        }
+*/        
+        return $data;
     }    
     
     
@@ -56,7 +72,7 @@ class URE_Role_Additional_Options {
         // Allow other developers to modify the list of role's additonal options 
         $this->items = apply_filters('ure_role_additional_options', $this->items);
     
-        $this->active_items = self::get_active_items();
+        $this->active_items = self::get_active_items();        
     }
     // end of init()
 
@@ -73,7 +89,9 @@ class URE_Role_Additional_Options {
                 continue;
             }
             foreach(array_keys($this->active_items[$role]) as $item_id) {
-                add_action($this->items[$item_id]->hook, $this->items[$item_id]->routine);
+                if (isset($this->items[$item_id])) {
+                    add_action($this->items[$item_id]->hook, $this->items[$item_id]->routine, 99);
+                }
             }            
         }
         

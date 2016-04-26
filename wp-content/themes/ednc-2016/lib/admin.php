@@ -106,6 +106,7 @@ add_filter( 'manage_map_posts_custom_column', __NAMESPACE__ . '\\maps_custom_col
 function bills_custom_column_heading($columns) {
 	$new_columns['cb'] = 'cb';
 	$new_columns['title'] = 'Title';
+  $new_columns['session'] = 'Session';
 	$new_columns['bill-type'] = 'Bill Type';
 	$new_columns['bill-status'] = 'Bill Status';
 	$new_columns['date'] = 'Date';
@@ -115,6 +116,10 @@ function bills_custom_column_heading($columns) {
 }
 
 function bills_custom_column_content($column_name, $id) {
+  if ( 'session' == $column_name ) {
+    echo get_the_term_list($id, 'session', '', ', ', '');
+  }
+
 	if ( 'bill-type' == $column_name ) {
 		echo get_the_term_list($id, 'bill-type', '', ', ', '');
 	}

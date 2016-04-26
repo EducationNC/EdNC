@@ -8,13 +8,6 @@ class WP_Embed_FB_Plugin {
 	 * @var string Plugin url
 	 */
 	private static $url = null;
-	/**
-	 * @var string Plugin slug
-	 */
-	private static $slug = null;
-	/**
-	 * Save default values to data base
-	 */
 	static function install(){
 		$defaults = self::getdefaults();
 		foreach ($defaults as $option => $value) {
@@ -30,7 +23,8 @@ class WP_Embed_FB_Plugin {
 	 * Delete all plugin options on uninstall
 	 */
 	static function uninstall(){
-		$defaults = self::getdefaults();
+		$deprecated = array('wpemfb_show_posts'=>'','wpemfb_close_warning'=>'');
+		$defaults = self::getdefaults() + $deprecated;
 		if ( is_multisite() ) {
 			$sites = wp_get_sites();
 			foreach ($sites as $site) {
@@ -56,14 +50,13 @@ class WP_Embed_FB_Plugin {
 	static function getdefaults(){
 		$locale = get_locale();
 		if(strpos($locale,'es_') !== false)
-			$locale = 'es_LA';
+			$locale = 'es_LA';//TODO check this is not working as expected
 		return array(
 			'wpemfb_max_width' 		    => '450',
 			'wpemfb_max_photos' 	    => '24',
-			'wpemfb_max_posts' 		    => '2',
-			'wpemfb_show_posts' 	    => 'false',
-			'wpemfb_app_id' 		    => '0',
-			'wpemfb_app_secret'		    => '0',
+			'wpemfb_max_posts' 		    => '0',
+			'wpemfb_app_id' 		    => '',
+			'wpemfb_app_secret'		    => '',
 			'wpemfb_proportions' 	    => 0.36867,
 			'wpemfb_height'			    => '221.202',
 			'wpemfb_show_like'		    => 'true',
@@ -87,8 +80,9 @@ class WP_Embed_FB_Plugin {
 			'wpemfb_page_hide_cover'    => 'false',
 			'wpemfb_page_show_posts'    => 'false',
 			'wpemfb_sdk_lang'           => array_key_exists( $locale, self::get_fb_locales()) ? $locale : 'en_US',
-			'wpemfb_close_warning'		=> 'false',
+			'wpemfb_close_warning1'		=> 'false',
 			'wpemfb_force_app_token'	=> 'true',
+			'wpemfb_video_download'     => 'false',
 		);
 	}
 	//("uninstalled","deactivated","activated","reactivated")
@@ -99,7 +93,7 @@ class WP_Embed_FB_Plugin {
 		return true;
 	}
 	/**
-	 * load translations and facebook sdk
+	 * session start if necessary
 	 */
 	static function init(){
 		if(version_compare(phpversion(), '5.4.0', '<')) {
@@ -108,7 +102,12 @@ class WP_Embed_FB_Plugin {
 		} elseif(session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
-		load_plugin_textdomain( 'wp-embed-facebook', false, self::get_slug() . '/lang' );
+	}
+	/**
+	 * Load translation file
+	 */
+	static function plugins_loaded(){
+		load_plugin_textdomain( 'wp-embed-facebook', false, 'wp-embed-facebook/lang' );
 	}
 	/**
 	 * Enqueue wp embed facebook styles
@@ -159,27 +158,25 @@ class WP_Embed_FB_Plugin {
 			return self::$url;
 		}
 	}
-	static function get_slug(){
-		if(self::$slug){
-			return self::$slug;
-		} else {
-			self::$slug = dirname(dirname(plugin_basename(__FILE__)));
-			return self::$slug;
-		}
-	}
 	static function fb_root($content){
 		return '<div id="fb-root"></div>'.PHP_EOL.$content;
 	}
 	static function admin_notices(){
 		if(!self::has_fb_app()){
-			if(get_option('wpemfb_close_warning') == 'false') :
+			if(get_option('wpemfb_close_warning1','false') == 'false' && !self::has_fb_app()) :
 				?>
-				<div class="error notice wpemfb_warning is-dismissible">
-				<p><?php _e('Setup Facebook App Id and Secret to access custom embeds.','wp-embed-facebook') ?>
-					<a href="<?php echo admin_url("options-general.php?page=embedfacebook") ?>">
-						<?php _e('Settings.','wp-embed-facebook') ?>
-					</a>
-				</p>
+				<div class="notice wpemfb_warning is-dismissible">
+					<h2>WP Embed Facebook</h2>
+					<p>Hey! The last step.</p>
+					<p><img src="<?php echo WP_Embed_FB_Plugin::get_url().'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a id="wef-video-down" href="<?php echo admin_url("options-general.php?page=embedfacebook") ?>">Video Download Option</a> in settings.</p>
+					<small><?php _e('To embed albums, events, profiles and video as HTML5 you will need a Facebook App','wp-embed-facebook') ?>
+					</small>
+					<p>
+						<?php
+							printf(__('This free plugin has taken <strong>thousands of hours</strong> to develop and maintain consider making a <a href="%s">donation</a> or leaving a <a href="%s">review</a> <strong>do not let us loose faith</strong> in humanity.',''), 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26','https://wordpress.org/support/view/plugin-reviews/wp-embed-facebook')
+						?>
+					</p>
+
 				</div>
 				<?php
 			endif;
@@ -187,9 +184,16 @@ class WP_Embed_FB_Plugin {
 			//TODO rate and buy notice.
 		}
 	}
-	static function close_warning(){
+	static function wpemfb_close_warning(){
 		if(current_user_can('manage_options'))
-			update_option('wpemfb_close_warning','true');
+			update_option('wpemfb_close_warning1','true');
+		die;
+	}
+	static function wpemfb_video_down(){
+		if(current_user_can('manage_options')){
+			update_option('wpemfb_close_warning1','true');
+			update_option('wpemfb_video_download','true');
+		}
 		die;
 	}
 	static function has_fb_app(){

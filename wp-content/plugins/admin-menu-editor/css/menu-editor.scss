@@ -2,6 +2,14 @@
 
 #ws_menu_editor {
 	min-width: 780px;
+
+	#ws_actor_selector {
+		margin-top: 6px;
+	}
+}
+
+.ame-is-free-version #ws_menu_editor {
+	margin-top: 9px;
 }
 
 .ws_main_container {
@@ -172,12 +180,23 @@
 	margin-bottom: 20px;
 }
 
-#ws_menu_editor #ws_export_menu {
-	margin-top: 12px;
-}
-
 #ws_menu_editor #ws_toggle_editor_layout {
 	display: none;
+}
+
+#ws_menu_editor .ws_sidebar_button_separator {
+	display: block;
+	height: 4px;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Page heading and tabs
+ */
+
+#ws_ame_editor_heading {
+	float: left;
 }
 
 /*
@@ -694,7 +713,7 @@ select.ws_dropdown optgroup option {
 }
 
 #ws_icon_selector.ws_with_more_icons {
-    width: 504px;
+    width: 540px;
 }
 
 #ws_icon_selector .ws_icon_extra {

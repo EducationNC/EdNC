@@ -19,6 +19,9 @@ class WP_Embed_FB_Admin {
 		if ( $hook_suffix == 'settings_page_embedfacebook' ) {
 			wp_enqueue_style( 'wpemfb-admin-css', WP_Embed_FB_Plugin::get_url() . 'lib/admin/admin.css' );
 		}
+		wp_enqueue_style('wpemfb-default', WP_Embed_FB_Plugin::get_url().'templates/default/default.css',array(),false);
+		wp_enqueue_style('wpemfb-classic', WP_Embed_FB_Plugin::get_url().'templates/classic/classic.css',array(),false);
+		wp_enqueue_style('wpemfb-lightbox', WP_Embed_FB_Plugin::get_url().'lib/lightbox2/css/lightbox.css',array(),false);
 	}
 	static function in_admin_footer(){
 		global $hook_suffix;
@@ -42,17 +45,30 @@ class WP_Embed_FB_Admin {
 			</script>
 			<?php
 		endif;
-		if(get_option('wpemfb_close_warning') == 'false') :
+		if(get_option('wpemfb_close_warning1','false') == 'false') :
 			?>
 			<script type="text/javascript">
 				jQuery(document).on( 'click', '.wpemfb_warning .notice-dismiss', function() {
-					jQuery.post(ajaxurl, { action: 'close_warning' });
+					jQuery.post(ajaxurl, { action: 'wpemfb_close_warning' });
+				});
+				jQuery(document).on( 'click', '#wef-video-down', function(e) {
+					e.preventDefault();
+					jQuery.post(ajaxurl, { action: 'wpemfb_video_down' },function(){
+						window.location = "<?php echo admin_url("options-general.php?page=embedfacebook"); ?>"
+					});
+
 				});
 			</script>
 			<?php
 		endif;
 		echo ob_get_clean();
 	}
+
+	static function add_action_link($links){
+				array_unshift( $links, '<a href="'.admin_url("options-general.php?page=embedfacebook").'">'.__("Settings").'</a>' );
+		return $links;
+	}
+
 	/**
 	 * Add template editor style to the embeds.
 	 */
@@ -69,7 +85,7 @@ class WP_Embed_FB_Admin {
 	static function section( $title = '' ) {
 		if ( ! empty( $title ) ) :
 			?>
-			<h4><?php echo $title ?></h4>
+			<h3><?php echo $title ?></h3>
 			<table>
 			<tbody>
 			<?php
@@ -241,34 +257,40 @@ class WP_Embed_FB_Admin {
 									self::field( 'number', 'wpemfb_max_width', __( 'Maximum width in pixels', 'wp-embed-facebook' ) );
 									self::field( 'select', 'wpemfb_sdk_lang', __( 'Like Buttons Language', 'wp-embed-facebook' ), WP_Embed_FB_Plugin::get_fb_locales() );
 									self::section();
+									echo '<img style="float: left; margin: 42px 10px 0px;"  src="'.WP_Embed_FB_Plugin::get_url().'lib/admin/ic_image_settings.png">';
 									?>
+
 									<?php
-									self::section( __( 'Social Plugin Defaults', 'wp-embed-facebook' ) );
-									self::field( 'string', '', '---- ' . __( 'Page Plugin', 'wp-embed-facebook' ) . ' ----' );
-									self::field( 'number', 'wpemfb_page_height', __( 'Maximum height in pixels', 'wp-embed-facebook' ) );
+									self::section( __( 'Video Social Plugin Settings', 'wp-embed-facebook' ) );
+									self::field( 'checkbox', 'wpemfb_video_download', __( 'Show download option under video', 'wp-embed-facebook' ) );
+									self::field( 'checkbox', 'wpemfb_video_as_post', __( 'Embed Video as Post', 'wp-embed-facebook' ) );
+									self::section();
+									self::section( __( 'Page Social Plugin Settings', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_page_show_faces', __( "Show Friend's Faces", 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_page_small_header', __( 'Use Small Header', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_page_hide_cover', __( 'Hide Cover Photo', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_page_show_posts', __( 'Show Page Posts', 'wp-embed-facebook' ) );
-									self::field( 'string', '', '---- ' . __( 'Videos', 'wp-embed-facebook' ) . ' ----' );
-									self::field( 'checkbox', 'wpemfb_video_as_post', __( 'Embed Video as Post', 'wp-embed-facebook' ) );
+									self::field( 'number', 'wpemfb_page_height', __( 'Maximum height in pixels', 'wp-embed-facebook' ) );
 									self::section();
 									if ( ! WP_Embed_FB_Plugin::has_fb_app() ) :
 										?>
 										<p>
 											<?php _e( 'By default you can only embed public pages, videos, photos and posts.', 'wp-embed-facebook' ) ?>
-											<br><?php _e( 'To embed embed albums, events, profiles and raw video you will need a Facebook App.', 'wp-embed-facebook' ) ?>
+											<br><?php _e( 'To embed albums, events, profiles and video as HTML5 you will need a Facebook App', 'wp-embed-facebook' ) ?>
 										</p>
 										<?php
 									endif;
-									self::section( __( 'Facebook credentials', 'wp-embed-facebook' ) );
-									self::field( 'text', 'wpemfb_app_id', __( 'App ID', 'wp-embed-facebook' ), array( 'required' => 'true' ) );
-									self::field( 'text', 'wpemfb_app_secret', __( 'App Secret', 'wp-embed-facebook' ), array( 'required' => 'true' ) );
-									self::section();
 									?>
 									<p><a href="https://developers.facebook.com/apps"
-									      target="_blank"><?php _e( 'Your Facebook Apps', 'wp-embed-facebook' ) ?></a>
+									      target="_blank"><?php _e( 'Create or view Facebook Apps', 'wp-embed-facebook' ) ?></a>
 									</p>
+									<?php
+									self::section( __( 'Facebook credentials', 'wp-embed-facebook' ) );
+									self::field( 'text', 'wpemfb_app_id', __( 'App ID', 'wp-embed-facebook' ) );
+									self::field( 'text', 'wpemfb_app_secret', __( 'App Secret', 'wp-embed-facebook' ) );
+									self::section();
+									?>
+
 								</section>
 								<section class="sections">
 									<?php
@@ -292,7 +314,6 @@ class WP_Embed_FB_Admin {
 									self::section( __( "Pages", 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_raw_page', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_show_like', __( 'Show like button', 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_show_posts', __( 'Show latest posts', 'wp-embed-facebook' ) );
 									self::field( 'number', 'wpemfb_max_posts', __( 'Number of posts', 'wp-embed-facebook' ) );
 									self::section();
 									self::section( __( "Photo", 'wp-embed-facebook' ) );
@@ -328,7 +349,7 @@ class WP_Embed_FB_Admin {
 								<input type="submit" name="submit" class="button button-primary alignright"
 								       value="<?php _e( 'Save', 'wp-embed-facebook' ) ?>"/>
 
-								<p><?php _e( 'All options can be overwritten using the [facebook=url ]', 'wp-embed-facebook' ) ?>
+								<p><?php _e( 'All options can be overwritten using the [facebook url ]', 'wp-embed-facebook' ) ?>
 									<a href="http://www.wpembedfb.com/documentation">shortcode</a></p>
 								<br>
 								<br>
@@ -336,35 +357,27 @@ class WP_Embed_FB_Admin {
 						</div>
 						<div class="welcome-panel-column welcome-panel-last">
 							<?php ob_start(); ?>
-							<h3><?php _e( 'Premium Extension Available', 'wp-embed-facebook' ) ?></h3>
+							<h1><?php _e( 'Premium Extension Available', 'wp-embed-facebook' ) ?></h1>
 							<br>
-
 							<div class="features-list">
-								<p><?php _e( 'Embed a Facebook Page with all its details.', 'wp-embed-facebook' ) ?></p>
+								<p><?php _e( 'Shortcodes for embedding a full event or page.', 'wp-embed-facebook' ) ?></p>
 
-								<p><?php _e( 'Embed an Event with all its details.', 'wp-embed-facebook' ) ?></p>
+								<p><?php _e( 'Default event template shows admins and address.', 'wp-embed-facebook' ) ?></p>
+								<p><?php _e( 'Albums with more that 100 photos.', 'wp-embed-facebook' ) ?></p>
 
 								<p><?php _e( 'One Year Premium Support', 'wp-embed-facebook' ) ?></p>
-
+								<p>
+									<a class="button button-red"
+								      href="http://www.wpembedfb.com/premium"><?php _e( 'Check it out', 'wp-embed-facebook' ) ?></a>
+								</p>
 								<p>
 									<?php _e( 'Plus new features cooking', 'wp-embed-facebook' ) ?>
 									<br>
 									<small>
-										<?php _e( 'Upcoming events widget, events with maps...', 'wp-embed-facebook' ) ?>
+										<?php _e( 'Embed personal data, shortcode creator, widgets, special templates for albums and pages', 'wp-embed-facebook' ) ?>
 									</small>
 								</p>
 							</div>
-							<h2>
-								<?php _e( 'Only $6.99 USD', 'wp-embed-facebook' ) ?>
-								<br>
-								<small
-									style="font-size: 12px; color: rgb(152, 152, 152)"><?php _e( 'Price will change very soon', 'wp-embed-facebook' ) ?></small>
-							</h2>
-							<br>
-							<a class="button button-red"
-							   href="http://www.wpembedfb.com/premium"><?php _e( 'Check it out', 'wp-embed-facebook' ) ?></a>
-							<br>
-							<br>
 							<hr>
 							<h4><?php _e( "Keep this plugin's core free and accessible to all.", 'wp-embed-facebook' ) ?></h4>
 

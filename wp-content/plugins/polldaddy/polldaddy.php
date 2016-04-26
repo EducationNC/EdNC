@@ -6,7 +6,7 @@ Plugin URI: http://wordpress.org/extend/plugins/polldaddy/
 Description: Create and manage Polldaddy polls and ratings in WordPress
 Author: Automattic, Inc.
 Author URL: http://polldaddy.com/
-Version: 2.0.28
+Version: 2.0.30
 */
 
 // You can hardcode your Polldaddy PartnerGUID (API Key) here
@@ -50,7 +50,20 @@ class WP_Polldaddy {
 				if ( $jetpack_active_modules && in_array( 'contact-form', $jetpack_active_modules ) )
 					$this->has_feedback_menu = true;
 			}
+			Jetpack_Sync::sync_options( __FILE__, 'polldaddy_api_key' );
+			add_filter( 'jetpack_options_whitelist', array( $this, 'add_to_jetpack_options_whitelist' ) );
 		}
+	}
+
+   /**
+	* Add the polldaddy option to the Jetpack options management whitelist.
+	*
+	* @param array $options The list of whitelisted option names.
+	* @return array The updated whitelist
+	*/
+	public static function add_to_jetpack_options_whitelist( $options ) {
+		$options[] = 'polldaddy_api_key';
+		return $options;
 	}
 
 	function &get_client( $api_key, $userCode = null ) {
@@ -4950,7 +4963,7 @@ src="http://static.polldaddy.com/p/<?php echo (int) $poll_id; ?>.js"&gt;&lt;/scr
       <tbody>
         <tr class="form-field form-required">
           <th valign="top" scope="row">
-            <label for="polldaddy-email">
+            <label for="polldaddy-key">
               <?php _e( 'Polldaddy.com API Key', 'polldaddy' ); ?>
             </label>
           </th>

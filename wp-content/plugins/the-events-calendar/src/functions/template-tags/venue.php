@@ -120,7 +120,14 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 */
 	function tribe_get_country( $postId = null ) {
 		$postId = tribe_get_venue_id( $postId );
-		$output = esc_html( tribe_get_event_meta( $postId, '_VenueCountry', true ) );
+		$venue_country = tribe_get_event_meta( $postId, '_VenueCountry', true );
+
+		// _VenueCountry should hold an array of [ 'country_id', 'country_name' ]. Let's get the country
+		// name from that array and output that
+		if ( is_array( $venue_country ) ) {
+			$venue_country = array_pop( $venue_country );
+		}
+		$output = esc_html( $venue_country );
 
 		return apply_filters( 'tribe_get_country', $output );
 	}
@@ -398,8 +405,8 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * @return string Formatted link to the venue website
 	 */
 	function tribe_get_venue_website_link( $post_id = null, $label = null ) {
-		$post_id = tribe_get_venue_id( $post_id );
-		$url     = tribe_get_event_meta( $post_id, '_VenueURL', true );
+		$url = tribe_get_venue_website_url( $post_id );
+
 		if ( ! empty( $url ) ) {
 			$label = is_null( $label ) ? $url : $label;
 			if ( ! empty( $url ) ) {
@@ -419,6 +426,22 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 		}
 
 		return apply_filters( 'tribe_get_venue_website_link', $html );
+	}
+
+	/**
+	 * Returns the venue website URL related to the current post or for the optionally
+	 * specified post.
+	 *
+	 * @param int|null $post_id
+	 *
+	 * @return string
+	 */
+	function tribe_get_venue_website_url( $post_id = null ) {
+		return (string) tribe_get_event_meta(
+			tribe_get_venue_id( $post_id ),
+			'_VenueURL',
+			true
+		);
 	}
 
 	/**

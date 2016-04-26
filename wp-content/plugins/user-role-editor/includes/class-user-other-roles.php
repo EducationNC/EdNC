@@ -14,9 +14,9 @@ class URE_User_Other_Roles {
     protected $lib = null;
     
     
-    function __construct(Ure_Lib $lib) {
+    function __construct() {
     
-        $this->lib = $lib;
+        $this->lib = URE_Lib::get_instance();
         $this->set_hooks();
     }
     // end of $lib
@@ -242,6 +242,11 @@ class URE_User_Other_Roles {
     // save additional user roles when user profile is updated, as WordPress itself doesn't know about them
     public function update($user_id) {
 
+        global $wp_roles;
+        
+        if (!current_user_can('edit_users')) {
+            return false;
+        }
         if (!current_user_can('edit_user', $user_id)) {
             return false;
         }
@@ -251,17 +256,18 @@ class URE_User_Other_Roles {
             return false;
         }
         
-        $ure_other_roles = explode(',', str_replace(' ', '', $_POST['ure_other_roles']));
-        $new_roles = array_intersect($user->roles, $ure_other_roles);
-        $skip_roles = array();
-        foreach ($new_roles as $role) {
-            $skip_roles['$role'] = 1;
-        }
-        unset($new_roles);
-        foreach ($ure_other_roles as $role) {
-            if (!isset($skip_roles[$role])) {
-                $user->add_role($role);
+        $data = explode(',', str_replace(' ', '', $_POST['ure_other_roles']));
+        $ure_other_roles = array();
+        foreach($data as $role_id) {
+            if (!isset($wp_roles->roles[$role_id])) {   // skip unexisted roles
+                continue;
             }
+            if (is_array($user->roles) && !in_array($role_id, $user->roles)) {
+                $ure_other_roles[] = $role_id;
+            }
+        }
+        foreach ($ure_other_roles as $role) {
+            $user->add_role($role);
         }
         
         return true;        
