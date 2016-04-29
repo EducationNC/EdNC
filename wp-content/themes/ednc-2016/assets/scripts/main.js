@@ -180,7 +180,7 @@
         $('.entry-content table').addClass('table table-striped').wrap('<div class="table-responsive"></div>');
 
         // Add watermark dropcap on pull quotes (left and right)
-        $('blockquote p[style*=left], blockquote p[style*=right]').each(function() {
+        $('blockquote p[style*="left"], blockquote p[style*="right"]').each(function() {
           var text = $(this).text();
           $(this).attr('data-before', text.charAt(0));
         });
@@ -236,10 +236,10 @@
         });
 
         // Smooth scroll to anchor on same page
-        $('a[href*=#]:not([href=#]):not(.collapsed)').on(clickortap, function() {
+        $('a[href*="#"]:not([href="#"]):not(.collapsed)').on(clickortap, function() {
           if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
             var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            target = target.length ? target : $('[name="' + this.hash.slice(1) +'"]');
             if (target.length) {
               $('html,body').animate({
                 scrollTop: target.offset().top
@@ -324,7 +324,7 @@
 
           // Active state for TOC
           $('#fc-left-nav .toc li').removeClass('active');
-          $('#fc-left-nav .toc').find('a[href=#' + hash + ']').parent('li').addClass('active');
+          $('#fc-left-nav .toc').find('a[href="#' + hash + '"]').parent('li').addClass('active');
         }
 
         // Init Owl Carousel 2
