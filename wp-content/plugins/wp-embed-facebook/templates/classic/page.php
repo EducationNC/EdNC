@@ -1,9 +1,11 @@
 <?php
- $height = round((($width - 21 ) * $prop),2);
+/** @noinspection PhpUndefinedVariableInspection */
+$height = round((($width - 21 ) * $prop),2);
  $show_posts = get_option("wpemfb_show_posts") == "true" ? true : false;
 ?>
 <div class="wef-classic wef-measure" style="max-width: <?php echo $width ?>px" >
-	<div class="cover" style="height:<?php echo $height ?>px; background-image: url('<?php echo $fb_data['cover']['source'] ?>'); background-position: 0 <?php echo $fb_data['cover']['offset_y'] ?>%; cursor: pointer" onclick="window.open('<?php echo $fb_data['link'] ?>', '_blank')" ></div>
+	<div class="cover" style="height:<?php echo $height ?>px; background: transparent url('<?php /** @noinspection PhpUndefinedVariableInspection */
+	echo $fb_data['cover']['source'] ?>')  no-repeat scroll 0 <?php echo $fb_data['cover']['offset_y'] ?>%; " onclick="window.open('<?php echo $fb_data['link'] ?>', '_blank')" ></div>
 	<div class="row pad-top">
 			<div class="col-2 text-center">
 				<a href="<?php echo $fb_data['link'] ?>" target="_blank" rel="nofollow">

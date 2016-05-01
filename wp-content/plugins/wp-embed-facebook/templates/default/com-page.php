@@ -1,7 +1,8 @@
 <div class="wef-default" style="max-width: <?php echo $width ?>px">
 	<div class="row">
 		<div class="col-3 text-center">
-			<a href="https://www.facebook.com/<?php echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
+			<a href="https://www.facebook.com/<?php /** @noinspection PhpUndefinedVariableInspection */
+			echo $fb_data['id'] ?>" target="_blank" rel="nofollow">
 				<img src="https://graph.facebook.com/<?php echo $fb_data['id'] ?>/picture" />
 			</a>
 		</div>

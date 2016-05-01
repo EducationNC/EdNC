@@ -17,13 +17,16 @@ class WP_Embed_FB_Plugin {
 			if(!isset($type))
 				$type = $opt==false?"activated":"reactivated";
 		}
+
+		/** @noinspection PhpUndefinedVariableInspection */
+
 		return self::whois($type);
 	}
 	/**
 	 * Delete all plugin options on uninstall
 	 */
 	static function uninstall(){
-		$deprecated = array('wpemfb_show_posts'=>'','wpemfb_close_warning'=>'');
+		$deprecated = array('wpemfb_show_posts'=>'','wpemfb_close_warning'=>'','wpemfb_height'=>'','wpemfb_close_warning1'=>'');
 		$defaults = self::getdefaults() + $deprecated;
 		if ( is_multisite() ) {
 			$sites = wp_get_sites();
@@ -50,7 +53,7 @@ class WP_Embed_FB_Plugin {
 	static function getdefaults(){
 		$locale = get_locale();
 		if(strpos($locale,'es_') !== false)
-			$locale = 'es_LA';//TODO check this is not working as expected
+			$locale = 'es_LA';
 		return array(
 			'wpemfb_max_width' 		    => '450',
 			'wpemfb_max_photos' 	    => '24',
@@ -58,7 +61,6 @@ class WP_Embed_FB_Plugin {
 			'wpemfb_app_id' 		    => '',
 			'wpemfb_app_secret'		    => '',
 			'wpemfb_proportions' 	    => 0.36867,
-			'wpemfb_height'			    => '221.202',
 			'wpemfb_show_like'		    => 'true',
 			'wpemfb_fb_root'		    => 'true',
 			'wpemfb_theme'			    => 'default',
@@ -80,9 +82,10 @@ class WP_Embed_FB_Plugin {
 			'wpemfb_page_hide_cover'    => 'false',
 			'wpemfb_page_show_posts'    => 'false',
 			'wpemfb_sdk_lang'           => array_key_exists( $locale, self::get_fb_locales()) ? $locale : 'en_US',
-			'wpemfb_close_warning1'		=> 'false',
+			'wpemfb_close_warning2'		=> 'false',
 			'wpemfb_force_app_token'	=> 'true',
 			'wpemfb_video_download'     => 'false',
+			'wpemfb_sdk_version'        => 'v2.6',
 		);
 	}
 	//("uninstalled","deactivated","activated","reactivated")
@@ -96,11 +99,13 @@ class WP_Embed_FB_Plugin {
 	 * session start if necessary
 	 */
 	static function init(){
-		if(version_compare(phpversion(), '5.4.0', '<')) {
-			if(session_id() == '')
+		if( self::has_fb_app() ){
+			if(version_compare(phpversion(), '5.4.0', '<')) {
+				if(session_id() == '')
+					session_start();
+			} elseif(session_status() == PHP_SESSION_NONE) {
 				session_start();
-		} elseif(session_status() == PHP_SESSION_NONE) {
-			session_start();
+			}
 		}
 	}
 	/**
@@ -114,9 +119,12 @@ class WP_Embed_FB_Plugin {
 	 */
 	static function wp_enqueue_scripts(){
 		if(get_option('wpemfb_enqueue_style') == 'true'){
+			wp_register_style('wpemfb-default',self::get_url().'templates/default/default.css',array(),false);
+			wp_register_style('wpemfb-classic',self::get_url().'templates/classic/classic.css',array(),false);
+//			do_action('wpemfb_register_style');
 			$theme = get_option('wpemfb_theme');
-			wp_enqueue_style('wpemfb-'.$theme, self::get_url().'templates/'.$theme.'/'.$theme.'.css',array(),false);
-			wp_enqueue_style('wpemfb-lightbox', self::get_url().'lib/lightbox2/css/lightbox.css',array(),false);
+			wp_enqueue_style('wpemfb-'.$theme);
+			wp_enqueue_style('wpemfb-lightbox', self::get_url().'lib/lightbox2/css/lightbox.min.css',array(),false);
 		}
 		if(get_option('wpemfb_enq_lightbox') == 'true'){
 			wp_enqueue_script(
@@ -138,7 +146,10 @@ class WP_Embed_FB_Plugin {
 				self::get_url().'lib/js/fb.js',
 				array( 'jquery' )
 			);
-			$translation_array = array( 'local' => get_option('wpemfb_sdk_lang'), 'fb_id'=>get_option('wpemfb_app_id') == '0' ? '' : get_option('wpemfb_app_id'));
+			$translation_array = array(
+				'local' => get_option('wpemfb_sdk_lang','en_US'),
+				'version' => get_option('wpemfb_sdk_version','v2.6'),
+				'fb_id'=>get_option('wpemfb_app_id') == '0' ? '' : get_option('wpemfb_app_id'));
 			wp_localize_script( 'wpemfb-fbjs', 'WEF', $translation_array );
 		}
 	}
@@ -158,40 +169,36 @@ class WP_Embed_FB_Plugin {
 			return self::$url;
 		}
 	}
-	static function fb_root($content){
-		return '<div id="fb-root"></div>'.PHP_EOL.$content;
-	}
 	static function admin_notices(){
-		if(!self::has_fb_app()){
-			if(get_option('wpemfb_close_warning1','false') == 'false' && !self::has_fb_app()) :
-				?>
-				<div class="notice wpemfb_warning is-dismissible">
-					<h2>WP Embed Facebook</h2>
-					<p>Hey! The last step.</p>
-					<p><img src="<?php echo WP_Embed_FB_Plugin::get_url().'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a id="wef-video-down" href="<?php echo admin_url("options-general.php?page=embedfacebook") ?>">Video Download Option</a> in settings.</p>
-					<small><?php _e('To embed albums, events, profiles and video as HTML5 you will need a Facebook App','wp-embed-facebook') ?>
-					</small>
-					<p>
-						<?php
-							printf(__('This free plugin has taken <strong>thousands of hours</strong> to develop and maintain consider making a <a href="%s">donation</a> or leaving a <a href="%s">review</a> <strong>do not let us loose faith</strong> in humanity.',''), 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26','https://wordpress.org/support/view/plugin-reviews/wp-embed-facebook')
-						?>
-					</p>
+		if( (get_option('wpemfb_close_warning2','false') == 'false')) :
+			?>
+			<div class="notice wpemfb_warning is-dismissible">
+				<h2>WP Embed Facebook</h2>
+				<p>Hey! The last step.</p>
+				<p><img style="position:relative; top: 5px;" height="20px" width="auto" src="<?php echo WP_Embed_FB_Plugin::get_url().'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a id="wef-video-down" href="<?php echo admin_url("options-general.php?page=embedfacebook") ?>">Video Download Option</a> in settings.</p>
+				<small>
+					<?php
+					printf(__('To embed albums, events, profiles and video as HTML5 you will need a <a target="_blank" href="%s">Facebook App</a>',''), 'https://developers.facebook.com/apps')
+					?>
+				</small>
+				<p>
+					<?php
+						printf(__('This free plugin has taken <strong>thousands of hours</strong> to develop and maintain consider making a <a target="_blank" href="%s">donation</a> or leaving a <a target="_blank" href="%s">review</a> <strong>do not let us loose faith</strong> in humanity.','wp-embed-facebook'), 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26','https://wordpress.org/support/view/plugin-reviews/wp-embed-facebook')
+					?>
+				</p>
 
-				</div>
-				<?php
-			endif;
-		} else {
-			//TODO rate and buy notice.
-		}
+			</div>
+			<?php
+		endif;
 	}
 	static function wpemfb_close_warning(){
 		if(current_user_can('manage_options'))
-			update_option('wpemfb_close_warning1','true');
+			update_option('wpemfb_close_warning2','true');
 		die;
 	}
 	static function wpemfb_video_down(){
 		if(current_user_can('manage_options')){
-			update_option('wpemfb_close_warning1','true');
+			update_option('wpemfb_close_warning2','true');
 			update_option('wpemfb_video_download','true');
 		}
 		die;

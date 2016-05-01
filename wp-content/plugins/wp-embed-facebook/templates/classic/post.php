@@ -1,4 +1,5 @@
-<?php $fb_post = $fb_data ?>
+<?php $fb_post = /** @noinspection PhpUndefinedVariableInspection */
+	$fb_data ?>
 <div class="wef-classic" style="max-width: <?php echo $width ?>px" >
 	<div class="col-3 text-center">
 		<a href="https://www.facebook.com/<?php echo $fb_post['from']['id'] ?>" target="_blank" rel="nofollow">

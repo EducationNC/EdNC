@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpUndefinedVariableInspection */
 $height            = $width * $prop;
 $start_time_format = 'l, j F Y g:i a';
 $old_time_zone = date_default_timezone_get();
@@ -8,12 +9,13 @@ if(get_option('wpemfb_ev_local_tz') == 'true'){
 	$timezone = isset( $fb_data['timezone'] ) ? $fb_data['timezone'] : get_option( 'timezone_string' );
 }
 date_default_timezone_set( $timezone );
+/** @noinspection PhpUndefinedVariableInspection */
 $start_time = date_i18n( $start_time_format, strtotime( $fb_data['start_time'] ) );
 date_default_timezone_set( $old_time_zone );
 ?>
 <div class="wef-default wef-measure" style="max-width: <?php echo $width ?>px">
 	<?php if(isset($fb_data['cover'])) : ?>
-	<div class="cover" style="height:<?php echo $height ?>px; background-image: url('<?php echo $fb_data['cover']['source'] ?>'); background-position: 0% <?php echo $fb_data['cover']['offset_y'] ?>%;" onclick="window.open('https://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')" ></div>
+	<div class="cover" style="height:<?php echo $height ?>px; background: transparent url('<?php echo $fb_data['cover']['source'] ?>')  no-repeat scroll 0 <?php echo $fb_data['cover']['offset_y'] ?>%; " onclick="window.open('https://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')" ></div>
 	<?php endif; ?>
 	<div class="row pad-top">
 		<div class="col-12">

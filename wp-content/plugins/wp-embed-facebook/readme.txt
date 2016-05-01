@@ -3,8 +3,8 @@ Contributors: poxtron
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26
 Tags: Facebook, facebook, Social Plugins, embed facebook, facebook video, facebook posts, facebook publication, facebook publications, facebook event, facebook events, facebook pages, facebook page, facebook profiles, facebook album, facebook albums, facebook photos, facebook photo, social,
 Requires at least: 3.8.1
-Tested up to: 4.4.1
-Stable tag: 2.0.8
+Tested up to: 4.5
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,18 +38,19 @@ You should see the embed right on the editor, try switching from text to visual 
 
 Alternatively you can use the [facebook] shortcode.
 
-Read more about the shortcode attributes on [this](http://wpembedfb.com/documentation/) page.
+Read more about the shortcodes on [this](http://www.wpembedfb.com/shortcode-attributes-and-examples/) page.
 
 = Premium extension =
 * Embed full event shortcode
 * Embed full fan page shortcode
 * Embed events with address and admins
 * Embed albums with more that 100 photos
+* Embed all upcoming events of a fan page
 * Features cooking
     * Embed personal data
     * Shortcode creator
     * Special templates for albums and pages
-    * Embed all upcoming events of a fan page
+
 
 == Installation ==
 
@@ -78,6 +79,17 @@ This can only be achieved using the premium version
 4. Event
 
 == Changelog ==
+
+= 2.0.9 =
+* Fixed css on footer when using different themes
+* Updated all.js to sdk.js (bryant1410)
+* Optimization for sites with no Facebook App
+* Added error messages for special cases
+* Added advanced option for selecting Facebook SDK version
+* Fixed locale error inside editor
+* Fixed link underline in some themes
+* Fixed several css and html structure nothing critical
+
 
 = 2.0.8 =
 * Fix Event title css
@@ -275,5 +287,5 @@ This can only be achieved using the premium version
 
 == Upgrade Notice ==
 
-= 2.0.8 =
-* Titles css
+= 2.0.9 =
+* Lots of bug fixed and improvements
