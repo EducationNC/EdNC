@@ -45,7 +45,7 @@ class WP_Embed_FB_Admin {
 			</script>
 			<?php
 		endif;
-		if(get_option('wpemfb_close_warning1','false') == 'false') :
+		if(get_option('wpemfb_close_warning2','false') == 'false') :
 			?>
 			<script type="text/javascript">
 				jQuery(document).on( 'click', '.wpemfb_warning .notice-dismiss', function() {
@@ -114,6 +114,7 @@ class WP_Embed_FB_Admin {
 				<tr valign="middle">
 					<th><?php echo $label ?></th>
 					<td>
+						<!--suppress HtmlFormInputWithoutLabel -->
 						<input type="checkbox" id="<?php echo $name ?>"
 						       name="<?php echo $name ?>" <?php echo $checked ?> />
 					</td>
@@ -122,12 +123,16 @@ class WP_Embed_FB_Admin {
 				ob_end_flush();
 				break;
 			case 'select' :
+
 				$option = get_option( $name );
+				if( empty($option) && $name == 'wpemfb_sdk_version' )
+					$option = 'v2.6';
 				ob_start();
 				?>
 				<tr valign="middle">
 					<th><?php echo $label ?></th>
 					<td>
+						<!--suppress HtmlFormInputWithoutLabel -->
 						<select name="<?php echo $name ?>">
 							<?php foreach ( $args as $value => $name ) : ?>
 								<option
@@ -157,6 +162,7 @@ class WP_Embed_FB_Admin {
 				<tr valign="middle">
 					<th><?php echo $label ?></th>
 					<td>
+						<!--suppress HtmlFormInputWithoutLabel -->
 						<input id="<?php echo $name ?>"
 						       type="<?php echo $type ?>"
 						       name="<?php echo $name ?>" <?php echo isset( $args['required'] ) ? 'required' : '' ?>
@@ -206,7 +212,6 @@ class WP_Embed_FB_Admin {
 			}
 			if ( isset( $_POST['wpemfb_max_width'] ) && is_int( $_POST['wpemfb_max_width'] ) ) {
 				$prop = get_option( 'wpemfb_proportions' ) * $_POST['wpemfb_max_width'];
-				update_option( 'wpemfb_height', $prop );//TODO height is deprecated
 			}
 		}
 		/**
@@ -282,7 +287,7 @@ class WP_Embed_FB_Admin {
 									endif;
 									?>
 									<p><a href="https://developers.facebook.com/apps"
-									      target="_blank"><?php _e( 'Create or view Facebook Apps', 'wp-embed-facebook' ) ?></a>
+									      target="_blank"><?php _e( 'Create or view your Facebook Apps', 'wp-embed-facebook' ) ?></a>
 									</p>
 									<?php
 									self::section( __( 'Facebook credentials', 'wp-embed-facebook' ) );
@@ -294,42 +299,45 @@ class WP_Embed_FB_Admin {
 								</section>
 								<section class="sections">
 									<?php
-									self::section( __( "General", 'wp-embed-facebook' ) );
-									/**
-									 * Filter available templates
-									 * @since 2.0.2
-									 */
-									$templates = apply_filters( 'wpemfb_admin_theme', array(
-										'default' => 'Default',
-										'classic' => 'Classic'
-									) );
-									self::field( 'select', 'wpemfb_theme', 'Template to use', $templates );
-									self::section();
-									self::section( __( "Albums", 'wp-embed-facebook' ) );
-									self::field( 'number', 'wpemfb_max_photos', __( 'Number of Photos', 'wp-embed-facebook' ) );
-									self::section();
-									self::section( __( "Events", 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_ev_local_tz', __( 'Use WordPress timezone string to calculate the date', 'wp-embed-facebook' ) );
-									self::section();
-									self::section( __( "Pages", 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_raw_page', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_show_like', __( 'Show like button', 'wp-embed-facebook' ) );
-									self::field( 'number', 'wpemfb_max_posts', __( 'Number of posts', 'wp-embed-facebook' ) );
-									self::section();
-									self::section( __( "Photo", 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_raw_photo', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
-									self::section();
-									self::section( __( "Posts", 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_raw_post', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
-									self::section();
-									self::section( __( "Videos", 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_raw_video', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_video_ratio', __( 'Force 16:9 ratio', 'wp-embed-facebook' ) );
-									//TODO update class and delete 'wpemfb_raw_video_fb' option forever
-									self::section();
-									self::section( __( "Profiles", 'wp-embed-facebook' ) );
-									self::field( 'checkbox', 'wpemfb_show_follow', __( 'Show follow button', 'wp-embed-facebook' ) );
-									self::section();
+									if(WP_Embed_FB_Plugin::has_fb_app()){
+										self::section( __( "General", 'wp-embed-facebook' ) );
+										/**
+										 * Filter available templates
+										 * @since 2.0.2
+										 */
+										$templates = apply_filters( 'wpemfb_admin_theme', array(
+											'default' => 'Default',
+											'classic' => 'Classic'
+										) );
+										self::field( 'select', 'wpemfb_theme', 'Template to use', $templates );
+										self::section();
+										self::section( __( "Albums", 'wp-embed-facebook' ) );
+										self::field( 'number', 'wpemfb_max_photos', __( 'Number of Photos', 'wp-embed-facebook' ) );
+										self::section();
+										self::section( __( "Events", 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_ev_local_tz', __( 'Use WordPress timezone string to calculate the date', 'wp-embed-facebook' ) );
+										self::section();
+										self::section( __( "Pages", 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_raw_page', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_show_like', __( 'Show like button', 'wp-embed-facebook' ) );
+										self::field( 'number', 'wpemfb_max_posts', __( 'Number of posts', 'wp-embed-facebook' ) );
+										self::section();
+										self::section( __( "Photo", 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_raw_photo', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
+										self::section();
+										self::section( __( "Posts", 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_raw_post', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
+										self::section();
+										self::section( __( "Videos", 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_raw_video', __( 'Use custom embed by default', 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_video_ratio', __( 'Force 16:9 ratio', 'wp-embed-facebook' ) );
+										self::section();
+										self::section( __( "Profiles", 'wp-embed-facebook' ) );
+										self::field( 'checkbox', 'wpemfb_show_follow', __( 'Show follow button', 'wp-embed-facebook' ) );
+										self::section();
+									} else {
+										echo "<br><p>You need a facebook app to use custom embeds</p>";
+									}
 									?>
 
 								</section>
@@ -343,6 +351,16 @@ class WP_Embed_FB_Admin {
 									self::field( 'checkbox', 'wpemfb_enq_wpemfb', __( 'Enqueue WPEmbedFB script', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_enq_fbjs', __( 'Enqueue Facebook SDK', 'wp-embed-facebook' ) );
 									self::field( 'checkbox', 'wpemfb_force_app_token', __( 'Force app token', 'wp-embed-facebook' ) );
+									$versions = array(
+										'v2.0' => '2.0',
+										'v2.1' => '2.1',
+										'v2.2' => '2.2',
+										'v2.3' => '2.3',
+										'v2.4' => '2.4',
+										'v2.5' => '2.5',
+										'v2.6' => '2.6',
+									);
+									self::field( 'select', 'wpemfb_sdk_version', 'SDK Version', $versions );
 									self::section();
 									?>
 								</section>
@@ -381,8 +399,12 @@ class WP_Embed_FB_Admin {
 							<hr>
 							<h4><?php _e( "Keep this plugin's core free and accessible to all.", 'wp-embed-facebook' ) ?></h4>
 
-							<p><strong><a href="http://wordpress.org/plugins/wp-embed-facebook">Rate it <span
-											style="color: gold;">&#9733;&#9733;&#9733;&#9733;&#9733;</span></strong></a>
+							<p>
+								<strong>
+								<a href="http://wordpress.org/plugins/wp-embed-facebook">Rate it<br>
+										<span style="color: gold;"> &#9733;&#9733;&#9733;&#9733;&#9733; </span>
+								</a>
+								</strong>
 							</p>
 
 							<p><strong><a

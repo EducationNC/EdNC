@@ -400,6 +400,8 @@ abstract class BaseFacebook
         $this->setPersistentData(
             'access_token', $response_params['access_token']
         );
+
+        return $response_params['access_token'];
     }
 
     /**
@@ -567,6 +569,7 @@ abstract class BaseFacebook
         ) {
             $user = $this->getUserFromAccessToken();
             if ($user) {
+                /** @noinspection PhpParamsInspection */
                 $this->setPersistentData('user_id', $user);
             } else {
                 $this->clearAllPersistentData();
@@ -780,6 +783,7 @@ abstract class BaseFacebook
      * either logged in to Facebook or has granted an offline access permission.
      *
      * @param string $code An authorization code.
+     * @param string $redirect_uri A redirect url.
      * @return mixed An access token exchanged for the authorization code, or
      *               false if an access token could not be generated.
      */
@@ -936,7 +940,7 @@ abstract class BaseFacebook
         }
 
         return $this->makeRequest($url, $params);
-    }
+    }/** @noinspection PhpUndefinedClassInspection */
 
     /**
      * Makes an HTTP request. This method can be overridden by subclasses if
@@ -948,6 +952,7 @@ abstract class BaseFacebook
      * @param CurlHandler $ch Initialized curl handle
      *
      * @return string The response text
+     * @throws FacebookApiException
      */
     protected function makeRequest($url, $params, $ch = null)
     {
@@ -1054,7 +1059,7 @@ abstract class BaseFacebook
     /**
      * Makes a signed_request blob using the given data.
      *
-     * @param array The data array.
+     * @param array $data The data array.
      * @return string The signed request.
      */
     protected function makeSignedRequest($data)
@@ -1207,6 +1212,7 @@ abstract class BaseFacebook
         // The base domain is stored in the metadata cookie if not we fallback
         // to the current hostname
         $metadata = $this->getMetadataCookie();
+        /** @noinspection PhpParamsInspection */
         if (array_key_exists('base_domain', $metadata) &&
             !empty($metadata['base_domain'])
         ) {
@@ -1286,6 +1292,8 @@ abstract class BaseFacebook
      *
      * @param $result array A record storing the error message returned
      *                      by a failed API call.
+     *
+     * @throws FacebookApiException
      */
     protected function throwAPIException($result)
     {
@@ -1392,7 +1400,7 @@ abstract class BaseFacebook
     /**
      * Parses the metadata cookie that our Javascript API set
      *
-     * @return  an array mapping key to value
+     * @return  array mapping key to value
      */
     protected function getMetadataCookie()
     {

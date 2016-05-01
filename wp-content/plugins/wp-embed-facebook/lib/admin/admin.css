@@ -2,7 +2,7 @@
     padding:1px 22px 22px 22px;
     background: #fff;
     border:1px solid #ccc;
-    border-top:0px;
+    border-top:0;
     margin-bottom: 20px;
 }
 section {
@@ -30,9 +30,9 @@ section:first-child {
 }
 
 .no-js section:first-child {
-    margin:0px;
-    padding:0px;
-    border:0px;
+    margin:0;
+    padding:0;
+    border:0;
 }
 .nav-tab-active {
     background-color: #ffffff;
@@ -64,16 +64,16 @@ section:first-child {
     }
 }
 .welcome-panel-last .button-red {
-    background: #D2002C none repeat scroll 0% 0%;
+    background: #D2002C none repeat scroll 0 0;
     border-color: #AA0012;
-    box-shadow: 0px 1px 0px rgba(230, 14, 23, 0.5) inset, 0px 1px 0px rgba(173, 173, 173, 0.15);
+    box-shadow: 0 1px 0 rgba(230, 14, 23, 0.5) inset, 0 1px 0 rgba(173, 173, 173, 0.15);
     color: #FFF;
     text-decoration: none;
 }
 .welcome-panel-last .button-red:focus, .welcome-panel-last .button-red:hover {
-    background: #AB1F42 none repeat scroll 0% 0%;
+    background: #AB1F42 none repeat scroll 0 0;
     border-color: #AA0012;
-    box-shadow: 0px 1px 0px rgba(230, 14, 23, 0.5) inset;
+    box-shadow: 0 1px 0 rgba(230, 14, 23, 0.5) inset;
     color: #FFF;
 }
 .welcome-panel-last p {

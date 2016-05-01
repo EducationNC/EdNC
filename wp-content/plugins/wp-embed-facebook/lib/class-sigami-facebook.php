@@ -77,6 +77,9 @@ class Sigami_Facebook extends BaseFacebook
    * methods.  The implementation uses PHP sessions to maintain
    * a store for authorization codes, user ids, CSRF states, and
    * access tokens.
+   *
+   * @param string $key
+   * @param array $value
    */
   protected function setPersistentData($key, $value) {
     if (!in_array($key, self::$kSupportedKeys)) {

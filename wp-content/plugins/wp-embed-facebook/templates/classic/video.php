@@ -4,6 +4,7 @@ $use_ratio = (get_option('wpemfb_video_ratio') == 'true');
 <div class="wef-classic" style="max-width: <?php echo $width ?>px">
     <?php echo $use_ratio ? '<div class="video">' : '' ?>
     <?php
+    /** @noinspection PhpUndefinedVariableInspection */
     $url = $fb_data['source'];
     $file_array = explode('/',parse_url($url, PHP_URL_PATH));
     $file = end($file_array);

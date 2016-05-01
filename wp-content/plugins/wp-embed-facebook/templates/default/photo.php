@@ -1,5 +1,6 @@
 <div class="wef-default" style="max-width: <?php echo $width ?>px" >
-	<a href="<?php echo $fb_data['link'] ?>" target="_blank" rel="nofollow">
+	<a href="<?php /** @noinspection PhpUndefinedVariableInspection */
+	echo $fb_data['link'] ?>" target="_blank" rel="nofollow">
 		<img src="<?php echo $fb_data['source'] ?>" width="100%" height="auto" >
 	</a>
 	<a class="post-link" href="<?php echo $fb_data['link'] ?> " target="_blank" rel="nofollow">
