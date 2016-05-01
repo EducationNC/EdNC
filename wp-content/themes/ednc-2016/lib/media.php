@@ -215,16 +215,18 @@ add_action( 'wp_print_footer_scripts', __NAMESPACE__ . '\\mejs_add_container_cla
  * Customize Embeds
  */
 // Add template path for customizing WP Embeds
-add_filter( 'embed_template', function() {
+add_filter( 'template_include', function($template) {
   global $post;
-  if ($post->post_type == 'data-viz') {
-    return get_template_directory() . '/embed-data-viz.php';
-  } elseif ($post->post_type == 'flash-cards') {
-    return get_template_directory() . '/embed-flash-cards.php';
-  } else {
-    return get_template_directory() . '/embed.php';
+  if ($post->post_type == 'data-viz' && is_embed()) {
+    $template = get_template_directory() . '/embed-data-viz.php';
+  } elseif ($post->post_type == 'flash-cards' && is_embed()) {
+    $template = get_template_directory() . '/embed-flash-cards.php';
+  } elseif (is_embed()) {
+    $template = get_template_directory() . '/embed.php';
   }
-});
+
+  return $template;
+}, 110 );
 
 // Remove visual=true from returned iframe from SoundCloud oembed
 function filter_result($return, $url) {
