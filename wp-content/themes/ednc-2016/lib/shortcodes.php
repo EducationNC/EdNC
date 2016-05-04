@@ -192,7 +192,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
         });
       </script>
 
-      <?php } ?>
+      <?php endif; ?>
 
       <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?>">
         <div class="row">
