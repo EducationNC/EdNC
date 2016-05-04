@@ -1,3 +1,7 @@
-body#tinymce {
+.mce-content-body {
   margin: 12px !important;
+
+  .full-bleed-image .parallax {
+    height: 400px;
+  }
 }
