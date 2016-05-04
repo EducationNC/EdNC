@@ -162,8 +162,6 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
       </div><!-- row -->
       </div><!-- container -->
 
-      <?php if (!is_admin()) : ?>
-
       <script type="text/javascript">
         jQuery(document).ready(function($) {
           var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
@@ -191,8 +189,6 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
           }
         });
       </script>
-
-      <?php endif; ?>
 
       <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?>">
         <div class="row">
