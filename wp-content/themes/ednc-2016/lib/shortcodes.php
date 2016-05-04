@@ -162,33 +162,37 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
       </div><!-- row -->
       </div><!-- container -->
 
-      <script type="text/javascript">
-        jQuery(document).ready(function($) {
-          var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
+      <?php if (!is_admin()) : ?>
 
-          // only do parallax if this is not mobile
-          if (!ismobileorIE) {
-            var img = $('#parallax-<?php echo $image_id; ?> .parallax-img');
+        <script type="text/javascript">
+          jQuery(document).ready(function($) {
+            var ismobileorIE = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MSIE|Trident|Edge/i.test(navigator.userAgent);
 
-            // Set up CSS for devices that support parallax
-            img.css({'top': '-50%', 'position':'absolute'});
+            // only do parallax if this is not mobile
+            if (!ismobileorIE) {
+              var img = $('#parallax-<?php echo $image_id; ?> .parallax-img');
 
-            // Do it on init
-    	      parallax(img);
+              // Set up CSS for devices that support parallax
+              img.css({'top': '-50%', 'position':'absolute'});
 
-            // Happy JS scroll pattern
-            var scrollTimeout;  // global for any pending scrollTimeout
-      			$(window).scroll(function () {
-      				if (scrollTimeout) {
-      					// clear the timeout, if one is pending
-      					clearTimeout(scrollTimeout);
-      					scrollTimeout = null;
-      				}
-      				scrollTimeout = setTimeout(parallax(img), 10);
-      			});
-          }
-        });
-      </script>
+              // Do it on init
+      	      parallax(img);
+
+              // Happy JS scroll pattern
+              var scrollTimeout;  // global for any pending scrollTimeout
+        			$(window).scroll(function () {
+        				if (scrollTimeout) {
+        					// clear the timeout, if one is pending
+        					clearTimeout(scrollTimeout);
+        					scrollTimeout = null;
+        				}
+        				scrollTimeout = setTimeout(parallax(img), 10);
+        			});
+            }
+          });
+        </script>
+
+      <?php endif; ?>
 
       <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?>">
         <div class="row">
