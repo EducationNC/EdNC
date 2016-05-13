@@ -172,7 +172,7 @@ while (have_posts()) : the_post();
             </div>
           </div>
 
-          <div class="col-md-7 col-md-pull-1point5">
+          <div class="col-md-7 col-md-pull-1point5 print-only">
 
             <?php if (has_post_thumbnail() && $featured_image_align == 'contained') {
               echo '<div class="alignnone no-top-margin">';
