@@ -253,6 +253,18 @@ wp_embed_register_handler( 'googlemapsv1', '#https?://www.google.com/maps/place/
 // CartoDB embed
 wp_oembed_add_provider( '#https?://(?:www\.)?[^/^\.]+\.cartodb\.com/\S+#i', 'https://services.cartodb.com/oembed', true );
 
+// Qualtrics survey embed
+function qse_embed_handler( $matches, $attr, $url, $rawattr ) {
+	if ( ! empty( $rawattr['width'] ) && ! empty( $rawattr['height'] ) ) {
+		$width  = (int) $rawattr['width'];
+		$height = (int) $rawattr['height'];
+	} else {
+		list( $width, $height ) = wp_expand_dimensions( 425, 326, $attr['width'], $attr['height'] );
+	}
+	$embed = "<div class='entry-content-asset qualtrics'><iframe src='https://".esc_attr($matches[1]).".qualtrics.com/".esc_attr($matches[2])."' name='Qualtrics' scrolling='auto' frameborder='0' height='{$height}' width='{$width}'></iframe></div>";
+	return apply_filters( 'qse_embed', $embed, $matches, $attr, $url, $rawattr );
+}
+wp_embed_register_handler( 'qse', '/https\:\/\/(.+?)\.qualtrics\.com\/(.+)/i' , __NAMESPACE__ . '\\qse_embed_handler' );
 
 
 /**
