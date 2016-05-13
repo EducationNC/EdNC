@@ -153,11 +153,11 @@ while (have_posts()) : the_post();
     <div class="entry-content">
       <div class="container">
         <div class="row">
-          <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm ">
+          <div class="col-md-2 col-md-push-10 meta hidden-xs hidden-sm print-no">
             <?php get_template_part('templates/components/author', 'meta'); ?>
           </div>
 
-          <div class="col-md-2 col-md-pull-2 ">
+          <div class="col-md-2 col-md-pull-2 print-no">
             <div class="hidden-xs">
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
               <!-- Article sidebar -->
@@ -172,7 +172,7 @@ while (have_posts()) : the_post();
             </div>
           </div>
 
-          <div class="col-md-7 col-md-pull-1point5">
+          <div class="col-md-7 col-md-pull-1point5 print-only">
 
             <?php if (has_post_thumbnail() && $featured_image_align == 'contained') {
               echo '<div class="alignnone no-top-margin">';
