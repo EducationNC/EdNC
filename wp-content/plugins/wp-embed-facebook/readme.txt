@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Facebook, facebook, Social Plugins, embed facebook, facebook video, facebook posts, facebook publication, facebook publications, facebook event, facebook events, facebook pages, facebook page, facebook profiles, facebook album, facebook albums, facebook photos, facebook photo, social,
 Requires at least: 3.8.1
 Tested up to: 4.5
-Stable tag: 2.0.9
+Stable tag: 2.0.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,11 @@ This can only be achieved using the premium version
 4. Event
 
 == Changelog ==
+
+= 2.0.9.1 =
+* Fixed Admin notice bug
+* Lightbox css improved
+* Fixed cover css
 
 = 2.0.9 =
 * Fixed css on footer when using different themes
@@ -287,5 +292,5 @@ This can only be achieved using the premium version
 
 == Upgrade Notice ==
 
-= 2.0.9 =
-* Lots of bug fixed and improvements
+= 2.0.9.1 =
+* Fixed Admin notice bug and Lightbox css improved

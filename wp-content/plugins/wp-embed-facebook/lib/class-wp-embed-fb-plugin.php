@@ -178,7 +178,7 @@ class WP_Embed_FB_Plugin {
 				<p><img style="position:relative; top: 5px;" height="20px" width="auto" src="<?php echo WP_Embed_FB_Plugin::get_url().'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a id="wef-video-down" href="<?php echo admin_url("options-general.php?page=embedfacebook") ?>">Video Download Option</a> in settings.</p>
 				<small>
 					<?php
-					printf(__('To embed albums, events, profiles and video as HTML5 you will need a <a target="_blank" href="%s">Facebook App</a>',''), 'https://developers.facebook.com/apps')
+					printf(__('To embed albums, events, profiles and video as HTML5 you will need a <a target="_blank" href="%s">Facebook App</a>','wp-embed-facebook'), 'https://developers.facebook.com/apps')
 					?>
 				</small>
 				<p>

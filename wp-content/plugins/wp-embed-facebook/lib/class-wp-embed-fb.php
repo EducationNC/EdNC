@@ -370,7 +370,7 @@ class  WP_Embed_FB {
 		} else {
 			$fb_data = '<p><a href="https://www.facebook.com/'.$url.'" target="_blank" rel="nofollow">https://www.facebook.com/'.$url.'</a>';
 			if(is_super_admin()){
-				$fb_data .= '<br><span style="color: #4a0e13">'.__('A Facebook App is needed to embed this url (only visible to super admins)','wp-embed-facebook').'</span>';
+				$fb_data .= '<br><span style="color: #4a0e13">'.sprintf(__('<small>To embed this type of content you need to setup a facebook app on <a href="%s" title="WP Embed Facebook Settings">settings</a></small>','wp-embed-facebook'),admin_url('options-general.php?page=embedfacebook')).'</span>';
 			}
 			$fb_data .= '</p>';
 		}
