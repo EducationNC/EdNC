@@ -27,7 +27,7 @@ class Ure_Lib extends URE_Base_Lib {
 	protected $caps_readable = false;
 	protected $hide_pro_banner = false;	
 	protected $full_capabilities = false;
-	public $ure_object = 'role';  // what to process, 'role' or 'user'  
+	public    $ure_object = 'role';  // what to process, 'role' or 'user'  
 	public    $role_default_html = '';
 	protected $role_to_copy_html = '';
 	protected $role_select_html = '';
@@ -284,7 +284,7 @@ class Ure_Lib extends URE_Base_Lib {
     protected function advertisement() {
 
         if (!$this->is_pro()) {
-            $this->advert = new ure_Advertisement();
+            $this->advert = new URE_Advertisement();
             $this->advert->display();
         }
     }
@@ -683,7 +683,7 @@ if ($this->multisite && !is_network_admin()) {
         }
         
         if (!$this->is_pro()) {
-            require_once(URE_PLUGIN_DIR . 'includes/class-advertisement.php');
+            require_once(URE_PLUGIN_DIR . 'includes/classes/advertisement.php');
         }
         
     }
@@ -1656,6 +1656,21 @@ if ($this->multisite && !is_network_admin()) {
     // end of add_wordpress_caps()
     
     
+    /**
+     * Return all available post types except non-public WordPress built-in post types
+     * 
+     * @return array
+     */
+    public function _get_post_types() {
+        $all_post_types = get_post_types();
+        $internal_post_types = get_post_types(array('public'=>false, '_builtin'=>true));
+        $post_types = array_diff($all_post_types, $internal_post_types);
+        
+        return $post_types;
+    }
+    // end of get_post_types()
+    
+    
     protected function add_custom_post_type_caps() {
                
         global $wp_roles;
@@ -1674,14 +1689,18 @@ if ($this->multisite && !is_network_admin()) {
             'delete_others_posts'
         );
         
-        $post_types = get_post_types(array('_builtin'=>false), 'objects');
+        $post_types = get_post_types(array(), 'objects');
+        $_post_types = $this->_get_post_types();
         // do not forget attachment post type as it may use the own capabilities set
         $attachment_post_type = get_post_type_object('attachment');
         if ($attachment_post_type->cap->edit_posts!=='edit_posts') {
             $post_types['attachment'] = $attachment_post_type;
         }
         
-        foreach($post_types as $post_type) {            
+        foreach($post_types as $post_type) {
+            if (!isset($_post_types[$post_type->name])) {
+                continue;
+            }
             if (!isset($post_type->cap)) {
                 continue;
             }
@@ -2437,6 +2456,7 @@ if ($this->multisite && !is_network_admin()) {
             }
         }
         $user->update_user_level_from_caps();
+        do_action('profile_update', $user->ID, $user);  // in order other plugins may hook to the user permissions update
         
         if ($this->apply_to_all) { // apply update to the all network
             if (!$this->network_update_user($user)) {

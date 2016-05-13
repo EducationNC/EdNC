@@ -4,7 +4,7 @@ Plugin Name: WP Embed Facebook
 Plugin URI: http://www.wpembedfb.com
 Description: Embed any public Facebook video, photo, album, event, page, profile, or post. Copy the facebook url to a single line on your post, or use shortcode [facebook url ] more information at <a href="http://www.wpembedfb.com" title="plugin website">www.wpembedfb.com</a>
 Author: Miguel Sirvent
-Version: 2.0.9
+Version: 2.0.9.1
 Author URI: http://www.wpembedfb.com
 Text Domain: wp-embed-facebook
 Domain Path: /lang

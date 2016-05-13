@@ -27,6 +27,7 @@ wp-content/uploads/
 wp-content/wp-cache-config.php
 
 # ignorable theme files
+wp-content/themes/twentysixteen/
 wp-content/themes/ednc-roots/node_modules/*
 wp-content/themes/ednc-roots/assets/app/vendor/*
 wp-content/themes/ednc-roots/.sass-cache

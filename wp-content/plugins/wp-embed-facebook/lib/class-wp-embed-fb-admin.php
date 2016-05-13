@@ -364,6 +364,7 @@ class WP_Embed_FB_Admin {
 									self::section();
 									?>
 								</section>
+								<input type="hidden" name="wpemfb_close_warning2" value="true">
 								<input type="submit" name="submit" class="button button-primary alignright"
 								       value="<?php _e( 'Save', 'wp-embed-facebook' ) ?>"/>
 
