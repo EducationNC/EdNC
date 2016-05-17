@@ -1,4 +1,4 @@
-<div class="wef-classic" style="max-width: <?php echo $width ?>px" >
+<div class="wef-classic aligncenter" style="max-width: <?php echo $width ?>px" >
 	<a href="<?php /** @noinspection PhpUndefinedVariableInspection */
 	echo $fb_data['link'] ?>" target="_blank" rel="nofollow">
 		<img src="<?php echo $fb_data['source'] ?>" width="100%" height="auto" >

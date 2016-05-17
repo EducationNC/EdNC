@@ -29,11 +29,12 @@ class WEF_Social_Plugins {
 			'show_faces'  => 'false',
 		);
 		$options  = wp_parse_args( $options, $defaults );
-		$string = '';
-		foreach($options as $data => $value){
-			$string .= " data-".str_replace('_','-',$data)."=$value";
+		$string   = '';
+		foreach ( $options as $data => $value ) {
+			$string .= " data-" . str_replace( '_', '-', $data ) . "=$value";
 		}
-		return '<div class="fb-like" data-href="' . $href . '"'.$string.' data-action="like"></div>';
+
+		return '<div class="fb-like" data-href="' . $href . '"' . $string . ' data-action="like"></div>';
 	}
 
 	/**
@@ -72,11 +73,11 @@ class WEF_Social_Plugins {
 	 */
 	static function page_plugin( $href, $width, $options = array() ) {
 		$defaults = array(
-			'hide_cover'    => get_option('wpemfb_page_hide_cover'),
-			'show_facepile' => get_option('wpemfb_page_show_faces'),
-			'show_posts'    => get_option('wpemfb_page_show_posts'),
-			'small_header'  => get_option('wpemfb_page_small_header'),
-			'height'        => get_option('wpemfb_page_height'),
+			'hide_cover'    => WP_Embed_FB_Plugin::get_option( 'page_hide_cover' ),
+			'show_facepile' => WP_Embed_FB_Plugin::get_option( 'page_show_faces' ),
+			'show_posts'    => WP_Embed_FB_Plugin::get_option( 'page_show_posts' ),
+			'small_header'  => WP_Embed_FB_Plugin::get_option( 'page_small_header' ),
+			'height'        => WP_Embed_FB_Plugin::get_option( 'page_height' ),
 		);
 		$options  = wp_parse_args( $options, $defaults );
 

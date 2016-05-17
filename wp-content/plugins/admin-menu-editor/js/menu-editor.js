@@ -1378,6 +1378,11 @@ function encodeMenuAsJSON(tree){
 		name: wsEditorData.menuFormatName,
 		version: wsEditorData.menuFormatVersion
 	};
+
+	//Compress the admin menu.
+	tree = compressMenu(tree);
+	console.log(tree); //xxxx debugging code
+
 	return $.toJSON(tree);
 }
 
@@ -1425,6 +1430,65 @@ function readMenuTreeState(){
 		color_presets: $.extend(true, {}, colorPresets),
 		granted_capabilities: AmeCapabilityManager.getGrantedCapabilities()
 	};
+}
+
+/**
+ * Losslessly compress the admin menu configuration.
+ * 
+ * This is a JS port of the ameMenu::compress() function defined in /includes/menu.php.
+ * 
+ * @param {Object} adminMenu
+ * @returns {Object}
+ */
+function compressMenu(adminMenu) {
+	var common = {
+		properties: _.omit(wsEditorData.blankMenuItem, ['defaults']),
+		basic_defaults: _.clone(_.get(wsEditorData.blankMenuItem, 'defaults', {})),
+		custom_item_defaults: _.clone(itemTemplates.getTemplateById('').defaults)
+	};
+
+	adminMenu.format.compressed = true;
+	adminMenu.format.common = common;
+
+	function compressItem(item) {
+		//These empty arrays can be dropped.
+		if ( _.isEmpty(item['grant_access']) ) {
+			delete item['grant_access'];
+		}
+		if ( _.isEmpty(item['items']) ) {
+			delete item['items'];
+		}
+
+		//Normal and custom menu items have different defaults.
+		//Remove defaults that are the same for all items of that type.
+		var defaults = _.get(item, 'custom', false) ? common['custom_item_defaults'] : common['basic_defaults'];
+		if ( _.has(item, 'defaults') ) {
+			_.forEach(defaults, function(value, key) {
+				if (_.has(item['defaults'], key) && (item['defaults'][key] === value)) {
+					delete item['defaults'][key];
+				}
+			});
+		}
+
+		//Remove properties that match the common values.
+		_.forEach(common['properties'], function(value, key) {
+			if (_.has(item, key) && (item[key] === value)) {
+				delete item[key];
+			}
+		});
+
+		return item;
+	}
+
+	adminMenu.tree = _.mapValues(adminMenu.tree, function(topMenu) {
+		topMenu = compressItem(topMenu);
+		if (typeof topMenu.items !== 'undefined') {
+			topMenu.items = _.map(topMenu.items, compressItem);
+		}
+		return topMenu;
+	});
+
+	return adminMenu;
 }
 
 AmeEditorApi.readMenuTreeState = readMenuTreeState;

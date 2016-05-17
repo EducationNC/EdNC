@@ -14,7 +14,7 @@
 				</p>
 				<div>
 					<?php
-					$opt = get_option('wpemfb_show_follow');
+					$opt = WP_Embed_FB_Plugin::get_option('show_follow');
 					if($opt === 'true') :
 						WEF_Social_Plugins::follow_btn('https://www.facebook.com/'.$fb_data['id']);
 					endif;

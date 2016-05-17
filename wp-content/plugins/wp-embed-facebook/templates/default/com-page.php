@@ -13,7 +13,7 @@
 			<br>
 			<div>
 				<?php
-				$opt = get_option('wpemfb_show_like');
+				$opt = WP_Embed_FB_Plugin::get_option('show_like');
 				if($opt === 'true') :
 					echo WEF_Social_Plugins::like_btn('https://www.facebook.com/'.$fb_data['id'],array('share'=>'true','layout'=>'button_count'));
 				else :
