@@ -101,8 +101,12 @@
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
         if (window.location.search === '?feedback') {
-          $('#popmake-21098').popmake('open');
-          $('#popmake-26020').popmake('open');
+          if ($('#popmake-21098').length) {         // Dev environment
+            $('#popmake-21098').popmake('open');
+          }
+          if ($('#popmake-26020').length) {         // Prod environment
+            $('#popmake-26020').popmake('open');
+          }
         }
       }
     },
