@@ -100,6 +100,10 @@
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
+        if (window.location.search === '?feedback') {
+          $('#popmake-21098').popmake('open');
+          $('#popmake-26020').popmake('open');
+        }
       }
     },
     // Home page

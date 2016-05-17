@@ -1,0 +1,551 @@
+@import 'partials/pum_fields';
+@import 'partials/tabs';
+@import 'partials/metaboxes';
+@import 'partials/admin_modal';
+@import 'partials/pum_select2';
+@import 'partials/facet_builder';
+@import 'partials/extensions_page';
+@import 'partials/mce_buttons';
+
+.pum-form {
+/*
+  box-sizing: border-box;
+  .field {
+
+
+    &.half, &.one-half, &.two-quarters &.third, &.one-third, &.one-thirds, &.two-thirds, &.quarter, &.one-quarter, &.one-quarters, &.three-quarters, &.one-fifth, &.one-fifths, &.two-fifths, &.three-fifths, &.four-fifths {
+      display: inline-block;
+      float: left;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 1%;
+      padding-right: 1%;
+
+      .first {
+        clear: left;
+      }
+      input[type="text"], select {
+        width: 100%;
+      }
+    }
+
+    &.half,
+    &.one-half,
+    &.two-quarters {
+      width: 48%;
+    }
+    &.third,
+    &.one-third,
+    &.one-thirds {
+      width: 31%;
+    }
+    &.two-thirds {
+      width: 64%;
+    }
+    &.quarter,
+    &.one-quarter,
+    &.one-quarters {
+      width: 23%;
+    }
+    &.three-quarters {
+      width: 73%;
+    }
+
+    &.one-fifth,
+    &.one-fifths {
+      width: 18%;
+    }
+
+    &.two-fifths {
+      width: 38%;
+    }
+    &.three-fifths {
+      width: 58%;
+    }
+    &.four-fifths {
+      width: 78%;
+    }
+  }
+*/
+}
+
+
+.tabbed-form {
+  .field {
+    position: relative;
+    margin: 0 0 1em;
+  }
+
+  .pumselect2-container--default {
+    width: 100%!important;
+  }
+
+  .pum-select2 select {
+    width: 100%;
+  }
+
+  .field.cookiekey {
+
+    .cookie-key {
+      position: relative;
+      display: inline-block;
+      button.reset {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+      }
+    }
+  }
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  .field.checkbox {
+    label {
+
+      &.pum-desc {
+        display: inline;
+        font-weight:inherit;
+        font-size:inherit;
+        margin: 0 0 1em;
+      }
+    }
+  }
+
+  .pum-required {
+    label::after {
+      color: #a00;
+      content: "*";
+      margin-left: 5px;
+    }
+  }
+}
+
+
+
+/* UI */
+
+#popuptitlediv {
+
+  position: relative;
+
+  #popuptitlewrap {
+    border: 0;
+    padding: 0;
+  }
+
+  #popuptitle-prompt-text {
+    color: #777;
+    position: absolute;
+    font-size: 1.7em;
+    padding: 11px 10px;
+  }
+
+  label {
+    cursor: text;
+  }
+
+  #popuptitle {
+    padding: 3px 8px;
+    font-size: 1.7em;
+    line-height: 1.125;
+    height: 1.7em;
+    width: 100%;
+    outline: none;
+    margin: 0 0 3px;
+    background-color: #fff;
+  }
+
+}
+
+.post-type-popup {
+  #edit-slug-box {
+    margin-bottom: 5px;
+  }
+}
+
+
+.posttypediv, .taxonomydiv {
+  margin-bottom: 10px;
+  clear: both;
+  overflow: auto;
+}
+
+#major-publishing-actions {
+  text-align: right;
+}
+
+#trigger-popmake-preview {
+  padding: 5px;
+
+}
+
+/*
+
+input[type="text"], select {
+    font-size: 13px;
+    margin: 0;
+	height: 30px!important;
+    line-height: 28px!important;
+    padding: 0 6px 2px!important;
+    box-shadow: 0 1px 0 rgb(255, 255, 255) inset, 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+*/
+
+input[type="range"] {
+  vertical-align: middle;
+}
+
+input.popmake-range-manual {
+  padding-right: 25px !important;
+}
+
+.pum-image-field .pum-image-select,
+.pum-image-field.pum-image-empty .pum-image-preview {
+  display: none;
+}
+.pum-image-field.pum-image-empty .pum-image-select {
+  display: block;
+}
+.pum-image-field .pum-image-preview-img {
+  float: left;
+  line-height: 0;
+  margin: 5px 0;
+}
+.pum-image-field .pum-image-preview-img img {
+  max-width: 60px;
+}
+.pum-image-field .pum-image-preview select {
+  margin: 8px 0 8px 10px;
+  width: 200px;
+}
+.pum-image-field .pum-image-edit {
+  margin: 0 0 0 11px;
+}
+.pum-image-field .pum-image-replace,
+.pum-image-field .pum-image-remove {
+  margin: 0 0 0 8px;
+}
+
+
+/*
+input[type="text"], select {
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    margin: 0;
+    text-decoration: none;
+    white-space: nowrap;
+	height: 30px!important;
+    line-height: 28px!important;
+    padding: 0 12px 2px!important;
+    background: none repeat scroll 0 0 rgb(247, 247, 247)!important;
+    border-color: rgb(204, 204, 204);
+    box-shadow: 0 1px 0 rgb(255, 255, 255) inset, 0 1px 0 rgba(0, 0, 0, 0.08);
+    color: rgb(85, 85, 85);
+    vertical-align: top!important;
+}
+input[type="text"] {
+    background-color: rgb(247, 247, 247)!important;
+}
+input[type="range"] {
+	background: transparent!important;
+	border:none!important;
+	outline:0;
+	box-shadow:none;
+}
+
+button.popmake-range-minus, button.popmake-range-plus {
+	height:30px;
+	width:30px;
+	text-align: center;
+}
+
+*/
+option.bold {
+  font-weight: bold;
+  font-size: 1.125em;
+}
+
+/* Range Slider Adjusters */
+.popmake-range-manual {
+  padding-right: 25px;
+  text-align: right;
+  width: 80px;
+}
+
+.range-value-unit {
+  position: relative;
+  display: inline-block;
+  margin-left: -30px;
+  margin-right: 10px;
+  width: 20px;
+  text-align: left;
+  top: .125em;
+}
+
+/* Form Table Dividers */
+.title-divider th {
+  border-top: 1px solid #ccc;
+  padding: 0;
+}
+
+.form-table td, .form-table tr {
+  padding-top: 10px;
+}
+
+.title-divider .title {
+  font-size: 1.125em;
+  padding-left: 0 !important;
+  padding-top: 20px !important;
+  padding-bottom: 0 !important;
+}
+
+
+
+/* Upgrade Tips */
+.popmake-upgrade-tip {
+  color: #333;
+  line-height: 2em !important;
+}
+
+div.popmake-upgrade-tip {
+  margin-bottom: 15px;
+  display: block;
+  font-weight: bold;
+}
+
+.popmake-upgrade-tip img {
+  float: left;
+  margin-right: 15px;
+}
+
+
+/* Theme Builder */
+#popmake_popup_theme_preview {
+  z-index: 100;
+}
+
+#popmake_popup_theme_preview .inside {
+  margin-top: 0;
+  padding: 0;
+  background: url(http://s.wordpress.com/mshots/v1/http://www.wordpress.org) no-repeat center top;
+}
+
+#popmake_popup_theme_preview .empreview {
+  padding: 30px 20px;
+  position: relative;
+}
+
+// Reset
+.example-popup-overlay,
+.example-popup-overlay .example-popup,
+.pum-overlay .title,
+.pum-overlay .content,
+.example-popup-overlay .close-popup,
+.example-popup-overlay .close-popupclose-popup:hover,
+.example-popup-overlay .close-popup:focus,
+.example-popup-overlay .close-popup:active {
+  background: none;
+  border: none;
+  bottom: auto;
+  clear: none;
+  cursor: default;
+  /* didn't really know what the default for display should be*/
+  /*display:inline;*/
+  float: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+  font-style: normal;
+  font-weight: normal;
+  height: auto;
+  left: auto;
+  letter-spacing: normal;
+  line-height: normal;
+  max-height: none;
+  max-width: none;
+  min-height: 0;
+  min-width: 0;
+  overflow: visible;
+  position: static;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  top: auto;
+  visibility: visible;
+  white-space: normal;
+  width: auto;
+  z-index: auto;
+}
+
+.example-popup, .example-popup:before, .example-popup:after,
+.example-popup *, .example-popup *:before, .example-popup *:after {
+  box-sizing: border-box;
+}
+
+.empreview .example-popup-overlay {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0
+}
+
+.empreview .example-popup {
+  display: block;
+  position: relative;
+  width: 95%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-size: 16px;
+  z-index: 99;
+}
+
+.empreview .example-popup .close-popup {
+  text-decoration: none;
+  text-align: center;
+  line-height: 1;
+  position: absolute;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 1em;
+}
+
+/* Sidebar */
+.popmake-support-links {
+  list-style: none;
+}
+
+.popmake-support-links li {
+  margin-bottom: 10px;
+}
+
+.popmake-support-links a {
+  color: #20252b;
+  font-family: "Montserrat";
+  font-size: 1.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.popmake-support-links a span {
+  margin-left: 10px;
+}
+
+.popmake-support-links a img {
+  top: 6px;
+  position: relative;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+}
+
+.button.rounded {
+  box-shadow: none;
+  border: 0;
+  border-radius: 2px;
+  padding-left: 18px;
+  padding-right: 18px;
+  transition: transform .5s;
+  margin-bottom: 10px;
+}
+
+.button.rounded:hover, .button.rounded:focus {
+  transform: scale(1.125);
+}
+
+#popmake_popup_support {
+  margin-bottom: 10px;
+}
+
+
+/* Welcome Page */
+.popmake-badge {
+  padding-top: 150px;
+  height: 52px;
+  width: 185px;
+  color: #666;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  margin: 0 -5px;
+  background: url('../images/welcome/logo.png') no-repeat center center;
+}
+
+.about-wrap .popmake-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.popmake-welcome-screenshots {
+  float: right;
+  margin-left: 10px !important;
+  padding: 0 7.5em;
+}
+
+.popmake-wrap .feature-section {
+  margin-top: 20px;
+}
+
+.tab-box {
+  margin-top: 40px;
+  position: relative;
+  border: 1px solid #ccc;
+  max-width: 500px;
+  padding: 20px 10px 5px;
+}
+
+.tab-box h4 {
+  font: 13px/30px "Open Sans", sans-serif;
+  font-weight: bold;
+  position: absolute;
+  background: #ccc;
+  display: inline-block;
+  padding: 0 10px;
+  top: -48px;
+  left: -1px;
+}
+
+.tab-box a {
+  font: 300 18px/1.125 "Oswald";
+  color: #9ABA27;
+}
+
+.tab-box button {
+  font: 300 18px/1.125 "Oswald";
+  color: #fff;
+  background: #9ABA27;
+  box-shadow: none;
+  border: 0;
+  padding: 5px 10px 7px;
+  cursor: pointer;
+  transition: transform .5s;
+}
+
+.tab-box button:hover {
+  transform: scale(1.125);
+}
+
+#popmake-preview {
+  position: fixed;
+  z-index: 9999999 !important;
+}
+
+#popmake-overlay {
+  z-index: 9999998 !important;
+}
+
