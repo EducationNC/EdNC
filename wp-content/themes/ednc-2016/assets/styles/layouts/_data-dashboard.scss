@@ -1,16 +1,28 @@
 .post-type-archive-data {
+  background-image: url('../images/data-dashboard.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: $raven-60;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+  }
+
+  .wrap {
+    z-index: 1;
+  }
+
   .banner:after {
     background: none;
   }
 
-    // Position footer over background
-  .above-footer, .content-info {
-    position: relative;
-    z-index: 50;
-  }
-
   .dashboard-header {
-    // background: $indigo-50;
     position: relative;
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -25,18 +37,6 @@
     font-size: 54px;
     font-family: $font-family-sans-serif;
     margin: .25em 0;
-
-    &:after {
-      content: 'BETA';
-      background: $ginger;
-      color: $white;
-      font-family: $font-family-sans-serif;
-      font-weight: bold;
-      font-size: 14px;
-      display: inline;
-      vertical-align: top;
-      padding: 1px 3px;
-    }
   }
 
   .subtitle {
@@ -45,6 +45,12 @@
     font-style: italic;
     color: $pear;
     font-size: 22px;
+  }
+
+  .popover-title {
+    background: $steel;
+    color: $ash;
+    border: none;
   }
 }
 
@@ -93,39 +99,107 @@
 .data-section {
   background: $pearl;
   margin-bottom: 10px;
+  padding: 0;
 
-  & > div {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+  .wp-embed & {
+    padding: 10px;
+    margin-bottom: 0;
 
-  .col-md-9 {
-    background: $white;
-  }
+    .embed-credit {
+      width: 64px;
+    }
 
-  .fancy-number {
-    display: block;
-    line-height: 1em;
-    font-size: $font-size-h1;
-    color: $plum-lighter;
-    font-family: $font-family-serif;
-    transition: font-size .3s ease-in-out;
-  }
+    @media (max-width: $screen-sm-max) {
+      p.no-bottom-margin {
+        padding-right: 70px;
+      }
 
-  .btn {
-    margin-bottom: 4px;
-  }
-
-  .popover-content {
-    p {
-      margin: 0;
+      .embed-credit {
+        top: 0;
+        width: 54px;
+      }
     }
   }
 
-  .popover-title {
+  & > div {
+    padding: 10px;
+  }
+
+  .panel {
+    margin-bottom: 0;
+  }
+
+  .fancy-number {
+    color: $plum-lighter;
+    margin-bottom: 10px;
+  }
+}
+
+.data-dashboard {
+  .well, .panel {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .callout {
     background: $steel;
-    color: $ash;
-    border: 0;
+    overflow: visible;
+
+    @media (min-width: $screen-md-min) {
+      max-width: 295px;
+    }
+
+    &.affix-bottom {
+      width: 100% !important;
+    }
+
+    a {
+      color: $pearl;
+      // text-decoration: none;
+    }
+  }
+
+  .nav {
+    li {
+      li {
+        color: $pearl;
+
+        a {
+          color: $pearl;
+        }
+
+        &.active {
+          & > a {
+            color: $pearl;
+          }
+        }
+      }
+
+      &.active {
+        & > a {
+          color: $white;
+          background: $gray;
+
+          span {
+            color: $white;
+          }
+        }
+      }
+    }
+
+    a {
+      color: $pearl;
+
+      span {
+        color: $ash;
+      }
+
+      &:hover, &:focus {
+        background: $pearl;
+        color: $steel;
+      }
+    }
   }
 
   .modal-toggle {
@@ -153,147 +227,22 @@
       text-decoration: none;
     }
   }
-
-  .wp-embed {
-    position: relative;
-
-    .icon-external-link {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -75%, 0);
-      color: $white;
-      text-shadow: 0 0 10px $raven-60;
-      font-size: 90px;
-      text-decoration: none;
-      pointer-events: none;
-    }
-  }
-}
-
-.data-viz-chart {
-  overflow: hidden;
-}
-
-.google-visualization-tooltip.google-visualization-tooltip {
-  color: $jet;
-  font-family: $font-family-sans-serif;
-  font-size: 16px;
-  min-width: 150px;
-  border-radius: 4px;
-
-  .google-visualization-tooltip-item:first-child {
-    margin-bottom: 0;
-
-    & + .google-visualization-tooltip-item {
-      margin-top: 0;
-    }
-  }
-
-  .tooltip-inner {
-    background: $ash;
-  }
-}
-
-.data-dashboard {
-  // Sidebar
-  .callout {
-    background: $steel;
-    overflow: visible;
-
-    .append-on-affix {
-      display: none;
-      position: absolute;
-      bottom: -40px;
-      left: 30px;
-
-      a {
-        color: $pearl;
-        text-decoration: none;
-      }
-    }
-  }
-
-  .nav {
-    li {
-      // @extend h3;
-      margin: 0;
-
-      li {
-        // @extend h4;
-        margin: 0;
-        color: $pearl;
-        display: block;
-
-        a {
-          list-style-type: square;
-          list-style-position: inside;
-          display: list-item;
-          color: $pearl;
-        }
-
-        &.active {
-          & > a {
-            color: $pearl;
-          }
-        }
-      }
-
-      &.active {
-        & > a {
-          color: $white;
-          background: $gray;
-
-          span {
-            color: $white;
-          }
-        }
-      }
-    }
-
-    a {
-      padding: 10px 5px 7px;
-      text-decoration: none;
-      color: $pearl;
-      position: relative;
-
-      span {
-        color: $ash;
-      }
-
-      &:hover, &:focus {
-        background: $pearl;
-        color: $steel;
-      }
-    }
-
-    .children {
-      a {
-        padding-left: 20px;
-      }
-    }
-  }
-
-  .affix {
-    @media (min-width: $screen-md-min) {
-      top: 10px;
-      position: fixed;
-
-      .append-on-affix {
-        display: block;
-      }
-    }
-  }
-
-  .affix-bottom {
-    @media (min-width: $screen-md-min) {
-      position: absolute;
-
-      .append-on-affix {
-        display: block;
-      }
-    }
-  }
+//
+//   .wp-embed {
+//     position: relative;
+//
+//     .icon-external-link {
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate3d(-50%, -75%, 0);
+//       color: $white;
+//       text-shadow: 0 0 10px $raven-60;
+//       font-size: 90px;
+//       text-decoration: none;
+//       pointer-events: none;
+//     }
+//   }
 }
 
 // Google tables
