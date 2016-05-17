@@ -6,7 +6,7 @@ switch($type){
 		echo WEF_Social_Plugins::page_plugin('https://www.facebook.com/'.$fb_data['link'],$width);
 		break;
 	case 'video' :
-		if(get_option('wpemfb_video_as_post','false') == 'true')
+		if(WP_Embed_FB_Plugin::get_option('video_as_post') == 'true')
 			/** @noinspection PhpUndefinedVariableInspection */
 			echo WEF_Social_Plugins::embedded_post('https://www.facebook.com/'.$fb_data['link'],$width);
 		else

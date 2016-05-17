@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 4.1
-Tested up to: 4.5
-Stable tag: 1.6.1
+Tested up to: 4.5.2
+Stable tag: 1.6.2
 
 Lets you edit the WordPress admin menu. You can re-order, hide or rename menus, add custom menus and more. 
 
@@ -62,6 +62,13 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 3. Re-ordering menu items via drag and drop
 
 == Changelog ==
+
+= 1.6.2 =
+* Fixed a bug that made menu items "jump" slightly to the left when you start to drag them.
+* Fixed a Multisite-specific bug where temporarily switching to another site using the switch_to_blog() function could result in the user having the wrong permissions.
+* When saving settings, the plugin will now compress the menu data before sending it to the server. This reduces the chances of exceeding request size limits that are imposed by some hosting companies.
+* You can dismiss the "Settings saved" notification by clicking the "x" button.
+* Tested up to WordPress 4.5.2.
 
 = 1.6.1 =
 * Fixed a bug introduced in version 1.6 that prevented the "collapse menu" link from working. In some cases, this bug also made it impossible to switch between "Help" tabs.

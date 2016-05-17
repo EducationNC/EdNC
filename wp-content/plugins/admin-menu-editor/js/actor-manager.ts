@@ -68,6 +68,17 @@ class AmeRole extends AmeBaseActor {
 		super('role:' + roleId, displayName, capabilities);
 		this.name = roleId;
 	}
+
+
+	hasOwnCap(capability: string): boolean {
+		//In WordPress, a role name is also a capability name. Users that have the role "foo" always
+		//have the "foo" capability. It's debatable whether the role itself actually has that capability
+		//(WP_Role says no), but it's convenient to treat it that way.
+		if (capability === this.name) {
+			return true;
+		}
+		return super.hasOwnCap(capability);
+	}
 }
 
 class AmeUser extends AmeBaseActor {
@@ -345,7 +356,7 @@ class AmeActorManager {
 		capability = AmeActorManager.mapMetaCap(capability);
 
 		var grant = sourceType ? [hasCap, sourceType, sourceName || null] : hasCap;
-		_.set(context, [actor, capability], grant);
+		AmeActorManager._.set(context, [actor, capability], grant);
 	}
 
 	resetCap(actor: string, capability: string) {
@@ -355,7 +366,7 @@ class AmeActorManager {
 	static resetCapInContext(context: AmeGrantedCapabilityMap, actor: string, capability: string) {
 		capability = AmeActorManager.mapMetaCap(capability);
 
-		if (_.has(context, [actor, capability])) {
+		if (AmeActorManager._.has(context, [actor, capability])) {
 			delete context[actor][capability];
 		}
 	}

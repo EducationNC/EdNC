@@ -64,7 +64,7 @@ if ( !apply_filters('admin_menu_editor_is_pro', false) ){
 <?php
 if ( !empty($_GET['message']) ){
 	if ( intval($_GET['message']) == 1 ){
-		echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
+		echo '<div id="message" class="updated notice is-dismissible"><p><strong>Settings saved.</strong></p></div>';
 	} elseif ( intval($_GET['message']) == 2 ) {
 		echo '<div id="message" class="error"><p><strong>Failed to decode input! The menu wasn\'t modified.</strong></p></div>';
 	}

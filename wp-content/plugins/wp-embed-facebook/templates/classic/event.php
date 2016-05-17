@@ -1,21 +1,19 @@
 <?php
-/** @noinspection PhpUndefinedVariableInspection */
-$height            = $width * $prop;
 $start_time_format = 'l, j F Y g:i a';
 $old_time_zone = date_default_timezone_get();
-if(get_option('wpemfb_ev_local_tz') == 'true'){
-	$timezone = get_option( 'timezone_string' );
+if(WP_Embed_FB_Plugin::get_option('ev_local_tz') == 'true'){
+	$timezone = WP_Embed_FB_Plugin::get_timezone();
 } else {
-	$timezone = isset( $fb_data['timezone'] ) ? $fb_data['timezone'] : get_option( 'timezone_string' );
+	$timezone = isset( $fb_data['timezone'] ) ? $fb_data['timezone'] : WP_Embed_FB_Plugin::get_timezone();
 }
 date_default_timezone_set( $timezone );
 /** @noinspection PhpUndefinedVariableInspection */
 $start_time = date_i18n( $start_time_format, strtotime( $fb_data['start_time'] ) );
 date_default_timezone_set( $old_time_zone );
 ?>
-<div class="wef-classic wef-measure" style="max-width: <?php echo $width ?>px">
+<div class="wef-classic aligncenter" style="max-width: <?php echo $width ?>px">
 	<?php if(isset($fb_data['cover'])) : ?>
-		<div class="cover" style="height:<?php echo $height ?>px; background: transparent url('<?php echo $fb_data['cover']['source'] ?>')  no-repeat scroll 0 <?php echo $fb_data['cover']['offset_y'] ?>%;" onclick="window.open('https://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')" ></div>
+		<div class="relative-container cover"><div class="relative" style="background-image: url('<?php echo $fb_data['cover']['source'] ?>'); background-position-y: <?php echo $fb_data['cover']['offset_y'] ?>%" onclick="window.open('https://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')"></div></div>
 	<?php endif; ?>
 	<div class="row pad-top">
 		<div class="col-12">

@@ -1,8 +1,8 @@
 <?php
-$use_ratio = (get_option('wpemfb_video_ratio') == 'true');
+$use_ratio = (WP_Embed_FB_Plugin::get_option('video_ratio') == 'true');
 ?>
-<div class="wef-classic" style="max-width: <?php echo $width ?>px">
-    <?php echo $use_ratio ? '<div class="video">' : '' ?>
+<div class="wef-classic aligncenter" style="max-width: <?php echo $width ?>px">
+    <?php echo $use_ratio ? '<div class="relative-container video">' : '' ?>
     <?php
     /** @noinspection PhpUndefinedVariableInspection */
     $url = $fb_data['source'];

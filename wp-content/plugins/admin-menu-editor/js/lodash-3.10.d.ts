@@ -7329,7 +7329,7 @@ declare module _ {
          */
         pluck<T extends {}>(
             collection: List<T>|Dictionary<T>,
-            path: StringRepresentable|StringRepresentable[]
+            path: string|StringRepresentable|StringRepresentable[]
         ): any[];
 
         /**
@@ -7337,7 +7337,7 @@ declare module _ {
          */
         pluck<T extends {}, TResult>(
             collection: List<T>|Dictionary<T>,
-            path: StringRepresentable|StringRepresentable[]
+            path: string|StringRepresentable|StringRepresentable[]
         ): TResult[];
     }
 
@@ -7345,28 +7345,28 @@ declare module _ {
         /**
          * @see _.pluck
          */
-        pluck<TResult>(path: StringRepresentable|StringRepresentable[]): LoDashImplicitArrayWrapper<TResult>;
+        pluck<TResult>(path: string|StringRepresentable|StringRepresentable[]): LoDashImplicitArrayWrapper<TResult>;
     }
 
     interface LoDashImplicitObjectWrapper<T> {
         /**
          * @see _.pluck
          */
-        pluck<TResult>(path: StringRepresentable|StringRepresentable[]): LoDashImplicitArrayWrapper<TResult>;
+        pluck<TResult>(path: string|StringRepresentable|StringRepresentable[]): LoDashImplicitArrayWrapper<TResult>;
     }
 
     interface LoDashExplicitArrayWrapper<T> {
         /**
          * @see _.pluck
          */
-        pluck<TResult>(path: StringRepresentable|StringRepresentable[]): LoDashExplicitArrayWrapper<TResult>;
+        pluck<TResult>(path: string|StringRepresentable|StringRepresentable[]): LoDashExplicitArrayWrapper<TResult>;
     }
 
     interface LoDashExplicitObjectWrapper<T> {
         /**
          * @see _.pluck
          */
-        pluck<TResult>(path: StringRepresentable|StringRepresentable[]): LoDashExplicitArrayWrapper<TResult>;
+        pluck<TResult>(path: string|StringRepresentable|StringRepresentable[]): LoDashExplicitArrayWrapper<TResult>;
     }
 
     //_.reduce
@@ -12697,7 +12697,7 @@ declare module _ {
          */
         has<T extends {}>(
             object: T,
-            path: StringRepresentable|StringRepresentable[]
+            path: string|StringRepresentable|StringRepresentable[]
         ): boolean;
     }
 
@@ -12705,14 +12705,14 @@ declare module _ {
         /**
          * @see _.has
          */
-        has(path: StringRepresentable|StringRepresentable[]): boolean;
+        has(path: string|StringRepresentable|StringRepresentable[]): boolean;
     }
 
     interface LoDashExplicitObjectWrapper<T> {
         /**
          * @see _.has
          */
-        has(path: StringRepresentable|StringRepresentable[]): LoDashExplicitWrapper<boolean>;
+        has(path: string|StringRepresentable|StringRepresentable[]): LoDashExplicitWrapper<boolean>;
     }
 
     //_.invert
@@ -13192,7 +13192,7 @@ declare module _ {
          * @see _.omit
          */
         omit<TResult extends {}>(
-            ...predicate: (StringRepresentable|StringRepresentable[])[]
+            ...predicate: (string|StringRepresentable|StringRepresentable[])[]
         ): LoDashImplicitObjectWrapper<TResult>;
     }
 
@@ -13209,7 +13209,7 @@ declare module _ {
          * @see _.omit
          */
         omit<TResult extends {}>(
-            ...predicate: (StringRepresentable|StringRepresentable[])[]
+            ...predicate: (string|StringRepresentable|StringRepresentable[])[]
         ): LoDashExplicitObjectWrapper<TResult>;
     }
 
@@ -13282,7 +13282,7 @@ declare module _ {
          * @see _.pick
          */
         pick<TResult extends {}>(
-            ...predicate: (StringRepresentable|StringRepresentable[])[]
+            ...predicate: (string|StringRepresentable|StringRepresentable[])[]
         ): LoDashImplicitObjectWrapper<TResult>;
     }
 
@@ -13299,7 +13299,7 @@ declare module _ {
          * @see _.pick
          */
         pick<TResult extends {}>(
-            ...predicate: (StringRepresentable|StringRepresentable[])[]
+            ...predicate: (string|StringRepresentable|StringRepresentable[])[]
         ): LoDashExplicitObjectWrapper<TResult>;
     }
 
@@ -13343,7 +13343,7 @@ declare module _ {
          */
         set<T>(
             object: T,
-            path: StringRepresentable|StringRepresentable[],
+            path: string|StringRepresentable|StringRepresentable[],
             value: any
         ): T;
 
@@ -13352,7 +13352,7 @@ declare module _ {
          */
         set<V, T>(
             object: T,
-            path: StringRepresentable|StringRepresentable[],
+            path: string|StringRepresentable|StringRepresentable[],
             value: V
         ): T;
     }
@@ -13362,7 +13362,7 @@ declare module _ {
          * @see _.set
          */
         set<V>(
-            path: StringRepresentable|StringRepresentable[],
+            path: string|StringRepresentable|StringRepresentable[],
             value: V
         ): LoDashImplicitObjectWrapper<T>;
     }
@@ -13372,7 +13372,7 @@ declare module _ {
          * @see _.set
          */
         set<V>(
-            path: StringRepresentable|StringRepresentable[],
+            path: string|StringRepresentable|StringRepresentable[],
             value: V
         ): LoDashExplicitObjectWrapper<T>;
     }

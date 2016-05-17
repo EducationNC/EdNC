@@ -479,3 +479,5 @@ class ameGrantedCapabilityFilter {
 
 
 class InvalidMenuException extends Exception {}
+
+class ameInvalidJsonException extends RuntimeException {};

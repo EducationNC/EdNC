@@ -3,8 +3,8 @@ Contributors: poxtron
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26
 Tags: Facebook, facebook, Social Plugins, embed facebook, facebook video, facebook posts, facebook publication, facebook publications, facebook event, facebook events, facebook pages, facebook page, facebook profiles, facebook album, facebook albums, facebook photos, facebook photo, social,
 Requires at least: 3.8.1
-Tested up to: 4.5
-Stable tag: 2.0.9.1
+Tested up to: 4.5.2
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Embed any **public** facebook video, page, post, profile, photo or event directl
 * Facebook Fan pages
 * Facebook Community pages
 * Facebook Profiles
-* Facebook Publications
+* Facebook Posts
 
 **[Live Demo](http://www.wpembedfb.com/demo/)**
 
@@ -73,12 +73,47 @@ This can only be achieved using the premium version
 
 == Screenshots ==
 
-1. Fan Page Embed
-2. Album
-3. Profile
-4. Event
+1. Fan Page Social Plugin
+2. Fan Page Custom Embed
+3. Video Social Plugin
+4. Video Custom Embed
+5. Album
+6. Album with more than 100 photos  (Premium only)
+7. Event
+8. Full Event Shortcode (Premium only)
+9. Full Page Shortcode (Premium only)
+10. Fan page upcoming events (Premium only)
+11. Post Social Plugin
+12. Post Custom Embed
+13. Photo Custom embed
+14. Settings
+15. Profile
+
 
 == Changelog ==
+
+= 2.1 =
+* Removed all options and moved them to a single one 'wpemfb_options'
+* Removed resize cover javascript it is now done with css
+* Fixed timezone bug custom post and events
+* Added option to only load scripts when an embed is present
+* Added option to reset all options
+* Added Jetpack Photon compatibility
+* Added X Theme compatibility
+* Added lightbox.sass for theme developers
+* Updated Lightbox script and style
+* Added Lightbox Option Album Label
+* Added Lightbox Option Always Show Nav On Touch Devices
+* Added Lightbox Option Show Image Number Label
+* Added Lightbox Option Wrap Around
+* Added Lightbox Option Disable Scrolling
+* Added Lightbox Option Fit Images In Viewport
+* Added Lightbox Option Max Width
+* Added Lightbox Option Max Height
+* Added Lightbox Option Position From Top
+* Added Lightbox Option Resize Duration
+* Added Lightbox Option Fade Duration
+* Changed css on classic theme
 
 = 2.0.9.1 =
 * Fixed Admin notice bug
@@ -292,5 +327,5 @@ This can only be achieved using the premium version
 
 == Upgrade Notice ==
 
-= 2.0.9.1 =
-* Fixed Admin notice bug and Lightbox css improved
+= 2.1 =
+2.1 version is a lot faster and provides full compatibility with Jetpack Photon and some premium "drag and drop" themes all options have been moved to a single one 'wpemfb_options' and new features where added: Enqueue styles and scripts only when an embed is present, 11 Lightbox options like 'Disable Scrolling' 'Loop though Album' etc. Cover resize now done with css

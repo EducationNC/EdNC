@@ -55,6 +55,15 @@ var AmeRole = (function (_super) {
         this.actorTypeSpecificity = 1;
         this.name = roleId;
     }
+    AmeRole.prototype.hasOwnCap = function (capability) {
+        //In WordPress, a role name is also a capability name. Users that have the role "foo" always
+        //have the "foo" capability. It's debatable whether the role itself actually has that capability
+        //(WP_Role says no), but it's convenient to treat it that way.
+        if (capability === this.name) {
+            return true;
+        }
+        return _super.prototype.hasOwnCap.call(this, capability);
+    };
     return AmeRole;
 }(AmeBaseActor));
 var AmeUser = (function (_super) {
@@ -264,14 +273,14 @@ var AmeActorManager = (function () {
     AmeActorManager.setCapInContext = function (context, actor, capability, hasCap, sourceType, sourceName) {
         capability = AmeActorManager.mapMetaCap(capability);
         var grant = sourceType ? [hasCap, sourceType, sourceName || null] : hasCap;
-        _.set(context, [actor, capability], grant);
+        AmeActorManager._.set(context, [actor, capability], grant);
     };
     AmeActorManager.prototype.resetCap = function (actor, capability) {
         AmeActorManager.resetCapInContext(this.grantedCapabilities, actor, capability);
     };
     AmeActorManager.resetCapInContext = function (context, actor, capability) {
         capability = AmeActorManager.mapMetaCap(capability);
-        if (_.has(context, [actor, capability])) {
+        if (AmeActorManager._.has(context, [actor, capability])) {
             delete context[actor][capability];
         }
     };

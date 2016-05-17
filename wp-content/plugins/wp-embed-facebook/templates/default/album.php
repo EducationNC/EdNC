@@ -19,17 +19,18 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-12">
+		<div class="col-12 text-center">
 			<div class="text-center album-thumbs">
 			<?php
-			foreach ($fb_data['photos']['data'] as $pic) {
-				$data_title = isset($pic['name']) ? $pic['name'] :  $fb_data['from']['name'];
-				?>
-				<a href="<?php echo $pic['source'] ?>"  data-lightbox="roadtrip" data-title="<?php echo esc_attr(wp_rel_nofollow(make_clickable($data_title))) ?>" >
-					<img class="thumbnail" src="<?php echo $pic['picture'] ?>" />
-				</a>
-				<?php
-			}
+			if(isset($fb_data['photos']))
+				foreach ($fb_data['photos']['data'] as $pic) {
+					$data_title = isset($pic['name']) ? $pic['name'] :  '';
+					?>
+					<a href="<?php echo $pic['source'] ?>"  data-lightbox="roadtrip" <?php echo !empty($data_title) ? 'data-title="'.esc_attr(wp_rel_nofollow(make_clickable(str_replace(array('"',"'"),array('&#34;','&#39;'),$data_title)))).'"' : '' ?> >
+						<img class="thumbnail" src="<?php echo $pic['picture'] ?>" />
+					</a>
+					<?php
+				}
 			?>
 			</div>
 		</div>

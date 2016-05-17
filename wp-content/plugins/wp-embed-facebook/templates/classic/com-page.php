@@ -1,4 +1,4 @@
-<div class="wef-classic" style="max-width: <?php echo $width ?>px">
+<div class="wef-classic aligncenter" style="max-width: <?php echo $width ?>px">
 	<div class="row">
 		<div class="col-3 text-center">
 			<a href="https://www.facebook.com/<?php /** @noinspection PhpUndefinedVariableInspection */
@@ -13,7 +13,7 @@
 			<br>
 			<div>
 				<?php
-				$opt = get_option('wpemfb_show_like');
+				$opt = WP_Embed_FB_Plugin::get_option('show_like');
 				if($opt === 'true') :
 					echo WEF_Social_Plugins::like_btn('https://www.facebook.com/'.$fb_data['id'],array('share'=>'true','layout'=>'button_count'));
 				else :

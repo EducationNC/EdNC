@@ -36,7 +36,7 @@ img {
     }
   }
 
-  .mce-content-body & {
+  .mce-content-body &, .popmake-content & {
     margin-left: 0 !important;
     margin-right: 0 !important;
     max-width: 100% !important;
@@ -248,7 +248,7 @@ object, embed {
       height: 100%;
     }
 
-    .mce-content-body & {
+    .mce-content-body &, .popmake-content & {
       margin-left: 0 !important;
       margin-right: 0 !important;
       max-width: 100% !important;

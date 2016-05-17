@@ -1,4 +1,5 @@
 <?php
+
 class WP_Embed_FB_Plugin {
 	/**
 	 * @var string Plugin directory
@@ -8,182 +9,343 @@ class WP_Embed_FB_Plugin {
 	 * @var string Plugin url
 	 */
 	private static $url = null;
-	static function install(){
-		$defaults = self::getdefaults();
-		foreach ($defaults as $option => $value) {
-			$opt = get_option($option);
-			if($opt === false)
-				update_option($option, $value);
-			if(!isset($type))
-				$type = $opt==false?"activated":"reactivated";
-		}
+	private static $options = null;
+	private static $defaults = null;
+	const option_name = 'wpemfb_options';
+	private static $lb_defaults = null;
+	private static $has_photon = null;
+	private static $wp_timezone = null;
 
-		/** @noinspection PhpUndefinedVariableInspection */
+	static function install() {
+		$type = ( get_option( 'wpemfb_theme' ) || get_option( self::option_name ) ) ? 'reactivated' : 'activated';
+		self::get_option();
 
-		return self::whois($type);
+		return self::whois( $type );
 	}
+
 	/**
 	 * Delete all plugin options on uninstall
 	 */
-	static function uninstall(){
-		$deprecated = array('wpemfb_show_posts'=>'','wpemfb_close_warning'=>'','wpemfb_height'=>'','wpemfb_close_warning1'=>'');
-		$defaults = self::getdefaults() + $deprecated;
+	static function uninstall() {
 		if ( is_multisite() ) {
 			$sites = wp_get_sites();
-			foreach ($sites as $site) {
-				switch_to_blog($site['blog_id']);
-				foreach ($defaults as $option => $value ) {
-					delete_option($option);
-				}
+			foreach ( $sites as $site ) {
+				switch_to_blog( $site['blog_id'] );
+				delete_option( self::option_name );
 			}
 			restore_current_blog();
 		} else {
-			foreach ($defaults as $option => $value ) {
-				delete_option($option);
+			delete_option( self::option_name );
+		}
+
+		return self::whois( 'uninstalled' );
+	}
+
+	static function deactivate() {
+		return self::whois( 'deactivated' );
+	}
+
+	/**
+	 * @return array old options to be deleated since 2.1
+	 */
+	static function old_options() {
+		return apply_filters( 'wpemfb_old_options', array(
+			'show_posts',
+			'close_warning',
+			'height',
+			'close_warning1',
+			'max_width',
+			'max_photos',
+			'max_posts',
+			'app_id',
+			'app_secret',
+			'proportions',
+			'show_like',
+			'fb_root',
+			'theme',
+			'show_follow',
+			'video_ratio',
+			'video_as_post',
+			'raw_video',
+			'raw_photo',
+			'raw_post',
+			'raw_page',
+			'enqueue_style',
+			'enq_lightbox',
+			'enq_wpemfb',
+			'enq_fbjs',
+			'ev_local_tz',
+			'page_height',
+			'page_show_faces',
+			'page_small_header',
+			'page_hide_cover',
+			'page_show_posts',
+			'sdk_lang',
+			'close_warning2',
+			'force_app_token',
+			'video_download',
+			'sdk_version'
+		) );
+	}
+
+	static function get_defaults() {
+		if ( self::$defaults === null ) {
+			$locale = get_locale();
+			if ( strpos( $locale, 'es_' ) !== false ) {
+				$locale = 'es_LA';
+			}
+
+			self::$defaults = array(
+				'sdk_lang'                       => array_key_exists( $locale, self::get_fb_locales() ) ? $locale : 'en_US',
+				'max_width'                      => '450',
+				'max_photos'                     => '24',
+				'max_posts'                      => '0',
+				'app_id'                         => '',
+				'app_secret'                     => '',
+				'theme'                          => 'default',
+				'page_height'                    => '500',
+				'sdk_version'                    => 'v2.6',
+				'show_like'                      => 'true',
+				'fb_root'                        => 'true',
+				'show_follow'                    => 'true',
+				'video_ratio'                    => 'false',
+				'video_as_post'                  => 'false',
+				'raw_video'                      => 'false',
+				'raw_photo'                      => 'false',
+				'raw_post'                       => 'false',
+				'raw_page'                       => 'false',
+				'enqueue_style'                  => 'true',
+				'enq_lightbox'                   => 'true',
+				'enq_wpemfb'                     => 'true',
+				'enq_fbjs'                       => 'true',
+				'ev_local_tz'                    => 'false',
+				'page_show_faces'                => 'true',
+				'page_small_header'              => 'false',
+				'page_hide_cover'                => 'false',
+				'page_show_posts'                => 'false',
+				'close_warning2'                 => 'false',
+				'force_app_token'                => 'true',
+				'video_download'                 => 'false',
+				'LB_albumLabel'                  => 'Image %1 of %2',
+				'LB_alwaysShowNavOnTouchDevices' => 'false',
+				'LB_showImageNumberLabel'        => 'true',
+				'LB_wrapAround'                  => 'false',
+				'LB_disableScrolling'            => 'false',
+				'LB_fitImagesInViewport'         => 'true',
+				'LB_maxWidth'                    => '0',
+				'LB_maxHeight'                   => '0',
+				'LB_positionFromTop'             => '50',
+				'LB_resizeDuration'              => '700',
+				'LB_fadeDuration'                => '500',
+				'enq_fbjs_global'                => 'false',
+				'enq_when_needed'                => 'false',
+			);
+		}
+
+		return apply_filters( 'wpemfb_defaults', self::$defaults );
+	}
+
+	static function get_lb_defaults() {
+		if ( self::$lb_defaults === null ) {
+			$keys              = array(
+				'albumLabel',
+				'alwaysShowNavOnTouchDevices',
+				'showImageNumberLabel',
+				'wrapAround',
+				'disableScrolling',
+				'fitImagesInViewport',
+				'maxWidth',
+				'maxHeight',
+				'positionFromTop',
+				'resizeDuration',
+				'fadeDuration'
+			);
+			self::$lb_defaults = array();
+			$defaults          = self::get_defaults();
+			foreach ( $keys as $key ) {
+				self::$lb_defaults[ $key ] = $defaults[ 'LB_' . $key ];
 			}
 		}
-		return self::whois('uninstalled');
+
+		return self::$lb_defaults;
 	}
-	static function deactivate(){
-		return self::whois('deactivated');
-	}
-	/**
-	 * @return array plugin defaults
-	 */
-	static function getdefaults(){
-		$locale = get_locale();
-		if(strpos($locale,'es_') !== false)
-			$locale = 'es_LA';
-		return array(
-			'wpemfb_max_width' 		    => '450',
-			'wpemfb_max_photos' 	    => '24',
-			'wpemfb_max_posts' 		    => '0',
-			'wpemfb_app_id' 		    => '',
-			'wpemfb_app_secret'		    => '',
-			'wpemfb_proportions' 	    => 0.36867,
-			'wpemfb_show_like'		    => 'true',
-			'wpemfb_fb_root'		    => 'true',
-			'wpemfb_theme'			    => 'default',
-			'wpemfb_show_follow'	    => 'true',
-			'wpemfb_video_ratio'	    => 'false',
-			'wpemfb_video_as_post'	    => 'false',
-			'wpemfb_raw_video'		    => 'false',
-			'wpemfb_raw_photo'		    => 'false',
-			'wpemfb_raw_post'		    => 'false',
-			'wpemfb_raw_page'           => 'false',
-			'wpemfb_enqueue_style' 	    => 'true',
-			'wpemfb_enq_lightbox'	    => 'true',
-			'wpemfb_enq_wpemfb'		    => 'true',
-			'wpemfb_enq_fbjs'		    => 'true',
-			'wpemfb_ev_local_tz'        => 'false',
-			'wpemfb_page_height'        => '500',
-			'wpemfb_page_show_faces'    => 'true',
-			'wpemfb_page_small_header'  => 'false',
-			'wpemfb_page_hide_cover'    => 'false',
-			'wpemfb_page_show_posts'    => 'false',
-			'wpemfb_sdk_lang'           => array_key_exists( $locale, self::get_fb_locales()) ? $locale : 'en_US',
-			'wpemfb_close_warning2'		=> 'false',
-			'wpemfb_force_app_token'	=> 'true',
-			'wpemfb_video_download'     => 'false',
-			'wpemfb_sdk_version'        => 'v2.6',
-		);
-	}
+
 	//("uninstalled","deactivated","activated","reactivated")
-	protected static function whois($install){
+	protected static function whois( $install ) {
 		$home = home_url();
-		$home = esc_url($home);
-		@file_get_contents("http://www.wpembedfb.com/api/?whois=$install&site_url=$home");
+		$home = esc_url( $home );
+		@file_get_contents( "http://www.wpembedfb.com/api/?whois=$install&site_url=$home" );
+
 		return true;
 	}
+
 	/**
 	 * session start if necessary
 	 */
-	static function init(){
-		if( self::has_fb_app() ){
-			if(version_compare(phpversion(), '5.4.0', '<')) {
-				if(session_id() == '')
+	static function init() {
+		if ( self::has_fb_app() ) {
+			if ( version_compare( phpversion(), '5.4.0', '<' ) ) {
+				if ( session_id() == '' ) {
 					session_start();
-			} elseif(session_status() == PHP_SESSION_NONE) {
+				}
+			} elseif ( session_status() == PHP_SESSION_NONE ) {
 				session_start();
 			}
 		}
 	}
+
 	/**
 	 * Load translation file
 	 */
-	static function plugins_loaded(){
+	static function plugins_loaded() {
 		load_plugin_textdomain( 'wp-embed-facebook', false, 'wp-embed-facebook/lang' );
 	}
+
 	/**
 	 * Enqueue wp embed facebook styles
 	 */
-	static function wp_enqueue_scripts(){
-		if(get_option('wpemfb_enqueue_style') == 'true'){
-			wp_register_style('wpemfb-default',self::get_url().'templates/default/default.css',array(),false);
-			wp_register_style('wpemfb-classic',self::get_url().'templates/classic/classic.css',array(),false);
-//			do_action('wpemfb_register_style');
-			$theme = get_option('wpemfb_theme');
-			wp_enqueue_style('wpemfb-'.$theme);
-			wp_enqueue_style('wpemfb-lightbox', self::get_url().'lib/lightbox2/css/lightbox.min.css',array(),false);
+	static function wp_enqueue_scripts() {
+		wp_register_style( 'wpemfb-default', self::get_url() . 'templates/default/default.css', array(), false );
+		wp_register_style( 'wpemfb-classic', self::get_url() . 'templates/classic/classic.css', array(), false );
+		wp_register_style( 'wpemfb-lightbox', self::get_url() . 'lib/lightbox2/css/lightbox.css', array(), false );
+		wp_register_script(
+			'wpemfb-lightbox',
+			self::get_url() . 'lib/lightbox2/js/lightbox.min.js',
+			array( 'jquery' )
+		);
+		$lb_defaults       = self::get_lb_defaults();
+		$options           = self::get_option();
+		$translation_array = array();
+		foreach ( $lb_defaults as $default_name => $value ) {
+			if ( $options[ 'LB_' . $default_name ] !== $value ) {
+				$translation_array[ $default_name ] = $options[ 'LB_' . $default_name ];
+			}
 		}
-		if(get_option('wpemfb_enq_lightbox') == 'true'){
-			wp_enqueue_script(
-				'wpemfb-lightbox',
-				self::get_url().'lib/lightbox2/js/lightbox.min.js',
-				array( 'jquery' )
-			);
+		if ( ! empty( $translation_array ) ) {
+			wp_localize_script( 'wpemfb-lightbox', 'WEF_LB', $translation_array );
 		}
-		if(get_option('wpemfb_enq_wpemfb') == 'true'){
-			wp_enqueue_script(
-				'wpemfb',
-				self::get_url().'lib/js/wpembedfb.js',
-				array( 'jquery' )
-			);
+		wp_register_script(
+			'wpemfb',
+			self::get_url() . 'lib/js/wpembedfb.min.js',
+			array( 'jquery' )
+		);
+		wp_register_script(
+			'wpemfb-fbjs',
+			self::get_url() . 'lib/js/fb.min.js',
+			array( 'jquery' )
+		);
+		$translation_array = array(
+			'local'   => WP_Embed_FB_Plugin::get_option( 'sdk_lang' ),
+			'version' => WP_Embed_FB_Plugin::get_option( 'sdk_version' ),
+			'fb_id'   => WP_Embed_FB_Plugin::get_option( 'app_id' ) == '0' ? '' : WP_Embed_FB_Plugin::get_option( 'app_id' )
+		);
+		wp_localize_script( 'wpemfb-fbjs', 'WEF', $translation_array );
+		if ( WP_Embed_FB_Plugin::get_option( 'enq_when_needed' ) == 'false' ) {
+			if ( WP_Embed_FB_Plugin::get_option( 'enq_lightbox' ) == 'true' ) {
+				wp_enqueue_script( 'wpemfb-lightbox' );
+				wp_enqueue_style( 'wpemfb-lightbox' );
+			}
+			if ( WP_Embed_FB_Plugin::get_option( 'enq_wpemfb' ) == 'true' ) {
+				wp_enqueue_script( 'wpemfb' );
+			}
+			if ( WP_Embed_FB_Plugin::get_option( 'enq_fbjs' ) == 'true' ) {
+				wp_enqueue_script( 'wpemfb-fbjs' );
+			}
 		}
-		if(get_option('wpemfb_enq_fbjs') == 'true'){
-			wp_enqueue_script(
-				'wpemfb-fbjs',
-				self::get_url().'lib/js/fb.js',
-				array( 'jquery' )
-			);
-			$translation_array = array(
-				'local' => get_option('wpemfb_sdk_lang','en_US'),
-				'version' => get_option('wpemfb_sdk_version','v2.6'),
-				'fb_id'=>get_option('wpemfb_app_id') == '0' ? '' : get_option('wpemfb_app_id'));
-			wp_localize_script( 'wpemfb-fbjs', 'WEF', $translation_array );
+		if ( WP_Embed_FB_Plugin::get_option( 'enq_fbjs_global' ) == 'true' ) {
+			wp_enqueue_script( 'wpemfb-fbjs' );
 		}
 	}
-	static function get_path(){
-		if(self::$path){
+
+	static function get_path() {
+		if ( self::$path ) {
 			return self::$path;
 		} else {
-			self::$path = dirname(plugin_dir_path( __FILE__ )).'/';
+			self::$path = dirname( plugin_dir_path( __FILE__ ) ) . '/';
+
 			return self::$path;
 		}
 	}
-	static function get_url(){
-		if(self::$url){
+
+	static function get_url() {
+		if ( self::$url ) {
 			return self::$url;
 		} else {
-			self::$url = dirname(plugin_dir_url( __FILE__ )).'/';
+			self::$url = dirname( plugin_dir_url( __FILE__ ) ) . '/';
+
 			return self::$url;
 		}
 	}
-	static function admin_notices(){
-		if( (get_option('wpemfb_close_warning2','false') == 'false')) :
+
+	static function get_option( $option = null ) {
+		if ( ! is_array( self::$options ) ) {
+			$options  = get_option( self::option_name );
+			$defaults = self::get_defaults();
+			if ( is_array( $options ) ) {
+				if ( $options == $defaults ) {
+					self::$options = $options;
+				} else {
+					//check option array for corruption
+					$compare = array();
+					foreach ( $defaults as $default_key => $default_value ) {
+						$compare[ $default_key ] = isset( $options[ $default_key ] ) ? $options[ $default_key ] : $default_value;
+					}
+					if ( $compare !== $options ) {
+						self::set_options( $compare );
+					} else {
+						//set cache value
+						self::$options = $options;
+					}
+				}
+			} else {
+				if ( get_option( 'wpemfb_theme' ) ) {
+					//upgrade options
+					foreach ( self::old_options() as $old_option ) {
+						if ( isset( $defaults[ $old_option ] ) ) {
+							$defaults[ $old_option ] = get_option( 'wpemfb_' . $old_option );
+						}
+						delete_option( 'wpemfb_' . $old_option );
+					}
+					self::set_options( $defaults );
+				} else {
+					//new instalation
+					//TODO get app id and secret from other plugins Jetpack and WP Social Login.
+					self::set_options( $defaults );
+				}
+			}
+		}
+		if ( $option ) {
+			return isset( self::$options[ $option ] ) ? self::$options[ $option ] : false;
+		} else {
+			return self::$options;
+		}
+	}
+
+	static function set_options( $options ) {
+		update_option( self::option_name, $options, true );
+		self::$options = $options;
+	}
+
+	static function admin_notices() {
+		if ( ( WP_Embed_FB_Plugin::get_option( 'close_warning2' ) == 'false' ) ) :
 			?>
 			<div class="notice wpemfb_warning is-dismissible">
 				<h2>WP Embed Facebook</h2>
+
 				<p>Hey! The last step.</p>
-				<p><img style="position:relative; top: 5px;" height="20px" width="auto" src="<?php echo WP_Embed_FB_Plugin::get_url().'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a id="wef-video-down" href="<?php echo admin_url("options-general.php?page=embedfacebook") ?>">Video Download Option</a> in settings.</p>
+
+				<p><img style="position:relative; top: 5px;" height="20px" width="auto"
+				        src="<?php echo WP_Embed_FB_Plugin::get_url() . 'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a
+						id="wef-video-down" href="<?php echo admin_url( "options-general.php?page=embedfacebook" ) ?>">Video
+						Download Option</a> in settings.</p>
 				<small>
 					<?php
-					printf(__('To embed albums, events, profiles and video as HTML5 you will need a <a target="_blank" href="%s">Facebook App</a>','wp-embed-facebook'), 'https://developers.facebook.com/apps')
+					printf( __( 'To embed albums, events, profiles and video as HTML5 you will need a <a target="_blank" href="%s">Facebook App</a>', 'wp-embed-facebook' ), 'https://developers.facebook.com/apps' )
 					?>
 				</small>
 				<p>
 					<?php
-						printf(__('This free plugin has taken <strong>thousands of hours</strong> to develop and maintain consider making a <a target="_blank" href="%s">donation</a> or leaving a <a target="_blank" href="%s">review</a> <strong>do not let us loose faith</strong> in humanity.','wp-embed-facebook'), 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26','https://wordpress.org/support/view/plugin-reviews/wp-embed-facebook')
+					printf( __( 'This free plugin has taken <strong>thousands of hours</strong> to develop and maintain consider making a <a target="_blank" href="%s">donation</a> or leaving a <a target="_blank" href="%s">review</a> <strong>do not let us loose faith</strong> in humanity.', 'wp-embed-facebook' ), 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26', 'https://wordpress.org/support/view/plugin-reviews/wp-embed-facebook' )
 					?>
 				</p>
 
@@ -191,167 +353,205 @@ class WP_Embed_FB_Plugin {
 			<?php
 		endif;
 	}
-	static function wpemfb_close_warning(){
-		if(current_user_can('manage_options'))
-			update_option('wpemfb_close_warning2','true');
-		die;
-	}
-	static function wpemfb_video_down(){
-		if(current_user_can('manage_options')){
-			update_option('wpemfb_close_warning2','true');
-			update_option('wpemfb_video_download','true');
+
+	static function wpemfb_close_warning() {
+		if ( current_user_can( 'manage_options' ) ) {
+			$options                   = self::get_option();
+			$options['close_warning2'] = 'true';
+			self::set_options( $options );
 		}
 		die;
 	}
-	static function has_fb_app(){
-		$app_id = get_option('wpemfb_app_id');
-		$app_secret = get_option('wpemfb_app_secret');
-		if(empty($app_id) || empty($app_id) || $app_id === '0' || $app_secret === '0' ){
+
+	static function wpemfb_video_down() {
+		if ( current_user_can( 'manage_options' ) ) {
+			$options                   = self::get_option();
+			$options['close_warning2'] = 'true';
+			$options['video_download'] = 'true';
+			self::set_options( $options );
+		}
+		die;
+	}
+
+	static function has_fb_app() {
+		$app_id     = WP_Embed_FB_Plugin::get_option( 'app_id' );
+		$app_secret = WP_Embed_FB_Plugin::get_option( 'app_secret' );
+		if ( empty( $app_id ) || empty( $app_secret ) || $app_id === '0' || $app_secret === '0' ) {
 			return false;
-		}  else {
+		} else {
 			return true;
 		}
 	}
-	static function get_fb_locales(){
+
+	static function has_photon() {
+		if ( self::$has_photon === null ) {
+			if ( class_exists( 'Jetpack' ) && method_exists( 'Jetpack', 'get_active_modules' ) && in_array( 'photon', Jetpack::get_active_modules() ) ) {
+				self::$has_photon = true;
+			} else {
+				self::$has_photon = false;
+			}
+		}
+
+		return self::$has_photon;
+	}
+
+	static function get_fb_locales() {
 		return array(
-			'af_ZA'=>'Afrikaans',
-			'ak_GH'=>'Akan',
-			'am_ET'=>'Amharic',
-			'ar_AR'=>'Arabic',
-			'as_IN'=>'Assamese',
-			'ay_BO'=>'Aymara',
-			'az_AZ'=>'Azerbaijani',
-			'be_BY'=>'Belarusian',
-			'bg_BG'=>'Bulgarian',
-			'bn_IN'=>'Bengali',
-			'br_FR'=>'Breton',
-			'bs_BA'=>'Bosnian',
-			'ca_ES'=>'Catalan',
-			'cb_IQ'=>'Sorani Kurdish',
-			'ck_US'=>'Cherokee',
-			'co_FR'=>'Corsican',
-			'cs_CZ'=>'Czech',
-			'cx_PH'=>'Cebuano',
-			'cy_GB'=>'Welsh',
-			'da_DK'=>'Danish',
-			'de_DE'=>'German',
-			'el_GR'=>'Greek',
-			'en_GB'=>'English (UK)',
-			'en_IN'=>'English (India)',
-			'en_PI'=>'English (Pirate)',
-			'en_UD'=>'English (Upside Down)',
-			'en_US'=>'English (US)',
-			'eo_EO'=>'Esperanto',
-			'es_CL'=>'Spanish (Chile)',
-			'es_CO'=>'Spanish (Colombia)',
-			'es_ES'=>'Spanish (Spain)',
-			'es_LA'=>'Spanish',
-			'es_MX'=>'Spanish (Mexico)',
-			'es_VE'=>'Spanish (Venezuela)',
-			'et_EE'=>'Estonian',
-			'eu_ES'=>'Basque',
-			'fa_IR'=>'Persian',
-			'fb_LT'=>'Leet Speak',
-			'ff_NG'=>'Fulah',
-			'fi_FI'=>'Finnish',
-			'fo_FO'=>'Faroese',
-			'fr_CA'=>'French (Canada)',
-			'fr_FR'=>'French (France)',
-			'fy_NL'=>'Frisian',
-			'ga_IE'=>'Irish',
-			'gl_ES'=>'Galician',
-			'gn_PY'=>'Guarani',
-			'gu_IN'=>'Gujarati',
-			'gx_GR'=>'Classical Greek',
-			'ha_NG'=>'Hausa',
-			'he_IL'=>'Hebrew',
-			'hi_IN'=>'Hindi',
-			'hr_HR'=>'Croatian',
-			'hu_HU'=>'Hungarian',
-			'hy_AM'=>'Armenian',
-			'id_ID'=>'Indonesian',
-			'ig_NG'=>'Igbo',
-			'is_IS'=>'Icelandic',
-			'it_IT'=>'Italian',
-			'ja_JP'=>'Japanese',
-			'ja_KS'=>'Japanese (Kansai)',
-			'jv_ID'=>'Javanese',
-			'ka_GE'=>'Georgian',
-			'kk_KZ'=>'Kazakh',
-			'km_KH'=>'Khmer',
-			'kn_IN'=>'Kannada',
-			'ko_KR'=>'Korean',
-			'ku_TR'=>'Kurdish (Kurmanji)',
-			'la_VA'=>'Latin',
-			'lg_UG'=>'Ganda',
-			'li_NL'=>'Limburgish',
-			'ln_CD'=>'Lingala',
-			'lo_LA'=>'Lao',
-			'lt_LT'=>'Lithuanian',
-			'lv_LV'=>'Latvian',
-			'mg_MG'=>'Malagasy',
-			'mk_MK'=>'Macedonian',
-			'ml_IN'=>'Malayalam',
-			'mn_MN'=>'Mongolian',
-			'mr_IN'=>'Marathi',
-			'ms_MY'=>'Malay',
-			'mt_MT'=>'Maltese',
-			'my_MM'=>'Burmese',
-			'nb_NO'=>'Norwegian (bokmal)',
-			'nd_ZW'=>'Ndebele',
-			'ne_NP'=>'Nepali',
-			'nl_BE'=>'Dutch (België)',
-			'nl_NL'=>'Dutch',
-			'nn_NO'=>'Norwegian (nynorsk)',
-			'ny_MW'=>'Chewa',
-			'or_IN'=>'Oriya',
-			'pa_IN'=>'Punjabi',
-			'pl_PL'=>'Polish',
-			'ps_AF'=>'Pashto',
-			'pt_BR'=>'Portuguese (Brazil)',
-			'pt_PT'=>'Portuguese (Portugal)',
-			'qu_PE'=>'Quechua',
-			'rm_CH'=>'Romansh',
-			'ro_RO'=>'Romanian',
-			'ru_RU'=>'Russian',
-			'rw_RW'=>'Kinyarwanda',
-			'sa_IN'=>'Sanskrit',
-			'sc_IT'=>'Sardinian',
-			'se_NO'=>'Northern Sámi',
-			'si_LK'=>'Sinhala',
-			'sk_SK'=>'Slovak',
-			'sl_SI'=>'Slovenian',
-			'sn_ZW'=>'Shona',
-			'so_SO'=>'Somali',
-			'sq_AL'=>'Albanian',
-			'sr_RS'=>'Serbian',
-			'sv_SE'=>'Swedish',
-			'sw_KE'=>'Swahili',
-			'sy_SY'=>'Syriac',
-			'sz_PL'=>'Silesian',
-			'ta_IN'=>'Tamil',
-			'te_IN'=>'Telugu',
-			'tg_TJ'=>'Tajik',
-			'th_TH'=>'Thai',
-			'tk_TM'=>'Turkmen',
-			'tl_PH'=>'Filipino',
-			'tl_ST'=>'Klingon',
-			'tr_TR'=>'Turkish',
-			'tt_RU'=>'Tatar',
-			'tz_MA'=>'Tamazight',
-			'uk_UA'=>'Ukrainian',
-			'ur_PK'=>'Urdu',
-			'uz_UZ'=>'Uzbek',
-			'vi_VN'=>'Vietnamese',
-			'wo_SN'=>'Wolof',
-			'xh_ZA'=>'Xhosa',
-			'yi_DE'=>'Yiddish',
-			'yo_NG'=>'Yoruba',
-			'zh_CN'=>'Simplified Chinese (China)',
-			'zh_HK'=>'Traditional Chinese (Hong Kong)',
-			'zh_TW'=>'Traditional Chinese (Taiwan)',
-			'zu_ZA'=>'Zulu',
-			'zz_TR'=>'Zazaki',
+			'af_ZA' => 'Afrikaans',
+			'ak_GH' => 'Akan',
+			'am_ET' => 'Amharic',
+			'ar_AR' => 'Arabic',
+			'as_IN' => 'Assamese',
+			'ay_BO' => 'Aymara',
+			'az_AZ' => 'Azerbaijani',
+			'be_BY' => 'Belarusian',
+			'bg_BG' => 'Bulgarian',
+			'bn_IN' => 'Bengali',
+			'br_FR' => 'Breton',
+			'bs_BA' => 'Bosnian',
+			'ca_ES' => 'Catalan',
+			'cb_IQ' => 'Sorani Kurdish',
+			'ck_US' => 'Cherokee',
+			'co_FR' => 'Corsican',
+			'cs_CZ' => 'Czech',
+			'cx_PH' => 'Cebuano',
+			'cy_GB' => 'Welsh',
+			'da_DK' => 'Danish',
+			'de_DE' => 'German',
+			'el_GR' => 'Greek',
+			'en_GB' => 'English (UK)',
+			'en_IN' => 'English (India)',
+			'en_PI' => 'English (Pirate)',
+			'en_UD' => 'English (Upside Down)',
+			'en_US' => 'English (US)',
+			'eo_EO' => 'Esperanto',
+			'es_CL' => 'Spanish (Chile)',
+			'es_CO' => 'Spanish (Colombia)',
+			'es_ES' => 'Spanish (Spain)',
+			'es_LA' => 'Spanish',
+			'es_MX' => 'Spanish (Mexico)',
+			'es_VE' => 'Spanish (Venezuela)',
+			'et_EE' => 'Estonian',
+			'eu_ES' => 'Basque',
+			'fa_IR' => 'Persian',
+			'fb_LT' => 'Leet Speak',
+			'ff_NG' => 'Fulah',
+			'fi_FI' => 'Finnish',
+			'fo_FO' => 'Faroese',
+			'fr_CA' => 'French (Canada)',
+			'fr_FR' => 'French (France)',
+			'fy_NL' => 'Frisian',
+			'ga_IE' => 'Irish',
+			'gl_ES' => 'Galician',
+			'gn_PY' => 'Guarani',
+			'gu_IN' => 'Gujarati',
+			'gx_GR' => 'Classical Greek',
+			'ha_NG' => 'Hausa',
+			'he_IL' => 'Hebrew',
+			'hi_IN' => 'Hindi',
+			'hr_HR' => 'Croatian',
+			'hu_HU' => 'Hungarian',
+			'hy_AM' => 'Armenian',
+			'id_ID' => 'Indonesian',
+			'ig_NG' => 'Igbo',
+			'is_IS' => 'Icelandic',
+			'it_IT' => 'Italian',
+			'ja_JP' => 'Japanese',
+			'ja_KS' => 'Japanese (Kansai)',
+			'jv_ID' => 'Javanese',
+			'ka_GE' => 'Georgian',
+			'kk_KZ' => 'Kazakh',
+			'km_KH' => 'Khmer',
+			'kn_IN' => 'Kannada',
+			'ko_KR' => 'Korean',
+			'ku_TR' => 'Kurdish (Kurmanji)',
+			'la_VA' => 'Latin',
+			'lg_UG' => 'Ganda',
+			'li_NL' => 'Limburgish',
+			'ln_CD' => 'Lingala',
+			'lo_LA' => 'Lao',
+			'lt_LT' => 'Lithuanian',
+			'lv_LV' => 'Latvian',
+			'mg_MG' => 'Malagasy',
+			'mk_MK' => 'Macedonian',
+			'ml_IN' => 'Malayalam',
+			'mn_MN' => 'Mongolian',
+			'mr_IN' => 'Marathi',
+			'ms_MY' => 'Malay',
+			'mt_MT' => 'Maltese',
+			'my_MM' => 'Burmese',
+			'nb_NO' => 'Norwegian (bokmal)',
+			'nd_ZW' => 'Ndebele',
+			'ne_NP' => 'Nepali',
+			'nl_BE' => 'Dutch (België)',
+			'nl_NL' => 'Dutch',
+			'nn_NO' => 'Norwegian (nynorsk)',
+			'ny_MW' => 'Chewa',
+			'or_IN' => 'Oriya',
+			'pa_IN' => 'Punjabi',
+			'pl_PL' => 'Polish',
+			'ps_AF' => 'Pashto',
+			'pt_BR' => 'Portuguese (Brazil)',
+			'pt_PT' => 'Portuguese (Portugal)',
+			'qu_PE' => 'Quechua',
+			'rm_CH' => 'Romansh',
+			'ro_RO' => 'Romanian',
+			'ru_RU' => 'Russian',
+			'rw_RW' => 'Kinyarwanda',
+			'sa_IN' => 'Sanskrit',
+			'sc_IT' => 'Sardinian',
+			'se_NO' => 'Northern Sámi',
+			'si_LK' => 'Sinhala',
+			'sk_SK' => 'Slovak',
+			'sl_SI' => 'Slovenian',
+			'sn_ZW' => 'Shona',
+			'so_SO' => 'Somali',
+			'sq_AL' => 'Albanian',
+			'sr_RS' => 'Serbian',
+			'sv_SE' => 'Swedish',
+			'sw_KE' => 'Swahili',
+			'sy_SY' => 'Syriac',
+			'sz_PL' => 'Silesian',
+			'ta_IN' => 'Tamil',
+			'te_IN' => 'Telugu',
+			'tg_TJ' => 'Tajik',
+			'th_TH' => 'Thai',
+			'tk_TM' => 'Turkmen',
+			'tl_PH' => 'Filipino',
+			'tl_ST' => 'Klingon',
+			'tr_TR' => 'Turkish',
+			'tt_RU' => 'Tatar',
+			'tz_MA' => 'Tamazight',
+			'uk_UA' => 'Ukrainian',
+			'ur_PK' => 'Urdu',
+			'uz_UZ' => 'Uzbek',
+			'vi_VN' => 'Vietnamese',
+			'wo_SN' => 'Wolof',
+			'xh_ZA' => 'Xhosa',
+			'yi_DE' => 'Yiddish',
+			'yo_NG' => 'Yoruba',
+			'zh_CN' => 'Simplified Chinese (China)',
+			'zh_HK' => 'Traditional Chinese (Hong Kong)',
+			'zh_TW' => 'Traditional Chinese (Taiwan)',
+			'zu_ZA' => 'Zulu',
+			'zz_TR' => 'Zazaki',
 		);
+	}
+
+	static function get_timezone() {
+		if ( self::$wp_timezone === null ) {
+			$tzstring = get_option( 'timezone_string', '' );
+			if ( empty($tzstring) ) {
+				$current_offset = get_option( 'gmt_offset', 0 );
+				if ( 0 == $current_offset ) {
+					$tzstring = 'Etc/GMT';
+				} else {
+					$tzstring = ( $current_offset < 0 ) ? 'Etc/GMT' . $current_offset : 'Etc/GMT+' . $current_offset;
+				}
+			}
+			self::$wp_timezone = $tzstring;
+		}
+
+		return self::$wp_timezone;
 	}
 }
