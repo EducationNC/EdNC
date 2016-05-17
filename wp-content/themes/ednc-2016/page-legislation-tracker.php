@@ -96,7 +96,7 @@
             $bills = new WP_Query( $args );
 
             if ($bills->have_posts()) :
-              echo '<h2>2016 Short Session: Bills in play</h2>';
+              echo '<h2>Bills introduced in the 2016 Short Session</h2>';
               echo '<ul>';
                 while ( $bills->have_posts() ) : $bills->the_post();
                   get_template_part('templates/layouts/block', 'bill');
