@@ -103,9 +103,11 @@
         if (window.location.search === '?feedback') {
           if ($('#popmake-21098').length) {         // Dev environment
             $('#popmake-21098').popmake('open');
+            $('#popmake-21110').popmake('close');
           }
           if ($('#popmake-26020').length) {         // Prod environment
             $('#popmake-26020').popmake('open');
+            $('#popmake-26025').popmake('close');
           }
         }
       }
