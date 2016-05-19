@@ -118,7 +118,7 @@ function register_post_types() {
 			'show_in_nav_menus' => false,
 			'menu_position' => 8,
 			//'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png',
-			// 'capability_type' => array('district','districts'),
+			'capability_type' => array('district','districts'),
 			'map_meta_cap' => true,
 			'hierarchical' => false,
 			'supports' => array( 'title', 'revisions', 'thumbnail'),
