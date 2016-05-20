@@ -75,14 +75,6 @@
           }
         });
 
-        $('#mobile-nav .widgettitle-in-submenu').append('<span class="caret"></span>');
-
-        // Close mobile ad on button tap
-        $('#mobile-ad .close').on(clickortap, function() {
-          $('#mobile-ad').detach();
-          $('.icon-share').css({'bottom': '0'});
-        });
-
         // Helper function for translation cookies
         function getDomainName(hostName) {
           return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
