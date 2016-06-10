@@ -79,7 +79,9 @@ var PUM;
         if (typeof method === 'object' || !method) {
             return $.fn.popmake.methods.init.apply(this, arguments);
         }
-        $.error('Method ' + method + ' does not exist on $.fn.popmake');
+        if (window.console) {
+            console.warn('Method ' + method + ' does not exist on $.fn.popmake');
+        }
     };
 
     // Defines the core $.popmake methods.
@@ -857,8 +859,10 @@ var PUM_Analytics;
         if ($.fn.popmake.overlay_animations[style]) {
             return $.fn.popmake.overlay_animations[style].apply(this, [duration, callback]);
         }
-        $.error('Animation style ' + style + ' does not exist.');
 
+        if (window.console) {
+            console.warn('Animation style ' + style + ' does not exist.');
+        }
         return this;
     };
 
@@ -867,14 +871,20 @@ var PUM_Analytics;
         if ($.fn.popmake.animations[style]) {
             return $.fn.popmake.animations[style].apply(this, Array.prototype.slice.call(arguments, 1));
         }
-        $.error('Animation style ' + style + ' does not exist.');
+        if (window.console) {
+            console.warn('Animation style ' + style + ' does not exist.');
+        }
         return this;
     };
 
     $.fn.popmake.animations = {
         none: function (callback) {
-            PUM.getPopup(this)
-                .popmake('animate_overlay', 'none', 0, function () {
+            var $popup = PUM.getPopup(this);
+
+            // Ensure the container is visible immediately.
+            $popup.popmake('getContainer').show(0);
+
+            $popup.popmake('animate_overlay', 'none', 0, function () {
                     // Fire user passed callback.
                     if (callback !== undefined) {
                         callback();
@@ -1203,7 +1213,9 @@ var pm_cookie, pm_remove_cookie;
         if ($.fn.popmake.cookies[type]) {
             return $.fn.popmake.cookies[type].apply(this, Array.prototype.slice.call(arguments, 1));
         }
-        $.error('Cookie type ' + type + ' does not exist.');
+        if (window.console) {
+            console.warn('Cookie type ' + type + ' does not exist.');
+        }
         return this;
     };
 
@@ -1333,7 +1345,9 @@ var pm_cookie, pm_remove_cookie;
         if ($.fn.popmake.triggers[type]) {
             return $.fn.popmake.triggers[type].apply(this, Array.prototype.slice.call(arguments, 1));
         }
-        $.error('Trigger type ' + type + ' does not exist.');
+        if (window.console) {
+            console.warn('Trigger type ' + type + ' does not exist.');
+        }
         return this;
     };
 
@@ -1415,7 +1429,7 @@ var pm_cookie, pm_remove_cookie;
                     }
 
                     // If trigger has the class do-default we don't prevent default actions.
-                    if (!$(e.target).hasClass('do-default')) {
+                    if (!settings.do_default && !$(e.target).hasClass('do-default')) {
                         e.preventDefault();
                         e.stopPropagation();
                     }

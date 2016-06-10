@@ -32,6 +32,9 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			//Update images list in cache
 			add_action( 'wp_smush_nextgen_image_stats', array( $this, 'update_cache' ) );
 
+			//Add the resizing stats to Global stats
+			add_action( 'wp_smush_image_nextgen_resized',  array( $this, 'update_stats' ), '', 2 );
+
 			//Get the stats for single image, update the global stats
 			add_action( 'wp_smush_nextgen_image_stats', array( $this, 'update_stats' ), '', 2 );
 		}
@@ -91,13 +94,8 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		 */
 		function get_ngg_images( $type = 'smushed', $count = false, $force_update = false ) {
 
-			global $wpdb;
-			/**
-			 * Allows to set a limit of mysql query
-			 * Default value is 2000
-			 */
-			$limit  = apply_filters( 'wp_smush_nextgen_query_limit', 2000 );
-			$limit  = intval( $limit );
+			global $wpdb, $wpsmushit_admin;
+			$limit  = $wpsmushit_admin->nextgen_query_limit();
 			$offset = 0;
 
 			//Check type of images being queried
@@ -299,6 +297,44 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		 *
 		 */
 		function update_stats( $image_id, $stats ) {
+
+			global $WpSmush;
+
+			$stats = ! empty( $stats['stats'] ) ? $stats['stats'] : '';
+
+			$smush_stats = get_option( 'wp_smush_stats_nextgen', array() );
+
+			if ( ! empty( $stats ) ) {
+
+				//Compression Bytes
+				$smush_stats['bytes'] = ! empty( $smush_stats['bytes'] ) ? ( $smush_stats['bytes'] + $stats['bytes'] ) : $stats['bytes'];
+
+				//Human Readable
+				$smush_stats['human'] = ! empty( $smush_stats['bytes'] ) ? $WpSmush->format_bytes( $smush_stats['bytes'] ) : '';
+
+				//Size of images before the compression
+				$smush_stats['size_before'] = ! empty( $smush_stats['size_before'] ) ? ( $smush_stats['size_before'] + $stats['size_before'] ) : $stats['size_before'];
+
+				//Size of image after compression
+				$smush_stats['size_after'] = ! empty( $smush_stats['size_after'] ) ? ( $smush_stats['size_after'] + $stats['size_after'] ) : $stats['size_after'];
+
+				//Compression Percentage
+				$smush_stats['percent'] = ! empty( $smush_stats['size_before'] ) && !empty( $smush_stats['size_after'] ) && $smush_stats['size_before'] > 0 ? ( $smush_stats['bytes'] / $smush_stats['size_before'] ) * 100 : $stats['percent'];
+			}
+
+			update_option( 'wp_smush_stats_nextgen', $smush_stats );
+
+			//Cahce the results, we don't need a timed cache expiration.
+			wp_cache_set( 'wp_smush_stats_nextgen', $smush_stats, 'nextgen' );
+		}
+
+		/**
+		 * Updated the global smush stats for NextGen gallery
+		 *
+		 * @param $stats Compression stats fo respective image
+		 *
+		 */
+		function update_resize_stats( $image_id, $stats ) {
 			global $WpSmush;
 
 			$stats = ! empty( $stats['stats'] ) ? $stats['stats'] : '';

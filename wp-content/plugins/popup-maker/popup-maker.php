@@ -4,7 +4,7 @@
  * Plugin URI: https://wppopupmaker.com/
  * Description: Easily create & style popups with any content. Theme editor to quickly style your popups. Add forms, social media boxes, videos & more.
  * Author: WP Popup Maker
- * Version: 1.4.9
+ * Version: 1.4.10
  * Author URI: https://wppopupmaker.com/
  * Text Domain: popup-maker
  *
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Popup_Maker' ) ) :
 			}
 
 			if ( ! defined( 'POPMAKE_VERSION' ) ) {
-				define( 'POPMAKE_VERSION', '1.4.9' );
+				define( 'POPMAKE_VERSION', '1.4.10' );
 			}
 
 			if ( ! defined( 'POPMAKE_DB_VERSION' ) ) {
@@ -321,8 +321,12 @@ if ( ! class_exists( 'Popup_Maker' ) ) :
 
 			}
 
-			require_once POPMAKE_DIR . 'includes/integrations/class-popmake-woocommerce-integration.php';
-			require_once POPMAKE_DIR . 'includes/integrations/class-pum-woocommerce-integration.php';
+			if ( pum_is_v1_4_compatible() ) {
+				require_once POPMAKE_DIR . 'includes/integrations/class-pum-woocommerce-integration.php';
+			} else {
+				require_once POPMAKE_DIR . 'includes/integrations/class-popmake-woocommerce-integration.php';
+			}
+
 
 			if ( defined( 'WPB_VC_VERSION' ) || defined( 'FL_BUILDER_VERSION' ) ) {
 				require_once POPMAKE_DIR . 'includes/integrations/visual-composer.php';

@@ -16,7 +16,7 @@
  * Plugin Name:       MailMunch - Increase your Email Subscribers by over 500%
  * Plugin URI:        http://www.mailmunch.co
  * Description:       Collect email addresses from website visitors and grow your subscribers with our attention grabbing optin-forms, entry/exit intent technology, and other effective lead-generation forms.
- * Version:           2.0.2
+ * Version:           2.0.3
  * Author:            MailMunch
  * Author URI:        http://www.mailmunch.co
  * License:           GPL-2.0+

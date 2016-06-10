@@ -134,7 +134,7 @@ class Mailmunch_Public {
 		if (is_tag()) { echo "_mmunch['tag'] = true;"; }
 		if (is_attachment()) { echo "_mmunch['attachment'] = true;"; }
 		echo "</script>";
-		echo('<script data-cfasync="false" src="//s3.amazonaws.com/mailmunch/static/site.js" id="mailmunch-script" data-mailmunch-site-id="'.$siteID.'" async></script>');
+		echo('<script data-cfasync="false" src="//a.mailmunch.co/app/v1/site.js" id="mailmunch-script" data-plugin="'.MAILMUNCH_PREFIX.'" data-mailmunch-site-id="'.$siteID.'" async></script>');
 
 	}
 
