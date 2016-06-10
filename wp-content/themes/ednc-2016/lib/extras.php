@@ -32,6 +32,10 @@ function body_class($classes) {
     }
   }
 
+  if (is_page('story-2015-16')) {
+    $classes[] = 'single';
+  }
+
   return $classes;
 }
 add_filter('body_class', __NAMESPACE__ . '\\body_class');

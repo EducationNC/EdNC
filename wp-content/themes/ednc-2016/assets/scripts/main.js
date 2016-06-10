@@ -251,6 +251,30 @@
           }
         });
 
+        // Automatically create TOC of chapters
+        $('.hentry a.chapter').each(function() {
+          $('#chapters .nav').append('<li><a href="#' + $(this).attr('name') + '">' + $(this).attr('data-name') + '</a></li>');
+        });
+
+        // Chapters Affix
+        $(window).on('load', function() {
+          $('#chapters .nav').affix({
+            offset: {
+              top: function() {
+                return (this.top = $('#chapters .nav').offset().top);
+              },
+              bottom: function () {
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+              }
+            }
+          });
+        });
+
+        // Scrollspy for chapters
+        $('body').scrollspy({
+          target: '#chapters',
+          offset: 60
+        });
       }
     },
     // Flash cards

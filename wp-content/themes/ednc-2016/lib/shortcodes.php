@@ -274,6 +274,50 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
 
   /**
+   * Chapters shortcode
+   * UI by Shortcake plugin
+   */
+
+     // Register shortcode
+     function chapter_shortcode($atts, $content = null) {
+       extract( shortcode_atts( array(
+         'short_name' => '',
+       ), $atts) );
+
+       ob_start();
+       ?>
+
+       <a name="<?php echo sanitize_title($short_name); ?>" id="<?php echo sanitize_title($short_name); ?>" data-name="<?php echo $short_name; ?>" class="chapter"></a>
+
+       <?php
+       return ob_get_clean();
+     }
+     add_shortcode('chapter', __NAMESPACE__ . '\\chapter_shortcode');
+
+     // Register shortcake UI
+     shortcode_ui_register_for_shortcode(
+       'chapter',
+       array(
+         // Display label. String. Required.
+         'label' => 'Chapter',
+         // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
+         'listItemImage' => 'dashicons-editor-ol',
+         // Available shortcode attributes and default values. Required. Array.
+         // Attribute model expects 'attr', 'type' and 'label'
+         // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
+         'attrs' => array(
+           array(
+             'label' => 'Short Name',
+             'attr'  => 'short_name',
+             'type'  => 'text',
+             'description' => 'This is the title that will appear in the chapter index',
+           )
+         )
+       )
+     );
+
+
+  /**
    * Columns shortcode
    * UI by Shortcake plugin
    */

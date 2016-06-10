@@ -1,0 +1,85 @@
+.story-2015-16 {
+  .banner {
+    .container-fluid, .navbar, &:after {
+      display: none;
+    }
+  }
+
+  .brand {
+    position: fixed;
+  }
+
+  .chapters {
+    height: 0;
+    overflow: visible;
+    margin-bottom: 3em;
+
+    @media (max-width: $screen-sm-max) {
+      display: none;
+    }
+
+    .nav {
+      text-align: center;
+      list-style: none;
+      background: $white;
+      height: 37px;
+      z-index: 9;
+
+      &.affix {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        width: 100%;
+      }
+
+      &.affix-bottom {
+        position: absolute;
+        width: calc(100% - 20px);
+      }
+
+      li {
+        display: inline-block;
+        margin: 0;
+
+        a {
+          @extend h6;
+          text-decoration: none;
+          margin: 0;
+          overflow: hidden;
+
+          &:after {
+            content: '';
+            width: 100%;
+            height: 3px;
+            background: $plum;
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            transform: translateY(0);
+            transition: transform .3s;
+          }
+        }
+
+        &.active {
+          a {
+            &:after {
+              transform: translateY(-3px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .photo-overlay {
+    &:after {
+      display: none !important;
+    }
+  }
+
+  a.chapter {
+    display: inline-block;
+    margin-bottom: 3em;
+  }
+}
