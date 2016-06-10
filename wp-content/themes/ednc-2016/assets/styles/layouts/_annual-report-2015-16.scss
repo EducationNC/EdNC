@@ -9,6 +9,19 @@
     position: fixed;
   }
 
+  .affix {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    width: 100%;
+  }
+
+  .affix-bottom {
+    position: absolute;
+    width: calc(100% - 20px);
+  }
+
   .chapters {
     height: 0;
     overflow: visible;
@@ -24,19 +37,6 @@
       background: $white;
       height: 37px;
       z-index: 9;
-
-      &.affix {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translate3d(-50%, 0, 0);
-        width: 100%;
-      }
-
-      &.affix-bottom {
-        position: absolute;
-        width: calc(100% - 20px);
-      }
 
       li {
         display: inline-block;
@@ -81,5 +81,15 @@
   a.chapter {
     display: inline-block;
     margin-bottom: 3em;
+  }
+
+  &.admin-bar {
+    .brand {
+      top: 47px;
+    }
+
+    .affix {
+      top: 32px;
+    }
   }
 }
