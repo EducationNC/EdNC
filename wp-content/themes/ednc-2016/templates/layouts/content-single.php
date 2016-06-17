@@ -86,6 +86,7 @@ while (have_posts()) : the_post();
           </div>
         </div>
       </div>
+
     <?php } else {
       if (isset($banner)) {
         ?>
@@ -149,6 +150,14 @@ while (have_posts()) : the_post();
         </div>
       </div>
     <?php } ?>
+
+    <div id="chapters" class="chapters container hidden-xs hidden-sm print-no">
+      <div class="row">
+        <div class="col-md-8 col-centered">
+          <ul class="nav"></ul>
+        </div>
+      </div>
+    </div>
 
     <div class="entry-content">
       <div class="container">
