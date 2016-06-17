@@ -24,7 +24,9 @@ if ( function_exists( 'get_coauthors' ) ) {
           if (
             $author->user_nicename != 'agranados' &&
             $author->user_nicename != 'alisa' &&
+            $author->user_nicename != 'lbell' &&
             $author->user_nicename != 'mrash' &&
+            $author->user_nicename != 'nation-hahn' &&
             $author->user_nicename != 'todd-brantley' &&
             $author->user_nicename != 'staff'
           ) { ?>
