@@ -2,6 +2,7 @@
 
 use Roots\Sage\Assets;
 use Roots\Sage\Media;
+use Roots\Sage\Resize;
 
 if ($post->post_type == 'post') {
   $video = has_post_format('video');
