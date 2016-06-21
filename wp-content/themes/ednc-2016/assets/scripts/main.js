@@ -89,6 +89,11 @@
           location.reload();
         });
 
+        // Make sure WordPress embeds have correct permissions
+        $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+
+        // Add special class to default WP embeds
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
@@ -165,12 +170,6 @@
 
         // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
-
-        // Make sure WordPress embeds have correct permissions
-        $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
-
-        // Add special class to default WP embeds
-        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         // Make sure iframes for flash-cards embeds scroll and add special class
         if (!ismobileorIE && !isSafari) {
