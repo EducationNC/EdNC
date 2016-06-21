@@ -21,7 +21,7 @@ $emailURL = 'mailto:?subject='.$crunchifyTitle.'&amp;body='.$crunchifyURL;
 // Pint button loads annual report PDF if on that page
 if (is_page('story-2015-16')) {
   $printLink = "href=\"http://www.ednc.org/wp-content/uploads/2016/06/annual-report-2016-print.pdf\"";
-else {
+} else {
   $printLink = "href=\"http://www.printfriendly.com/print\" onclick=\"window.open('http://www.printfriendly.com/print?url='+document.location.href); return false;\"";
 }
 
