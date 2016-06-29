@@ -253,6 +253,10 @@
         // Automatically create TOC of chapters
         $('.hentry a.chapter').each(function() {
           $('#chapters .nav').append('<li><a href="#' + $(this).attr('name') + '">' + $(this).attr('data-name') + '</a></li>');
+        }).promise().done(function() {
+          if ($('#chapters .nav').is(':empty')) {
+            $('#chapters').hide();
+          }
         });
 
         // Chapters Affix
