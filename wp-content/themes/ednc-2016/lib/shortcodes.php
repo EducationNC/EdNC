@@ -316,6 +316,130 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
        )
      );
 
+   /**
+    * Tableau Map shortcode
+    * UI by Shortcake plugin
+    */
+
+     // Register shortcode
+     add_shortcode('tableau-map', function($atts, $inner_content = null) {
+       extract( shortcode_atts( array(
+        // 'content' => '',
+        'large' => '',
+        'medium' => '',
+        'small' => ''
+       ), $atts) );
+
+       $allowed_tags = array(
+         'script' => array(
+           'type' => [],
+           'src' => []
+         ),
+         'div' => array(
+           'class' => [],
+           'style' => []
+         ),
+         'noscript' => [],
+         'a' => array(
+           'href' => []
+         ),
+         'img' => array(
+           'alt' => [],
+           'src' => [],
+           'style' => []
+         ),
+         'object' => array(
+           'class' => [],
+           'width' => [],
+           'height' => [],
+           'style' => []
+         ),
+         'param' => array(
+           'name' => [],
+           'value' => []
+         )
+       );
+
+       ob_start();
+       ?>
+
+       </div><!-- col -->
+       </div><!-- row -->
+       </div><!-- container -->
+
+       <div class="map-container">
+         <?php if (!empty($large)) { ?>
+           <div class="map-desktop">
+             <?php echo wp_kses(urldecode($large), $allowed_tags); ?>
+           </div>
+         <?php } else { ?>
+           <div class="map-desktop">
+             <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
+           </div>
+         <?php } ?>
+
+         <div class="map-tablet">
+           <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
+         </div>
+
+         <?php if (!empty($small)) { ?>
+           <div class="map-mobile">
+             <?php echo wp_kses(urldecode($small), $allowed_tags); ?>
+           </div>
+         <?php } else { ?>
+           <div class="map-mobile-scroll">
+             <div class="alert alert-warning" role="alert">This map is not optimized for small displays. Please check back on a tablet or computer.</div>
+             <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
+           </div>
+         <?php } ?>
+       </div>
+
+       <div class="container">
+       <div class="row">
+       <div class="col-md-7 col-md-push-2point5">
+
+       <?php
+       return ob_get_clean();
+     });
+
+     // Register shortcake UI
+     shortcode_ui_register_for_shortcode(
+       'tableau-map',
+       array(
+         // Display label. String. Required.
+         'label' => 'Tableau Map Embed',
+         // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
+         'listItemImage' => 'dashicons-location-alt',
+         // Available shortcode attributes and default values. Required. Array.
+         // Attribute model expects 'attr', 'type' and 'label'
+         // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
+         'attrs' => array(
+           array(
+             'label'       => 'Large/Desktop (1024px) Embed Code',
+             'attr'        => 'large',
+             'type'        => 'textarea',
+             'description' => 'Optional',
+             'encode'      => true
+           ),
+           array(
+             'label'       => 'Medium/Tablet (768px) Embed Code',
+             'attr'        => 'medium',
+             'type'        => 'textarea',
+             'description' => 'Required',
+             'encode'      => true
+           ),
+           array(
+             'label'       => 'Small/Mobile (320 px) Embed Code',
+             'attr'        => 'small',
+             'type'        => 'textarea',
+             'description' => 'Optional',
+             'encode'      => true
+           )
+         )
+       )
+     );
+
+
 
   /**
    * Columns shortcode
