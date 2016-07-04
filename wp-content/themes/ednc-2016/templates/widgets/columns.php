@@ -2,100 +2,69 @@
 
 use Roots\Sage\Assets;
 
+global $featured_ids;
+
+if (empty($featured_ids)) {
+  $featured_ids = array();
+}
+
 ?>
 
 <div class="container">
   <div class="row">
     <?php
     /*
-     * Iterate through all the columns to output most recent post from each weekly column
+     * Most recent features that are not up in news
      *
      */
 
-    // What day of the week is it?
-    $whichday = current_time('w');
+    $recent = new WP_Query([
+      'posts_per_page' => 5,
+      'post_type' => array('post', 'map'),
+      'post__not_in' => $featured_ids,
+      'tax_query' => array(
+      'relation' => 'AND',
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'featured'
+        ),
+        array(
+          'taxonomy' => 'appearance',
+          'field' => 'slug',
+          'terms' => 'news',
+          'operator' => 'NOT IN'
+        )
+      ),
+      'meta_key' => 'updated_date',
+      'orderby' => 'meta_value_num',
+      'order' => 'DESC'
+    ]);
 
-    // Put columns in array by day of week
-    // Offset by -1 day so iterator shows yesterday's column first and today's column from last week last
-    $columns = [null, null, 'meck-monday', 'sparking-stem', 'healthy-ever-after', 'policy-points', 'friday-with-ferrel'];
-
-    // Set array iterator to match most recent column
-    end($columns);
-    while ( key($columns) != (int)$whichday ) {
-      if (key($columns) == 0) {
-        end($columns);
-      } else {
-        prev($columns);
-      }
-    }
-
-    $start = key($columns);
     $i = 0;
-    $j = 0;
 
-    // Reverse iterate through columns to output most recent post
-    while ( !is_null($key = key($columns)) ) {
-      // Break loop when we get back to start
-      if ($start == key($columns) && $j > 1) {
-        break;
-      }
+    if ($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post();
 
-      // If it's time to show today's column, set offset to 1 so we get last week's article instead
-      if ($whichday == key($columns) -1) {
-        $offset = 1;
-      } else {
-        $offset = 0;
-      }
+      if ($i < 2) { ?>
+        <div class="col-sm-6 hidden-sm <?php if ($i == 0) echo 'hidden-xs'; ?>">
+          <?php get_template_part('templates/layouts/block', 'overlay'); ?>
+        </div>
+        <div class="col-sm-6 visible-sm-block">
+          <?php get_template_part('templates/layouts/block', 'post'); ?>
+        </div>
+      <?php } else { ?>
+        <div class="col-sm-4 three-across">
+          <?php get_template_part('templates/layouts/block', 'post'); ?>
+        </div>
+      <?php } ?>
 
-      if ( !is_null($current = current($columns)) ) {
-        $recent = new WP_Query([
-          'posts_per_page' => 1,
-          'offset' => $offset,
-          'post_type' => 'post',
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'column',
-              'field' => 'slug',
-              'terms' => $current
-            )
-          ),
-          'meta_key' => 'updated_date',
-          'orderby' => 'meta_value_num',
-          'order' => 'DESC'
-        ]);
+      <?php if ($i == 1) { ?>
+        </div><div class="row">
+      <?php }
 
-        if ($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post();
-
-          if ($i < 2) { ?>
-            <div class="col-sm-6 hidden-sm <?php if ($i == 0) echo 'hidden-xs'; ?>">
-              <?php get_template_part('templates/layouts/block', 'overlay'); ?>
-            </div>
-            <div class="col-sm-6 visible-sm-block">
-              <?php get_template_part('templates/layouts/block', 'post'); ?>
-            </div>
-          <?php } else { ?>
-            <div class="col-sm-4 three-across">
-              <?php get_template_part('templates/layouts/block', 'post'); ?>
-            </div>
-          <?php } ?>
-
-          <?php if ($i == 1) { ?>
-            </div><div class="row">
-          <?php }
-
-        endwhile; endif; wp_reset_query();
-        $i++;
-      }
-
-      $j++;
-
-      // Go back to end of array if we get to beginning.
-       if (key($columns) == 0) {
-        end($columns);
-      } else {
-        prev($columns);
-      }
-    } ?>
+      $i++;
+    endwhile; endif; wp_reset_query();
+    ?>
   </div>
 
   <hr class="visible-xs-block" />
