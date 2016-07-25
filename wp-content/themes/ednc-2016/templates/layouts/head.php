@@ -16,6 +16,8 @@
   }
   ?>
 
+  <meta property="fb:pages" content="384676381708957" />
+
   <?php wp_head(); ?>
 
   <script type="text/javascript">
