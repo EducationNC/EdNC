@@ -19,5 +19,9 @@ require_once(URE_PLUGIN_DIR .'includes/classes/ajax-processor.php');
 require_once(URE_PLUGIN_DIR .'includes/classes/screen-help.php');
 require_once(URE_PLUGIN_DIR .'includes/classes/known-js-css-compatibility-issues.php');
 require_once(URE_PLUGIN_DIR .'includes/classes/role-additional-options.php');
+require_once(URE_PLUGIN_DIR .'includes/classes/capabilities-groups-manager.php');
+require_once(URE_PLUGIN_DIR .'includes/classes/view.php');
+require_once(URE_PLUGIN_DIR .'includes/classes/role-view.php');
+require_once(URE_PLUGIN_DIR .'includes/classes/user-view.php');
 require_once(URE_PLUGIN_DIR .'includes/classes/user-role-editor.php');
 

@@ -15,7 +15,7 @@
 				<?php
 				$opt = WP_Embed_FB_Plugin::get_option('show_like');
 				if($opt === 'true') :
-					echo WEF_Social_Plugins::like_btn('https://www.facebook.com/'.$fb_data['id'],array('share'=>'true','layout'=>'button_count'));
+					echo WEF_Social_Plugins::get('like',array('href'=>'https://www.facebook.com/'.$fb_data['id'],'share'=>'true','layout'=>'button_count'));
 				else :
 					printf( __( '%d people like this.', 'wp-embed-facebook' ), $fb_data['likes'] );
 				endif;

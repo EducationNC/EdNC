@@ -3,22 +3,11 @@
  * WPMUDEV Frash - Free Dashboard Notification module.
  * Used by wordpress.org hosted plugins.
  *
- * TODO:
- *   - Form submit handler to submit email address to getdrip.com
- *   - Show the WPMUDEV logo in left side
- *
- * @version 1.0.0
+ * @version 1.1.0
  * @author  Incsub (Philipp Stracker)
  */
 if ( ! class_exists( 'WDev_Frash' ) ) {
 	class WDev_Frash {
-
-		/**
-		 * The text-domain of the module.
-		 *
-		 * @since  1.0.0
-		 */
-		const LANG = 'wdev-frash';
 
 		/**
 		 * List of all registered plugins.
@@ -385,7 +374,7 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 			$user_name = $user->display_name;
 			$admin_email = get_site_option( 'admin_email' );
 
-			$msg = __( "We're happy that you've chosen to install %s! Are you interested in how to make the most of this plugin? How would you like a quick 5 day email crash course with actionable advice on building your membership site? Only the info you want, no subscription!", self::LANG );
+			$msg = __( "We're happy that you've chosen to install %s! Are you interested in how to make the most of this plugin? How would you like a quick 5 day email crash course with actionable advice on building your membership site? Only the info you want, no subscription!", 'wdev_frash' );
 			$msg = apply_filters( 'wdev-email-message-' . $plugin->id, $msg );
 
 			?>
@@ -400,11 +389,11 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 				</div>
 				<div class="frash-notice-cta">
 					<input type="email" name="email" value="<?php echo esc_attr( $admin_email ); ?>" />
-					<button class="frash-notice-act button-primary" data-msg="<?php _e( 'Thanks :)', self::LANG ); ?>">
+					<button class="frash-notice-act button-primary" data-msg="<?php _e( 'Thanks :)', 'wdev_frash' ); ?>">
 						<?php echo esc_html( $plugin->cta_email ); ?>
 					</button>
-					<button class="frash-notice-dismiss" data-msg="<?php _e( 'Saving', self::LANG ); ?>">
-						<?php _e( 'No thanks', self::LANG ); ?>
+					<button class="frash-notice-dismiss" data-msg="<?php _e( 'Saving', 'wdev_frash' ); ?>">
+						<?php _e( 'No thanks', 'wdev_frash' ); ?>
 					</button>
 				</div>
 			<?php
@@ -420,7 +409,7 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 			$user = wp_get_current_user();
 			$user_name = $user->display_name;
 
-			$msg = __( "Hey %s, you've been using %s for a while now, and we hope you're happy with it.", self::LANG ) . '<br />'. __( "We've spent countless hours developing this free plugin for you, and we would really appreciate it if you dropped us a quick rating!", self::LANG );
+			$msg = __( "Hey %s, you've been using %s for a while now, and we hope you're happy with it.", 'wdev_frash' ) . '<br />'. __( "We've spent countless hours developing this free plugin for you, and we would really appreciate it if you dropped us a quick rating!", 'wdev_frash' );
 			$msg = apply_filters( 'wdev-rating-message-' . $plugin->id, $msg );
 
 			?>
@@ -435,15 +424,15 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 					?>
 				</div>
 				<div class="frash-notice-cta">
-					<button class="frash-notice-act button-primary" data-msg="<?php _e( 'Thanks :)', self::LANG ); ?>">
+					<button class="frash-notice-act button-primary" data-msg="<?php _e( 'Thanks :)', 'wdev_frash' ); ?>">
 						<?php
 						printf(
-							__( 'Rate %s', self::LANG ),
+							__( 'Rate %s', 'wdev_frash' ),
 							esc_html( $plugin->title )
 						); ?>
 					</button>
-					<button class="frash-notice-dismiss" data-msg="<?php _e( 'Saving', self::LANG ); ?>">
-						<?php _e( 'No thanks', self::LANG ); ?>
+					<button class="frash-notice-dismiss" data-msg="<?php _e( 'Saving', 'wdev_frash' ); ?>">
+						<?php _e( 'No thanks', 'wdev_frash' ); ?>
 					</button>
 				</div>
 			<?php

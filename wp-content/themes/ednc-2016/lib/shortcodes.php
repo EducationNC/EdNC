@@ -287,7 +287,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
        ob_start();
        ?>
 
-       <a name="<?php echo sanitize_title($short_name); ?>" id="<?php echo sanitize_title($short_name); ?>" data-name="<?php echo $short_name; ?>" class="chapter"></a>
+       <a name="<?php echo sanitize_title($short_name); ?>" id="<?php echo sanitize_title($short_name); ?>" data-name="<?php echo $short_name; ?>" class="chapter mce-item-anchor"></a>
 
        <?php
        return ob_get_clean();

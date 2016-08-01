@@ -82,13 +82,18 @@
       select,
       input {
         margin: 0;
+        max-width: 100%;
       }
     }
 
     .pum-condition-target {
 
       position: relative;
-      max-width: 180px;
+      max-width: 240px;
+
+      #postbox-container-1 & {
+        max-width: 100%;
+      }
 
       * {
         box-sizing: border-box;

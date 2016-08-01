@@ -1,20 +1,34 @@
 <?php
 
+/**
+ * Main plugin file, stores defauls and utilities used along all the plugin.
+ *
+ */
 class WP_Embed_FB_Plugin {
-	/**
-	 * @var string Plugin directory
-	 */
+	const option_name = 'wpemfb_options';
 	private static $path = null;
-	/**
-	 * @var string Plugin url
-	 */
 	private static $url = null;
 	private static $options = null;
 	private static $defaults = null;
-	const option_name = 'wpemfb_options';
 	private static $lb_defaults = null;
 	private static $has_photon = null;
 	private static $wp_timezone = null;
+
+	/**
+	 * @var array $link_types Link fields needed for rendering a social plugin
+	 */
+	static $link_types = array( 'href', 'uri' );
+
+	static function hooks() {
+		//Session start when there is a facebook app
+		add_action( 'init', __CLASS__ . '::init', 999 );
+
+		//Translation string
+		add_action( 'plugins_loaded', __CLASS__ . '::plugins_loaded' );
+
+		//register all scripts and styles
+		add_action( 'wp_enqueue_scripts', __CLASS__ . '::wp_enqueue_scripts' );
+	}
 
 	static function install() {
 		$type = ( get_option( 'wpemfb_theme' ) || get_option( self::option_name ) ) ? 'reactivated' : 'activated';
@@ -28,14 +42,17 @@ class WP_Embed_FB_Plugin {
 	 */
 	static function uninstall() {
 		if ( is_multisite() ) {
+			//TODO deprecated for get_sites in WP v4.6
 			$sites = wp_get_sites();
 			foreach ( $sites as $site ) {
 				switch_to_blog( $site['blog_id'] );
 				delete_option( self::option_name );
+				delete_post_meta_by_key( '_wef_comment_count' );
 			}
 			restore_current_blog();
 		} else {
 			delete_option( self::option_name );
+			delete_post_meta_by_key( '_wef_comment_count' );
 		}
 
 		return self::whois( 'uninstalled' );
@@ -49,7 +66,7 @@ class WP_Embed_FB_Plugin {
 	 * @return array old options to be deleated since 2.1
 	 */
 	static function old_options() {
-		return apply_filters( 'wpemfb_old_options', array(
+		return array(
 			'show_posts',
 			'close_warning',
 			'height',
@@ -85,7 +102,7 @@ class WP_Embed_FB_Plugin {
 			'force_app_token',
 			'video_download',
 			'sdk_version'
-		) );
+		);
 	}
 
 	static function get_defaults() {
@@ -94,52 +111,68 @@ class WP_Embed_FB_Plugin {
 			if ( strpos( $locale, 'es_' ) !== false ) {
 				$locale = 'es_LA';
 			}
-
+			$vars           = WEF_Social_Plugins::get_defaults();
+			$social_options = array();
+			foreach ( $vars as $key => $value ) {
+				foreach ( $value as $d_key => $d_value ) {
+					if ( ! in_array( $d_key, self::$link_types ) ) {
+						$social_options["{$key}_$d_key"] = $d_value;
+					}
+				}
+			}
 			self::$defaults = array(
-				'sdk_lang'                       => array_key_exists( $locale, self::get_fb_locales() ) ? $locale : 'en_US',
-				'max_width'                      => '450',
-				'max_photos'                     => '24',
-				'max_posts'                      => '0',
-				'app_id'                         => '',
-				'app_secret'                     => '',
-				'theme'                          => 'default',
-				'page_height'                    => '500',
-				'sdk_version'                    => 'v2.6',
-				'show_like'                      => 'true',
-				'fb_root'                        => 'true',
-				'show_follow'                    => 'true',
-				'video_ratio'                    => 'false',
-				'video_as_post'                  => 'false',
-				'raw_video'                      => 'false',
-				'raw_photo'                      => 'false',
-				'raw_post'                       => 'false',
-				'raw_page'                       => 'false',
-				'enqueue_style'                  => 'true',
-				'enq_lightbox'                   => 'true',
-				'enq_wpemfb'                     => 'true',
-				'enq_fbjs'                       => 'true',
-				'ev_local_tz'                    => 'false',
-				'page_show_faces'                => 'true',
-				'page_small_header'              => 'false',
-				'page_hide_cover'                => 'false',
-				'page_show_posts'                => 'false',
-				'close_warning2'                 => 'false',
-				'force_app_token'                => 'true',
-				'video_download'                 => 'false',
-				'LB_albumLabel'                  => 'Image %1 of %2',
-				'LB_alwaysShowNavOnTouchDevices' => 'false',
-				'LB_showImageNumberLabel'        => 'true',
-				'LB_wrapAround'                  => 'false',
-				'LB_disableScrolling'            => 'false',
-				'LB_fitImagesInViewport'         => 'true',
-				'LB_maxWidth'                    => '0',
-				'LB_maxHeight'                   => '0',
-				'LB_positionFromTop'             => '50',
-				'LB_resizeDuration'              => '700',
-				'LB_fadeDuration'                => '500',
-				'enq_fbjs_global'                => 'false',
-				'enq_when_needed'                => 'false',
-			);
+				                  'sdk_lang'                       => array_key_exists( $locale, self::get_fb_locales() ) ? $locale : 'en_US',
+				                  'max_width'                      => '450',
+				                  'max_photos'                     => '24',
+				                  'max_posts'                      => '0',
+				                  'app_id'                         => '',
+				                  'app_secret'                     => '',
+				                  'theme'                          => 'default',
+				                  'sdk_version'                    => 'v2.6',
+				                  'show_like'                      => 'true',
+				                  'fb_root'                        => 'true',
+				                  'show_follow'                    => 'true',
+				                  'video_ratio'                    => 'false',
+				                  'video_as_post'                  => 'false',
+				                  'raw_video'                      => 'false',
+				                  'raw_photo'                      => 'false',
+				                  'raw_post'                       => 'false',
+				                  'raw_page'                       => 'false',
+				                  'enqueue_style'                  => 'true',
+				                  'enq_lightbox'                   => 'true',
+				                  'enq_wpemfb'                     => 'true',
+				                  'enq_fbjs'                       => 'true',
+				                  'ev_local_tz'                    => 'false',
+				                  'close_warning2'                 => 'false',
+				                  'force_app_token'                => 'true',
+				                  'video_download'                 => 'false',
+				                  'enq_fbjs_global'                => 'false',
+				                  'enq_when_needed'                => 'false',
+				                  //Lightbox options
+				                  'LB_albumLabel'                  => 'Image %1 of %2',
+				                  'LB_alwaysShowNavOnTouchDevices' => 'false',
+				                  'LB_showImageNumberLabel'        => 'true',
+				                  'LB_wrapAround'                  => 'false',
+				                  'LB_disableScrolling'            => 'false',
+				                  'LB_fitImagesInViewport'         => 'true',
+				                  'LB_maxWidth'                    => '0',
+				                  'LB_maxHeight'                   => '0',
+				                  'LB_positionFromTop'             => '50',
+				                  'LB_resizeDuration'              => '700',
+				                  'LB_fadeDuration'                => '500',
+				                  'FB_plugins_as_iframe'           => 'false',
+				                  'adaptive_fb_plugin'             => 'false',
+				                  'quote_plugin_active'            => 'false',
+				                  'quote_post_types'               => 'post,page',
+				                  'auto_embed_active'              => 'true',//
+//				                  'auto_embed_post_types'          => '',//TODO filter embed register handler per post_type
+				                  'auto_comments_active'           => 'false',
+				                  'auto_comments_post_types'       => 'post',
+				                  'comments_count_active'          => 'true',
+				                  'comments_open_graph'            => 'true',
+//				                  'scrape_open_graph'              => 'true',
+				                  'lightbox_att'                   => 'data-lightbox="roadtrip"',
+			                  ) + $social_options;
 		}
 
 		return apply_filters( 'wpemfb_defaults', self::$defaults );
@@ -170,15 +203,6 @@ class WP_Embed_FB_Plugin {
 		return self::$lb_defaults;
 	}
 
-	//("uninstalled","deactivated","activated","reactivated")
-	protected static function whois( $install ) {
-		$home = home_url();
-		$home = esc_url( $home );
-		@file_get_contents( "http://www.wpembedfb.com/api/?whois=$install&site_url=$home" );
-
-		return true;
-	}
-
 	/**
 	 * session start if necessary
 	 */
@@ -198,20 +222,19 @@ class WP_Embed_FB_Plugin {
 	 * Load translation file
 	 */
 	static function plugins_loaded() {
+
 		load_plugin_textdomain( 'wp-embed-facebook', false, 'wp-embed-facebook/lang' );
+
 	}
 
 	/**
 	 * Enqueue wp embed facebook styles
 	 */
 	static function wp_enqueue_scripts() {
-		wp_register_style( 'wpemfb-default', self::get_url() . 'templates/default/default.css', array(), false );
-		wp_register_style( 'wpemfb-classic', self::get_url() . 'templates/classic/classic.css', array(), false );
-		wp_register_style( 'wpemfb-lightbox', self::get_url() . 'lib/lightbox2/css/lightbox.css', array(), false );
-		wp_register_script(
-			'wpemfb-lightbox',
-			self::get_url() . 'lib/lightbox2/js/lightbox.min.js',
-			array( 'jquery' )
+		wp_register_style( 'wpemfb-default', self::url() . 'templates/default/default.css', array(), false );
+		wp_register_style( 'wpemfb-classic', self::url() . 'templates/classic/classic.css', array(), false );
+		wp_register_style( 'wpemfb-lightbox', self::url() . 'lib/lightbox2/css/lightbox.css', array(), false );
+		wp_register_script( 'wpemfb-lightbox', self::url() . 'lib/lightbox2/js/lightbox.min.js', array( 'jquery' )
 		);
 		$lb_defaults       = self::get_lb_defaults();
 		$options           = self::get_option();
@@ -222,59 +245,68 @@ class WP_Embed_FB_Plugin {
 			}
 		}
 		if ( ! empty( $translation_array ) ) {
+			//TODO use something like wp_add_inline_script('wpemfb-lightbox','new Lightbox(WEF_LB)') for LightBox options
 			wp_localize_script( 'wpemfb-lightbox', 'WEF_LB', $translation_array );
 		}
 		wp_register_script(
 			'wpemfb',
-			self::get_url() . 'lib/js/wpembedfb.min.js',
+			self::url() . 'lib/js/wpembedfb.min.js',
 			array( 'jquery' )
 		);
 		wp_register_script(
 			'wpemfb-fbjs',
-			self::get_url() . 'lib/js/fb.min.js',
+			self::url() . 'lib/js/fb.min.js',
 			array( 'jquery' )
 		);
 		$translation_array = array(
-			'local'   => WP_Embed_FB_Plugin::get_option( 'sdk_lang' ),
-			'version' => WP_Embed_FB_Plugin::get_option( 'sdk_version' ),
-			'fb_id'   => WP_Embed_FB_Plugin::get_option( 'app_id' ) == '0' ? '' : WP_Embed_FB_Plugin::get_option( 'app_id' )
+			'local'   => $options['sdk_lang'],
+			'version' => $options['sdk_version'],
+			'fb_id'   => $options['app_id'] == '0' ? '' : $options['app_id']
 		);
+		if ( $options['auto_comments_active'] == 'true' && $options['comments_count_active'] == 'true' ) {
+			$translation_array = $translation_array + array(
+					'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				);
+		}
+		//TODO use something like wp_add_inline_script('wpemfb-fbjs','new Wpemfb(WEF)') for LightBox options
 		wp_localize_script( 'wpemfb-fbjs', 'WEF', $translation_array );
-		if ( WP_Embed_FB_Plugin::get_option( 'enq_when_needed' ) == 'false' ) {
-			if ( WP_Embed_FB_Plugin::get_option( 'enq_lightbox' ) == 'true' ) {
+		if ( $options['enq_when_needed'] == 'false' ) {
+			if ( $options['enq_lightbox'] == 'true' ) {
 				wp_enqueue_script( 'wpemfb-lightbox' );
 				wp_enqueue_style( 'wpemfb-lightbox' );
 			}
-			if ( WP_Embed_FB_Plugin::get_option( 'enq_wpemfb' ) == 'true' ) {
+			if ( $options['enq_wpemfb'] == 'true' ) {
 				wp_enqueue_script( 'wpemfb' );
 			}
-			if ( WP_Embed_FB_Plugin::get_option( 'enq_fbjs' ) == 'true' ) {
+			if ( $options['enq_fbjs'] == 'true' ) {
 				wp_enqueue_script( 'wpemfb-fbjs' );
 			}
 		}
-		if ( WP_Embed_FB_Plugin::get_option( 'enq_fbjs_global' ) == 'true' ) {
+		if ( $options['enq_fbjs_global'] == 'true' ) {
 			wp_enqueue_script( 'wpemfb-fbjs' );
 		}
+
+		if ( ( $options['auto_comments_active'] == 'true' ) && is_single() ) {
+			$array          = WP_Embed_FB_Plugin::string_to_array( $options['auto_comments_post_types'] );
+			$queried_object = get_queried_object();
+			if ( in_array( $queried_object->post_type, $array ) ) {
+				wp_enqueue_script( 'wpemfb-fbjs' );
+			}
+		}
 	}
 
-	static function get_path() {
-		if ( self::$path ) {
-			return self::$path;
-		} else {
+	static function path() {
+		if ( self::$path == null ) {
 			self::$path = dirname( plugin_dir_path( __FILE__ ) ) . '/';
-
-			return self::$path;
 		}
+		return self::$path;
 	}
 
-	static function get_url() {
-		if ( self::$url ) {
-			return self::$url;
-		} else {
+	static function url() {
+		if ( self::$url == null ) {
 			self::$url = dirname( plugin_dir_url( __FILE__ ) ) . '/';
-
-			return self::$url;
 		}
+		return self::$url;
 	}
 
 	static function get_option( $option = null ) {
@@ -291,6 +323,14 @@ class WP_Embed_FB_Plugin {
 						$compare[ $default_key ] = isset( $options[ $default_key ] ) ? $options[ $default_key ] : $default_value;
 					}
 					if ( $compare !== $options ) {
+						if ( isset( $option['page_show_faces'] ) ) {
+							$compare['page_show-facepile'] = $option['page_show_faces'];
+							$compare['page_small-header']  = $option['page_small_header'];
+							$compare['page_hide-cover']    = $option['page_hide_cover'];
+							if ( $option['page_show_posts'] == 'true' ) {
+								$compare['page_tabs'] = 'timeline';
+							}
+						}
 						self::set_options( $compare );
 					} else {
 						//set cache value
@@ -309,7 +349,7 @@ class WP_Embed_FB_Plugin {
 					self::set_options( $defaults );
 				} else {
 					//new instalation
-					//TODO get app id and secret from other plugins Jetpack and WP Social Login.
+					//TODO get app id and secret from other plugins Jetpack or WP Social Login or... one day...
 					self::set_options( $defaults );
 				}
 			}
@@ -324,53 +364,6 @@ class WP_Embed_FB_Plugin {
 	static function set_options( $options ) {
 		update_option( self::option_name, $options, true );
 		self::$options = $options;
-	}
-
-	static function admin_notices() {
-		if ( ( WP_Embed_FB_Plugin::get_option( 'close_warning2' ) == 'false' ) ) :
-			?>
-			<div class="notice wpemfb_warning is-dismissible">
-				<h2>WP Embed Facebook</h2>
-
-				<p>Hey! The last step.</p>
-
-				<p><img style="position:relative; top: 5px;" height="20px" width="auto"
-				        src="<?php echo WP_Embed_FB_Plugin::get_url() . 'lib/admin/ic_setting.png' ?>">&nbsp;Turn on <a
-						id="wef-video-down" href="<?php echo admin_url( "options-general.php?page=embedfacebook" ) ?>">Video
-						Download Option</a> in settings.</p>
-				<small>
-					<?php
-					printf( __( 'To embed albums, events, profiles and video as HTML5 you will need a <a target="_blank" href="%s">Facebook App</a>', 'wp-embed-facebook' ), 'https://developers.facebook.com/apps' )
-					?>
-				</small>
-				<p>
-					<?php
-					printf( __( 'This free plugin has taken <strong>thousands of hours</strong> to develop and maintain consider making a <a target="_blank" href="%s">donation</a> or leaving a <a target="_blank" href="%s">review</a> <strong>do not let us loose faith</strong> in humanity.', 'wp-embed-facebook' ), 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26', 'https://wordpress.org/support/view/plugin-reviews/wp-embed-facebook' )
-					?>
-				</p>
-
-			</div>
-			<?php
-		endif;
-	}
-
-	static function wpemfb_close_warning() {
-		if ( current_user_can( 'manage_options' ) ) {
-			$options                   = self::get_option();
-			$options['close_warning2'] = 'true';
-			self::set_options( $options );
-		}
-		die;
-	}
-
-	static function wpemfb_video_down() {
-		if ( current_user_can( 'manage_options' ) ) {
-			$options                   = self::get_option();
-			$options['close_warning2'] = 'true';
-			$options['video_download'] = 'true';
-			self::set_options( $options );
-		}
-		die;
 	}
 
 	static function has_fb_app() {
@@ -541,7 +534,7 @@ class WP_Embed_FB_Plugin {
 	static function get_timezone() {
 		if ( self::$wp_timezone === null ) {
 			$tzstring = get_option( 'timezone_string', '' );
-			if ( empty($tzstring) ) {
+			if ( empty( $tzstring ) ) {
 				$current_offset = get_option( 'gmt_offset', 0 );
 				if ( 0 == $current_offset ) {
 					$tzstring = 'Etc/GMT';
@@ -554,4 +547,20 @@ class WP_Embed_FB_Plugin {
 
 		return self::$wp_timezone;
 	}
+
+	static function string_to_array( $string ) {
+		$array = explode( ',', $string );
+
+		return array_map( 'trim', $array );
+	}
+
+	//("uninstalled","deactivated","activated","reactivated")
+	protected static function whois( $install ) {
+		$home = home_url();
+		$home = esc_url( $home );
+		@file_get_contents( "http://www.wpembedfb.com/api/?whois=$install&site_url=$home" );
+
+		return true;
+	}
+
 }

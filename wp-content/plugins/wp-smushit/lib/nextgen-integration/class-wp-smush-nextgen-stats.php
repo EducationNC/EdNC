@@ -24,7 +24,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		function __construct() {
 
 			global $WpSmush;
-			$this->is_pro_user = $WpSmush->is_pro();
+			$this->is_pro_user = $WpSmush->validate_install();
 
 			//Update Total Image count
 			add_action( 'ngg_added_new_image', array( $this, 'image_count' ), 10 );
@@ -399,7 +399,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			}
 
 			//Round off precentage
-			$smushed_stats['percent'] = ! empty( $smushed_stats['percent'] ) ? round( $smushed_stats['percent'], 2 ) : 0;
+			$smushed_stats['percent'] = ! empty( $smushed_stats['percent'] ) ? round( $smushed_stats['percent'], 1 ) : 0;
 
 			$smushed_stats['human'] = $WpSmush->format_bytes( $smushed_stats['bytes'] );
 

@@ -1,10 +1,4 @@
-.sections {
-    padding:1px 22px 22px 22px;
-    background: #fff;
-    border:1px solid #ccc;
-    border-top:0;
-    margin-bottom: 20px;
-}
+
 section {
     display:none;
 }
@@ -13,75 +7,48 @@ section:first-child {
     display:block;
 }
 
-
-.no-js h2.nav-tab-wrapper {
-    display:none;
+th{
+    text-align: right;
+}
+th h3 {
+    text-align: left;
 }
 
-.no-js .sections {
-    border-top:1px solid #ccc;
-    margin-top:22px;
+td {
+    padding-left: 10px;
 }
 
-.no-js section {
-    border-top: 1px dashed #aaa;
-    margin-top:22px;
-    padding-top:22px;
+.wef-content{
+    width: 72%;
+    float: left;
+    /*border-right: 1px solid gray;*/
 }
-
-.no-js section:first-child {
-    margin:0;
-    padding:0;
-    border:0;
-}
-.nav-tab-active {
-    background-color: #ffffff;
-}
-
-.ui-widget-content th {
-    font-weight: normal;
-    padding-right: 10px;
-}
-
-.settings-col {
-    width: 50% !important;
-    padding-right: 2% !important;
-    text-align: left !important;
-}
-
-.welcome-panel-last {
-    width: 47% !important;
+.wef-sidebar{
+    width: 28%;
+    float: left;
     text-align: center;
+    /*border-left: 1px solid gray;*/
+    /*padding: 0 10px;*/
 }
 
 @media (max-width: 870px) {
-    .settings-col {
-        width: 100% !important;
-    }
-
-    .welcome-panel-last {
+    .wef-sidebar, .wef-content  {
         width: 100% !important;
     }
 }
-.welcome-panel-last .button-red {
+.wef-sidebar .button-red {
     background: #D2002C none repeat scroll 0 0;
     border-color: #AA0012;
     box-shadow: 0 1px 0 rgba(230, 14, 23, 0.5) inset, 0 1px 0 rgba(173, 173, 173, 0.15);
     color: #FFF;
     text-decoration: none;
 }
-.welcome-panel-last .button-red:focus, .welcome-panel-last .button-red:hover {
+.wef-sidebar .button-red:focus, .wef-sidebar .button-red:hover {
     background: #AB1F42 none repeat scroll 0 0;
     border-color: #AA0012;
     box-shadow: 0 1px 0 rgba(230, 14, 23, 0.5) inset;
-    color: #FFF;
 }
-.welcome-panel-last p {
-    font-size: 14px;
-    line-height: 14px;
-    margin: 0;
-    padding: 0 0 16px;
-}
-.welcome-panel-last h4 {
-    padding: 0 0 10px;
+
+h3 small {
+    font-size: 0.7em;
 }

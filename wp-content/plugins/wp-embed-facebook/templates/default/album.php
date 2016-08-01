@@ -26,7 +26,7 @@
 				foreach ($fb_data['photos']['data'] as $pic) {
 					$data_title = isset($pic['name']) ? $pic['name'] :  '';
 					?>
-					<a href="<?php echo $pic['source'] ?>"  data-lightbox="roadtrip" <?php echo !empty($data_title) ? 'data-title="'.esc_attr(wp_rel_nofollow(make_clickable(str_replace(array('"',"'"),array('&#34;','&#39;'),$data_title)))).'"' : '' ?> >
+					<a href="<?php echo $pic['source'] ?>" <?php echo WP_Embed_FB_Plugin::get_option('lightbox_att') ?> <?php echo !empty($data_title) ? 'data-title="'.esc_attr(wp_rel_nofollow(make_clickable(str_replace(array('"',"'"),array('&#34;','&#39;'),$data_title)))).'"' : '' ?> >
 						<img class="thumbnail" src="<?php echo $pic['picture'] ?>" />
 					</a>
 					<?php

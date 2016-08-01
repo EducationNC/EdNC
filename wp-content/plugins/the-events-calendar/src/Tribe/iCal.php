@@ -11,7 +11,7 @@ class Tribe__Events__iCal {
 	 * @static
 	 */
 	public static function init() {
-		add_filter( 'tribe_events_after_footer', array( __CLASS__, 'maybe_add_link' ), 10, 1 );
+		add_action( 'tribe_events_after_footer', array( __CLASS__, 'maybe_add_link' ), 10, 1 );
 		add_action( 'tribe_events_single_event_after_the_content', array( __CLASS__, 'single_event_links' ) );
 		add_action( 'tribe_tec_template_chooser', array( __CLASS__, 'do_ical_template' ) );
 		add_filter( 'tribe_get_ical_link', array( __CLASS__, 'day_view_ical_link' ), 20, 1 );
@@ -91,7 +91,7 @@ class Tribe__Events__iCal {
 		if ( tribe_is_month() && ! tribe_events_month_has_events() ) {
 			return;
 		}
-		if ( is_single() || ! have_posts() ) {
+		if ( is_single() || empty( $wp_query->posts ) ) {
 			return;
 		}
 
@@ -236,8 +236,8 @@ class Tribe__Events__iCal {
 			$time = (object) array(
 				'start' => tribe_get_start_date( $event_post->ID, false, 'U' ),
 				'end' => tribe_get_end_date( $event_post->ID, false, 'U' ),
-				'modified' => self::wp_strtotime( $event_post->post_modified ),
-				'created' => self::wp_strtotime( $event_post->post_date ),
+				'modified' => Tribe__Date_Utils::wp_strtotime( $event_post->post_modified ),
+				'created' => Tribe__Date_Utils::wp_strtotime( $event_post->post_date ),
 			);
 
 			if ( 'yes' == get_post_meta( $event_post->ID, '_EventAllDay', true ) ) {
@@ -363,47 +363,4 @@ class Tribe__Events__iCal {
 		exit;
 
 	}
-
-	/**
-	 * Converts a locally-formatted date to a unix timestamp. This is a drop-in
-	 * replacement for `strtotime()`, except that where strtotime assumes GMT, this
-	 * assumes local time (as described below). If a timezone is specified, this
-	 * function defers to strtotime().
-	 *
-	 * If there is a timezone_string available, the date is assumed to be in that
-	 * timezone, otherwise it simply subtracts the value of the 'gmt_offset'
-	 * option.
-	 *
-	 * @see strtotime()
-	 * @uses get_option() to retrieve the value of 'gmt_offset'.
-	 * @param string $string A date/time string. See `strtotime` for valid formats.
-	 * @return int UNIX timestamp.
-	 */
-	private static function wp_strtotime( $string ) {
-		// If there's a timezone specified, we shouldn't convert it
-		try {
-			$test_date = new DateTime( $string );
-			if ( 'UTC' != $test_date->getTimezone()->getName() ) {
-				return strtotime( $string );
-			}
-		} catch ( Exception $e ) {
-			return strtotime( $string );
-		}
-
-		$tz = get_option( 'timezone_string' );
-		if ( ! empty( $tz ) ) {
-			$date = date_create( $string, new DateTimeZone( $tz ) );
-			if ( ! $date ) {
-				return strtotime( $string );
-			}
-			$date->setTimezone( new DateTimeZone( 'UTC' ) );
-			return $date->format( 'U' );
-		} else {
-			$offset = (float) get_option( 'gmt_offset' );
-			$seconds = intval( $offset * HOUR_IN_SECONDS );
-			$timestamp = strtotime( $string ) - $seconds;
-			return $timestamp;
-		}
-	}
-
 }

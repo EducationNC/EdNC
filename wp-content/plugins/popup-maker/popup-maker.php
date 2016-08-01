@@ -4,7 +4,7 @@
  * Plugin URI: https://wppopupmaker.com/
  * Description: Easily create & style popups with any content. Theme editor to quickly style your popups. Add forms, social media boxes, videos & more.
  * Author: WP Popup Maker
- * Version: 1.4.10
+ * Version: 1.4.15
  * Author URI: https://wppopupmaker.com/
  * Text Domain: popup-maker
  *
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Popup_Maker' ) ) :
 			}
 
 			if ( ! defined( 'POPMAKE_VERSION' ) ) {
-				define( 'POPMAKE_VERSION', '1.4.10' );
+				define( 'POPMAKE_VERSION', '1.4.15' );
 			}
 
 			if ( ! defined( 'POPMAKE_DB_VERSION' ) ) {
@@ -285,11 +285,6 @@ if ( ! class_exists( 'Popup_Maker' ) ) :
 
 
 			if ( is_admin() ) {
-				require_once POPMAKE_DIR . 'includes/admin/welcome.php';
-				require_once POPMAKE_DIR . 'includes/admin/welcome/about.php';
-				require_once POPMAKE_DIR . 'includes/admin/welcome/credits.php';
-				require_once POPMAKE_DIR . 'includes/admin/welcome/changelog.php';
-				require_once POPMAKE_DIR . 'includes/admin/welcome/getting-started.php';
 				require_once POPMAKE_DIR . 'includes/admin/admin-setup.php';
 				require_once POPMAKE_DIR . 'includes/admin/admin-functions.php';
 
@@ -315,14 +310,13 @@ if ( ! class_exists( 'Popup_Maker' ) ) :
 
 				require_once POPMAKE_DIR . 'includes/admin/extensions/extensions-page.php';
 
-				require_once POPMAKE_DIR . 'includes/admin/help/help-page.php';
-
 				require_once POPMAKE_DIR . 'includes/admin/metabox-support.php';
 
 			}
 
 			if ( pum_is_v1_4_compatible() ) {
 				require_once POPMAKE_DIR . 'includes/integrations/class-pum-woocommerce-integration.php';
+				require_once POPMAKE_DIR . 'includes/integrations/class-pum-buddypress-integration.php';
 			} else {
 				require_once POPMAKE_DIR . 'includes/integrations/class-popmake-woocommerce-integration.php';
 			}

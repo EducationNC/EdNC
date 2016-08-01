@@ -27,6 +27,34 @@ var progress_bar = function (cur_ele, txt, state) {
         progress_button.hide();
     }
 };
+
+var dash_offset = function (percent) {
+    //Get the dasharray value
+    var dasharray = jQuery('.wp-smush-svg-circle-progress').attr('stroke-dasharray');
+    return dasharray - ( dasharray * percent );
+}
+
+var update_dashoffset = function (stats) {
+    if (stats.total > 0) {
+        var dashoffset = dash_offset(stats.smushed / stats.total);
+        var circle_progress = jQuery('.wp-smush-svg-circle-progress');
+        if (typeof dashoffset != 'undefined' && circle_progress.length) {
+            circle_progress.css({'stroke-dashoffset': dashoffset});
+        }
+    }
+}
+/**
+ * Resize Background width
+ */
+var resize_width = function () {
+    var width = jQuery('.wp-smush-pro-for-free').width();
+    if ('undefined' != typeof ( width ) && 500 < width) {
+        jQuery('.wpmud .wp-smush-pro-adv').css({'background-size': '500px'});
+    } else {
+        jQuery('.wpmud .wp-smush-pro-adv').css({'background-size': '90%'});
+    }
+}
+
 jQuery(function ($) {
     var smushAddParams = function (url, data) {
         if (!$.isEmptyObject(data)) {
@@ -70,7 +98,7 @@ jQuery(function ($) {
             this.deferred.errors = [];
 
             //If button has resmush class, and we do have ids that needs to resmushed, put them in the list
-            this.ids = wp_smushit_data.resmush.length > 0 && !skip_resmush ? ( wp_smushit_data.unsmushed.length > 0 ? wp_smushit_data.resmush.concat(wp_smushit_data.unsmushed) :  wp_smushit_data.resmush ): wp_smushit_data.unsmushed;
+            this.ids = wp_smushit_data.resmush.length > 0 && !skip_resmush ? ( wp_smushit_data.unsmushed.length > 0 ? wp_smushit_data.resmush.concat(wp_smushit_data.unsmushed) : wp_smushit_data.resmush ) : wp_smushit_data.unsmushed;
 
             this.is_bulk_resmush = wp_smushit_data.resmush.length > 0 && !skip_resmush ? true : false;
 
@@ -160,8 +188,12 @@ jQuery(function ($) {
                         self.$button.remove();
                     } else {
                         self.$status.addClass("error");
+                        self.$status.html(response.data.error_msg);
+                        self.$status.show();
                     }
-                    self.$status.html(response.data.status);
+                    if (response.data.status) {
+                        self.$status.html(response.data.status);
+                    }
                     //Check if stats div exists
                     var parent = self.$status.parent();
                     var stats_div = parent.find('.smush-stats-wrapper');
@@ -259,7 +291,7 @@ jQuery(function ($) {
                     if (wp_smushit_data.resmush.length > 0) {
                         //Update the Count
                         $('.wp-smush-images-remaining').html(wp_smushit_data.resmush.length);
-                    } else if (wp_smushit_data.resmush.length == 0 && this.ids.length == 0 ) {
+                    } else if (wp_smushit_data.resmush.length == 0 && this.ids.length == 0) {
                         //If all images are resmushed, show the All Smushed message
 
                         //Show All Smushed
@@ -286,8 +318,8 @@ jQuery(function ($) {
             }
 
             //Update Total Images Tooltip
-            if( 'undefined' !== typeof _res.data.stats.tooltip_text && '' != _res.data.stats.tooltip_text ) {
-                $('.wp-smush-stats .smushed-count').attr('tooltip', _res.data.stats.tooltip_text );
+            if ('undefined' !== typeof _res.data.stats.tooltip_text && '' != _res.data.stats.tooltip_text) {
+                $('.wp-smush-current-progress').attr('tooltip', _res.data.stats.tooltip_text);
             }
 
             //Update remaining count
@@ -296,15 +328,33 @@ jQuery(function ($) {
             //if we have received the progress data, update the stats else skip
             if ('undefined' != typeof _res.data.stats) {
 
-                //Update stats
-                $('.smush-total-reduction-percent .wp-smush-stats').html(_res.data.stats.percent);
-                $('.smush-total-reduction-bytes .wp-smush-stats').html(_res.data.stats.human);
+                update_dashoffset(_res.data.stats);
 
-                $('.smush-attachments .wp-smush-stats .smushed-count, .wp-smush-images-smushed').html(_res.data.stats.smushed);
+                //Update stats
+                $('.wp-smush-savings .wp-smush-stats-percent').html(_res.data.stats.percent);
+                $('.wp-smush-savings .wp-smush-stats-human').html(_res.data.stats.human);
+
+                $('.wp-smush-images-smushed, .wp-smush-optimised').html(_res.data.stats.smushed);
                 if ($('.super-smush-attachments .smushed-count').length && 'undefined' != typeof _res.data.stats.super_smushed) {
                     $('.super-smush-attachments .smushed-count').html(_res.data.stats.super_smushed);
                 }
 
+                var smush_conversion_savings = $('.smush-conversion-savings');
+                //Update Conversion Savings
+                if (smush_conversion_savings.length > 0 && 'undefined' != typeof ( _res.data.stats.conversion_savings ) && _res.data.stats.conversion_savings != '') {
+                    var conversion_savings = smush_conversion_savings.find('.wp-smush-stats');
+                    if (conversion_savings.length > 0) {
+                        conversion_savings.html(_res.data.stats.conversion_savings);
+                    }
+                }
+                var smush_resize_savings = $('.smush-resize-savings');
+                //Update Resize Savings
+                if (smush_resize_savings.length > 0 && 'undefined' != typeof ( _res.data.stats.resize_savings ) && _res.data.stats.resize_savings != '') {
+                    var resize_savings = smush_resize_savings.find('.wp-smush-stats');
+                    if (resize_savings.length > 0) {
+                        resize_savings.html(_res.data.stats.resize_savings);
+                    }
+                }
                 // increase the progress bar
                 this._update_progress(_res.data.stats.smushed, progress);
             }
@@ -351,7 +401,7 @@ jQuery(function ($) {
             this.current_id = this.is_bulk ? this.ids.shift() : this.$button.data("id"); //remove from array while processing so we can continue where left off
 
             //Remove the id from respective variable as well
-            this.update_smush_ids( this.current_id );
+            this.update_smush_ids(this.current_id);
 
             var nonce_field = this.$button.parent().find('#_wp_smush_nonce');
             if (nonce_field) {
@@ -465,7 +515,7 @@ jQuery(function ($) {
          * Remove the current id from unsmushed/resmush variable
          * @param current_id
          */
-        this.update_smush_ids = function( current_id ) {
+        this.update_smush_ids = function (current_id) {
             if ('undefined' !== typeof wp_smushit_data.unsmushed && wp_smushit_data.unsmushed.length > 0) {
                 var u_index = wp_smushit_data.unsmushed.indexOf(current_id);
                 if (u_index > -1) {
@@ -547,7 +597,7 @@ jQuery(function ($) {
      * @param smush_action
      * @returns {boolean}
      */
-    var process_smush_action = function (e, current_button, smush_action) {
+    var process_smush_action = function (e, current_button, smush_action, action) {
 
         //If disabled
         if ('disabled' == current_button.attr('disabled')) {
@@ -572,12 +622,12 @@ jQuery(function ($) {
         //Reduce the opacity of stats and disable the click
         disable_links(current_button);
 
-        progress_bar(current_button, wp_smush_msgs.smushing, 'show');
+        progress_bar(current_button, wp_smush_msgs[action], 'show');
 
         //Restore the image
         $.post(ajaxurl, params, function (r) {
 
-            progress_bar(current_button, wp_smush_msgs.smushing, 'hide');
+            progress_bar(current_button, wp_smush_msgs[action], 'hide');
 
             //reset all functionality
             enable_links(current_button);
@@ -629,7 +679,7 @@ jQuery(function ($) {
         }
 
         //Check for width
-        if ( !height_only && 'undefined' != typeof width_input && parseInt(wp_smushit_data.resize_sizes.width) > parseInt(width_input.val())) {
+        if (!height_only && 'undefined' != typeof width_input && parseInt(wp_smushit_data.resize_sizes.width) > parseInt(width_input.val())) {
             width_input.addClass('error');
             width_error_note.show('slow');
             width_error = true;
@@ -753,28 +803,28 @@ jQuery(function ($) {
     $('body').on('click', '.wp-smush-action.wp-smush-restore', function (e) {
         var current_button = $(this);
         var smush_action = 'smush_restore_image';
-        process_smush_action(e, current_button, smush_action);
+        process_smush_action(e, current_button, smush_action, 'restore');
     });
 
     /** Resmush: Media Library **/
     $('body').on('click', '.wp-smush-action.wp-smush-resmush', function (e) {
         var current_button = $(this);
         var smush_action = 'smush_resmush_image';
-        process_smush_action(e, current_button, smush_action);
+        process_smush_action(e, current_button, smush_action, 'smushing');
     });
 
     /** Restore: NextGen Gallery **/
     $('body').on('click', '.wp-smush-action.wp-smush-nextgen-restore', function (e) {
         var current_button = $(this);
         var smush_action = 'smush_restore_nextgen_image';
-        process_smush_action(e, current_button, smush_action);
+        process_smush_action(e, current_button, smush_action, 'restore');
     });
 
     /** Resmush: NextGen Gallery **/
     $('body').on('click', '.wp-smush-action.wp-smush-nextgen-resmush', function (e) {
         var current_button = $(this);
         var smush_action = 'smush_resmush_nextgen_image';
-        process_smush_action(e, current_button, smush_action);
+        process_smush_action(e, current_button, smush_action, 'smushing');
     });
 
     //Scan For resmushing images
@@ -831,7 +881,7 @@ jQuery(function ($) {
                     var smushed_count = wp_smushit_data.count_smushed - r.data.resmush_ids.length;
 
                     //Update it in stats bar
-                    $('.smush-attachments .wp-smush-stats .smushed-count, .wp-smush-images-smushed').html(smushed_count);
+                    $('.wp-smush-images-smushed, .wp-smush-optimised').html(smushed_count);
 
                     //Hide the Existing wrapper
                     var notices = $('.bulk-smush-wrapper .wp-smush-notice');
@@ -844,9 +894,9 @@ jQuery(function ($) {
                     //Show Bulk wrapper
                     $('.wp-smush-bulk-wrapper').show();
 
-                    if( 'undefined' !== typeof r.data.count ) {
+                    if ('undefined' !== typeof r.data.count) {
                         //Update progress bar
-                        update_progress_bar_resmush( r.data.count );
+                        update_progress_bar_resmush(r.data.count);
                     }
                 }
                 //If content is received, Prepend it
@@ -861,13 +911,13 @@ jQuery(function ($) {
                 $('.smush-final-log').hide();
 
                 //Hide Super Smush notice if it's enabled in media settings
-                if ('undefined' != typeof r.data.super_smush && r.data.super_smush ) {
+                if ('undefined' != typeof r.data.super_smush && r.data.super_smush) {
                     var enable_lossy = jQuery('.wp-smush-enable-lossy');
-                    if( enable_lossy.length > 0 ) {
+                    if (enable_lossy.length > 0) {
                         enable_lossy.remove();
                     }
-                    if( 'undefined' !== r.data.super_smush_stats ) {
-                        $('.super-smush-attachments .wp-smush-stats').html( r.data.super_smush_stats );
+                    if ('undefined' !== r.data.super_smush_stats) {
+                        $('.super-smush-attachments .wp-smush-stats').html(r.data.super_smush_stats);
                     }
                 }
             }
@@ -925,12 +975,27 @@ jQuery(function ($) {
         var keep_exif = document.getElementById("wp-smush-keep_exif");
         var super_smush = document.getElementById("wp-smush-lossy");
         var smush_original = document.getElementById("wp-smush-original");
+        var resize_images = document.getElementById("wp-smush-resize");
+        var smush_pngjpg = document.getElementById("wp-smush-png_to_jpg");
 
         var update_button_txt = true;
 
+        $('.wp-smush-hex-notice').hide();
+
         //If Preserve Exif is Checked, and all other settings are off, just save the settings
-        if (keep_exif.checked && !super_smush.checked && !smush_original.checked) {
+        if (keep_exif.checked && !super_smush.checked && !smush_original.checked && !resize_images.checked && !smush_pngjpg.checked) {
             update_button_txt = false;
+        }
+        //If PNG to JPEG conversion is enabled
+        if (smush_pngjpg.checked && document.getElementById('png_to_jpg_transparent').checked ) {
+            var jpg_bg = $('[name="wp-smush-png_to_jpg_background"]');
+            //Check the length of hex code
+            if (jpg_bg.val().length < 6) {
+                $('.wp-smush-hex-notice').show();
+                //Return false and add error class
+                jpg_bg.addClass('error');
+                return false;
+            }
         }
 
         //Update text
@@ -998,7 +1063,7 @@ jQuery(function ($) {
         type = 'undefined' == typeof type ? 'media' : type;
 
         var smushed_count = 'undefined' != typeof wp_smushit_data.count_smushed ? wp_smushit_data.count_smushed : 0
-        $('.smush-attachments .wp-smush-stats .smushed-count, .wp-smush-images-smushed').html(smushed_count);
+        $('.wp-smush-images-smushed, .wp-smush-optimised').html(smushed_count);
 
         //Update the Progress Bar Width
         // get the progress bar
@@ -1034,6 +1099,17 @@ jQuery(function ($) {
         $('#wp-smush-save-settings').click();
     });
 
+    //Enable Resi
+    $('.wp-smush-resize-enable').on('click', function (e) {
+        e.preventDefault();
+
+        //Enable Super Smush
+        $('#wp-smush-resize').prop('checked', true);
+        //Induce Setting button save click
+        $('#wp-smush-save-settings').click();
+    });
+
+
     //Trigger Bulk
     $('body').on('click', '.wp-smush-trigger-bulk', function (e) {
         e.preventDefault();
@@ -1066,7 +1142,7 @@ jQuery(function ($) {
     });
 
     //Handle Resize Checkbox toggle, to show/hide width, height settings
-    $('#wp-smush-resize').click(function() {
+    $('#wp-smush-resize').click(function () {
         var self = $(this);
         var settings_wrap = $('.wp-smush-resize-settings-wrap');
 
@@ -1076,7 +1152,68 @@ jQuery(function ($) {
             settings_wrap.hide();
         }
     });
+    //Handle PNG to JPG Checkbox toggle, to show/hide Transparent image conversion settings
+    $('#wp-smush-png_to_jpg').click(function () {
+        var self = $(this);
+        var settings_wrap = $('.wp-smush-png_to_jpg-wrap');
 
+        if (self.is(':checked')) {
+            settings_wrap.show();
+        } else {
+            settings_wrap.hide();
+        }
+    });
+
+    //On background input remove class error
+    $('#png_to_jpg_background').on('mouseup', function (e) {
+        $(this).removeClass('error');
+    });
+
+    //Handle Twitter Share
+    $('#wp-smush-twitter-share').on('click', function (e) {
+        e.preventDefault();
+        var width = 550,
+            height = 420,
+            left = ($(window).width() - width) / 2,
+            top = ($(window).height() - height) / 2,
+            url = this.href,
+            opts = 'status=1' +
+                ',width=' + width +
+                ',height=' + height +
+                ',top=' + top +
+                ',left=' + left;
+
+        window.open(url, 'twitter', opts);
+
+        return false;
+    });
+    $('#wp-smush-facebook-share').on('click', function (e) {
+        e.preventDefault();
+        var width = 550,
+            height = 420,
+            left = ($(window).width() - width) / 2,
+            top = ($(window).height() - height) / 2,
+            url = this.href,
+            opts = 'status=1' +
+                ',width=' + width +
+                ',height=' + height +
+                ',top=' + top +
+                ',left=' + left;
+
+        window.open(url, 'facebook', opts);
+
+        return false;
+    });
+
+    //Adjust background image size if required
+    if( $('.wp-smush-pro-for-free').length ) {
+        //On Page load
+        resize_width();
+        //Adjust background image
+        $(window).resize(function () {
+            resize_width();
+        });
+    }
 
 });
 (function ($) {
