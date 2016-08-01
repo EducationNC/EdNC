@@ -1,13 +1,13 @@
 === WP Smush - Image Optimization ===
 Plugin Name: WP Smush - Image Optimization
-Version: 2.3.1
+Version: 2.4.3
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Contributors: WPMUDEV, alexdunae
 Tags: image optimization, image compression, attachment,Attachments,compress,Compress Image File,Compress Image Size,Compress JPG,Compressed JPG, Compression Image,Image,Images,JPG,Optimise,Optimize,Photo,Photos,Pictures,PNG,Reduce Image Size,Smush,Smush.it,Upload,WordPress Compression,WordPress Image Tool,Yahoo, Yahoo Smush.it
 Requires at least: 3.5
-Tested up to: 4.5.2
-Stable tag: 2.3.1
+Tested up to: 4.5.3
+Stable tag: 2.4.3
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 Reduce image file sizes, improve performance and boost your SEO using the free <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
@@ -34,7 +34,7 @@ WP Smush meticulously scans every image you upload – or have already added to 
 ★★★★★ <br>
 “I optimize my photos in Photoshop, but Smush makes it so easy – it does it automatically. I can just sit back and enjoy the speed.” - <a href="https://profiles.wordpress.org/helen432">helen432</a>
 
-WP Smush is super easy to use – no confusing compression software settings! Smush images in your library one at a time or bulk smush up to 50 images at a time.  Plus, Smush can help keep your site running fast. Use automatic smush to scale and compress every new image upload without thinking about it.
+WP Smush is super easy to use – no confusing compression software settings! Smush images in your library one at a time or bulk smush up to 50 images at a time.  Plus, configure automatic smush to scale and compress some or all of your images as they are being uploaded.
 
 The faster your site loads, the more Google, Bing, Yahoo and other search engines will like it. Your site will load faster and rank higher.
 
@@ -63,6 +63,7 @@ WP Smush Pro gives you everything you'll find in WP Smush and more:
 	<li>Get even better lossless compression. We try multiple methods to squeeze every last byte out of your images.</li>
 	<li>Smush images up to 32MB. Now you can smush any image, even one’s that aren’t web optimized.</li>
 	<li>Bulk smush ALL your images with one click - no more rate limiting!</li>
+	<li>Automatically convert PNG files to lossy JPEG if extra savings are found.</li>
 	<li>Keep a backup of original un-smushed images in case you want to restore later.</li>
 	<li>24/7/365 support from the best WordPress support team on the planet.</li>
 	<li>Includes Hummingbird pagespeed booster, Uptime monitoring and security hardening.</li>
@@ -90,6 +91,37 @@ Yahoo's Smush.it API is gone forever. So WPMU DEV built our own free API that is
 
 
 == Changelog ==
+
+= 2.4.3 =
+
+    * Fixed:
+        * Image resizing not working on image upload
+
+= 2.4.2 =
+
+    * Fixed:
+        * PHP 5.2 compatibility
+
+= 2.4.1 =
+
+    * Fixed: Conflict with Customizer
+
+= 2.4 =
+
+* Compatibility:
+    * WPML Media Add-on compatibility, you can smush all the images for all the languages at once from Bulk Smush page
+
+* Features:
+    * Added PNG to JPG - Lossy Conversion for higher savings ( Pro Feature )
+
+*Fixed:
+    * EXIF: Device details were left out for some images, even when opted for stripping it
+
+* Updated:
+    * Minor Tweaks on WP Smush Page ( Bulk Smush )
+    * Stats calculation is more accurate
+    * Show current image size and image size dimensions in media library after image has been smushed
+    * JPEG optimisation - higher savings for JPEGs lossy optimisation ( Pro Feature )
 
 = 2.3.1 =
 

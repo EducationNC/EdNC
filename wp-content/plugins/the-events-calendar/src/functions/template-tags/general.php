@@ -844,16 +844,34 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 			$post_id = get_the_ID();
 		}
 
-		$image_html     = get_the_post_thumbnail( $post_id, $size );
+		/**
+		 * Provides an opportunity to modify the featured image size.
+		 *
+		 * @param string $size
+		 * @param int    $post_id
+		 */
+		$image_html     = get_the_post_thumbnail( $post_id, apply_filters( 'tribe_event_featured_image_size', $size, $post_id ) );
 		$featured_image = '';
 
-		//if link is not specifically excluded, then include <a>
-		if ( ! empty( $image_html ) && $link ) {
+		/**
+		 * Controls whether the featured image should be wrapped in a link
+		 * or not.
+		 *
+		 * @param bool $link
+		 */
+		if ( ! empty( $image_html ) && apply_filters( 'tribe_event_featured_image_link', $link ) ) {
 			$featured_image .= '<div class="tribe-events-event-image"><a href="' . esc_url( tribe_get_event_link() ) . '">' . $image_html . '</a></div>';
 		} elseif ( ! empty( $image_html ) ) {
 			$featured_image .= '<div class="tribe-events-event-image">' . $image_html . '</div>';
 		}
 
+		/**
+		 * Provides an opportunity to modify the featured image HTML.
+		 *
+		 * @param string $featured_image
+		 * @param int    $post_id
+		 * @param string $size
+		 */
 		return apply_filters( 'tribe_event_featured_image', $featured_image, $post_id, $size );
 	}
 
@@ -1335,7 +1353,15 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 		 *
 		 * @var bool
 		 */
-		$allow_shortcode = apply_filters( 'tribe_events_excerpt_allow_shortcode', false );
+		$allow_shortcodes = apply_filters( 'tribe_events_excerpt_allow_shortcode', false );
+
+		/**
+		 * Filter to stop removal of shortcode markup in the Excerpt
+		 * This will remove all text that resembles a shortcode [shortcode 5]
+		 *
+		 * @var bool
+		 */
+		$remove_shortcodes = apply_filters( 'tribe_events_excerpt_shortcode_removal', true );
 
 		// Get the Excerpt or content based on what is available
 		if ( has_excerpt( $post->ID ) ) {
@@ -1362,15 +1388,26 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 			$excerpt = wp_trim_words( $excerpt, $excerpt_length, $excerpt_more );
 		}
 
+		// If shortcode filter is enabled lets process them
+		if ( $allow_shortcodes ) {
+			$excerpt = do_shortcode( $excerpt );
+		}
+
 		// Remove all shortcode Content before removing HTML
-		if ( ! $allow_shortcode ) {
+		if ( $remove_shortcodes ) {
 			$excerpt = preg_replace( '#\[.+\]#U', '', $excerpt );
 		}
 
 		// Remove "all" HTML based on what is allowed
 		$excerpt = wp_kses( $excerpt, $allowed_html );
 
-		return wpautop( $excerpt );
+		/**
+		 * Filter the event excerpt used in various views.
+		 *
+		 * @param string  $excerpt
+		 * @param WP_Post $post
+		 */
+		return apply_filters( 'tribe_events_get_the_excerpt', wpautop( $excerpt ), $post );
 	}
 
 	/**

@@ -57,7 +57,7 @@ if ( ! class_exists( 'WpSmushitBulk' ) ) {
 				while ( $get_posts ) {
 
 					//Remove the Filters added by WP Media Folder
-					$wpsmush_stats->remove_wmf_filters();
+					$wpsmush_stats->remove_filters();
 
 					$query = new WP_Query( $args );
 

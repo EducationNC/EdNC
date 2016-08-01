@@ -75,6 +75,8 @@ class Tribe__Tickets__Attendees_Table extends WP_List_Table {
 			'cb'              => '<input type="checkbox" />',
 			'order_id'        => esc_html__( 'Order #', 'event-tickets' ),
 			'order_status'    => esc_html__( 'Order Status', 'event-tickets' ),
+			'purchaser_name'  => esc_html__( 'Purchaser name', 'event-tickets' ),
+			'purchaser_email' => esc_html__( 'Purchaser email', 'event-tickets' ),
 			'ticket'          => esc_html__( 'Ticket type', 'event-tickets' ),
 			'attendee_id'     => esc_html__( 'Ticket #', 'event-tickets' ),
 			'security'        => esc_html__( 'Security Code', 'event-tickets' ),
@@ -96,6 +98,34 @@ class Tribe__Tickets__Attendees_Table extends WP_List_Table {
 		$value = empty( $item[ $column ] ) ? '' : $item[ $column ];
 
 		return apply_filters( 'tribe_events_tickets_attendees_table_column', $value, $item, $column );
+	}
+
+	/**
+	 * Handler for the ticket number column
+	 *
+	 * @param array $item
+	 *
+	 * @return int|string
+	 */
+	public function column_attendee_id( $item ) {
+		$attendee_id = empty( $item['attendee_id'] ) ? '' : $item['attendee_id'];
+		if ( $attendee_id === '' ) {
+			return '';
+		}
+
+		$unique_id = get_post_meta( $attendee_id, '_unique_id', true );
+
+		if ( $unique_id === '' ) {
+			$unique_id = $attendee_id;
+		}
+
+		/**
+		 * Filters the ticket number; defaults to the ticket unique ID.
+		 *
+		 * @param string $unique_id A unique string identifier for the ticket.
+		 * @param array  $item      The item entry.
+		 */
+		return apply_filters( 'tribe_events_tickets_attendees_table_attendee_id_column', $unique_id, $item );
 	}
 
 	/**
@@ -168,14 +198,9 @@ class Tribe__Tickets__Attendees_Table extends WP_List_Table {
 	public function column_ticket( $item ) {
 		ob_start();
 
-		$acquired_by_label = 'Tribe__Tickets__RSVP' === $item['provider'] ? __( 'Reserved by:', 'event-tickets' ) : __( 'Purchased by:', 'event-tickets' );
-
 		?>
 		<div class="event-tickets-ticket-name">
 			<?php echo esc_html( $item['ticket'] ); ?>
-		</div>
-		<div class="event-tickets-ticket-purchaser">
-			<?php echo esc_html( $acquired_by_label ); ?> <?php echo esc_html( $item['purchaser_name'] ); ?> (<?php echo esc_html( $item['purchaser_email'] ); ?>)
 		</div>
 		<?php
 
@@ -234,9 +259,14 @@ class Tribe__Tickets__Attendees_Table extends WP_List_Table {
 
 			return sprintf( $button_template, $item['order_id_link_src'], __( 'View order', 'event-tickets' ) );
 		}
-
-		$checkin   = sprintf( '<a href="#" data-attendee-id="%d" data-provider="%s" class="button-secondary tickets_checkin">%s</a>', esc_attr( $item['attendee_id'] ), esc_attr( $item['provider'] ), esc_html__( 'Check in', 'event-tickets' ) );
-		$uncheckin = sprintf( '<span class="delete"><a href="#" data-attendee-id="%d" data-provider="%s" class="tickets_uncheckin">%s</a></span>', esc_attr( $item['attendee_id'] ), esc_attr( $item['provider'] ), esc_html__( 'Undo Check in', 'event-tickets' ) );
+		if ( empty( $this->event ) ) {
+			$checkin   = sprintf( '<a href="#" data-attendee-id="%d" data-provider="%s" class="button-secondary tickets_checkin">%s</a>', esc_attr( $item['attendee_id'] ), esc_attr( $item['provider'] ), esc_html__( 'Check in', 'event-tickets' ) );
+			$uncheckin = sprintf( '<span class="delete"><a href="#" data-attendee-id="%d" data-provider="%s" class="tickets_uncheckin">%s</a></span>', esc_attr( $item['attendee_id'] ), esc_attr( $item['provider'] ), esc_html__( 'Undo Check in', 'event-tickets' ) );
+		} else {
+			// add the additional `data-event-id` attribute if this is an event
+			$checkin   = sprintf( '<a href="#" data-attendee-id="%d" data-event-id="%d" data-provider="%s" class="button-secondary tickets_checkin">%s</a>', esc_attr( $item['attendee_id'] ), esc_attr($this->event->ID), esc_attr( $item['provider'] ), esc_html__( 'Check in', 'event-tickets' ) );
+			$uncheckin = sprintf( '<span class="delete"><a href="#" data-attendee-id="%d" data-event-id="%d" data-provider="%s" class="tickets_uncheckin">%s</a></span>', esc_attr( $item['attendee_id'] ), esc_attr($this->event->ID), esc_attr( $item['provider'] ), esc_html__( 'Undo Check in', 'event-tickets' ) );
+		}
 
 		return $checkin . $uncheckin;
 	}
@@ -284,6 +314,11 @@ class Tribe__Tickets__Attendees_Table extends WP_List_Table {
 			)
 		);
 
+		/**
+		 * Include TB_iframe JS
+		 */
+		add_thickbox();
+
 		$email_link = Tribe__Settings::instance()->get_url( array(
 			'page' => 'tickets-attendees',
 			'action' => 'email',
@@ -291,6 +326,7 @@ class Tribe__Tickets__Attendees_Table extends WP_List_Table {
 			'TB_iframe' => true,
 			'width' => 410,
 			'height' => 300,
+			'parent' => 'admin.php',
 		) );
 
 		$nav = array(

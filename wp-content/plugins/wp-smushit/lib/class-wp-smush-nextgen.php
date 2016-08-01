@@ -173,6 +173,18 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 						continue;
 					}
 
+					//Check if registered size is supposed to be converted or not
+					global $wpsmushit_admin;
+					if( 'full' != $size && $wpsmushit_admin->skip_image_size( $size ) ) {
+						return false;
+					}
+
+					//Check if registered size is supposed to be converted or not
+					global $wpsmushit_admin;
+					if( 'full' != $size && $wpsmushit_admin->skip_image_size( $size ) ) {
+						return false;
+					}
+
 					// We take the original image. Get the absolute path using the storage object
 					$attachment_file_path_size = $storage->get_image_abspath( $image, $size );
 

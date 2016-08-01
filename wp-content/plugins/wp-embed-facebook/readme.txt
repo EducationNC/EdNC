@@ -3,8 +3,8 @@ Contributors: poxtron
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8Q85GT3Q8Q26
 Tags: Facebook, facebook, Social Plugins, embed facebook, facebook video, facebook posts, facebook publication, facebook publications, facebook event, facebook events, facebook pages, facebook page, facebook profiles, facebook album, facebook albums, facebook photos, facebook photo, social,
 Requires at least: 3.8.1
-Tested up to: 4.5.2
-Stable tag: 2.1
+Tested up to: 4.5.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +36,7 @@ Copy the facebook url on a single line or use the WordPress native [embed] short
 
 You should see the embed right on the editor, try switching from text to visual if it does not.
 
-Alternatively you can use the [facebook] shortcode.
+Alternatively you can use the [facebook url] shortcode.
 
 Read more about the shortcodes on [this](http://www.wpembedfb.com/shortcode-attributes-and-examples/) page.
 
@@ -51,6 +51,8 @@ Read more about the shortcodes on [this](http://www.wpembedfb.com/shortcode-attr
     * Shortcode creator
     * Special templates for albums and pages
 
+= Contributing =
+If you found a bug or want to add an extra feature create a pull request [here](https://github.com/sigami/wp-embed-facebook)
 
 == Installation ==
 
@@ -64,7 +66,15 @@ Read more about the shortcodes on [this](http://www.wpembedfb.com/shortcode-attr
 
 = How can I change the way an embed looks? =
 
-You can override the embed template with a custom one on your theme read more about it here
+You can override the embed template with a custom one. More information on http://wpembedfb.com/documentation/
+
+= How can I make my page load faster ? =
+
+Use any kind of page cache. W3 Total Cache or WP Super Cache are known to be the best ones.
+
+= I cannot embed my photo stream =
+
+This plugin only works for embedding **albums**. The premium version will allow you to embed all. (Feature available mid July 2016)
 
 = Is there a way to embed an album with more than 100 photos ? =
 
@@ -92,16 +102,47 @@ This can only be achieved using the premium version
 
 == Changelog ==
 
+= 2.1.4 =
+* Added: new action 'wp_embed_fb' on WP_Embed_FB class
+* Added: compatibility for using href=, url=, uri=, link=, on [facebook] shortcode
+* Fixed: shortcode not running when text changed for htmlentities
+* Added: warning when shortcode in badly used.
+
+= 2.1.3 =
+* Fixed: includes giving problems in some sites.
+
+= 2.1.2 =
+* Added: [fb_plugin] shortcode to embed any type of social plugin
+* Added: Auto embed comments plugin to certain post types
+* Added: Auto embed quote plugin to certain post types
+* Added: Default options for all social plugins
+* Added: Advanced option to integrate other lightbox scripts to the album embeds
+* Improved: Admin area is more comprehensive with tons of examples
+* Improved: url recognition
+* Deprecated: Old functions on Wef_Social_Plugins class
+
+= 2.1.1 =
+* Updated: social plugins embed
+
+= 2.1.0 =
+* Fixed: Shortcode [facebook object_id]
+* Fixed: Error for uls https://www.facebook.com/something-3423223
+* Fixed: Readme typo
+* Added: Uglyfied scripts
+* Added: Extra FAQ
+* Added: Github for development https://github.com/sigami/wp-embed-facebook
+
+
 = 2.1 =
-* Removed all options and moved them to a single one 'wpemfb_options'
-* Removed resize cover javascript it is now done with css
-* Fixed timezone bug custom post and events
+* Removed: all options and moved them to a single one 'wpemfb_options'
+* Removed: resize cover javascript it is now done with css
+* Fixed: timezone bug custom post and events
 * Added option to only load scripts when an embed is present
 * Added option to reset all options
 * Added Jetpack Photon compatibility
 * Added X Theme compatibility
 * Added lightbox.sass for theme developers
-* Updated Lightbox script and style
+* Changed: d Lightbox script and style
 * Added Lightbox Option Album Label
 * Added Lightbox Option Always Show Nav On Touch Devices
 * Added Lightbox Option Show Image Number Label
@@ -116,19 +157,19 @@ This can only be achieved using the premium version
 * Changed css on classic theme
 
 = 2.0.9.1 =
-* Fixed Admin notice bug
+* Fixed: Admin notice bug
 * Lightbox css improved
-* Fixed cover css
+* Fixed: cover css
 
 = 2.0.9 =
-* Fixed css on footer when using different themes
-* Updated all.js to sdk.js (bryant1410)
+* Fixed: css on footer when using different themes
+* Changed: d all.js to sdk.js (bryant1410)
 * Optimization for sites with no Facebook App
 * Added error messages for special cases
 * Added advanced option for selecting Facebook SDK version
-* Fixed locale error inside editor
-* Fixed link underline in some themes
-* Fixed several css and html structure nothing critical
+* Fixed: locale error inside editor
+* Fixed: link underline in some themes
+* Fixed: several css and html structure nothing critical
 
 
 = 2.0.8 =
@@ -149,20 +190,20 @@ This can only be achieved using the premium version
 * Improved [embed] shortcode compatibility !
 * Added new 'photos' attribute for shortcode used only on albums
 * Added 'type' parameter to wpemfb_template filter
-* Fixed https on all templates
-* Fixed like and comment links on single post raw
-* Fixed forced app token only if it has app
-* Fixed admin shortcode references
-* Fixed removed unused options on uninstall
-* Fixed translations strings
-* Fixed notice on installations with no FB App
+* Fixed: https on all templates
+* Fixed: like and comment links on single post raw
+* Fixed: forced app token only if it has app
+* Fixed: admin shortcode references
+* Fixed: removed unused options on uninstall
+* Fixed: translations strings
+* Fixed: notice on installations with no FB App
 
 = 2.0.4 =
 * changed shortcode tag from [facebook=url] to [facebook url]
 * force app access token
 
 = 2.0.3 =
-* Fixed notice on pages and events with no cover
+* Fixed: notice on pages and events with no cover
 * Moved admin scripts to footer
 
 = 2.0.2 =
@@ -172,61 +213,61 @@ This can only be achieved using the premium version
 * More human friendly
 
 = 2.0.1 =
-* Fixed message on photo single post
+* Fixed: message on photo single post
 
 = 2.0 =
-* Fixed language issue when embedding social plugins in admin
-* Fixed time on events
-* Update Facebook API to 2.4
+* Fixed: language issue when embedding social plugins in admin
+* Fixed: time on events
+* Changed:  Facebook API to 2.4
 * Added a new parameters for shortcode 'social_plugin' and 'theme'
-* Fixed shortcode use [facebook FB_Object_ID ]
+* Fixed: shortcode use [facebook FB_Object_ID ]
 * Improved CSS and themes
 * New Embed Post Raw
 
 = 1.9.6.7 =
-* Fixed delete of options on uninstall
+* Fixed: delete of options on uninstall
 
 = 1.9.6.6 =
-* Fixed Embed Video Error
-* Fixed like and follow button html
+* Fixed: Embed Video Error
+* Fixed: like and follow button html
 
 = 1.9.6.5 =
-* Fixed more things on multisite
-* Fixed Page Template HTML
+* Fixed: more things on multisite
+* Fixed: Page Template HTML
 
 = 1.9.6.4 =
-* Fixed translation files
-* Fixed bug on event template
+* Fixed: translation files
+* Fixed: bug on event template
 
 = 1.9.6.3 =
-* Fixed MultiSite error
+* Fixed: MultiSite error
 * New Shortcode use [facebook FB_Object_ID ] solution for fb permalinks
-* Fixed raw attribute on shortcode when url is video
+* Fixed: raw attribute on shortcode when url is video
 
 = 1.9.6.2 =
 * Local Release
 
 = 1.9.6.1 =
-* Fixed headers already sent notice.
+* Fixed: headers already sent notice.
 * Added Links to Facebook Apps and plugin settings
-* Removed deprecated is_date_only field on event template
+* Removed: deprecated is_date_only field on event template
 
 = 1.9.6 =
 * Fix Fatal Error on non object
 
 = 1.9.5 =
-* Fixed event templates
-* Fixed album thumbnails
-* Fixed jQuery UI error when admin is in https
+* Fixed: event templates
+* Fixed: album thumbnails
+* Fixed: jQuery UI error when admin is in https
 
 = 1.9.4 =
 * Added option to embed raw videos with facebook code
 * Added poster on raw embed videos
-* Update to FB API v2.3
-* Update raw photo template
+* Changed:  to FB API v2.3
+* Changed:  raw photo template
 
 = 1.9.3 =
-* Fixed error on older versions of PHP
+* Fixed: error on older versions of PHP
 
 = 1.9.2 =
 * Line breaks fix
@@ -250,7 +291,7 @@ This can only be achieved using the premium version
 
 = 1.8.1 =
 * Fix: Warning on Dashboard
-* Update: Readme.txt
+* Changed: : Readme.txt
 
 = 1.8 =
 * Compatibility with twenty 15 theme
@@ -258,7 +299,7 @@ This can only be achieved using the premium version
 * Compatibility with premium plugin
 
 = 1.7.1 =
-* Documentation Update
+* Documentation Changed: 
 * New advanced option
 
 = 1.7 =
@@ -308,7 +349,7 @@ This can only be achieved using the premium version
 * Bugs and documentation
 
 = 1.2.1 =
-* Updated Instructions
+* Changed: d Instructions
 * Change theme template directory
 
 = 1.2 =
@@ -327,5 +368,5 @@ This can only be achieved using the premium version
 
 == Upgrade Notice ==
 
-= 2.1 =
-2.1 version is a lot faster and provides full compatibility with Jetpack Photon and some premium "drag and drop" themes all options have been moved to a single one 'wpemfb_options' and new features where added: Enqueue styles and scripts only when an embed is present, 11 Lightbox options like 'Disable Scrolling' 'Loop though Album' etc. Cover resize now done with css
+= 2.1.1 =
+Auto comments, added all facebook plugins better url recognition, tons of new features. It is just the best yet! After update go to setting and see for yourself.

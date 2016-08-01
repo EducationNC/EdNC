@@ -15,7 +15,7 @@ if ( ! class_exists( 'WDEV_Plugin_Ui' ) ) {
 		/**
 		 * Current module version.
 		 */
-		const VERSION = '1.1';
+		const VERSION = '1.0';
 
 		/**
 		 * Internal translation container.
@@ -71,10 +71,16 @@ if ( ! class_exists( 'WDEV_Plugin_Ui' ) ) {
 			if ( ! did_action( 'admin_enqueue_scripts' ) ) {
 				add_action(
 					'admin_enqueue_scripts',
-					array( __CLASS__, 'enqueue' )
+					array( __CLASS__, 'enqueue_early' )
+				);
+				add_action(
+					'admin_enqueue_scripts',
+					array( __CLASS__, 'enqueue_late' ),
+					999
 				);
 			} else {
 				self::enqueue();
+				self::enqueue_late();
 			}
 		}
 
@@ -85,26 +91,67 @@ if ( ! class_exists( 'WDEV_Plugin_Ui' ) ) {
 		 * @internal Do not call this method manually. It's called by `load()`!
 		 */
 		static public function enqueue() {
+			/*
+			 * Beta-testers will not have cached scripts!
+			 * Just in case we have to update the plugin prior to launch.
+			 */
+			if ( defined( 'WPMUDEV_BETATEST' ) && WPMUDEV_BETATEST ) {
+				$script_version = time();
+			} else {
+				$script_version = self::VERSION;
+			}
+
 			wp_enqueue_style(
 				'wdev-plugin-google_fonts',
 				'https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Roboto:400,500,300,300italic',
 				false,
-				self::VERSION
+				$script_version
 			);
+
+			wp_enqueue_style(
+				'wdev-plugin-notice',
+				self::$module_url . 'notice.css',
+				array( 'wdev-plugin-google_fonts' ),
+				$script_version
+			);
+		}
+
+		/**
+		 * Enqueues the CSS and JS files after all other files.
+		 *
+		 * @since  1.0.0
+		 * @internal Do not call this method manually. It's called by `load()`!
+		 */
+		static public function enqueue_late() {
+			/*
+			 * Beta-testers will not have cached scripts!
+			 * Just in case we have to update the plugin prior to launch.
+			 */
+			if ( defined( 'WPMUDEV_BETATEST' ) && WPMUDEV_BETATEST ) {
+				$script_version = time();
+			} else {
+				$script_version = self::VERSION;
+			}
 
 			wp_enqueue_style(
 				'wdev-plugin-ui',
 				self::$module_url . 'wdev-ui.css',
 				array( 'wdev-plugin-google_fonts' ),
-				self::VERSION
+				$script_version
 			);
 
 			wp_enqueue_script(
 				'wdev-plugin-ui',
 				self::$module_url . 'wdev-ui.js',
 				array( 'jquery' ),
-				self::VERSION
+				$script_version
 			);
+
+			/**
+			 * Allow other plugins to enqueue css/js after shared-ui to
+			 * overwrite certain definitions.
+			 */
+			do_action( 'wpmudev_plugin_ui_enqueued' );
 		}
 
 		/**
@@ -248,7 +295,7 @@ if ( ! class_exists( 'WDEV_Plugin_Ui' ) ) {
 					</div>
 					<?php if ( $show_actions ) : ?>
 					<div class="frash-notice-cta">
-						<?php echo wp_kses( $msg['cta'], $allowed ); ?>
+						<?php echo $msg['cta']; ?>
 						<?php if ( $msg['can_dismiss'] ) : ?>
 						<button class="frash-notice-dismiss" data-msg="<?php echo esc_attr( $msg_dismiss ); ?>">
 							<?php esc_html_e( 'Dismiss', 'wpmudev' ); ?>
