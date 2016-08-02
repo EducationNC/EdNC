@@ -73,7 +73,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
       </div><!-- row -->
       </div><!-- container -->
 
-      <div class="container-fluid full-bleed-text theme-<?php echo $bg_color; ?>">
+      <div class="container-fluid full-bleed-text theme-<?php echo $bg_color; ?> print-only">
         <div class="row">
           <div class="col-md-7 col-centered content">
             <?php echo apply_filters('the_content', $inner_content); ?>
@@ -86,7 +86,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <div class="container">
       <div class="row">
-      <div class="col-md-7 col-md-push-2point5">
+      <div class="col-md-7 col-md-push-2point5 print-only">
 
       <?php
       return ob_get_clean();
@@ -194,7 +194,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <?php endif; ?>
 
-      <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?>">
+      <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?> print-only">
         <div class="row">
           <div class="image-holder parallax">
             <?php if ( ! empty($image_id) ) { ?>
@@ -221,7 +221,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <div class="container">
       <div class="row">
-      <div class="col-md-7 col-md-push-2point5">
+      <div class="col-md-7 col-md-push-2point5 print-only">
 
       <?php
       return ob_get_clean();
@@ -378,7 +378,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
            </div>
          <?php } ?>
 
-         <div class="map-tablet">
+         <div class="map-tablet print-only">
            <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
          </div>
 
@@ -396,7 +396,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
        <div class="container">
        <div class="row">
-       <div class="col-md-7 col-md-push-2point5">
+       <div class="col-md-7 col-md-push-2point5 print-only">
 
        <?php
        return ob_get_clean();

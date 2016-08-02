@@ -8,7 +8,7 @@
   }
   ?>
   |
-  <time class="published" datetime="<?php echo get_the_time('c'); ?>">
+  <time class="published pf-date" datetime="<?php echo get_the_time('c'); ?>">
     <?php the_time(get_option('date_format')); ?>
   </time>
   <?php
