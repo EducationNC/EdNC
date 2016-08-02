@@ -86,7 +86,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <div class="container">
       <div class="row">
-      <div class="col-md-7 col-md-push-2point5">
+      <div class="col-md-7 col-md-push-2point5 print-only">
 
       <?php
       return ob_get_clean();
@@ -221,7 +221,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <div class="container">
       <div class="row">
-      <div class="col-md-7 col-md-push-2point5">
+      <div class="col-md-7 col-md-push-2point5 print-only">
 
       <?php
       return ob_get_clean();
@@ -396,7 +396,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
        <div class="container">
        <div class="row">
-       <div class="col-md-7 col-md-push-2point5">
+       <div class="col-md-7 col-md-push-2point5 print-only">
 
        <?php
        return ob_get_clean();
