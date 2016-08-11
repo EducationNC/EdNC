@@ -4,7 +4,6 @@ $post_type = get_post_type();
 $author = get_the_author_meta('user_nicename');
 if (
   $author == 'agranados' ||
-  $author == 'alisa' ||
   $author == 'lbell' ||
   $author == 'mrash' ||
   $author == 'nation-hahn' ||
