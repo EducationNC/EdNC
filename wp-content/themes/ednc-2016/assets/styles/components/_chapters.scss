@@ -1,0 +1,75 @@
+.chapters {
+  height: 0;
+  overflow: visible;
+  margin-bottom: 3em;
+
+  .nav {
+    list-style: none;
+    background: $white;
+    height: 37px;
+    z-index: 9;
+    margin-bottom: 0 !important;
+
+    &.affix {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translate3d(-50%, 0, 0);
+      width: 100%;
+
+      .admin-bar & {
+        top: 32px;
+      }
+    }
+
+    &.affix-bottom {
+      position: absolute;
+      width: calc(100% - 20px);
+    }
+
+    &.affix-top {
+      background: $steel;
+    }
+
+    li {
+      display: inline-block;
+      margin: 0 !important;
+
+      a {
+        @extend h6;
+        text-decoration: none;
+        margin: 0;
+        overflow: hidden;
+
+        &:after {
+          content: '';
+          width: 100%;
+          height: 3px;
+          background: $plum;
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          transform: translateY(0);
+          transition: transform .3s;
+        }
+      }
+
+      &.active {
+        a {
+          &:after {
+            transform: translateY(-3px);
+          }
+        }
+      }
+    }
+  }
+}
+
+a.chapter {
+  display: inline-block;
+  margin-bottom: 2em;
+
+  .admin-bar & {
+    margin-bottom: 3em;
+  }
+}

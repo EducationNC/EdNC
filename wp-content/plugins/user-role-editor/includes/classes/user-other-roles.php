@@ -33,7 +33,8 @@ class URE_User_Other_Roles {
             add_action( 'user_new_form', array($this, 'user_new_form'), 10, 1 );
             add_action( 'profile_update', array($this, 'update'), 10 );
         }
-        if ($this->lib->multisite) {          
+        $multisite = $this->lib->get('multisite');
+        if ($multisite) {          
             add_action( 'wpmu_activate_user', array($this, 'add_other_roles'), 10, 1 );
         }
         add_action( 'user_register', array($this, 'add_other_roles'), 10, 1 );

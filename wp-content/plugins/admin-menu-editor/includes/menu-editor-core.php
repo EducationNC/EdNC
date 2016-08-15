@@ -11,9 +11,12 @@ if (class_exists('WPMenuEditor')){
 $thisDirectory = dirname(__FILE__);
 require $thisDirectory . '/shadow_plugin_framework.php';
 require $thisDirectory . '/role-utils.php';
+require $thisDirectory . '/ame-utils.php';
 require $thisDirectory . '/menu-item.php';
 require $thisDirectory . '/menu.php';
 require $thisDirectory . '/auto-versioning.php';
+require $thisDirectory . '/ajax-helper.php';
+require $thisDirectory . '/module.php';
 
 class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	const WPML_CONTEXT = 'admin-menu-editor menu texts';
@@ -186,6 +189,11 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			'index.php?page=dwqa-about' => true,
 			'index.php?page=dwqa-changelog' => true,
 			'index.php?page=dwqa-credits' => true,
+			//Ninja Forms 2.9.41
+			'index.php?page=nf-about' => true,
+			'index.php?page=nf-changelog' => true,
+			'index.php?page=nf-getting-started' => true,
+			'index.php?page=nf-credits' => true,
 		);
 		
 		//AJAXify screen options
@@ -231,17 +239,35 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		//There's also a "set_user_role" hook, but it's only called by WP_User::set_role and not WP_User::add_role.
 		//It's also redundant - WP_User::set_role updates user meta, so the above hooks already cover it.
 
+		//Multisite: Clear role and capability caches when switching to another site.
+		add_action('switch_blog', array($this, 'clear_site_specific_caches'), 10, 0);
+
+		//Utility actions. Modules can use them in their templates.
 		add_action('admin_menu_editor-display_tabs', array($this, 'display_editor_tabs'));
+		add_action('admin_menu_editor-display_header', array($this, 'display_settings_page_header'));
+		add_action('admin_menu_editor-display_footer', array($this, 'display_settings_page_footer'));
 
 		//Modules
 		include dirname(__FILE__) . '/../modules/actor-selector/actor-selector.php';
 		new ameActorSelector($this);
 
+		include dirname(__FILE__) . '/../modules/plugin-visibility/plugin-visibility.php';
+		new amePluginVisibility($this);
+
 		$proModuleDirectory = AME_ROOT_DIR . '/extras/modules';
 		if ( @is_dir($proModuleDirectory) ) {
-			if ( is_file($proModuleDirectory . '/dashboard-widget-editor/load.php') ) {
+			//The widget module requires PHP 5.3.
+			if (
+				version_compare(phpversion(), '5.3', '>=')
+				&&  is_file($proModuleDirectory . '/dashboard-widget-editor/load.php')
+			) {
 				require_once $proModuleDirectory . '/dashboard-widget-editor/load.php';
 				new ameWidgetEditor($this);
+			}
+
+			if ( is_file($proModuleDirectory . '/super-users/super-users.php') ) {
+				require $proModuleDirectory . '/super-users/super-users.php';
+				new ameSuperUsers($this);
 			}
 		}
 
@@ -340,8 +366,15 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		if ( $this->current_user_can_edit_menu() ){
 			$this->log_security_note('Current user can edit the admin menu.');
 
+			//Determine the current menu editor page tab.
+			$this->current_tab = isset($this->get['sub_section']) ? strval($this->get['sub_section']) : 'editor';
+			$tab_title = '';
+			if ($this->current_tab !== 'editor' && isset($this->tabs[$this->current_tab])) {
+				$tab_title = ' - ' . $this->tabs[$this->current_tab];
+			}
+
 			$page = add_options_page(
-				apply_filters('admin_menu_editor-self_page_title', 'Menu Editor'), 
+				apply_filters('admin_menu_editor-self_page_title', 'Menu Editor') . $tab_title,
 				apply_filters('admin_menu_editor-self_menu_title', 'Menu Editor'), 
 				apply_filters('admin_menu_editor-capability', 'manage_options'),
 				'menu_editor', 
@@ -365,9 +398,6 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
 			//Make a placeholder for our screen options (hacky)
 			add_meta_box("ws-ame-screen-options", "[AME placeholder]", '__return_false', $page);
-
-			//Determine the current menu editor page tab.
-			$this->current_tab = isset($this->get['sub_section']) ? strval($this->get['sub_section']) : 'editor';
 		}
 		
 		//Store the "original" menus for later use in the editor
@@ -594,7 +624,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	  *
 	  * @return void
 	  */
-	function enqueue_scripts(){
+	function enqueue_scripts() {
 		//Optimization: Remove wp-emoji.js from the plugin page. wpEmoji makes DOM manipulation slow because
 		//it tracks *all* DOM changes using MutationObserver.
 		remove_action('admin_print_scripts', 'print_emoji_detection_script');
@@ -1974,6 +2004,25 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	}
 
 	/**
+	 * Display the header of the "Menu Editor" page.
+	 * This includes the page heading and tab list.
+	 */
+	public function display_settings_page_header() {
+		echo '<div class="wrap">';
+		printf(
+			'<%1$s id="ws_ame_editor_heading">%2$s</%1$s>',
+			self::$admin_heading_tag,
+			apply_filters('admin_menu_editor-self_page_title', 'Menu Editor')
+		);
+
+		do_action('admin_menu_editor-display_tabs');
+	}
+
+	public function display_settings_page_footer() {
+		echo '</div>'; //div.wrap
+	}
+
+	/**
 	 * Display the tabs for the settings page.
 	 */
 	public function display_editor_tabs() {
@@ -2021,9 +2070,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	 * @return bool
 	 */
 	protected function is_editor_page() {
-		return is_admin()
-		&& isset($this->get['page']) && ($this->get['page'] == 'menu_editor')
-		&& ($this->current_tab === 'editor');
+		return $this->is_tab_open('editor');
 	}
 
 	/**
@@ -2032,9 +2079,19 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	 * @return bool
 	 */
 	protected function is_settings_page() {
+		return $this->is_tab_open('settings');
+	}
+
+	/**
+	 * Check if the specified AME settings tab is currently open.
+	 *
+	 * @param string $tab_slug
+	 * @return bool
+	 */
+	public function is_tab_open($tab_slug) {
 		return is_admin()
-		&& ($this->current_tab === 'settings')
-		&& isset($this->get['page']) && ($this->get['page'] == 'menu_editor');
+			&& ($this->current_tab === $tab_slug)
+			&& isset($this->get['page']) && ($this->get['page'] == 'menu_editor');
 	}
 	
 	/**
@@ -2126,6 +2183,22 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			return 'manage_options';
 		}
 		return $capability;
+	}
+
+	/**
+	 * Clear all internal caches that can vary depending on the current site.
+	 *
+	 * For example, the same user can have different roles on different sites,
+	 * so we must clear the role cache when WordPress switches the active site.
+	 */
+	public function clear_site_specific_caches() {
+		$this->cached_virtual_caps = null;
+		$this->cached_user_caps = array();
+		$this->cached_user_roles = array();
+
+		if ($this->options['menu_config_scope'] === 'site') {
+			$this->cached_custom_menu = null;
+		}
 	}
 
 	/**
@@ -3203,7 +3276,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
 	}
 
-	private function is_pro_version() {
+	public function is_pro_version() {
 		return apply_filters('admin_menu_editor_is_pro', false);
 	}
 

@@ -253,9 +253,10 @@
     font-size: $font-size-h1;
     color: $white;
     text-align: center;
-    width: 100%;
+    width: 80%;
     top: 50%;
-    transform: translate(0, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-shadow: 0 0 30px $jet;
   }
 

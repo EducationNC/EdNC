@@ -1,6 +1,6 @@
 <?php $fb_post = /** @noinspection PhpUndefinedVariableInspection */
 	$fb_data ?>
-<div class="wef-classic" style="max-width: <?php echo $width ?>px" >
+<div class="wef-classic aligncenter" style="max-width: <?php echo $width ?>px" >
 	<div class="col-3 text-center">
 		<a href="https://www.facebook.com/<?php echo $fb_post['from']['id'] ?>" target="_blank" rel="nofollow">
 			<img src="https://graph.facebook.com/<?php echo $fb_post['from']['id'] ?>/picture" width="50px" height="50px" />
@@ -14,9 +14,9 @@
 		</p>
 		<div>
 			<?php
-			$opt = get_option('wpemfb_show_like');
+			$opt = WP_Embed_FB_Plugin::get_option('show_like');
 			if($opt === 'true') :
-				echo WEF_Social_Plugins::like_btn($fb_post['link'],array('share'=>'true','layout'=>'button_count'));
+				echo WEF_Social_Plugins::get('like',array('href'=>'https://www.facebook.com/'.$fb_data['id'],'share'=>'true','layout'=>'button_count'));
 			else :
 				printf( __( '%d people like this.', 'wp-embed-facebook' ), $fb_post['likes'] );
 			endif;

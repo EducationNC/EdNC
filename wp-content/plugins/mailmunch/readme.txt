@@ -1,9 +1,9 @@
 === MailMunch - Grow your Email Subscribers ===
-Contributors: mailmunch
+Contributors: mailmunch, lizgannes
 Tags: signup form, newsletter, newsletters, subscribe, popup, exit popup, exit intent, subscribers, subscription, popover, lightbox, analytics, collect email, optin, optin form, optin forms, double optin, list builder, email form, lead, leads, mailchimp, mailchimp form, mailchimp newsletter, mailchimp plugin, mailchimp signup, mailchimp signup forms, mailchimp signup form, mailchimp widget, mailchimp subscribe, constant contact, contact contact form, constant contact newsletter, constant contact plugin, constant contact signup, constant contact signup forms, constant contact signup form, constant contact widget, constant contact subscribe, aweber, aweber form, aweber forms, aweber signup form, aweber plugin
 Requires at least: 3.0.1
-Tested up to: 4.4
-Stable tag: 2.0.2
+Tested up to: 4.5
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

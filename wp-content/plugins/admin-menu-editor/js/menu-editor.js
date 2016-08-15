@@ -1378,6 +1378,10 @@ function encodeMenuAsJSON(tree){
 		name: wsEditorData.menuFormatName,
 		version: wsEditorData.menuFormatVersion
 	};
+
+	//Compress the admin menu.
+	tree = compressMenu(tree);
+
 	return $.toJSON(tree);
 }
 
@@ -1427,6 +1431,65 @@ function readMenuTreeState(){
 	};
 }
 
+/**
+ * Losslessly compress the admin menu configuration.
+ * 
+ * This is a JS port of the ameMenu::compress() function defined in /includes/menu.php.
+ * 
+ * @param {Object} adminMenu
+ * @returns {Object}
+ */
+function compressMenu(adminMenu) {
+	var common = {
+		properties: _.omit(wsEditorData.blankMenuItem, ['defaults']),
+		basic_defaults: _.clone(_.get(wsEditorData.blankMenuItem, 'defaults', {})),
+		custom_item_defaults: _.clone(itemTemplates.getTemplateById('').defaults)
+	};
+
+	adminMenu.format.compressed = true;
+	adminMenu.format.common = common;
+
+	function compressItem(item) {
+		//These empty arrays can be dropped.
+		if ( _.isEmpty(item['grant_access']) ) {
+			delete item['grant_access'];
+		}
+		if ( _.isEmpty(item['items']) ) {
+			delete item['items'];
+		}
+
+		//Normal and custom menu items have different defaults.
+		//Remove defaults that are the same for all items of that type.
+		var defaults = _.get(item, 'custom', false) ? common['custom_item_defaults'] : common['basic_defaults'];
+		if ( _.has(item, 'defaults') ) {
+			_.forEach(defaults, function(value, key) {
+				if (_.has(item['defaults'], key) && (item['defaults'][key] === value)) {
+					delete item['defaults'][key];
+				}
+			});
+		}
+
+		//Remove properties that match the common values.
+		_.forEach(common['properties'], function(value, key) {
+			if (_.has(item, key) && (item[key] === value)) {
+				delete item[key];
+			}
+		});
+
+		return item;
+	}
+
+	adminMenu.tree = _.mapValues(adminMenu.tree, function(topMenu) {
+		topMenu = compressItem(topMenu);
+		if (typeof topMenu.items !== 'undefined') {
+			topMenu.items = _.map(topMenu.items, compressItem);
+		}
+		return topMenu;
+	});
+
+	return adminMenu;
+}
+
 AmeEditorApi.readMenuTreeState = readMenuTreeState;
 AmeEditorApi.encodeMenuAsJson = encodeMenuAsJSON;
 
@@ -1441,7 +1504,7 @@ function readItemState(itemDiv, position){
 	position = (typeof position === 'undefined') ? 0 : position;
 
 	itemDiv = $(itemDiv);
-	var item = $.extend({}, wsEditorData.blankMenuItem, itemDiv.data('menu_item'), readAllFields(itemDiv));
+	var item = $.extend(true, {}, wsEditorData.blankMenuItem, itemDiv.data('menu_item'), readAllFields(itemDiv));
 
 	item.defaults = itemDiv.data('menu_item').defaults;
 
@@ -2092,7 +2155,7 @@ function ameOnDomReady() {
 
 	AmeItemAccessEditor.setup({
 		api: AmeEditorApi,
-		actors: wsEditorData.actors,
+		actorSelector: actorSelectorWidget,
 		postTypes: wsEditorData.postTypes,
 		taxonomies: wsEditorData.taxonomies,
 		lodash: _,
@@ -3351,14 +3414,14 @@ function ameOnDomReady() {
 
 		//The new menu starts out rather bare
 		var randomId = randomMenuId();
-		var menu = $.extend({}, wsEditorData.blankMenuItem, {
+		var menu = $.extend(true, {}, wsEditorData.blankMenuItem, {
 			custom: true, //Important : flag the new menu as custom, or it won't show up after saving.
 			template_id : '',
 			menu_title : 'Custom Menu ' + ws_paste_count,
 			file : randomId,
-			items: [],
-			defaults: $.extend({}, itemTemplates.getDefaults(''))
+			items: []
 		});
+		menu.defaults = $.extend(true, {}, itemTemplates.getDefaults(''));
 
 		//Make it accessible only to the current actor if one is selected.
 		if (actorSelectorWidget.selectedActor !== null) {
@@ -3707,14 +3770,14 @@ function ameOnDomReady() {
 
 		ws_paste_count++;
 
-		var entry = $.extend({}, wsEditorData.blankMenuItem, {
+		var entry = $.extend(true, {}, wsEditorData.blankMenuItem, {
 			custom: true,
 			template_id : '',
 			menu_title : 'Custom Item ' + ws_paste_count,
 			file : randomMenuId(),
-			items: [],
-			defaults: $.extend({}, itemTemplates.getDefaults(''))
+			items: []
 		});
+		entry.defaults = $.extend(true, {}, itemTemplates.getDefaults(''));
 
 		//Make it accessible to only the currently selected actor.
 		if (actorSelectorWidget.selectedActor !== null) {

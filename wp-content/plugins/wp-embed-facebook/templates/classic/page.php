@@ -1,11 +1,7 @@
-<?php
-/** @noinspection PhpUndefinedVariableInspection */
-$height = round((($width - 21 ) * $prop),2);
- $show_posts = get_option("wpemfb_show_posts") == "true" ? true : false;
-?>
-<div class="wef-classic wef-measure" style="max-width: <?php echo $width ?>px" >
-	<div class="cover" style="height:<?php echo $height ?>px; background: transparent url('<?php /** @noinspection PhpUndefinedVariableInspection */
-	echo $fb_data['cover']['source'] ?>')  no-repeat scroll 0 <?php echo $fb_data['cover']['offset_y'] ?>%; " onclick="window.open('<?php echo $fb_data['link'] ?>', '_blank')" ></div>
+<div class="wef-classic aligncenter" style="max-width: <?php echo $width ?>px" >
+	<?php if(isset($fb_data['cover'])) : ?>
+		<div class="relative-container cover"><div class="relative" style="background-image: url('<?php echo $fb_data['cover']['source'] ?>'); background-position-y: <?php echo $fb_data['cover']['offset_y'] ?>%" onclick="window.open('https://www.facebook.com/<?php echo $fb_data['id'] ?>', '_blank')"></div></div>
+	<?php endif; ?>
 	<div class="row pad-top">
 			<div class="col-2 text-center">
 				<a href="<?php echo $fb_data['link'] ?>" target="_blank" rel="nofollow">
@@ -31,9 +27,9 @@ $height = round((($width - 21 ) * $prop),2);
 				<?php endif; ?>
 				<div style="float: right;">
 					<?php
-					$opt = get_option('wpemfb_show_like');
+					$opt = WP_Embed_FB_Plugin::get_option('show_like');
 					if($opt === 'true') :
-						echo WEF_Social_Plugins::like_btn('https://www.facebook.com/'.$fb_data['id'],array('share'=>'true','layout'=>'button_count'));
+						echo WEF_Social_Plugins::get('like',array('href'=>'https://www.facebook.com/'.$fb_data['id'],'share'=>'true','layout'=>'button_count','show-faces'=> 'false'));
 					else :
 						printf( __( '%d people like this.', 'wp-embed-facebook' ), $fb_data['likes'] );
 					endif;
@@ -41,7 +37,7 @@ $height = round((($width - 21 ) * $prop),2);
 				</div>
 			</div>
 	</div>	
-	<?php if($show_posts && isset($fb_data['posts'])) : global $wp_embed;   ?>
+	<?php if(isset($fb_data['posts'])) : global $wp_embed;   ?>
 		<?php foreach($fb_data['posts']['data'] as $fb_post) : ?>
 			<?php if(isset($fb_post['picture']) || isset($fb_post['message'])) : ?>
 				<?php include('single-post.php') ?>

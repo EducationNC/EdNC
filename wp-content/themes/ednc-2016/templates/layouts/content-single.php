@@ -86,6 +86,7 @@ while (have_posts()) : the_post();
           </div>
         </div>
       </div>
+
     <?php } else {
       if (isset($banner)) {
         ?>
@@ -150,6 +151,14 @@ while (have_posts()) : the_post();
       </div>
     <?php } ?>
 
+    <div id="chapters" class="chapters container hidden-xs hidden-sm print-no">
+      <div class="row">
+        <div class="col-md-8 col-centered">
+          <ul class="nav"></ul>
+        </div>
+      </div>
+    </div>
+
     <div class="entry-content">
       <div class="container">
         <div class="row">
@@ -172,7 +181,7 @@ while (have_posts()) : the_post();
             </div>
           </div>
 
-          <div class="col-md-7 col-md-pull-1point5">
+          <div class="col-md-7 col-md-pull-1point5 print-only">
 
             <?php if (has_post_thumbnail() && $featured_image_align == 'contained') {
               echo '<div class="alignnone no-top-margin">';

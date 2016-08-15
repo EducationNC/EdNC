@@ -1,0 +1,30 @@
+.story-2015-16 {
+  .banner {
+    .container-fluid, .navbar, &:after {
+      display: none;
+    }
+  }
+
+  .brand {
+    position: fixed;
+  }
+
+  .photo-overlay {
+    &:after {
+      display: none !important;
+    }
+  }
+
+  &.admin-bar {
+    .brand {
+      top: 47px;
+    }
+  }
+
+  .chapters {
+    .nav {
+      background: $white;
+      text-align: center;
+    }
+  }
+}

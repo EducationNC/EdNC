@@ -75,14 +75,6 @@
           }
         });
 
-        $('#mobile-nav .widgettitle-in-submenu').append('<span class="caret"></span>');
-
-        // Close mobile ad on button tap
-        $('#mobile-ad .close').on(clickortap, function() {
-          $('#mobile-ad').detach();
-          $('.icon-share').css({'bottom': '0'});
-        });
-
         // Helper function for translation cookies
         function getDomainName(hostName) {
           return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
@@ -97,9 +89,24 @@
           location.reload();
         });
 
+        // Make sure WordPress embeds have correct permissions
+        $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+
+        // Add special class to default WP embeds
+        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
+        if (window.location.search === '?feedback') {
+          if ($('#popmake-21098').length) {         // Dev environment
+            $('#popmake-21098').popmake('open');
+            $('#popmake-21110').popmake('close');
+          }
+          if ($('#popmake-26020').length) {         // Prod environment
+            $('#popmake-26020').popmake('open');
+            $('#popmake-26025').popmake('close');
+          }
+        }
       }
     },
     // Home page
@@ -163,12 +170,6 @@
 
         // Add special class to .entry-content-wrapper for SoundCloud (fixed height)
         $('iframe[src*="soundcloud"]').parent('.entry-content-asset').addClass('soundcloud');
-
-        // Make sure WordPress embeds have correct permissions
-        $('iframe.wp-embedded-content').attr('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
-
-        // Add special class to default WP embeds
-        $('iframe.wp-embedded-content').not('[src*="/flash-cards/"]').closest('.entry-content-asset').addClass('wp-embed');
 
         // Make sure iframes for flash-cards embeds scroll and add special class
         if (!ismobileorIE && !isSafari) {
@@ -249,6 +250,34 @@
           }
         });
 
+        // Automatically create TOC of chapters
+        $('.hentry a.chapter').each(function() {
+          $('#chapters .nav').append('<li><a href="#' + $(this).attr('name') + '">' + $(this).attr('data-name') + '</a></li>');
+        }).promise().done(function() {
+          if ($('#chapters .nav').is(':empty')) {
+            $('#chapters').hide();
+          }
+        });
+
+        // Chapters Affix
+        $(window).on('load', function() {
+          $('#chapters .nav').affix({
+            offset: {
+              top: function() {
+                return (this.top = $('#chapters .nav').offset().top);
+              },
+              bottom: function () {
+                return (this.bottom = $('footer.content-info').outerHeight(true) + $('.above-footer').outerHeight(true) + 100);
+              }
+            }
+          });
+        });
+
+        // Scrollspy for chapters
+        $('body').scrollspy({
+          target: '#chapters',
+          offset: 60
+        });
       }
     },
     // Flash cards

@@ -419,7 +419,7 @@ function ednc_gallery($attr) {
 		}
   }
 
-	if ( $columns > 0 && $i % $columns !== 0 && $atts['collage'] == false ) {
+	if ( $columns > 0 && $i % $columns !== 0 && $type !== 'collage' ) {
 		$output .= "
 			<br style='clear: both' />";
 	}

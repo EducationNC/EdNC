@@ -31,6 +31,7 @@ $featured_ids = array();
 
       if ($featured->have_posts()) : while ($featured->have_posts()) : $featured->the_post();
 
+        global $featured_ids;
         $featured_ids[] = get_the_id();
 
         get_template_part('templates/layouts/block', 'overlay');

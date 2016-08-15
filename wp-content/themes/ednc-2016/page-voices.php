@@ -10,17 +10,10 @@
       <?php
       $args = array(
         'post_type' => 'bio',
+        'post__in' => array(1647, 1663, 4513, 13081, 26641),   // Mebane, Alex, Todd, Nation, Liz
         'posts_per_page' => -1,
-        'order' => 'ASC',
-        'orderby' => 'meta_value',
-        'meta_key' => 'last_name_to_sort_by',
-        'tax_query' => array(
-          array(
-            'taxonomy' => 'author-type',
-            'field' => 'slug',
-            'terms' => 'staff'
-          )
-        )
+        'orderby' => 'post__in',
+        'order' => 'ASC'
       );
 
       $staff = new WP_Query($args);

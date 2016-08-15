@@ -1,3 +1,5 @@
+var ure_obj = {selected_group: 'all'};
+
 // get/post via jQuery
 (function ($) {
     $.extend({
@@ -28,14 +30,28 @@ function ure_ui_button_text(caption) {
 }
 
 
+function ure_select_selectable_element(selectable_container, elements_to_select) {
+    // add unselecting class to all elements in the styleboard canvas except the ones to select
+    jQuery(".ui-selected", selectable_container).not(elements_to_select).removeClass("ui-selected").addClass("ui-unselecting");    
+    // add ui-selecting class to the elements to select
+    jQuery(elements_to_select).not(".ui-selected").addClass("ui-selecting");
+    // trigger the mouse stop event (this will select all .ui-selecting elements, and deselect all .ui-unselecting elements)
+    selectable_container.data("ui-selectable")._mouseStop(null);
+}
+
+
 jQuery(function ($) {
 
-    $('#ure_select_all').button({
-        label: ure_data.select_all
-    }).click(function (event) {
-        event.preventDefault();
-        ure_select_all(1);
+    $('#ure_select_all_caps').click(ure_auto_select_caps);
+    $('#ure_caps_groups_list').selectable({
+        selected: function( event, ui ) {
+            // do not allow multiple selection
+            $(ui.selected).siblings().removeClass("ui-selected");
+            ure_caps_refresh(ui.selected.id);
+        }
     });
+    
+    ure_select_selectable_element($('#ure_caps_groups_list'), $('#ure_caps_group_all'));
 
     if (typeof ure_current_role === 'undefined' || 'administrator' !== ure_current_role) {
         $('#ure_unselect_all').button({
@@ -444,6 +460,42 @@ function ure_select_all(selected) {
 // end of ure_select_all()
 
 
+function ure_apply_selection(cb_id) {
+    var qfilter = jQuery('#quick_filter').val();
+    var parent_div = jQuery('#ure_cap_div_'+ cb_id);
+    var disabled = jQuery('#'+ cb_id).attr('disabled');
+    var result = false;
+    if (parent_div.hasClass(ure_obj.selected_group) && // make selection inside currently selected group of capabilities only
+        !parent_div.hasClass('hidden') && disabled!=='disabled') {   // select not hidden and not disabled checkboxes (capabilities) only
+        //  if quick filter is not empty, then apply selection to the tagged element only
+        if (qfilter==='' || parent_div.hasClass('ure_tag')) {            
+            result = true;
+        }
+    }
+    
+    return result;
+}
+
+
+function ure_auto_select_caps(event) {
+    jQuery(function($) {                
+        if (event.shiftKey) {
+            $('.ure-cap-cb').each(function () {   // reverse selection
+                if (ure_apply_selection(this.id)) {
+                    $(this).prop('checked', !$(this).prop('checked'));
+                }
+            });
+        } else {    
+            $('.ure-cap-cb').each(function () { // switch On/Off all checkboxes
+                if (ure_apply_selection(this.id)) {
+                    $(this).prop('checked', $('#ure_select_all_caps').prop('checked'));
+                }
+            });
+        }
+    });
+}
+
+
 function ure_turn_caps_readable(user_id) {
     var ure_object = 'user';
     if (user_id === 0) {
@@ -479,14 +531,14 @@ function ure_role_change(role_name) {
 
 
 function ure_filter_capabilities(cap_id) {
-    var div_list = jQuery("div[id^='ure_div_cap_']");
+    var div_list = jQuery('.ure-cap-div');
     for (i = 0; i < div_list.length; i++) {
         if (cap_id !== '' && div_list[i].id.substr(11).indexOf(cap_id) !== -1) {
-            div_list[i].ure_tag = true;
+            jQuery('#'+ div_list[i].id).addClass('ure_tag');
             div_list[i].style.color = '#27CF27';
         } else {
             div_list[i].style.color = '#000000';
-            div_list[i].ure_tag = false;
+            jQuery('#'+ div_list[i].id).removeClass('ure_tag');
         }
     }
     ;
@@ -501,3 +553,39 @@ function ure_hide_pro_banner() {
 
 }
 // end of ure_hide_this_banner()
+
+
+function ure_caps_refresh(group) {
+
+    var group_id = group.substr(15);
+    ure_obj.selected_group = group_id;
+    if (group_id === 'all') {
+        jQuery('.ure-cap-div').each(function () {
+            if (jQuery(this).hasClass('hidden') && !jQuery(this).hasClass('deprecated')) {
+                jQuery(this).removeClass('hidden');
+            }
+        });
+        return;
+    }
+
+    var show_deprecated = jQuery('#ure_show_deprecated_caps').attr('checked');
+    jQuery('.ure-cap-div').each(function () {
+        if (jQuery(this).hasClass(group_id)) {
+            if (jQuery(this).hasClass('hidden')) {
+                if (!jQuery(this).hasClass('blocked')) {
+                    if (jQuery(this).hasClass('deprecated')) {
+                        if (group_id==='deprecated' || show_deprecated) {
+                            jQuery(this).removeClass('hidden');
+                        }
+                    } else {                    
+                        jQuery(this).removeClass('hidden');
+                    }
+                }
+            }
+        } else {
+            if (!jQuery(this).hasClass('hidden')) {
+                jQuery(this).addClass('hidden');
+            }
+        }
+    });
+} 

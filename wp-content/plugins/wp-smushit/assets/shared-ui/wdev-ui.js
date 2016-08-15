@@ -30,6 +30,9 @@ jQuery(function() {
 	// Handle close buttons inside boxes.
 	jQuery(".wpmud").on("click", ".can-close .close", closeElement);
 
+	// Add a reload-page handler.
+	jQuery(".wpmud").on("click", ".reload-page", reloadPage);
+
 	// Initialize all tab-areas.
 	jQuery(".wpmud .tabs").each(function(){
 		WDP.wpmuTabs(this);
@@ -96,6 +99,29 @@ jQuery(function() {
 		return false;
 	}
 
+	// When a .reload-page item is clicked, we reload it!
+	function reloadPage(ev) {
+		if (ev && ev.preventDefault) { ev.preventDefault(); }
+
+		var btn = jQuery(ev.target),
+			scope = jQuery("#wpbody, .dev-overlay"),
+			elems = scope.find("button, .button, a[href], [tooltip]");
+
+		// Disable other elements on the page and start loading animation.
+		if (btn.closest(".box").length) {
+			btn.closest(".box").loading(true);
+		} else if (btn.find(".spin-on-click")) {
+			spinOnClick.call(btn, ev);
+		} else {
+			btn.loading(true);
+		}
+		elems.prop("disabled", true).addClass("disabled");
+
+		// Reload the page!
+		window.location.reload();
+		return false;
+	}
+
 	// Select all text inside the element.
 	function selectOnClick(ev) {
 		WDP.selectText(this);
@@ -146,7 +172,7 @@ jQuery(function() {
 
 	// Parses the hash-tag in the current address bar.
 	function checkLocalRoutes() {
-		var route = window.location.hash.substr(1);
+		var route = window.location.hash.substr(1),
 			parts = route.split("=");
 
 		WDP.localRoutes = {
@@ -393,7 +419,7 @@ WDP.prepareOverlay = function() {
 		WDP.overlay.box = jQuery('<div class="box"></div>');
 		WDP.overlay.box_title = jQuery('<div class="title"><h3></h3></div>');
 		WDP.overlay.box_content = jQuery('<div class="content"></div>');
-		WDP.overlay.close = jQuery('<div class="close">&times;</div>');
+		WDP.overlay.close = jQuery('<div class="close" aria-label="Close">&times;</div>');
 
 		WDP.overlay.back.appendTo(WDP.overlay.wrapper);
 		WDP.overlay.scroll.appendTo(WDP.overlay.wrapper);
@@ -606,7 +632,7 @@ WDP.wpmuSelect = function(el) {
 		wrap, handle, list, value, items;
 
 	if (! jq.is("select")) { return; }
-	if (jq.closest(".select-container").length) { return; }
+	if (jq.closest(".select-container").length || jq.data("select2") || jq.is(".none-wpmu") ) { return; }
 
 	// Add the DOM elements to style the select list.
 	function setupElement() {
@@ -625,21 +651,48 @@ WDP.wpmuSelect = function(el) {
 	// Add all the options to the new DOM elements.
 	function populateList() {
 		items.empty();
-		jq.find("option").each(function onPopulateLoop() {
-			var opt = jQuery(this),
-				item;
-			item = jQuery("<li></li>").appendTo(items);
-			item.text(opt.text());
-			item.data("value", opt.val());
+		if( jq.find("optgroup").length ){
+			jq.find("optgroup").each(function(){
+				var optgroup = jQuery(this),
+					optgroup_item;
+				optgroup_item = jQuery("<ul></ul>").appendTo(items);
+				$label = jQuery('<li class="optgroup-label"></li>').text( optgroup.prop('label') );
 
-			if (opt.val() == jq.val()) {
-				selectItem(item);
-			}
-		});
+				optgroup_item.html( $label );
+				optgroup_item.addClass('optgroup');
+
+				optgroup.find('option').each(function onPopulateLoop() {
+					var opt = jQuery(this),
+							item;
+					item = jQuery("<li></li>").appendTo(optgroup_item);
+					item.text(opt.text());
+					item.data("value", opt.val());
+
+					if (opt.val() == jq.val()) {
+						selectItem(item);
+					}
+				});
+			});
+		}else{
+			jq.find("option").each(function onPopulateLoop() {
+				var opt = jQuery(this),
+						item;
+				item = jQuery("<li></li>").appendTo(items);
+				item.text(opt.text());
+				item.data("value", opt.val());
+
+				if (opt.val() == jq.val()) {
+					selectItem(item, true);
+				}
+			});
+		}
+
 	}
 
 	// Toggle the dropdown state between open/closed.
 	function stateToggle() {
+		if( wrap.find("select").is(":disabled") ) return;
+		
 		if (! wrap.hasClass("active")) {
 			stateOpen();
 		} else {
@@ -664,16 +717,18 @@ WDP.wpmuSelect = function(el) {
 	}
 
 	// Visually mark the specified option as "selected".
-	function selectItem(opt) {
+	function selectItem(opt, is_init) {
+		is_init = typeof is_init === "undefined" ? false : is_init;
 		value.text(opt.text());
-
 		jQuery(".current", items).removeClass("current");
 		opt.addClass("current");
 		stateClose();
 
 		// Also update the select list value.
 		jq.val(opt.data("value"));
-		jq.trigger("change");
+
+		if( !is_init )
+			jq.trigger("change");
 	}
 
 	// Element constructor.
@@ -682,9 +737,9 @@ WDP.wpmuSelect = function(el) {
 
 		setupElement();
 		populateList();
-		items.on("click", function onItemClick(ev) {
+		items.find("li").not('.optgroup-label').on("click", function onItemClick(ev) {
 			var opt = jQuery(ev.target);
-			selectItem(opt);
+			selectItem(opt, false);
 		});
 
 		handle.on("click", stateToggle);
@@ -708,6 +763,7 @@ WDP.wpmuSelect = function(el) {
 		if (sel_id) {
 			jQuery("label[for=" + sel_id + "]").on("click", stateOpen);
 		}
+		jq.addClass("wdev-styled");
 	}
 
 	init();
@@ -1042,16 +1098,16 @@ WDP.showMessage = function(action) {
 			'<span class="the-msg-icon check-animation"></span>' +
 			'<p><span class="default-text">' + WDP.lang.default_msg_ok + '</span>' +
 			'<span class="extra-text" style="display:none"></span></p>' +
-			'<span class="close">&times;</span>' +
+			'<span class="close" aria-label="Close">&times;</span>' +
 			'</div>'
-		);
+		)
 
 		jQuery("body").append(
 			'<div class="update-notice err" id="wdp-error" style="display:none">' +
 			'<i class="the-msg-icon wdv-icon wdv-icon-warning-sign"></i>' +
 			'<p><span class="default-text">' + WDP.lang.default_msg_err + '</span>' +
 			'<span class="extra-text" style="display:none"></span></p>' +
-			'<span class="close">&times;</span>' +
+			'<span class="close" aria-label="Close">&times;</span>' +
 			'</div>'
 		);
 
@@ -1111,7 +1167,7 @@ WDP.showMessage = function(action) {
 	}
 
 	return WDP;
-};
+}
 
 /**
  * Displays the "Changes saved" message in the top of the window.
@@ -1200,4 +1256,41 @@ WDP.updateHash = function(newHash) {
 		fx.remove();
 		node.attr('id', newHash);
 	}
+}
+
+/**
+ * Create or replace a cookie via javascript.
+ *
+ * @since  4.1.0
+ */
+WDP.setCookie = function(name, value, days) {
+	var expires;
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 86400 * 1000));
+		expires = "; expires=" + date.toGMTString();
+	} else {
+		expires = "";
+	}
+	document.cookie = name + "=" + value + expires + "; path=/";
+};
+
+/**
+ * Return the value of a cookie.
+ *
+ * @since  4.1.0
+ */
+WDP.getCookie = function(cookieName) {
+	if (document.cookie.length > 0) {
+		offset = document.cookie.indexOf(cookieName + "=");
+		if (-1 != offset) {
+			offset = offset + cookieName.length + 1;
+			end = document.cookie.indexOf(";", offset);
+			if (end == -1) {
+				end = document.cookie.length;
+			}
+			return unescape(document.cookie.substring(offset, end));
+		}
+	}
+	return "";
 };

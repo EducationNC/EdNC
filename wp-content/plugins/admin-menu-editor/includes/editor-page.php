@@ -54,17 +54,13 @@ if ( !apply_filters('admin_menu_editor_is_pro', false) ){
 }
 
 ?>
-<div class="<?php echo esc_attr(implode(' ', $wrap_classes)); ?>">
-	<?php echo '<', WPMenuEditor::$admin_heading_tag, ' id="ws_ame_editor_heading">'; ?>
-		<?php echo apply_filters('admin_menu_editor-self_page_title', 'Menu Editor'); ?>
-	<?php echo '</', WPMenuEditor::$admin_heading_tag, '>'; ?>
 
-	<?php do_action('admin_menu_editor-display_tabs'); ?>
+<?php do_action('admin_menu_editor-display_header'); ?>
 
 <?php
 if ( !empty($_GET['message']) ){
 	if ( intval($_GET['message']) == 1 ){
-		echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
+		echo '<div id="message" class="updated notice is-dismissible"><p><strong>Settings saved.</strong></p></div>';
 	} elseif ( intval($_GET['message']) == 2 ) {
 		echo '<div id="message" class="error"><p><strong>Failed to decode input! The menu wasn\'t modified.</strong></p></div>';
 	}
@@ -313,7 +309,7 @@ function ame_output_sort_buttons($icons) {
 
 </div> <!-- / .ws_menu_editor -->
 
-</div> <!-- / .wrap -->
+<?php do_action('admin_menu_editor-display_footer'); ?>
 
 
 

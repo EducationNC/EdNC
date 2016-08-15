@@ -64,6 +64,7 @@ function defer_javascripts ( $url ) {
   if ( FALSE === strpos( $url, '.js' ) ) return $url;
   if ( strpos( $url, 'jquery.js' ) || strpos( $url, 'charts/loader.js' ) ) return $url;
   if ( is_single() && strpos( $url, 'ednc-2016') ) return $url;
+  if ( is_page('story-2015-16') ) return $url;
   if ( strpos( $url, 'mediaelement' ) ) return $url;
   return "$url' async='async";
 }

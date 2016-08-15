@@ -64,53 +64,14 @@
             // If not a search result, lay out in sections
             the_content();
 
-            // 2016 short session bills in play
-            $args = array(
-              'post_type' => 'bill',
-              'posts_per_page' => -1,
-              'orderby' => 'menu_order',
-              'order' => 'ASC',
-              'tax_query' => array(
-                'relation' => 'AND',
-                  array(
-                    'taxonomy' => 'session',
-                    'field' => 'slug',
-                    'terms' => '2016-short-session',
-                    'operator' => 'IN'
-                  ),
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'ratified',
-                  'operator' => 'NOT IN'
-                ),
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'met-crossover-deadline',
-                  'operator' => 'NOT IN'
-                )
-              )
-            );
-
-            $bills = new WP_Query( $args );
-
-            if ($bills->have_posts()) :
-              echo '<h2>2016 Short Session: Bills in play</h2>';
-              echo '<ul>';
-                while ( $bills->have_posts() ) : $bills->the_post();
-                  get_template_part('templates/layouts/block', 'bill');
-                endwhile;
-              echo '</ul>';
-              echo '<hr />';
-            endif; wp_reset_query();
-
             // loop through bill years and statuses
             $sessions = array_reverse(get_terms('session', ['hide_empty' => false]));
-            $statuses = get_terms('bill-status');
+            $statuses = array_reverse(get_terms('bill-status'));
 
             foreach ($sessions as $session) {
               foreach ( $statuses as $status ) {
+                $status_ids[] = $status->term_id;
+
                 $args = array(
                   'post_type' => 'bill',
                   'posts_per_page' => -1,
@@ -144,48 +105,39 @@
                   echo '<hr />';
                 endif; wp_reset_query();
               }
-            }
 
-            // 2015 bills that did not meet crossover deadline
-            $args = array(
-              'post_type' => 'bill',
-              'posts_per_page' => -1,
-              'orderby' => 'menu_order',
-              'order' => 'ASC',
-              'tax_query' => array(
-                'relation' => 'AND',
+              $args = array(
+                'post_type' => 'bill',
+                'posts_per_page' => -1,
+                'orderby' => 'menu_order',
+                'order' => 'ASC',
+                'tax_query' => array(
                   array(
                     'taxonomy' => 'session',
                     'field' => 'slug',
-                    'terms' => '2015-long-session',
+                    'terms' => $session,
                     'operator' => 'IN'
-                  ),
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'ratified',
-                  'operator' => 'NOT IN'
-                ),
-                array(
-                  'taxonomy' => 'bill-status',
-                  'field' => 'slug',
-                  'terms' => 'met-crossover-deadline',
-                  'operator' => 'NOT IN'
+                    ),
+                  array(
+                    'taxonomy' => 'bill-status',
+                    'field' => 'term_id',
+                    'terms' => $status_ids,
+                    'operator' => 'NOT IN'
+                  )
                 )
-              )
-            );
+              );
 
-            $bills = new WP_Query( $args );
+              $bills = new WP_Query( $args );
 
-            if ($bills->have_posts()) :
-              echo '<h2>2015 Long Session: Bills that did not meet crossover deadline</h2>';
-              echo '<ul>';
-                while ( $bills->have_posts() ) : $bills->the_post();
-                  get_template_part('templates/layouts/block', 'bill');
-                endwhile;
-              echo '</ul>';
-            endif; wp_reset_query();
-
+              if ($bills->have_posts()) :
+                echo '<h2>Other bills introduced in the ' . $session->name . '</h2>';
+                echo '<ul>';
+                  while ( $bills->have_posts() ) : $bills->the_post();
+                    get_template_part('templates/layouts/block', 'bill');
+                  endwhile;
+                echo '</ul>';
+              endif; wp_reset_query();
+            }
           }
         ?>
       </div>

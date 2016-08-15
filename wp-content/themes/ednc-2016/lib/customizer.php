@@ -12,7 +12,6 @@ function customize_register($wp_customize) {
 
   // Remove unneeded sections
   $wp_customize->remove_section( 'static_front_page');
-  $wp_customize->remove_panel( 'nav_menus');
 
   // Site-wide alert settings
   $wp_customize->add_section(

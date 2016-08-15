@@ -73,7 +73,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
       </div><!-- row -->
       </div><!-- container -->
 
-      <div class="container-fluid full-bleed-text theme-<?php echo $bg_color; ?>">
+      <div class="container-fluid full-bleed-text theme-<?php echo $bg_color; ?> print-only">
         <div class="row">
           <div class="col-md-7 col-centered content">
             <?php echo apply_filters('the_content', $inner_content); ?>
@@ -86,7 +86,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <div class="container">
       <div class="row">
-      <div class="col-md-7 col-md-push-2point5">
+      <div class="col-md-7 col-md-push-2point5 print-only">
 
       <?php
       return ob_get_clean();
@@ -194,7 +194,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <?php endif; ?>
 
-      <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?>">
+      <div class="container-fluid full-bleed-image" id="parallax-<?php echo $image_id; ?> print-only">
         <div class="row">
           <div class="image-holder parallax">
             <?php if ( ! empty($image_id) ) { ?>
@@ -221,7 +221,7 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
 
       <div class="container">
       <div class="row">
-      <div class="col-md-7 col-md-push-2point5">
+      <div class="col-md-7 col-md-push-2point5 print-only">
 
       <?php
       return ob_get_clean();
@@ -271,6 +271,174 @@ if (function_exists('shortcode_ui_register_for_shortcode')) :
         )
       )
     );
+
+
+  /**
+   * Chapters shortcode
+   * UI by Shortcake plugin
+   */
+
+     // Register shortcode
+     function chapter_shortcode($atts, $content = null) {
+       extract( shortcode_atts( array(
+         'short_name' => '',
+       ), $atts) );
+
+       ob_start();
+       ?>
+
+       <a name="<?php echo sanitize_title($short_name); ?>" id="<?php echo sanitize_title($short_name); ?>" data-name="<?php echo $short_name; ?>" class="chapter mce-item-anchor"></a>
+
+       <?php
+       return ob_get_clean();
+     }
+     add_shortcode('chapter', __NAMESPACE__ . '\\chapter_shortcode');
+
+     // Register shortcake UI
+     shortcode_ui_register_for_shortcode(
+       'chapter',
+       array(
+         // Display label. String. Required.
+         'label' => 'Chapter',
+         // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
+         'listItemImage' => 'dashicons-editor-ol',
+         // Available shortcode attributes and default values. Required. Array.
+         // Attribute model expects 'attr', 'type' and 'label'
+         // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
+         'attrs' => array(
+           array(
+             'label' => 'Short Name',
+             'attr'  => 'short_name',
+             'type'  => 'text',
+             'description' => 'This is the title that will appear in the chapter index',
+           )
+         )
+       )
+     );
+
+   /**
+    * Tableau Map shortcode
+    * UI by Shortcake plugin
+    */
+
+     // Register shortcode
+     add_shortcode('tableau-map', function($atts, $inner_content = null) {
+       extract( shortcode_atts( array(
+        // 'content' => '',
+        'large' => '',
+        'medium' => '',
+        'small' => ''
+       ), $atts) );
+
+       $allowed_tags = array(
+         'script' => array(
+           'type' => [],
+           'src' => []
+         ),
+         'div' => array(
+           'class' => [],
+           'style' => []
+         ),
+         'noscript' => [],
+         'a' => array(
+           'href' => []
+         ),
+         'img' => array(
+           'alt' => [],
+           'src' => [],
+           'style' => []
+         ),
+         'object' => array(
+           'class' => [],
+           'width' => [],
+           'height' => [],
+           'style' => []
+         ),
+         'param' => array(
+           'name' => [],
+           'value' => []
+         )
+       );
+
+       ob_start();
+       ?>
+
+       </div><!-- col -->
+       </div><!-- row -->
+       </div><!-- container -->
+
+       <div class="map-container">
+         <?php if (!empty($large)) { ?>
+           <div class="map-desktop">
+             <?php echo wp_kses(urldecode($large), $allowed_tags); ?>
+           </div>
+         <?php } else { ?>
+           <div class="map-desktop">
+             <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
+           </div>
+         <?php } ?>
+
+         <div class="map-tablet print-only">
+           <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
+         </div>
+
+         <?php if (!empty($small)) { ?>
+           <div class="map-mobile">
+             <?php echo wp_kses(urldecode($small), $allowed_tags); ?>
+           </div>
+         <?php } else { ?>
+           <div class="map-mobile-scroll">
+             <div class="alert alert-warning" role="alert">This map is not optimized for small displays. Please check back on a tablet or computer.</div>
+             <?php echo wp_kses(urldecode($medium), $allowed_tags); ?>
+           </div>
+         <?php } ?>
+       </div>
+
+       <div class="container">
+       <div class="row">
+       <div class="col-md-7 col-md-push-2point5 print-only">
+
+       <?php
+       return ob_get_clean();
+     });
+
+     // Register shortcake UI
+     shortcode_ui_register_for_shortcode(
+       'tableau-map',
+       array(
+         // Display label. String. Required.
+         'label' => 'Tableau Map Embed',
+         // Icon/image for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
+         'listItemImage' => 'dashicons-location-alt',
+         // Available shortcode attributes and default values. Required. Array.
+         // Attribute model expects 'attr', 'type' and 'label'
+         // Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
+         'attrs' => array(
+           array(
+             'label'       => 'Large/Desktop (1024px) Embed Code',
+             'attr'        => 'large',
+             'type'        => 'textarea',
+             'description' => 'Optional',
+             'encode'      => true
+           ),
+           array(
+             'label'       => 'Medium/Tablet (768px) Embed Code',
+             'attr'        => 'medium',
+             'type'        => 'textarea',
+             'description' => 'Required',
+             'encode'      => true
+           ),
+           array(
+             'label'       => 'Small/Mobile (320 px) Embed Code',
+             'attr'        => 'small',
+             'type'        => 'textarea',
+             'description' => 'Optional',
+             'encode'      => true
+           )
+         )
+       )
+     );
+
 
 
   /**

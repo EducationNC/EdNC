@@ -28,7 +28,10 @@ use Roots\Sage\Assets;
       <li><img src="<?php echo Assets\asset_path('images/burroughs-wellcome-fund.png'); ?>" width="100" alt="Burroughs Wellcome Fund" /></li>
       <li><img src="<?php echo Assets\asset_path('images/park-foundation.png'); ?>" width="130" alt="Park Foundation" /></li>
       <li><img src="<?php echo Assets\asset_path('images/sas.png'); ?>" width="100" alt="SAS Institute" /></li>
+      <li><img src="<?php echo Assets\asset_path('images/duke-energy.png'); ?>" width="150" alt="Duke Energy" /></li>
+      <li><img src="<?php echo Assets\asset_path('images/viacom.png'); ?>" width="150" alt="Viacom" /></li>
       <li><img src="<?php echo Assets\asset_path('images/o2-energies.png'); ?>" width="78" alt="O2energies" /></li>
+      <li><img src="<?php echo Assets\asset_path('images/wells-fargo.png'); ?>" width="78" alt="Wells Fargo" /></li>
     </ul>
   </div>
 

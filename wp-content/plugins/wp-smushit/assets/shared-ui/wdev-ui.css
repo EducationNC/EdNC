@@ -115,18 +115,18 @@
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	font-size: 15px;
-	line-height: 21px;
+	line-height: 29px;
 	color: #777771;
 }
 .wpmud p small {
 	font-size: 12.5px;
-	line-height: 17px;
+	line-height: 22px;
 	display: inline-block;
 	color: #555550;
 }
 .wpmud p big {
 	font-size: 18px;
-	line-height: 24px;
+	line-height: 28px;
 	display: inline-block;
 	font-weight: 400;
 	color: #888882;
@@ -161,10 +161,13 @@
 	display: inline-block;
 	margin: 0;
 }
-.wpmud #wpfooter {
+#wpfooter {
 	display: none;
 }
-
+.wpmud b,
+.wpmud strong {
+	font-weight: 500;
+}
 .wpmud a {
 	text-decoration: none;
 	color: #19B4CF;
@@ -860,6 +863,9 @@
 .wpmud [tooltip].tooltip-right:after {
 	margin-left: -180px;
 }
+.wpmud [tooltip].tooltip-left:after {
+	margin-left: -20px;
+}
 .wpmud [tooltip].tooltip-s.tooltip-right:after {
 	margin-left: -130px;
 }
@@ -1061,8 +1067,8 @@
 	display: inline-block;
 	margin: 0;
 	border: 0;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
 	cursor: pointer;
 	box-shadow: none;
 	-moz-transition: color 0.3s, opacity 0.3s;
@@ -1098,6 +1104,13 @@
 	background: -ms-linear-gradient(top, #0082a1 0%,#008fae 100%);
 	background: linear-gradient(to bottom, #0082a1 0%,#008fae 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0082a1', endColorstr='#008fae',GradientType=0 );
+}
+.wpmud a.disabled,
+.wpmud button.disabled,
+.wpmud .close.disabled,
+.wpmud .button.disabled {
+	/* Do not handle click events while disabled */
+	pointer-events: none;
 }
 /* Variation: Green button */
 .wpmud .button-green {
@@ -1297,9 +1310,9 @@
 	padding: 7px 10px;
 	font-weight: 500;
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
+	font-size: 15px;
 	margin: 0 0 4px;
-	color: #777771;
+	color: #555;
 }
 .wpmud label.inline-label {
 	display: inline-block;
@@ -1663,7 +1676,7 @@
 	margin-left: -1px;
 	margin-right: -1px;
 	margin-top: -2px;
-	opacity: 0;
+	display: none;
 	border-radius: 0 0 4px 4px;
 	font: 500 15px/25px 'Roboto';
 	transition-property: opacity, border-color;
@@ -1681,6 +1694,21 @@
 	opacity: 0.8;
 	transition-property: opacity;
 	transition-duration: 0.3s;
+	border-radius: 0 !important;
+	cursor: pointer;
+}
+.wpmud .select-list-container .list-results .optgroup{
+	cursor: default;
+}
+.wpmud .select-list-container .list-results .optgroup li{
+	padding-left: 30px;
+	cursor: pointer;
+}
+.wpmud .select-list-container .list-results .optgroup li.optgroup-label{
+	padding-left: 10px;
+	color: #ababab;
+	cursor: default;
+	pointer-events: none;
 }
 .wpmud .select-list-container .list-results li:last-child {
 	border-radius: 0 0 3px 3px;
@@ -1688,6 +1716,9 @@
 .wpmud .select-list-container .list-results li:hover {
 	background: #b5e6f8;
 	color: #3d464d;
+}
+.wpmud .select-list-container .list-results .optgroup li.optgroup-label:hover{
+	background: none;
 }
 .wpmud .select-list-container .list-results .current {
 	background: #FFF;
@@ -1724,8 +1755,9 @@
 	left: 0;
 	right: 0;
 	width: auto;
-	opacity: 1;
-	transition-duration: 0;
+	/*opacity: 1;*/
+	display: block;
+	transition-duration: 0ms;
 }
 .wpmud .select-container.active:hover {
 	border-color: #DDD;
@@ -1826,6 +1858,7 @@
 /* ****************************************************************************
  * 19. ELEMENT: USER NOTIFICATIONS
  */
+/* Notice floating on top of the screen */
 .wpmud .update-notice,
 .wpmud .wpmud-loading-info {
 	position: fixed;
@@ -1899,6 +1932,59 @@
 .wpmud.folded .wpmud-loading-info {
 	left: 36px;
 }
+/* Inline notifications */
+.wpmud .inline-notice {
+	position: relative;
+	display: block;
+	padding: 20px 30px;
+	line-height: 20px;
+	font-size: 15px;
+	font-family: "Roboto", Arial, sans-serif;
+	border-radius: 5px;
+	margin: 30px 0;
+	background: #EBFCFF;
+	color: #14485F;
+	border: 1px solid #B5D3E0;
+}
+.wpmud .inline-notice.ok {
+	background: #1ABC9C;
+	color: #ffffff;
+	border: 0;
+}
+.wpmud .inline-notice.err {
+	background: #FF6D6D;
+	color: #ffffff;
+	border: 0;
+}
+.wpmud .inline-notice button,
+.wpmud .inline-notice button:hover:not(:focus):not(:active),
+.wpmud .inline-notice .button,
+.wpmud .inline-notice .button:hover:not(:focus):not(:active) {
+	background: transparent;
+	border: 1px solid #14485F;
+	color: #14485F;
+	padding: 3px 14px;
+}
+.wpmud .inline-notice.ok button,
+.wpmud .inline-notice.ok .button,
+.wpmud .inline-notice.ok button:hover:not(:focus):not(:active),
+.wpmud .inline-notice.ok .button:hover:not(:focus):not(:active),
+.wpmud .inline-notice.err button,
+.wpmud .inline-notice.err .button,
+.wpmud .inline-notice.err button:hover:not(:focus):not(:active),
+.wpmud .inline-notice.err .button:hover:not(:focus):not(:active) {
+	border-color: #fff;
+	color: #fff;
+}
+.wpmud .inline-notice button:hover:not(:focus):not(:active),
+.wpmud .inline-notice button:focus,
+.wpmud .inline-notice button:active,
+.wpmud .inline-notice .button:hover:not(:focus):not(:active),
+.wpmud .inline-notice .button:focus,
+.wpmud .inline-notice .button:active {
+	background: rgba(255,255,255,0.1);
+}
+
 
 /* ****************************************************************************
  * 20. ELEMENT: SEARCH BOX
