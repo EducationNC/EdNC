@@ -29,8 +29,7 @@ $sage_includes = [
   'lib/wrapper.php',            // Theme wrapper class
   'lib/customizer.php',         // Theme customizer
   'lib/widgets/register.php',   // Register widgets
-  'lib/social-share-count.php', // Social share counts
-  'lib/data-viz.php'            // Functions for data-viz -- including AJAX and transients
+  'lib/social-share-count.php'  // Social share counts
 ];
 
 foreach ($sage_includes as $file) {

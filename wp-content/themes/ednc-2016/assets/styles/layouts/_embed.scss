@@ -42,15 +42,6 @@
     }
   }
 
-  .single-data-viz & {
-    padding: 0;
-    border: 0;
-
-    .data-section {
-      margin-bottom: 0;
-    }
-  }
-
   .navbar {
     height: 64px;
     padding: 0;
@@ -72,10 +63,6 @@
 
   .navbar-header {
     margin: 0;
-  }
-
-  .modal-toggle {
-    margin-bottom: -64px;
   }
 
   .navbar-brand.navbar-brand {
