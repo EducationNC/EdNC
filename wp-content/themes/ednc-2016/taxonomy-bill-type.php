@@ -16,8 +16,8 @@
       </div>
 
       <div class="callout">
-        <h4>Bill types</h4>
-        <?php $terms = get_terms('bill-type'); ?>
+        <h4>Sessions</h4>
+        <?php $terms = array_reverse(get_terms('session')); ?>
         <ul class="resource-cats">
           <?php foreach( $terms as $term) { ?>
           <li>
