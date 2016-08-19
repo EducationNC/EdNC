@@ -260,3 +260,38 @@ JS;
 	 */
 	return apply_filters( 'embed_html', $output, $post, $width, $height );
 }
+
+/**
+ * Modify FB Instant Articles RSS feed output for content
+ *
+ * Have to make sure embeds and images all appear correctly. For some reason
+ * (and I don't understand why), the filter 'the_content' is not rendering the
+ * content the same in this feed as it is on the front end of site. Debugged
+ * by changing theme to Twenty Sixteen and disabling all plugins. Still rendered
+ * shortcodes differently in feed and on front end.
+ */
+
+function preg_replace_all($find, $replacement, $s) {
+	while(preg_match($find, $s)) {
+		$s = preg_replace($find, $replacement, $s);
+	}
+	return $s;
+}
+
+add_filter('instant_articles_content', function($content) {
+
+	// Replace all whitespace with spaces
+	$content = trim(preg_replace('/\s+/', ' ', $content));
+
+	// Make sure there are no spaces between HTML tags
+	$content = str_replace('> <', '><', $content);
+
+	// Strip all divs
+	$content = preg_replace_all('/(?:<div(?:.*?)>)(.*?)<\/div>/i', '$1', $content);
+	// Strip all links around images
+	$content = preg_replace_all('/<a.*?(<img.*?>)<\/a>/', '$1', $content);
+	// Replace all <br>s between images with <p>s
+	$content = preg_replace_all('/(<img.*?)(<br.*?>)(<img)/', '$1</p><p>$3', $content);
+
+  return $content;
+});
