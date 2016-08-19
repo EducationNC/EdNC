@@ -17,8 +17,8 @@
         </div>
 
         <div class="callout">
-          <h4>Bill types</h4>
-          <?php $terms = get_terms('bill-type'); ?>
+          <h4>Sessions</h4>
+          <?php $terms = array_reverse(get_terms('session')); ?>
           <ul class="resource-cats">
             <?php foreach( $terms as $term) { ?>
             <li>
@@ -62,49 +62,17 @@
 
           } else {
             // If not a search result, lay out in sections
-            the_content();
+            // the_content();
 
             // loop through bill years and statuses
             $sessions = array_reverse(get_terms('session', ['hide_empty' => false]));
             $statuses = array_reverse(get_terms('bill-status'));
 
-            foreach ($sessions as $session) {
-              foreach ( $statuses as $status ) {
-                $status_ids[] = $status->term_id;
+            // Only display most recent session on this page
+            $session = $sessions[0];
 
-                $args = array(
-                  'post_type' => 'bill',
-                  'posts_per_page' => -1,
-                  'orderby' => 'menu_order',
-                  'order' => 'ASC',
-                  'tax_query' => array(
-                    array(
-                      'taxonomy' => 'session',
-                      'field' => 'slug',
-                      'terms' => $session,
-                      'operator' => 'IN'
-                    ),
-                    array(
-                      'taxonomy' => 'bill-status',
-                      'field' => 'slug',
-                      'terms' => $status,
-                      'operator' => 'IN'
-                    )
-                  )
-                );
-
-                $bills = new WP_Query( $args );
-
-                if ($bills->have_posts()) :
-                  echo '<h2>' . $session->name . ': ' . $status->name . '</h2>';
-                  echo '<ul>';
-                    while ( $bills->have_posts() ) : $bills->the_post();
-                      get_template_part('templates/layouts/block', 'bill');
-                    endwhile;
-                  echo '</ul>';
-                  echo '<hr />';
-                endif; wp_reset_query();
-              }
+            foreach ( $statuses as $status ) {
+              $status_ids[] = $status->term_id;
 
               $args = array(
                 'post_type' => 'bill',
@@ -117,12 +85,12 @@
                     'field' => 'slug',
                     'terms' => $session,
                     'operator' => 'IN'
-                    ),
+                  ),
                   array(
                     'taxonomy' => 'bill-status',
-                    'field' => 'term_id',
-                    'terms' => $status_ids,
-                    'operator' => 'NOT IN'
+                    'field' => 'slug',
+                    'terms' => $status,
+                    'operator' => 'IN'
                   )
                 )
               );
@@ -130,14 +98,47 @@
               $bills = new WP_Query( $args );
 
               if ($bills->have_posts()) :
-                echo '<h2>Other bills introduced in the ' . $session->name . '</h2>';
+                echo '<h2>' . $session->name . ': ' . $status->name . '</h2>';
                 echo '<ul>';
                   while ( $bills->have_posts() ) : $bills->the_post();
                     get_template_part('templates/layouts/block', 'bill');
                   endwhile;
                 echo '</ul>';
+                echo '<hr />';
               endif; wp_reset_query();
             }
+
+            $args = array(
+              'post_type' => 'bill',
+              'posts_per_page' => -1,
+              'orderby' => 'menu_order',
+              'order' => 'ASC',
+              'tax_query' => array(
+                array(
+                  'taxonomy' => 'session',
+                  'field' => 'slug',
+                  'terms' => $session,
+                  'operator' => 'IN'
+                  ),
+                array(
+                  'taxonomy' => 'bill-status',
+                  'field' => 'term_id',
+                  'terms' => $status_ids,
+                  'operator' => 'NOT IN'
+                )
+              )
+            );
+
+            $bills = new WP_Query( $args );
+
+            if ($bills->have_posts()) :
+              echo '<h2>Other bills introduced in the ' . $session->name . '</h2>';
+              echo '<ul>';
+                while ( $bills->have_posts() ) : $bills->the_post();
+                  get_template_part('templates/layouts/block', 'bill');
+                endwhile;
+              echo '</ul>';
+            endif; wp_reset_query();
           }
         ?>
       </div>
