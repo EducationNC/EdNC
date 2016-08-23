@@ -17,7 +17,7 @@ if ( ! empty($term_image) ) { ?>
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-centered">
-            <h1 class="entry-title"><?= Titles\title() . $title; ?></h1>
+            <h1 class="entry-title"><?= Titles\title() . $title; ?> <small><a href="feed"><span class="icon-rss"></span> RSS Feed</a></small></h1>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@ if ( ! empty($term_image) ) { ?>
   <div class="container page-header">
     <div class="row">
       <div class="col-md-12 col-centered">
-        <h1 class="entry-title"><?= Titles\title() . $title; ?></h1>
+        <h1 class="entry-title"><?= Titles\title() . $title; ?> <small><a href="feed"><span class="icon-rss"></span> RSS Feed</a></small></h1>
       </div>
     </div>
   </div>
