@@ -6,9 +6,6 @@
 *.swp
 Thumbs.db
 
-ednc.sublime-project
-ednc.sublime-workspace
-
 .htaccess
 sitemap.xml
 sitemap.xml.gz
@@ -22,6 +19,7 @@ wp-content/backup-db/
 wp-content/backups/
 wp-content/blogs.dir/
 wp-content/cache/*
+wp-content/db.php
 wp-content/upgrade/*
 wp-content/uploads/
 wp-content/wp-cache-config.php
@@ -51,6 +49,8 @@ wp-content/plugins/wpai-acf-add-on/*
 .gitattributes
 _wpeprivate
 wp-content/object-cache.php
+wp-content/mu-plugins/php-selector.php
+wp-content/mu-plugins/php-selector/*
 wp-content/mu-plugins/mu-plugin.php
 wp-content/mu-plugins/slt-force-strong-passwords.php
 wp-content/mu-plugins/limit-login-attempts
@@ -61,6 +61,7 @@ wp-content/mysql.sql
 /db-config.php
 /index.php
 /license.txt
+/local-config.php
 /readme.html
 /wp-activate.php
 /wp-app.php
@@ -80,6 +81,7 @@ wp-content/mysql.sql
 /wp-rss2.php
 /wp-pass.php
 /wp-register.php
+/wp-salts.php
 /wp-settings.php
 /wp-signup.php
 /wp-trackback.php
